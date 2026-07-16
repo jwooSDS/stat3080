@@ -1,11 +1,9 @@
 fig:nice-fig
 tab:nice-tab
-prerequisites
+fig:car
+fig:cards
+eq:union
 intro
-literature
+blank
 methods
-math-example
-applications
-example-one
-example-two
-final-words
+math

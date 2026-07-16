@@ -1,0 +1,24 @@
+# Blank Canvas {#blank}
+
+Read CH 2 from [@BH2019].
+
+See Sections \@ref(intro), \@ref(blank), and \@ref(math).
+
+See equation \@ref(eq:union).
+
+See Figure \@ref(fig:nice-fig), \@ref(fig:car), and \@ref(fig:cards) and Table \@ref(tab:nice-tab).
+
+```{r car, fig.cap='Car', out.width='80%', fig.asp=.75, fig.align='center'}
+plot(cars)
+```
+
+```{r cards, fig.cap = "Sample Space of Drawing One Card from Standard Deck. Picture from [wikipedia](https://en.wikipedia.org/wiki/Standard_52-card_deck)", echo = FALSE}
+knitr::include_graphics("images/02-cards.jpg")
+```
+
+See this sum
+
+```{r}
+1+1
+```
+

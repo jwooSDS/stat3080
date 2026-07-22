@@ -2,11 +2,11 @@
 
 Read CH 2 from [@BH2019].
 
-See Sections \@ref(intro), \@ref(blank), and \@ref(math).
+See Sections \@ref(RBasics), \@ref(doc).
 
 See equation \@ref(eq:union).
 
-See Figure \@ref(fig:nice-fig), \@ref(fig:car), and \@ref(fig:cards) and Table \@ref(tab:nice-tab).
+See Figure \@ref(fig:car), and \@ref(fig:cards) and Table \@ref(tab:nice-tab).
 
 ```{r car, fig.cap='Car', out.width='80%', fig.asp=.75, fig.align='center'}
 plot(cars)
@@ -16,9 +16,5 @@ plot(cars)
 knitr::include_graphics("images/02-cards.jpg")
 ```
 
-See this sum
 
-```{r}
-1+1
-```
 

@@ -242,7 +242,7 @@ R is an open-source programming language and software environment specifically d
 While R has a basic default interface, users typically write code using integrated development environments (IDEs) such as RStudio, Positron, VS Code, which can provide additional user-friendly features. RStudio will be used in this course.
 
 \hypertarget{rstudio-interface}{%
-\section{RStudio Interface}\label{rstudio-interface}}
+\subsection{RStudio Interface}\label{rstudio-interface}}
 
 Open RStudio. You will see three panes:
 
@@ -273,7 +273,7 @@ In order to get R to do what you want it to do, you will need to write a \textbf
 ## [1] 3
 \end{verbatim}
 
-Notice a number in brackets before the answer? The number indicate the length of the output because most objects that we'll work with in R are treated like vectors (much more on that later).
+Notice a number in brackets before the answer? The number indicates index position of the first element displayed on that specific line.
 
 You can also add \textbf{comments} to R code by using the \texttt{\#} sign. Everything to the right of the \texttt{\#} is ignored by R. Comments are useful to explain what has been coded and why to yourself or to collaborators.
 
@@ -367,14 +367,7 @@ An \textbf{RStudio Project} is a folder with a \texttt{.Rproj} file that in it. 
 If you open the folder associated with the created working directory, you will find a file with a \texttt{.Rproj} extension created (its name should be the name of the project that you gave in the last step above).
 
 Now, close your RStudio. Navigate to the project folder on your computer and double-click the \texttt{.Rproj} file. Your working directory will be where this \texttt{.Rproj} file is located. You can confirm using \texttt{getwd()}, or by looking at the pane called ``Files / Plots / Packages / Help''. Click on the files tab and it will display the path of your working directory, and you can also see the other files in this folder.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  If you have created an RStudio Project before and have a file with a \texttt{.RProj} extension, you can just copy and paste this file and place it into another folder to make it your working directory. This is the approach I almost exclusively use.
-\end{enumerate}
+2. If you have created an RStudio Project before and have a file with a \texttt{.RProj} extension, you can just copy and paste this file and place it into another folder to make it your working directory. This is the approach I almost exclusively use.
 
 I highly recommend that you create a folder on your computer that is exclusively for this class. You should also create separate subfolders for each assignment.
 
@@ -410,6 +403,59 @@ R is like any calculator in that these operators follow the standard order of op
 \begin{Shaded}
 \begin{Highlighting}[]
 \DecValTok{15}\SpecialCharTok{+}\DecValTok{10}
+\DecValTok{12}\SpecialCharTok{/}\DecValTok{6}
+\FloatTok{0.7}\SpecialCharTok{*}\DecValTok{5}
+\DecValTok{3}\SpecialCharTok{\^{}}\DecValTok{3}
+\DecValTok{15}\SpecialCharTok{+}\DecValTok{10}\SpecialCharTok{*}\DecValTok{3}
+\NormalTok{(}\DecValTok{15}\SpecialCharTok{+}\DecValTok{10}\NormalTok{)}\SpecialCharTok{*}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{assignments-and-variables}{%
+\section{Assignments and Variables}\label{assignments-and-variables}}
+
+In order to write useful and effective R code, You need to be able to store items to be used later. Anything that is stored is called an object. An object can be a single value resulting from a calculation or a collection of information such as a table of linear regression coefficients.
+
+A \textbf{variable} is a memory location for the object, which can be thought of as a label for the object. Variables are created when the object is \textbf{assigned} to it, so there is no need to declare the variable first.
+
+\textbf{Note}: the term variable as defined above comes from computer science. In statistics, the term variable means something different (any characteristic that can be measured).
+
+Variable names can consist of letters, numbers, periods, and underscores. There are a few limitations to how these types of characters can be combined. The following are characteristics of all variable names:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Variable names cannot begin with a number.
+\item
+  Variable names cannot contain spaces.
+\item
+  Variable names can begin with a period as long as they are not followed by a number.
+\item
+  Since R is case-sensitive, \texttt{x} and \texttt{X} are different variable names.
+  Wherever possible, it is best practice to avoid using the names of existing functions (ie. mean, sd, log) and predefined variables (ie. pi) to avoid confusion for anyone reading your code and possibly R itself.
+\end{enumerate}
+
+It is also best practice to use variable names that are short and descriptive of the information contained in the object.
+
+Once you have decided on a variable name for the object, you will need to assign the object to the variable by using either the assignment operator \texttt{\textless{}-} or \texttt{=} (the first is the more commonly used in R). I would discourage using \texttt{=} as an assignment operator as it is also used when specifying values for arguments in functions (see section \ref{doc}.)
+
+To store the sum of 10 and 5 and the rounded value of 5.7 (to whole number) into variables called \texttt{total1} \texttt{value1} respectively:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total1 }\OtherTok{\textless{}{-}} \DecValTok{10}\SpecialCharTok{+}\DecValTok{15}
+\NormalTok{value1 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FloatTok{5.7}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that these variables and their values are displayed in the environment tab in the pane at the top-right.
+
+R will recall or show the object stored in a variable when the variable name is submitted as a command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -419,53 +465,51 @@ R is like any calculator in that these operators follow the standard order of op
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{12}\SpecialCharTok{/}\DecValTok{6}
+\NormalTok{value1}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2
+## [1] 6
+\end{verbatim}
+
+Stored objects can be used in subsequent operations. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total1}\SpecialCharTok{/}\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FloatTok{0.7}\SpecialCharTok{*}\DecValTok{5}
+\NormalTok{total1}\SpecialCharTok{/}\NormalTok{value1}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.5
+## [1] 4.166667
 \end{verbatim}
+
+Any object that you would like stored needs to be given a variable name.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{3}\SpecialCharTok{\^{}}\DecValTok{3}
+\NormalTok{ratio1 }\OtherTok{\textless{}{-}}\NormalTok{ total1}\SpecialCharTok{/}\NormalTok{value1}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## [1] 27
-\end{verbatim}
+Variables can be overwritten by storing a new object using the same variable name.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{15}\SpecialCharTok{+}\DecValTok{10}\SpecialCharTok{*}\DecValTok{3}
+\NormalTok{ratio1 }\OtherTok{\textless{}{-}}\NormalTok{ total1}\SpecialCharTok{/}\DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## [1] 45
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(}\DecValTok{15}\SpecialCharTok{+}\DecValTok{10}\NormalTok{)}\SpecialCharTok{*}\DecValTok{3}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 75
-\end{verbatim}
 
 \hypertarget{functions}{%
 \section{Functions}\label{functions}}
@@ -481,105 +525,20 @@ Some common functions are listed below:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{log}\NormalTok{(}\FloatTok{2.7}\NormalTok{) }\DocumentationTok{\#\# log with base e, sometimes written as ln}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.9932518
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{) }\DocumentationTok{\#\# e to power of 1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2.718282
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{sqrt}\NormalTok{(}\DecValTok{9}\NormalTok{) }\DocumentationTok{\#\# squareroot of 9}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{) }\DocumentationTok{\#\# 3!}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 6
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{abs}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{) }\DocumentationTok{\#\# absolute value}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 5
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{sum}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{) }\DocumentationTok{\#\# summing up all these numbers}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 12
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{floor}\NormalTok{(}\FloatTok{5.7}\NormalTok{) }\DocumentationTok{\#\# round down to nearest integer}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 5
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{ceiling}\NormalTok{(}\FloatTok{5.7}\NormalTok{) }\DocumentationTok{\#\# round down to nearest integer}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 6
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{round}\NormalTok{(}\FloatTok{5.7}\NormalTok{) }\DocumentationTok{\#\# round to nearest integer}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 6
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{round}\NormalTok{(}\FloatTok{5.727}\NormalTok{,}\DecValTok{2}\NormalTok{) }\DocumentationTok{\#\#round to 2 decimal places}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## [1] 5.73
-\end{verbatim}
-
-\hypertarget{documentation}{%
-\section{Documentation}\label{documentation}}
+\hypertarget{doc}{%
+\subsection{Documentation}\label{doc}}
 
 Typing \texttt{?} and then the name of a function will open up the help page (called R documentation) associated with that function. The help page will appear under the Help tab in the bottom-right pane. Type \texttt{?log} to read the help page for the \texttt{log()} function.
 
@@ -599,19 +558,472 @@ The sections of the help page that I find useful:
 
 \emph{Practice}: after reading the documentation for \texttt{log()}, use R to find the value of \(\log_3(5)\).
 
+Note: In the top-left corner of the help page, the name of the function is shown, along with the package it is from in braces. So the \texttt{log()} function comes a package called \texttt{base}.
+
+\hypertarget{working-with-common-probability-distributions}{%
+\subsection{Working with common probability distributions}\label{working-with-common-probability-distributions}}
+
+Some common probability distributions (e.g.~normal, binomial, etc.) are defined in R. Each distribution has a general function name, for example:
+
+\begin{itemize}
+\tightlist
+\item
+  norm: normal distribution
+\item
+  binom: binomial distribution
+\item
+  t: \(t\) distribution
+\item
+  F: \(F\) distribution
+\item
+  chisq: \(\chi^2\) distribution
+\end{itemize}
+
+Each distribution has 4 functions associated with it in R. The letter that precedes the distribution name tells R what specifically to do with that distribution. These letters are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{d}: gives the value of the probability density (or mass) function.
+\item
+  \texttt{p}: gives the cumulative probability of the distribution at the point specified.
+\item
+  \texttt{q}: determines the value within the distribution associated with the cumulative probability specified.
+\item
+  \texttt{r}: generates random numbers from the distribution.
+\end{itemize}
+
+\hypertarget{example-1-normal-distribution}{%
+\subsubsection{Example 1: Normal distribution}\label{example-1-normal-distribution}}
+
+Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9.
+
+\begin{itemize}
+\tightlist
+\item
+  To find \(P(X \leq 2)\), we use:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pnorm}\NormalTok{(}\DecValTok{2}\NormalTok{, }\AttributeTok{mean=}\DecValTok{1}\NormalTok{, }\AttributeTok{sd=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6305587
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  To find the value of \(X\) associated with the 25th percentile:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\AttributeTok{mean=}\DecValTok{1}\NormalTok{, }\AttributeTok{sd=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1.023469
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  To simulate 10 random draws from \(X\), we use:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{, }\AttributeTok{mean=}\DecValTok{1}\NormalTok{, }\AttributeTok{sd=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  3.1510904  3.3235058 -3.0489001  7.1865201  3.0699536 -0.4556186
+##  [7] -4.8989888 -1.1089669  0.8634739 -0.3278151
+\end{verbatim}
+
+Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
+
+\hypertarget{example-2-binomial-distribution}{%
+\subsubsection{Example 2: Binomial distribution}\label{example-2-binomial-distribution}}
+
+Suppose \(Y \sim Bin(10, 0.6)\), i.e.~a binomial distribution with \(n=10\) and \(p=0.6\).
+
+\begin{itemize}
+\tightlist
+\item
+  To find \(P(Y=3)\), we use:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbinom}\NormalTok{(}\DecValTok{3}\NormalTok{, }\AttributeTok{size=}\DecValTok{10}\NormalTok{, }\AttributeTok{prob=}\FloatTok{0.6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.04246733
+\end{verbatim}
+
+To find \(P(Y \leq 3)\), we use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pbinom}\NormalTok{(}\DecValTok{3}\NormalTok{, }\AttributeTok{size=}\DecValTok{10}\NormalTok{, }\AttributeTok{prob=}\FloatTok{0.6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.05476188
+\end{verbatim}
+
+\emph{Add Practice questions:}
+
 \hypertarget{packages}{%
 \section{Packages}\label{packages}}
+
+The functionality of R is broken up into various packages. There are four packages included in an R download: base, graphics, stats, utils. These four packages are sometimes collectively called ``base R packages''. An R \textbf{package} is a collection of R functions, corresponding documentation, and datasets.
+
+However, statistical methodologies advance, and additional functions beyond those that exist in base R packages are needed. Independent statisticians create packages to solve more modern problems and have contributed them for everyone to use. These packages are sometimes called ``contributed packages''.
+
+In order to use what is in a contributed package, that package needs to be installed first, and then loaded. You do not need to install or load base R packages.
+
+In order to install packages, you must have an internet connection. Packages only need to be installed once on a computer unless the version of R is updated. We use the function \texttt{install.packages()}. As an example, to install the package called \texttt{palmerpenguins}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"palmerpenguins"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You can then load the package in order to able to use the functions from that package, by using the \texttt{library()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(palmerpenguins)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{\emph{Key idea:}} packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using `library()'.
+
+\hypertarget{types-data-structures-classes}{%
+\section{Types, Data Structures, Classes}\label{types-data-structures-classes}}
+
+\hypertarget{types}{%
+\subsection{Types}\label{types}}
+
+In R, \textbf{type} refers to how an object is stored in memory. You can refer to this \href{https://cran.r-project.org/doc/manuals/r-patched/R-lang.html\#Objects}{table} for a list of types in R. To find the type of an R object, use the \texttt{typeof()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{typeof}\NormalTok{(total1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "double"
+\end{verbatim}
+
+\hypertarget{data-structures}{%
+\subsection{Data Structures}\label{data-structures}}
+
+Data structures are classified based on dimensionality and homogeneity.
+
+\begin{itemize}
+\tightlist
+\item
+  A single value is considered to have zero dimensions and is called a scalar.
+\item
+  A data structure that is either a single column or a single row is considered to have one dimension.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If everything recorded in a one-dimensional data structure is of the same type, then it is called a \textbf{vector}.
+  \item
+    If the items recorded in a one-dimensional data structure have varying types, then it is called a \textbf{list}.
+  \end{itemize}
+\item
+  A data structure that contains multiple rows and multiple columns is considered to have two dimensions.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If the contents of a two-dimensional data structure are homogeneous, then it is called a \textbf{matrix}.
+  \item
+    If the contents of a two-dimensional data structure are heterogeneous, then it is called a \textbf{data frame}.
+  \end{itemize}
+\item
+  An \textbf{array} is a data structure that is homogeneous with one or more dimensions.
+\end{itemize}
+
+This information is summarized in Table \ref{tab:structures} below:
+
+\begin{longtable}[]{@{}ccc@{}}
+\caption{\label{tab:structures} Classification of R Data Structures}\tabularnewline
+\toprule\noalign{}
+Dimension & Homogeneous (Same Type) & Heterogeneous (Diff Type) \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Dimension & Homogeneous (Same Type) & Heterogeneous (Diff Type) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+One & Vector & List \\
+Two & Matrix & Data Frame \\
+\textgreater2 & Array & - \\
+\end{longtable}
+
+Data structures are created either when data are read in from external files or when data are entered manually. Next, we will see how to create them manually.
+
+\hypertarget{vectors}{%
+\subsubsection{Vectors}\label{vectors}}
+
+The concatenate function, \texttt{c()}, is commonly used to create a vector. The inputs for this function are the data that you would like stored in the vector in the order in which you would like them stored. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{25}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{15}\NormalTok{)}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  3  6  9 12 15
+\end{verbatim}
+
+The concatenate function can also be used to add a value to a vector or to combine preexisting vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(x,}\DecValTok{30}\NormalTok{)}
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(x,y)}
+\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  5 10 15 20 25  3  6  9 12 15
+\end{verbatim}
+
+It is important to remember that the order in which the objects are specified is the order in which they will be saved in the vector.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(y,x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  3  6  9 12 15  5 10 15 20 25
+\end{verbatim}
+
+\hypertarget{pattern-vectors}{%
+\paragraph{Pattern vectors}\label{pattern-vectors}}
+
+There are times when you may need to create a vector that contains a sequence of numbers. There are a few ways to create this type of vector.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  If you are wanting to create a vector that contains a sequence of consecutive integers, then you can use the syntax a:b to create a vector that starts at a and increases or decreases by one until b.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5}\SpecialCharTok{:}\DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5 4 3 2 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\DecValTok{1}\SpecialCharTok{:{-}}\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1 -2 -3 -4 -5
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  If you are wanting a sequence where the values have a constant difference other than one, then you can use the sequence function, \texttt{seq()}. This function takes three arguments: from, to, by. These inputs specify the first and last number of the sequence as well as the difference between each value in the sequence.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{seq}\NormalTok{(}\AttributeTok{from=}\DecValTok{1}\NormalTok{, }\AttributeTok{to=}\DecValTok{5}\NormalTok{, }\AttributeTok{by=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0
+\end{verbatim}
+
+There is another optional input for the sequence function: length. The length option specifies the length that you want your vector to be or how many values you want contained in the vector. The sequence function will use this value to determine a constant difference between each of the values that yields the number of values that you specify.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{, }\AttributeTok{length=}\DecValTok{9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Another function that creates a useful type of vector is the replicate function, \texttt{rep()}. This function takes two arguments: vector and number of replicates. These specify what you would like R to repeat and how many times. Depending on the format of what you provide in the times option, this function will either repeat the given vector a specified number of times or repeat the elements of the vector a specified number of times.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 2 3 4 5 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 2 3 3 3 4 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 1 2 2 3 3 4 4 5 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\AttributeTok{each=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 1 2 2 3 3 4 4 5 5
+\end{verbatim}
+
+\hypertarget{matrices}{%
+\subsubsection{Matrices}\label{matrices}}
+
+The \texttt{matrix()} function can be used to create a matrix. This function takes four arguments: vector, nrow, ncol, and byrow. These arguments instruct R what values to put in the matrix, how many rows and columns the matrix should have, and whether values should be assigned across the rows or down the columns. The default for the byrow option is false, meaning that the values will be assigned down the columns if the byrow option is not provided.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{15}\NormalTok{), }\AttributeTok{nrow=}\DecValTok{2}\NormalTok{, }\AttributeTok{ncol=}\DecValTok{5}\NormalTok{, }\AttributeTok{byrow=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    5   10   15   20   25
+## [2,]    3    6    9   12   15
+\end{verbatim}
+
+Another way to create a matrix is to use either the \texttt{cbind()} or \texttt{rbind()} function. Both of these functions use vectors as inputs. The \texttt{cbind()} function will bind these vectors together as columns and the \texttt{rbind()} function will bind these vectors together as rows.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rbind}\NormalTok{(x,y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [,1] [,2] [,3] [,4] [,5]
+## x    5   10   15   20   25
+## y    3    6    9   12   15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cbind}\NormalTok{(x,y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       x  y
+## [1,]  5  3
+## [2,] 10  6
+## [3,] 15  9
+## [4,] 20 12
+## [5,] 25 15
+\end{verbatim}
+
+As with the concatenate function, R will bind the vectors together in the order you specify.
+
+\hypertarget{classes}{%
+\subsection{Classes}\label{classes}}
+
+In, R, \textbf{class} refers to how an object behaves with generic functions. There are 3 main classes in R: logical, numeric, and character.
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}
 
 Read CH 2 from \citep{BH2019}.
 
-See Sections \ref{intro}, \ref{blank}, and \ref{math}.
+See Sections \ref{RBasics}, \ref{doc}.
 
 See equation \eqref{eq:union}.
 
-See Figure \ref{fig:nice-fig}, \ref{fig:car}, and \ref{fig:cards} and Table \ref{tab:nice-tab}.
+See Figure \ref{fig:car}, and \ref{fig:cards} and Table \ref{tab:nice-tab}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -633,18 +1045,6 @@ See Figure \ref{fig:nice-fig}, \ref{fig:car}, and \ref{fig:cards} and Table \ref
 \includegraphics{images/02-cards.jpg}
 \caption{\label{fig:cards}Sample Space of Drawing One Card from Standard Deck. Picture from \href{https://en.wikipedia.org/wiki/Standard_52-card_deck}{wikipedia}}
 \end{figure}
-
-See this sum
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1}\SpecialCharTok{+}\DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2
-\end{verbatim}
 
   \bibliography{book.bib,packages.bib}
 

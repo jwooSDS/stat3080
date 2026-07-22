@@ -1,3 +1,4 @@
+tab:structures
 fig:car
 fig:cards
 Rbasics
@@ -10,7 +11,18 @@ changing-the-working-directory
 rstudio-projects
 r-scripts
 basic-math-operations
+assignments-and-variables
 functions
-documentation
+doc
+working-with-common-probability-distributions
+example-1-normal-distribution
+example-2-binomial-distribution
 packages
+types-data-structures-classes
+types
+data-structures
+vectors
+pattern-vectors
+matrices
+classes
 blank

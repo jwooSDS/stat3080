@@ -6,7 +6,7 @@ R is an open-source programming language and software environment specifically d
 
 While R has a basic default interface, users typically write code using integrated development environments (IDEs) such as RStudio, Positron, VS Code, which can provide additional user-friendly features. RStudio will be used in this course. 
 
-## RStudio Interface
+### RStudio Interface
 
 Open RStudio. You will see three panes:
 
@@ -24,7 +24,7 @@ In order to get R to do what you want it to do, you will need to     write a **c
 1+2
 ```
 
-Notice a number in brackets before the answer? The number indicate the length of the output because most objects that we’ll work with in R are treated like vectors (much more on that later).
+Notice a number in brackets before the answer? The number indicates index position of the first element displayed on that specific line. 
 
 You can also add **comments** to R code by using the `#` sign. Everything to the right of the `#` is ignored by R. Comments are useful to explain what has been coded and why to yourself or to collaborators.
 
@@ -77,7 +77,6 @@ An **RStudio Project** is a folder with a `.Rproj` file that in it. There are a 
 If you open the folder associated with the created working directory, you will find a file with a `.Rproj` extension created (its name should be the name of the project that you gave in the last step above).
 
 Now, close your RStudio. Navigate to the project folder on your computer and double-click the `.Rproj` file. Your working directory will be where this `.Rproj` file is located. You can confirm using `getwd()`, or by looking at the pane called "Files / Plots / Packages / Help". Click on the files tab and it will display the path of your working directory, and you can also see the other files in this folder. 
-
 2. If you have created an RStudio Project before and have a file with a `.RProj` extension, you can just copy and paste this file and place it into another folder to make it your working directory. This is the approach I almost exclusively use. 
 
 I highly recommend that you create a folder on your computer that is exclusively for this class. You should also create separate subfolders for each assignment. 
@@ -109,7 +108,7 @@ R can be used as a calculator by using the standard arithmetic operators:       
 
 R is like any calculator in that these operators follow the standard order of operations. Some examples:
 
-```{r}
+```{r, eval=FALSE}
 15+10
 12/6
 0.7*5
@@ -117,6 +116,62 @@ R is like any calculator in that these operators follow the standard order of op
 15+10*3
 (15+10)*3
 ```
+
+## Assignments and Variables
+
+In order to write useful and effective R code, You need to be able to store items to be used later. Anything that is stored is called an object. An object can be a single value resulting from a calculation or a collection of information such as a table of linear regression coefficients.
+
+A **variable** is a memory location for the object, which can be thought of as a label for the object. Variables are created when the object is **assigned** to it, so there is no need to declare the variable first. 
+
+**Note**: the term variable as defined above comes from computer science. In statistics, the term variable means something different (any characteristic that can be measured).
+
+Variable names can consist of letters, numbers, periods, and underscores. There are a few limitations to how these types of characters can be combined. The following are characteristics of all variable names: 
+
+1. Variable names cannot begin with a number.
+2. Variable names cannot contain spaces. 
+3. Variable names can begin with a period as long as they are not followed by a number. 
+4. Since R is case-sensitive, `x` and `X` are different variable names. 
+Wherever possible, it is best practice to avoid using the names of existing functions (ie. mean, sd, log) and predefined variables (ie. pi) to avoid confusion for anyone reading your code and possibly R itself. 
+
+It is also best practice to use variable names that are short and descriptive of the information contained in the object. 
+
+Once you have decided on a variable name for the object, you will need to assign the object to the variable by using either the assignment operator `<-` or `=` (the first is the more commonly used in R). I would discourage using `=` as an assignment operator as it is also used when specifying values for arguments in functions (see section \@ref(doc).) 
+
+To store the sum of 10 and 5 and the rounded value of 5.7 (to whole number) into variables called `total1` `value1` respectively:
+
+```{r}
+total1 <- 10+15
+value1 <- round(5.7,0)
+```
+
+Notice that these variables and their values are displayed in the environment tab in the pane at the top-right. 
+
+R will recall or show the object stored in a variable when the variable name is submitted as a command.  
+
+```{r}
+total1
+value1
+```
+
+Stored objects can be used in subsequent operations. For example:
+
+```{r}
+total1/5
+total1/value1
+```
+
+Any object that you would like stored needs to be given a variable name.
+
+```{r}
+ratio1 <- total1/value1
+```
+
+Variables can be overwritten by storing a new object using the same variable name. 
+
+```{r}
+ratio1 <- total1/2
+```
+
 
 ## Functions
 
@@ -128,7 +183,7 @@ R is case-sensitive, so functions that you want to use must be typed exactly as 
 
 Some common functions are listed below:
 
-```{r}
+```{r, eval=FALSE}
 log(2.7) ## log with base e, sometimes written as ln
 exp(1) ## e to power of 1
 sqrt(9) ## squareroot of 9
@@ -141,7 +196,7 @@ round(5.7) ## round to nearest integer
 round(5.727,2) ##round to 2 decimal places
 ```
 
-## Documentation
+### Documentation {#doc}
 
 Typing `?` and then the name of a function will open up the help page (called R documentation) associated with that function. The help page will appear under the Help tab in the bottom-right pane. Type `?log` to read the help page for the `log()` function. 
 
@@ -154,4 +209,200 @@ The sections of the help page that I find useful:
 
 *Practice*: after reading the documentation for `log()`, use R to find the value of $\log_3(5)$.
 
+Note: In the top-left corner of the help page, the name of the function is shown, along with the package it is from in braces. So the `log()` function comes a package called `base`. 
+
+### Working with common probability distributions
+
+Some common probability distributions (e.g. normal, binomial, etc.) are defined in R. Each distribution has a general function name, for example:
+
+- norm: normal distribution
+- binom: binomial distribution
+- t: $t$ distribution
+- F: $F$ distribution
+- chisq: $\chi^2$ distribution
+
+Each distribution has 4 functions associated with it in R. The letter that precedes the distribution name tells R what specifically to do with that distribution. These letters are:
+
+- `d`: gives the value of the probability density (or mass) function.
+- `p`: gives the cumulative probability of the distribution at the point specified.
+- `q`: determines the value within the distribution associated with the cumulative probability specified.
+- `r`: generates random numbers from the distribution.  
+
+#### Example 1: Normal distribution
+
+Suppose $X \sim N(1,9)$, i.e. a normal distribution with mean 1 and variance 9. 
+
+- To find $P(X \leq 2)$, we use:
+
+```{r}
+pnorm(2, mean=1, sd=3)
+```
+
+- To find the value of $X$ associated with the 25th percentile:
+
+```{r}
+qnorm(0.25, mean=1, sd=3)
+```
+
+- To simulate 10 random draws from $X$, we use:
+
+```{r}
+rnorm(10, mean=1, sd=3)
+```
+
+Note: you are likely to get a vector of 10 numbers that are different than the ones shown. 
+
+
+#### Example 2: Binomial distribution
+
+Suppose $Y \sim Bin(10, 0.6)$, i.e. a binomial distribution with $n=10$ and $p=0.6$.
+
+- To find $P(Y=3)$, we use:
+
+```{r}
+dbinom(3, size=10, prob=0.6)
+```
+
+To find $P(Y \leq 3)$, we use:
+
+```{r}
+pbinom(3, size=10, prob=0.6)
+```
+
+*Add Practice questions:*
+
 ## Packages
+
+The functionality of R is broken up into various packages. There are four packages included in an R download: base, graphics, stats, utils. These four packages are sometimes collectively called "base R packages". An R **package** is a collection of R functions, corresponding documentation, and datasets.
+
+However, statistical methodologies advance, and additional functions beyond those that exist in base R packages are needed. Independent statisticians create packages to solve more modern problems and have contributed them for everyone to use. These packages are sometimes called "contributed packages".
+
+In order to use what is in a contributed package, that package needs to be installed first, and then loaded. You do not need to install or load base R packages. 
+
+In order to install packages, you must have an internet connection. Packages only need to be installed once on a computer unless the  version of R is updated. We use the function `install.packages()`. As an example, to install the package called `palmerpenguins`:
+
+```{r, eval=FALSE}
+install.packages("palmerpenguins")
+```
+
+You can then load the package in order to able to use the functions from that package, by using the `library()` function:
+
+```{r}
+library(palmerpenguins)
+```
+
+***Key idea:*** packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using `library()'.
+
+## Types, Data Structures, Classes
+
+### Types
+
+In R, **type** refers to how an object is stored in memory. You can refer to this [table](https://cran.r-project.org/doc/manuals/r-patched/R-lang.html#Objects) for a list of types in R. To find the type of an R object, use the `typeof()` function:
+
+```{r}
+typeof(total1)
+```
+
+### Data Structures
+
+Data structures are classified based on dimensionality and homogeneity.
+
+- A single value is considered to have zero dimensions and is called   a scalar.
+- A data structure that is either a single column or a single row is  considered to have one dimension.
+  - If everything recorded in a one-dimensional data structure is of the same type, then it is called a **vector**. 
+  - If the items recorded in a one-dimensional data structure have varying types, then it is called a **list**. 
+- A data structure that contains multiple rows and multiple columns   is considered to have two dimensions.
+  - If the contents of a two-dimensional data structure are homogeneous, then it is called a **matrix**. 
+  - If the contents of a two-dimensional data structure are heterogeneous, then it is called a **data frame**. 
+- An **array** is a data structure that is homogeneous with one or more dimensions. 
+  
+This information is summarized in Table \@ref(tab:structures) below:
+
+Table: (\#tab:structures) Classification of R Data Structures
+
+| Dimension |  Homogeneous (Same Type)  |  Heterogeneous (Diff Type) | 
+|:----------:|:-------------:|:------:|
+| One |  Vector | List  | 
+| Two |    Matrix   | Data Frame | 
+| >2 | Array | - | 
+
+Data structures are created either when data are read in from external files or when data are entered manually. Next, we will see how to create them manually. 
+
+#### Vectors
+
+The concatenate function, `c()`, is commonly used to create a vector.  The inputs for this function are the data that you would like stored in the vector in the order in which you would like them stored. For example:
+
+```{r}
+x <- c(5,10,15,20,25)
+x
+y <- c(3,6,9,12,15)
+y
+```
+The concatenate function can also be used to add a value to a vector or to combine preexisting vectors.          
+
+```{r}
+x2 <- c(x,30)
+z <- c(x,y)
+z
+```
+
+It is important to remember that the order in which the objects are  specified is the order in which they will be saved in the vector.
+
+```{r}
+c(y,x)
+```
+
+##### Pattern vectors
+
+There are times when you may need to create a vector that contains a sequence of numbers. There are a few ways to create this type of vector.
+
+1. If you are wanting to create a vector that contains a sequence of consecutive integers, then you can use the syntax a:b to create a vector that starts at a and increases or decreases by one until b. 
+
+```{r}
+1:5
+5:1
+-1:-5
+```
+
+2. If you are wanting a sequence where the values have a constant difference other than one, then you can use the sequence function, `seq()`. This function takes three arguments: from, to, by. These inputs specify the first and last number of the sequence as well as the difference between each value in the sequence. 
+
+```{r}
+seq(from=1, to=5, by=0.5)
+```
+
+There is another optional input for the sequence function: length. The length option specifies the length that you want your vector to be or how many values you want contained in the vector. The sequence function will use this value to determine a constant difference between each of the values that yields the number of values that you specify.  
+
+```{r}
+seq(1,5, length=9)
+```
+
+3. Another function that creates a useful type of vector is the        replicate function, `rep()`. This function takes two arguments: vector and number of replicates. These specify what you would like R to repeat and how many times. Depending on the format of what you provide in the times option, this function will either repeat the given vector a specified number of times or repeat the elements of the vector a specified number of times.
+
+```{r}
+rep(1:5, 2)
+rep(1:5, c(1,2,3,2,1))
+rep(1:5, c(2,2,2,2,2))
+rep(1:5, each=2)
+```
+#### Matrices
+
+The `matrix()` function can be used to create a matrix. This function  takes four arguments: vector, nrow, ncol, and byrow. These arguments instruct R what values to put in the matrix, how many rows and columns the matrix should have, and whether values should be assigned across the rows or down the columns. The default for the byrow option is false, meaning that the values will be assigned down the columns if the byrow option is not provided.
+
+```{r}
+matrix(c(5,10,15,20,25,3,6,9,12,15), nrow=2, ncol=5, byrow=TRUE)
+```
+Another way to create a matrix is to use either the `cbind()` or `rbind()` function. Both of these functions use vectors as inputs. The `cbind()` function will bind these vectors together as columns and the `rbind()` function will bind these vectors together as rows.
+
+```{r}
+rbind(x,y)
+cbind(x,y)
+```
+
+As with the concatenate function, R will bind the vectors together in the order you specify.  
+
+### Classes
+
+In, R, **class** refers to how an object behaves with generic functions. There are 3 main classes in R: logical, numeric, and character.
+
+- 
+

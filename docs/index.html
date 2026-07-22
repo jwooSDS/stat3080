@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Prerequisites | STAT 3080: From Data to Knowledge</title>
+<title>Preface | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="Course Notes for STAT 3080">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Prerequisites | STAT 3080: From Data to Knowledge">
+<meta property="og:title" content="Preface | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Course Notes for STAT 3080">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Prerequisites | STAT 3080: From Data to Knowledge">
+<meta name="twitter:title" content="Preface | STAT 3080: From Data to Knowledge">
 <meta name="twitter:description" content="Course Notes for STAT 3080">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -64,10 +64,9 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html">Prerequisites</a></li>
+<li><a class="active" href="index.html">Preface</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">1</span> Introduction</a></li>
 <li><a class="" href="blank.html"><span class="header-section-number">2</span> Blank Canvas</a></li>
-<li><a class="" href="methods.html"><span class="header-section-number">3</span> Methods</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -76,25 +75,35 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="prerequisites" class="section level1 unnumbered">
-<h1>Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="preface" class="section level1 unnumbered">
+<h1>Preface<a class="anchor" aria-label="anchor" href="#preface"><i class="fas fa-link"></i></a>
 </h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bookdown"</span><span class="op">)</span></span>
-<span><span class="co"># or the development version</span></span>
-<span><span class="co"># devtools::install_github("rstudio/bookdown")</span></span></code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
-
+<div id="course-overview-and-goals" class="section level2 unnumbered">
+<h2>Course Overview and Goals<a class="anchor" aria-label="anchor" href="#course-overview-and-goals"><i class="fas fa-link"></i></a>
+</h2>
+<p>This course focuses on a simulation-based inference approach to concepts taught in elementary statistics. It focuses on using simulations to investigate the operating characteristics of common inferential procedures in statistics, so you can make practical decisions on when to use these procedures to learn about the data at hand.</p>
+<p>For example, you may have heard that a hypothesis test for the mean from one sample assumes the data come from a normal distribution, or that the sample size is “large enough”. You may have wondered what constitutes being “large enough”, and you may have learned or read that a sample size of 25 or 30 will be considered “large enough”. The true answer is actually “it depends”, as various other factors play a role.</p>
+<p>You will learn to design and run simulations to develop a more nuanced understanding of how reliable these inferential procedures are when the assumptions they are based on are not met. It turns out that there are mathematical proofs that can answer such questions, but they are usually fairly complicated, so we will use simulations in place of these mathematical proofs.</p>
+<p>In order to design such simulations, a fair amount of knowledge with coding using R will be needed, which you will learn in the first portion of this course. This course is not a programming course; it is simulation-based inference using R.</p>
+<p>Upon successful completion of this course, you will be able to:</p>
+<ol style="list-style-type: decimal">
+<li>Use simulation to study operating characteristics of statistical methodologies.</li>
+<li>Understand and apply appropriate statistical methodologies under various data scenarios.</li>
+<li>Use simulation to estimate statistical quantities which are difficult to compute.</li>
+<li>Use simulation to assess the quality of statistical estimators.</li>
+<li>Communicate results from simulations in writing, based on principles of reproducible research.</li>
+</ol>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="empty"></div>
 <div class="next"><a href="intro.html"><span class="header-section-number">1</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#prerequisites">Prerequisites</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preface">Preface</a></li>
+<li><a class="nav-link" href="#course-overview-and-goals">Course Overview and Goals</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -110,7 +119,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-16.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -118,34 +127,6 @@
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>

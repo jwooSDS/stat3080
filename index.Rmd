@@ -12,25 +12,23 @@ github-repo: rstudio/bookdown-demo
 description: "Course Notes for STAT 3080"
 ---
 
-# Prerequisites {-}
+# Preface {-}
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
+## Course Overview and Goals {-}
 
-The **bookdown** package can be installed from CRAN or Github:
+This course focuses on a simulation-based inference approach to concepts taught in elementary statistics. It focuses on using simulations to investigate the operating characteristics of common inferential procedures in statistics, so you can make practical decisions on when to use these procedures to learn about the data at hand. 
 
-```{r eval=FALSE}
-install.packages("bookdown")
-# or the development version
-# devtools::install_github("rstudio/bookdown")
-```
+For example, you may have heard that a hypothesis test for the mean from one sample assumes the data come from a normal distribution, or that the sample size is “large enough”. You may have wondered what constitutes being “large enough”, and you may have learned or read that a sample size of 25 or 30 will be considered “large enough”. The true answer is actually “it depends”, as various other factors play a role.
 
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
+You will learn to design and run simulations to develop a more nuanced understanding of how reliable these inferential procedures are when the assumptions they are based on are not met. It turns out that there are mathematical proofs that can answer such questions, but they are usually fairly complicated, so we will use simulations in place of these mathematical proofs. 
 
-To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+In order to design such simulations, a fair amount of knowledge with coding using R will be needed, which you will learn in the first portion of this course. This course is not a programming course; it is simulation-based inference using R. 
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+Upon successful completion of this course, you will be able to:
+
+1. Use simulation to study operating characteristics of statistical methodologies.
+2. Understand and apply appropriate statistical methodologies under various data scenarios.
+3. Use simulation to estimate statistical quantities which are difficult to compute.
+4. Use simulation to assess the quality of statistical estimators. 
+5. Communicate results from simulations in writing, based on principles of reproducible research. 
+

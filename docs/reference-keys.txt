@@ -2,8 +2,5 @@ fig:nice-fig
 tab:nice-tab
 fig:car
 fig:cards
-eq:union
 intro
 blank
-methods
-math

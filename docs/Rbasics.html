@@ -322,8 +322,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ul>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1]  3.5286863  4.2088612 -0.3996300  0.8289246 -0.9989759  0.8072859
-##  [7]  3.5440651  3.3034961  1.6403130 -4.0027049</code></pre>
+<pre><code>##  [1] -1.4329436  0.9999366  2.0582796  3.8717128  1.7711695  0.6598600
+##  [7] -2.3658108  2.9703299  2.1408721  4.5493356</code></pre>
 <p>Note: you are likely to get a vector of 10 numbers that are different than the ones shown.</p>
 </div>
 <div id="example-2-binomial-distribution" class="section level4" number="1.7.2.2">
@@ -364,20 +364,11 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <h2>
 <span class="header-section-number">1.9</span> Types, Data Structures, Classes<a class="anchor" aria-label="anchor" href="#types-data-structures-classes"><i class="fas fa-link"></i></a>
 </h2>
-<div id="types" class="section level3" number="1.9.1">
-<h3>
-<span class="header-section-number">1.9.1</span> Types<a class="anchor" aria-label="anchor" href="#types"><i class="fas fa-link"></i></a>
-</h3>
 <p>In R, <strong>type</strong> refers to how an object is stored in memory. You can refer to this <a href="https://cran.r-project.org/doc/manuals/r-patched/R-lang.html#Objects">table</a> for a list of types in R. To find the type of an R object, use the <code><a href="https://rdrr.io/r/base/typeof.html">typeof()</a></code> function:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">total1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "double"</code></pre>
-</div>
-<div id="data-structures" class="section level3" number="1.9.2">
-<h3>
-<span class="header-section-number">1.9.2</span> Data Structures<a class="anchor" aria-label="anchor" href="#data-structures"><i class="fas fa-link"></i></a>
-</h3>
-<p>Data structures are classified based on dimensionality and homogeneity.</p>
+<p><strong>Data structures</strong> are used to store and organize values. They are classified based on dimensionality and homogeneity.</p>
 <ul>
 <li>A single value is considered to have zero dimensions and is called a scalar.</li>
 <li>A data structure that is either a single column or a single row is considered to have one dimension.
@@ -422,10 +413,10 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </tbody>
 </table></div>
 <p>Data structures are created either when data are read in from external files or when data are entered manually. Next, we will see how to create them manually.</p>
-<div id="vectors" class="section level4" number="1.9.2.1">
-<h4>
-<span class="header-section-number">1.9.2.1</span> Vectors<a class="anchor" aria-label="anchor" href="#vectors"><i class="fas fa-link"></i></a>
-</h4>
+<div id="vec" class="section level3" number="1.9.1">
+<h3>
+<span class="header-section-number">1.9.1</span> Vectors<a class="anchor" aria-label="anchor" href="#vec"><i class="fas fa-link"></i></a>
+</h3>
 <p>The concatenate function, <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, is commonly used to create a vector. The inputs for this function are the data that you would like stored in the vector in the order in which you would like them stored. For example:</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>,<span class="fl">25</span><span class="op">)</span></span>
@@ -445,10 +436,10 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y</span>,<span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1]  3  6  9 12 15  5 10 15 20 25</code></pre>
-<div id="pattern-vectors" class="section level5" number="1.9.2.1.1">
-<h5>
-<span class="header-section-number">1.9.2.1.1</span> Pattern vectors<a class="anchor" aria-label="anchor" href="#pattern-vectors"><i class="fas fa-link"></i></a>
-</h5>
+<div id="pattern-vectors" class="section level4" number="1.9.1.1">
+<h4>
+<span class="header-section-number">1.9.1.1</span> Pattern vectors<a class="anchor" aria-label="anchor" href="#pattern-vectors"><i class="fas fa-link"></i></a>
+</h4>
 <p>There are times when you may need to create a vector that contains a sequence of numbers. There are a few ways to create this type of vector.</p>
 <ol style="list-style-type: decimal">
 <li>If you are wanting to create a vector that contains a sequence of consecutive integers, then you can use the syntax a:b to create a vector that starts at a and increases or decreases by one until b.</li>
@@ -489,10 +480,10 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <pre><code>##  [1] 1 1 2 2 3 3 4 4 5 5</code></pre>
 </div>
 </div>
-<div id="matrices" class="section level4" number="1.9.2.2">
-<h4>
-<span class="header-section-number">1.9.2.2</span> Matrices<a class="anchor" aria-label="anchor" href="#matrices"><i class="fas fa-link"></i></a>
-</h4>
+<div id="mat" class="section level3" number="1.9.2">
+<h3>
+<span class="header-section-number">1.9.2</span> Matrices<a class="anchor" aria-label="anchor" href="#mat"><i class="fas fa-link"></i></a>
+</h3>
 <p>The <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code> function can be used to create a matrix. This function takes four arguments: vector, nrow, ncol, and byrow. These arguments instruct R what values to put in the matrix, how many rows and columns the matrix should have, and whether values should be assigned across the rows or down the columns. The default for the byrow option is false, meaning that the values will be assigned down the columns if the byrow option is not provided.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>,<span class="fl">25</span>,<span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">9</span>,<span class="fl">12</span>,<span class="fl">15</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span>, ncol<span class="op">=</span><span class="fl">5</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -515,15 +506,28 @@ Wherever possible, it is best practice to avoid using the names of existing func
 ## [5,] 25 15</code></pre>
 <p>As with the concatenate function, R will bind the vectors together in the order you specify.</p>
 </div>
-</div>
 <div id="classes" class="section level3" number="1.9.3">
 <h3>
 <span class="header-section-number">1.9.3</span> Classes<a class="anchor" aria-label="anchor" href="#classes"><i class="fas fa-link"></i></a>
 </h3>
-<p>In, R, <strong>class</strong> refers to how an object behaves with generic functions. There are 3 main classes in R: logical, numeric, and character.</p>
-<ul>
-<li>
-</ul>
+<p>In, R, <strong>class</strong> refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.</p>
+<ol style="list-style-type: decimal">
+<li>Character: Represents text strings, symbols, or words. Must always be enclosed in quotes.</li>
+<li>Numeric: Represents real numbers.</li>
+<li>Logical: Represents Boolean values for binary conditions.</li>
+</ol>
+<p>The vectors and matrices created in sections <a href="Rbasics.html#vec">1.9.1</a> and <a href="Rbasics.html#mat">1.9.2</a> are numeric.</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "numeric"</code></pre>
+<p>To create a logical vector:</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">log_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="co">## Note that T and F are equivalent to TRUE and FALSE resp</span></span></code></pre></div>
+<p>To create a character vector:</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">char_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ByOne"</span>, <span class="st">"ByTwo"</span>, <span class="st">"ByThree"</span>, <span class="st">"ByFour"</span>, <span class="st">"ByFive"</span><span class="op">)</span></span></code></pre></div>
+
 </div>
 </div>
 </div>
@@ -557,8 +561,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <li><a class="nav-link" href="#packages"><span class="header-section-number">1.8</span> Packages</a></li>
 <li>
 <a class="nav-link" href="#types-data-structures-classes"><span class="header-section-number">1.9</span> Types, Data Structures, Classes</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#types"><span class="header-section-number">1.9.1</span> Types</a></li>
-<li><a class="nav-link" href="#data-structures"><span class="header-section-number">1.9.2</span> Data Structures</a></li>
+<li><a class="nav-link" href="#vec"><span class="header-section-number">1.9.1</span> Vectors</a></li>
+<li><a class="nav-link" href="#mat"><span class="header-section-number">1.9.2</span> Matrices</a></li>
 <li><a class="nav-link" href="#classes"><span class="header-section-number">1.9.3</span> Classes</a></li>
 </ul>
 </li>

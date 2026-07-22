@@ -295,17 +295,12 @@ library(palmerpenguins)
 
 ## Types, Data Structures, Classes
 
-### Types
-
 In R, **type** refers to how an object is stored in memory. You can refer to this [table](https://cran.r-project.org/doc/manuals/r-patched/R-lang.html#Objects) for a list of types in R. To find the type of an R object, use the `typeof()` function:
 
 ```{r}
 typeof(total1)
 ```
-
-### Data Structures
-
-Data structures are classified based on dimensionality and homogeneity.
+**Data structures** are used to store and organize values. They are classified based on dimensionality and homogeneity.
 
 - A single value is considered to have zero dimensions and is called   a scalar.
 - A data structure that is either a single column or a single row is  considered to have one dimension.
@@ -328,7 +323,7 @@ Table: (\#tab:structures) Classification of R Data Structures
 
 Data structures are created either when data are read in from external files or when data are entered manually. Next, we will see how to create them manually. 
 
-#### Vectors
+### Vectors {#vec}
 
 The concatenate function, `c()`, is commonly used to create a vector.  The inputs for this function are the data that you would like stored in the vector in the order in which you would like them stored. For example:
 
@@ -352,7 +347,7 @@ It is important to remember that the order in which the objects are  specified i
 c(y,x)
 ```
 
-##### Pattern vectors
+#### Pattern vectors
 
 There are times when you may need to create a vector that contains a sequence of numbers. There are a few ways to create this type of vector.
 
@@ -384,7 +379,7 @@ rep(1:5, c(1,2,3,2,1))
 rep(1:5, c(2,2,2,2,2))
 rep(1:5, each=2)
 ```
-#### Matrices
+### Matrices {#mat}
 
 The `matrix()` function can be used to create a matrix. This function  takes four arguments: vector, nrow, ncol, and byrow. These arguments instruct R what values to put in the matrix, how many rows and columns the matrix should have, and whether values should be assigned across the rows or down the columns. The default for the byrow option is false, meaning that the values will be assigned down the columns if the byrow option is not provided.
 
@@ -402,7 +397,29 @@ As with the concatenate function, R will bind the vectors together in the order 
 
 ### Classes
 
-In, R, **class** refers to how an object behaves with generic functions. There are 3 main classes in R: logical, numeric, and character.
+In, R, **class** refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.
 
-- 
+1. Character: Represents text strings, symbols, or words. Must always be enclosed in quotes.
+2. Numeric: Represents real numbers.
+3. Logical: Represents Boolean values for binary conditions.
+
+The vectors and matrices created in sections \@ref(vec) and \@ref(mat) are numeric. 
+
+```{r}
+class(y)
+```
+
+To create a logical vector:
+
+```{r}
+log_vect <- c(TRUE, FALSE, T, F)
+## Note that T and F are equivalent to TRUE and FALSE resp
+```
+
+To create a character vector:
+
+```{r}
+char_vect <- c("ByOne", "ByTwo", "ByThree", "ByFour", "ByFive")
+```
+
 

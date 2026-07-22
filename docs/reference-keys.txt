@@ -19,10 +19,8 @@ example-1-normal-distribution
 example-2-binomial-distribution
 packages
 types-data-structures-classes
-types
-data-structures
-vectors
+vec
 pattern-vectors
-matrices
+mat
 classes
 blank

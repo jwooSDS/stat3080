@@ -643,8 +643,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  3.1510904  3.3235058 -3.0489001  7.1865201  3.0699536 -0.4556186
-##  [7] -4.8989888 -1.1089669  0.8634739 -0.3278151
+##  [1]  1.1071797  4.0255930  0.8580170 -0.5293577 -1.4452624  1.7772671
+##  [7]  2.1793403 -2.3599390  2.8047424 10.2166899
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -714,9 +714,6 @@ You can then load the package in order to able to use the functions from that pa
 \hypertarget{types-data-structures-classes}{%
 \section{Types, Data Structures, Classes}\label{types-data-structures-classes}}
 
-\hypertarget{types}{%
-\subsection{Types}\label{types}}
-
 In R, \textbf{type} refers to how an object is stored in memory. You can refer to this \href{https://cran.r-project.org/doc/manuals/r-patched/R-lang.html\#Objects}{table} for a list of types in R. To find the type of an R object, use the \texttt{typeof()} function:
 
 \begin{Shaded}
@@ -729,10 +726,7 @@ In R, \textbf{type} refers to how an object is stored in memory. You can refer t
 ## [1] "double"
 \end{verbatim}
 
-\hypertarget{data-structures}{%
-\subsection{Data Structures}\label{data-structures}}
-
-Data structures are classified based on dimensionality and homogeneity.
+\textbf{Data structures} are used to store and organize values. They are classified based on dimensionality and homogeneity.
 
 \begin{itemize}
 \tightlist
@@ -783,8 +777,8 @@ Two & Matrix & Data Frame \\
 
 Data structures are created either when data are read in from external files or when data are entered manually. Next, we will see how to create them manually.
 
-\hypertarget{vectors}{%
-\subsubsection{Vectors}\label{vectors}}
+\hypertarget{vec}{%
+\subsection{Vectors}\label{vec}}
 
 The concatenate function, \texttt{c()}, is commonly used to create a vector. The inputs for this function are the data that you would like stored in the vector in the order in which you would like them stored. For example:
 
@@ -837,7 +831,7 @@ It is important to remember that the order in which the objects are specified is
 \end{verbatim}
 
 \hypertarget{pattern-vectors}{%
-\paragraph{Pattern vectors}\label{pattern-vectors}}
+\subsubsection{Pattern vectors}\label{pattern-vectors}}
 
 There are times when you may need to create a vector that contains a sequence of numbers. There are a few ways to create this type of vector.
 
@@ -956,8 +950,8 @@ There is another optional input for the sequence function: length. The length op
 ##  [1] 1 1 2 2 3 3 4 4 5 5
 \end{verbatim}
 
-\hypertarget{matrices}{%
-\subsubsection{Matrices}\label{matrices}}
+\hypertarget{mat}{%
+\subsection{Matrices}\label{mat}}
 
 The \texttt{matrix()} function can be used to create a matrix. This function takes four arguments: vector, nrow, ncol, and byrow. These arguments instruct R what values to put in the matrix, how many rows and columns the matrix should have, and whether values should be assigned across the rows or down the columns. The default for the byrow option is false, meaning that the values will be assigned down the columns if the byrow option is not provided.
 
@@ -1007,12 +1001,47 @@ As with the concatenate function, R will bind the vectors together in the order 
 \hypertarget{classes}{%
 \subsection{Classes}\label{classes}}
 
-In, R, \textbf{class} refers to how an object behaves with generic functions. There are 3 main classes in R: logical, numeric, and character.
+In, R, \textbf{class} refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-\end{itemize}
+  Character: Represents text strings, symbols, or words. Must always be enclosed in quotes.
+\item
+  Numeric: Represents real numbers.
+\item
+  Logical: Represents Boolean values for binary conditions.
+\end{enumerate}
+
+The vectors and matrices created in sections \ref{vec} and \ref{mat} are numeric.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+To create a logical vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{log\_vect }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, T, F)}
+\DocumentationTok{\#\# Note that T and F are equivalent to TRUE and FALSE resp}
+\end{Highlighting}
+\end{Shaded}
+
+To create a character vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{char\_vect }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"ByOne"}\NormalTok{, }\StringTok{"ByTwo"}\NormalTok{, }\StringTok{"ByThree"}\NormalTok{, }\StringTok{"ByFour"}\NormalTok{, }\StringTok{"ByFive"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

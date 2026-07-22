@@ -87,12 +87,51 @@
 <p>In order to design such simulations, a fair amount of knowledge with coding using R will be needed, which you will learn in the first portion of this course. This course is not a programming course; it is simulation-based inference using R.</p>
 <p>Upon successful completion of this course, you will be able to:</p>
 <ol style="list-style-type: decimal">
-<li>Use simulation to study operating characteristics of statistical methodologies.</li>
-<li>Understand and apply appropriate statistical methodologies under various data scenarios.</li>
-<li>Use simulation to estimate statistical quantities which are difficult to compute.</li>
-<li>Use simulation to assess the quality of statistical estimators.</li>
-<li>Communicate results from simulations in writing, based on principles of reproducible research.</li>
+<li><p>Use simulation to study operating characteristics of statistical methodologies.</p></li>
+<li><p>Understand and apply appropriate statistical methodologies under various data scenarios.</p></li>
+<li><p>Use simulation to estimate statistical quantities which are difficult to compute.</p></li>
+<li><p>Use simulation to assess the quality of statistical estimators.</p></li>
+<li><p>Communicate results from simulations in writing, based on principles of reproducible research.</p></li>
 </ol>
+</div>
+<div id="background-needed-for-the-course" class="section level2 unnumbered">
+<h2>Background Needed for the Course<a class="anchor" aria-label="anchor" href="#background-needed-for-the-course"><i class="fas fa-link"></i></a>
+</h2>
+<p>The official prerequisites are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Intro statistics (One of STAT 1100, STAT 1120, STAT 2020, STAT 2120, STAT 3120, APMA 3110, APMA 3120).</p></li>
+<li><p>Intro programming (One of STAT 1601, STAT 1602, STAT 3250, CS 1110, CS 1111, CS 1112, CS 1113).</p></li>
+</ol>
+<p>The course is presented assuming you are familiar with inferential procedures associated with one- or two-sample means and proportions, as well as basic programming skills. The course will not cover these.</p>
+<div id="required-software" class="section level3 unnumbered">
+<h3>Required Software<a class="anchor" aria-label="anchor" href="#required-software"><i class="fas fa-link"></i></a>
+</h3>
+<p>The software introduced and featured in this course is R. RStudio is a software that runs R with additional user-friendly features. RStudio will be used for all in-class R demonstrations. Both R and RStudio are free for download.</p>
+<ul>
+<li><p>R will need to be <a href="https://www.r-project.org/">downloaded first</a>.</p></li>
+<li><p>Then <a href="https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads">downloaded RStudio</a>.</p></li>
+</ul>
+<p>You are <strong>highly encouraged</strong> to use R Markdown to create PDF documents for homeworks and the project, which uses a type-setting platform called LaTeX. LaTeX can be installed by running the following two commands in the R Console:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tinytex"</span><span class="op">)</span></span>
+<span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="chapters" class="section level2 unnumbered">
+<h2>Chapters<a class="anchor" aria-label="anchor" href="#chapters"><i class="fas fa-link"></i></a>
+</h2>
+<p>The chapters for the book is as follows:</p>
+<ul>
+<li><p>Chapters ??? focus on core R skills needed: .</p></li>
+<li><p>Chapters ??? focus on</p></li>
+</ul>
+</div>
+<div id="reporting-issues-with-course-notes" class="section level2 unnumbered">
+<h2>Reporting Issues with Course Notes<a class="anchor" aria-label="anchor" href="#reporting-issues-with-course-notes"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you find any issues (typos, formatting, etc), please report them at <a href="https://github.com/jwooSDS/stat3080/issues">my GitHub page</a>. Please be as specific as you can, by specifying the section and paragraph where the issue is found.</p>
+<p>Serious issues that need my immediate attention should be posted on our Canvas page on Piazza or emailed to me.</p>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -103,6 +142,11 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#preface">Preface</a></li>
 <li><a class="nav-link" href="#course-overview-and-goals">Course Overview and Goals</a></li>
+<li>
+<a class="nav-link" href="#background-needed-for-the-course">Background Needed for the Course</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#required-software">Required Software</a></li></ul>
+</li>
+<li><a class="nav-link" href="#chapters">Chapters</a></li>
+<li><a class="nav-link" href="#reporting-issues-with-course-notes">Reporting Issues with Course Notes</a></li>
 </ul>
 
       <div class="book-extra">

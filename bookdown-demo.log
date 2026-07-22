@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  22 JUL 2026 13:05
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  22 JUL 2026 13:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -883,32 +883,33 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 [3] [4
 
-] [5] [6]
+] [5]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 204.
+[6] [7] [8
+
+]
 Chapter 1.
 
-LaTeX Warning: Reference `methods' on page 7 undefined on input line 175.
+LaTeX Warning: Reference `methods' on page 9 undefined on input line 233.
 
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 181.
 File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
-[7
-
-] [8]
+[9] [10]
 Chapter 2.
 
-LaTeX Warning: Reference `math' on page 9 undefined on input line 248.
+LaTeX Warning: Reference `math' on page 11 undefined on input line 306.
 
 
-LaTeX Warning: Reference `eq:union' on page 9 undefined on input line 250.
+LaTeX Warning: Reference `eq:union' on page 11 undefined on input line 308.
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/car-1.pdf>
 File: images/02-cards.jpg Graphic file (type bmp)
 <images/02-cards.jpg>
-[9
+[11
 
-] (bookdown-demo.bbl [10]) [11
+] (bookdown-demo.bbl [12]) [13
 
 ] (bookdown-demo.aux)
 
@@ -916,12 +917,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19494 strings out of 411472
- 353064 string characters out of 5818265
+ 19504 strings out of 411472
+ 353249 string characters out of 5818265
  1855012 words of memory out of 5000000
- 39472 multiletter control sequences out of 15000+600000
- 518746 words of font info for 86 fonts, out of 8000000 for 9000
+ 39481 multiletter control sequences out of 15000+600000
+ 518754 words of font info for 87 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,8n,121p,1012b,435s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (11 pages).
+Output written on bookdown-demo.pdf (13 pages).

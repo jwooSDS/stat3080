@@ -156,6 +156,7 @@ Upon successful completion of this course, you will be able to:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   Use simulation to study operating characteristics of statistical methodologies.
 \item
@@ -176,6 +177,7 @@ The official prerequisites are:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   Intro statistics (One of STAT 1100, STAT 1120, STAT 2020, STAT 2120, STAT 3120, APMA 3110, APMA 3120).
 \item
@@ -185,12 +187,13 @@ The official prerequisites are:
 The course is presented assuming you are familiar with inferential procedures associated with one- or two-sample means and proportions, as well as basic programming skills. The course will not cover these.
 
 \hypertarget{required-software}{%
-\subsection*{Required Software}\label{required-software}}
-\addcontentsline{toc}{subsection}{Required Software}
+\section*{Required Software}\label{required-software}}
+\addcontentsline{toc}{section}{Required Software}
 
 The software introduced and featured in this course is R. RStudio is a software that runs R with additional user-friendly features. RStudio will be used for all in-class R demonstrations. Both R and RStudio are free for download.
 
 \begin{itemize}
+\tightlist
 \item
   R will need to be \href{https://www.r-project.org/}{downloaded first}.
 \item
@@ -213,6 +216,7 @@ You are \textbf{highly encouraged} to use R Markdown to create PDF documents for
 The chapters for the book is as follows:
 
 \begin{itemize}
+\tightlist
 \item
   Chapters ??? focus on core R skills needed: .
 \item
@@ -227,76 +231,376 @@ If you find any issues (typos, formatting, etc), please report them at \href{htt
 
 Serious issues that need my immediate attention should be posted on our Canvas page on Piazza or emailed to me.
 
-\hypertarget{intro}{%
-\chapter{Introduction}\label{intro}}
+\hypertarget{Rbasics}{%
+\chapter{R Basics}\label{Rbasics}}
 
-You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
+\hypertarget{overview-of-r}{%
+\section{Overview of R}\label{overview-of-r}}
 
-Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively.
+R is an open-source programming language and software environment specifically designed for statistical computing, data analysis, and graphical visualization. It is widely used by data scientists, statisticians, and researchers to clean, manipulate, and model data. R is maintained by volunteers. All users can access and modify source code.
+
+While R has a basic default interface, users typically write code using integrated development environments (IDEs) such as RStudio, Positron, VS Code, which can provide additional user-friendly features. RStudio will be used in this course.
+
+\hypertarget{rstudio-interface}{%
+\section{RStudio Interface}\label{rstudio-interface}}
+
+Open RStudio. You will see three panes:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Console} (left): where commands are executed
+\item
+  \textbf{Environment / History} (top-right:) objects you have created and the commands you have run.
+\item
+  \textbf{Files / Plots / Packages / Help} (bottom-right): files in working directory, plots created, packages installed, help page.
+\end{itemize}
+
+We will focus on the console for the time being.
+
+\hypertarget{commands}{%
+\section{Commands}\label{commands}}
+
+In order to get R to do what you want it to do, you will need to write a \textbf{command}. R is ready for a new command when you see a \texttt{\textgreater{}} in the \textbf{console}. If your command is incomplete, R will show a \texttt{+} instead of a \texttt{\textgreater{}}. You can either complete the command after the \texttt{+} or use the ESC key to abort. You will also see the output of your command (if any) in the console. For example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+\DecValTok{1}\SpecialCharTok{+}\DecValTok{2}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
 
-{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/nice-fig-1} 
+Notice a number in brackets before the answer? The number indicate the length of the output because most objects that we'll work with in R are treated like vectors (much more on that later).
 
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
-
-Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
+You can also add \textbf{comments} to R code by using the \texttt{\#} sign. Everything to the right of the \texttt{\#} is ignored by R. Comments are useful to explain what has been coded and why to yourself or to collaborators.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
+\DecValTok{1}\SpecialCharTok{+}\DecValTok{2} \DocumentationTok{\#\# what is the sum of 1 and 2?}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rrrrl}
-\toprule
-Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
-\midrule
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
-\addlinespace
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-4.6 & 3.4 & 1.4 & 0.3 & setosa\\
-5.0 & 3.4 & 1.5 & 0.2 & setosa\\
-4.4 & 2.9 & 1.4 & 0.2 & setosa\\
-4.9 & 3.1 & 1.5 & 0.1 & setosa\\
-\addlinespace
-5.4 & 3.7 & 1.5 & 0.2 & setosa\\
-4.8 & 3.4 & 1.6 & 0.2 & setosa\\
-4.8 & 3.0 & 1.4 & 0.1 & setosa\\
-4.3 & 3.0 & 1.1 & 0.1 & setosa\\
-5.8 & 4.0 & 1.2 & 0.2 & setosa\\
-\addlinespace
-5.7 & 4.4 & 1.5 & 0.4 & setosa\\
-5.4 & 3.9 & 1.3 & 0.4 & setosa\\
-5.1 & 3.5 & 1.4 & 0.3 & setosa\\
-5.7 & 3.8 & 1.7 & 0.3 & setosa\\
-5.1 & 3.8 & 1.5 & 0.3 & setosa\\
-\bottomrule
-\end{tabular}
-\end{table}
+I \textbf{highly discourage} you to enter your code directly into the R console. Code typed into the console is difficult to be saved or edited. Any meaningful work that you will use R for will likely need to be saved and edited.
 
-You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+\hypertarget{working-directory}{%
+\section{Working Directory}\label{working-directory}}
+
+Before talking about a better way to enter R commands, you will need to set up a \textbf{working directory}. The working directory is the path to the folder on your system (typically, the computer you are using) to store files generated during an R session and any files that you save. This is also the folder where R will search for files.
+
+\hypertarget{finding-the-working-directory}{%
+\subsection{Finding the working directory}\label{finding-the-working-directory}}
+
+Typing \texttt{getwd()} will display the path of the working directory:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C:/Users/jeffr/Dropbox/UVA/book_stat3080/stat3080"
+\end{verbatim}
+
+\hypertarget{changing-the-working-directory}{%
+\subsection{Changing the working directory}\label{changing-the-working-directory}}
+
+To change the working directory, use \texttt{setwd()}, with the path place as an argument:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"C:/Users/jeffr/Dropbox/UVA/book\_stat3080/stat3080/HWs"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+I do not recommend using \texttt{setwd()}:
+
+\begin{itemize}
+\tightlist
+\item
+  Typing the path is fairly cumbersome.
+\item
+  Your code will not run if you run the code on another computer (e.g.~when sharing with a collaborator).
+\end{itemize}
+
+Therefore, I prefer to use RStudio Projects.
+
+\hypertarget{rstudio-projects}{%
+\subsection{RStudio Projects}\label{rstudio-projects}}
+
+An \textbf{RStudio Project} is a folder with a \texttt{.Rproj} file that in it. There are a couple of ways to create an RStudio Project.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  If you have never created one before:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Open RStudio.
+\item
+  Click on File, then New Project.
+\item
+  A few options will be presented. The options that you will most likely use are:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    New Directory: use this to start in a fresh folder.
+  \item
+    Existing Directory: use this to work in an existing folder.
+  \end{itemize}
+\item
+  If you are a creating a new directory, select New Project. Then you will enter the name of your project and choose a path for the folder.
+\end{itemize}
+
+If you open the folder associated with the created working directory, you will find a file with a \texttt{.Rproj} extension created (its name should be the name of the project that you gave in the last step above).
+
+Now, close your RStudio. Navigate to the project folder on your computer and double-click the \texttt{.Rproj} file. Your working directory will be where this \texttt{.Rproj} file is located. You can confirm using \texttt{getwd()}, or by looking at the pane called ``Files / Plots / Packages / Help''. Click on the files tab and it will display the path of your working directory, and you can also see the other files in this folder.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  If you have created an RStudio Project before and have a file with a \texttt{.RProj} extension, you can just copy and paste this file and place it into another folder to make it your working directory. This is the approach I almost exclusively use.
+\end{enumerate}
+
+I highly recommend that you create a folder on your computer that is exclusively for this class. You should also create separate subfolders for each assignment.
+
+\textbf{\emph{Key idea:}} The working directory is the folder on your computer where all files that R generates will be saved and where R will search for files.
+
+\emph{Practice}: create an RStudio Project on your own.
+
+\hypertarget{r-scripts}{%
+\section{R Scripts}\label{r-scripts}}
+
+You should type R commands in an R \textbf{script} instead of the R console. Commands can be saved and edited in an R script.
+
+To create a new R script, click on File, New File, R Script. You will now have a new pane on the top-left with a tab labeled with a name similar to Untitled. You have created an untitled R script.
+
+An R script looks like a notepad. Type your commands into this script. Each command should be a separate line. To execute commands, highlight the commands, and then click on Run or press Ctrl + Enter.
+
+To save your R script, click on the Save icon and name your script. You have now saved an R Script, and it should appear in your working directory.
+
+To open a saved R script, open the \texttt{.Rproj} file in the working directory, and you can click on the script under the tab called Files.
+
+\hypertarget{basic-math-operations}{%
+\section{Basic Math Operations}\label{basic-math-operations}}
+
+R can be used as a calculator by using the standard arithmetic operators: +
+- \texttt{+}: addition
+- \texttt{-}: subtraction
+- \texttt{*}: multiplication
+- \texttt{/}: division
+- \texttt{\^{}}: power
+
+R is like any calculator in that these operators follow the standard order of operations. Some examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{15}\SpecialCharTok{+}\DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{12}\SpecialCharTok{/}\DecValTok{6}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FloatTok{0.7}\SpecialCharTok{*}\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3}\SpecialCharTok{\^{}}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 27
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{15}\SpecialCharTok{+}\DecValTok{10}\SpecialCharTok{*}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 45
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{15}\SpecialCharTok{+}\DecValTok{10}\NormalTok{)}\SpecialCharTok{*}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 75
+\end{verbatim}
+
+\hypertarget{functions}{%
+\section{Functions}\label{functions}}
+
+R has an extensive list of existing functions that can be used. Each function has a specific name that is followed by a set of parentheses. Using a function calls a specific collection of code to be executed. Generally the code that will be executed needs specific arguments or inputs to run correctly and the user provides these values in the parentheses that follow the function name.
+
+Functions can be used for basic calculations, for complex procedures, and many other things in between. You can also write your own functions.
+
+R is case-sensitive, so functions that you want to use must be typed exactly as it was defined.
+
+Some common functions are listed below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{log}\NormalTok{(}\FloatTok{2.7}\NormalTok{) }\DocumentationTok{\#\# log with base e, sometimes written as ln}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9932518
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{exp}\NormalTok{(}\DecValTok{1}\NormalTok{) }\DocumentationTok{\#\# e to power of 1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.718282
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{9}\NormalTok{) }\DocumentationTok{\#\# squareroot of 9}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{) }\DocumentationTok{\#\# 3!}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{abs}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{) }\DocumentationTok{\#\# absolute value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{) }\DocumentationTok{\#\# summing up all these numbers}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{floor}\NormalTok{(}\FloatTok{5.7}\NormalTok{) }\DocumentationTok{\#\# round down to nearest integer}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ceiling}\NormalTok{(}\FloatTok{5.7}\NormalTok{) }\DocumentationTok{\#\# round down to nearest integer}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FloatTok{5.7}\NormalTok{) }\DocumentationTok{\#\# round to nearest integer}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FloatTok{5.727}\NormalTok{,}\DecValTok{2}\NormalTok{) }\DocumentationTok{\#\#round to 2 decimal places}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.73
+\end{verbatim}
+
+\hypertarget{documentation}{%
+\section{Documentation}\label{documentation}}
+
+Typing \texttt{?} and then the name of a function will open up the help page (called R documentation) associated with that function. The help page will appear under the Help tab in the bottom-right pane. Type \texttt{?log} to read the help page for the \texttt{log()} function.
+
+The sections of the help page that I find useful:
+
+\begin{itemize}
+\tightlist
+\item
+  Description: describes what the function does.
+\item
+  Usage: tells us what arguments need to be provided, and if arguments have defaults.
+\item
+  Arguments: describes the arguments.
+\item
+  Examples: some examples.
+\end{itemize}
+
+\emph{Practice}: after reading the documentation for \texttt{log()}, use R to find the value of \(\log_3(5)\).
+
+\hypertarget{packages}{%
+\section{Packages}\label{packages}}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

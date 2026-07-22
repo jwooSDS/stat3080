@@ -27,13 +27,9 @@ In order to design such simulations, a fair amount of knowledge with coding usin
 Upon successful completion of this course, you will be able to:
 
 1. Use simulation to study operating characteristics of statistical methodologies.
-
 2. Understand and apply appropriate statistical methodologies under various data scenarios.
-
 3. Use simulation to estimate statistical quantities which are difficult to compute.
-
 4. Use simulation to assess the quality of statistical estimators. 
-
 5. Communicate results from simulations in writing, based on principles of reproducible research. 
 
 ## Background Needed for the Course {-}
@@ -41,17 +37,15 @@ Upon successful completion of this course, you will be able to:
 The official prerequisites are:
 
 1. Intro statistics (One of STAT 1100, STAT 1120, STAT 2020, STAT 2120, STAT 3120, APMA 3110, APMA 3120).
-
 2. Intro programming (One of STAT 1601, STAT 1602, STAT 3250, CS 1110, CS 1111, CS 1112, CS 1113).
 
 The course is presented assuming you are familiar with inferential procedures associated with one- or two-sample means and proportions, as well as basic programming skills. The course will not cover these. 
 
-### Required Software {-}
+## Required Software {-}
 
 The software introduced and featured in this course is R. RStudio is a software that runs R with additional user-friendly features. RStudio will be used for all in-class R demonstrations. Both R and RStudio are free for download.
 
 - R will need to be [downloaded first](https://www.r-project.org/). 
-
 - Then [downloaded RStudio](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads).
 
 You are **highly encouraged** to use R Markdown to create PDF documents for homeworks and the project, which uses a type-setting platform called LaTeX. LaTeX can be installed by running the following two commands in the R Console:
@@ -66,7 +60,6 @@ tinytex::install_tinytex()
 The chapters for the book is as follows:
 
 - Chapters ??? focus on core R skills needed: .
-
 - Chapters ??? focus on
 
 ## Reporting Issues with Course Notes {-}

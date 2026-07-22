@@ -1,0 +1,157 @@
+# R Basics {#Rbasics}
+
+## Overview of R
+
+R is an open-source programming language and software environment specifically designed for statistical computing, data analysis, and graphical visualization. It is widely used by data scientists, statisticians, and researchers to clean, manipulate, and model data. R is maintained by volunteers. All users can access and modify source code.
+
+While R has a basic default interface, users typically write code using integrated development environments (IDEs) such as RStudio, Positron, VS Code, which can provide additional user-friendly features. RStudio will be used in this course. 
+
+## RStudio Interface
+
+Open RStudio. You will see three panes:
+
+- **Console** (left): where commands are executed
+- **Environment / History** (top-right:) objects you have created and the commands you have run.
+- **Files / Plots / Packages / Help** (bottom-right): files in working directory, plots created, packages installed, help page.
+
+We will focus on the console for the time being. 
+
+## Commands
+
+In order to get R to do what you want it to do, you will need to     write a **command**. R is ready for a new command when you see a `>` in the **console**. If your command is incomplete, R will show a `+` instead of a `>`. You can either complete the command after the `+` or use the ESC key to abort. You will also see the output of your command (if any) in the console. For example:
+
+```{r}
+1+2
+```
+
+Notice a number in brackets before the answer? The number indicate the length of the output because most objects that we’ll work with in R are treated like vectors (much more on that later).
+
+You can also add **comments** to R code by using the `#` sign. Everything to the right of the `#` is ignored by R. Comments are useful to explain what has been coded and why to yourself or to collaborators.
+
+```{r}
+1+2 ## what is the sum of 1 and 2?
+```
+
+I **highly discourage** you to enter your code directly into the R console. Code typed into the console is difficult to be saved or edited. Any meaningful work that you will use R for will likely need to be saved and edited. 
+
+## Working Directory
+
+Before talking about a better way to enter R commands, you will need to set up a **working directory**. The working directory is the path to the folder on your system (typically, the computer you are using) to store files generated during an R session and any files that you save. This is also the folder where R will search for files.
+
+### Finding the working directory
+
+Typing `getwd()` will display the path of the working directory:
+
+```{r}
+getwd()
+```
+
+### Changing the working directory
+
+To change the working directory, use `setwd()`, with the path place as an argument:
+
+```{r, eval=FALSE}
+setwd("C:/Users/jeffr/Dropbox/UVA/book_stat3080/stat3080/HWs")
+```
+
+I do not recommend using `setwd()`:
+
+- Typing the path is fairly cumbersome. 
+- Your code will not run if you run the code on another computer (e.g. when sharing with a collaborator).
+
+Therefore, I prefer to use RStudio Projects.
+
+### RStudio Projects
+
+An **RStudio Project** is a folder with a `.Rproj` file that in it. There are a couple of ways to create an RStudio Project.
+
+1. If you have never created one before:
+
+- Open RStudio.
+- Click on File, then New Project. 
+- A few options will be presented. The options that you will most likely use are:
+  - New Directory: use this to start in a fresh folder.
+  - Existing Directory: use this to work in an existing folder.
+- If you are a creating a new directory, select New Project. Then you will enter the name of your project and choose a path for the folder.
+
+If you open the folder associated with the created working directory, you will find a file with a `.Rproj` extension created (its name should be the name of the project that you gave in the last step above).
+
+Now, close your RStudio. Navigate to the project folder on your computer and double-click the `.Rproj` file. Your working directory will be where this `.Rproj` file is located. You can confirm using `getwd()`, or by looking at the pane called "Files / Plots / Packages / Help". Click on the files tab and it will display the path of your working directory, and you can also see the other files in this folder. 
+
+2. If you have created an RStudio Project before and have a file with a `.RProj` extension, you can just copy and paste this file and place it into another folder to make it your working directory. This is the approach I almost exclusively use. 
+
+I highly recommend that you create a folder on your computer that is exclusively for this class. You should also create separate subfolders for each assignment. 
+
+***Key idea:*** The working directory is the folder on your computer where all files that R generates will be saved and where R will search for files.
+
+*Practice*: create an RStudio Project on your own. 
+
+## R Scripts
+
+You should type R commands in an R **script** instead of the R console. Commands can be saved and edited in an R script. 
+
+To create a new R script, click on File, New File, R Script. You will now have a new pane on the top-left with a tab labeled with a name similar to Untitled. You have created an untitled R script. 
+
+An R script looks like a notepad. Type your commands into this script. Each command should be a separate line. To execute commands, highlight the commands, and then click on Run or press Ctrl + Enter. 
+
+To save your R script, click on the Save icon and name your script. You have now saved an R Script, and it should appear in your working directory. 
+
+To open a saved R script, open the `.Rproj` file in the working directory, and you can click on the script under the tab called Files. 
+
+## Basic Math Operations
+
+R can be used as a calculator by using the standard arithmetic operators:                                                             + 
+- `+`: addition
+- `-`: subtraction
+- `*`: multiplication
+- `/`: division
+- `^`: power
+
+R is like any calculator in that these operators follow the standard order of operations. Some examples:
+
+```{r}
+15+10
+12/6
+0.7*5
+3^3
+15+10*3
+(15+10)*3
+```
+
+## Functions
+
+R has an extensive list of existing functions that can be used. Each function has a specific name that is followed by a set of parentheses. Using a function calls a specific collection of code to be executed. Generally the  code that will be executed needs specific arguments or inputs to run correctly and the user provides these values in the parentheses that follow the function name. 
+
+Functions can be used for basic calculations, for complex procedures, and many other things in between. You can also write your own functions. 
+
+R is case-sensitive, so functions that you want to use must be typed exactly as it was defined.  
+
+Some common functions are listed below:
+
+```{r}
+log(2.7) ## log with base e, sometimes written as ln
+exp(1) ## e to power of 1
+sqrt(9) ## squareroot of 9
+factorial(3) ## 3!
+abs(-5) ## absolute value
+sum(2,4,6) ## summing up all these numbers
+floor(5.7) ## round down to nearest integer
+ceiling(5.7) ## round down to nearest integer
+round(5.7) ## round to nearest integer
+round(5.727,2) ##round to 2 decimal places
+```
+
+## Documentation
+
+Typing `?` and then the name of a function will open up the help page (called R documentation) associated with that function. The help page will appear under the Help tab in the bottom-right pane. Type `?log` to read the help page for the `log()` function. 
+
+The sections of the help page that I find useful:
+
+- Description: describes what the function does.
+- Usage: tells us what arguments need to be provided, and if arguments have defaults.
+- Arguments: describes the arguments.
+- Examples: some examples.
+
+*Practice*: after reading the documentation for `log()`, use R to find the value of $\log_3(5)$.
+
+## Packages

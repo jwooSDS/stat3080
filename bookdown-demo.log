@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  22 JUL 2026 13:34
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  22 JUL 2026 15:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -885,31 +885,42 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 ] [5]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 204.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 207.
 [6] [7] [8
 
 ]
 Chapter 1.
+[9]
 
-LaTeX Warning: Reference `methods' on page 9 undefined on input line 233.
+LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 282.
 
-File: bookdown-demo_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/nice-fig-1.pdf>
-[9] [10]
+[10] [11] [12] [13] [14]
 Chapter 2.
 
-LaTeX Warning: Reference `math' on page 11 undefined on input line 306.
+LaTeX Warning: Reference `intro' on page 15 undefined on input line 610.
 
 
-LaTeX Warning: Reference `eq:union' on page 11 undefined on input line 308.
+LaTeX Warning: Reference `math' on page 15 undefined on input line 610.
+
+
+LaTeX Warning: Reference `eq:union' on page 15 undefined on input line 612.
+
+
+LaTeX Warning: Reference `fig:nice-fig' on page 15 undefined on input line 614.
+
+
+
+LaTeX Warning: Reference `tab:nice-tab' on page 15 undefined on input line 614.
+
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/car-1.pdf>
 File: images/02-cards.jpg Graphic file (type bmp)
 <images/02-cards.jpg>
-[11
+[15
 
-] (bookdown-demo.bbl [12]) [13
+] (bookdown-demo.bbl [16]) [17
 
 ] (bookdown-demo.aux)
 
@@ -917,12 +928,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19504 strings out of 411472
- 353249 string characters out of 5818265
- 1855012 words of memory out of 5000000
- 39481 multiletter control sequences out of 15000+600000
- 518754 words of font info for 87 fonts, out of 8000000 for 9000
+ 19527 strings out of 411472
+ 353365 string characters out of 5818265
+ 1856012 words of memory out of 5000000
+ 39497 multiletter control sequences out of 15000+600000
+ 518786 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 86i,8n,121p,1012b,435s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,6n,121p,1012b,435s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (13 pages).
+Output written on bookdown-demo.pdf (17 pages).

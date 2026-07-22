@@ -399,9 +399,9 @@ As with the concatenate function, R will bind the vectors together in the order 
 
 In, R, **class** refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.
 
-1. Character: Represents text strings, symbols, or words. Must always be enclosed in quotes.
-2. Numeric: Represents real numbers.
-3. Logical: Represents Boolean values for binary conditions.
+- Character: Represents text strings, symbols, or words. Must always be enclosed in quotes.
+- Numeric: Represents real numbers.
+- Logical: Represents Boolean values for binary conditions.
 
 The vectors and matrices created in sections \@ref(vec) and \@ref(mat) are numeric. 
 
@@ -422,4 +422,91 @@ To create a character vector:
 char_vect <- c("ByOne", "ByTwo", "ByThree", "ByFour", "ByFive")
 ```
 
+The `class()` function can be used to find out the class of an object, for example:
 
+```{r}
+class(log_vect)
+```
+
+Alternatively, functions such as `is.character(), `is.numeric()`, `is.logical()` can be used to test for the class:
+
+```{r}
+is.numeric(log_vect)
+```
+If a vector or matrix contains multiple types of data, an error message is unlikely to show up. R will modify the data to all be of the same type according to the following hierarchical structure: 
+
+1. character 
+2. numeric  
+3. logical
+
+```{r}
+c(TRUE, 5)
+c(TRUE, "ByFive", 5)
+mult_mat <- cbind(char_vect,x,y)
+mult_mat
+```
+
+#### Example 1: Mixing numeric with character
+
+The most common kind of mixing of classes usually involve a data structure containing a mix of numeric and character, for example:
+
+```{r}
+mixed <- c(1, 2, "3")
+mixed ## notice all characters, since they are in quotes
+class(mixed)
+```
+
+Trying to add the numbers in the variable `mixed` results in an error:
+
+```{r, eval=FALSE}
+sum(mixed)
+```
+
+In this example, we can **coerce** all entries to become numeric:
+
+```{r}
+mixed <- as.numeric(mixed) ## overwrite existing variable
+sum(mixed)
+```
+
+A situation like this example sometimes happens when working with an external data file and the person who entered the data made a mistake. This is a common reason why a mathematical operation fails as one character changes the entire vector to be character.
+
+Note: Coercing an object to change will not always yield a result that makes sense.
+
+#### Example 2: Math operations with logical
+
+Interestingly, math operations can be performed on logicals. `TRUE` and `FALSE` is considered to be 1 and 0 respectively. 
+
+```{r}
+sum(log_vect)
+mean(log_vect)
+```
+
+This will be extremely useful later on when working with simulations, as we often want to evaluate the proportion of times certain conditions are met. 
+
+### Data Frames
+
+Data frames are commonly used to store data. There is typically a row for each observation and a column for each variable measured on the observations (think of an EXCEL spreadsheet). A data frame can be created using the `data.frame()` function. The arguments to this function are the vectors that you would like to be in the data frame.
+
+```{r}
+mult_data <- data.frame(char_vect,x,y)
+mult_data
+```
+Notice you can also view the data frame by clicking on its name in the Environment tab in the top-right. 
+
+### Lists
+
+Lists are the most flexible type of object in R. Lists are similar to vectors in that there is one row containing multiple values. However, in a list, those values can be objects of varying types and sizes. A list is created using the list function, `list()`. The arguments specify what you would like in each element of the list.
+
+```{r}
+mult_list <- list(mult_data, z, log_vect, 7)
+mult_list
+```
+
+There are testing and cohersion functions for all of the types of data structures. As with the classes of data, cohersion may not yield a valid result. Some examples are shown below:
+
+```{r, eval=FALSE}
+is.vector(x)
+as.vector(mult_list)
+as.data.frame(mult_mat)
+```

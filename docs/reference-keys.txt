@@ -23,4 +23,8 @@ vec
 pattern-vectors
 mat
 classes
+example-1-mixing-numeric-with-character
+example-2-math-operations-with-logical
+data-frames
+lists
 blank

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  22 JUL 2026 18:18
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  22 JUL 2026 19:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -897,29 +897,34 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [10] [11] [12] [13] [14]
 Overfull \hbox (38.25pt too wide) in paragraph at lines 648--648
-[]\TU/lmtt/m/n/10 ##  [1]  1.1071797  4.0255930  0.8580170 -0.5293577 -1.445262
-4  1.7772671[] 
+[]\TU/lmtt/m/n/10 ##  [1] -2.4182277  2.5328250 -6.8149705 -1.6660165  2.618199
+9  4.1074442[] 
  []
 
 [15] [16] [17] [18] [19] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 1077--1079
+
+ []
+
+[21] [22] [23] [24
+
+]
 Chapter 2.
 
-LaTeX Warning: Reference `RBasics' on page 21 undefined on input line 1051.
+LaTeX Warning: Reference `RBasics' on page 25 undefined on input line 1265.
 
 
-LaTeX Warning: Reference `eq:union' on page 21 undefined on input line 1053.
+LaTeX Warning: Reference `eq:union' on page 25 undefined on input line 1267.
 
 
-LaTeX Warning: Reference `tab:nice-tab' on page 21 undefined on input line 1055
+LaTeX Warning: Reference `tab:nice-tab' on page 25 undefined on input line 1269
 .
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/car-1.pdf>
 File: images/02-cards.jpg Graphic file (type bmp)
 <images/02-cards.jpg>
-(bookdown-demo.bbl [21
-
-] [22]) [23
+(bookdown-demo.bbl [25] [26]) [27
 
 ] (bookdown-demo.aux)
 
@@ -927,12 +932,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19536 strings out of 411472
- 353562 string characters out of 5818265
+ 19540 strings out of 411472
+ 353663 string characters out of 5818265
  1859012 words of memory out of 5000000
- 39506 multiletter control sequences out of 15000+600000
+ 39510 multiletter control sequences out of 15000+600000
  518786 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,6n,121p,1012b,435s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (23 pages).
+Output written on bookdown-demo.pdf (27 pages).

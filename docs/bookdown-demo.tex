@@ -643,8 +643,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.1071797  4.0255930  0.8580170 -0.5293577 -1.4452624  1.7772671
-##  [7]  2.1793403 -2.3599390  2.8047424 10.2166899
+##  [1] -2.4182277  2.5328250 -6.8149705 -1.6660165  2.6181999  4.1074442
+##  [7] -1.1239948  1.1070126  0.1756743  1.3496701
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1003,8 +1003,7 @@ As with the concatenate function, R will bind the vectors together in the order 
 
 In, R, \textbf{class} refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\begin{itemize}
 \tightlist
 \item
   Character: Represents text strings, symbols, or words. Must always be enclosed in quotes.
@@ -1012,7 +1011,7 @@ In, R, \textbf{class} refers to how an object behaves with generic functions. Th
   Numeric: Represents real numbers.
 \item
   Logical: Represents Boolean values for binary conditions.
-\end{enumerate}
+\end{itemize}
 
 The vectors and matrices created in sections \ref{vec} and \ref{mat} are numeric.
 
@@ -1040,6 +1039,221 @@ To create a character vector:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{char\_vect }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"ByOne"}\NormalTok{, }\StringTok{"ByTwo"}\NormalTok{, }\StringTok{"ByThree"}\NormalTok{, }\StringTok{"ByFour"}\NormalTok{, }\StringTok{"ByFive"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{class()} function can be used to find out the class of an object, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(log\_vect)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "logical"
+\end{verbatim}
+
+Alternatively, functions such as \texttt{is.character(),}is.numeric()\texttt{,}is.logical()` can be used to test for the class:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.numeric}\NormalTok{(log\_vect)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+If a vector or matrix contains multiple types of data, an error message is unlikely to show up. R will modify the data to all be of the same type according to the following hierarchical structure:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  character
+\item
+  numeric\\
+\item
+  logical
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\StringTok{"ByFive"}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "TRUE"   "ByFive" "5"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_mat }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(char\_vect,x,y)}
+\NormalTok{mult\_mat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      char_vect x    y   
+## [1,] "ByOne"   "5"  "3" 
+## [2,] "ByTwo"   "10" "6" 
+## [3,] "ByThree" "15" "9" 
+## [4,] "ByFour"  "20" "12"
+## [5,] "ByFive"  "25" "15"
+\end{verbatim}
+
+\hypertarget{example-1-mixing-numeric-with-character}{%
+\subsubsection{Example 1: Mixing numeric with character}\label{example-1-mixing-numeric-with-character}}
+
+The most common kind of mixing of classes usually involve a data structure containing a mix of numeric and character, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mixed }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\StringTok{"3"}\NormalTok{)}
+\NormalTok{mixed }\DocumentationTok{\#\# notice all characters, since they are in quotes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "1" "2" "3"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(mixed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+Trying to add the numbers in the variable \texttt{mixed} results in an error:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(mixed)}
+\end{Highlighting}
+\end{Shaded}
+
+In this example, we can \textbf{coerce} all entries to become numeric:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mixed }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(mixed) }\DocumentationTok{\#\# overwrite existing variable}
+\FunctionTok{sum}\NormalTok{(mixed)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+A situation like this example sometimes happens when working with an external data file and the person who entered the data made a mistake. This is a common reason why a mathematical operation fails as one character changes the entire vector to be character.
+
+Note: Coercing an object to change will not always yield a result that makes sense.
+
+\hypertarget{example-2-math-operations-with-logical}{%
+\subsubsection{Example 2: Math operations with logical}\label{example-2-math-operations-with-logical}}
+
+Interestingly, math operations can be performed on logicals. \texttt{TRUE} and \texttt{FALSE} is considered to be 1 and 0 respectively.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(log\_vect)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(log\_vect)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5
+\end{verbatim}
+
+This will be extremely useful later on when working with simulations, as we often want to evaluate the proportion of times certain conditions are met.
+
+\hypertarget{data-frames}{%
+\subsection{Data Frames}\label{data-frames}}
+
+Data frames are commonly used to store data. There is typically a row for each observation and a column for each variable measured on the observations (think of an EXCEL spreadsheet). A data frame can be created using the \texttt{data.frame()} function. The arguments to this function are the vectors that you would like to be in the data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(char\_vect,x,y)}
+\NormalTok{mult\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15
+\end{verbatim}
+
+Notice you can also view the data frame by clicking on its name in the Environment tab in the top-right.
+
+\hypertarget{lists}{%
+\subsection{Lists}\label{lists}}
+
+Lists are the most flexible type of object in R. Lists are similar to vectors in that there is one row containing multiple values. However, in a list, those values can be objects of varying types and sizes. A list is created using the list function, \texttt{list()}. The arguments specify what you would like in each element of the list.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(mult\_data, z, log\_vect, }\DecValTok{7}\NormalTok{)}
+\NormalTok{mult\_list}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15
+## 
+## [[2]]
+##  [1]  5 10 15 20 25  3  6  9 12 15
+## 
+## [[3]]
+## [1]  TRUE FALSE  TRUE FALSE
+## 
+## [[4]]
+## [1] 7
+\end{verbatim}
+
+There are testing and cohersion functions for all of the types of data structures. As with the classes of data, cohersion may not yield a valid result. Some examples are shown below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.vector}\NormalTok{(x)}
+\FunctionTok{as.vector}\NormalTok{(mult\_list)}
+\FunctionTok{as.data.frame}\NormalTok{(mult\_mat)}
 \end{Highlighting}
 \end{Shaded}
 

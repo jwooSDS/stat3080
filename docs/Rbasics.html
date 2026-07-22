@@ -322,8 +322,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ul>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] -1.4329436  0.9999366  2.0582796  3.8717128  1.7711695  0.6598600
-##  [7] -2.3658108  2.9703299  2.1408721  4.5493356</code></pre>
+<pre><code>##  [1] -0.5976346  0.7757285 -0.7306493  3.7980633  1.8068912 -2.0941212
+##  [7] -3.2530067  0.7453662  4.1703838  4.7642293</code></pre>
 <p>Note: you are likely to get a vector of 10 numbers that are different than the ones shown.</p>
 </div>
 <div id="example-2-binomial-distribution" class="section level4" number="1.7.2.2">
@@ -511,11 +511,11 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.3</span> Classes<a class="anchor" aria-label="anchor" href="#classes"><i class="fas fa-link"></i></a>
 </h3>
 <p>In, R, <strong>class</strong> refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.</p>
-<ol style="list-style-type: decimal">
+<ul>
 <li>Character: Represents text strings, symbols, or words. Must always be enclosed in quotes.</li>
 <li>Numeric: Represents real numbers.</li>
 <li>Logical: Represents Boolean values for binary conditions.</li>
-</ol>
+</ul>
 <p>The vectors and matrices created in sections <a href="Rbasics.html#vec">1.9.1</a> and <a href="Rbasics.html#mat">1.9.2</a> are numeric.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
@@ -527,6 +527,118 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <p>To create a character vector:</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">char_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ByOne"</span>, <span class="st">"ByTwo"</span>, <span class="st">"ByThree"</span>, <span class="st">"ByFour"</span>, <span class="st">"ByFive"</span><span class="op">)</span></span></code></pre></div>
+<p>The <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> function can be used to find out the class of an object, for example:</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "logical"</code></pre>
+<p>Alternatively, functions such as <code>is.character(),</code>is.numeric()<code>,</code>is.logical()` can be used to test for the class:</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>If a vector or matrix contains multiple types of data, an error message is unlikely to show up. R will modify the data to all be of the same type according to the following hierarchical structure:</p>
+<ol style="list-style-type: decimal">
+<li>character</li>
+<li>numeric<br>
+</li>
+<li>logical</li>
+</ol>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1 5</code></pre>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"ByFive"</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "TRUE"   "ByFive" "5"</code></pre>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">char_vect</span>,<span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">mult_mat</span></span></code></pre></div>
+<pre><code>##      char_vect x    y   
+## [1,] "ByOne"   "5"  "3" 
+## [2,] "ByTwo"   "10" "6" 
+## [3,] "ByThree" "15" "9" 
+## [4,] "ByFour"  "20" "12"
+## [5,] "ByFive"  "25" "15"</code></pre>
+<div id="example-1-mixing-numeric-with-character" class="section level4" number="1.9.3.1">
+<h4>
+<span class="header-section-number">1.9.3.1</span> Example 1: Mixing numeric with character<a class="anchor" aria-label="anchor" href="#example-1-mixing-numeric-with-character"><i class="fas fa-link"></i></a>
+</h4>
+<p>The most common kind of mixing of classes usually involve a data structure containing a mix of numeric and character, for example:</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mixed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="st">"3"</span><span class="op">)</span></span>
+<span><span class="va">mixed</span> <span class="co">## notice all characters, since they are in quotes</span></span></code></pre></div>
+<pre><code>## [1] "1" "2" "3"</code></pre>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "character"</code></pre>
+<p>Trying to add the numbers in the variable <code>mixed</code> results in an error:</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span></span></code></pre></div>
+<p>In this example, we can <strong>coerce</strong> all entries to become numeric:</p>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mixed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span> <span class="co">## overwrite existing variable</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<p>A situation like this example sometimes happens when working with an external data file and the person who entered the data made a mistake. This is a common reason why a mathematical operation fails as one character changes the entire vector to be character.</p>
+<p>Note: Coercing an object to change will not always yield a result that makes sense.</p>
+</div>
+<div id="example-2-math-operations-with-logical" class="section level4" number="1.9.3.2">
+<h4>
+<span class="header-section-number">1.9.3.2</span> Example 2: Math operations with logical<a class="anchor" aria-label="anchor" href="#example-2-math-operations-with-logical"><i class="fas fa-link"></i></a>
+</h4>
+<p>Interestingly, math operations can be performed on logicals. <code>TRUE</code> and <code>FALSE</code> is considered to be 1 and 0 respectively.</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.5</code></pre>
+<p>This will be extremely useful later on when working with simulations, as we often want to evaluate the proportion of times certain conditions are met.</p>
+</div>
+</div>
+<div id="data-frames" class="section level3" number="1.9.4">
+<h3>
+<span class="header-section-number">1.9.4</span> Data Frames<a class="anchor" aria-label="anchor" href="#data-frames"><i class="fas fa-link"></i></a>
+</h3>
+<p>Data frames are commonly used to store data. There is typically a row for each observation and a column for each variable measured on the observations (think of an EXCEL spreadsheet). A data frame can be created using the <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> function. The arguments to this function are the vectors that you would like to be in the data frame.</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">char_vect</span>,<span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">mult_data</span></span></code></pre></div>
+<pre><code>##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15</code></pre>
+<p>Notice you can also view the data frame by clicking on its name in the Environment tab in the top-right.</p>
+</div>
+<div id="lists" class="section level3" number="1.9.5">
+<h3>
+<span class="header-section-number">1.9.5</span> Lists<a class="anchor" aria-label="anchor" href="#lists"><i class="fas fa-link"></i></a>
+</h3>
+<p>Lists are the most flexible type of object in R. Lists are similar to vectors in that there is one row containing multiple values. However, in a list, those values can be objects of varying types and sizes. A list is created using the list function, <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>. The arguments specify what you would like in each element of the list.</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">mult_data</span>, <span class="va">z</span>, <span class="va">log_vect</span>, <span class="fl">7</span><span class="op">)</span></span>
+<span><span class="va">mult_list</span></span></code></pre></div>
+<pre><code>## [[1]]
+##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15
+## 
+## [[2]]
+##  [1]  5 10 15 20 25  3  6  9 12 15
+## 
+## [[3]]
+## [1]  TRUE FALSE  TRUE FALSE
+## 
+## [[4]]
+## [1] 7</code></pre>
+<p>There are testing and cohersion functions for all of the types of data structures. As with the classes of data, cohersion may not yield a valid result. Some examples are shown below:</p>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">is.vector</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">mult_list</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">mult_mat</span><span class="op">)</span></span></code></pre></div>
 
 </div>
 </div>
@@ -564,6 +676,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <li><a class="nav-link" href="#vec"><span class="header-section-number">1.9.1</span> Vectors</a></li>
 <li><a class="nav-link" href="#mat"><span class="header-section-number">1.9.2</span> Matrices</a></li>
 <li><a class="nav-link" href="#classes"><span class="header-section-number">1.9.3</span> Classes</a></li>
+<li><a class="nav-link" href="#data-frames"><span class="header-section-number">1.9.4</span> Data Frames</a></li>
+<li><a class="nav-link" href="#lists"><span class="header-section-number">1.9.5</span> Lists</a></li>
 </ul>
 </li>
 </ul>

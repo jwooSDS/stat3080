@@ -322,8 +322,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ul>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1]  0.7190815 -1.2260977  3.7710007 -1.0324612  3.4898057 -2.0799130
-##  [7]  2.1887774 -3.1927258 -0.2849217 -2.1645127</code></pre>
+<pre><code>##  [1]  1.4527323 -7.8873533  0.3858544 -1.5915437  4.1322512  3.2441136
+##  [7]  2.6450532  1.6324215  3.1180288  1.0134260</code></pre>
 <p>Note: you are likely to get a vector of 10 numbers that are different than the ones shown.</p>
 </div>
 <div id="example-2-binomial-distribution" class="section level4" number="1.7.2.2">
@@ -358,7 +358,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <p>You can then load the package in order to able to use the functions from that package, by using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span></code></pre></div>
-<p><strong><em>Key idea:</em></strong> packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using `library()’.</p>
+<p><strong><em>Key idea:</em></strong> packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</p>
 </div>
 <div id="types-data-structures-classes" class="section level2" number="1.9">
 <h2>
@@ -639,7 +639,33 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">is.vector</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">mult_list</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">mult_mat</span><span class="op">)</span></span></code></pre></div>
-
+</div>
+</div>
+<div id="other-practical-advice-with-r" class="section level2" number="1.10">
+<h2>
+<span class="header-section-number">1.10</span> Other Practical Advice with R<a class="anchor" aria-label="anchor" href="#other-practical-advice-with-r"><i class="fas fa-link"></i></a>
+</h2>
+<div id="the-workspace" class="section level3" number="1.10.1">
+<h3>
+<span class="header-section-number">1.10.1</span> The Workspace<a class="anchor" aria-label="anchor" href="#the-workspace"><i class="fas fa-link"></i></a>
+</h3>
+<p>When you are ready to exit R, you may be asked whether you want to save the workspace image into a <code>.RData</code> file. The workspace is not the same as the R script. It refers to the objects in the current environment. My recommendation is not to save the workspace.</p>
+<p>This keeps your environment fresh the next time you open R. You will then re-run your R script to reproduce your results. Such practice is consistent with principles associated with <strong>reproducible research</strong>. An environment that contains objects from previous workspaces will interfere with the current workspace and must be avoided.</p>
+<p>A situation where you may want to save the workspace is if your code takes a long time to run, and you want to avoid having to run your code again. This is unlikely to be a situation in this class.</p>
+<p>To remove this prompt, go to Tools, then Global Options. Under the General tab on the left, and the Basic tab on top, uncheck all boxes listed under R Sessions, Workspace, and History. For the option Save workspace to .RData on exit, choose never.</p>
+<p>If you have saved the workspace before, find the .RData file in your working directory, and delete it.</p>
+</div>
+<div id="the-environment" class="section level3" number="1.10.2">
+<h3>
+<span class="header-section-number">1.10.2</span> The Environment<a class="anchor" aria-label="anchor" href="#the-environment"><i class="fas fa-link"></i></a>
+</h3>
+<p>Always check that your environment is empty (clear the environment) whenever you start working with R. This will ensure that previously declared variables will not influence the results from your code.</p>
+<p>You should also clear the environment if you edited your code after executing it. You do not want previous mistakes or version of the code to influence your results.</p>
+<p>To clear the environment to make it empty:</p>
+<ol style="list-style-type: decimal">
+<li>Execute the code <code>rm(list = ls())</code>, or</li>
+<li>Click on the broom icon on the top-right under the Environment tab.</li>
+</ol>
 </div>
 </div>
 </div>
@@ -678,6 +704,12 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <li><a class="nav-link" href="#classes"><span class="header-section-number">1.9.3</span> Classes</a></li>
 <li><a class="nav-link" href="#data-frames"><span class="header-section-number">1.9.4</span> Data Frames</a></li>
 <li><a class="nav-link" href="#lists"><span class="header-section-number">1.9.5</span> Lists</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#other-practical-advice-with-r"><span class="header-section-number">1.10</span> Other Practical Advice with R</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-workspace"><span class="header-section-number">1.10.1</span> The Workspace</a></li>
+<li><a class="nav-link" href="#the-environment"><span class="header-section-number">1.10.2</span> The Environment</a></li>
 </ul>
 </li>
 </ul>

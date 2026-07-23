@@ -291,7 +291,7 @@ You can then load the package in order to able to use the functions from that pa
 library(palmerpenguins)
 ```
 
-***Key idea:*** packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using `library()'.
+***Key idea:*** packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using `library()`.
 
 ## Types, Data Structures, Classes
 
@@ -510,3 +510,28 @@ is.vector(x)
 as.vector(mult_list)
 as.data.frame(mult_mat)
 ```
+
+## Other Practical Advice with R
+
+### The Workspace
+
+When you are ready to exit R, you may be asked whether you want to save the workspace image into a `.RData` file. The workspace is not the same as the R script. It refers to the objects in the current environment. My recommendation is not to save the workspace.
+
+This keeps your environment fresh the next time you open R. You will then re-run your R script to reproduce your results. Such practice is consistent with principles associated with **reproducible research**. An environment that contains objects from previous workspaces will interfere with the current workspace and must be avoided. 
+
+A situation where you may want to save the workspace is if your code takes a long time to run, and you want to avoid having to run your code again. This is unlikely to be a situation in this class. 
+
+To remove this prompt, go to Tools, then Global Options. Under the General tab on the left, and the Basic tab on top, uncheck all boxes listed under R Sessions, Workspace, and History. For the option Save workspace to .RData on exit, choose never. 
+
+If you have saved the workspace before, find the .RData file in your working directory, and delete it. 
+
+### The Environment
+
+Always check that your environment is empty (clear the environment) whenever you start working with R. This will ensure that previously declared variables will not influence the results from your code. 
+
+You should also clear the environment if you edited your code after executing it. You do not want previous mistakes or version of the code to influence your results. 
+
+To clear the environment to make it empty:
+
+1. Execute the code `rm(list = ls())`, or
+2. Click on the broom icon on the top-right under the Environment tab. 

@@ -27,4 +27,7 @@ example-1-mixing-numeric-with-character
 example-2-math-operations-with-logical
 data-frames
 lists
+other-practical-advice-with-r
+the-workspace
+the-environment
 blank

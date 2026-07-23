@@ -2,7 +2,7 @@
 
 ## Why Use R Markdown
 
-Imagine you are in this scenario: you have a homework assignment where you are supposed to produce data visualizations and answer some questions based on a data set using R. Your teacher needs to assess if you know what code to write and that you are providing your commentary on the R output. Therefore, you need to produce a document that show the following:
+Imagine you are in this scenario: you have a homework assignment where you are supposed to produce data visualizations and answer some questions based on a data set using R. Your teacher needs to assess if you know what code to write and that you are providing your narrative on the R output. Therefore, you need to produce a document that show the following:
 
 1. R code.
 2. Relevant graphs.
@@ -10,11 +10,11 @@ Imagine you are in this scenario: you have a homework assignment where you are s
 
 These have to be presented in a cohesive and organized manner. 
 
-Providing an R script will not help, as it only shows your R code and you could provide your interpretations as comments. However, your graphs are not shown. Your teacher does not want to produce the graphs by running your R code as it will take a lot of time to run code for all students in the class. 
+Providing an R script will not help, as it only shows your R code and you could provide your narrative as comments. However, your graphs are not shown. Your teacher does not want to produce the graphs by running your R code as it will take a lot of time to run code for all students in the class. 
 
-You might think of copying and pasting your R code, your graphs from the output, and type you interpretations into a word document. This is doable but it will take you more time than you think, and the document is likely to look sloppy. 
+You might think of copying and pasting your R code, your graphs from the output, and type you narrative into a word document. This is doable but it will take you more time than you think, and the document is likely to look sloppy. 
 
-Is there a tool that will help you weave your code, R output, and your interpretations into a neat document? This is what R Markdown does!
+Is there a tool that will help you weave your code, R output, and your narrative into a neat document? This is what R Markdown does!
 
 Note: R Markdown is not the only tool that allows you to do this. [Quarto](https://quarto.org/) is another tool. R Markdown and Quarto can be thought of as variants of Markdown. Markdown is a language for formatting plain text. R Markdown and Quarto expand on Markdown. 
 
@@ -131,9 +131,9 @@ You can type in your R commands inside the code chunks.
 
 You can customize how the code runs and displays by using chunk options inside the curly braces. There a lot of options; the ones you may use are:
 
-- `message = FALSE`: which hides messages or warnings that R produces when running your code
-- `echo = FALSE`: which hides the code, but allows the results from R to be displayed. This should be used if readers do not want the R code.
-- `eval = FALSE`: which shows the code but does not execute the code. This is used for displaying example R code. (I use it a lot in these notes)
+- `message = FALSE`: which hides messages or warnings that R produces from your document.
+- `echo = FALSE`: which hides the code, but allows the results from R to be displayed in your document. This should be used if readers do not want the R code.
+- `eval = FALSE`: which shows the code but does not execute the code in your document. This is used for displaying example R code. (I use it a lot in these notes)
 
 #### Inline Code
 

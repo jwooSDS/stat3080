@@ -6,11 +6,11 @@ Imagine you are in this scenario: you have a homework assignment where you are s
 
 1. R code.
 2. Relevant graphs.
-3. Your interpretations of the graphs. 
+3. Your interpretations of the graphs in narrative form. 
 
-Not only these, but these have to be presented in a cohesive and organized manner. 
+These have to be presented in a cohesive and organized manner. 
 
-Providing just an R script will not help, as it only shows your R code and you could provide your interpretations as comments. However, your graphs are not shown. Your teacher does want to produce the graphs by running your R code as it will take a lot of time to run code for all students in the class. 
+Providing an R script will not help, as it only shows your R code and you could provide your interpretations as comments. However, your graphs are not shown. Your teacher does not want to produce the graphs by running your R code as it will take a lot of time to run code for all students in the class. 
 
 You might think of copying and pasting your R code, your graphs from the output, and type you interpretations into a word document. This is doable but it will take you more time than you think, and the document is likely to look sloppy. 
 
@@ -28,7 +28,7 @@ Note: [The Turing Way](https://quarto.org/) provides an overview of the terms re
 
 ### Prerequisites
 
-While you technically need the `rmarkdown` package, you do not need to explicitly install and load it, if you are using RStudio. RStudio performs these in the background when you knit (create) your document. 
+While you technically need the `rmarkdown` package, you do not need to explicitly install and load it, if you are using RStudio. RStudio performs these in the background when you knit (render) your document. 
 
 ## Getting Started
 
@@ -147,13 +147,13 @@ You may want to consider using the `round()` function as R tends to print out a 
 
 ## Knitting Your Document
 
-Once you have your document ready, you can *knit* your document. Knitting transforms your plain text `.Rmd` file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the `rmarkdown` package (if needed) and loads it. This is why you do not have to load it by using the `library()` function. 
+Once you have your document ready, you can **knit** your document. Knitting transforms your plain text `.Rmd` file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the `rmarkdown` package (if needed) and loads it. This is why you do not have to load it by using the `library()` function. 
 
 ### Things to Consider
 
 #### Troubelshooting
 
-I have seen many students work directly using an `.Rmd` file and bypassing an R script. I find troubleshooting error messages in this scenario, as there are two potential sources of the error. 
+I have seen some students work directly using an `.Rmd` file and bypass an R script. I find troubleshooting error messages difficult in this scenario, as there are two potential sources of the error: 
 
 1. Error in R code inside code chunks.
 2. Error in delimiters or options for the YAML, code chunks, inline code.
@@ -165,7 +165,7 @@ Personally, I type up and execute my R code in an R script first. Once there are
 You will need to produce a PDF file for the project. To do so, you can:
 
 1. Change the default output format to PDF when creating the `.Rmd` file at the beginning. 
-  - Do note that to be to knit the file into a PDF, you need LaTeX, which can be installed by running the following two commands in the R Console:
+  - To knit the file into a PDF, you need LaTeX, which can be installed by running the following two commands in the R Console:
 
 ```{r, eval=FALSE}
 install.packages("tinytex")
@@ -176,8 +176,8 @@ tinytex::install_tinytex()
   
 #### More Resources for R Markdown
 
-There are a lot more options available with R Markdown. We have only covered the very basics in this unit to get you started with this class. A couple of other resources with more details can be found below:
+There are a lot more options available with R Markdown. We have only covered the very basics in this unit to get you started with this class. A few other resources with more details can be found below:
 
 - [R For Data Science, Ch 27](https://r4ds.had.co.nz/r-markdown.html)
 - [R Markdown Cheat Sheet from RStudio](https://rmarkdown.rstudio.com/lesson-15.HTML) 
-
+- [Cross-Referencing Figures, Equations, and Tables Within Documents](https://pkg.yihui.org/rmarkdown-cookbook/cross-ref). Once you are comfortable with the basics from this unit, I highly recommend reading this, which will be useful for the project. 

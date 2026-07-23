@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -1.57601312  7.56772709  6.01597870  1.04778576 -0.49472216 -0.32767287
-##  [7]  1.56393144  2.41263612  0.07068151 -0.46062424
+##  [1]  1.43519184 -0.52625962 -2.00266814 -2.01028615 -0.04014506  1.73937070
+##  [7]  0.46631517  4.74271744  1.27726834  2.19157544
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1319,12 +1319,12 @@ Imagine you are in this scenario: you have a homework assignment where you are s
 \item
   Relevant graphs.
 \item
-  Your interpretations of the graphs.
+  Your interpretations of the graphs in narrative form.
 \end{enumerate}
 
-Not only these, but these have to be presented in a cohesive and organized manner.
+These have to be presented in a cohesive and organized manner.
 
-Providing just an R script will not help, as it only shows your R code and you could provide your interpretations as comments. However, your graphs are not shown. Your teacher does want to produce the graphs by running your R code as it will take a lot of time to run code for all students in the class.
+Providing an R script will not help, as it only shows your R code and you could provide your interpretations as comments. However, your graphs are not shown. Your teacher does not want to produce the graphs by running your R code as it will take a lot of time to run code for all students in the class.
 
 You might think of copying and pasting your R code, your graphs from the output, and type you interpretations into a word document. This is doable but it will take you more time than you think, and the document is likely to look sloppy.
 
@@ -1344,7 +1344,7 @@ Note: \href{https://quarto.org/}{The Turing Way} provides an overview of the ter
 \hypertarget{prerequisites}{%
 \subsection{Prerequisites}\label{prerequisites}}
 
-While you technically need the \texttt{rmarkdown} package, you do not need to explicitly install and load it, if you are using RStudio. RStudio performs these in the background when you knit (create) your document.
+While you technically need the \texttt{rmarkdown} package, you do not need to explicitly install and load it, if you are using RStudio. RStudio performs these in the background when you knit (render) your document.
 
 \hypertarget{getting-started}{%
 \section{Getting Started}\label{getting-started}}
@@ -1516,7 +1516,7 @@ You may want to consider using the \texttt{round()} function as R tends to print
 \hypertarget{knitting-your-document}{%
 \section{Knitting Your Document}\label{knitting-your-document}}
 
-Once you have your document ready, you can \emph{knit} your document. Knitting transforms your plain text \texttt{.Rmd} file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the \texttt{rmarkdown} package (if needed) and loads it. This is why you do not have to load it by using the \texttt{library()} function.
+Once you have your document ready, you can \textbf{knit} your document. Knitting transforms your plain text \texttt{.Rmd} file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the \texttt{rmarkdown} package (if needed) and loads it. This is why you do not have to load it by using the \texttt{library()} function.
 
 \hypertarget{things-to-consider}{%
 \subsection{Things to Consider}\label{things-to-consider}}
@@ -1524,7 +1524,7 @@ Once you have your document ready, you can \emph{knit} your document. Knitting t
 \hypertarget{troubelshooting}{%
 \subsubsection{Troubelshooting}\label{troubelshooting}}
 
-I have seen many students work directly using an \texttt{.Rmd} file and bypassing an R script. I find troubleshooting error messages in this scenario, as there are two potential sources of the error.
+I have seen some students work directly using an \texttt{.Rmd} file and bypass an R script. I find troubleshooting error messages difficult in this scenario, as there are two potential sources of the error:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1552,7 +1552,7 @@ You will need to produce a PDF file for the project. To do so, you can:
 \begin{itemize}
 \tightlist
 \item
-  Do note that to be to knit the file into a PDF, you need LaTeX, which can be installed by running the following two commands in the R Console:
+  To knit the file into a PDF, you need LaTeX, which can be installed by running the following two commands in the R Console:
 \end{itemize}
 
 \begin{Shaded}
@@ -1573,7 +1573,7 @@ You will need to produce a PDF file for the project. To do so, you can:
 \hypertarget{more-resources-for-r-markdown}{%
 \subsubsection{More Resources for R Markdown}\label{more-resources-for-r-markdown}}
 
-There are a lot more options available with R Markdown. We have only covered the very basics in this unit to get you started with this class. A couple of other resources with more details can be found below:
+There are a lot more options available with R Markdown. We have only covered the very basics in this unit to get you started with this class. A few other resources with more details can be found below:
 
 \begin{itemize}
 \tightlist
@@ -1581,6 +1581,8 @@ There are a lot more options available with R Markdown. We have only covered the
   \href{https://r4ds.had.co.nz/r-markdown.html}{R For Data Science, Ch 27}
 \item
   \href{https://rmarkdown.rstudio.com/lesson-15.HTML}{R Markdown Cheat Sheet from RStudio}
+\item
+  \href{https://pkg.yihui.org/rmarkdown-cookbook/cross-ref}{Cross-Referencing Figures, Equations, and Tables Within Documents}. Once you are comfortable with the basics from this unit, I highly recommend reading this, which will be useful for the project.
 \end{itemize}
 
 \hypertarget{blank}{%

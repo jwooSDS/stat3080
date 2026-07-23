@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  23 JUL 2026 17:32
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  23 JUL 2026 18:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -897,8 +897,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [10] [11] [12] [13] [14]
 Overfull \hbox (69.75pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1] -1.57601312  7.56772709  6.01597870  1.04778576 -0.49
-472216 -0.32767287[] 
+[]\TU/lmtt/m/n/10 ##  [1]  1.43519184 -0.52625962 -2.00266814 -2.01028615 -0.04
+014506  1.73937070[] 
  []
 
 [15] [16] [17] [18] [19] [20]
@@ -913,13 +913,13 @@ Chapter 2.
 ] [26] [27] [28] [29] [30]
 Chapter 3.
 
-LaTeX Warning: Reference `RBasics' on page 31 undefined on input line 1589.
+LaTeX Warning: Reference `RBasics' on page 31 undefined on input line 1591.
 
 
-LaTeX Warning: Reference `eq:union' on page 31 undefined on input line 1591.
+LaTeX Warning: Reference `eq:union' on page 31 undefined on input line 1593.
 
 
-LaTeX Warning: Reference `tab:nice-tab' on page 31 undefined on input line 1593
+LaTeX Warning: Reference `tab:nice-tab' on page 31 undefined on input line 1595
 .
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)

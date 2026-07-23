@@ -26,6 +26,13 @@ In order to get R to do what you want it to do, you will need to     write a **c
 
 Notice a number in brackets before the answer? The number indicates index position of the first element displayed on that specific line. 
 
+R also ignores white space between components of a command, so typing `1+2` is the same as typing `1 + 2`.
+
+```{r}
+1 + 2
+```
+
+
 You can also add **comments** to R code by using the `#` sign. Everything to the right of the `#` is ignored by R. Comments are useful to explain what has been coded and why to yourself or to collaborators.
 
 ```{r}

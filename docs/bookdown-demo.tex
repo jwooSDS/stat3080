@@ -275,6 +275,18 @@ In order to get R to do what you want it to do, you will need to write a \textbf
 
 Notice a number in brackets before the answer? The number indicates index position of the first element displayed on that specific line.
 
+R also ignores white space between components of a command, so typing \texttt{1+2} is the same as typing \texttt{1\ +\ 2}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \SpecialCharTok{+} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
 You can also add \textbf{comments} to R code by using the \texttt{\#} sign. Everything to the right of the \texttt{\#} is ignored by R. Comments are useful to explain what has been coded and why to yourself or to collaborators.
 
 \begin{Shaded}
@@ -643,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -2.892894 -3.181069  1.926764 -3.176340 -1.822846  3.275598  2.335625
-##  [8]  1.778707 -4.977052  8.689365
+##  [1] -1.1130192 -2.8152540 -6.4394843  3.2953042  1.2531256  4.8141490
+##  [7]  1.5142569  5.4004591  0.8336535 -3.3406029
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.

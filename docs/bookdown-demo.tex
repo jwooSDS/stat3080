@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-07-22}
+\date{2026-07-23}
 
 \begin{document}
 \maketitle
@@ -418,7 +418,7 @@ In order to write useful and effective R code, You need to be able to store item
 
 A \textbf{variable} is a memory location for the object, which can be thought of as a label for the object. Variables are created when the object is \textbf{assigned} to it, so there is no need to declare the variable first.
 
-\textbf{Note}: the term variable as defined above comes from computer science. In statistics, the term variable means something different (any characteristic that can be measured).
+Note: the term variable as defined above comes from computer science. In statistics, the term variable means something different (any characteristic that can be measured).
 
 Variable names can consist of letters, numbers, periods, and underscores. There are a few limitations to how these types of characters can be combined. The following are characteristics of all variable names:
 
@@ -440,7 +440,7 @@ It is also best practice to use variable names that are short and descriptive of
 
 Once you have decided on a variable name for the object, you will need to assign the object to the variable by using either the assignment operator \texttt{\textless{}-} or \texttt{=} (the first is the more commonly used in R). I would discourage using \texttt{=} as an assignment operator as it is also used when specifying values for arguments in functions (see section \ref{doc}.)
 
-To store the sum of 10 and 5 and the rounded value of 5.7 (to whole number) into variables called \texttt{total1} \texttt{value1} respectively:
+To store the sum of 10 and 5 and the rounded value of 5.7 (to whole number) into variables called \texttt{total1} and \texttt{value1} respectively:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -643,8 +643,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -2.4182277  2.5328250 -6.8149705 -1.6660165  2.6181999  4.1074442
-##  [7] -1.1239948  1.1070126  0.1756743  1.3496701
+##  [1] -0.1289638  0.5647897  6.5827392 -0.6172950 -3.7987216 -2.1123407
+##  [7]  1.2636689 -0.1151624  1.0125943 -3.3544032
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1001,7 +1001,7 @@ As with the concatenate function, R will bind the vectors together in the order 
 \hypertarget{classes}{%
 \subsection{Classes}\label{classes}}
 
-In, R, \textbf{class} refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.
+Before going into the remaining data structures, you need to learn what classes are. In R, \textbf{class} refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.
 
 \begin{itemize}
 \tightlist

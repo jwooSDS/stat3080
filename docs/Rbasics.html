@@ -66,8 +66,8 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Preface</a></li>
 <li><a class="active" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
-<li><a class="" href="references.html">References</a></li>
 <li><a class="" href="blank.html"><span class="header-section-number">2</span> Blank Canvas</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -206,7 +206,7 @@
 </h2>
 <p>In order to write useful and effective R code, You need to be able to store items to be used later. Anything that is stored is called an object. An object can be a single value resulting from a calculation or a collection of information such as a table of linear regression coefficients.</p>
 <p>A <strong>variable</strong> is a memory location for the object, which can be thought of as a label for the object. Variables are created when the object is <strong>assigned</strong> to it, so there is no need to declare the variable first.</p>
-<p><strong>Note</strong>: the term variable as defined above comes from computer science. In statistics, the term variable means something different (any characteristic that can be measured).</p>
+<p>Note: the term variable as defined above comes from computer science. In statistics, the term variable means something different (any characteristic that can be measured).</p>
 <p>Variable names can consist of letters, numbers, periods, and underscores. There are a few limitations to how these types of characters can be combined. The following are characteristics of all variable names:</p>
 <ol style="list-style-type: decimal">
 <li>Variable names cannot begin with a number.</li>
@@ -217,7 +217,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ol>
 <p>It is also best practice to use variable names that are short and descriptive of the information contained in the object.</p>
 <p>Once you have decided on a variable name for the object, you will need to assign the object to the variable by using either the assignment operator <code>&lt;-</code> or <code>=</code> (the first is the more commonly used in R). I would discourage using <code>=</code> as an assignment operator as it is also used when specifying values for arguments in functions (see section <a href="Rbasics.html#doc">1.7.1</a>.)</p>
-<p>To store the sum of 10 and 5 and the rounded value of 5.7 (to whole number) into variables called <code>total1</code> <code>value1</code> respectively:</p>
+<p>To store the sum of 10 and 5 and the rounded value of 5.7 (to whole number) into variables called <code>total1</code> and <code>value1</code> respectively:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">total1</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">+</span><span class="fl">15</span></span>
 <span><span class="va">value1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">5.7</span>,<span class="fl">0</span><span class="op">)</span></span></code></pre></div>
@@ -322,8 +322,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ul>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] -0.5976346  0.7757285 -0.7306493  3.7980633  1.8068912 -2.0941212
-##  [7] -3.2530067  0.7453662  4.1703838  4.7642293</code></pre>
+<pre><code>##  [1]  0.7190815 -1.2260977  3.7710007 -1.0324612  3.4898057 -2.0799130
+##  [7]  2.1887774 -3.1927258 -0.2849217 -2.1645127</code></pre>
 <p>Note: you are likely to get a vector of 10 numbers that are different than the ones shown.</p>
 </div>
 <div id="example-2-binomial-distribution" class="section level4" number="1.7.2.2">
@@ -510,7 +510,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <h3>
 <span class="header-section-number">1.9.3</span> Classes<a class="anchor" aria-label="anchor" href="#classes"><i class="fas fa-link"></i></a>
 </h3>
-<p>In, R, <strong>class</strong> refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.</p>
+<p>Before going into the remaining data structures, you need to learn what classes are. In R, <strong>class</strong> refers to how an object behaves with generic functions. There are 3 main classes in R: character, numeric, and logical.</p>
 <ul>
 <li>Character: Represents text strings, symbols, or words. Must always be enclosed in quotes.</li>
 <li>Numeric: Represents real numbers.</li>
@@ -645,7 +645,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">Preface</a></div>
-<div class="next"><a href="references.html">References</a></div>
+<div class="next"><a href="blank.html"><span class="header-section-number">2</span> Blank Canvas</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -696,7 +696,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-22.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

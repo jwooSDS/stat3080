@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -1.1130192 -2.8152540 -6.4394843  3.2953042  1.2531256  4.8141490
-##  [7]  1.5142569  5.4004591  0.8336535 -3.3406029
+##  [1] -1.0089300 -3.5732585  0.8976058  3.6723282  0.0700096  2.9762124
+##  [7]  0.7046069 -0.5976909  2.8329462  0.3401275
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1303,10 +1303,46 @@ To clear the environment to make it empty:
   Click on the broom icon on the top-right under the Environment tab.
 \end{enumerate}
 
+\hypertarget{rmd}{%
+\chapter{R Markdown}\label{rmd}}
+
+\hypertarget{why-use-r-markdown}{%
+\section{Why Use R Markdown}\label{why-use-r-markdown}}
+
+Imagine you are in this scenario: you have a homework assignment where you are supposed to produce data visualizations and answer some questions based on a data set using R. Your teacher needs to assess if you know what code to write and that you are providing your commentary on the R output. Therefore, you need to produce a document that show the following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  R code.
+\item
+  Relevant graphs.
+\item
+  Your interpretations of the graphs.
+\end{enumerate}
+
+Not only these, but these have to be presented in a cohesive and organized manner.
+
+Providing just an R script will not help, as it only shows your R code and you could provide your interpretations as comments. However, your graphs are not shown. Your teacher does want to produce the graphs by running your R code as it will take a lot of time to run code for all students in the class.
+
+You might think of copying and pasting your R code, your graphs from the output, and type you interpretations into a word document. This is doable but it will take you more time than you think, and the document is likely to look sloppy.
+
+Is there a tool that will help you weave your code, R output, and your interpretations into a neat document? This is what R Markdown does!
+
+Note: R Markdown is not the only tool that allows you to do this. \href{https://quarto.org/}{Quarto} is another tool. R Markdown and Quarto can be thought of as variants of Markdown. Markdown is a language for formatting plain text. R Markdown and Quarto expand on Markdown.
+
+\hypertarget{reproducible-research}{%
+\subsection{Reproducible Research}\label{reproducible-research}}
+
+Another reason for using R Markdown is to adhere to \textbf{reproducible research} principles. According to \citet{rep}, the definition of reproducible research is ``Authors provide all the necessary data and the computer codes to run the analysis again, re-creating the results.''
+
+Since your document provides the R commands, readers can simply execute the commands to verify your output. Reproducible research improves transparency and builds trust in your work.
+
+Note: \href{https://quarto.org/}{The Turing Way} provides an overview of the terms reproducible, replicable, robust, and generalizable for research. We will not go into the details for this class but it is worth your time to think about these.
+
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}
-
-Read CH 2 from \citep{BH2019}.
 
 See Sections \ref{RBasics}, \ref{doc}.
 

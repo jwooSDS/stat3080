@@ -1,7 +1,5 @@
 # Blank Canvas {#blank}
 
-Read CH 2 from [@BH2019].
-
 See Sections \@ref(RBasics), \@ref(doc).
 
 See equation \@ref(eq:union).

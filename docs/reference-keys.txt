@@ -30,4 +30,7 @@ lists
 other-practical-advice-with-r
 the-workspace
 the-environment
+rmd
+why-use-r-markdown
+reproducible-research
 blank

@@ -25,3 +25,159 @@ Another reason for using R Markdown is to adhere to **reproducible research** pr
 Since your document provides the R commands, readers can simply execute the commands to verify your output. Reproducible research improves transparency and builds trust in your work. 
 
 Note: [The Turing Way](https://quarto.org/) provides an overview of the terms reproducible, replicable, robust, and generalizable for research. We will not go into the details for this class but it is worth your time to think about these. 
+
+### Prerequisites
+
+While you technically need the `rmarkdown` package, you do not need to explicitly install and load it, if you are using RStudio. RStudio performs these in the background when you knit (create) your document. 
+
+## Getting Started
+
+To get started with producing your document with R Markdown, open RStudio, then click on File, New File, R Markdown. Select the Document option, and fill in the entries for title, author, and date. For the time being, use HTML as the default output format. 
+
+You will see an untitled tab created. Save it. The file will have a `.Rmd` extension, which is the extension for an R Markdown file. There are some directions provided in this file. Feel free to read it. 
+
+In general, there are three essential components of an `.Rmd` file:
+
+1. YAML header.
+2. Narrative text. 
+3. Code chunks.
+
+### YAML Header
+
+The **YAML header** controls the settings associated with the document. At this point, your YAML header looks like this:
+
+````{verbatim}
+---
+title: "Untitled"
+author: "Jeffrey Woo"
+date: "2026-07-23"
+output: html_document
+---
+````
+
+The YAML header is fenced by three dashes, `---`. These three dashes are also called a **delimeter**. A delimeter is a specific character or symbol used to indicate the boundary between separate, independent regions of the file. You can easily change the title, name, and date by changing the values inside the quotes in the YAML. 
+
+### Narrative Text
+
+You can type your narration below the YAML. 
+
+#### Headers
+
+Use hashtags `#` followed by a space to create a header. The more hashtags the smaller the header. 
+
+````{verbatim}
+# 1st level header
+## 2nd level header
+### 3rd level header
+````
+
+#### Text Styles
+
+- For italics, fence the word(s) with `*`.
+- For bold, fence the word(s) with `**`.
+- To display short code in a text, fence the code with ```.
+
+````{verbatim}
+*italicize these words*
+**bold these words**
+`mean(c(4,6,10))`
+````
+
+#### Hyperlinks
+
+For hyperlinks, fence the text with `[ ]` then add the URL in parentheses. For example:
+
+````{verbatim}
+Check out the official [R Markdown Documentation](https://rmarkdown.rstudio.com).
+````
+
+#### Lists
+
+For an unordered bullet point list, start each line with a dash `-`, asterisk `*`, or plus `+` followed by a space.
+
+````{verbatim}
+- First item
+- Second item
+- Third item
+````
+
+For a numbered list, start each line with a number followed by a period and a space. 
+
+````{verbatim}
+1. First item
+2. Second item
+3. Third item
+````
+
+For a nested list, indent the line with two or four spaces (or one tab) and use the list marker.
+
+````{verbatim}
+- Main item 1
+    - Sub-item 1a
+    - Sub-item 1b
+````
+
+### Code Chunks
+
+**Code chunks** allow you to embed R code within your document. There are a few ways to insert a code chunk:
+
+1. Ctrl + Alt + I
+2. Click the insert code chunk icon (its a green square with a white C). Click on the down arrow and select R.
+3. Type the chunk delimiters ` ```{r}` and ` ``` `.
+
+You can type in your R commands inside the code chunks. 
+
+#### Chunk options
+
+You can customize how the code runs and displays by using chunk options inside the curly braces. There a lot of options; the ones you may use are:
+
+- `message = FALSE`: which hides messages or warnings that R produces when running your code
+- `echo = FALSE`: which hides the code, but allows the results from R to be displayed. This should be used if readers do not want the R code.
+- `eval = FALSE`: which shows the code but does not execute the code. This is used for displaying example R code. (I use it a lot in these notes)
+
+#### Inline Code
+
+To display the result from R directly inside the narrative text, use inline R code by fencing the R code with single backticks starting with the letter `r`, for example:
+
+````{verbatim}
+The average of 2, 5, and 9 is`r mean(c(2, 5, 9))`.
+````
+
+You may want to consider using the `round()` function as R tends to print out a lot of decimal places
+
+## Knitting Your Document
+
+Once you have your document ready, you can *knit* your document. Knitting transforms your plain text `.Rmd` file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the `rmarkdown` package (if needed) and loads it. This is why you do not have to load it by using the `library()` function. 
+
+### Things to Consider
+
+#### Troubelshooting
+
+I have seen many students work directly using an `.Rmd` file and bypassing an R script. I find troubleshooting error messages in this scenario, as there are two potential sources of the error. 
+
+1. Error in R code inside code chunks.
+2. Error in delimiters or options for the YAML, code chunks, inline code.
+
+Personally, I type up and execute my R code in an R script first. Once there are no more errors, I then create my `.Rmd` file and then copy and paste the relevant R code into the code chunks. If an error pops up when knitting, I can rule out errors in the R code and focus on the delimeters and options for the YAML and code chunks. 
+
+#### PDF Output
+
+You will need to produce a PDF file for the project. To do so, you can:
+
+1. Change the default output format to PDF when creating the `.Rmd` file at the beginning. 
+  - Do note that to be to knit the file into a PDF, you need LaTeX, which can be installed by running the following two commands in the R Console:
+
+```{r, eval=FALSE}
+install.packages("tinytex")
+tinytex::install_tinytex()
+```
+
+2. If this previous step does not work, change the default output format to word when creating the `.Rmd` file at the beginning. Then, convert the word document to a PDF using microsoft word. 
+  
+#### More Resources for R Markdown
+
+There are a lot more options available with R Markdown. We have only covered the very basics in this unit to get you started with this class. A couple of other resources with more details can be found below:
+
+- [R For Data Science, Ch 27](https://r4ds.had.co.nz/r-markdown.html)
+- [R Markdown Cheat Sheet from RStudio](https://rmarkdown.rstudio.com/lesson-15.HTML) 
+

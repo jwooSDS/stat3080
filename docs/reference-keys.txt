@@ -54,6 +54,9 @@ pdf-output
 more-resources-for-r-markdown
 subset
 overview
+subsetting-with-brackets
 subsetting-vectors
-subsetting-data-frames-and-lists
+subsetting-matrices-and-data-frames
+subsetting-lists
+section
 blank

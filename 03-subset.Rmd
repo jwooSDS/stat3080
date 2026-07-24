@@ -17,7 +17,9 @@ mult_list <- list(mult_data, z, log_vect, 7)
 
 Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the `dplyr` package, and you will learn these in a later section. 
 
-## Subsetting Vectors
+## Subsetting with Brackets
+
+### Subsetting Vectors
 
 The typical notation to subset vectors is a set of brackets used directly after the variable name of the vector. The information given inside the brackets specifies which values should be extracted from the vector. 
 
@@ -79,12 +81,71 @@ x2 <- x
 x2[6] <- 30 ##place 30 in position 6
 x2
 
-x2[7:9] <- c(35,40,45) 
+x2[7:9] <- c(35,40,45) ##then add 3 values
 x2
 
 x2[c(1,3)] <- 0 ##change value of position 1, 3 to 0
 x2
 ```
 
-## Subsetting Data Frames and Lists
+### Subsetting Matrices and Data Frames 
+
+To subset a matrix or data frame, a similar bracket notation is used. However, because matrices and data frames are two-dimensional structures, two arguments are required in the brackets. The first argument references the row index and the second input references the column index.
+
+Note: subsetting data frames is very common when analyzing data, as data are usually stored in data frames.
+
+The examples below are applied to a data frame. Subsetting matrices work in the same way.
+
+```{r}
+mult_data
+
+## Subsetting the value in the first row and second column
+mult_data[1,2]
+
+## Subsetting the values in the first two rows and first two columns
+mult_data[1:2,1:2]
+
+## Subsetting the values in rows 1, 4 and columns 2, 3
+mult_data[c(1,4),2:3]
+
+## Subsetting the entire first row.
+## Comma as the 2nd argument means want all columns
+mult_data[1,]
+
+## Subsetting the entire second column
+## Comma as the 1st argument means want all rows
+mult_data[,2]
+
+## Subsetting all but the first row
+mult_data[-1,]
+
+## Subsetting all but the third column
+mult_data[,-3]
+
+## Subsetting the third column twice
+mult_data[,c(3,3)]
+
+## Subsetting columns 1, 2, 3 and duplicating the third column
+mult_data[,c(1:3,3)]
+```
+
+### Subsetting Lists
+
+A list is subset to any of its elements by using double brackets, `[[ ]]`.
+
+```{r}
+mult_list[[3]]
+```
+Double brackets are limited to one value. In order to subset multiple elements of a list, single brackets can be used. 
+
+```{r}
+mult_list[2:3]
+```
+### 
+
+
+
+
+
+
 

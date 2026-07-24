@@ -145,6 +145,33 @@ The average of 2, 5, and 9 is`r mean(c(2, 5, 9))`.
 
 You may want to consider using the `round()` function as R tends to print out a lot of decimal places
 
+## Cross-Referencing with R Markdown
+
+Cross-referencing is done in a document to help connect related information to readers. You will often that you will want to connect a narrative with a graphical output, information presented in a table, a math equation, or a citation. R Markdown does cross-referencing and automatically numbers them for you. Below, we will go over a simple example of how to label a figure produced by R, and then refer to it in a narrative. 
+
+For this example, we will use the `pressure` data set that is loaded in base R. Per its documentation, the data are the temperature in degrees Celsius and vapor pressure of mercury in millimeters (of mercury).
+
+In the code chunk below, notice a couple of items are added inside the curly braces:
+
+1. A label, `plot-pressure` for this example. 
+2. A caption via `fig.cap`.
+
+````{verbatim}
+```{r plot-pressure, fig.cap="Vapor Pressure of Mercury in mm Hg Against Temp in Celcius"}
+plot(pressure)  # a scatterplot
+```
+````
+
+```{r plot-pressure, fig.cap="Vapor Pressure of Mercury in mm Hg Against Temp in Celcius", echo=FALSE}
+plot(pressure)  # a scatterplot
+```
+
+An example narrative about this plot could be: we can see from \@ref(fig:plot-pressure) that vapor pressure increases exponentially with temperature. 
+
+To cite the figure, type `\@ref(fig:plot-pressure)` in the narrative, using the label in the code chunk. 
+
+This is just a simple example. Referencing tables and equations are similar. Details can be found in @xie2020 Chapter 4.7.
+
 ## Knitting Your Document
 
 Once you have your document ready, you can **knit** your document. Knitting transforms your plain text `.Rmd` file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the `rmarkdown` package (if needed) and loads it. This is why you do not have to load it by using the `library()` function. 
@@ -180,4 +207,4 @@ There are a lot more options available with R Markdown. We have only covered the
 
 - [R For Data Science, Ch 27](https://r4ds.had.co.nz/r-markdown.html)
 - [R Markdown Cheat Sheet from RStudio](https://rmarkdown.rstudio.com/lesson-15.HTML) 
-- [Cross-Referencing Figures, Equations, and Tables Within Documents](https://pkg.yihui.org/rmarkdown-cookbook/cross-ref). Once you are comfortable with the basics from this unit, I highly recommend reading this, which will be useful for the project. 
+- [Cross-Referencing Figures, Equations, and Tables Within Documents](https://pkg.yihui.org/rmarkdown-cookbook/cross-ref). 

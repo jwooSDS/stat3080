@@ -127,12 +127,12 @@
 <span class="header-section-number">2.2.1</span> YAML Header<a class="anchor" aria-label="anchor" href="#yaml-header"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>YAML header</strong> controls the settings associated with the document. At this point, your YAML header looks like this:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb100-1"><a href="rmd.html#cb100-1" tabindex="-1"></a>---</span>
-<span id="cb100-2"><a href="rmd.html#cb100-2" tabindex="-1"></a>title: "Untitled"</span>
-<span id="cb100-3"><a href="rmd.html#cb100-3" tabindex="-1"></a>author: "Jeffrey Woo"</span>
-<span id="cb100-4"><a href="rmd.html#cb100-4" tabindex="-1"></a>date: "2026-07-23"</span>
-<span id="cb100-5"><a href="rmd.html#cb100-5" tabindex="-1"></a>output: html_document</span>
-<span id="cb100-6"><a href="rmd.html#cb100-6" tabindex="-1"></a>---</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb102-1"><a href="rmd.html#cb102-1" tabindex="-1"></a>---</span>
+<span id="cb102-2"><a href="rmd.html#cb102-2" tabindex="-1"></a>title: "Untitled"</span>
+<span id="cb102-3"><a href="rmd.html#cb102-3" tabindex="-1"></a>author: "Jeffrey Woo"</span>
+<span id="cb102-4"><a href="rmd.html#cb102-4" tabindex="-1"></a>date: "2026-07-23"</span>
+<span id="cb102-5"><a href="rmd.html#cb102-5" tabindex="-1"></a>output: html_document</span>
+<span id="cb102-6"><a href="rmd.html#cb102-6" tabindex="-1"></a>---</span></code></pre></div>
 <p>The YAML header is fenced by three dashes, <code>---</code>. These three dashes are also called a <strong>delimeter</strong>. A delimeter is a specific character or symbol used to indicate the boundary between separate, independent regions of the file. You can easily change the title, name, and date by changing the values inside the quotes in the YAML.</p>
 </div>
 <div id="narrative-text" class="section level3" number="2.2.2">
@@ -145,9 +145,9 @@
 <span class="header-section-number">2.2.2.1</span> Headers<a class="anchor" aria-label="anchor" href="#headers"><i class="fas fa-link"></i></a>
 </h4>
 <p>Use hashtags <code>#</code> followed by a space to create a header. The more hashtags the smaller the header.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb101-1"><a href="rmd.html#cb101-1" tabindex="-1"></a># 1st level header</span>
-<span id="cb101-2"><a href="rmd.html#cb101-2" tabindex="-1"></a>## 2nd level header</span>
-<span id="cb101-3"><a href="rmd.html#cb101-3" tabindex="-1"></a>### 3rd level header</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb103-1"><a href="rmd.html#cb103-1" tabindex="-1"></a># 1st level header</span>
+<span id="cb103-2"><a href="rmd.html#cb103-2" tabindex="-1"></a>## 2nd level header</span>
+<span id="cb103-3"><a href="rmd.html#cb103-3" tabindex="-1"></a>### 3rd level header</span></code></pre></div>
 </div>
 <div id="text-styles" class="section level4" number="2.2.2.2">
 <h4>
@@ -158,33 +158,33 @@
 <li>For bold, fence the word(s) with <code>**</code>.</li>
 <li>To display short code in a text, fence the code with ```.</li>
 </ul>
-<div class="sourceCode" id="cb102"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb102-1"><a href="rmd.html#cb102-1" tabindex="-1"></a>*italicize these words*</span>
-<span id="cb102-2"><a href="rmd.html#cb102-2" tabindex="-1"></a>**bold these words**</span>
-<span id="cb102-3"><a href="rmd.html#cb102-3" tabindex="-1"></a>`mean(c(4,6,10))`</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb104-1"><a href="rmd.html#cb104-1" tabindex="-1"></a>*italicize these words*</span>
+<span id="cb104-2"><a href="rmd.html#cb104-2" tabindex="-1"></a>**bold these words**</span>
+<span id="cb104-3"><a href="rmd.html#cb104-3" tabindex="-1"></a>`mean(c(4,6,10))`</span></code></pre></div>
 </div>
 <div id="hyperlinks" class="section level4" number="2.2.2.3">
 <h4>
 <span class="header-section-number">2.2.2.3</span> Hyperlinks<a class="anchor" aria-label="anchor" href="#hyperlinks"><i class="fas fa-link"></i></a>
 </h4>
 <p>For hyperlinks, fence the text with <code>[ ]</code> then add the URL in parentheses. For example:</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb103-1"><a href="rmd.html#cb103-1" tabindex="-1"></a>Check out the official [R Markdown Documentation](https://rmarkdown.rstudio.com).</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb105-1"><a href="rmd.html#cb105-1" tabindex="-1"></a>Check out the official [R Markdown Documentation](https://rmarkdown.rstudio.com).</span></code></pre></div>
 </div>
 <div id="lists-1" class="section level4" number="2.2.2.4">
 <h4>
 <span class="header-section-number">2.2.2.4</span> Lists<a class="anchor" aria-label="anchor" href="#lists-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>For an unordered bullet point list, start each line with a dash <code>-</code>, asterisk <code>*</code>, or plus <code>+</code> followed by a space.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb104-1"><a href="rmd.html#cb104-1" tabindex="-1"></a>- First item</span>
-<span id="cb104-2"><a href="rmd.html#cb104-2" tabindex="-1"></a>- Second item</span>
-<span id="cb104-3"><a href="rmd.html#cb104-3" tabindex="-1"></a>- Third item</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb106-1"><a href="rmd.html#cb106-1" tabindex="-1"></a>- First item</span>
+<span id="cb106-2"><a href="rmd.html#cb106-2" tabindex="-1"></a>- Second item</span>
+<span id="cb106-3"><a href="rmd.html#cb106-3" tabindex="-1"></a>- Third item</span></code></pre></div>
 <p>For a numbered list, start each line with a number followed by a period and a space.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb105-1"><a href="rmd.html#cb105-1" tabindex="-1"></a>1. First item</span>
-<span id="cb105-2"><a href="rmd.html#cb105-2" tabindex="-1"></a>2. Second item</span>
-<span id="cb105-3"><a href="rmd.html#cb105-3" tabindex="-1"></a>3. Third item</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb107-1"><a href="rmd.html#cb107-1" tabindex="-1"></a>1. First item</span>
+<span id="cb107-2"><a href="rmd.html#cb107-2" tabindex="-1"></a>2. Second item</span>
+<span id="cb107-3"><a href="rmd.html#cb107-3" tabindex="-1"></a>3. Third item</span></code></pre></div>
 <p>For a nested list, indent the line with two or four spaces (or one tab) and use the list marker.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb106-1"><a href="rmd.html#cb106-1" tabindex="-1"></a>- Main item 1</span>
-<span id="cb106-2"><a href="rmd.html#cb106-2" tabindex="-1"></a>    - Sub-item 1a</span>
-<span id="cb106-3"><a href="rmd.html#cb106-3" tabindex="-1"></a>    - Sub-item 1b</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb108-1"><a href="rmd.html#cb108-1" tabindex="-1"></a>- Main item 1</span>
+<span id="cb108-2"><a href="rmd.html#cb108-2" tabindex="-1"></a>    - Sub-item 1a</span>
+<span id="cb108-3"><a href="rmd.html#cb108-3" tabindex="-1"></a>    - Sub-item 1b</span></code></pre></div>
 </div>
 </div>
 <div id="code-chunks" class="section level3" number="2.2.3">
@@ -217,23 +217,47 @@
 <span class="header-section-number">2.2.3.2</span> Inline Code<a class="anchor" aria-label="anchor" href="#inline-code"><i class="fas fa-link"></i></a>
 </h4>
 <p>To display the result from R directly inside the narrative text, use inline R code by fencing the R code with single backticks starting with the letter <code>r</code>, for example:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb107-1"><a href="rmd.html#cb107-1" tabindex="-1"></a>The average of 2, 5, and 9 is`r mean(c(2, 5, 9))`.</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb109-1"><a href="rmd.html#cb109-1" tabindex="-1"></a>The average of 2, 5, and 9 is`r mean(c(2, 5, 9))`.</span></code></pre></div>
 <p>You may want to consider using the <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> function as R tends to print out a lot of decimal places</p>
 </div>
 </div>
 </div>
-<div id="knitting-your-document" class="section level2" number="2.3">
+<div id="cross-referencing-with-r-markdown" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">2.3</span> Knitting Your Document<a class="anchor" aria-label="anchor" href="#knitting-your-document"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> Cross-Referencing with R Markdown<a class="anchor" aria-label="anchor" href="#cross-referencing-with-r-markdown"><i class="fas fa-link"></i></a>
+</h2>
+<p>Cross-referencing is done in a document to help connect related information to readers. You will often that you will want to connect a narrative with a graphical output, information presented in a table, a math equation, or a citation. R Markdown does cross-referencing and automatically numbers them for you. Below, we will go over a simple example of how to label a figure produced by R, and then refer to it in a narrative.</p>
+<p>For this example, we will use the <code>pressure</code> data set that is loaded in base R. Per its documentation, the data are the temperature in degrees Celsius and vapor pressure of mercury in millimeters (of mercury).</p>
+<p>In the code chunk below, notice a couple of items are added inside the curly braces:</p>
+<ol style="list-style-type: decimal">
+<li>A label, <code>plot-pressure</code> for this example.</li>
+<li>A caption via <code>fig.cap</code>.</li>
+</ol>
+<div class="sourceCode" id="cb110"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb110-1"><a href="rmd.html#cb110-1" tabindex="-1"></a>```{r plot-pressure, fig.cap="Vapor Pressure of Mercury in mm Hg Against Temp in Celcius"}</span>
+<span id="cb110-2"><a href="rmd.html#cb110-2" tabindex="-1"></a>plot(pressure)  # a scatterplot</span>
+<span id="cb110-3"><a href="rmd.html#cb110-3" tabindex="-1"></a>```</span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:plot-pressure"></span>
+<img src="bookdown-demo_files/figure-html/plot-pressure-1.png" alt="Vapor Pressure of Mercury in mm Hg Against Temp in Celcius" width="672"><p class="caption">
+Figure 2.1: Vapor Pressure of Mercury in mm Hg Against Temp in Celcius
+</p>
+</div>
+<p>An example narrative about this plot could be: we can see from <a href="rmd.html#fig:plot-pressure">2.1</a> that vapor pressure increases exponentially with temperature.</p>
+<p>To cite the figure, type <code>\@ref(fig:plot-pressure)</code> in the narrative, using the label in the code chunk.</p>
+<p>This is just a simple example. Referencing tables and equations are similar. Details can be found in <span class="citation">Xie, Dervieux, and Riederer (<a href="references.html#ref-xie2020">2020</a>)</span> Chapter 4.7.</p>
+</div>
+<div id="knitting-your-document" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Knitting Your Document<a class="anchor" aria-label="anchor" href="#knitting-your-document"><i class="fas fa-link"></i></a>
 </h2>
 <p>Once you have your document ready, you can <strong>knit</strong> your document. Knitting transforms your plain text <code>.Rmd</code> file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the <code>rmarkdown</code> package (if needed) and loads it. This is why you do not have to load it by using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function.</p>
-<div id="things-to-consider" class="section level3" number="2.3.1">
+<div id="things-to-consider" class="section level3" number="2.4.1">
 <h3>
-<span class="header-section-number">2.3.1</span> Things to Consider<a class="anchor" aria-label="anchor" href="#things-to-consider"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1</span> Things to Consider<a class="anchor" aria-label="anchor" href="#things-to-consider"><i class="fas fa-link"></i></a>
 </h3>
-<div id="troubelshooting" class="section level4" number="2.3.1.1">
+<div id="troubelshooting" class="section level4" number="2.4.1.1">
 <h4>
-<span class="header-section-number">2.3.1.1</span> Troubelshooting<a class="anchor" aria-label="anchor" href="#troubelshooting"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1.1</span> Troubelshooting<a class="anchor" aria-label="anchor" href="#troubelshooting"><i class="fas fa-link"></i></a>
 </h4>
 <p>I have seen some students work directly using an <code>.Rmd</code> file and bypass an R script. I find troubleshooting error messages difficult in this scenario, as there are two potential sources of the error:</p>
 <ol style="list-style-type: decimal">
@@ -242,9 +266,9 @@
 </ol>
 <p>Personally, I type up and execute my R code in an R script first. Once there are no more errors, I then create my <code>.Rmd</code> file and then copy and paste the relevant R code into the code chunks. If an error pops up when knitting, I can rule out errors in the R code and focus on the delimeters and options for the YAML and code chunks.</p>
 </div>
-<div id="pdf-output" class="section level4" number="2.3.1.2">
+<div id="pdf-output" class="section level4" number="2.4.1.2">
 <h4>
-<span class="header-section-number">2.3.1.2</span> PDF Output<a class="anchor" aria-label="anchor" href="#pdf-output"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1.2</span> PDF Output<a class="anchor" aria-label="anchor" href="#pdf-output"><i class="fas fa-link"></i></a>
 </h4>
 <p>You will need to produce a PDF file for the project. To do so, you can:</p>
 <ol style="list-style-type: decimal">
@@ -253,23 +277,23 @@
 <ul>
 <li>To knit the file into a PDF, you need LaTeX, which can be installed by running the following two commands in the R Console:</li>
 </ul>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tinytex"</span><span class="op">)</span></span>
 <span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>If this previous step does not work, change the default output format to word when creating the <code>.Rmd</code> file at the beginning. Then, convert the word document to a PDF using microsoft word.</li>
 </ol>
 </div>
-<div id="more-resources-for-r-markdown" class="section level4" number="2.3.1.3">
+<div id="more-resources-for-r-markdown" class="section level4" number="2.4.1.3">
 <h4>
-<span class="header-section-number">2.3.1.3</span> More Resources for R Markdown<a class="anchor" aria-label="anchor" href="#more-resources-for-r-markdown"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1.3</span> More Resources for R Markdown<a class="anchor" aria-label="anchor" href="#more-resources-for-r-markdown"><i class="fas fa-link"></i></a>
 </h4>
 <p>There are a lot more options available with R Markdown. We have only covered the very basics in this unit to get you started with this class. A few other resources with more details can be found below:</p>
 <ul>
 <li><a href="https://r4ds.had.co.nz/r-markdown.html">R For Data Science, Ch 27</a></li>
 <li><a href="https://rmarkdown.rstudio.com/lesson-15.HTML">R Markdown Cheat Sheet from RStudio</a></li>
 <li>
-<a href="https://pkg.yihui.org/rmarkdown-cookbook/cross-ref">Cross-Referencing Figures, Equations, and Tables Within Documents</a>. Once you are comfortable with the basics from this unit, I highly recommend reading this, which will be useful for the project.</li>
+<a href="https://pkg.yihui.org/rmarkdown-cookbook/cross-ref">Cross-Referencing Figures, Equations, and Tables Within Documents</a>.</li>
 </ul>
 </div>
 </div>
@@ -295,8 +319,9 @@
 <li><a class="nav-link" href="#code-chunks"><span class="header-section-number">2.2.3</span> Code Chunks</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#cross-referencing-with-r-markdown"><span class="header-section-number">2.3</span> Cross-Referencing with R Markdown</a></li>
 <li>
-<a class="nav-link" href="#knitting-your-document"><span class="header-section-number">2.3</span> Knitting Your Document</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#things-to-consider"><span class="header-section-number">2.3.1</span> Things to Consider</a></li></ul>
+<a class="nav-link" href="#knitting-your-document"><span class="header-section-number">2.4</span> Knitting Your Document</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#things-to-consider"><span class="header-section-number">2.4.1</span> Things to Consider</a></li></ul>
 </li>
 </ul>
 
@@ -314,7 +339,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-23.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

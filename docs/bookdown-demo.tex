@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-07-23}
+\date{2026-07-24}
 
 \begin{document}
 \maketitle
@@ -618,7 +618,7 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{pnorm}\NormalTok{(}\DecValTok{2}\NormalTok{, }\AttributeTok{mean=}\DecValTok{1}\NormalTok{, }\AttributeTok{sd=}\DecValTok{3}\NormalTok{)}
+\FunctionTok{pnorm}\NormalTok{(}\DecValTok{2}\NormalTok{, }\AttributeTok{mean=}\DecValTok{1}\NormalTok{, }\AttributeTok{sd=}\DecValTok{3}\NormalTok{) }\DocumentationTok{\#\#note that SD is specified, not variance}
 \end{Highlighting}
 \end{Shaded}
 
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  4.3949555  0.7653106 -0.1190916 -0.4369209  2.6619787 -0.6998373
-##  [7]  0.1708321  0.9387269 -2.7333375 -1.4686666
+##  [1] -0.5360353 -3.1160202 -1.2856156 -0.4937998 -2.1065359  2.7925098
+##  [7]  0.9293064 -1.0172639 -3.4070459  2.0848500
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -694,7 +694,15 @@ To find \(P(Y \leq 3)\), we use:
 ## [1] 0.05476188
 \end{verbatim}
 
-\emph{Add Practice questions:}
+\emph{Practice:} Suppose \(S \sim \chi_5^2\), i.e.~a chi-squared distribution with 5 degrees of freedom.
+
+\begin{itemize}
+\tightlist
+\item
+  Find \(P(S > 0.80)\).
+\item
+  What is the value of \(S\) that corresponds to the 90th percentile?
+\end{itemize}
 
 \hypertarget{packages}{%
 \section{Packages}\label{packages}}
@@ -821,6 +829,16 @@ The concatenate function can also be used to add a value to a vector or to combi
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{x2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(x,}\DecValTok{30}\NormalTok{)}
+\NormalTok{x2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25 30
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(x,y)}
 \NormalTok{z}
 \end{Highlighting}
@@ -1513,6 +1531,44 @@ To display the result from R directly inside the narrative text, use inline R co
 
 You may want to consider using the \texttt{round()} function as R tends to print out a lot of decimal places
 
+\hypertarget{cross-referencing-with-r-markdown}{%
+\section{Cross-Referencing with R Markdown}\label{cross-referencing-with-r-markdown}}
+
+Cross-referencing is done in a document to help connect related information to readers. You will often that you will want to connect a narrative with a graphical output, information presented in a table, a math equation, or a citation. R Markdown does cross-referencing and automatically numbers them for you. Below, we will go over a simple example of how to label a figure produced by R, and then refer to it in a narrative.
+
+For this example, we will use the \texttt{pressure} data set that is loaded in base R. Per its documentation, the data are the temperature in degrees Celsius and vapor pressure of mercury in millimeters (of mercury).
+
+In the code chunk below, notice a couple of items are added inside the curly braces:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A label, \texttt{plot-pressure} for this example.
+\item
+  A caption via \texttt{fig.cap}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}\{r plot{-}pressure, fig.cap="Vapor Pressure of Mercury in mm Hg Against Temp in Celcius"\}}
+\NormalTok{plot(pressure)  \# a scatterplot}
+\NormalTok{\textasciigrave{}\textasciigrave{}\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/plot-pressure-1.pdf}
+\caption{\label{fig:plot-pressure}Vapor Pressure of Mercury in mm Hg Against Temp in Celcius}
+\end{figure}
+
+An example narrative about this plot could be: we can see from \ref{fig:plot-pressure} that vapor pressure increases exponentially with temperature.
+
+To cite the figure, type \texttt{\textbackslash{}@ref(fig:plot-pressure)} in the narrative, using the label in the code chunk.
+
+This is just a simple example. Referencing tables and equations are similar. Details can be found in \citet{xie2020} Chapter 4.7.
+
 \hypertarget{knitting-your-document}{%
 \section{Knitting Your Document}\label{knitting-your-document}}
 
@@ -1582,7 +1638,7 @@ There are a lot more options available with R Markdown. We have only covered the
 \item
   \href{https://rmarkdown.rstudio.com/lesson-15.HTML}{R Markdown Cheat Sheet from RStudio}
 \item
-  \href{https://pkg.yihui.org/rmarkdown-cookbook/cross-ref}{Cross-Referencing Figures, Equations, and Tables Within Documents}. Once you are comfortable with the basics from this unit, I highly recommend reading this, which will be useful for the project.
+  \href{https://pkg.yihui.org/rmarkdown-cookbook/cross-ref}{Cross-Referencing Figures, Equations, and Tables Within Documents}.
 \end{itemize}
 
 \hypertarget{blank}{%

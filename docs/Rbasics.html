@@ -314,7 +314,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <li>To find <span class="math inline">\(P(X \leq 2)\)</span>, we use:</li>
 </ul>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">2</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">2</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="co">##note that SD is specified, not variance</span></span></code></pre></div>
 <pre><code>## [1] 0.6305587</code></pre>
 <ul>
 <li>To find the value of <span class="math inline">\(X\)</span> associated with the 25th percentile:</li>
@@ -327,8 +327,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ul>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] -1.563263  0.481025  3.584484  4.773530  4.683410  2.536221 -2.593040
-##  [8] -1.716382  3.601891  6.546422</code></pre>
+<pre><code>##  [1] -2.8951810  0.3392657 -0.6881910  1.8111947  1.0068246  3.6416080
+##  [7]  0.2760669  2.1601890  2.3886795  2.0573962</code></pre>
 <p>Note: you are likely to get a vector of 10 numbers that are different than the ones shown.</p>
 </div>
 <div id="example-2-binomial-distribution" class="section level4" number="1.7.2.2">
@@ -346,7 +346,11 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">3</span>, size<span class="op">=</span><span class="fl">10</span>, prob<span class="op">=</span><span class="fl">0.6</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.05476188</code></pre>
-<p><em>Add Practice questions:</em></p>
+<p><em>Practice:</em> Suppose <span class="math inline">\(S \sim \chi_5^2\)</span>, i.e. a chi-squared distribution with 5 degrees of freedom.</p>
+<ul>
+<li>Find <span class="math inline">\(P(S &gt; 0.80)\)</span>.</li>
+<li>What is the value of <span class="math inline">\(S\)</span> that corresponds to the 90th percentile?</li>
+</ul>
 </div>
 </div>
 </div>
@@ -434,11 +438,14 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <p>The concatenate function can also be used to add a value to a vector or to combine preexisting vectors.</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">30</span><span class="op">)</span></span>
-<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">x2</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25 30</code></pre>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">z</span></span></code></pre></div>
 <pre><code>##  [1]  5 10 15 20 25  3  6  9 12 15</code></pre>
 <p>It is important to remember that the order in which the objects are specified is the order in which they will be saved in the vector.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y</span>,<span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1]  3  6  9 12 15  5 10 15 20 25</code></pre>
 <div id="pattern-vectors" class="section level4" number="1.9.1.1">
@@ -449,38 +456,38 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <ol style="list-style-type: decimal">
 <li>If you are wanting to create a vector that contains a sequence of consecutive integers, then you can use the syntax a:b to create a vector that starts at a and increases or decreases by one until b.</li>
 </ol>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">5</span><span class="op">:</span><span class="fl">1</span></span></code></pre></div>
 <pre><code>## [1] 5 4 3 2 1</code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="op">-</span><span class="fl">5</span></span></code></pre></div>
 <pre><code>## [1] -1 -2 -3 -4 -5</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>If you are wanting a sequence where the values have a constant difference other than one, then you can use the sequence function, <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code>. This function takes three arguments: from, to, by. These inputs specify the first and last number of the sequence as well as the difference between each value in the sequence.</li>
 </ol>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fl">1</span>, to<span class="op">=</span><span class="fl">5</span>, by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0</code></pre>
 <p>There is another optional input for the sequence function: length. The length option specifies the length that you want your vector to be or how many values you want contained in the vector. The sequence function will use this value to determine a constant difference between each of the values that yields the number of values that you specify.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>, length<span class="op">=</span><span class="fl">9</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Another function that creates a useful type of vector is the replicate function, <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code>. This function takes two arguments: vector and number of replicates. These specify what you would like R to repeat and how many times. Depending on the format of what you provide in the times option, this function will either repeat the given vector a specified number of times or repeat the elements of the vector a specified number of times.</li>
 </ol>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] 1 2 3 4 5 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 2 2 3 3 3 4 4 5</code></pre>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] 1 1 2 2 3 3 4 4 5 5</code></pre>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, each<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] 1 1 2 2 3 3 4 4 5 5</code></pre>
 </div>
@@ -490,18 +497,18 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.2</span> Matrices<a class="anchor" aria-label="anchor" href="#mat"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code> function can be used to create a matrix. This function takes four arguments: vector, nrow, ncol, and byrow. These arguments instruct R what values to put in the matrix, how many rows and columns the matrix should have, and whether values should be assigned across the rows or down the columns. The default for the byrow option is false, meaning that the values will be assigned down the columns if the byrow option is not provided.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>,<span class="fl">25</span>,<span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">9</span>,<span class="fl">12</span>,<span class="fl">15</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span>, ncol<span class="op">=</span><span class="fl">5</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    5   10   15   20   25
 ## [2,]    3    6    9   12   15</code></pre>
 <p>Another way to create a matrix is to use either the <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> or <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> function. Both of these functions use vectors as inputs. The <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> function will bind these vectors together as columns and the <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> function will bind these vectors together as rows.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   [,1] [,2] [,3] [,4] [,5]
 ## x    5   10   15   20   25
 ## y    3    6    9   12   15</code></pre>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##       x  y
 ## [1,]  5  3
@@ -522,22 +529,22 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <li>Logical: Represents Boolean values for binary conditions.</li>
 </ul>
 <p>The vectors and matrices created in sections <a href="Rbasics.html#vec">1.9.1</a> and <a href="Rbasics.html#mat">1.9.2</a> are numeric.</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "numeric"</code></pre>
 <p>To create a logical vector:</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">log_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="co">## Note that T and F are equivalent to TRUE and FALSE resp</span></span></code></pre></div>
 <p>To create a character vector:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">char_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ByOne"</span>, <span class="st">"ByTwo"</span>, <span class="st">"ByThree"</span>, <span class="st">"ByFour"</span>, <span class="st">"ByFive"</span><span class="op">)</span></span></code></pre></div>
 <p>The <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> function can be used to find out the class of an object, for example:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "logical"</code></pre>
 <p>Alternatively, functions such as <code>is.character(),</code>is.numeric()<code>,</code>is.logical()` can be used to test for the class:</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>If a vector or matrix contains multiple types of data, an error message is unlikely to show up. R will modify the data to all be of the same type according to the following hierarchical structure:</p>
@@ -547,13 +554,13 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </li>
 <li>logical</li>
 </ol>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 5</code></pre>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"ByFive"</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "TRUE"   "ByFive" "5"</code></pre>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">char_vect</span>,<span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">mult_mat</span></span></code></pre></div>
 <pre><code>##      char_vect x    y   
@@ -567,18 +574,18 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.3.1</span> Example 1: Mixing numeric with character<a class="anchor" aria-label="anchor" href="#example-1-mixing-numeric-with-character"><i class="fas fa-link"></i></a>
 </h4>
 <p>The most common kind of mixing of classes usually involve a data structure containing a mix of numeric and character, for example:</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mixed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="st">"3"</span><span class="op">)</span></span>
 <span><span class="va">mixed</span> <span class="co">## notice all characters, since they are in quotes</span></span></code></pre></div>
 <pre><code>## [1] "1" "2" "3"</code></pre>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "character"</code></pre>
 <p>Trying to add the numbers in the variable <code>mixed</code> results in an error:</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span></span></code></pre></div>
 <p>In this example, we can <strong>coerce</strong> all entries to become numeric:</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mixed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span> <span class="co">## overwrite existing variable</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
@@ -590,10 +597,10 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.3.2</span> Example 2: Math operations with logical<a class="anchor" aria-label="anchor" href="#example-2-math-operations-with-logical"><i class="fas fa-link"></i></a>
 </h4>
 <p>Interestingly, math operations can be performed on logicals. <code>TRUE</code> and <code>FALSE</code> is considered to be 1 and 0 respectively.</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>This will be extremely useful later on when working with simulations, as we often want to evaluate the proportion of times certain conditions are met.</p>
@@ -604,7 +611,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.4</span> Data Frames<a class="anchor" aria-label="anchor" href="#data-frames"><i class="fas fa-link"></i></a>
 </h3>
 <p>Data frames are commonly used to store data. There is typically a row for each observation and a column for each variable measured on the observations (think of an EXCEL spreadsheet). A data frame can be created using the <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> function. The arguments to this function are the vectors that you would like to be in the data frame.</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">char_vect</span>,<span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">mult_data</span></span></code></pre></div>
 <pre><code>##   char_vect  x  y
@@ -620,7 +627,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.5</span> Lists<a class="anchor" aria-label="anchor" href="#lists"><i class="fas fa-link"></i></a>
 </h3>
 <p>Lists are the most flexible type of object in R. Lists are similar to vectors in that there is one row containing multiple values. However, in a list, those values can be objects of varying types and sizes. A list is created using the list function, <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>. The arguments specify what you would like in each element of the list.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">mult_data</span>, <span class="va">z</span>, <span class="va">log_vect</span>, <span class="fl">7</span><span class="op">)</span></span>
 <span><span class="va">mult_list</span></span></code></pre></div>
 <pre><code>## [[1]]
@@ -640,7 +647,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 ## [[4]]
 ## [1] 7</code></pre>
 <p>There are testing and cohersion functions for all of the types of data structures. As with the classes of data, cohersion may not yield a valid result. Some examples are shown below:</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">is.vector</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">mult_list</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">mult_mat</span><span class="op">)</span></span></code></pre></div>
@@ -733,7 +740,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-23.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

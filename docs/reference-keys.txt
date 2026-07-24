@@ -1,4 +1,5 @@
 tab:structures
+fig:plot-pressure
 fig:car
 fig:cards
 Rbasics
@@ -44,6 +45,7 @@ lists-1
 code-chunks
 chunk-options
 inline-code
+cross-referencing-with-r-markdown
 knitting-your-document
 things-to-consider
 troubelshooting

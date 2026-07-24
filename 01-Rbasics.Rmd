@@ -242,7 +242,7 @@ Suppose $X \sim N(1,9)$, i.e. a normal distribution with mean 1 and variance 9.
 - To find $P(X \leq 2)$, we use:
 
 ```{r}
-pnorm(2, mean=1, sd=3)
+pnorm(2, mean=1, sd=3) ##note that SD is specified, not variance
 ```
 
 - To find the value of $X$ associated with the 25th percentile:
@@ -276,7 +276,10 @@ To find $P(Y \leq 3)$, we use:
 pbinom(3, size=10, prob=0.6)
 ```
 
-*Add Practice questions:*
+*Practice:* Suppose $S \sim \chi_5^2$, i.e. a chi-squared distribution with 5 degrees of freedom. 
+
+- Find $P(S > 0.80)$.
+- What is the value of $S$ that corresponds to the 90th percentile?
 
 ## Packages
 
@@ -344,6 +347,8 @@ The concatenate function can also be used to add a value to a vector or to combi
 
 ```{r}
 x2 <- c(x,30)
+x2
+
 z <- c(x,y)
 z
 ```

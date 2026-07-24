@@ -48,6 +48,7 @@ inline-code
 cross-referencing-with-r-markdown
 knitting-your-document
 things-to-consider
+r-script-or-r-markdown
 troubelshooting
 pdf-output
 more-resources-for-r-markdown

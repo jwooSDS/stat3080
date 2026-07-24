@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.5360353 -3.1160202 -1.2856156 -0.4937998 -2.1065359  2.7925098
-##  [7]  0.9293064 -1.0172639 -3.4070459  2.0848500
+##  [1] -2.9889462 -0.3610252 -1.4754158  0.9463211 -2.1147060 -0.4170002
+##  [7] -3.7982830  2.4960194 -1.3355358  3.0848208
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1563,7 +1563,7 @@ In the code chunk below, notice a couple of items are added inside the curly bra
 \caption{\label{fig:plot-pressure}Vapor Pressure of Mercury in mm Hg Against Temp in Celcius}
 \end{figure}
 
-An example narrative about this plot could be: we can see from \ref{fig:plot-pressure} that vapor pressure increases exponentially with temperature.
+An example narrative about this plot could be: we can see from Figure \ref{fig:plot-pressure} that vapor pressure increases exponentially with temperature.
 
 To cite the figure, type \texttt{\textbackslash{}@ref(fig:plot-pressure)} in the narrative, using the label in the code chunk.
 
@@ -1576,6 +1576,19 @@ Once you have your document ready, you can \textbf{knit} your document. Knitting
 
 \hypertarget{things-to-consider}{%
 \subsection{Things to Consider}\label{things-to-consider}}
+
+\hypertarget{r-script-or-r-markdown}{%
+\subsubsection{R Script or R Markdown}\label{r-script-or-r-markdown}}
+
+You might be wondering when should you use an R script and when you should use R Markdown. Personally:
+
+\begin{itemize}
+\tightlist
+\item
+  If I am not going to be sharing the work, or only sharing the work with a small group of collaborators, I am likely to only use an R script.
+\item
+  If I want to share my work broadly, then I will use an R Markdown. I also start the analysis in an R script, and then transfer the code to an R Markdown, as I find this makes troubleshooting easier.
+\end{itemize}
 
 \hypertarget{troubelshooting}{%
 \subsubsection{Troubelshooting}\label{troubelshooting}}

@@ -166,7 +166,7 @@ plot(pressure)  # a scatterplot
 plot(pressure)  # a scatterplot
 ```
 
-An example narrative about this plot could be: we can see from \@ref(fig:plot-pressure) that vapor pressure increases exponentially with temperature. 
+An example narrative about this plot could be: we can see from Figure \@ref(fig:plot-pressure) that vapor pressure increases exponentially with temperature. 
 
 To cite the figure, type `\@ref(fig:plot-pressure)` in the narrative, using the label in the code chunk. 
 
@@ -177,6 +177,13 @@ This is just a simple example. Referencing tables and equations are similar. Det
 Once you have your document ready, you can **knit** your document. Knitting transforms your plain text `.Rmd` file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the `rmarkdown` package (if needed) and loads it. This is why you do not have to load it by using the `library()` function. 
 
 ### Things to Consider
+
+#### R Script or R Markdown
+
+You might be wondering when should you use an R script and when you should use R Markdown. Personally:
+
+- If I am not going to be sharing the work, or only sharing the work with a small group of collaborators, I am likely to only use an R script. 
+- If I want to share my work broadly, then I will use an R Markdown. I also start the analysis in an R script, and then transfer the code to an R Markdown, as I find this makes troubleshooting easier. 
 
 #### Troubelshooting
 

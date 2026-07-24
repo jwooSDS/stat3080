@@ -301,8 +301,8 @@ You can also add \textbf{comments} to R code by using the \texttt{\#} sign. Ever
 
 I \textbf{highly discourage} you to enter your code directly into the R console. Code typed into the console is difficult to be saved or edited. Any meaningful work that you will use R for will likely need to be saved and edited.
 
-\hypertarget{working-directory}{%
-\section{Working Directory}\label{working-directory}}
+\hypertarget{wd}{%
+\section{Working Directory}\label{wd}}
 
 Before talking about a better way to enter R commands, you will need to set up a \textbf{working directory}. The working directory is the path to the folder on your system (typically, the computer you are using) to store files generated during an R session and any files that you save. This is also the folder where R will search for files.
 
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  5.08349474  2.33642547 -0.06490812 -0.64443840 -2.92174893 -1.95366583
-##  [7]  3.12278318 -0.21953960  2.56114101  4.17697338
+##  [1] -2.8972950 -0.5186048 -0.6368042 -5.2845469 -2.1544473  3.2034078
+##  [7] -0.5760969  5.8331445  5.2051916  2.2809948
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1657,7 +1657,7 @@ There are a lot more options available with R Markdown. We have only covered the
 \end{itemize}
 
 \hypertarget{subset}{%
-\chapter{Subsetting Data Structures}\label{subset}}
+\chapter{Working with Data Structures}\label{subset}}
 
 We will create the same data structures in section \ref{structures} of the notes to use as examples in this section.
 
@@ -1674,16 +1674,16 @@ We will create the same data structures in section \ref{structures} of the notes
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{overview}{%
-\section{Overview}\label{overview}}
+\hypertarget{subsetting-data-structures}{%
+\section{Subsetting Data Structures}\label{subsetting-data-structures}}
 
 Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the \texttt{dplyr} package, and you will learn these in a later section.
 
 \hypertarget{subsetting-with-brackets}{%
-\section{Subsetting with Brackets}\label{subsetting-with-brackets}}
+\subsection{Subsetting with Brackets}\label{subsetting-with-brackets}}
 
 \hypertarget{subsetting-vectors}{%
-\subsection{Subsetting Vectors}\label{subsetting-vectors}}
+\subsubsection{Subsetting Vectors}\label{subsetting-vectors}}
 
 The typical notation to subset vectors is a set of brackets used directly after the variable name of the vector. The information given inside the brackets specifies which values should be extracted from the vector.
 
@@ -1862,7 +1862,7 @@ The brackets following a vector can also be used to replace or add one or more v
 \end{verbatim}
 
 \hypertarget{subsetting-matrices-and-data-frames}{%
-\subsection{Subsetting Matrices and Data Frames}\label{subsetting-matrices-and-data-frames}}
+\subsubsection{Subsetting Matrices and Data Frames}\label{subsetting-matrices-and-data-frames}}
 
 To subset a matrix or data frame, a similar bracket notation is used. However, because matrices and data frames are two-dimensional structures, two arguments are required in the brackets. The first argument references the row index and the second input references the column index.
 
@@ -2011,7 +2011,7 @@ The examples below are applied to a data frame. Subsetting matrices work in the 
 \end{verbatim}
 
 \hypertarget{subsetting-lists}{%
-\subsection{Subsetting Lists}\label{subsetting-lists}}
+\subsubsection{Subsetting Lists}\label{subsetting-lists}}
 
 A list is subset to any of its elements by using double brackets, \texttt{{[}{[}\ {]}{]}}.
 
@@ -2042,10 +2042,10 @@ Double brackets are limited to one value. In order to subset multiple elements o
 \end{verbatim}
 
 \hypertarget{subsetting-with-labels}{%
-\section{Subsetting with Labels}\label{subsetting-with-labels}}
+\subsection{Subsetting with Labels}\label{subsetting-with-labels}}
 
 \hypertarget{label-names-with-data-structures}{%
-\subsection{Label Names with Data Structures}\label{label-names-with-data-structures}}
+\subsubsection{Label Names with Data Structures}\label{label-names-with-data-structures}}
 
 Take a look at the output for \texttt{mult\_data}. Notice there is an extra row on top (as if they are headings or labels for the columns) and an extra column (as if they are labels for the rows).
 
@@ -2231,7 +2231,7 @@ The \texttt{names()} function can also be used to display the names of a data st
 \end{verbatim}
 
 \hypertarget{subsetting-with-labels-1}{%
-\subsection{Subsetting with Labels}\label{subsetting-with-labels-1}}
+\subsubsection{Subsetting with Labels}\label{subsetting-with-labels-1}}
 
 Data structures with labels can be subsetted using their labels. The name of the column or element can be used within the brackets or after the \texttt{\$} symbol.
 
@@ -2276,10 +2276,10 @@ Data structures with labels can be subsetted using their labels. The name of the
 \end{verbatim}
 
 \hypertarget{subsetting-with-logical-expressions}{%
-\section{Subsetting with Logical Expressions}\label{subsetting-with-logical-expressions}}
+\subsection{Subsetting with Logical Expressions}\label{subsetting-with-logical-expressions}}
 
 \hypertarget{logical-expressions}{%
-\subsection{Logical Expressions}\label{logical-expressions}}
+\subsubsection{Logical Expressions}\label{logical-expressions}}
 
 It may be useful to use a logical expression to determine which, if any, elements in a vector have certain qualities. When a logical expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied.
 
@@ -2358,7 +2358,7 @@ Multiple logical expressions can be combined using either and or or.
 \end{verbatim}
 
 \hypertarget{subsetting-with-logical-expressions-1}{%
-\section{Subsetting with Logical Expressions}\label{subsetting-with-logical-expressions-1}}
+\subsubsection{Subsetting with Logical Expressions}\label{subsetting-with-logical-expressions-1}}
 
 The logical vectors that result from logical expression statements can be used in the brackets to subset a vector just to the values that satisfy the condition.
 
@@ -2398,6 +2398,233 @@ Instead of yielding a logical vector for each entry in a vector, the \texttt{whi
 \end{verbatim}
 
 Two-dimensional data frames can be subsetting similarly, using the an argument for the row and another for the column.
+
+\hypertarget{loading-data-sets-in-r}{%
+\section{Loading Data Sets in R}\label{loading-data-sets-in-r}}
+
+We will cover two main ways to load data sets in R:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Data sets from R.
+\item
+  Data set from a local file.
+\end{enumerate}
+
+\hypertarget{data-sets-from-r}{%
+\subsection{Data Sets from R}\label{data-sets-from-r}}
+
+Base R comes pre-loaded with some data sets. You can view them by typing \texttt{data()}. You can use the specific data set by typing out its name in the list. To view the \texttt{airquality} data set:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airquality}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Ozone Solar.R Wind Temp Month Day
+## 1      41     190  7.4   67     5   1
+## 2      36     118  8.0   72     5   2
+## 3      12     149 12.6   74     5   3
+## 4      18     313 11.5   62     5   4
+## 5      NA      NA 14.3   56     5   5
+## 6      28      NA 14.9   66     5   6
+## 7      23     299  8.6   65     5   7
+## 8      19      99 13.8   59     5   8
+## 9       8      19 20.1   61     5   9
+## 10     NA     194  8.6   69     5  10
+## 11      7      NA  6.9   74     5  11
+## 12     16     256  9.7   69     5  12
+## 13     11     290  9.2   66     5  13
+## 14     14     274 10.9   68     5  14
+## 15     18      65 13.2   58     5  15
+## 16     14     334 11.5   64     5  16
+## 17     34     307 12.0   66     5  17
+## 18      6      78 18.4   57     5  18
+## 19     30     322 11.5   68     5  19
+## 20     11      44  9.7   62     5  20
+## 21      1       8  9.7   59     5  21
+## 22     11     320 16.6   73     5  22
+## 23      4      25  9.7   61     5  23
+## 24     32      92 12.0   61     5  24
+## 25     NA      66 16.6   57     5  25
+## 26     NA     266 14.9   58     5  26
+## 27     NA      NA  8.0   57     5  27
+## 28     23      13 12.0   67     5  28
+## 29     45     252 14.9   81     5  29
+## 30    115     223  5.7   79     5  30
+## 31     37     279  7.4   76     5  31
+## 32     NA     286  8.6   78     6   1
+## 33     NA     287  9.7   74     6   2
+## 34     NA     242 16.1   67     6   3
+## 35     NA     186  9.2   84     6   4
+## 36     NA     220  8.6   85     6   5
+## 37     NA     264 14.3   79     6   6
+## 38     29     127  9.7   82     6   7
+## 39     NA     273  6.9   87     6   8
+## 40     71     291 13.8   90     6   9
+## 41     39     323 11.5   87     6  10
+## 42     NA     259 10.9   93     6  11
+## 43     NA     250  9.2   92     6  12
+## 44     23     148  8.0   82     6  13
+## 45     NA     332 13.8   80     6  14
+## 46     NA     322 11.5   79     6  15
+## 47     21     191 14.9   77     6  16
+## 48     37     284 20.7   72     6  17
+## 49     20      37  9.2   65     6  18
+## 50     12     120 11.5   73     6  19
+## 51     13     137 10.3   76     6  20
+## 52     NA     150  6.3   77     6  21
+## 53     NA      59  1.7   76     6  22
+## 54     NA      91  4.6   76     6  23
+## 55     NA     250  6.3   76     6  24
+## 56     NA     135  8.0   75     6  25
+## 57     NA     127  8.0   78     6  26
+## 58     NA      47 10.3   73     6  27
+## 59     NA      98 11.5   80     6  28
+## 60     NA      31 14.9   77     6  29
+## 61     NA     138  8.0   83     6  30
+## 62    135     269  4.1   84     7   1
+## 63     49     248  9.2   85     7   2
+## 64     32     236  9.2   81     7   3
+## 65     NA     101 10.9   84     7   4
+## 66     64     175  4.6   83     7   5
+## 67     40     314 10.9   83     7   6
+## 68     77     276  5.1   88     7   7
+## 69     97     267  6.3   92     7   8
+## 70     97     272  5.7   92     7   9
+## 71     85     175  7.4   89     7  10
+## 72     NA     139  8.6   82     7  11
+## 73     10     264 14.3   73     7  12
+## 74     27     175 14.9   81     7  13
+## 75     NA     291 14.9   91     7  14
+## 76      7      48 14.3   80     7  15
+## 77     48     260  6.9   81     7  16
+## 78     35     274 10.3   82     7  17
+## 79     61     285  6.3   84     7  18
+## 80     79     187  5.1   87     7  19
+## 81     63     220 11.5   85     7  20
+## 82     16       7  6.9   74     7  21
+## 83     NA     258  9.7   81     7  22
+## 84     NA     295 11.5   82     7  23
+## 85     80     294  8.6   86     7  24
+## 86    108     223  8.0   85     7  25
+## 87     20      81  8.6   82     7  26
+## 88     52      82 12.0   86     7  27
+## 89     82     213  7.4   88     7  28
+## 90     50     275  7.4   86     7  29
+## 91     64     253  7.4   83     7  30
+## 92     59     254  9.2   81     7  31
+## 93     39      83  6.9   81     8   1
+## 94      9      24 13.8   81     8   2
+## 95     16      77  7.4   82     8   3
+## 96     78      NA  6.9   86     8   4
+## 97     35      NA  7.4   85     8   5
+## 98     66      NA  4.6   87     8   6
+## 99    122     255  4.0   89     8   7
+## 100    89     229 10.3   90     8   8
+## 101   110     207  8.0   90     8   9
+## 102    NA     222  8.6   92     8  10
+## 103    NA     137 11.5   86     8  11
+## 104    44     192 11.5   86     8  12
+## 105    28     273 11.5   82     8  13
+## 106    65     157  9.7   80     8  14
+## 107    NA      64 11.5   79     8  15
+## 108    22      71 10.3   77     8  16
+## 109    59      51  6.3   79     8  17
+## 110    23     115  7.4   76     8  18
+## 111    31     244 10.9   78     8  19
+## 112    44     190 10.3   78     8  20
+## 113    21     259 15.5   77     8  21
+## 114     9      36 14.3   72     8  22
+## 115    NA     255 12.6   75     8  23
+## 116    45     212  9.7   79     8  24
+## 117   168     238  3.4   81     8  25
+## 118    73     215  8.0   86     8  26
+## 119    NA     153  5.7   88     8  27
+## 120    76     203  9.7   97     8  28
+## 121   118     225  2.3   94     8  29
+## 122    84     237  6.3   96     8  30
+## 123    85     188  6.3   94     8  31
+## 124    96     167  6.9   91     9   1
+## 125    78     197  5.1   92     9   2
+## 126    73     183  2.8   93     9   3
+## 127    91     189  4.6   93     9   4
+## 128    47      95  7.4   87     9   5
+## 129    32      92 15.5   84     9   6
+## 130    20     252 10.9   80     9   7
+## 131    23     220 10.3   78     9   8
+## 132    21     230 10.9   75     9   9
+## 133    24     259  9.7   73     9  10
+## 134    44     236 14.9   81     9  11
+## 135    21     259 15.5   76     9  12
+## 136    28     238  6.3   77     9  13
+## 137     9      24 10.9   71     9  14
+## 138    13     112 11.5   71     9  15
+## 139    46     237  6.9   78     9  16
+## 140    18     224 13.8   67     9  17
+## 141    13      27 10.3   76     9  18
+## 142    24     238 10.3   68     9  19
+## 143    16     201  8.0   82     9  20
+## 144    13     238 12.6   64     9  21
+## 145    23      14  9.2   71     9  22
+## 146    36     139 10.3   81     9  23
+## 147     7      49 10.3   69     9  24
+## 148    14      20 16.6   63     9  25
+## 149    30     193  6.9   70     9  26
+## 150    NA     145 13.2   77     9  27
+## 151    14     191 14.3   75     9  28
+## 152    18     131  8.0   76     9  29
+## 153    20     223 11.5   68     9  30
+\end{verbatim}
+
+Notice, however, that this data frame does not appear in the environment. Personally, I like to assign such data frames to an object so it appears on my environment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data.air }\OtherTok{\textless{}{-}}\NormalTok{ airquality}
+\end{Highlighting}
+\end{Shaded}
+
+Data sets could also come from an R package. For example, the \texttt{Davis} data set comes from the \texttt{carData} package. So install (if needed) and load the package, and type the name of the data set. Again, I prefer to assign the data set to an object so it appears on the environment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(carData)}
+\NormalTok{Data.Davis }\OtherTok{\textless{}{-}}\NormalTok{ carData}\SpecialCharTok{::}\NormalTok{Davis}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that I typed \texttt{carData::Davis}. This command tells R to go into the \texttt{carData} package and use the data set called \texttt{Davis}.
+
+You could have typed \texttt{Davis} as well. R would have searched all loaded packages and find the data set called \texttt{Davis}. This would work fine if there is no other data set or function with the same name. If another package has a data set or function with the same name, there will be a conflict, and R will use the package that was most recently loaded. This is why I recommend typing the name of the package as well.
+
+\hypertarget{data-sets-from-local-file}{%
+\subsection{Data Sets from Local File}\label{data-sets-from-local-file}}
+
+A file containing a data set can be easily loaded into the workspace. Be sure the file is in the working directory (see Section \ref{wd} on how to set the working directory).
+
+If the data file is comma separated (\texttt{.csv}), the function \texttt{read.csv()} is used to read in the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{read.csv}\NormalTok{(}\StringTok{"Data1.csv"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The argument \texttt{header=TRUE} tells R that the first row of the file is a label for the columns (header). If the file does not have a header, specify \texttt{header=FALSE}.
+
+Another common type of data file is a \texttt{.txt} file. In this case, use \texttt{read.table()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# file has headers}
+\FunctionTok{read.table}\NormalTok{(}\StringTok{"Data1.txt"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

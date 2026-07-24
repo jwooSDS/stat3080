@@ -41,7 +41,7 @@ You can also add **comments** to R code by using the `#` sign. Everything to the
 
 I **highly discourage** you to enter your code directly into the R console. Code typed into the console is difficult to be saved or edited. Any meaningful work that you will use R for will likely need to be saved and edited. 
 
-## Working Directory
+## Working Directory {#wd}
 
 Before talking about a better way to enter R commands, you will need to set up a **working directory**. The working directory is the path to the folder on your system (typically, the computer you are using) to store files generated during an R session and any files that you save. This is also the folder where R will search for files.
 

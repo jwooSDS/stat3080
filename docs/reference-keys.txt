@@ -6,7 +6,7 @@ Rbasics
 overview-of-r
 rstudio-interface
 commands
-working-directory
+wd
 finding-the-working-directory
 changing-the-working-directory
 rstudio-projects
@@ -53,7 +53,7 @@ troubleshooting
 pdf-output
 more-resources-for-r-markdown
 subset
-overview
+subsetting-data-structures
 subsetting-with-brackets
 subsetting-vectors
 subsetting-matrices-and-data-frames
@@ -64,4 +64,7 @@ subsetting-with-labels-1
 subsetting-with-logical-expressions
 logical-expressions
 subsetting-with-logical-expressions-1
+loading-data-sets-in-r
+data-sets-from-r
+data-sets-from-local-file
 blank

@@ -1,4 +1,4 @@
-# Subsetting Data Structures {#subset}
+# Working with Data Structures {#subset}
 
 We will create the same data structures in section \@ref(structures) of the notes to use as examples in this section.
 
@@ -13,13 +13,13 @@ mult_data <- data.frame(char_vect,x,y)
 mult_list <- list(mult_data, z, log_vect, 7)
 ```
 
-## Overview
+## Subsetting Data Structures
 
 Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the `dplyr` package, and you will learn these in a later section. 
 
-## Subsetting with Brackets
+### Subsetting with Brackets
 
-### Subsetting Vectors
+#### Subsetting Vectors
 
 The typical notation to subset vectors is a set of brackets used directly after the variable name of the vector. The information given inside the brackets specifies which values should be extracted from the vector. 
 
@@ -88,7 +88,7 @@ x2[c(1,3)] <- 0 ##change value of position 1, 3 to 0
 x2
 ```
 
-### Subsetting Matrices and Data Frames 
+#### Subsetting Matrices and Data Frames 
 
 To subset a matrix or data frame, a similar bracket notation is used. However, because matrices and data frames are two-dimensional structures, two arguments are required in the brackets. The first argument references the row index and the second input references the column index.
 
@@ -129,7 +129,7 @@ mult_data[,c(3,3)]
 mult_data[,c(1:3,3)]
 ```
 
-### Subsetting Lists
+#### Subsetting Lists
 
 A list is subset to any of its elements by using double brackets, `[[ ]]`.
 
@@ -141,9 +141,9 @@ Double brackets are limited to one value. In order to subset multiple elements o
 ```{r}
 mult_list[2:3]
 ```
-## Subsetting with Labels
+### Subsetting with Labels
 
-### Label Names with Data Structures
+#### Label Names with Data Structures
 
 Take a look at the output for `mult_data`. Notice there is an extra row on top (as if they are headings or labels for the columns) and an extra column (as if they are labels for the rows).
 
@@ -200,7 +200,7 @@ names(mult_data)
 names(mult_list)
 ```
 
-### Subsetting with Labels
+#### Subsetting with Labels
 
 Data structures with labels can be subsetted using their labels. The name of the column or element can be used within the brackets or after the `$` symbol.
 
@@ -213,9 +213,9 @@ mult_data$Fives
 mult_list[["Logical.values"]]
 mult_list$Logical.values
 ```
-## Subsetting with Logical Expressions
+### Subsetting with Logical Expressions
 
-### Logical Expressions
+#### Logical Expressions
 
 It may be useful to use a logical expression to determine which, if any, elements in a vector have certain qualities. When a logical  expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied. 
 
@@ -243,7 +243,7 @@ x > 15 & y == 12
 x > 15 | x < 7
 ```
 
-## Subsetting with Logical Expressions
+#### Subsetting with Logical Expressions
 
 The logical vectors that result from logical expression statements can be used in the brackets to subset a vector just to the values that satisfy the condition.    
 
@@ -259,3 +259,60 @@ x[which(x>15)]
 ```
 
 Two-dimensional data frames can be subsetting similarly, using the an argument for the row and another for the column.
+
+## Loading Data Sets in R
+
+We will cover two main ways to load data sets in R:
+
+1. Data sets from R.
+2. Data set from a local file.
+
+### Data Sets from R
+
+Base R comes pre-loaded with some data sets. You can view them by typing `data()`. You can use the specific data set by typing out its name in the list. To view the `airquality` data set:
+
+```{r}
+airquality
+```
+
+Notice, however, that this data frame does not appear in the environment. Personally, I like to assign such data frames to an object so it appears on my environment. 
+
+```{r}
+Data.air <- airquality
+```
+
+Data sets could also come from an R package. For example, the `Davis` data set comes from the `carData` package. So install (if needed) and load the package, and type the name of the data set. Again, I prefer to assign the data set to an object so it appears on the environment.
+
+```{r}
+library(carData)
+Data.Davis <- carData::Davis
+```
+
+Notice that I typed `carData::Davis`. This command tells R to go into the `carData` package and use the data set called `Davis`. 
+
+You could have typed `Davis` as well. R would have searched all loaded packages and find the data set called `Davis`. This would work fine if there is no other data set or function with the same name. If another package has a data set or function with the same name, there will be a conflict, and R will use the package that was most recently loaded. This is why I recommend typing the name of the package as well. 
+
+### Data Sets from Local File
+
+A file containing a data set can be easily loaded into the workspace. Be sure the file is in the working directory (see Section \@ref(wd) on how to set the working directory).
+
+If the data file is comma separated (`.csv`), the function `read.csv()` is used to read in the data.
+
+```{r eval=FALSE}
+read.csv("Data1.csv", header=TRUE)
+```
+
+The argument `header=TRUE` tells R that the first row of the file is a label for the columns (header). If the file does not have a header, specify `header=FALSE`. 
+
+Another common type of data file is a `.txt` file. In this case, use `read.table()`.
+
+```{r eval=FALSE}
+## file has headers
+read.table("Data1.txt", header=TRUE) 
+```
+
+
+
+
+
+

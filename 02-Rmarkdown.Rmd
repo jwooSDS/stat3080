@@ -172,20 +172,22 @@ To cite the figure, type `\@ref(fig:plot-pressure)` in the narrative, using the 
 
 This is just a simple example. Referencing tables and equations are similar. Details can be found in @xie2020 Chapter 4.7.
 
+Note: you will learn more about creating plots in a later unit. 
+
 ## Knitting Your Document
 
 Once you have your document ready, you can **knit** your document. Knitting transforms your plain text `.Rmd` file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the `rmarkdown` package (if needed) and loads it. This is why you do not have to load it by using the `library()` function. 
 
-### Things to Consider
+## Things to Consider
 
-#### R Script or R Markdown
+### R Script or R Markdown
 
 You might be wondering when should you use an R script and when you should use R Markdown. Personally:
 
 - If I am not going to be sharing the work, or only sharing the work with a small group of collaborators, I am likely to only use an R script. 
 - If I want to share my work broadly, then I will use an R Markdown. I also start the analysis in an R script, and then transfer the code to an R Markdown, as I find this makes troubleshooting easier. 
 
-#### Troubelshooting
+### Troubelshooting
 
 I have seen some students work directly using an `.Rmd` file and bypass an R script. I find troubleshooting error messages difficult in this scenario, as there are two potential sources of the error: 
 
@@ -194,7 +196,7 @@ I have seen some students work directly using an `.Rmd` file and bypass an R scr
 
 Personally, I type up and execute my R code in an R script first. Once there are no more errors, I then create my `.Rmd` file and then copy and paste the relevant R code into the code chunks. If an error pops up when knitting, I can rule out errors in the R code and focus on the delimeters and options for the YAML and code chunks. 
 
-#### PDF Output
+### PDF Output
 
 You will need to produce a PDF file for the project. To do so, you can:
 

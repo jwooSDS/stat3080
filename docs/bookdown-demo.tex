@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -2.9889462 -0.3610252 -1.4754158  0.9463211 -2.1147060 -0.4170002
-##  [7] -3.7982830  2.4960194 -1.3355358  3.0848208
+##  [1]  1.2005141 -0.3997683  1.1532812  4.0758375 -0.6990474  1.0932863
+##  [7]  2.7575014  3.1581184  4.1928014  1.8098021
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1569,16 +1569,18 @@ To cite the figure, type \texttt{\textbackslash{}@ref(fig:plot-pressure)} in the
 
 This is just a simple example. Referencing tables and equations are similar. Details can be found in \citet{xie2020} Chapter 4.7.
 
+Note: you will learn more about creating plots in a later unit.
+
 \hypertarget{knitting-your-document}{%
 \section{Knitting Your Document}\label{knitting-your-document}}
 
 Once you have your document ready, you can \textbf{knit} your document. Knitting transforms your plain text \texttt{.Rmd} file into a neat document. Click on the Knit button, and your document is produced in the output format chosen at the beginning. This knit button also installs the \texttt{rmarkdown} package (if needed) and loads it. This is why you do not have to load it by using the \texttt{library()} function.
 
 \hypertarget{things-to-consider}{%
-\subsection{Things to Consider}\label{things-to-consider}}
+\section{Things to Consider}\label{things-to-consider}}
 
 \hypertarget{r-script-or-r-markdown}{%
-\subsubsection{R Script or R Markdown}\label{r-script-or-r-markdown}}
+\subsection{R Script or R Markdown}\label{r-script-or-r-markdown}}
 
 You might be wondering when should you use an R script and when you should use R Markdown. Personally:
 
@@ -1591,7 +1593,7 @@ You might be wondering when should you use an R script and when you should use R
 \end{itemize}
 
 \hypertarget{troubelshooting}{%
-\subsubsection{Troubelshooting}\label{troubelshooting}}
+\subsection{Troubelshooting}\label{troubelshooting}}
 
 I have seen some students work directly using an \texttt{.Rmd} file and bypass an R script. I find troubleshooting error messages difficult in this scenario, as there are two potential sources of the error:
 
@@ -1607,7 +1609,7 @@ I have seen some students work directly using an \texttt{.Rmd} file and bypass a
 Personally, I type up and execute my R code in an R script first. Once there are no more errors, I then create my \texttt{.Rmd} file and then copy and paste the relevant R code into the code chunks. If an error pops up when knitting, I can rule out errors in the R code and focus on the delimeters and options for the YAML and code chunks.
 
 \hypertarget{pdf-output}{%
-\subsubsection{PDF Output}\label{pdf-output}}
+\subsection{PDF Output}\label{pdf-output}}
 
 You will need to produce a PDF file for the project. To do so, you can:
 

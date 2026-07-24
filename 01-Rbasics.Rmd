@@ -303,7 +303,7 @@ library(palmerpenguins)
 
 ***Key idea:*** packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using `library()`.
 
-## Types, Data Structures, Classes
+## Types, Data Structures, Classes {#structures}
 
 In R, **type** refers to how an object is stored in memory. You can refer to this [table](https://cran.r-project.org/doc/manuals/r-patched/R-lang.html#Objects) for a list of types in R. To find the type of an R object, use the `typeof()` function:
 

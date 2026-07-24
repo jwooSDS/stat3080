@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  6.0041174  4.6016452  2.1251546  0.0139566  0.9837614  3.6057542
-##  [7] -1.8929614  5.2881145  6.8488110  2.0560668
+##  [1]  3.74660310 -1.10321137 -0.04122243  1.35693890 -0.56536476 -2.53314147
+##  [7]  2.20945153 -1.68870069 -0.07360313  1.38421801
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -731,8 +731,8 @@ You can then load the package in order to able to use the functions from that pa
 
 \textbf{\emph{Key idea:}} packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using \texttt{library()}.
 
-\hypertarget{types-data-structures-classes}{%
-\section{Types, Data Structures, Classes}\label{types-data-structures-classes}}
+\hypertarget{structures}{%
+\section{Types, Data Structures, Classes}\label{structures}}
 
 In R, \textbf{type} refers to how an object is stored in memory. You can refer to this \href{https://cran.r-project.org/doc/manuals/r-patched/R-lang.html\#Objects}{table} for a list of types in R. To find the type of an R object, use the \texttt{typeof()} function:
 
@@ -1655,6 +1655,211 @@ There are a lot more options available with R Markdown. We have only covered the
 \item
   \href{https://pkg.yihui.org/rmarkdown-cookbook/cross-ref}{Cross-Referencing Figures, Equations, and Tables Within Documents}.
 \end{itemize}
+
+\hypertarget{subset}{%
+\chapter{Subsetting Data Structures}\label{subset}}
+
+We will create the same data structures in section \ref{structures} of the notes to use as examples in this section.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{25}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{15}\NormalTok{)}
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(x,y)}
+\NormalTok{log\_vect }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, T, F)}
+\NormalTok{char\_vect }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"ByOne"}\NormalTok{, }\StringTok{"ByTwo"}\NormalTok{, }\StringTok{"ByThree"}\NormalTok{, }\StringTok{"ByFour"}\NormalTok{, }\StringTok{"ByFive"}\NormalTok{)}
+\NormalTok{mult\_mat }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(char\_vect,x,y)}
+\NormalTok{mult\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(char\_vect,x,y)}
+\NormalTok{mult\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(mult\_data, z, log\_vect, }\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the \texttt{dplyr} package, and you will learn these in a later section.
+
+\hypertarget{subsetting-vectors}{%
+\section{Subsetting Vectors}\label{subsetting-vectors}}
+
+The typical notation to subset vectors is a set of brackets used directly after the variable name of the vector. The information given inside the brackets specifies which values should be extracted from the vector.
+
+The position index of any vector begins at 1 and uses consecutive positive integers up to the length of the vector. For example, to obtain the 3rd element of the vector \texttt{x}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\DocumentationTok{\#\# for comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25
+\end{verbatim}
+
+Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g.~statisticians think in terms of sample size). This is unlike indexing starting from 0 for other software such as Python and C, who audiences tend to be programmers and software engineers.
+
+Multiple positions can be specified by using a vector in the brackets.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)] }\DocumentationTok{\#\#1st and 3rd positions}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{] }\DocumentationTok{\#\#2nd and 3rd posistions}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10 15
+\end{verbatim}
+
+If a position is duplicated in the brackets, the corresponding value in the vector will be subset twice.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)] }\DocumentationTok{\#\#1st position displayed twice}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5 5
+\end{verbatim}
+
+If a negative sign is used in the brackets, the specified value(s) will be omitted instead of included in the subset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\DocumentationTok{\#\#omit position 1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10 15 20 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)] }\DocumentationTok{\#\#omit positions 2, 3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 20 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{)] }\DocumentationTok{\#\#omit positions 1, 4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10 15 25
+\end{verbatim}
+
+Instead of specifying the positions that you would like included or excluded from the subset, you can specify a logical vector in the brackets. R will include the elements corresponding to TRUE and exclude the elements corresponding to FALSE.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(F,T,T,F,T)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10 15 25
+\end{verbatim}
+
+If the number of logical inputs does not match the length of the vector, R will repeat the logical inputs until there is a logical input corresponding to each vector element.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(F,T)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10 20
+\end{verbatim}
+
+The resulting subset vectors will only be stored if you define a variable name and assign the subset vector to it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{evens }\OtherTok{\textless{}{-}}\NormalTok{ x[}\FunctionTok{c}\NormalTok{(F,T)]}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{evens}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10 20
+\end{verbatim}
+
+The brackets following a vector can also be used to replace or add one or more values in a vector.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x2 }\OtherTok{\textless{}{-}}\NormalTok{ x}
+
+\NormalTok{x2[}\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{30} \DocumentationTok{\#\#place 30 in position 6}
+\NormalTok{x2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25 30
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x2[}\DecValTok{7}\SpecialCharTok{:}\DecValTok{9}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{35}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{45}\NormalTok{) }
+\NormalTok{x2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25 30 35 40 45
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x2[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)] }\OtherTok{\textless{}{-}} \DecValTok{0} \DocumentationTok{\#\#change value of position 1, 3 to 0}
+\NormalTok{x2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  0 10  0 20 25 30 35 40 45
+\end{verbatim}
+
+\hypertarget{subsetting-data-frames-and-lists}{%
+\section{Subsetting Data Frames and Lists}\label{subsetting-data-frames-and-lists}}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

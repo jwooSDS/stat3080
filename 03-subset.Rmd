@@ -1,0 +1,90 @@
+# Subsetting Data Structures {#subset}
+
+We will create the same data structures in section \@ref(structures) of the notes to use as examples in this section.
+
+```{r}
+x <- c(5,10,15,20,25)
+y <- c(3,6,9,12,15)
+z <- c(x,y)
+log_vect <- c(TRUE, FALSE, T, F)
+char_vect <- c("ByOne", "ByTwo", "ByThree", "ByFour", "ByFive")
+mult_mat <- cbind(char_vect,x,y)
+mult_data <- data.frame(char_vect,x,y)
+mult_list <- list(mult_data, z, log_vect, 7)
+```
+
+## Overview
+
+Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the `dplyr` package, and you will learn these in a later section. 
+
+## Subsetting Vectors
+
+The typical notation to subset vectors is a set of brackets used directly after the variable name of the vector. The information given inside the brackets specifies which values should be extracted from the vector. 
+
+The position index of any vector begins at 1 and uses consecutive positive integers up to the length of the vector. For example, to obtain the 3rd element of the vector `x`:
+
+```{r}
+x[3]
+x ## for comparison
+```
+
+Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g. statisticians think in terms of sample size). This is unlike indexing starting from 0 for other software such as Python and C, who audiences tend to be programmers and software engineers.
+
+Multiple positions can be specified by using a vector in the brackets.
+
+```{r}
+x[c(1,3)] ##1st and 3rd positions
+x[2:3] ##2nd and 3rd posistions
+```
+
+If a position is duplicated in the brackets, the corresponding value in the vector will be subset twice. 
+
+```{r}
+x[c(1,1)] ##1st position displayed twice
+```
+
+If a negative sign is used in the brackets, the specified value(s) will be omitted instead of included in the subset.
+
+```{r}
+x[-1] ##omit position 1
+x[-(2:3)] ##omit positions 2, 3
+x[-c(1,4)] ##omit positions 1, 4
+```
+
+Instead of specifying the positions that you would like included or excluded from the subset, you can specify a logical vector in the brackets. R will include the elements corresponding to TRUE and exclude the elements corresponding to FALSE.  
+
+```{r}
+x[c(F,T,T,F,T)]
+```
+
+If the number of logical inputs does not match the length of the vector, R will repeat the logical inputs until there is a logical input corresponding to each vector element.
+
+```{r}
+x[c(F,T)]
+```
+
+The resulting subset vectors will only be stored if you define a variable name and assign the subset vector to it.
+
+```{r}
+evens <- x[c(F,T)]
+x
+evens
+```
+
+The brackets following a vector can also be used to replace or add one or more values in a vector.
+
+```{r}
+x2 <- x
+
+x2[6] <- 30 ##place 30 in position 6
+x2
+
+x2[7:9] <- c(35,40,45) 
+x2
+
+x2[c(1,3)] <- 0 ##change value of position 1, 3 to 0
+x2
+```
+
+## Subsetting Data Frames and Lists
+

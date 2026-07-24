@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Subsetting Data Structures | STAT 3080: From Data to Knowledge</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="We will create the same data structures in section 1.9 of the notes to use as examples in this section. x &lt;- c(5,10,15,20,25) y &lt;- c(3,6,9,12,15) z &lt;- c(x,y) log_vect &lt;- c(TRUE, FALSE, T, F)...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Subsetting Data Structures | STAT 3080: From Data to Knowledge">
+<meta property="og:type" content="book">
+<meta property="og:description" content="We will create the same data structures in section 1.9 of the notes to use as examples in this section. x &lt;- c(5,10,15,20,25) y &lt;- c(3,6,9,12,15) z &lt;- c(x,y) log_vect &lt;- c(TRUE, FALSE, T, F)...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Subsetting Data Structures | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="We will create the same data structures in section 1.9 of the notes to use as examples in this section. x &lt;- c(5,10,15,20,25) y &lt;- c(3,6,9,12,15) z &lt;- c(x,y) log_vect &lt;- c(TRUE, FALSE, T, F)...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 3080: From Data to Knowledge</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
+<li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
+<li><a class="active" href="subset.html"><span class="header-section-number">3</span> Subsetting Data Structures</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">4</span> Blank Canvas</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="subset" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Subsetting Data Structures<a class="anchor" aria-label="anchor" href="#subset"><i class="fas fa-link"></i></a>
+</h1>
+<p>We will create the same data structures in section <a href="Rbasics.html#structures">1.9</a> of the notes to use as examples in this section.</p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>,<span class="fl">25</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">9</span>,<span class="fl">12</span>,<span class="fl">15</span><span class="op">)</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">log_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">char_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ByOne"</span>, <span class="st">"ByTwo"</span>, <span class="st">"ByThree"</span>, <span class="st">"ByFour"</span>, <span class="st">"ByFive"</span><span class="op">)</span></span>
+<span><span class="va">mult_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">char_vect</span>,<span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">mult_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">char_vect</span>,<span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">mult_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">mult_data</span>, <span class="va">z</span>, <span class="va">log_vect</span>, <span class="fl">7</span><span class="op">)</span></span></code></pre></div>
+<div id="overview" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+</h2>
+<p>Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the <code>dplyr</code> package, and you will learn these in a later section.</p>
+</div>
+<div id="subsetting-vectors" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Subsetting Vectors<a class="anchor" aria-label="anchor" href="#subsetting-vectors"><i class="fas fa-link"></i></a>
+</h2>
+<p>The typical notation to subset vectors is a set of brackets used directly after the variable name of the vector. The information given inside the brackets specifies which values should be extracted from the vector.</p>
+<p>The position index of any vector begins at 1 and uses consecutive positive integers up to the length of the vector. For example, to obtain the 3rd element of the vector <code>x</code>:</p>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 15</code></pre>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="co">## for comparison</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25</code></pre>
+<p>Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g. statisticians think in terms of sample size). This is unlike indexing starting from 0 for other software such as Python and C, who audiences tend to be programmers and software engineers.</p>
+<p>Multiple positions can be specified by using a vector in the brackets.</p>
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co">##1st and 3rd positions</span></span></code></pre></div>
+<pre><code>## [1]  5 15</code></pre>
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="co">##2nd and 3rd posistions</span></span></code></pre></div>
+<pre><code>## [1] 10 15</code></pre>
+<p>If a position is duplicated in the brackets, the corresponding value in the vector will be subset twice.</p>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="co">##1st position displayed twice</span></span></code></pre></div>
+<pre><code>## [1] 5 5</code></pre>
+<p>If a negative sign is used in the brackets, the specified value(s) will be omitted instead of included in the subset.</p>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="co">##omit position 1</span></span></code></pre></div>
+<pre><code>## [1] 10 15 20 25</code></pre>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co">##omit positions 2, 3</span></span></code></pre></div>
+<pre><code>## [1]  5 20 25</code></pre>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span><span class="op">]</span> <span class="co">##omit positions 1, 4</span></span></code></pre></div>
+<pre><code>## [1] 10 15 25</code></pre>
+<p>Instead of specifying the positions that you would like included or excluded from the subset, you can specify a logical vector in the brackets. R will include the elements corresponding to TRUE and exclude the elements corresponding to FALSE.</p>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">F</span>,<span class="cn">T</span>,<span class="cn">T</span>,<span class="cn">F</span>,<span class="cn">T</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 10 15 25</code></pre>
+<p>If the number of logical inputs does not match the length of the vector, R will repeat the logical inputs until there is a logical input corresponding to each vector element.</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">F</span>,<span class="cn">T</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 10 20</code></pre>
+<p>The resulting subset vectors will only be stored if you define a variable name and assign the subset vector to it.</p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">evens</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">F</span>,<span class="cn">T</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">x</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25</code></pre>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">evens</span></span></code></pre></div>
+<pre><code>## [1] 10 20</code></pre>
+<p>The brackets following a vector can also be used to replace or add one or more values in a vector.</p>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="va">x</span></span>
+<span></span>
+<span><span class="va">x2</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">30</span> <span class="co">##place 30 in position 6</span></span>
+<span><span class="va">x2</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25 30</code></pre>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x2</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">35</span>,<span class="fl">40</span>,<span class="fl">45</span><span class="op">)</span> </span>
+<span><span class="va">x2</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25 30 35 40 45</code></pre>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">##change value of position 1, 3 to 0</span></span>
+<span><span class="va">x2</span></span></code></pre></div>
+<pre><code>## [1]  0 10  0 20 25 30 35 40 45</code></pre>
+</div>
+<div id="subsetting-data-frames-and-lists" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Subsetting Data Frames and Lists<a class="anchor" aria-label="anchor" href="#subsetting-data-frames-and-lists"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></div>
+<div class="next"><a href="blank.html"><span class="header-section-number">4</span> Blank Canvas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#subset"><span class="header-section-number">3</span> Subsetting Data Structures</a></li>
+<li><a class="nav-link" href="#overview"><span class="header-section-number">3.1</span> Overview</a></li>
+<li><a class="nav-link" href="#subsetting-vectors"><span class="header-section-number">3.2</span> Subsetting Vectors</a></li>
+<li><a class="nav-link" href="#subsetting-data-frames-and-lists"><span class="header-section-number">3.3</span> Subsetting Data Frames and Lists</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-24.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

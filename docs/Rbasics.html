@@ -67,7 +67,8 @@
 <li><a class="" href="index.html">Preface</a></li>
 <li><a class="active" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
 <li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
-<li><a class="" href="blank.html"><span class="header-section-number">3</span> Blank Canvas</a></li>
+<li><a class="" href="subset.html"><span class="header-section-number">3</span> Subsetting Data Structures</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">4</span> Blank Canvas</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -327,8 +328,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ul>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] -1.3170578  0.8978477  1.4737758  2.9155363  2.3331705  3.7868781
-##  [7]  1.2165116 -0.8135444  3.1287556  3.2613802</code></pre>
+<pre><code>##  [1] -4.9586359 -2.0020045  0.6485239  3.4957396 -3.3944706  0.7446098
+##  [7]  1.9023485 -2.0370079  0.8536468  0.6673809</code></pre>
 <p>Note: you are likely to get a vector of 10 numbers that are different than the ones shown.</p>
 </div>
 <div id="example-2-binomial-distribution" class="section level4" number="1.7.2.2">
@@ -369,9 +370,9 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span></code></pre></div>
 <p><strong><em>Key idea:</em></strong> packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</p>
 </div>
-<div id="types-data-structures-classes" class="section level2" number="1.9">
+<div id="structures" class="section level2" number="1.9">
 <h2>
-<span class="header-section-number">1.9</span> Types, Data Structures, Classes<a class="anchor" aria-label="anchor" href="#types-data-structures-classes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.9</span> Types, Data Structures, Classes<a class="anchor" aria-label="anchor" href="#structures"><i class="fas fa-link"></i></a>
 </h2>
 <p>In R, <strong>type</strong> refers to how an object is stored in memory. You can refer to this <a href="https://cran.r-project.org/doc/manuals/r-patched/R-lang.html#Objects">table</a> for a list of types in R. To find the type of an R object, use the <code><a href="https://rdrr.io/r/base/typeof.html">typeof()</a></code> function:</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
@@ -710,7 +711,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </li>
 <li><a class="nav-link" href="#packages"><span class="header-section-number">1.8</span> Packages</a></li>
 <li>
-<a class="nav-link" href="#types-data-structures-classes"><span class="header-section-number">1.9</span> Types, Data Structures, Classes</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#structures"><span class="header-section-number">1.9</span> Types, Data Structures, Classes</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#vec"><span class="header-section-number">1.9.1</span> Vectors</a></li>
 <li><a class="nav-link" href="#mat"><span class="header-section-number">1.9.2</span> Matrices</a></li>
 <li><a class="nav-link" href="#classes"><span class="header-section-number">1.9.3</span> Classes</a></li>

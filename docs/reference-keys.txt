@@ -19,7 +19,7 @@ working-with-common-probability-distributions
 example-1-normal-distribution
 example-2-binomial-distribution
 packages
-types-data-structures-classes
+structures
 vec
 pattern-vectors
 mat
@@ -52,4 +52,8 @@ r-script-or-r-markdown
 troubleshooting
 pdf-output
 more-resources-for-r-markdown
+subset
+overview
+subsetting-vectors
+subsetting-data-frames-and-lists
 blank

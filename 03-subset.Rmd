@@ -1,5 +1,7 @@
 # Working with Data Structures {#subset}
 
+Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing summaries of some columns of the data frame. You will learn how to perform these tasks in this section. 
+
 We will create the same data structures in section \@ref(structures) of the notes to use as examples in this section.
 
 ```{r}
@@ -311,8 +313,61 @@ Another common type of data file is a `.txt` file. In this case, use `read.table
 read.table("Data1.txt", header=TRUE) 
 ```
 
+## Math Operations on Data Structures
 
+The standard arithmetic operators can be applied to data structures  containing numeric values. To perform the same constant arithmetic operation on each element of a numeric data structure, you will use the object name, the arithmetic operation symbol, and the constant. 
 
+```{r}
+x <- unname(x) ## remove the name for x
+x
+x*2
+x/5
+x^3
+```
 
+You may have related numeric information stored in two data structures of the same length / dimensions and you may want to perform an arithmetic operation on each pair of related values. 
 
+```{r}
+x
+y
+x+y
+x*y
+y/x
+```
 
+## Applying Functions on Data Structures
+
+When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The `apply()` function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the `apply()` function. Variants of this function and user-defined functions will be covered later.
+
+Suppose you are working on the `airquality` data set, that is stored in the object `Data.air`. The first four columns represents different numeric characteristics associated with air quality and weather conditions. You want to find the average value in each column.
+
+The apply() function is used for a two-dimensional data structure. It uses three arguments: data, margin, and function. The data input specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied.   
+
+```{r}
+apply(Data.air[,1:4], 2, mean)
+## 2 since we want to apply the mean to the columns
+## use 1 if want to apply mean to the row
+## applying to columns is more common as each column 
+## in a data frame represents a characteristic
+```
+
+Notice the NA for two of the columns? This happens when at least one entry in those columns has a missing value. Missing values in R are denoted by `NA`. If you look at the data frame, you can find some NAs in these columns. 
+
+If you want R to ignore values and exclude them in calculating the mean, add an argument `na.rm=TRUE` in the `apply()` function.
+
+```{r}
+apply(Data.air[,1:4], 2, mean, na.rm=TRUE)
+```
+Suppose you want to count the number of missing values in the column `Ozone`. The `is.na()` function returns a logical identifying whether an entry is missing or not. 
+
+```{r}
+## the head function returns only the first 6 entries of a vector
+## or first 6 rows of a data frame
+head(is.na(Data.air$Ozone))
+```
+
+Recall that `TRUE` and `FALSE` are considered to be 1 and 0 respectively. So you can find the number of missing values for `Ozone` with
+
+```{r}
+sum(is.na(Data.air$Ozone))
+```

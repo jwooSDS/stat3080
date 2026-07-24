@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -2.8972950 -0.5186048 -0.6368042 -5.2845469 -2.1544473  3.2034078
-##  [7] -0.5760969  5.8331445  5.2051916  2.2809948
+##  [1]  0.4141163 -2.9471714  4.8283251  1.1635579  4.2419501  0.2546601
+##  [7]  2.3780974 -1.8021392  3.3424132  0.9567981
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1199,7 +1199,7 @@ Note: Coercing an object to change will not always yield a result that makes sen
 \hypertarget{example-2-math-operations-with-logical}{%
 \subsubsection{Example 2: Math operations with logical}\label{example-2-math-operations-with-logical}}
 
-Interestingly, math operations can be performed on logicals. \texttt{TRUE} and \texttt{FALSE} is considered to be 1 and 0 respectively.
+Interestingly, math operations can be performed on logicals. \texttt{TRUE} and \texttt{FALSE} are considered to be 1 and 0 respectively.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1658,6 +1658,8 @@ There are a lot more options available with R Markdown. We have only covered the
 
 \hypertarget{subset}{%
 \chapter{Working with Data Structures}\label{subset}}
+
+Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing summaries of some columns of the data frame. You will learn how to perform these tasks in this section.
 
 We will create the same data structures in section \ref{structures} of the notes to use as examples in this section.
 
@@ -2625,6 +2627,174 @@ Another common type of data file is a \texttt{.txt} file. In this case, use \tex
 \FunctionTok{read.table}\NormalTok{(}\StringTok{"Data1.txt"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{math-operations-on-data-structures}{%
+\section{Math Operations on Data Structures}\label{math-operations-on-data-structures}}
+
+The standard arithmetic operators can be applied to data structures containing numeric values. To perform the same constant arithmetic operation on each element of a numeric data structure, you will use the object name, the arithmetic operation symbol, and the constant.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{unname}\NormalTok{(x) }\DocumentationTok{\#\# remove the name for x}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\SpecialCharTok{*}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10 20 30 40 50
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\SpecialCharTok{/}\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\SpecialCharTok{\^{}}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]   125  1000  3375  8000 15625
+\end{verbatim}
+
+You may have related numeric information stored in two data structures of the same length / dimensions and you may want to perform an arithmetic operation on each pair of related values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  3  6  9 12 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\SpecialCharTok{+}\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  8 16 24 32 40
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\SpecialCharTok{*}\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  15  60 135 240 375
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y}\SpecialCharTok{/}\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6 0.6 0.6 0.6 0.6
+\end{verbatim}
+
+\hypertarget{applying-functions-on-data-structures}{%
+\section{Applying Functions on Data Structures}\label{applying-functions-on-data-structures}}
+
+When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The \texttt{apply()} function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the \texttt{apply()} function. Variants of this function and user-defined functions will be covered later.
+
+Suppose you are working on the \texttt{airquality} data set, that is stored in the object \texttt{Data.air}. The first four columns represents different numeric characteristics associated with air quality and weather conditions. You want to find the average value in each column.
+
+The apply() function is used for a two-dimensional data structure. It uses three arguments: data, margin, and function. The data input specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apply}\NormalTok{(Data.air[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{], }\DecValTok{2}\NormalTok{, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Ozone   Solar.R      Wind      Temp 
+##        NA        NA  9.957516 77.882353
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# 2 since we want to apply the mean to the columns}
+\DocumentationTok{\#\# use 1 if want to apply mean to the row}
+\DocumentationTok{\#\# applying to columns is more common as each column }
+\DocumentationTok{\#\# in a data frame represents a characteristic}
+\end{Highlighting}
+\end{Shaded}
+
+Notice the NA for two of the columns? This happens when at least one entry in those columns has a missing value. Missing values in R are denoted by \texttt{NA}. If you look at the data frame, you can find some NAs in these columns.
+
+If you want R to ignore values and exclude them in calculating the mean, add an argument \texttt{na.rm=TRUE} in the \texttt{apply()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apply}\NormalTok{(Data.air[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{], }\DecValTok{2}\NormalTok{, mean, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Ozone    Solar.R       Wind       Temp 
+##  42.129310 185.931507   9.957516  77.882353
+\end{verbatim}
+
+Suppose you want to count the number of missing values in the column \texttt{Ozone}. The \texttt{is.na()} function returns a logical identifying whether an entry is missing or not.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# the head function returns only the first 6 entries of a vector}
+\DocumentationTok{\#\# or first 6 rows of a data frame}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(Data.air}\SpecialCharTok{$}\NormalTok{Ozone))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE FALSE FALSE  TRUE FALSE
+\end{verbatim}
+
+Recall that \texttt{TRUE} and \texttt{FALSE} are considered to be 1 and 0 respectively. So you can find the number of missing values for \texttt{Ozone} with
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(Data.air}\SpecialCharTok{$}\NormalTok{Ozone))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 37
+\end{verbatim}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

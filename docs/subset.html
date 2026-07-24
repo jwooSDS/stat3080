@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Working with Data Structures | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="We will create the same data structures in section 1.9 of the notes to use as examples in this section. x &lt;- c(5,10,15,20,25) y &lt;- c(3,6,9,12,15) z &lt;- c(x,y) log_vect &lt;- c(TRUE, FALSE, T, F)...">
+<meta name="description" content="Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing summaries of some...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Working with Data Structures | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="We will create the same data structures in section 1.9 of the notes to use as examples in this section. x &lt;- c(5,10,15,20,25) y &lt;- c(3,6,9,12,15) z &lt;- c(x,y) log_vect &lt;- c(TRUE, FALSE, T, F)...">
+<meta property="og:description" content="Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing summaries of some...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Working with Data Structures | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="We will create the same data structures in section 1.9 of the notes to use as examples in this section. x &lt;- c(5,10,15,20,25) y &lt;- c(3,6,9,12,15) z &lt;- c(x,y) log_vect &lt;- c(TRUE, FALSE, T, F)...">
+<meta name="twitter:description" content="Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing summaries of some...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -81,6 +81,7 @@
 <h1>
 <span class="header-section-number">3</span> Working with Data Structures<a class="anchor" aria-label="anchor" href="#subset"><i class="fas fa-link"></i></a>
 </h1>
+<p>Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing summaries of some columns of the data frame. You will learn how to perform these tasks in this section.</p>
 <p>We will create the same data structures in section <a href="Rbasics.html#structures">1.9</a> of the notes to use as examples in this section.</p>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>,<span class="fl">25</span><span class="op">)</span></span>
@@ -648,8 +649,76 @@
 <div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## file has headers</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"Data1.txt"</span>, header<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span></code></pre></div>
-
 </div>
+</div>
+<div id="math-operations-on-data-structures" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Math Operations on Data Structures<a class="anchor" aria-label="anchor" href="#math-operations-on-data-structures"><i class="fas fa-link"></i></a>
+</h2>
+<p>The standard arithmetic operators can be applied to data structures containing numeric values. To perform the same constant arithmetic operation on each element of a numeric data structure, you will use the object name, the arithmetic operation symbol, and the constant.</p>
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co">## remove the name for x</span></span>
+<span><span class="va">x</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25</code></pre>
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">*</span><span class="fl">2</span></span></code></pre></div>
+<pre><code>## [1] 10 20 30 40 50</code></pre>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">/</span><span class="fl">5</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">^</span><span class="fl">3</span></span></code></pre></div>
+<pre><code>## [1]   125  1000  3375  8000 15625</code></pre>
+<p>You may have related numeric information stored in two data structures of the same length / dimensions and you may want to perform an arithmetic operation on each pair of related values.</p>
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25</code></pre>
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span></span></code></pre></div>
+<pre><code>## [1]  3  6  9 12 15</code></pre>
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">+</span><span class="va">y</span></span></code></pre></div>
+<pre><code>## [1]  8 16 24 32 40</code></pre>
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">*</span><span class="va">y</span></span></code></pre></div>
+<pre><code>## [1]  15  60 135 240 375</code></pre>
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span><span class="op">/</span><span class="va">x</span></span></code></pre></div>
+<pre><code>## [1] 0.6 0.6 0.6 0.6 0.6</code></pre>
+</div>
+<div id="applying-functions-on-data-structures" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Applying Functions on Data Structures<a class="anchor" aria-label="anchor" href="#applying-functions-on-data-structures"><i class="fas fa-link"></i></a>
+</h2>
+<p>When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function. Variants of this function and user-defined functions will be covered later.</p>
+<p>Suppose you are working on the <code>airquality</code> data set, that is stored in the object <code>Data.air</code>. The first four columns represents different numeric characteristics associated with air quality and weather conditions. You want to find the average value in each column.</p>
+<p>The apply() function is used for a two-dimensional data structure. It uses three arguments: data, margin, and function. The data input specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied.</p>
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">Data.air</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##     Ozone   Solar.R      Wind      Temp 
+##        NA        NA  9.957516 77.882353</code></pre>
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## 2 since we want to apply the mean to the columns</span></span>
+<span><span class="co">## use 1 if want to apply mean to the row</span></span>
+<span><span class="co">## applying to columns is more common as each column </span></span>
+<span><span class="co">## in a data frame represents a characteristic</span></span></code></pre></div>
+<p>Notice the NA for two of the columns? This happens when at least one entry in those columns has a missing value. Missing values in R are denoted by <code>NA</code>. If you look at the data frame, you can find some NAs in these columns.</p>
+<p>If you want R to ignore values and exclude them in calculating the mean, add an argument <code>na.rm=TRUE</code> in the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function.</p>
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">Data.air</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">mean</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##      Ozone    Solar.R       Wind       Temp 
+##  42.129310 185.931507   9.957516  77.882353</code></pre>
+<p>Suppose you want to count the number of missing values in the column <code>Ozone</code>. The <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> function returns a logical identifying whether an entry is missing or not.</p>
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## the head function returns only the first 6 entries of a vector</span></span>
+<span><span class="co">## or first 6 rows of a data frame</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Data.air</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE  TRUE FALSE</code></pre>
+<p>Recall that <code>TRUE</code> and <code>FALSE</code> are considered to be 1 and 0 respectively. So you can find the number of missing values for <code>Ozone</code> with</p>
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Data.air</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 37</code></pre>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -672,6 +741,8 @@
 <li><a class="nav-link" href="#data-sets-from-local-file"><span class="header-section-number">3.2.2</span> Data Sets from Local File</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#math-operations-on-data-structures"><span class="header-section-number">3.3</span> Math Operations on Data Structures</a></li>
+<li><a class="nav-link" href="#applying-functions-on-data-structures"><span class="header-section-number">3.4</span> Applying Functions on Data Structures</a></li>
 </ul>
 
       <div class="book-extra">

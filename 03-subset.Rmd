@@ -141,11 +141,121 @@ Double brackets are limited to one value. In order to subset multiple elements o
 ```{r}
 mult_list[2:3]
 ```
-### 
+## Subsetting with Labels
 
+### Label Names with Data Structures
 
+Take a look at the output for `mult_data`. Notice there is an extra row on top (as if they are headings or labels for the columns) and an extra column (as if they are labels for the rows).
 
+```{r}
+mult_data
+```
 
+Descriptive names can be added to columns, rows, or values within data structures. For data frames and lists, column names can be added while creating the data structure.
 
+```{r}
+mult_data2 <- data.frame(Factor=char_vect, Fives=x, Threes=y)
+mult_data2
+```
 
+```{r}
+mult_list2 <- list(Factor.Table=mult_data, FiveThree=z, 
+                   Logical.values=log_vect, DaysPerWeek=7)
+mult_list2
+```
 
+Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: `names()`, `rownames()`, and `colnames()`. The appropriate function(s) to use depends on the type of data structure needing label names. See the examples below:
+
+```{r}
+x ## For comparison
+## Labeling values in a vector
+names(x) <- char_vect
+x
+```
+```{r}
+## Labeling rows and columns in a matrix
+mult_mat2 <- cbind(x,y)
+rownames(mult_mat2) <- char_vect
+colnames(mult_mat2) <- c("Fives","Threes")
+mult_mat2
+```
+
+```{r}
+## Labeling columns in a data frame
+colnames(mult_data) <- c("Factor","Fives","Threes")
+mult_data
+```
+```{r}
+## Labeling values in a list
+names(mult_list) <- c("Factor.Table", "FiveThree", "Logical.values", 
+                      "DaysPerWeek")
+mult_list
+```
+
+The `names()` function can also be used to display the names of a data structure. 
+
+```{r}
+names(x)
+names(mult_data)
+names(mult_list)
+```
+
+### Subsetting with Labels
+
+Data structures with labels can be subsetted using their labels. The name of the column or element can be used within the brackets or after the `$` symbol.
+
+```{r}
+mult_data[,"Fives"]
+mult_data$Fives
+```
+
+```{r}
+mult_list[["Logical.values"]]
+mult_list$Logical.values
+```
+## Subsetting with Logical Expressions
+
+### Logical Expressions
+
+It may be useful to use a logical expression to determine which, if any, elements in a vector have certain qualities. When a logical  expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied. 
+
+```{r}
+## Are any elements greater than 15?
+x > 15
+
+## Are any elements greater than or equal to 15?
+x >= 15
+
+## Are any elements exactly equal to 15?
+x == 15
+
+## Are any elements not equal to 15?
+x != 15
+```
+
+Multiple logical expressions can be combined using either and or or.
+
+```{r}
+## Are any elements in x greater than 15 AND the same element in y is equal to 12?
+x > 15 & y == 12
+
+## Are any elements greater than 15 OR less than 7?
+x > 15 | x < 7
+```
+
+## Subsetting with Logical Expressions
+
+The logical vectors that result from logical expression statements can be used in the brackets to subset a vector just to the values that satisfy the condition.    
+
+```{r}
+x[x>15]
+```
+
+Instead of yielding a logical vector for each entry in a vector, the `which()` function yields the positions in the vector where the condition is satisfied. `The which()` function can also be used in the brackets to subset a vector to just the values that satisfy the condition. 
+
+```{r}
+which(x>15)
+x[which(x>15)]
+```
+
+Two-dimensional data frames can be subsetting similarly, using the an argument for the row and another for the column.

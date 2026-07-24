@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  24 JUL 2026 15:21
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  24 JUL 2026 16:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -877,13 +877,13 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 2.
-)
+[3])
 \tf@toc=\write4
 \openout4 = `bookdown-demo.toc'.
 
-[3] [4
+[4] [5
 
-] [5]
+]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 207.
 [6] [7] [8
@@ -897,8 +897,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [10] [11] [12] [13] [14]
 Overfull \hbox (69.75pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1] -1.56780094  0.83700765 -0.03766553  1.06610730  2.35
-190120  3.07274733[] 
+[]\TU/lmtt/m/n/10 ##  [1]  5.08349474  2.33642547 -0.06490812 -0.64443840 -2.92
+174893 -1.95366583[] 
  []
 
 [15] [16] [17] [18] [19] [20]
@@ -918,25 +918,31 @@ df)
 
 ]
 Chapter 3.
-[33] [34] [35] [36] [37] [38]
+[33] [34] [35] [36] [37] [38] [39]
+Overfull \hbox (27.75pt too wide) in paragraph at lines 2231--2231
+[]\TU/lmtt/m/n/10 ## [1] "Factor.Table"   "FiveThree"      "Logical.values" "Da
+ysPerWeek"[] 
+ []
+
+[40] [41] [42]
 Chapter 4.
 
-LaTeX Warning: Reference `RBasics' on page 39 undefined on input line 2050.
+LaTeX Warning: Reference `RBasics' on page 43 undefined on input line 2405.
 
 
-LaTeX Warning: Reference `eq:union' on page 39 undefined on input line 2052.
+LaTeX Warning: Reference `eq:union' on page 43 undefined on input line 2407.
 
 
-LaTeX Warning: Reference `tab:nice-tab' on page 39 undefined on input line 2054
+LaTeX Warning: Reference `tab:nice-tab' on page 43 undefined on input line 2409
 .
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/car-1.pdf>
 File: images/02-cards.jpg Graphic file (type bmp)
 <images/02-cards.jpg>
-(bookdown-demo.bbl [39
+(bookdown-demo.bbl [43
 
-] [40]) [41
+] [44]) [45
 
 ] (bookdown-demo.aux)
 
@@ -944,12 +950,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19593 strings out of 411472
- 354748 string characters out of 5818265
+ 19601 strings out of 411472
+ 354938 string characters out of 5818265
  1859012 words of memory out of 5000000
- 39562 multiletter control sequences out of 15000+600000
+ 39570 multiletter control sequences out of 15000+600000
  518786 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 86i,6n,121p,1012b,518s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,6n,121p,1012b,538s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (41 pages).
+Output written on bookdown-demo.pdf (45 pages).

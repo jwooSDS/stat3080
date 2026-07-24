@@ -58,5 +58,10 @@ subsetting-with-brackets
 subsetting-vectors
 subsetting-matrices-and-data-frames
 subsetting-lists
-section
+subsetting-with-labels
+label-names-with-data-structures
+subsetting-with-labels-1
+subsetting-with-logical-expressions
+logical-expressions
+subsetting-with-logical-expressions-1
 blank

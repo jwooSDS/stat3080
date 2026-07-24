@@ -262,12 +262,199 @@
 ## [[2]]
 ## [1]  TRUE FALSE  TRUE FALSE</code></pre>
 </div>
-<div id="section" class="section level3" number="3.2.4">
-<h3>
-<span class="header-section-number">3.2.4</span> <a class="anchor" aria-label="anchor" href="#section"><i class="fas fa-link"></i></a>
-</h3>
-
 </div>
+<div id="subsetting-with-labels" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Subsetting with Labels<a class="anchor" aria-label="anchor" href="#subsetting-with-labels"><i class="fas fa-link"></i></a>
+</h2>
+<div id="label-names-with-data-structures" class="section level3" number="3.3.1">
+<h3>
+<span class="header-section-number">3.3.1</span> Label Names with Data Structures<a class="anchor" aria-label="anchor" href="#label-names-with-data-structures"><i class="fas fa-link"></i></a>
+</h3>
+<p>Take a look at the output for <code>mult_data</code>. Notice there is an extra row on top (as if they are headings or labels for the columns) and an extra column (as if they are labels for the rows).</p>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_data</span></span></code></pre></div>
+<pre><code>##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15</code></pre>
+<p>Descriptive names can be added to columns, rows, or values within data structures. For data frames and lists, column names can be added while creating the data structure.</p>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_data2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Factor<span class="op">=</span><span class="va">char_vect</span>, Fives<span class="op">=</span><span class="va">x</span>, Threes<span class="op">=</span><span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">mult_data2</span></span></code></pre></div>
+<pre><code>##    Factor Fives Threes
+## 1   ByOne     5      3
+## 2   ByTwo    10      6
+## 3 ByThree    15      9
+## 4  ByFour    20     12
+## 5  ByFive    25     15</code></pre>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_list2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Factor.Table<span class="op">=</span><span class="va">mult_data</span>, FiveThree<span class="op">=</span><span class="va">z</span>, </span>
+<span>                   Logical.values<span class="op">=</span><span class="va">log_vect</span>, DaysPerWeek<span class="op">=</span><span class="fl">7</span><span class="op">)</span></span>
+<span><span class="va">mult_list2</span></span></code></pre></div>
+<pre><code>## $Factor.Table
+##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15
+## 
+## $FiveThree
+##  [1]  5 10 15 20 25  3  6  9 12 15
+## 
+## $Logical.values
+## [1]  TRUE FALSE  TRUE FALSE
+## 
+## $DaysPerWeek
+## [1] 7</code></pre>
+<p>Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>, <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code>, and <code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code>. The appropriate function(s) to use depends on the type of data structure needing label names. See the examples below:</p>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="co">## For comparison</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25</code></pre>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Labeling values in a vector</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">char_vect</span></span>
+<span><span class="va">x</span></span></code></pre></div>
+<pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##       5      10      15      20      25</code></pre>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Labeling rows and columns in a matrix</span></span>
+<span><span class="va">mult_mat2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mult_mat2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">char_vect</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mult_mat2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Fives"</span>,<span class="st">"Threes"</span><span class="op">)</span></span>
+<span><span class="va">mult_mat2</span></span></code></pre></div>
+<pre><code>##         Fives Threes
+## ByOne       5      3
+## ByTwo      10      6
+## ByThree    15      9
+## ByFour     20     12
+## ByFive     25     15</code></pre>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Labeling columns in a data frame</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mult_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Factor"</span>,<span class="st">"Fives"</span>,<span class="st">"Threes"</span><span class="op">)</span></span>
+<span><span class="va">mult_data</span></span></code></pre></div>
+<pre><code>##    Factor Fives Threes
+## 1   ByOne     5      3
+## 2   ByTwo    10      6
+## 3 ByThree    15      9
+## 4  ByFour    20     12
+## 5  ByFive    25     15</code></pre>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Labeling values in a list</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mult_list</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Factor.Table"</span>, <span class="st">"FiveThree"</span>, <span class="st">"Logical.values"</span>, </span>
+<span>                      <span class="st">"DaysPerWeek"</span><span class="op">)</span></span>
+<span><span class="va">mult_list</span></span></code></pre></div>
+<pre><code>## $Factor.Table
+##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15
+## 
+## $FiveThree
+##  [1]  5 10 15 20 25  3  6  9 12 15
+## 
+## $Logical.values
+## [1]  TRUE FALSE  TRUE FALSE
+## 
+## $DaysPerWeek
+## [1] 7</code></pre>
+<p>The <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function can also be used to display the names of a data structure.</p>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "ByOne"   "ByTwo"   "ByThree" "ByFour"  "ByFive"</code></pre>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mult_data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Factor" "Fives"  "Threes"</code></pre>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mult_list</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Factor.Table"   "FiveThree"      "Logical.values" "DaysPerWeek"</code></pre>
+</div>
+<div id="subsetting-with-labels-1" class="section level3" number="3.3.2">
+<h3>
+<span class="header-section-number">3.3.2</span> Subsetting with Labels<a class="anchor" aria-label="anchor" href="#subsetting-with-labels-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Data structures with labels can be subsetted using their labels. The name of the column or element can be used within the brackets or after the <code>$</code> symbol.</p>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_data</span><span class="op">[</span>,<span class="st">"Fives"</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25</code></pre>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_data</span><span class="op">$</span><span class="va">Fives</span></span></code></pre></div>
+<pre><code>## [1]  5 10 15 20 25</code></pre>
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_list</span><span class="op">[[</span><span class="st">"Logical.values"</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mult_list</span><span class="op">$</span><span class="va">Logical.values</span></span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
+</div>
+</div>
+<div id="subsetting-with-logical-expressions" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Subsetting with Logical Expressions<a class="anchor" aria-label="anchor" href="#subsetting-with-logical-expressions"><i class="fas fa-link"></i></a>
+</h2>
+<div id="logical-expressions" class="section level3" number="3.4.1">
+<h3>
+<span class="header-section-number">3.4.1</span> Logical Expressions<a class="anchor" aria-label="anchor" href="#logical-expressions"><i class="fas fa-link"></i></a>
+</h3>
+<p>It may be useful to use a logical expression to determine which, if any, elements in a vector have certain qualities. When a logical expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied.</p>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Are any elements greater than 15?</span></span>
+<span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span></span></code></pre></div>
+<pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##   FALSE   FALSE   FALSE    TRUE    TRUE</code></pre>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Are any elements greater than or equal to 15?</span></span>
+<span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">15</span></span></code></pre></div>
+<pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##   FALSE   FALSE    TRUE    TRUE    TRUE</code></pre>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Are any elements exactly equal to 15?</span></span>
+<span><span class="va">x</span> <span class="op">==</span> <span class="fl">15</span></span></code></pre></div>
+<pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##   FALSE   FALSE    TRUE   FALSE   FALSE</code></pre>
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Are any elements not equal to 15?</span></span>
+<span><span class="va">x</span> <span class="op">!=</span> <span class="fl">15</span></span></code></pre></div>
+<pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##    TRUE    TRUE   FALSE    TRUE    TRUE</code></pre>
+<p>Multiple logical expressions can be combined using either and or or.</p>
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Are any elements in x greater than 15 AND the same element in y is equal to 12?</span></span>
+<span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">&amp;</span> <span class="va">y</span> <span class="op">==</span> <span class="fl">12</span></span></code></pre></div>
+<pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##   FALSE   FALSE   FALSE    TRUE   FALSE</code></pre>
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Are any elements greater than 15 OR less than 7?</span></span>
+<span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">|</span> <span class="va">x</span> <span class="op">&lt;</span> <span class="fl">7</span></span></code></pre></div>
+<pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##    TRUE   FALSE   FALSE    TRUE    TRUE</code></pre>
+</div>
+</div>
+<div id="subsetting-with-logical-expressions-1" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Subsetting with Logical Expressions<a class="anchor" aria-label="anchor" href="#subsetting-with-logical-expressions-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>The logical vectors that result from logical expression statements can be used in the brackets to subset a vector just to the values that satisfy the condition.</p>
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">15</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## ByFour ByFive 
+##     20     25</code></pre>
+<p>Instead of yielding a logical vector for each entry in a vector, the <code><a href="https://rdrr.io/r/base/which.html">which()</a></code> function yields the positions in the vector where the condition is satisfied. <code>The which()</code> function can also be used in the brackets to subset a vector to just the values that satisfy the condition.</p>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">15</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## ByFour ByFive 
+##      4      5</code></pre>
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">15</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## ByFour ByFive 
+##     20     25</code></pre>
+<p>Two-dimensional data frames can be subsetting similarly, using the an argument for the row and another for the column.</p>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -283,9 +470,18 @@
 <li><a class="nav-link" href="#subsetting-vectors"><span class="header-section-number">3.2.1</span> Subsetting Vectors</a></li>
 <li><a class="nav-link" href="#subsetting-matrices-and-data-frames"><span class="header-section-number">3.2.2</span> Subsetting Matrices and Data Frames</a></li>
 <li><a class="nav-link" href="#subsetting-lists"><span class="header-section-number">3.2.3</span> Subsetting Lists</a></li>
-<li><a class="nav-link" href="#section"><span class="header-section-number">3.2.4</span></a></li>
 </ul>
 </li>
+<li>
+<a class="nav-link" href="#subsetting-with-labels"><span class="header-section-number">3.3</span> Subsetting with Labels</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#label-names-with-data-structures"><span class="header-section-number">3.3.1</span> Label Names with Data Structures</a></li>
+<li><a class="nav-link" href="#subsetting-with-labels-1"><span class="header-section-number">3.3.2</span> Subsetting with Labels</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#subsetting-with-logical-expressions"><span class="header-section-number">3.4</span> Subsetting with Logical Expressions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#logical-expressions"><span class="header-section-number">3.4.1</span> Logical Expressions</a></li></ul>
+</li>
+<li><a class="nav-link" href="#subsetting-with-logical-expressions-1"><span class="header-section-number">3.5</span> Subsetting with Logical Expressions</a></li>
 </ul>
 
       <div class="book-extra">

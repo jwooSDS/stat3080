@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -1.56780094  0.83700765 -0.03766553  1.06610730  2.35190120  3.07274733
-##  [7]  2.57498773  4.82519823 -0.24936514  6.54502308
+##  [1]  5.08349474  2.33642547 -0.06490812 -0.64443840 -2.92174893 -1.95366583
+##  [7]  3.12278318 -0.21953960  2.56114101  4.17697338
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -2041,8 +2041,363 @@ Double brackets are limited to one value. In order to subset multiple elements o
 ## [1]  TRUE FALSE  TRUE FALSE
 \end{verbatim}
 
-\hypertarget{section}{%
-\subsection{}\label{section}}
+\hypertarget{subsetting-with-labels}{%
+\section{Subsetting with Labels}\label{subsetting-with-labels}}
+
+\hypertarget{label-names-with-data-structures}{%
+\subsection{Label Names with Data Structures}\label{label-names-with-data-structures}}
+
+Take a look at the output for \texttt{mult\_data}. Notice there is an extra row on top (as if they are headings or labels for the columns) and an extra column (as if they are labels for the rows).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15
+\end{verbatim}
+
+Descriptive names can be added to columns, rows, or values within data structures. For data frames and lists, column names can be added while creating the data structure.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_data2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Factor=}\NormalTok{char\_vect, }\AttributeTok{Fives=}\NormalTok{x, }\AttributeTok{Threes=}\NormalTok{y)}
+\NormalTok{mult\_data2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Factor Fives Threes
+## 1   ByOne     5      3
+## 2   ByTwo    10      6
+## 3 ByThree    15      9
+## 4  ByFour    20     12
+## 5  ByFive    25     15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_list2 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{Factor.Table=}\NormalTok{mult\_data, }\AttributeTok{FiveThree=}\NormalTok{z, }
+                   \AttributeTok{Logical.values=}\NormalTok{log\_vect, }\AttributeTok{DaysPerWeek=}\DecValTok{7}\NormalTok{)}
+\NormalTok{mult\_list2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Factor.Table
+##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15
+## 
+## $FiveThree
+##  [1]  5 10 15 20 25  3  6  9 12 15
+## 
+## $Logical.values
+## [1]  TRUE FALSE  TRUE FALSE
+## 
+## $DaysPerWeek
+## [1] 7
+\end{verbatim}
+
+Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: \texttt{names()}, \texttt{rownames()}, and \texttt{colnames()}. The appropriate function(s) to use depends on the type of data structure needing label names. See the examples below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\DocumentationTok{\#\# For comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Labeling values in a vector}
+\FunctionTok{names}\NormalTok{(x) }\OtherTok{\textless{}{-}}\NormalTok{ char\_vect}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##       5      10      15      20      25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Labeling rows and columns in a matrix}
+\NormalTok{mult\_mat2 }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(x,y)}
+\FunctionTok{rownames}\NormalTok{(mult\_mat2) }\OtherTok{\textless{}{-}}\NormalTok{ char\_vect}
+\FunctionTok{colnames}\NormalTok{(mult\_mat2) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Fives"}\NormalTok{,}\StringTok{"Threes"}\NormalTok{)}
+\NormalTok{mult\_mat2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Fives Threes
+## ByOne       5      3
+## ByTwo      10      6
+## ByThree    15      9
+## ByFour     20     12
+## ByFive     25     15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Labeling columns in a data frame}
+\FunctionTok{colnames}\NormalTok{(mult\_data) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Factor"}\NormalTok{,}\StringTok{"Fives"}\NormalTok{,}\StringTok{"Threes"}\NormalTok{)}
+\NormalTok{mult\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Factor Fives Threes
+## 1   ByOne     5      3
+## 2   ByTwo    10      6
+## 3 ByThree    15      9
+## 4  ByFour    20     12
+## 5  ByFive    25     15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Labeling values in a list}
+\FunctionTok{names}\NormalTok{(mult\_list) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Factor.Table"}\NormalTok{, }\StringTok{"FiveThree"}\NormalTok{, }\StringTok{"Logical.values"}\NormalTok{, }
+                      \StringTok{"DaysPerWeek"}\NormalTok{)}
+\NormalTok{mult\_list}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Factor.Table
+##   char_vect  x  y
+## 1     ByOne  5  3
+## 2     ByTwo 10  6
+## 3   ByThree 15  9
+## 4    ByFour 20 12
+## 5    ByFive 25 15
+## 
+## $FiveThree
+##  [1]  5 10 15 20 25  3  6  9 12 15
+## 
+## $Logical.values
+## [1]  TRUE FALSE  TRUE FALSE
+## 
+## $DaysPerWeek
+## [1] 7
+\end{verbatim}
+
+The \texttt{names()} function can also be used to display the names of a data structure.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "ByOne"   "ByTwo"   "ByThree" "ByFour"  "ByFive"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(mult\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Factor" "Fives"  "Threes"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(mult\_list)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Factor.Table"   "FiveThree"      "Logical.values" "DaysPerWeek"
+\end{verbatim}
+
+\hypertarget{subsetting-with-labels-1}{%
+\subsection{Subsetting with Labels}\label{subsetting-with-labels-1}}
+
+Data structures with labels can be subsetted using their labels. The name of the column or element can be used within the brackets or after the \texttt{\$} symbol.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_data[,}\StringTok{"Fives"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_data}\SpecialCharTok{$}\NormalTok{Fives}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  5 10 15 20 25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_list[[}\StringTok{"Logical.values"}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE  TRUE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mult\_list}\SpecialCharTok{$}\NormalTok{Logical.values}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE  TRUE FALSE
+\end{verbatim}
+
+\hypertarget{subsetting-with-logical-expressions}{%
+\section{Subsetting with Logical Expressions}\label{subsetting-with-logical-expressions}}
+
+\hypertarget{logical-expressions}{%
+\subsection{Logical Expressions}\label{logical-expressions}}
+
+It may be useful to use a logical expression to determine which, if any, elements in a vector have certain qualities. When a logical expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Are any elements greater than 15?}
+\NormalTok{x }\SpecialCharTok{\textgreater{}} \DecValTok{15}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##   FALSE   FALSE   FALSE    TRUE    TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Are any elements greater than or equal to 15?}
+\NormalTok{x }\SpecialCharTok{\textgreater{}=} \DecValTok{15}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##   FALSE   FALSE    TRUE    TRUE    TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Are any elements exactly equal to 15?}
+\NormalTok{x }\SpecialCharTok{==} \DecValTok{15}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##   FALSE   FALSE    TRUE   FALSE   FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Are any elements not equal to 15?}
+\NormalTok{x }\SpecialCharTok{!=} \DecValTok{15}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##    TRUE    TRUE   FALSE    TRUE    TRUE
+\end{verbatim}
+
+Multiple logical expressions can be combined using either and or or.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Are any elements in x greater than 15 AND the same element in y is equal to 12?}
+\NormalTok{x }\SpecialCharTok{\textgreater{}} \DecValTok{15} \SpecialCharTok{\&}\NormalTok{ y }\SpecialCharTok{==} \DecValTok{12}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##   FALSE   FALSE   FALSE    TRUE   FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Are any elements greater than 15 OR less than 7?}
+\NormalTok{x }\SpecialCharTok{\textgreater{}} \DecValTok{15} \SpecialCharTok{|}\NormalTok{ x }\SpecialCharTok{\textless{}} \DecValTok{7}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ByOne   ByTwo ByThree  ByFour  ByFive 
+##    TRUE   FALSE   FALSE    TRUE    TRUE
+\end{verbatim}
+
+\hypertarget{subsetting-with-logical-expressions-1}{%
+\section{Subsetting with Logical Expressions}\label{subsetting-with-logical-expressions-1}}
+
+The logical vectors that result from logical expression statements can be used in the brackets to subset a vector just to the values that satisfy the condition.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[x}\SpecialCharTok{\textgreater{}}\DecValTok{15}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ByFour ByFive 
+##     20     25
+\end{verbatim}
+
+Instead of yielding a logical vector for each entry in a vector, the \texttt{which()} function yields the positions in the vector where the condition is satisfied. \texttt{The\ which()} function can also be used in the brackets to subset a vector to just the values that satisfy the condition.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(x}\SpecialCharTok{\textgreater{}}\DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ByFour ByFive 
+##      4      5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{which}\NormalTok{(x}\SpecialCharTok{\textgreater{}}\DecValTok{15}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ByFour ByFive 
+##     20     25
+\end{verbatim}
+
+Two-dimensional data frames can be subsetting similarly, using the an argument for the row and another for the column.
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

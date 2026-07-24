@@ -55,15 +55,15 @@ output: html_document
 ---
 ````
 
-The YAML header is fenced by three dashes, `---`. These three dashes are also called a **delimeter**. A delimeter is a specific character or symbol used to indicate the boundary between separate, independent regions of the file. You can easily change the title, name, and date by changing the values inside the quotes in the YAML. 
+The YAML header is fenced by three dashes, `---`. These three dashes are also called a **delimiter**. A delimiter is a specific character or symbol used to indicate the boundary between separate, independent regions of the file. You can easily change the title, name, and date by changing the values inside the quotes in the YAML. 
 
 ### Narrative Text
 
 You can type your narration below the YAML. 
 
-#### Headers
+#### Section Headers
 
-Use hashtags `#` followed by a space to create a header. The more hashtags the smaller the header. 
+Use hashtags `#` followed by a space to create a section header. The more hashtags the smaller the header. 
 
 ````{verbatim}
 # 1st level header
@@ -187,7 +187,7 @@ You might be wondering when should you use an R script and when you should use R
 - If I am not going to be sharing the work, or only sharing the work with a small group of collaborators, I am likely to only use an R script. 
 - If I want to share my work broadly, then I will use an R Markdown. I also start the analysis in an R script, and then transfer the code to an R Markdown, as I find this makes troubleshooting easier. 
 
-### Troubelshooting
+### Troubleshooting
 
 I have seen some students work directly using an `.Rmd` file and bypass an R script. I find troubleshooting error messages difficult in this scenario, as there are two potential sources of the error: 
 

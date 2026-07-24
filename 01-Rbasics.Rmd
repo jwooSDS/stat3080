@@ -515,7 +515,7 @@ mult_list <- list(mult_data, z, log_vect, 7)
 mult_list
 ```
 
-There are testing and cohersion functions for all of the types of data structures. As with the classes of data, cohersion may not yield a valid result. Some examples are shown below:
+There are testing and coersion functions for all of the types of data structures. As with the classes of data, coersion may not yield a valid result. Some examples are shown below:
 
 ```{r, eval=FALSE}
 is.vector(x)

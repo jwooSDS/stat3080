@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.2005141 -0.3997683  1.1532812  4.0758375 -0.6990474  1.0932863
-##  [7]  2.7575014  3.1581184  4.1928014  1.8098021
+##  [1]  6.0041174  4.6016452  2.1251546  0.0139566  0.9837614  3.6057542
+##  [7] -1.8929614  5.2881145  6.8488110  2.0560668
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1277,7 +1277,7 @@ Lists are the most flexible type of object in R. Lists are similar to vectors in
 ## [1] 7
 \end{verbatim}
 
-There are testing and cohersion functions for all of the types of data structures. As with the classes of data, cohersion may not yield a valid result. Some examples are shown below:
+There are testing and coersion functions for all of the types of data structures. As with the classes of data, coersion may not yield a valid result. Some examples are shown below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1400,17 +1400,17 @@ The \textbf{YAML header} controls the settings associated with the document. At 
 \end{Highlighting}
 \end{Shaded}
 
-The YAML header is fenced by three dashes, \texttt{-\/-\/-}. These three dashes are also called a \textbf{delimeter}. A delimeter is a specific character or symbol used to indicate the boundary between separate, independent regions of the file. You can easily change the title, name, and date by changing the values inside the quotes in the YAML.
+The YAML header is fenced by three dashes, \texttt{-\/-\/-}. These three dashes are also called a \textbf{delimiter}. A delimiter is a specific character or symbol used to indicate the boundary between separate, independent regions of the file. You can easily change the title, name, and date by changing the values inside the quotes in the YAML.
 
 \hypertarget{narrative-text}{%
 \subsection{Narrative Text}\label{narrative-text}}
 
 You can type your narration below the YAML.
 
-\hypertarget{headers}{%
-\subsubsection{Headers}\label{headers}}
+\hypertarget{section-headers}{%
+\subsubsection{Section Headers}\label{section-headers}}
 
-Use hashtags \texttt{\#} followed by a space to create a header. The more hashtags the smaller the header.
+Use hashtags \texttt{\#} followed by a space to create a section header. The more hashtags the smaller the header.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1592,8 +1592,8 @@ You might be wondering when should you use an R script and when you should use R
   If I want to share my work broadly, then I will use an R Markdown. I also start the analysis in an R script, and then transfer the code to an R Markdown, as I find this makes troubleshooting easier.
 \end{itemize}
 
-\hypertarget{troubelshooting}{%
-\subsection{Troubelshooting}\label{troubelshooting}}
+\hypertarget{troubleshooting}{%
+\subsection{Troubleshooting}\label{troubleshooting}}
 
 I have seen some students work directly using an \texttt{.Rmd} file and bypass an R script. I find troubleshooting error messages difficult in this scenario, as there are two potential sources of the error:
 

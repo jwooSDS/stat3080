@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  24 JUL 2026 13:40
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  24 JUL 2026 13:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -897,8 +897,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [10] [11] [12] [13] [14]
 Overfull \hbox (38.25pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1]  1.2005141 -0.3997683  1.1532812  4.0758375 -0.699047
-4  1.0932863[] 
+[]\TU/lmtt/m/n/10 ##  [1]  6.0041174  4.6016452  2.1251546  0.0139566  0.983761
+4  3.6057542[] 
  []
 
 [15] [16] [17] [18] [19] [20]
@@ -941,7 +941,7 @@ LaTeX Warning: There were undefined references.
  ) 
 Here is how much of TeX's memory you used:
  19583 strings out of 411472
- 354613 string characters out of 5818265
+ 354621 string characters out of 5818265
  1859012 words of memory out of 5000000
  39552 multiletter control sequences out of 15000+600000
  518786 words of font info for 91 fonts, out of 8000000 for 9000

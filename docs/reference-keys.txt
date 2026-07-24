@@ -38,7 +38,7 @@ prerequisites
 getting-started
 yaml-header
 narrative-text
-headers
+section-headers
 text-styles
 hyperlinks
 lists-1
@@ -49,7 +49,7 @@ cross-referencing-with-r-markdown
 knitting-your-document
 things-to-consider
 r-script-or-r-markdown
-troubelshooting
+troubleshooting
 pdf-output
 more-resources-for-r-markdown
 blank

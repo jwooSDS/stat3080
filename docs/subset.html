@@ -310,7 +310,44 @@
 ## 
 ## $DaysPerWeek
 ## [1] 7</code></pre>
-<p>Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>, <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code>, and <code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code>. The appropriate function(s) to use depends on the type of data structure needing label names. See the examples below:</p>
+<p>Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>, <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code>, and <code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code>. The appropriate function(s) to use depends on the type of data structure needing label names. This information is summarized in Table <a href="subset.html#tab:labels">3.1</a> below:</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:labels">Table 3.1: </span> Labels for R Data Structures</caption>
+<thead><tr class="header">
+<th align="center">Data Structure</th>
+<th align="center"><code><a href="https://rdrr.io/r/base/names.html">names()</a></code></th>
+<th align="center"><code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code></th>
+<th align="center"><code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Vector</td>
+<td align="center">Elements</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="center">List</td>
+<td align="center">List items</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="center">Matrix</td>
+<td align="center">-</td>
+<td align="center">Column names</td>
+<td align="center">Row names</td>
+</tr>
+<tr class="even">
+<td align="center">Data frame</td>
+<td align="center">Column names</td>
+<td align="center">Column names</td>
+<td align="center">Row names</td>
+</tr>
+</tbody>
+</table></div>
+<p>My advice: use <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> for one-dimensional data structures, <code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code> and <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code> for two-dimensional data structures. Examples are displayed below:</p>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="co">## For comparison</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>

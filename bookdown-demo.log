@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  25 JUL 2026 11:14
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  25 JUL 2026 12:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -896,9 +896,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 294.
 
 [10] [11] [12] [13] [14]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1]  4.0687515 -1.9218047  1.5537083  4.5099195  1.843155
-0  0.3948173[] 
+Overfull \hbox (59.25pt too wide) in paragraph at lines 660--660
+[]\TU/lmtt/m/n/10 ##  [1]  6.196535  3.104884  2.191966  5.260053  5.367797 -4.
+002485 -1.232469[] 
  []
 
 [15] [16] [17] [18] [19] [20]
@@ -922,7 +922,7 @@ Chapter 3.
 Underfull \vbox (badness 2961) has occurred while \output is active []
 
 [33] [34] [35] [36] [37] [38] [39]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 2233--2233
+Overfull \hbox (27.75pt too wide) in paragraph at lines 2253--2253
 []\TU/lmtt/m/n/10 ## [1] "Factor.Table"   "FiveThree"      "Logical.values" "Da
 ysPerWeek"[] 
  []
@@ -930,13 +930,13 @@ ysPerWeek"[]
 [40] [41] [42] [43] [44] [45] [46]
 Chapter 4.
 
-LaTeX Warning: Reference `RBasics' on page 47 undefined on input line 2674.
+LaTeX Warning: Reference `RBasics' on page 47 undefined on input line 2694.
 
 
-LaTeX Warning: Reference `eq:union' on page 47 undefined on input line 2676.
+LaTeX Warning: Reference `eq:union' on page 47 undefined on input line 2696.
 
 
-LaTeX Warning: Reference `tab:nice-tab' on page 47 undefined on input line 2678
+LaTeX Warning: Reference `tab:nice-tab' on page 47 undefined on input line 2698
 .
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
@@ -953,10 +953,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19605 strings out of 411472
- 355079 string characters out of 5818265
+ 19607 strings out of 411472
+ 355096 string characters out of 5818265
  1859012 words of memory out of 5000000
- 39574 multiletter control sequences out of 15000+600000
+ 39576 multiletter control sequences out of 15000+600000
  518786 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,6n,121p,1012b,522s stack positions out of 10000i,1000n,20000p,200000b,200000s

@@ -166,7 +166,18 @@ mult_list2 <- list(Factor.Table=mult_data, FiveThree=z,
 mult_list2
 ```
 
-Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: `names()`, `rownames()`, and `colnames()`. The appropriate function(s) to use depends on the type of data structure needing label names. See the examples below:
+Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: `names()`, `rownames()`, and `colnames()`. The appropriate function(s) to use depends on the type of data structure needing label names. This information is summarized in Table \@ref(tab:labels) below:
+
+Table: (\#tab:labels) Labels for R Data Structures
+
+| Data Structure | `names()`  | `colnames()` | `rownames()` | 
+|:----------:|:-------------:|:------:|:------:|
+| Vector |  Elements | -  |  - |
+| List |  List items   | - | - | 
+| Matrix | - | Column names | Row names |
+| Data frame | Column names | Column names | Row names |
+
+My advice: use `names()` for one-dimensional data structures, `colnames()` and `rownames()` for two-dimensional data structures. Examples are displayed below:
 
 ```{r}
 x ## For comparison

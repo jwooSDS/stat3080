@@ -326,7 +326,7 @@ This information is summarized in Table \@ref(tab:structures) below:
 Table: (\#tab:structures) Classification of R Data Structures
 
 | Dimension |  Homogeneous (Same Type)  |  Heterogeneous (Diff Type) | 
-|:----------:|:-------------:|:------:|
+|:----------:|:-------------:|:------:| 
 | One |  Vector | List  | 
 | Two |    Matrix   | Data Frame | 
 | >2 | Array | - | 

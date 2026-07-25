@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  4.0687515 -1.9218047  1.5537083  4.5099195  1.8431550  0.3948173
-##  [7]  4.9329692  4.7066841  1.5430748  3.6987700
+##  [1]  6.196535  3.104884  2.191966  5.260053  5.367797 -4.002485 -1.232469
+##  [8]  2.740012  6.327237  3.724092
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -2111,7 +2111,27 @@ Take a look at the output for \texttt{mult\_data}. Notice there is an extra row 
 ## [1] 7
 \end{verbatim}
 
-Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: \texttt{names()}, \texttt{rownames()}, and \texttt{colnames()}. The appropriate function(s) to use depends on the type of data structure needing label names. See the examples below:
+Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: \texttt{names()}, \texttt{rownames()}, and \texttt{colnames()}. The appropriate function(s) to use depends on the type of data structure needing label names. This information is summarized in Table \ref{tab:labels} below:
+
+\begin{longtable}[]{@{}cccc@{}}
+\caption{\label{tab:labels} Labels for R Data Structures}\tabularnewline
+\toprule\noalign{}
+Data Structure & \texttt{names()} & \texttt{colnames()} & \texttt{rownames()} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Data Structure & \texttt{names()} & \texttt{colnames()} & \texttt{rownames()} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Vector & Elements & - & - \\
+List & List items & - & - \\
+Matrix & - & Column names & Row names \\
+Data frame & Column names & Column names & Row names \\
+\end{longtable}
+
+My advice: use \texttt{names()} for one-dimensional data structures, \texttt{colnames()} and \texttt{rownames()} for two-dimensional data structures. Examples are displayed below:
 
 \begin{Shaded}
 \begin{Highlighting}[]

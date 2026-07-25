@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  24 JUL 2026 18:05
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  25 JUL 2026 09:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -896,9 +896,15 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 294.
 
 [10] [11] [12] [13] [14]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1]  0.4141163 -2.9471714  4.8283251  1.1635579  4.241950
-1  0.2546601[] 
+Overfull \hbox (33.0pt too wide) in paragraph at lines 660--660
+[]\TU/lmtt/m/n/10 ##  [1] -0.190108024 -0.402153385 -2.636091110 -5.849335028  
+2.634514723[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 660--660
+[]\TU/lmtt/m/n/10 ##  [6] -2.223132216 -1.538649119  0.005964276  2.649641123  
+1.772562383[] 
  []
 
 [15] [16] [17] [18] [19] [20]
@@ -927,25 +933,25 @@ Overfull \hbox (27.75pt too wide) in paragraph at lines 2233--2233
 ysPerWeek"[] 
  []
 
-[40] [41] [42] [43] [44] [45] [46] [47] [48] [49] [50
+[40] [41] [42] [43] [44] [45] [46
 
 ]
 Chapter 4.
 
-LaTeX Warning: Reference `RBasics' on page 51 undefined on input line 2802.
+LaTeX Warning: Reference `RBasics' on page 47 undefined on input line 2652.
 
 
-LaTeX Warning: Reference `eq:union' on page 51 undefined on input line 2804.
+LaTeX Warning: Reference `eq:union' on page 47 undefined on input line 2654.
 
 
-LaTeX Warning: Reference `tab:nice-tab' on page 51 undefined on input line 2806
+LaTeX Warning: Reference `tab:nice-tab' on page 47 undefined on input line 2656
 .
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/car-1.pdf>
 File: images/02-cards.jpg Graphic file (type bmp)
 <images/02-cards.jpg>
-(bookdown-demo.bbl [51] [52]) [53
+(bookdown-demo.bbl [47] [48]) [49
 
 ] (bookdown-demo.aux)
 
@@ -955,10 +961,10 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  19605 strings out of 411472
  355079 string characters out of 5818265
- 1869012 words of memory out of 5000000
+ 1859012 words of memory out of 5000000
  39574 multiletter control sequences out of 15000+600000
  518786 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 86i,6n,121p,1012b,802s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,6n,121p,1012b,522s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (53 pages).
+Output written on bookdown-demo.pdf (49 pages).

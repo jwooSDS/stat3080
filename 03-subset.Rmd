@@ -23,7 +23,7 @@ Once a data structure is created and stored, it may be useful in subsequent anal
 
 #### Subsetting Vectors
 
-The typical notation to subset vectors is a set of brackets used directly after the variable name of the vector. The information given inside the brackets specifies which values should be extracted from the vector. 
+The typical notation to subset vectors is a set of brackets, `[ ]`, used directly after the variable name of the vector. The information given inside the brackets specifies which elements (in terms of index) should be extracted from the vector. 
 
 The position index of any vector begins at 1 and uses consecutive positive integers up to the length of the vector. For example, to obtain the 3rd element of the vector `x`:
 
@@ -32,27 +32,27 @@ x[3]
 x ## for comparison
 ```
 
-Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g. statisticians think in terms of sample size). This is unlike indexing starting from 0 for other software such as Python and C, who audiences tend to be programmers and software engineers.
+Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g. statisticians think in terms of sample size). This is unlike indexing from 0 for other software such as Python and C, who audiences tend to be programmers and software engineers.
 
 Multiple positions can be specified by using a vector in the brackets.
 
 ```{r}
-x[c(1,3)] ##1st and 3rd positions
-x[2:3] ##2nd and 3rd posistions
+x[c(1,3)] ##1st and 3rd elements
+x[2:3] ##2nd and 3rd elements
 ```
 
 If a position is duplicated in the brackets, the corresponding value in the vector will be subset twice. 
 
 ```{r}
-x[c(1,1)] ##1st position displayed twice
+x[c(1,1)] ##1st elements displayed twice
 ```
 
 If a negative sign is used in the brackets, the specified value(s) will be omitted instead of included in the subset.
 
 ```{r}
-x[-1] ##omit position 1
-x[-(2:3)] ##omit positions 2, 3
-x[-c(1,4)] ##omit positions 1, 4
+x[-1] ##omit element 1
+x[-(2:3)] ##omit elements 2, 3
+x[-c(1,4)] ##omit elements 1, 4
 ```
 
 Instead of specifying the positions that you would like included or excluded from the subset, you can specify a logical vector in the brackets. R will include the elements corresponding to TRUE and exclude the elements corresponding to FALSE.  
@@ -80,13 +80,13 @@ The brackets following a vector can also be used to replace or add one or more v
 ```{r}
 x2 <- x
 
-x2[6] <- 30 ##place 30 in position 6
+x2[6] <- 30 ## add 30 as element 6
 x2
 
 x2[7:9] <- c(35,40,45) ##then add 3 values
 x2
 
-x2[c(1,3)] <- 0 ##change value of position 1, 3 to 0
+x2[c(1,3)] <- 0 ##change value of elements 1, 3 to 0
 x2
 ```
 
@@ -153,7 +153,7 @@ Take a look at the output for `mult_data`. Notice there is an extra row on top (
 mult_data
 ```
 
-Descriptive names can be added to columns, rows, or values within data structures. For data frames and lists, column names can be added while creating the data structure.
+**Descriptive names** can be added to columns, rows, or values within data structures. For data frames and lists, column names can be added while creating the data structure.
 
 ```{r}
 mult_data2 <- data.frame(Factor=char_vect, Fives=x, Threes=y)
@@ -219,7 +219,7 @@ mult_list$Logical.values
 
 #### Logical Expressions
 
-It may be useful to use a logical expression to determine which, if any, elements in a vector have certain qualities. When a logical  expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied. 
+It may be useful to use a **logical expression** to determine which, if any, elements in a vector have certain qualities. When a logical  expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied. 
 
 ```{r}
 ## Are any elements greater than 15?
@@ -235,7 +235,7 @@ x == 15
 x != 15
 ```
 
-Multiple logical expressions can be combined using either and or or.
+Multiple logical expressions can be combined using either **and** or **or**.
 
 ```{r}
 ## Are any elements in x greater than 15 AND the same element in y is equal to 12?
@@ -253,7 +253,7 @@ The logical vectors that result from logical expression statements can be used i
 x[x>15]
 ```
 
-Instead of yielding a logical vector for each entry in a vector, the `which()` function yields the positions in the vector where the condition is satisfied. `The which()` function can also be used in the brackets to subset a vector to just the values that satisfy the condition. 
+Instead of yielding a logical vector for each entry in a vector, the `which()` function yields the indexes in the vector where the condition is satisfied. `The which()` function can also be used in the brackets to subset a vector to just the values that satisfy the condition. 
 
 ```{r}
 which(x>15)
@@ -274,10 +274,12 @@ We will cover two main ways to load data sets in R:
 Base R comes pre-loaded with some data sets. You can view them by typing `data()`. You can use the specific data set by typing out its name in the list. To view the `airquality` data set:
 
 ```{r}
-airquality
+head(airquality)
 ```
 
-Notice, however, that this data frame does not appear in the environment. Personally, I like to assign such data frames to an object so it appears on my environment. 
+You can use the `head()` function to print out the first 6 rows of a data frame instead of displaying the entire data frame. This gives the reader a good idea of the data without cluttering the document. 
+
+Notice that this data frame does not appear in the environment. Personally, I like to assign such data frames to an object so it appears on my environment. 
 
 ```{r}
 Data.air <- airquality
@@ -341,14 +343,14 @@ When working with a data frame, we often want to compute some numerical summarie
 
 Suppose you are working on the `airquality` data set, that is stored in the object `Data.air`. The first four columns represents different numeric characteristics associated with air quality and weather conditions. You want to find the average value in each column.
 
-The apply() function is used for a two-dimensional data structure. It uses three arguments: data, margin, and function. The data input specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied.   
+The `apply()` function is used for a two-dimensional data structure. It uses three arguments: data, margin, and function. The data argument specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied.   
 
 ```{r}
-apply(Data.air[,1:4], 2, mean)
 ## 2 since we want to apply the mean to the columns
 ## use 1 if want to apply mean to the row
 ## applying to columns is more common as each column 
 ## in a data frame represents a characteristic
+apply(Data.air[,1:4], 2, mean)
 ```
 
 Notice the NA for two of the columns? This happens when at least one entry in those columns has a missing value. Missing values in R are denoted by `NA`. If you look at the data frame, you can find some NAs in these columns. 

@@ -147,7 +147,7 @@ You may want to consider using the `round()` function as R tends to print out a 
 
 ## Cross-Referencing with R Markdown
 
-Cross-referencing is done in a document to help connect related information to readers. You will often that you will want to connect a narrative with a graphical output, information presented in a table, a math equation, or a citation. R Markdown does cross-referencing and automatically numbers them for you. Below, we will go over a simple example of how to label a figure produced by R, and then refer to it in a narrative. 
+**Cross-referencing** is done in a document to help connect related information to readers. You will often that you will want to connect a narrative with a graphical output, information presented in a table, a math equation, or a citation. R Markdown does cross-referencing and automatically numbers them for you. Below, we will go over a simple example of how to label a figure produced by R, and then refer to it in a narrative. 
 
 For this example, we will use the `pressure` data set that is loaded in base R. Per its documentation, the data are the temperature in degrees Celsius and vapor pressure of mercury in millimeters (of mercury).
 

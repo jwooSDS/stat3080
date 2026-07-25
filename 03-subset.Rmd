@@ -1,5 +1,7 @@
 # Working with Data Structures {#subset}
 
+## Motivation
+
 Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing summaries of some columns of the data frame. You will learn how to perform these tasks in this section. 
 
 We will create the same data structures in section \@ref(structures) of the notes to use as examples in this section.

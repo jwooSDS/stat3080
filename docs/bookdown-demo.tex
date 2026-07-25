@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  6.196535  3.104884  2.191966  5.260053  5.367797 -4.002485 -1.232469
-##  [8]  2.740012  6.327237  3.724092
+##  [1]  4.5973948  3.1170780  2.7633915 -1.7068418  1.4996794 -0.9660928
+##  [7]  3.0870503 -2.0666407  6.0272329  0.3369459
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -707,7 +707,7 @@ To find \(P(Y \leq 3)\), we use:
 \hypertarget{packages}{%
 \section{Packages}\label{packages}}
 
-The functionality of R is broken up into various packages. There are four packages included in an R download: base, graphics, stats, utils. These four packages are sometimes collectively called ``base R packages''. An R \textbf{package} is a collection of R functions, corresponding documentation, and datasets.
+The functionality of R is broken up into various packages. There are a number of packages included in an R download, such as base, graphics, stats, utils. These packages are sometimes collectively called ``base R packages''. An R \textbf{package} is a collection of R functions, corresponding documentation, and datasets.
 
 However, statistical methodologies advance, and additional functions beyond those that exist in base R packages are needed. Independent statisticians create packages to solve more modern problems and have contributed them for everyone to use. These packages are sometimes called ``contributed packages''.
 
@@ -1658,6 +1658,9 @@ There are a lot more options available with R Markdown. We have only covered the
 
 \hypertarget{subset}{%
 \chapter{Working with Data Structures}\label{subset}}
+
+\hypertarget{motivation}{%
+\section{Motivation}\label{motivation}}
 
 Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing summaries of some columns of the data frame. You will learn how to perform these tasks in this section.
 
@@ -2687,6 +2690,249 @@ Recall that \texttt{TRUE} and \texttt{FALSE} are considered to be 1 and 0 respec
 \begin{verbatim}
 ## [1] 37
 \end{verbatim}
+
+\hypertarget{func}{%
+\chapter{Functions}\label{func}}
+
+\hypertarget{motivation-1}{%
+\section{Motivation}\label{motivation-1}}
+
+Imagine you are using R to work on a project. You may notice that you have copied and pasted blocks of code in a number of places of your code, with minor tweaks in the value of a particular variable. You will likely be able to replace these blocks of code with a function. A \textbf{function} is a reusable block of code designed to perform a specific task. Copying and pasting blocks of code in a number of places is sometimes called \textbf{hard-coding}. A benefit of using functions is reducing copying and pasting errors. Manually changing the value of a variable across different blocks of code often leads to mistakes.
+
+You have been using functions that come from base R, or come with other packages. You will now learn how create your own functions.
+
+Functions are defined with three main components:
+
+\begin{itemize}
+\tightlist
+\item
+  the function \textbf{name},
+\item
+  the \textbf{arguments} that the function will take,
+\item
+  and the \textbf{body}, which is the code that should be executed when the function is called.
+\end{itemize}
+
+\hypertarget{basic-syntax}{%
+\section{Basic Syntax}\label{basic-syntax}}
+
+Suppose you want to convert temperature from Celsius to Fahrenheit in your code. You can create a function in the following manner:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CtoF }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(celsius) \{}
+\NormalTok{  celsius }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{9}\SpecialCharTok{/}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+} \DecValTok{32}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+In this particular example, the function name is \texttt{CtoF()}. It only takes in one argument called \texttt{celsius}. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used.
+
+To use this function to convert 27 degrees celsius to Fahrenheit
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{CtoF}\NormalTok{(}\DecValTok{27}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 80.6
+\end{verbatim}
+
+In this example, you can think of the following sequence of events happening when executing \texttt{CtoF(27)}:
+
+\begin{itemize}
+\tightlist
+\item
+  The value of \texttt{27} is assigned to \texttt{celsius},
+\item
+  the math operations as written in the body are performed on \texttt{celsius},
+\item
+  the value after the operations is returned from the function,
+\item
+  the value of \texttt{27} is no longer stored in \texttt{celsius}. In fact, \texttt{celsius} is not stored in the environment.
+\end{itemize}
+
+\hypertarget{returning-a-value}{%
+\section{Returning a Value}\label{returning-a-value}}
+
+A function in R returns the value of its last evaluated expression. You could explicitly use \texttt{return()} in the body to clearly state what you want returned. The function below performs identically to \texttt{CtoF()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# explicit return}
+\NormalTok{CtoFexp }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(celsius) \{}
+\NormalTok{  fahrenheit }\OtherTok{\textless{}{-}}\NormalTok{ celsius }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{9}\SpecialCharTok{/}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+} \DecValTok{32}
+  \FunctionTok{return}\NormalTok{(fahrenheit)}
+\NormalTok{\}}
+
+\FunctionTok{CtoFexp}\NormalTok{(}\DecValTok{27}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 80.6
+\end{verbatim}
+
+In R, \texttt{return()} is not needed when returning a single object, which is unlike other programming languages. If returning multiple objects, \texttt{return()} should be used, see Section \ref{funcMult}.
+
+\hypertarget{arguments-and-default-values}{%
+\section{Arguments and Default Values}\label{arguments-and-default-values}}
+
+A function can take more than one argument, and any of them can have a default value. Suppose we want to convert celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CtoFrounded }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(celsius, }\AttributeTok{decimals =} \DecValTok{0}\NormalTok{) \{}
+\NormalTok{  fahrenheit }\OtherTok{\textless{}{-}}\NormalTok{ celsius }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{9}\SpecialCharTok{/}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+} \DecValTok{32}
+  \FunctionTok{round}\NormalTok{(fahrenheit, decimals)}
+\NormalTok{\}}
+
+\FunctionTok{CtoFrounded}\NormalTok{(}\DecValTok{27}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 81
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{CtoFrounded}\NormalTok{(}\DecValTok{27}\NormalTok{, }\AttributeTok{decimals =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 80.6
+\end{verbatim}
+
+In the function \texttt{CtoFrounded()}, a second argument appears, \texttt{decimals}, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value. The first argument \texttt{celsius} is not set to any default, and must be specified when calling the function.
+
+You can also use \texttt{CtoFrounded(27,\ 1)} to get 27 degrees celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{CtoFrounded}\NormalTok{(}\DecValTok{27}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 80.6
+\end{verbatim}
+
+Alternatively, you can use \texttt{CtoFrounded(decimals\ =\ 1,\ celsius\ =\ 27)}. The order does not matter if you specify the names of the arguments.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{CtoFrounded}\NormalTok{(}\AttributeTok{decimals =} \DecValTok{1}\NormalTok{, }\AttributeTok{celsius =} \DecValTok{27}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 80.6
+\end{verbatim}
+
+You can also decide to have no defaults for any argument at all
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CtoFnodef }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(celsius, decimals) \{}
+\NormalTok{  fahrenheit }\OtherTok{\textless{}{-}}\NormalTok{ celsius }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{9}\SpecialCharTok{/}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+} \DecValTok{32}
+  \FunctionTok{round}\NormalTok{(fahrenheit, decimals)}
+\NormalTok{\}}
+
+\FunctionTok{CtoFnodef}\NormalTok{(}\DecValTok{27}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 80.6
+\end{verbatim}
+
+\hypertarget{stop-and-warning}{%
+\section{Stop and Warning}\label{stop-and-warning}}
+
+Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function \texttt{CtoF()}. To convert celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CtoFcheck }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(celsius) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.numeric}\NormalTok{(celsius)) \{}
+    \FunctionTok{stop}\NormalTok{(}\StringTok{"celsius must be numeric "}\NormalTok{)}
+\NormalTok{  \}}
+  \ControlFlowTok{if}\NormalTok{ (celsius }\SpecialCharTok{\textless{}} \SpecialCharTok{{-}}\DecValTok{100} \SpecialCharTok{|}\NormalTok{ celsius }\SpecialCharTok{\textgreater{}} \DecValTok{100}\NormalTok{)\{}
+    \FunctionTok{warning}\NormalTok{(}\StringTok{"Is celsius within acceptable range?"}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{  celsius }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{9}\SpecialCharTok{/}\DecValTok{5}\NormalTok{) }\SpecialCharTok{+} \DecValTok{32}
+\NormalTok{\}}
+
+\FunctionTok{CtoFcheck}\NormalTok{(}\StringTok{"blah"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in CtoFcheck("blah"): celsius must be numeric
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{CtoFcheck}\NormalTok{(}\DecValTok{250}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in CtoFcheck(250): Is celsius within acceptable range?
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 482
+\end{verbatim}
+
+The \texttt{stop()} function stops execution, while \texttt{warning()} will print out the warning message but still executes the code and prints out the result.
+
+Notice \texttt{if()} statments are used here. Basically, an \texttt{if()} statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover \texttt{if()} statements in more detail in a later section.
+
+\hypertarget{funcMult}{%
+\section{Return Multiple Objects}\label{funcMult}}
+
+R functions return a single object. If you need to return multiple objects, you can return those objects into a named list. For example,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Returning multiple items using a list}
+\NormalTok{get\_summary\_stats }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(vec) \{}
+\NormalTok{  my\_mean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(vec)}
+\NormalTok{  my\_sd   }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(vec)}
+  
+  \CommentTok{\# Return objects as a list and name them}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{mean =}\NormalTok{ my\_mean, }\AttributeTok{sd =}\NormalTok{ my\_sd)) }
+\NormalTok{\}}
+
+\FunctionTok{get\_summary\_stats}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{8}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $mean
+## [1] 3.6
+## 
+## $sd
+## [1] 2.701851
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{get\_summary\_stats}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{8}\NormalTok{))}\SpecialCharTok{$}\NormalTok{mean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.6
+\end{verbatim}
+
+\hypertarget{scope}{%
+\section{Scope}\label{scope}}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Functions | STAT 3080: From Data to Knowledge</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="4.1 Motivation Imagine you are using R to work on a project. You may notice that you have copied and pasted blocks of code in a number of places of your code, with minor tweaks in the value of a...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Functions | STAT 3080: From Data to Knowledge">
+<meta property="og:type" content="book">
+<meta property="og:description" content="4.1 Motivation Imagine you are using R to work on a project. You may notice that you have copied and pasted blocks of code in a number of places of your code, with minor tweaks in the value of a...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Functions | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="4.1 Motivation Imagine you are using R to work on a project. You may notice that you have copied and pasted blocks of code in a number of places of your code, with minor tweaks in the value of a...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 3080: From Data to Knowledge</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
+<li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
+<li><a class="" href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></li>
+<li><a class="active" href="functions.html"><span class="header-section-number">4</span> Functions</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">5</span> Blank Canvas</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="functions" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Functions<a class="anchor" aria-label="anchor" href="#functions"><i class="fas fa-link"></i></a>
+</h1>
+<div id="motivation-1" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Imagine you are using R to work on a project. You may notice that you have copied and pasted blocks of code in a number of places of your code, with minor tweaks in the value of a particular variable. You will likely be able to replace these blocks of code with a function. A <strong>function</strong> is a reusable block of code designed to perform a specific task. Copying and pasting blocks of code in a number of places is sometimes called <strong>hard-coding</strong>. A benefit of using functions is reducing copying and pasting errors. Manually changing the value of a variable across different blocks of code often leads to mistakes.</p>
+<p>You have been using functions that come from base R, or come with other packages. You will now learn how create your own functions.</p>
+<p>Functions are defined with three main components:</p>
+<ul>
+<li>the function <strong>name</strong>,</li>
+<li>the <strong>arguments</strong> that the function will take,</li>
+<li>and the <strong>body</strong>, which is the code that should be executed when the function is called.</li>
+</ul>
+</div>
+<div id="basic-syntax" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Basic Syntax<a class="anchor" aria-label="anchor" href="#basic-syntax"><i class="fas fa-link"></i></a>
+</h2>
+<p>Suppose you want to convert temperature from Celsius to Fahrenheit in your code. You can create a function in the following manner:</p>
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CtoF</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>In this particular example, the function name is <code>CtoF()</code>. It only takes in one argument called <code>celsius</code>. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used.</p>
+<p>To use this function to convert 27 degrees celsius to Fahrenheit</p>
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">CtoF</span><span class="op">(</span><span class="fl">27</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 80.6</code></pre>
+<p>In this example, you can think of the following sequence of events happening when executing <code>CtoF(27)</code>:</p>
+<ul>
+<li>The value of <code>27</code> is assigned to <code>celsius</code>,</li>
+<li>the math operations as written in the body are performed on <code>celsius</code>,</li>
+<li>the value after the operations is returned from the function,</li>
+<li>the value of <code>27</code> is no longer stored in <code>celsius</code>. In fact, <code>celsius</code> is not stored in the environment.</li>
+</ul>
+</div>
+<div id="returning-a-value" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Returning a Value<a class="anchor" aria-label="anchor" href="#returning-a-value"><i class="fas fa-link"></i></a>
+</h2>
+<p>A function in R returns the value of its last evaluated expression. You could explicitly use <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> in the body to clearly state what you want returned. The function below performs identically to <code>CtoF()</code>:</p>
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## explicit return</span></span>
+<span><span class="va">CtoFexp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">fahrenheit</span> <span class="op">&lt;-</span> <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">fahrenheit</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">CtoFexp</span><span class="op">(</span><span class="fl">27</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 80.6</code></pre>
+<p>In R, <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> is not needed when returning a single object, which is unlike other programming languages. If returning multiple objects, <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> should be used, see Section <a href="functions.html#funcMult">4.6</a>.</p>
+</div>
+<div id="arguments-and-default-values" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Arguments and Default Values<a class="anchor" aria-label="anchor" href="#arguments-and-default-values"><i class="fas fa-link"></i></a>
+</h2>
+<p>A function can take more than one argument, and any of them can have a default value. Suppose we want to convert celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.</p>
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CtoFrounded</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span>, <span class="va">decimals</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">fahrenheit</span> <span class="op">&lt;-</span> <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">fahrenheit</span>, <span class="va">decimals</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 81</code></pre>
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 80.6</code></pre>
+<p>In the function <code>CtoFrounded()</code>, a second argument appears, <code>decimals</code>, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value. The first argument <code>celsius</code> is not set to any default, and must be specified when calling the function.</p>
+<p>You can also use <code>CtoFrounded(27, 1)</code> to get 27 degrees celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created.</p>
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 80.6</code></pre>
+<p>Alternatively, you can use <code>CtoFrounded(decimals = 1, celsius = 27)</code>. The order does not matter if you specify the names of the arguments.</p>
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span>decimals <span class="op">=</span> <span class="fl">1</span>, celsius <span class="op">=</span> <span class="fl">27</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 80.6</code></pre>
+<p>You can also decide to have no defaults for any argument at all</p>
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CtoFnodef</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span>, <span class="va">decimals</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">fahrenheit</span> <span class="op">&lt;-</span> <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">fahrenheit</span>, <span class="va">decimals</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">CtoFnodef</span><span class="op">(</span><span class="fl">27</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 80.6</code></pre>
+</div>
+<div id="stop-and-warning" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Stop and Warning<a class="anchor" aria-label="anchor" href="#stop-and-warning"><i class="fas fa-link"></i></a>
+</h2>
+<p>Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function <code>CtoF()</code>. To convert celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.</p>
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CtoFcheck</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"celsius must be numeric "</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">celsius</span> <span class="op">&lt;</span> <span class="op">-</span><span class="fl">100</span> <span class="op">|</span> <span class="va">celsius</span> <span class="op">&gt;</span> <span class="fl">100</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"Is celsius within acceptable range?"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">CtoFcheck</span><span class="op">(</span><span class="fl">250</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning in CtoFcheck(250): Is celsius within acceptable range?</code></pre>
+<pre><code>## [1] 482</code></pre>
+<p>The <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code> function stops execution, while <code><a href="https://rdrr.io/r/base/warning.html">warning()</a></code> will print out the warning message but still executes the code and prints out the result.</p>
+<p>Notice <code>if()</code> statments are used here. Basically, an <code>if()</code> statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover <code>if()</code> statements in more detail in a later section.</p>
+</div>
+<div id="funcMult" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Return Multiple Objects<a class="anchor" aria-label="anchor" href="#funcMult"><i class="fas fa-link"></i></a>
+</h2>
+<p>R functions return a single object. If you need to return multiple objects, you can return those objects into a named list. For example,</p>
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Returning multiple items using a list</span></span>
+<span><span class="va">get_summary_stats</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">vec</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">my_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vec</span><span class="op">)</span></span>
+<span>  <span class="va">my_sd</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">vec</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Return objects as a list and name them</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">my_mean</span>, sd <span class="op">=</span> <span class="va">my_sd</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">get_summary_stats</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $mean
+## [1] 3.6
+## 
+## $sd
+## [1] 2.701851</code></pre>
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">get_summary_stats</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">mean</span></span></code></pre></div>
+<pre><code>## [1] 3.6</code></pre>
+</div>
+<div id="scope" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> Scope<a class="anchor" aria-label="anchor" href="#scope"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></div>
+<div class="next"><a href="blank.html"><span class="header-section-number">5</span> Blank Canvas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#functions"><span class="header-section-number">4</span> Functions</a></li>
+<li><a class="nav-link" href="#motivation-1"><span class="header-section-number">4.1</span> Motivation</a></li>
+<li><a class="nav-link" href="#basic-syntax"><span class="header-section-number">4.2</span> Basic Syntax</a></li>
+<li><a class="nav-link" href="#returning-a-value"><span class="header-section-number">4.3</span> Returning a Value</a></li>
+<li><a class="nav-link" href="#arguments-and-default-values"><span class="header-section-number">4.4</span> Arguments and Default Values</a></li>
+<li><a class="nav-link" href="#stop-and-warning"><span class="header-section-number">4.5</span> Stop and Warning</a></li>
+<li><a class="nav-link" href="#funcMult"><span class="header-section-number">4.6</span> Return Multiple Objects</a></li>
+<li><a class="nav-link" href="#scope"><span class="header-section-number">4.7</span> Scope</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-25.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

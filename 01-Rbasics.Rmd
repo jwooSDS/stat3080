@@ -283,7 +283,7 @@ pbinom(3, size=10, prob=0.6)
 
 ## Packages
 
-The functionality of R is broken up into various packages. There are four packages included in an R download: base, graphics, stats, utils. These four packages are sometimes collectively called "base R packages". An R **package** is a collection of R functions, corresponding documentation, and datasets.
+The functionality of R is broken up into various packages. There are a number of packages included in an R download, such as base, graphics, stats, utils. These packages are sometimes collectively called "base R packages". An R **package** is a collection of R functions, corresponding documentation, and datasets.
 
 However, statistical methodologies advance, and additional functions beyond those that exist in base R packages are needed. Independent statisticians create packages to solve more modern problems and have contributed them for everyone to use. These packages are sometimes called "contributed packages".
 

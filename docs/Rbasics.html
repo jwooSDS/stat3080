@@ -68,7 +68,8 @@
 <li><a class="active" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
 <li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
 <li><a class="" href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></li>
-<li><a class="" href="blank.html"><span class="header-section-number">4</span> Blank Canvas</a></li>
+<li><a class="" href="func.html"><span class="header-section-number">4</span> Functions</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">5</span> Blank Canvas</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -328,8 +329,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ul>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1] -0.37247025  2.33929408 -0.36832432  1.07753600  0.89193821  2.03910022
-##  [7] -0.01414688  1.79602333  3.62149650  0.35486877</code></pre>
+<pre><code>##  [1]  2.3551851  2.0941709 -2.9860737  6.2074011  5.8837343 -0.1829762
+##  [7]  1.3980298  3.1530260 -2.3191191  2.8792086</code></pre>
 <p>Note: you are likely to get a vector of 10 numbers that are different than the ones shown.</p>
 </div>
 <div id="example-2-binomial-distribution" class="section level4" number="1.7.2.2">
@@ -359,7 +360,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <h2>
 <span class="header-section-number">1.8</span> Packages<a class="anchor" aria-label="anchor" href="#packages"><i class="fas fa-link"></i></a>
 </h2>
-<p>The functionality of R is broken up into various packages. There are four packages included in an R download: base, graphics, stats, utils. These four packages are sometimes collectively called “base R packages”. An R <strong>package</strong> is a collection of R functions, corresponding documentation, and datasets.</p>
+<p>The functionality of R is broken up into various packages. There are a number of packages included in an R download, such as base, graphics, stats, utils. These packages are sometimes collectively called “base R packages”. An R <strong>package</strong> is a collection of R functions, corresponding documentation, and datasets.</p>
 <p>However, statistical methodologies advance, and additional functions beyond those that exist in base R packages are needed. Independent statisticians create packages to solve more modern problems and have contributed them for everyone to use. These packages are sometimes called “contributed packages”.</p>
 <p>In order to use what is in a contributed package, that package needs to be installed first, and then loaded. You do not need to install or load base R packages.</p>
 <p>In order to install packages, you must have an internet connection. Packages only need to be installed once on a computer unless the version of R is updated. We use the function <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>. As an example, to install the package called <code>palmerpenguins</code>:</p>

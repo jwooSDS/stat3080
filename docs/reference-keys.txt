@@ -54,6 +54,7 @@ troubleshooting
 pdf-output
 more-resources-for-r-markdown
 subset
+motivation
 subsetting-data-structures
 subsetting-with-brackets
 subsetting-vectors
@@ -70,4 +71,12 @@ data-sets-from-r
 data-sets-from-local-file
 math-operations-on-data-structures
 applying-functions-on-data-structures
+func
+motivation-1
+basic-syntax
+returning-a-value
+arguments-and-default-values
+stop-and-warning
+funcMult
+scope
 blank

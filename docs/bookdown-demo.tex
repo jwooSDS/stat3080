@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.25547194 -1.02811416 -6.48928774 -3.19116036  1.81214355 -0.01954689
-##  [7]  0.13989790  2.00716959  2.60141108  2.32742182
+##  [1]  0.9283492  0.2233650 -2.5206653  1.4828527 -5.4675786  2.5662289
+##  [7]  1.0035966  0.7718450  0.4986287  3.3685532
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -2728,7 +2728,7 @@ Suppose you want to convert temperature from Celsius to Fahrenheit in your code.
 
 In this particular example, the function name is \texttt{CtoF()}. It only takes in one argument called \texttt{celsius}. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used.
 
-To use this function to convert 27 degrees celsius to Fahrenheit
+To use this function to convert 27 degrees Celsius to Fahrenheit
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2753,6 +2753,8 @@ In this example, you can think of the following sequence of events happening whe
 \item
   the value of \texttt{27} is no longer stored in \texttt{celsius}. In fact, \texttt{celsius} is not stored in the environment.
 \end{itemize}
+
+Note: when creating your own function, it is best to avoid using names associated with functions in base R
 
 \hypertarget{returning-a-value}{%
 \section{Returning a Value}\label{returning-a-value}}
@@ -2809,7 +2811,7 @@ A function can take more than one argument (or even zero arguments such as \text
 
 In the function \texttt{CtoFrounded()}, a second argument appears, \texttt{decimals}, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value. The first argument \texttt{celsius} is not set to any default, and must be specified when calling the function.
 
-You can also use \texttt{CtoFrounded(27,\ 1)} to get 27 degrees celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created.
+You can also use \texttt{CtoFrounded(27,\ 1)} to get 27 degrees Celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2850,10 +2852,10 @@ You can also decide to have no defaults for any argument at all
 ## [1] 80.6
 \end{verbatim}
 
-\hypertarget{stop-and-warning}{%
-\section{Stop and Warning}\label{stop-and-warning}}
+\hypertarget{argument-validation}{%
+\section{Argument Validation}\label{argument-validation}}
 
-Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function \texttt{CtoF()}. To convert celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
+Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function \texttt{CtoF()}. This is called \textbf{argument validation}. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2891,7 +2893,7 @@ Ideally, your function should check if the argument entered satisfies certain co
 
 The \texttt{stop()} function stops execution, while \texttt{warning()} will print out the warning message but still executes the code and prints out the result.
 
-Notice \texttt{if()} statments are used here. Basically, an \texttt{if()} statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover \texttt{if()} statements in more detail in a later section.
+Notice \texttt{if()} statements are used here. Basically, an \texttt{if()} statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover \texttt{if()} statements in more detail in a later section.
 
 \hypertarget{funcMult}{%
 \section{Return Multiple Objects}\label{funcMult}}

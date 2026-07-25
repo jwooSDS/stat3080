@@ -76,7 +76,7 @@ motivation-1
 basicFunc
 returning-a-value
 arguments-and-default-values
-stop-and-warning
+argument-validation
 funcMult
 scope
 blank

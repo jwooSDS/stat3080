@@ -24,7 +24,7 @@ CtoF <- function(celsius) {
 
 In this particular example, the function name is `CtoF()`. It only takes in one argument called `celsius`. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used. 
 
-To use this function to convert 27 degrees celsius to Fahrenheit
+To use this function to convert 27 degrees Celsius to Fahrenheit
 
 ```{r}
 CtoF(27)
@@ -36,6 +36,8 @@ In this example, you can think of the following sequence of events happening whe
 - the math operations as written in the body are performed on `celsius`,
 - the value after the operations is returned from the function,
 - the value of `27` is no longer stored in `celsius`. In fact, `celsius` is not stored in the environment.
+
+Note: when creating your own function, it is best to avoid using names associated with functions in base R
 
 ## Returning a Value
 
@@ -69,7 +71,7 @@ CtoFrounded(27, decimals = 1)
 
 In the function `CtoFrounded()`, a second argument appears, `decimals`, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value. The first argument `celsius` is not set to any default, and must be specified when calling the function.
 
-You can also use `CtoFrounded(27, 1)` to get 27 degrees celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created. 
+You can also use `CtoFrounded(27, 1)` to get 27 degrees Celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created. 
 
 ```{r}
 CtoFrounded(27, 1)
@@ -92,9 +94,9 @@ CtoFnodef <- function(celsius, decimals) {
 CtoFnodef(27, 1)
 ```
 
-## Stop and Warning
+## Argument Validation
 
-Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function `CtoF()`. To convert celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
+Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function `CtoF()`. This is called **argument validation**. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
 
 ```{r error=TRUE}
 CtoFcheck <- function(celsius) {
@@ -113,7 +115,7 @@ CtoFcheck(250)
 
 The `stop()` function stops execution, while `warning()` will print out the warning message but still executes the code and prints out the result. 
 
-Notice `if()` statments are used here. Basically, an `if()` statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover `if()` statements in more detail in a later section.
+Notice `if()` statements are used here. Basically, an `if()` statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover `if()` statements in more detail in a later section.
 
 ## Return Multiple Objects {#funcMult}
 

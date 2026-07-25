@@ -105,7 +105,7 @@
 <span>  <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>In this particular example, the function name is <code>CtoF()</code>. It only takes in one argument called <code>celsius</code>. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used.</p>
-<p>To use this function to convert 27 degrees celsius to Fahrenheit</p>
+<p>To use this function to convert 27 degrees Celsius to Fahrenheit</p>
 <div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">CtoF</span><span class="op">(</span><span class="fl">27</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
@@ -116,6 +116,7 @@
 <li>the value after the operations is returned from the function,</li>
 <li>the value of <code>27</code> is no longer stored in <code>celsius</code>. In fact, <code>celsius</code> is not stored in the environment.</li>
 </ul>
+<p>Note: when creating your own function, it is best to avoid using names associated with functions in base R</p>
 </div>
 <div id="returning-a-value" class="section level2" number="4.3">
 <h2>
@@ -150,7 +151,7 @@
 <code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
 <p>In the function <code>CtoFrounded()</code>, a second argument appears, <code>decimals</code>, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value. The first argument <code>celsius</code> is not set to any default, and must be specified when calling the function.</p>
-<p>You can also use <code>CtoFrounded(27, 1)</code> to get 27 degrees celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created.</p>
+<p>You can also use <code>CtoFrounded(27, 1)</code> to get 27 degrees Celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created.</p>
 <div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
@@ -168,11 +169,11 @@
 <span><span class="fu">CtoFnodef</span><span class="op">(</span><span class="fl">27</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
 </div>
-<div id="stop-and-warning" class="section level2" number="4.5">
+<div id="argument-validation" class="section level2" number="4.5">
 <h2>
-<span class="header-section-number">4.5</span> Stop and Warning<a class="anchor" aria-label="anchor" href="#stop-and-warning"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5</span> Argument Validation<a class="anchor" aria-label="anchor" href="#argument-validation"><i class="fas fa-link"></i></a>
 </h2>
-<p>Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function <code>CtoF()</code>. To convert celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.</p>
+<p>Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function <code>CtoF()</code>. This is called <strong>argument validation</strong>. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.</p>
 <div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CtoFcheck</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -191,7 +192,7 @@
 <pre><code>## Warning in CtoFcheck(250): Is celsius within acceptable range?</code></pre>
 <pre><code>## [1] 482</code></pre>
 <p>The <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code> function stops execution, while <code><a href="https://rdrr.io/r/base/warning.html">warning()</a></code> will print out the warning message but still executes the code and prints out the result.</p>
-<p>Notice <code>if()</code> statments are used here. Basically, an <code>if()</code> statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover <code>if()</code> statements in more detail in a later section.</p>
+<p>Notice <code>if()</code> statements are used here. Basically, an <code>if()</code> statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover <code>if()</code> statements in more detail in a later section.</p>
 </div>
 <div id="funcMult" class="section level2" number="4.6">
 <h2>
@@ -251,7 +252,7 @@
 <li><a class="nav-link" href="#basicFunc"><span class="header-section-number">4.2</span> Basic Syntax</a></li>
 <li><a class="nav-link" href="#returning-a-value"><span class="header-section-number">4.3</span> Returning a Value</a></li>
 <li><a class="nav-link" href="#arguments-and-default-values"><span class="header-section-number">4.4</span> Arguments and Default Values</a></li>
-<li><a class="nav-link" href="#stop-and-warning"><span class="header-section-number">4.5</span> Stop and Warning</a></li>
+<li><a class="nav-link" href="#argument-validation"><span class="header-section-number">4.5</span> Argument Validation</a></li>
 <li><a class="nav-link" href="#funcMult"><span class="header-section-number">4.6</span> Return Multiple Objects</a></li>
 <li><a class="nav-link" href="#scope"><span class="header-section-number">4.7</span> Scope</a></li>
 </ul>

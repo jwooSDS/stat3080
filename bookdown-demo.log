@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  25 JUL 2026 09:57
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  25 JUL 2026 11:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -896,15 +896,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 294.
 
 [10] [11] [12] [13] [14]
-Overfull \hbox (33.0pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1] -0.190108024 -0.402153385 -2.636091110 -5.849335028  
-2.634514723[] 
- []
-
-
-Overfull \hbox (33.0pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [6] -2.223132216 -1.538649119  0.005964276  2.649641123  
-1.772562383[] 
+Overfull \hbox (38.25pt too wide) in paragraph at lines 660--660
+[]\TU/lmtt/m/n/10 ##  [1]  4.0687515 -1.9218047  1.5537083  4.5099195  1.843155
+0  0.3948173[] 
  []
 
 [15] [16] [17] [18] [19] [20]
@@ -933,25 +927,25 @@ Overfull \hbox (27.75pt too wide) in paragraph at lines 2233--2233
 ysPerWeek"[] 
  []
 
-[40] [41] [42] [43] [44] [45] [46
-
-]
+[40] [41] [42] [43] [44] [45] [46]
 Chapter 4.
 
-LaTeX Warning: Reference `RBasics' on page 47 undefined on input line 2652.
+LaTeX Warning: Reference `RBasics' on page 47 undefined on input line 2674.
 
 
-LaTeX Warning: Reference `eq:union' on page 47 undefined on input line 2654.
+LaTeX Warning: Reference `eq:union' on page 47 undefined on input line 2676.
 
 
-LaTeX Warning: Reference `tab:nice-tab' on page 47 undefined on input line 2656
+LaTeX Warning: Reference `tab:nice-tab' on page 47 undefined on input line 2678
 .
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/car-1.pdf>
 File: images/02-cards.jpg Graphic file (type bmp)
 <images/02-cards.jpg>
-(bookdown-demo.bbl [47] [48]) [49
+(bookdown-demo.bbl [47
+
+] [48]) [49
 
 ] (bookdown-demo.aux)
 

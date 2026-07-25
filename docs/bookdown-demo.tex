@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.190108024 -0.402153385 -2.636091110 -5.849335028  2.634514723
-##  [6] -2.223132216 -1.538649119  0.005964276  2.649641123  1.772562383
+##  [1]  4.0687515 -1.9218047  1.5537083  4.5099195  1.8431550  0.3948173
+##  [7]  4.9329692  4.7066841  1.5430748  3.6987700
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -2583,6 +2583,28 @@ You may have related numeric information stored in two data structures of the sa
 
 \hypertarget{applying-functions-on-data-structures}{%
 \section{Applying Functions on Data Structures}\label{applying-functions-on-data-structures}}
+
+Functions can be applied to data structures, for example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(mult\_mat2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 12
+\end{verbatim}
 
 When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The \texttt{apply()} function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the \texttt{apply()} function. Variants of this function and user-defined functions will be covered later.
 

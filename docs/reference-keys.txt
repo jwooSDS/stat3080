@@ -73,7 +73,7 @@ math-operations-on-data-structures
 applying-functions-on-data-structures
 func
 motivation-1
-basic-syntax
+basicFunc
 returning-a-value
 arguments-and-default-values
 stop-and-warning

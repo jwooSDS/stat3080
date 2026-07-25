@@ -12,7 +12,7 @@ Functions are defined with three main components:
 - the **arguments** that the function will take, 
 - and the **body**, which is the code that should be executed when the function is called.
 
-## Basic Syntax
+## Basic Syntax {#basicFunc}
 
 Suppose you want to convert temperature from Celsius to Fahrenheit in your code. You can create a function in the following manner:
 
@@ -55,7 +55,7 @@ In R, `return()` is not needed when returning a single object, which is unlike o
 
 ## Arguments and Default Values
 
-A function can take more than one argument, and any of them can have a default value. Suppose we want to convert celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.
+A function can take more than one argument (or even zero arguments such as `getwd()`), and any number of arguments can have a default value. Suppose we want to convert Celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.
 
 ```{r}
 CtoFrounded <- function(celsius, decimals = 0) {
@@ -133,9 +133,22 @@ get_summary_stats(c(4,3,1,2,8))
 get_summary_stats(c(4,3,1,2,8))$mean
 ```
 
-
 ## Scope
 
+Variables inside a function are **local**. This means that the value of a variable is not stored in the environment after the function is run (see Section \@ref(#basicFunc) where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,
 
+```{r}
+a <- 3 ## global
 
+toy1 <- function(){
+  a <- 10 ## local
+  return(a + 20)
+}
+
+toy1() ## function uses local a
+
+a ## global untouched
+```
+
+This means that we do not have to be concerned with names of variables inside a function that we create, as these variables will not overwrite variables with the same name outside the function. 
 

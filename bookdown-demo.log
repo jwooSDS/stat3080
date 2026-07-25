@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  25 JUL 2026 16:17
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  25 JUL 2026 16:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -896,9 +896,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 294.
 
 [10] [11] [12] [13] [14]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1]  4.5973948  3.1170780  2.7633915 -1.7068418  1.499679
-4 -0.9660928[] 
+Overfull \hbox (69.75pt too wide) in paragraph at lines 660--660
+[]\TU/lmtt/m/n/10 ##  [1]  0.25547194 -1.02811416 -6.48928774 -3.19116036  1.81
+214355 -0.01954689[] 
  []
 
 [15] [16] [17] [18] [19] [20]
@@ -933,13 +933,13 @@ Chapter 4.
 ]
 Chapter 5.
 
-LaTeX Warning: Reference `RBasics' on page 53 undefined on input line 2940.
+LaTeX Warning: Reference `RBasics' on page 53 undefined on input line 2971.
 
 
-LaTeX Warning: Reference `eq:union' on page 53 undefined on input line 2942.
+LaTeX Warning: Reference `eq:union' on page 53 undefined on input line 2973.
 
 
-LaTeX Warning: Reference `tab:nice-tab' on page 53 undefined on input line 2944
+LaTeX Warning: Reference `tab:nice-tab' on page 53 undefined on input line 2975
 .
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
@@ -955,7 +955,7 @@ LaTeX Warning: There were undefined references.
  ) 
 Here is how much of TeX's memory you used:
  19629 strings out of 411472
- 355355 string characters out of 5818265
+ 355352 string characters out of 5818265
  1859012 words of memory out of 5000000
  39596 multiletter control sequences out of 15000+600000
  518794 words of font info for 92 fonts, out of 8000000 for 9000

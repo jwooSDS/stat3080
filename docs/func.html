@@ -95,9 +95,9 @@
 <li>and the <strong>body</strong>, which is the code that should be executed when the function is called.</li>
 </ul>
 </div>
-<div id="basic-syntax" class="section level2" number="4.2">
+<div id="basicFunc" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> Basic Syntax<a class="anchor" aria-label="anchor" href="#basic-syntax"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Basic Syntax<a class="anchor" aria-label="anchor" href="#basicFunc"><i class="fas fa-link"></i></a>
 </h2>
 <p>Suppose you want to convert temperature from Celsius to Fahrenheit in your code. You can create a function in the following manner:</p>
 <div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
@@ -137,7 +137,7 @@
 <h2>
 <span class="header-section-number">4.4</span> Arguments and Default Values<a class="anchor" aria-label="anchor" href="#arguments-and-default-values"><i class="fas fa-link"></i></a>
 </h2>
-<p>A function can take more than one argument, and any of them can have a default value. Suppose we want to convert celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.</p>
+<p>A function can take more than one argument (or even zero arguments such as <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>), and any number of arguments can have a default value. Suppose we want to convert Celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.</p>
 <div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CtoFrounded</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span>, <span class="va">decimals</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">fahrenheit</span> <span class="op">&lt;-</span> <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
@@ -222,6 +222,21 @@
 <h2>
 <span class="header-section-number">4.7</span> Scope<a class="anchor" aria-label="anchor" href="#scope"><i class="fas fa-link"></i></a>
 </h2>
+<p>Variables inside a function are <strong>local</strong>. This means that the value of a variable is not stored in the environment after the function is run (see Section @ref(#basicFunc) where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,</p>
+<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">3</span> <span class="co">## global</span></span>
+<span></span>
+<span><span class="va">toy1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co">## local</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">a</span> <span class="op">+</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">toy1</span><span class="op">(</span><span class="op">)</span> <span class="co">## function uses local a</span></span></code></pre></div>
+<pre><code>## [1] 30</code></pre>
+<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="co">## global untouched</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>This means that we do not have to be concerned with names of variables inside a function that we create, as these variables will not overwrite variables with the same name outside the function.</p>
 
 </div>
 </div>
@@ -233,7 +248,7 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#func"><span class="header-section-number">4</span> Functions</a></li>
 <li><a class="nav-link" href="#motivation-1"><span class="header-section-number">4.1</span> Motivation</a></li>
-<li><a class="nav-link" href="#basic-syntax"><span class="header-section-number">4.2</span> Basic Syntax</a></li>
+<li><a class="nav-link" href="#basicFunc"><span class="header-section-number">4.2</span> Basic Syntax</a></li>
 <li><a class="nav-link" href="#returning-a-value"><span class="header-section-number">4.3</span> Returning a Value</a></li>
 <li><a class="nav-link" href="#arguments-and-default-values"><span class="header-section-number">4.4</span> Arguments and Default Values</a></li>
 <li><a class="nav-link" href="#stop-and-warning"><span class="header-section-number">4.5</span> Stop and Warning</a></li>

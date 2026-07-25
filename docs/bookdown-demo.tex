@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  4.5973948  3.1170780  2.7633915 -1.7068418  1.4996794 -0.9660928
-##  [7]  3.0870503 -2.0666407  6.0272329  0.3369459
+##  [1]  0.25547194 -1.02811416 -6.48928774 -3.19116036  1.81214355 -0.01954689
+##  [7]  0.13989790  2.00716959  2.60141108  2.32742182
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1277,7 +1277,7 @@ Lists are the most flexible type of object in R. Lists are similar to vectors in
 ## [1] 7
 \end{verbatim}
 
-There are testing and coersion functions for all of the types of data structures. As with the classes of data, coersion may not yield a valid result. Some examples are shown below:
+There are testing and coercion functions for all of the types of data structures. As with the classes of data, coercion may not yield a valid result. Some examples are shown below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2713,8 +2713,8 @@ Functions are defined with three main components:
   and the \textbf{body}, which is the code that should be executed when the function is called.
 \end{itemize}
 
-\hypertarget{basic-syntax}{%
-\section{Basic Syntax}\label{basic-syntax}}
+\hypertarget{basicFunc}{%
+\section{Basic Syntax}\label{basicFunc}}
 
 Suppose you want to convert temperature from Celsius to Fahrenheit in your code. You can create a function in the following manner:
 
@@ -2780,7 +2780,7 @@ In R, \texttt{return()} is not needed when returning a single object, which is u
 \hypertarget{arguments-and-default-values}{%
 \section{Arguments and Default Values}\label{arguments-and-default-values}}
 
-A function can take more than one argument, and any of them can have a default value. Suppose we want to convert celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.
+A function can take more than one argument (or even zero arguments such as \texttt{getwd()}), and any number of arguments can have a default value. Suppose we want to convert Celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2933,6 +2933,37 @@ R functions return a single object. If you need to return multiple objects, you 
 
 \hypertarget{scope}{%
 \section{Scope}\label{scope}}
+
+Variables inside a function are \textbf{local}. This means that the value of a variable is not stored in the environment after the function is run (see Section @ref(\#basicFunc) where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \DecValTok{3} \DocumentationTok{\#\# global}
+
+\NormalTok{toy1 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{()\{}
+\NormalTok{  a }\OtherTok{\textless{}{-}} \DecValTok{10} \DocumentationTok{\#\# local}
+  \FunctionTok{return}\NormalTok{(a }\SpecialCharTok{+} \DecValTok{20}\NormalTok{)}
+\NormalTok{\}}
+
+\FunctionTok{toy1}\NormalTok{() }\DocumentationTok{\#\# function uses local a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\DocumentationTok{\#\# global untouched}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+This means that we do not have to be concerned with names of variables inside a function that we create, as these variables will not overwrite variables with the same name outside the function.
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

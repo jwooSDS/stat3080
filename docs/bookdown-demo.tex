@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-07-25}
+\date{2026-07-28}
 
 \begin{document}
 \maketitle
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.9283492  0.2233650 -2.5206653  1.4828527 -5.4675786  2.5662289
-##  [7]  1.0035966  0.7718450  0.4986287  3.3685532
+##  [1]  4.5296121  2.4125551  6.6154244 -2.3658277  5.1200708  0.3785591
+##  [7]  7.2524669  3.1937015  1.4056050 -3.6468655
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1690,7 +1690,7 @@ Once a data structure is created and stored, it may be useful in subsequent anal
 \hypertarget{subsetting-vectors}{%
 \subsubsection{Subsetting Vectors}\label{subsetting-vectors}}
 
-The typical notation to subset vectors is a set of brackets, \texttt{{[}\ {]}}, used directly after the variable name of the vector. The information given inside the brackets specifies which elements (in terms of index) should be extracted from the vector.
+The typical notation to \textbf{subset} vectors is a set of \textbf{brackets}, \texttt{{[}\ {]}}, used directly after the variable name of the vector. The information given inside the brackets specifies which elements (in terms of index) should be extracted from the vector.
 
 The position index of any vector begins at 1 and uses consecutive positive integers up to the length of the vector. For example, to obtain the 3rd element of the vector \texttt{x}:
 
@@ -2018,7 +2018,7 @@ The examples below are applied to a data frame. Subsetting matrices work in the 
 \hypertarget{subsetting-lists}{%
 \subsubsection{Subsetting Lists}\label{subsetting-lists}}
 
-A list is subset to any of its elements by using double brackets, \texttt{{[}{[}\ {]}{]}}.
+A list is subset to any of its elements by using \textbf{double brackets}, \texttt{{[}{[}\ {]}{]}}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2114,7 +2114,7 @@ Take a look at the output for \texttt{mult\_data}. Notice there is an extra row 
 ## [1] 7
 \end{verbatim}
 
-Column, row, or value labels can also be added to an existing data structure using one or more of the following functions: \texttt{names()}, \texttt{rownames()}, and \texttt{colnames()}. The appropriate function(s) to use depends on the type of data structure needing label names. This information is summarized in Table \ref{tab:labels} below:
+Column, row, or value \textbf{labels} can also be added to an existing data structure using one or more of the following functions: \texttt{names()}, \texttt{rownames()}, and \texttt{colnames()}. The appropriate function(s) to use depends on the type of data structure needing label names. This information is summarized in Table \ref{tab:labels} below:
 
 \begin{longtable}[]{@{}cccc@{}}
 \caption{\label{tab:labels} Labels for R Data Structures}\tabularnewline
@@ -2726,7 +2726,7 @@ Suppose you want to convert temperature from Celsius to Fahrenheit in your code.
 \end{Highlighting}
 \end{Shaded}
 
-In this particular example, the function name is \texttt{CtoF()}. It only takes in one argument called \texttt{celsius}. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used.
+In this particular example, the function name is \texttt{CtoF()}. It only takes in one argument named \texttt{celsius}. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used.
 
 To use this function to convert 27 degrees Celsius to Fahrenheit
 
@@ -2740,7 +2740,7 @@ To use this function to convert 27 degrees Celsius to Fahrenheit
 ## [1] 80.6
 \end{verbatim}
 
-In this example, you can think of the following sequence of events happening when executing \texttt{CtoF(27)}:
+In this example, you can think of the following sequence of events happening when executing the function named \texttt{CtoF(27)}:
 
 \begin{itemize}
 \tightlist
@@ -2754,7 +2754,7 @@ In this example, you can think of the following sequence of events happening whe
   the value of \texttt{27} is no longer stored in \texttt{celsius}. In fact, \texttt{celsius} is not stored in the environment.
 \end{itemize}
 
-Note: when creating your own function, it is best to avoid using names associated with functions in base R
+Note: when creating your own function, it is best to avoid using naming your function or arguments with words that are associated with functions in base R.
 
 \hypertarget{returning-a-value}{%
 \section{Returning a Value}\label{returning-a-value}}
@@ -2782,7 +2782,7 @@ In R, \texttt{return()} is not needed when returning a single object, which is u
 \hypertarget{arguments-and-default-values}{%
 \section{Arguments and Default Values}\label{arguments-and-default-values}}
 
-A function can take more than one argument (or even zero arguments such as \texttt{getwd()}), and any number of arguments can have a default value. Suppose we want to convert Celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.
+A function can take more than one argument (or even zero arguments such as \texttt{getwd()}), and any number of arguments can have a \textbf{default} value. Suppose we want to convert Celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2894,6 +2894,8 @@ Ideally, your function should check if the argument entered satisfies certain co
 The \texttt{stop()} function stops execution, while \texttt{warning()} will print out the warning message but still executes the code and prints out the result.
 
 Notice \texttt{if()} statements are used here. Basically, an \texttt{if()} statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover \texttt{if()} statements in more detail in a later section.
+
+When I write functions, I normally add the parts regarding argument validation last. I would test that my function works with valid arguments, then add the argument validation parts, then test with invalid arguments.
 
 \hypertarget{funcMult}{%
 \section{Return Multiple Objects}\label{funcMult}}

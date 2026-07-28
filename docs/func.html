@@ -104,19 +104,19 @@
 <code class="sourceCode R"><span><span class="va">CtoF</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>In this particular example, the function name is <code>CtoF()</code>. It only takes in one argument called <code>celsius</code>. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used.</p>
+<p>In this particular example, the function name is <code>CtoF()</code>. It only takes in one argument named <code>celsius</code>. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used.</p>
 <p>To use this function to convert 27 degrees Celsius to Fahrenheit</p>
 <div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">CtoF</span><span class="op">(</span><span class="fl">27</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
-<p>In this example, you can think of the following sequence of events happening when executing <code>CtoF(27)</code>:</p>
+<p>In this example, you can think of the following sequence of events happening when executing the function named <code>CtoF(27)</code>:</p>
 <ul>
 <li>The value of <code>27</code> is assigned to <code>celsius</code>,</li>
 <li>the math operations as written in the body are performed on <code>celsius</code>,</li>
 <li>the value after the operations is returned from the function,</li>
 <li>the value of <code>27</code> is no longer stored in <code>celsius</code>. In fact, <code>celsius</code> is not stored in the environment.</li>
 </ul>
-<p>Note: when creating your own function, it is best to avoid using names associated with functions in base R</p>
+<p>Note: when creating your own function, it is best to avoid using naming your function or arguments with words that are associated with functions in base R.</p>
 </div>
 <div id="returning-a-value" class="section level2" number="4.3">
 <h2>
@@ -138,7 +138,7 @@
 <h2>
 <span class="header-section-number">4.4</span> Arguments and Default Values<a class="anchor" aria-label="anchor" href="#arguments-and-default-values"><i class="fas fa-link"></i></a>
 </h2>
-<p>A function can take more than one argument (or even zero arguments such as <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>), and any number of arguments can have a default value. Suppose we want to convert Celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.</p>
+<p>A function can take more than one argument (or even zero arguments such as <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>), and any number of arguments can have a <strong>default</strong> value. Suppose we want to convert Celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.</p>
 <div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CtoFrounded</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span>, <span class="va">decimals</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">fahrenheit</span> <span class="op">&lt;-</span> <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
@@ -193,6 +193,7 @@
 <pre><code>## [1] 482</code></pre>
 <p>The <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code> function stops execution, while <code><a href="https://rdrr.io/r/base/warning.html">warning()</a></code> will print out the warning message but still executes the code and prints out the result.</p>
 <p>Notice <code>if()</code> statements are used here. Basically, an <code>if()</code> statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover <code>if()</code> statements in more detail in a later section.</p>
+<p>When I write functions, I normally add the parts regarding argument validation last. I would test that my function works with valid arguments, then add the argument validation parts, then test with invalid arguments.</p>
 </div>
 <div id="funcMult" class="section level2" number="4.6">
 <h2>
@@ -271,7 +272,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-25.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

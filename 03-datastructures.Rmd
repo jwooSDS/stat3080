@@ -328,6 +328,16 @@ Another common type of data file is a `.txt` file. In this case, use `read.table
 read.table("Data1.txt", header=TRUE) 
 ```
 
+#### Factor Variables
+
+If you read the documentation for the `read.table()` function, you may notice an argument called `stringsAsFactors = FALSE`. This prevents text columns from being automatically converted into **categorical factor variables**, ensuring they are imported as plain character vectors instead.
+
+Factor variables group categorical data into sets containing values with the same string. Each set is given a numerical code that represents the corresponding categorical value. Dummy coding is an example of this. When performing some statistical modeling such as linear regression, categorical data need to be factors. 
+
+However, the default is set to `FALSE`, as this saves memory, and it is easier to wrangle with data when they are characters and not factors. Wrangling with data is performed prior to modeling; therefore categorical data are converted to factors after data wrangling and when we are ready for modeling. 
+
+To coerce a vector to a factor, use the `as.factor()` or `factor()` functions.
+
 ## Math Operations on Data Structures
 
 The standard arithmetic operators can be applied to data structures  containing numeric values. To perform the same constant arithmetic operation on each element of a numeric data structure, you will use the object name, the arithmetic operation symbol, and the constant. 

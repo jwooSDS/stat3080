@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  28 JUL 2026 16:35
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  28 JUL 2026 17:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -896,9 +896,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 294.
 
 [10] [11] [12] [13] [14]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1]  4.5296121  2.4125551  6.6154244 -2.3658277  5.120070
-8  0.3785591[] 
+Overfull \hbox (69.75pt too wide) in paragraph at lines 660--660
+[]\TU/lmtt/m/n/10 ##  [1]  0.03027995 -1.10770878  5.77235054  0.26682705  2.30
+991473  0.27992994[] 
  []
 
 [15] [16] [17] [18] [19] [20]
@@ -933,13 +933,13 @@ Chapter 4.
 ]
 Chapter 5.
 
-LaTeX Warning: Reference `RBasics' on page 53 undefined on input line 2975.
+LaTeX Warning: Reference `RBasics' on page 53 undefined on input line 2986.
 
 
-LaTeX Warning: Reference `eq:union' on page 53 undefined on input line 2977.
+LaTeX Warning: Reference `eq:union' on page 53 undefined on input line 2988.
 
 
-LaTeX Warning: Reference `tab:nice-tab' on page 53 undefined on input line 2979
+LaTeX Warning: Reference `tab:nice-tab' on page 53 undefined on input line 2990
 .
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
@@ -954,10 +954,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19629 strings out of 411472
- 355355 string characters out of 5818265
+ 19630 strings out of 411472
+ 355373 string characters out of 5818265
  1859012 words of memory out of 5000000
- 39596 multiletter control sequences out of 15000+600000
+ 39597 multiletter control sequences out of 15000+600000
  518794 words of font info for 92 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,6n,121p,1012b,522s stack positions out of 10000i,1000n,20000p,200000b,200000s

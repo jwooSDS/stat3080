@@ -69,6 +69,7 @@ subsetting-with-logical-expressions-1
 loading-data-sets-in-r
 data-sets-from-r
 data-sets-from-local-file
+factor-variables
 math-operations-on-data-structures
 applying-functions-on-data-structures
 func

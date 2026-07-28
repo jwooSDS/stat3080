@@ -546,6 +546,15 @@
 <div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## file has headers</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"Data1.txt"</span>, header<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span></code></pre></div>
+<div id="factor-variables" class="section level4" number="3.3.2.1">
+<h4>
+<span class="header-section-number">3.3.2.1</span> Factor Variables<a class="anchor" aria-label="anchor" href="#factor-variables"><i class="fas fa-link"></i></a>
+</h4>
+<p>If you read the documentation for the <code><a href="https://rdrr.io/r/utils/read.table.html">read.table()</a></code> function, you may notice an argument called <code>stringsAsFactors = FALSE</code>. This prevents text columns from being automatically converted into <strong>categorical factor variables</strong>, ensuring they are imported as plain character vectors instead.</p>
+<p>Factor variables group categorical data into sets containing values with the same string. Each set is given a numerical code that represents the corresponding categorical value. Dummy coding is an example of this. When performing some statistical modeling such as linear regression, categorical data need to be factors.</p>
+<p>However, the default is set to <code>FALSE</code>, as this saves memory, and it is easier to wrangle with data when they are characters and not factors. Wrangling with data is performed prior to modeling; therefore categorical data are converted to factors after data wrangling and when we are ready for modeling.</p>
+<p>To coerce a vector to a factor, use the <code><a href="https://rdrr.io/r/base/factor.html">as.factor()</a></code> or <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> functions.</p>
+</div>
 </div>
 </div>
 <div id="math-operations-on-data-structures" class="section level2" number="3.4">

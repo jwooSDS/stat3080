@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  4.5296121  2.4125551  6.6154244 -2.3658277  5.1200708  0.3785591
-##  [7]  7.2524669  3.1937015  1.4056050 -3.6468655
+##  [1]  0.03027995 -1.10770878  5.77235054  0.26682705  2.30991473  0.27992994
+##  [7]  2.07245361 -0.88913917 -1.09284894 -3.45605429
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -2505,6 +2505,17 @@ Another common type of data file is a \texttt{.txt} file. In this case, use \tex
 \FunctionTok{read.table}\NormalTok{(}\StringTok{"Data1.txt"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{factor-variables}{%
+\subsubsection{Factor Variables}\label{factor-variables}}
+
+If you read the documentation for the \texttt{read.table()} function, you may notice an argument called \texttt{stringsAsFactors\ =\ FALSE}. This prevents text columns from being automatically converted into \textbf{categorical factor variables}, ensuring they are imported as plain character vectors instead.
+
+Factor variables group categorical data into sets containing values with the same string. Each set is given a numerical code that represents the corresponding categorical value. Dummy coding is an example of this. When performing some statistical modeling such as linear regression, categorical data need to be factors.
+
+However, the default is set to \texttt{FALSE}, as this saves memory, and it is easier to wrangle with data when they are characters and not factors. Wrangling with data is performed prior to modeling; therefore categorical data are converted to factors after data wrangling and when we are ready for modeling.
+
+To coerce a vector to a factor, use the \texttt{as.factor()} or \texttt{factor()} functions.
 
 \hypertarget{math-operations-on-data-structures}{%
 \section{Math Operations on Data Structures}\label{math-operations-on-data-structures}}

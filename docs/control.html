@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Control Flow | STAT 3080: From Data to Knowledge</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="5.1 Motivation You may realize that you may need your code to make decisions based on criteria (e.g. argument validation in Section 4.5) or repeat (a set number of times or an unknown amount of...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Control Flow | STAT 3080: From Data to Knowledge">
+<meta property="og:type" content="book">
+<meta property="og:description" content="5.1 Motivation You may realize that you may need your code to make decisions based on criteria (e.g. argument validation in Section 4.5) or repeat (a set number of times or an unknown amount of...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Control Flow | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="5.1 Motivation You may realize that you may need your code to make decisions based on criteria (e.g. argument validation in Section 4.5) or repeat (a set number of times or an unknown amount of...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 3080: From Data to Knowledge</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
+<li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
+<li><a class="" href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></li>
+<li><a class="" href="func.html"><span class="header-section-number">4</span> Functions</a></li>
+<li><a class="active" href="control.html"><span class="header-section-number">5</span> Control Flow</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">6</span> Blank Canvas</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="control" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Control Flow<a class="anchor" aria-label="anchor" href="#control"><i class="fas fa-link"></i></a>
+</h1>
+<div id="motivation-2" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>You may realize that you may need your code to make decisions based on criteria (e.g. argument validation in Section <a href="func.html#validation">4.5</a>) or repeat (a set number of times or an unknown amount of times). <strong>Control flow</strong> tools will allow you to do so. The main tools and their functions are:</p>
+<ul>
+<li>Branching with if statements: If a condition is true, execute a block of code. Extensions include the possibility of running another clode of code if the condition is false.</li>
+<li>Iterate with for loops: repeat a block of code a fixed, known number of times.</li>
+<li>Iterate with while loops: repeat unknown number of times until a condition is no longer met.</li>
+</ul>
+<p>It may be worth reviewing logical expressions in Section <a href="subset.html#logicalexp">3.2.3.1</a> as they are used a lot in control flows. Do note that the examples returned logical vectors. Pay attention to the <code>&amp; and</code>|` operators. In these examples, the operators were performed element-wise, and are useful when subsetting or modifying a data structure.</p>
+<p>However, in control flows, we want logical expressions to return an output of length 1 (a scalar), so you should use <code>&amp;&amp;</code> for and and <code>||</code> for or.</p>
+</div>
+<div id="branching" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Branching<a class="anchor" aria-label="anchor" href="#branching"><i class="fas fa-link"></i></a>
+</h2>
+<div id="if-statement" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> If Statement<a class="anchor" aria-label="anchor" href="#if-statement"><i class="fas fa-link"></i></a>
+</h3>
+<p>Branching with an <strong>if statement</strong> allows our code to execute only if a certain condition is met. If the condition is not met, nothing is executed. For example</p>
+<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"a is positive"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<pre><code>## [1] "a is positive"</code></pre>
+<p>The parenthesis after the <code>if</code> statement is the condition that has to be met for the code to be executed. In this example, the condition is met since <code>a</code> is equal to 1, so <code>a &gt; 0</code> returns <code>TRUE</code>, and the code in the braces is executed. However, if have the following, notice nothing gets printed.</p>
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">9</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"a is positive"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Since <code>a</code> is equal to -9, the condition <code>a &gt; 0</code> is <code>FALSE</code>, so the code inside the braces is not executed.</p>
+</div>
+<div id="if-else-statement" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> If-Else Statement<a class="anchor" aria-label="anchor" href="#if-else-statement"><i class="fas fa-link"></i></a>
+</h3>
+<p>If you want to run another block of code when the condition is not met, add an <code>else</code> statement that runs when the condition is not met. This is called an <strong>if-else statement</strong>: it branches out based on two conditions.</p>
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## a is still -9</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"a is positive"</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"a is 0 or negative"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<pre><code>## [1] "a is 0 or negative"</code></pre>
+<p>Since the condition <code>a &gt; 0</code> is not met, the code inside the other set of braces (after the <code>else</code> statement) gets executed.</p>
+<p>So, add an <code>else</code> statement if you have two conditions or branches.</p>
+</div>
+<div id="else-if" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> Else If<a class="anchor" aria-label="anchor" href="#else-if"><i class="fas fa-link"></i></a>
+</h3>
+<p>If there are more than two conditions or branches, use <code>else if</code> statements between the <code>if</code> statement at the beginning and an <code>else</code> statement at the end.</p>
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## a is still -9</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"a is positive"</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">a</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"a is 0"</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"a is negative"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<pre><code>## [1] "a is negative"</code></pre>
+<p>The condition <code>a &gt; 0</code> is not met, so the code in its braces is not run. The next condition <code>a == 0</code> is not met, so the code in its braces is not run. Therefore, the code in the braces after the <code>else</code> is executed.</p>
+</div>
+<div id="vectorized-else-if" class="section level3" number="5.2.4">
+<h3>
+<span class="header-section-number">5.2.4</span> Vectorized Else-If<a class="anchor" aria-label="anchor" href="#vectorized-else-if"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> function is a vectorized version of an else-if statement. If applies an else-if statement to each element in a vector, and returns a vector with the same length. For example, I have a number of students in class, and they pass if they score at least 60 on a test, other wise they fail.</p>
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">80</span>, <span class="fl">90</span>, <span class="fl">40</span>, <span class="fl">95</span>, <span class="fl">55</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">scores</span> <span class="op">&gt;=</span> <span class="fl">60</span>, <span class="st">"pass"</span>, <span class="st">"fail"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "pass" "pass" "fail" "pass" "fail"</code></pre>
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## condition applied to vector first, then</span></span>
+<span><span class="co">## what to return if condition is true, then</span></span>
+<span><span class="co">## what to return if condition is false</span></span></code></pre></div>
+</div>
+</div>
+<div id="iterating" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Iterating<a class="anchor" aria-label="anchor" href="#iterating"><i class="fas fa-link"></i></a>
+</h2>
+<div id="forloops" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> For Loops<a class="anchor" aria-label="anchor" href="#forloops"><i class="fas fa-link"></i></a>
+</h3>
+<p>A for loop iterates a block of code for each element in a sequence. As a simple example, suppose I want to print out the values of <span class="math inline">\(n^2\)</span> for <span class="math inline">\(n = 1, 2, 3, \cdots, 10\)</span>:</p>
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="va">n</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 4
+## [1] 9
+## [1] 16
+## [1] 25
+## [1] 36
+## [1] 49
+## [1] 64
+## [1] 81
+## [1] 100</code></pre>
+<p>Take a closer look at this for loop. A for loop is made up of 5 components:</p>
+<ol style="list-style-type: decimal">
+<li>The for statement.</li>
+<li>The index variable. In this example, this is <code>n</code>. This value changes at each iteration of the loop.</li>
+<li>The in statement.</li>
+<li>The vector of values for which the for loop should run, i.e. the values of the variable <code>n</code> that should be used. In this example, the values of <code>n</code> should be integers 1 to 10.</li>
+<li>the code to be repeated.</li>
+</ol>
+<p>The way to think about how this loops runs, is to:</p>
+<ul>
+<li>Run the code for the first value of the index variable, which is 1, so <span class="math inline">\(1^2 = 1\)</span> is printed.</li>
+<li>When this code if finished for the value of 1, move on to the next value of the index variable, which is 2, so <span class="math inline">\(2^2 = 4\)</span> is printed.</li>
+<li>When this code if finished for the value of 2, move on to the next value of the index variable, which is 3, so <span class="math inline">\(3^2 = 9\)</span> is printed.</li>
+<li>Keep iterating until the last value of the index variable, which is 10, so <span class="math inline">\(10^2 = 100\)</span> is printed.</li>
+</ul>
+<p>If values are being calculated in the loop that need to be saved, it is best practice to create a data structure to record the values before beginning the loop. For example</p>
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## create a vector to store the 10 squared values</span></span>
+<span><span class="co">## initialize each entry in the vector to be 0 to start</span></span>
+<span><span class="co">## we have fill the vector with something at the start</span></span>
+<span><span class="va">squaredVals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">squaredVals</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">n</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> </span>
+<span>  <span class="co">## store the value of n^2 in each entry of the vector</span></span>
+<span>  <span class="co">## replacing the original value of 0 in each entry</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Ideas associated with a for loop, i.e. iterating a block of code a set number of times, is used a lot in simulations. As mentioned in the preface, simulations are used to estimate statistical quantities that may be difficult to compute. It turns out that there are more efficient ways to run simulations.</p>
+</div>
+<div id="while-loops" class="section level3" number="5.3.2">
+<h3>
+<span class="header-section-number">5.3.2</span> While Loops<a class="anchor" aria-label="anchor" href="#while-loops"><i class="fas fa-link"></i></a>
+</h3>
+<p>A while loop iterates a block of code until some condition is met. Typically, number of iterations is unknown. While loops are much less common in practice though. We will just use a simple example to illustrate this idea.</p>
+<p>Suppose you play a gambling game where you start with $5. Each time you play the game, the amount of money you lose is a random number that comes from a normal distribution with mean 2, and standard deviation 1. You keep playing the game until you run out of cash. We want to simulate the number of times you play the game, and record the amount of cash after each time you play the game.</p>
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## set.seed() for reproducibility due to random nature </span></span>
+<span><span class="co">## of random loss each time you play</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">cash</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="co">## initial amount of cash</span></span>
+<span></span>
+<span><span class="co">##store amount of cash at each play. </span></span>
+<span><span class="co">##Use NULL since we do not know</span></span>
+<span><span class="co">##how many times you will play</span></span>
+<span><span class="va">storeCash</span> <span class="op">&lt;-</span> <span class="cn">NULL</span> </span>
+<span><span class="va">numPlays</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">## counter to count number of times you play</span></span>
+<span></span>
+<span><span class="kw">while</span> <span class="op">(</span><span class="va">cash</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">cash</span> <span class="op">&lt;-</span> <span class="va">cash</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">numPlays</span> <span class="op">&lt;-</span> <span class="va">numPlays</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span>  <span class="va">storeCash</span><span class="op">[</span><span class="va">numPlays</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">cash</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">numPlays</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">storeCash</span></span></code></pre></div>
+<pre><code>## [1]  2.9812538  1.1655064  0.5368369 -0.8639954</code></pre>
+</div>
+</div>
+<div id="vectorization-in-r" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Vectorization in R<a class="anchor" aria-label="anchor" href="#vectorization-in-r"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Vectorization in R</strong> is a feature of R where operations are applied to an entire vector or data structure at once, rather than iterating through each individual element one by one using a traditional loop. You have seen this feature in the examples in Section <a href="subset.html#mathops">3.4</a>. Vectorization makes performing math operations and functions on data structures efficient.</p>
+<p>Consider the example in Sectin <a href="control.html#forloops">5.3.1</a></p>
+<div id="speed" class="section level3" number="5.4.1">
+<h3>
+<span class="header-section-number">5.4.1</span> Speed<a class="anchor" aria-label="anchor" href="#speed"><i class="fas fa-link"></i></a>
+</h3>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="func.html"><span class="header-section-number">4</span> Functions</a></div>
+<div class="next"><a href="blank.html"><span class="header-section-number">6</span> Blank Canvas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#control"><span class="header-section-number">5</span> Control Flow</a></li>
+<li><a class="nav-link" href="#motivation-2"><span class="header-section-number">5.1</span> Motivation</a></li>
+<li>
+<a class="nav-link" href="#branching"><span class="header-section-number">5.2</span> Branching</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#if-statement"><span class="header-section-number">5.2.1</span> If Statement</a></li>
+<li><a class="nav-link" href="#if-else-statement"><span class="header-section-number">5.2.2</span> If-Else Statement</a></li>
+<li><a class="nav-link" href="#else-if"><span class="header-section-number">5.2.3</span> Else If</a></li>
+<li><a class="nav-link" href="#vectorized-else-if"><span class="header-section-number">5.2.4</span> Vectorized Else-If</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#iterating"><span class="header-section-number">5.3</span> Iterating</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#forloops"><span class="header-section-number">5.3.1</span> For Loops</a></li>
+<li><a class="nav-link" href="#while-loops"><span class="header-section-number">5.3.2</span> While Loops</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#vectorization-in-r"><span class="header-section-number">5.4</span> Vectorization in R</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#speed"><span class="header-section-number">5.4.1</span> Speed</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-29.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

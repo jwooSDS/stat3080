@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-07-28}
+\date{2026-07-29}
 
 \begin{document}
 \maketitle
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.03027995 -1.10770878  5.77235054  0.26682705  2.30991473  0.27992994
-##  [7]  2.07245361 -0.88913917 -1.09284894 -3.45605429
+##  [1]  0.3561478 -1.5033905  0.1835075  0.7196150  6.3445118  4.5130569
+##  [7]  4.3830809  4.4330064  4.5559228 -1.1064802
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -2303,8 +2303,8 @@ Data structures with labels can be subsetted using their labels. The name of the
 \hypertarget{subsetting-with-logical-expressions}{%
 \subsection{Subsetting with Logical Expressions}\label{subsetting-with-logical-expressions}}
 
-\hypertarget{logical-expressions}{%
-\subsubsection{Logical Expressions}\label{logical-expressions}}
+\hypertarget{logicalexp}{%
+\subsubsection{Logical Expressions}\label{logicalexp}}
 
 It may be useful to use a \textbf{logical expression} to determine which, if any, elements in a vector have certain qualities. When a logical expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied.
 
@@ -2517,8 +2517,8 @@ However, the default is set to \texttt{FALSE}, as this saves memory, and it is e
 
 To coerce a vector to a factor, use the \texttt{as.factor()} or \texttt{factor()} functions.
 
-\hypertarget{math-operations-on-data-structures}{%
-\section{Math Operations on Data Structures}\label{math-operations-on-data-structures}}
+\hypertarget{mathops}{%
+\section{Math Operations on Data Structures}\label{mathops}}
 
 The standard arithmetic operators can be applied to data structures containing numeric values. To perform the same constant arithmetic operation on each element of a numeric data structure, you will use the object name, the arithmetic operation symbol, and the constant.
 
@@ -2863,8 +2863,8 @@ You can also decide to have no defaults for any argument at all
 ## [1] 80.6
 \end{verbatim}
 
-\hypertarget{argument-validation}{%
-\section{Argument Validation}\label{argument-validation}}
+\hypertarget{validation}{%
+\section{Argument Validation}\label{validation}}
 
 Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function \texttt{CtoF()}. This is called \textbf{argument validation}. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
 
@@ -2904,7 +2904,7 @@ Ideally, your function should check if the argument entered satisfies certain co
 
 The \texttt{stop()} function stops execution, while \texttt{warning()} will print out the warning message but still executes the code and prints out the result.
 
-Notice \texttt{if()} statements are used here. Basically, an \texttt{if()} statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover \texttt{if()} statements in more detail in a later section.
+Notice \texttt{if()} statements are used here. Basically, an \texttt{if()} statement checks whether a certain condition is TRUE, if so, the code in the curly braces get executed. If FALSE, the code in the curly braces is skipped, and code outside the curly braces get executed. We will cover \texttt{if()} statements in more detail in in Section \ref{control}.
 
 When I write functions, I normally add the parts regarding argument validation last. I would test that my function works with valid arguments, then add the argument validation parts, then test with invalid arguments.
 
@@ -2979,6 +2979,273 @@ Variables inside a function are \textbf{local}. This means that the value of a v
 \end{verbatim}
 
 This means that we do not have to be concerned with names of variables inside a function that we create, as these variables will not overwrite variables with the same name outside the function.
+
+\hypertarget{control}{%
+\chapter{Control Flow}\label{control}}
+
+\hypertarget{motivation-2}{%
+\section{Motivation}\label{motivation-2}}
+
+You may realize that you may need your code to make decisions based on criteria (e.g.~argument validation in Section \ref{validation}) or repeat (a set number of times or an unknown amount of times). \textbf{Control flow} tools will allow you to do so. The main tools and their functions are:
+
+\begin{itemize}
+\tightlist
+\item
+  Branching with if statements: If a condition is true, execute a block of code. Extensions include the possibility of running another clode of code if the condition is false.
+\item
+  Iterate with for loops: repeat a block of code a fixed, known number of times.
+\item
+  Iterate with while loops: repeat unknown number of times until a condition is no longer met.
+\end{itemize}
+
+It may be worth reviewing logical expressions in Section \ref{logicalexp} as they are used a lot in control flows. Do note that the examples returned logical vectors. Pay attention to the \texttt{\&\ and}\textbar` operators. In these examples, the operators were performed element-wise, and are useful when subsetting or modifying a data structure.
+
+However, in control flows, we want logical expressions to return an output of length 1 (a scalar), so you should use \texttt{\&\&} for and and \texttt{\textbar{}\textbar{}} for or.
+
+\hypertarget{branching}{%
+\section{Branching}\label{branching}}
+
+\hypertarget{if-statement}{%
+\subsection{If Statement}\label{if-statement}}
+
+Branching with an \textbf{if statement} allows our code to execute only if a certain condition is met. If the condition is not met, nothing is executed. For example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \DecValTok{1}
+
+\ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is positive"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a is positive"
+\end{verbatim}
+
+The parenthesis after the \texttt{if} statement is the condition that has to be met for the code to be executed. In this example, the condition is met since \texttt{a} is equal to 1, so \texttt{a\ \textgreater{}\ 0} returns \texttt{TRUE}, and the code in the braces is executed. However, if have the following, notice nothing gets printed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\DecValTok{9}
+
+\ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is positive"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Since \texttt{a} is equal to -9, the condition \texttt{a\ \textgreater{}\ 0} is \texttt{FALSE}, so the code inside the braces is not executed.
+
+\hypertarget{if-else-statement}{%
+\subsection{If-Else Statement}\label{if-else-statement}}
+
+If you want to run another block of code when the condition is not met, add an \texttt{else} statement that runs when the condition is not met. This is called an \textbf{if-else statement}: it branches out based on two conditions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# a is still {-}9}
+
+\ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is positive"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is 0 or negative"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a is 0 or negative"
+\end{verbatim}
+
+Since the condition \texttt{a\ \textgreater{}\ 0} is not met, the code inside the other set of braces (after the \texttt{else} statement) gets executed.
+
+So, add an \texttt{else} statement if you have two conditions or branches.
+
+\hypertarget{else-if}{%
+\subsection{Else If}\label{else-if}}
+
+If there are more than two conditions or branches, use \texttt{else\ if} statements between the \texttt{if} statement at the beginning and an \texttt{else} statement at the end.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# a is still {-}9}
+
+\ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is positive"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{==} \DecValTok{0}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is 0"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is negative"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a is negative"
+\end{verbatim}
+
+The condition \texttt{a\ \textgreater{}\ 0} is not met, so the code in its braces is not run. The next condition \texttt{a\ ==\ 0} is not met, so the code in its braces is not run. Therefore, the code in the braces after the \texttt{else} is executed.
+
+\hypertarget{vectorized-else-if}{%
+\subsection{Vectorized Else-If}\label{vectorized-else-if}}
+
+The \texttt{ifelse()} function is a vectorized version of an else-if statement. If applies an else-if statement to each element in a vector, and returns a vector with the same length. For example, I have a number of students in class, and they pass if they score at least 60 on a test, other wise they fail.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scores }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{80}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{95}\NormalTok{, }\DecValTok{55}\NormalTok{)}
+
+\FunctionTok{ifelse}\NormalTok{(scores }\SpecialCharTok{\textgreater{}=} \DecValTok{60}\NormalTok{, }\StringTok{"pass"}\NormalTok{, }\StringTok{"fail"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "pass" "pass" "fail" "pass" "fail"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# condition applied to vector first, then}
+\DocumentationTok{\#\# what to return if condition is true, then}
+\DocumentationTok{\#\# what to return if condition is false}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{iterating}{%
+\section{Iterating}\label{iterating}}
+
+\hypertarget{forloops}{%
+\subsection{For Loops}\label{forloops}}
+
+A for loop iterates a block of code for each element in a sequence. As a simple example, suppose I want to print out the values of \(n^2\) for \(n = 1, 2, 3, \cdots, 10\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)\{}
+  \FunctionTok{print}\NormalTok{ (n}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+## [1] 4
+## [1] 9
+## [1] 16
+## [1] 25
+## [1] 36
+## [1] 49
+## [1] 64
+## [1] 81
+## [1] 100
+\end{verbatim}
+
+Take a closer look at this for loop. A for loop is made up of 5 components:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The for statement.
+\item
+  The index variable. In this example, this is \texttt{n}. This value changes at each iteration of the loop.
+\item
+  The in statement.
+\item
+  The vector of values for which the for loop should run, i.e.~the values of the variable \texttt{n} that should be used. In this example, the values of \texttt{n} should be integers 1 to 10.
+\item
+  the code to be repeated.
+\end{enumerate}
+
+The way to think about how this loops runs, is to:
+
+\begin{itemize}
+\tightlist
+\item
+  Run the code for the first value of the index variable, which is 1, so \(1^2 = 1\) is printed.
+\item
+  When this code if finished for the value of 1, move on to the next value of the index variable, which is 2, so \(2^2 = 4\) is printed.
+\item
+  When this code if finished for the value of 2, move on to the next value of the index variable, which is 3, so \(3^2 = 9\) is printed.
+\item
+  Keep iterating until the last value of the index variable, which is 10, so \(10^2 = 100\) is printed.
+\end{itemize}
+
+If values are being calculated in the loop that need to be saved, it is best practice to create a data structure to record the values before beginning the loop. For example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# create a vector to store the 10 squared values}
+\DocumentationTok{\#\# initialize each entry in the vector to be 0 to start}
+\DocumentationTok{\#\# we have fill the vector with something at the start}
+\NormalTok{squaredVals }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)\{}
+\NormalTok{  squaredVals[n] }\OtherTok{\textless{}{-}}\NormalTok{ (n}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }
+  \DocumentationTok{\#\# store the value of n\^{}2 in each entry of the vector}
+  \DocumentationTok{\#\# replacing the original value of 0 in each entry}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Ideas associated with a for loop, i.e.~iterating a block of code a set number of times, is used a lot in simulations. As mentioned in the preface, simulations are used to estimate statistical quantities that may be difficult to compute. It turns out that there are more efficient ways to run simulations.
+
+\hypertarget{while-loops}{%
+\subsection{While Loops}\label{while-loops}}
+
+A while loop iterates a block of code until some condition is met. Typically, number of iterations is unknown. While loops are much less common in practice though. We will just use a simple example to illustrate this idea.
+
+Suppose you play a gambling game where you start with \$5. Each time you play the game, the amount of money you lose is a random number that comes from a normal distribution with mean 2, and standard deviation 1. You keep playing the game until you run out of cash. We want to simulate the number of times you play the game, and record the amount of cash after each time you play the game.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# set.seed() for reproducibility due to random nature }
+\DocumentationTok{\#\# of random loss each time you play}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{) }
+
+\NormalTok{cash }\OtherTok{\textless{}{-}} \DecValTok{5} \DocumentationTok{\#\# initial amount of cash}
+
+\DocumentationTok{\#\#store amount of cash at each play. }
+\DocumentationTok{\#\#Use NULL since we do not know}
+\DocumentationTok{\#\#how many times you will play}
+\NormalTok{storeCash }\OtherTok{\textless{}{-}} \ConstantTok{NULL} 
+\NormalTok{numPlays }\OtherTok{\textless{}{-}} \DecValTok{0} \DocumentationTok{\#\# counter to count number of times you play}
+
+\ControlFlowTok{while}\NormalTok{ (cash }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) \{}
+\NormalTok{  cash }\OtherTok{\textless{}{-}}\NormalTok{ cash }\SpecialCharTok{{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{mean =} \DecValTok{2}\NormalTok{, }\AttributeTok{sd =}\DecValTok{1}\NormalTok{)}
+\NormalTok{  numPlays }\OtherTok{\textless{}{-}}\NormalTok{ numPlays }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{  storeCash[numPlays] }\OtherTok{\textless{}{-}}\NormalTok{ cash}
+\NormalTok{\}}
+
+\NormalTok{numPlays}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{storeCash}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  2.9812538  1.1655064  0.5368369 -0.8639954
+\end{verbatim}
+
+\hypertarget{vectorization-in-r}{%
+\section{Vectorization in R}\label{vectorization-in-r}}
+
+\textbf{Vectorization in R} is a feature of R where operations are applied to an entire vector or data structure at once, rather than iterating through each individual element one by one using a traditional loop. You have seen this feature in the examples in Section \ref{mathops}. Vectorization makes performing math operations and functions on data structures efficient.
+
+Consider the example in Sectin \ref{forloops}
+
+\hypertarget{speed}{%
+\subsection{Speed}\label{speed}}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

@@ -230,7 +230,7 @@ mult_list$Logical.values
 ```
 ### Subsetting with Logical Expressions
 
-#### Logical Expressions
+#### Logical Expressions {#logicalexp}
 
 It may be useful to use a **logical expression** to determine which, if any, elements in a vector have certain qualities. When a logical  expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied. 
 
@@ -338,7 +338,7 @@ However, the default is set to `FALSE`, as this saves memory, and it is easier t
 
 To coerce a vector to a factor, use the `as.factor()` or `factor()` functions.
 
-## Math Operations on Data Structures
+## Math Operations on Data Structures {#mathops}
 
 The standard arithmetic operators can be applied to data structures  containing numeric values. To perform the same constant arithmetic operation on each element of a numeric data structure, you will use the object name, the arithmetic operation symbol, and the constant. 
 

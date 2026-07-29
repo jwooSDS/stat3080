@@ -1,0 +1,169 @@
+# Control Flow {#control}
+
+## Motivation
+
+You may realize that you may need your code to make decisions based on criteria (e.g. argument validation in Section \@ref(validation)) or repeat (a set number of times or an unknown amount of times). **Control flow** tools will allow you to do so. The main tools and their functions are:
+
+- Branching with if statements: If a condition is true, execute a block of code. Extensions include the possibility of running another clode of code if the condition is false.
+- Iterate with for loops: repeat a block of code a fixed, known number of times.
+- Iterate with while loops: repeat unknown number of times until a condition is no longer met.
+
+It may be worth reviewing logical expressions in Section \@ref(logicalexp) as they are used a lot in control flows. Do note that the examples returned logical vectors. Pay attention to the `& and `|` operators. In these examples, the operators were performed element-wise, and are useful when subsetting or modifying a data structure.  
+
+However, in control flows, we want logical expressions to return an output of length 1 (a scalar), so you should use `&&` for and and `||` for or. 
+
+## Branching 
+
+### If Statement
+
+Branching with an **if statement** allows our code to execute only if a certain condition is met. If the condition is not met, nothing is executed. For example
+
+```{r}
+a <- 1
+
+if (a > 0){
+  print("a is positive")
+}
+```
+
+The parenthesis after the `if` statement is the condition that has to be met for the code to be executed. In this example, the condition is met since `a` is equal to 1, so `a > 0` returns `TRUE`, and the code in the braces is executed. However, if have the following, notice nothing gets printed.
+
+```{r}
+a <- -9
+
+if (a > 0){
+  print("a is positive")
+}
+```
+
+Since `a` is equal to -9, the condition `a > 0` is `FALSE`, so the code inside the braces is not executed. 
+
+### If-Else Statement
+
+If you want to run another block of code when the condition is not met, add an `else` statement that runs when the condition is not met. This is called an **if-else statement**: it branches out based on two conditions.
+
+```{r}
+## a is still -9
+
+if (a > 0){
+  print("a is positive")
+} else {
+  print("a is 0 or negative")
+}
+```
+
+Since the condition `a > 0` is not met, the code inside the other set of braces (after the `else` statement) gets executed.
+
+So, add an `else` statement if you have two conditions or branches. 
+
+### Else If
+
+If there are more than two conditions or branches, use `else if` statements between the `if` statement at the beginning and an `else` statement at the end.
+
+```{r}
+## a is still -9
+
+if (a > 0){
+  print("a is positive")
+} else if (a == 0) {
+  print("a is 0")
+} else {
+  print("a is negative")
+}
+```
+
+The condition `a > 0` is not met, so the code in its braces is not run. The next condition `a == 0` is not met, so the code in its braces is not run. Therefore, the code in the braces after the `else` is executed. 
+
+### Vectorized Else-If
+
+The `ifelse()` function is a vectorized version of an else-if statement. If applies an else-if statement to each element in a vector, and returns a vector with the same length. For example, I have a number of students in class, and they pass if they score at least 60 on a test, other wise they fail.
+
+```{r}
+scores <- c(80, 90, 40, 95, 55)
+
+ifelse(scores >= 60, "pass", "fail")
+## condition applied to vector first, then
+## what to return if condition is true, then
+## what to return if condition is false
+```
+
+## Iterating
+
+### For Loops {#forloops}
+
+A for loop iterates a block of code for each element in a sequence. As a simple example, suppose I want to print out the values of $n^2$ for $n = 1, 2, 3, \cdots, 10$:
+
+```{r}
+for (n in 1:10){
+  print (n^2)
+}
+```
+
+Take a closer look at this for loop. A for loop is made up of 5 components:
+
+1. The for statement. 
+2. The index variable. In this example, this is `n`. This value changes at each iteration of the loop.
+3. The in statement.
+4. The vector of values for which the for loop should run, i.e. the values of the variable `n` that should be used. In this example, the values of `n` should be integers 1 to 10. 
+5. the code to be repeated.
+
+The way to think about how this loops runs, is to:
+
+- Run the code for the first value of the index variable, which is 1, so $1^2 = 1$ is printed.
+- When this code if finished for the value of 1, move on to the next value of the index variable, which is 2, so $2^2 = 4$ is printed. 
+- When this code if finished for the value of 2, move on to the next value of the index variable, which is 3, so $3^2 = 9$ is printed. 
+- Keep iterating until the last value of the index variable, which is 10, so $10^2 = 100$ is printed. 
+
+If values are being calculated in the loop that need to be saved, it is best practice to create a data structure to record the values before beginning the loop. For example
+
+```{r}
+## create a vector to store the 10 squared values
+## initialize each entry in the vector to be 0 to start
+## we have fill the vector with something at the start
+squaredVals <- rep(0, 10)
+
+for (n in 1:10){
+  squaredVals[n] <- (n^2) 
+  ## store the value of n^2 in each entry of the vector
+  ## replacing the original value of 0 in each entry
+}
+```
+
+Ideas associated with a for loop, i.e. iterating a block of code a set number of times, is used a lot in simulations. As mentioned in the preface, simulations are used to estimate statistical quantities that may be difficult to compute. It turns out that there are more efficient ways to run simulations. 
+
+### While Loops
+
+A while loop iterates a block of code until some condition is met. Typically, number of iterations is unknown. While loops are much less common in practice though. We will just use a simple example to illustrate this idea. 
+
+Suppose you play a gambling game where you start with $5. Each time you play the game, the amount of money you lose is a random number that comes from a normal distribution with mean 2, and standard deviation 1. You keep playing the game until you run out of cash. We want to simulate the number of times you play the game, and record the amount of cash after each time you play the game. 
+
+```{r}
+## set.seed() for reproducibility due to random nature 
+## of random loss each time you play
+set.seed(10) 
+
+cash <- 5 ## initial amount of cash
+
+##store amount of cash at each play. 
+##Use NULL since we do not know
+##how many times you will play
+storeCash <- NULL 
+numPlays <- 0 ## counter to count number of times you play
+
+while (cash > 0) {
+  cash <- cash - rnorm(1, mean = 2, sd =1)
+  numPlays <- numPlays + 1
+  storeCash[numPlays] <- cash
+}
+
+numPlays
+storeCash
+```
+
+## Vectorization in R
+
+**Vectorization in R** is a feature of R where operations are applied to an entire vector or data structure at once, rather than iterating through each individual element one by one using a traditional loop. You have seen this feature in the examples in Section \@ref(mathops). Vectorization makes performing math operations and functions on data structures efficient. 
+
+Consider the example in Sectin \@ref(forloops)
+
+### Speed

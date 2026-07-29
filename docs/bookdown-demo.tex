@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.3561478 -1.5033905  0.1835075  0.7196150  6.3445118  4.5130569
-##  [7]  4.3830809  4.4330064  4.5559228 -1.1064802
+##  [1]  0.03444571  3.67821122 -1.67189699  6.76632906  2.19653361  1.36596050
+##  [7] -2.42019872 -1.82150069  0.59546717 -2.78626215
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3000,7 +3000,7 @@ You may realize that you may need your code to make decisions based on criteria 
 
 It may be worth reviewing logical expressions in Section \ref{logicalexp} as they are used a lot in control flows. Do note that the examples returned logical vectors. Pay attention to the \texttt{\&\ and}\textbar` operators. In these examples, the operators were performed element-wise, and are useful when subsetting or modifying a data structure.
 
-However, in control flows, we want logical expressions to return an output of length 1 (a scalar), so you should use \texttt{\&\&} for and and \texttt{\textbar{}\textbar{}} for or.
+However, in control flows, we want logical expressions to return an output of length 1 (a scalar), so you should use the \textbf{scalar operators} \texttt{\&\&} for and and \texttt{\textbar{}\textbar{}} for or.
 
 \hypertarget{branching}{%
 \section{Branching}\label{branching}}
@@ -3173,13 +3173,13 @@ The way to think about how this loops runs, is to:
   Keep iterating until the last value of the index variable, which is 10, so \(10^2 = 100\) is printed.
 \end{itemize}
 
-If values are being calculated in the loop that need to be saved, it is best practice to create a data structure to record the values before beginning the loop. For example
+If values are being calculated in the loop that need to be saved, it is best practice to create a data structure of an appropriate size to record the values during the loop. This practice is called \textbf{pre-allocation}. This is preferred to creating a data structure with unknown size and have the data structure grow as the loop is run, as pre-allocation is more efficient.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \DocumentationTok{\#\# create a vector to store the 10 squared values}
 \DocumentationTok{\#\# initialize each entry in the vector to be 0 to start}
-\DocumentationTok{\#\# we have fill the vector with something at the start}
+\DocumentationTok{\#\# we have to fill the vector with something at the start}
 \NormalTok{squaredVals }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{)}
 
 \ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)\{}
@@ -3208,9 +3208,11 @@ Suppose you play a gambling game where you start with \$5. Each time you play th
 \NormalTok{cash }\OtherTok{\textless{}{-}} \DecValTok{5} \DocumentationTok{\#\# initial amount of cash}
 
 \DocumentationTok{\#\#store amount of cash at each play. }
-\DocumentationTok{\#\#Use NULL since we do not know}
+\DocumentationTok{\#\#start with empty vector as we don\textquotesingle{}t know}
 \DocumentationTok{\#\#how many times you will play}
-\NormalTok{storeCash }\OtherTok{\textless{}{-}} \ConstantTok{NULL} 
+\DocumentationTok{\#\#don\textquotesingle{}t do this with for loop as pre{-}allocation}
+\DocumentationTok{\#\#is more efficient than starting with empty vector}
+\NormalTok{storeCash }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
 \NormalTok{numPlays }\OtherTok{\textless{}{-}} \DecValTok{0} \DocumentationTok{\#\# counter to count number of times you play}
 
 \ControlFlowTok{while}\NormalTok{ (cash }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) \{}
@@ -3242,10 +3244,7 @@ Suppose you play a gambling game where you start with \$5. Each time you play th
 
 \textbf{Vectorization in R} is a feature of R where operations are applied to an entire vector or data structure at once, rather than iterating through each individual element one by one using a traditional loop. You have seen this feature in the examples in Section \ref{mathops}. Vectorization makes performing math operations and functions on data structures efficient.
 
-Consider the example in Sectin \ref{forloops}
-
-\hypertarget{speed}{%
-\subsection{Speed}\label{speed}}
+Consider the example in Section \ref{forloops}. We have a vector \texttt{1:10} and we want to square each value. Instead of squaring each entry in the vector one by one for a loop, we can easily type \texttt{(1:10)\^{}2} to get the same result.
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

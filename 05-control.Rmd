@@ -10,7 +10,7 @@ You may realize that you may need your code to make decisions based on criteria 
 
 It may be worth reviewing logical expressions in Section \@ref(logicalexp) as they are used a lot in control flows. Do note that the examples returned logical vectors. Pay attention to the `& and `|` operators. In these examples, the operators were performed element-wise, and are useful when subsetting or modifying a data structure.  
 
-However, in control flows, we want logical expressions to return an output of length 1 (a scalar), so you should use `&&` for and and `||` for or. 
+However, in control flows, we want logical expressions to return an output of length 1 (a scalar), so you should use the **scalar operators** `&&` for and and `||` for or. 
 
 ## Branching 
 
@@ -114,12 +114,12 @@ The way to think about how this loops runs, is to:
 - When this code if finished for the value of 2, move on to the next value of the index variable, which is 3, so $3^2 = 9$ is printed. 
 - Keep iterating until the last value of the index variable, which is 10, so $10^2 = 100$ is printed. 
 
-If values are being calculated in the loop that need to be saved, it is best practice to create a data structure to record the values before beginning the loop. For example
+If values are being calculated in the loop that need to be saved, it is best practice to create a data structure of an appropriate size to record the values during the loop. This practice is called **pre-allocation**. This is preferred to creating a data structure with unknown size and have the data structure grow as the loop is run, as pre-allocation is more efficient. 
 
 ```{r}
 ## create a vector to store the 10 squared values
 ## initialize each entry in the vector to be 0 to start
-## we have fill the vector with something at the start
+## we have to fill the vector with something at the start
 squaredVals <- rep(0, 10)
 
 for (n in 1:10){
@@ -145,9 +145,11 @@ set.seed(10)
 cash <- 5 ## initial amount of cash
 
 ##store amount of cash at each play. 
-##Use NULL since we do not know
+##start with empty vector as we don't know
 ##how many times you will play
-storeCash <- NULL 
+##don't do this with for loop as pre-allocation
+##is more efficient than starting with empty vector
+storeCash <- c()
 numPlays <- 0 ## counter to count number of times you play
 
 while (cash > 0) {
@@ -164,6 +166,4 @@ storeCash
 
 **Vectorization in R** is a feature of R where operations are applied to an entire vector or data structure at once, rather than iterating through each individual element one by one using a traditional loop. You have seen this feature in the examples in Section \@ref(mathops). Vectorization makes performing math operations and functions on data structures efficient. 
 
-Consider the example in Sectin \@ref(forloops)
-
-### Speed
+Consider the example in Section \@ref(forloops). We have a vector `1:10` and we want to square each value. Instead of squaring each entry in the vector one by one for a loop, we can easily type `(1:10)^2` to get the same result.

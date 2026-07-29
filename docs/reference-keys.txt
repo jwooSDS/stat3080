@@ -91,5 +91,4 @@ iterating
 forloops
 while-loops
 vectorization-in-r
-speed
 blank

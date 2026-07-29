@@ -94,7 +94,7 @@
 <li>Iterate with while loops: repeat unknown number of times until a condition is no longer met.</li>
 </ul>
 <p>It may be worth reviewing logical expressions in Section <a href="subset.html#logicalexp">3.2.3.1</a> as they are used a lot in control flows. Do note that the examples returned logical vectors. Pay attention to the <code>&amp; and</code>|` operators. In these examples, the operators were performed element-wise, and are useful when subsetting or modifying a data structure.</p>
-<p>However, in control flows, we want logical expressions to return an output of length 1 (a scalar), so you should use <code>&amp;&amp;</code> for and and <code>||</code> for or.</p>
+<p>However, in control flows, we want logical expressions to return an output of length 1 (a scalar), so you should use the <strong>scalar operators</strong> <code>&amp;&amp;</code> for and and <code>||</code> for or.</p>
 </div>
 <div id="branching" class="section level2" number="5.2">
 <h2>
@@ -210,11 +210,11 @@
 <li>When this code if finished for the value of 2, move on to the next value of the index variable, which is 3, so <span class="math inline">\(3^2 = 9\)</span> is printed.</li>
 <li>Keep iterating until the last value of the index variable, which is 10, so <span class="math inline">\(10^2 = 100\)</span> is printed.</li>
 </ul>
-<p>If values are being calculated in the loop that need to be saved, it is best practice to create a data structure to record the values before beginning the loop. For example</p>
+<p>If values are being calculated in the loop that need to be saved, it is best practice to create a data structure of an appropriate size to record the values during the loop. This practice is called <strong>pre-allocation</strong>. This is preferred to creating a data structure with unknown size and have the data structure grow as the loop is run, as pre-allocation is more efficient.</p>
 <div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## create a vector to store the 10 squared values</span></span>
 <span><span class="co">## initialize each entry in the vector to be 0 to start</span></span>
-<span><span class="co">## we have fill the vector with something at the start</span></span>
+<span><span class="co">## we have to fill the vector with something at the start</span></span>
 <span><span class="va">squaredVals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
@@ -238,9 +238,11 @@
 <span><span class="va">cash</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="co">## initial amount of cash</span></span>
 <span></span>
 <span><span class="co">##store amount of cash at each play. </span></span>
-<span><span class="co">##Use NULL since we do not know</span></span>
+<span><span class="co">##start with empty vector as we don't know</span></span>
 <span><span class="co">##how many times you will play</span></span>
-<span><span class="va">storeCash</span> <span class="op">&lt;-</span> <span class="cn">NULL</span> </span>
+<span><span class="co">##don't do this with for loop as pre-allocation</span></span>
+<span><span class="co">##is more efficient than starting with empty vector</span></span>
+<span><span class="va">storeCash</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">numPlays</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">## counter to count number of times you play</span></span>
 <span></span>
 <span><span class="kw">while</span> <span class="op">(</span><span class="va">cash</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
@@ -261,13 +263,8 @@
 <span class="header-section-number">5.4</span> Vectorization in R<a class="anchor" aria-label="anchor" href="#vectorization-in-r"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>Vectorization in R</strong> is a feature of R where operations are applied to an entire vector or data structure at once, rather than iterating through each individual element one by one using a traditional loop. You have seen this feature in the examples in Section <a href="subset.html#mathops">3.4</a>. Vectorization makes performing math operations and functions on data structures efficient.</p>
-<p>Consider the example in Sectin <a href="control.html#forloops">5.3.1</a></p>
-<div id="speed" class="section level3" number="5.4.1">
-<h3>
-<span class="header-section-number">5.4.1</span> Speed<a class="anchor" aria-label="anchor" href="#speed"><i class="fas fa-link"></i></a>
-</h3>
+<p>Consider the example in Section <a href="control.html#forloops">5.3.1</a>. We have a vector <code>1:10</code> and we want to square each value. Instead of squaring each entry in the vector one by one for a loop, we can easily type <code>(1:10)^2</code> to get the same result.</p>
 
-</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -292,9 +289,7 @@
 <li><a class="nav-link" href="#while-loops"><span class="header-section-number">5.3.2</span> While Loops</a></li>
 </ul>
 </li>
-<li>
-<a class="nav-link" href="#vectorization-in-r"><span class="header-section-number">5.4</span> Vectorization in R</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#speed"><span class="header-section-number">5.4.1</span> Speed</a></li></ul>
-</li>
+<li><a class="nav-link" href="#vectorization-in-r"><span class="header-section-number">5.4</span> Vectorization in R</a></li>
 </ul>
 
       <div class="book-extra">

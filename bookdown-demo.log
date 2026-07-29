@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  29 JUL 2026 14:59
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  29 JUL 2026 18:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -896,9 +896,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 294.
 
 [10] [11] [12] [13] [14]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1]  0.3561478 -1.5033905  0.1835075  0.7196150  6.344511
-8  4.5130569[] 
+Overfull \hbox (69.75pt too wide) in paragraph at lines 660--660
+[]\TU/lmtt/m/n/10 ##  [1]  0.03444571  3.67821122 -1.67189699  6.76632906  2.19
+653361  1.36596050[] 
  []
 
 [15] [16] [17] [18] [19] [20]
@@ -932,16 +932,19 @@ Chapter 4.
 
 ]
 Chapter 5.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 [53] [54] [55] [56] [57] [58]
 Chapter 6.
 
-LaTeX Warning: Reference `RBasics' on page 59 undefined on input line 3253.
+LaTeX Warning: Reference `RBasics' on page 59 undefined on input line 3252.
 
 
-LaTeX Warning: Reference `eq:union' on page 59 undefined on input line 3255.
+LaTeX Warning: Reference `eq:union' on page 59 undefined on input line 3254.
 
 
-LaTeX Warning: Reference `tab:nice-tab' on page 59 undefined on input line 3257
+LaTeX Warning: Reference `tab:nice-tab' on page 59 undefined on input line 3256
 .
 
 File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
@@ -958,10 +961,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19647 strings out of 411472
- 355515 string characters out of 5818265
+ 19646 strings out of 411472
+ 355508 string characters out of 5818265
  1859012 words of memory out of 5000000
- 39614 multiletter control sequences out of 15000+600000
+ 39613 multiletter control sequences out of 15000+600000
  518794 words of font info for 92 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,6n,121p,1012b,522s stack positions out of 10000i,1000n,20000p,200000b,200000s

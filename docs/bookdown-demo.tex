@@ -572,8 +572,8 @@ The sections of the help page that I find useful:
 
 Note: In the top-left corner of the help page, the name of the function is shown, along with the package it is from in braces. So the \texttt{log()} function comes a package called \texttt{base}.
 
-\hypertarget{working-with-common-probability-distributions}{%
-\subsection{Working with common probability distributions}\label{working-with-common-probability-distributions}}
+\hypertarget{distributions}{%
+\subsection{Working with common probability distributions}\label{distributions}}
 
 Some common probability distributions (e.g.~normal, binomial, etc.) are defined in R. Each distribution has a general function name, for example:
 
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  2.626439  1.724571  2.234296  7.542492 -1.200581  1.485892 -0.720010
-##  [8]  6.682834  2.586090 -1.479757
+##  [1] -4.5636989  4.0292530 -1.2010709  5.1409959  1.3825723 -8.2694672
+##  [7]  0.7912508  6.4820995  0.4473297 -2.0269787
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3178,9 +3178,9 @@ If values are being calculated in the loop that need to be saved, it is best pra
 \begin{Shaded}
 \begin{Highlighting}[]
 \DocumentationTok{\#\# create a vector to store the 10 squared values}
-\DocumentationTok{\#\# initialize each entry in the vector to be 0 to start}
+\DocumentationTok{\#\# initialize each entry in the vector to be NA to start}
 \DocumentationTok{\#\# we have to fill the vector with something at the start}
-\NormalTok{squaredVals }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{squaredVals }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{10}\NormalTok{)}
 
 \ControlFlowTok{for}\NormalTok{ (n }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)\{}
 \NormalTok{  squaredVals[n] }\OtherTok{\textless{}{-}}\NormalTok{ (n}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }
@@ -3247,6 +3247,135 @@ Suppose you play a gambling game where you start with \$5. Each time you play th
 Consider the example in Section \ref{forloops}. We have a vector \texttt{1:10} and we want to square each value. Instead of squaring each entry in the vector one by one for a loop, we can easily type \texttt{(1:10)\^{}2} to get the same result.
 
 As your code gets longer and more complex, making it more efficient with vectorization and pre-allocation will make a difference in how long your code runs.
+
+\hypertarget{sims}{%
+\chapter{Simulations}\label{sims}}
+
+\hypertarget{motivation-3}{%
+\section{Motivation}\label{motivation-3}}
+
+When we are analyzing data, there is always going to be some degree of uncertainty, as there is \textbf{randomness} in a lot of phenomena that we observe in our world. An example that is common in statistics comes from the field of sample surveys. A poll is conducted to see what proportion of voters will vote each candidate in an upcoming election. Even with a well-designed poll and a large sample size, the value of the sample proportion that will vote for a candidate has some randomness to it. If we get another random sample, the sample proportion is likely to be different (but hopefully close). The act of obtaining a random sample, or \textbf{sampling}, from a population introduces some randomness.
+
+Statisticians and data scientists often want to investigate the degree of randomness involved in what is being studied. You may realize in the previous paragraph that one way of studying the randomness in polls is to repeatedly obtain random samples. But it is practically unfeasible to repeatedly go out in the field to collect data.
+
+This is why simulations are used. We can simulate the studies many times (in the thousands, at least) with computers without spending time and money and repeating these studies physically.
+
+You will see how sampling introduces randomness and then learn how to create simulations to quantify the degree of randomness or uncertainty.
+
+\hypertarget{sampling}{%
+\section{Sampling}\label{sampling}}
+
+The \texttt{sample()} function in R randomly draws a selected number of items from a list of items (the list is usually a vector), and the probabilities of each item being selected are the same for all items. A simple example of randomness is tossing a fair coin a set number of times (equal chance of landing heads or tails).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fairCoin }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"heads"}\NormalTok{, }\StringTok{"tails"}\NormalTok{)}
+\FunctionTok{sample}\NormalTok{(fairCoin, }\AttributeTok{size =} \DecValTok{5}\NormalTok{, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "heads" "heads" "heads" "tails" "heads"
+\end{verbatim}
+
+The \texttt{sample()} function has three main arguments:
+
+\begin{itemize}
+\tightlist
+\item
+  A vector of values from which to sample.
+\item
+  How many values from the vector to draw.
+\item
+  If you want to sample with or without replacement.
+\end{itemize}
+
+\textbf{Sampling with replacement} means that when we sample a value from the vector, the value gets returned to the vector and can be sampled again.
+
+\textbf{Sampling without replacement} means that means that when we sample a value from the vector, the value does not get returned to the vector and cannot be sampled again.
+
+Run the code in the block above a few times. You will notice that the returned vector is not always the same, so the result is unpredictable. This is unlike most of the earlier code you have seen in the course notes.
+
+Another use of sampling is in model validation (i.e.~assessing model accuracy). The original data set is randomly split into two mutually exclusive data sets: one called training and the other called test. The training set is used to build the model, and model assessment is done on the test set. Suppose we want to split the \texttt{Davis} data set from the \texttt{carData} package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(carData)}
+\NormalTok{Data.Davis }\OtherTok{\textless{}{-}}\NormalTok{ carData}\SpecialCharTok{::}\NormalTok{Davis}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(Data.Davis)[}\DecValTok{1}\NormalTok{]}
+\DocumentationTok{\#\# when dim() is applied to a dataframe, two values get returned}
+\DocumentationTok{\#\# the num of rows and number of columns. The number of rows is }
+\DocumentationTok{\#\# equal to the sample size}
+
+\NormalTok{trainInd }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{n, }\AttributeTok{size =} \FunctionTok{ceiling}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{), }\AttributeTok{replace =} \ConstantTok{FALSE}\NormalTok{)}
+\DocumentationTok{\#\# each observation belongs to a row. So randomly select half of}
+\DocumentationTok{\#\# row indexes without replacement so the two sets are mutually \#\# exclusive}
+
+\DocumentationTok{\#\# split data into training and test}
+\NormalTok{trainData }\OtherTok{\textless{}{-}}\NormalTok{ Data.Davis[trainInd,]}
+\NormalTok{testData }\OtherTok{\textless{}{-}}\NormalTok{ Data.Davis[}\SpecialCharTok{{-}}\NormalTok{trainInd,]}
+\end{Highlighting}
+\end{Shaded}
+
+You have also seen sampling before in Section @red(distributions), where functions such as \texttt{rnorm()} and \texttt{rbinom()} draw random numbers from known probability distributions such as the normal and binomial distributions. Try typing \texttt{rnorm(10)} a few times. You should get a vector containing 10 random draws from a standard normal, and the vectors are not always the same.
+
+\hypertarget{replicate}{%
+\section{Replicate}\label{replicate}}
+
+You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or replicate, the sampling a lot of times.
+
+Suppose we want to do the following to investigate the uncertainty associated with the sample mean when the data follows a standard normal distribution, based on samples size 10. You could write code to do the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Draw a random sample of 10 from a standard normal distribution.
+\item
+  Compute the sample mean of this sample of 10 and store it.
+\item
+  Repeat the previous two steps for large number of times, say 10,000 times.
+\item
+  Create a visualization to show the distribution of these 10,000 sample means, or calculate some values such as the mean, variance, and so on.
+\end{itemize}
+
+From section @ref(), you may think of using a for loop to execute these.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Repeat for total 10,000 times}
+\NormalTok{Reps }\OtherTok{\textless{}{-}} \DecValTok{10000} 
+\DocumentationTok{\#\# pre allocate vector to store the 10,000 sample means}
+\NormalTok{sampleMeans }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, Reps) }
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Reps)\{}
+  \DocumentationTok{\#\# draw 10 numbers from standard normal, find the mean, and store}
+\NormalTok{  sampleMeans[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Intuitively, we know the sample means from each sample are different. We can print out a few of these values to confirm this idea.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(sampleMeans)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.30823015 -0.12775532  0.41992670  0.09275484  0.01503494  0.21408720
+\end{verbatim}
+
+We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure \ref{fig:ch6plot} that most of the sample means are close to 0, and values further from 0 are less likely to occur.
+
+\begin{figure}
+
+{\centering \includegraphics{bookdown-demo_files/figure-latex/ch6plot-1} 
+
+}
+
+\caption{Density Plot of Sample Means from 10,000 Random Samples of Size 10}\label{fig:ch6plot}
+\end{figure}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

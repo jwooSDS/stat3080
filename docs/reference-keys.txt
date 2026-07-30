@@ -1,6 +1,7 @@
 tab:structures
 fig:plot-pressure
 tab:labels
+fig:ch6plot
 fig:car
 fig:cards
 Rbasics
@@ -16,7 +17,7 @@ basic-math-operations
 assignments-and-variables
 functions
 doc
-working-with-common-probability-distributions
+distributions
 example-1-normal-distribution
 example-2-binomial-distribution
 packages
@@ -91,4 +92,8 @@ iterating
 forloops
 while-loops
 vectorization-in-r
+sims
+motivation-3
+sampling
+replicate
 blank

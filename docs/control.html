@@ -70,7 +70,8 @@
 <li><a class="" href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></li>
 <li><a class="" href="func.html"><span class="header-section-number">4</span> Functions</a></li>
 <li><a class="active" href="control.html"><span class="header-section-number">5</span> Control Flow</a></li>
-<li><a class="" href="blank.html"><span class="header-section-number">6</span> Blank Canvas</a></li>
+<li><a class="" href="sims.html"><span class="header-section-number">6</span> Simulations</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">7</span> Blank Canvas</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -213,9 +214,9 @@
 <p>If values are being calculated in the loop that need to be saved, it is best practice to create a data structure of an appropriate size to record the values during the loop. This practice is called <strong>pre-allocation</strong>. This is preferred to creating a data structure with unknown size and have the data structure grow as the loop is run, as pre-allocation is more efficient.</p>
 <div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## create a vector to store the 10 squared values</span></span>
-<span><span class="co">## initialize each entry in the vector to be 0 to start</span></span>
+<span><span class="co">## initialize each entry in the vector to be NA to start</span></span>
 <span><span class="co">## we have to fill the vector with something at the start</span></span>
-<span><span class="va">squaredVals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">squaredVals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">squaredVals</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">n</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> </span>
@@ -270,7 +271,7 @@
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="func.html"><span class="header-section-number">4</span> Functions</a></div>
-<div class="next"><a href="blank.html"><span class="header-section-number">6</span> Blank Canvas</a></div>
+<div class="next"><a href="sims.html"><span class="header-section-number">6</span> Simulations</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">

@@ -218,7 +218,7 @@ The sections of the help page that I find useful:
 
 Note: In the top-left corner of the help page, the name of the function is shown, along with the package it is from in braces. So the `log()` function comes a package called `base`. 
 
-### Working with common probability distributions
+### Working with common probability distributions {#distributions}
 
 Some common probability distributions (e.g. normal, binomial, etc.) are defined in R. Each distribution has a general function name, for example:
 

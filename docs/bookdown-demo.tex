@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-07-29}
+\date{2026-07-30}
 
 \begin{document}
 \maketitle
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.03444571  3.67821122 -1.67189699  6.76632906  2.19653361  1.36596050
-##  [7] -2.42019872 -1.82150069  0.59546717 -2.78626215
+##  [1]  2.626439  1.724571  2.234296  7.542492 -1.200581  1.485892 -0.720010
+##  [8]  6.682834  2.586090 -1.479757
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -2991,7 +2991,7 @@ You may realize that you may need your code to make decisions based on criteria 
 \begin{itemize}
 \tightlist
 \item
-  Branching with if statements: If a condition is true, execute a block of code. Extensions include the possibility of running another clode of code if the condition is false.
+  Branching with if statements: If a condition is true, execute a block of code. Extensions include the possibility of running another block of code if the condition is false.
 \item
   Iterate with for loops: repeat a block of code a fixed, known number of times.
 \item
@@ -3245,6 +3245,8 @@ Suppose you play a gambling game where you start with \$5. Each time you play th
 \textbf{Vectorization in R} is a feature of R where operations are applied to an entire vector or data structure at once, rather than iterating through each individual element one by one using a traditional loop. You have seen this feature in the examples in Section \ref{mathops}. Vectorization makes performing math operations and functions on data structures efficient.
 
 Consider the example in Section \ref{forloops}. We have a vector \texttt{1:10} and we want to square each value. Instead of squaring each entry in the vector one by one for a loop, we can easily type \texttt{(1:10)\^{}2} to get the same result.
+
+As your code gets longer and more complex, making it more efficient with vectorization and pre-allocation will make a difference in how long your code runs.
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

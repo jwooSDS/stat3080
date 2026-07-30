@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  2.3613188  0.1837096 -4.0303509  2.5231597  3.7812568 -2.0905174
-##  [7]  0.2495993 -2.8255194 -1.4188294  5.0170675
+##  [1]  1.1622126  3.5850511  2.4461021 -0.4526766 -0.0783924 -0.4259770
+##  [7]  0.4256915  1.5913574  0.2008653 -0.7014705
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3322,7 +3322,7 @@ You have also seen sampling before in Section @red(distributions), where functio
 \hypertarget{replicate}{%
 \section{Replicate}\label{replicate}}
 
-You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or replicate, the sampling a lot of times.
+You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or \textbf{replicate}, the sampling a lot of times.
 
 The \texttt{replicate()} function evaluates a given function the specified number of times and returns a matrix with a column containing the results from each replication. There are two arguments: the number of replications and the function to be replicated.
 
@@ -3343,7 +3343,7 @@ Going back to the coin tossing example, suppose we want to toss a fair coin 5 ti
 ## [5,] "heads" "tails" "tails" "tails" "heads" "heads"
 \end{verbatim}
 
-From section \ref{control}, you may think of using a for loop to execute these. A for loop could do the same, but the code is longer.
+From section \ref{control}, you may think of using a for loop to execute these steps. A for loop could do the same, but the code is longer.
 
 \hypertarget{simulation}{%
 \section{Simulation}\label{simulation}}
@@ -3376,7 +3376,7 @@ In the previous block of code, we see these steps in action:
 \hypertarget{ch6sim}{%
 \subsection{Worked Example: Sampling Distribution of the Sample Mean}\label{ch6sim}}
 
-In introductory statistics, you learned if \(X \sim N(\mu, \sigma^2)\), then \(\bar{X} \sim N(\mu, \frac{\sigma^2}{n})\). This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class.
+In introductory statistics, you learned that if \(X \sim N(\mu, \sigma^2)\), then \(\bar{X} \sim N(\mu, \frac{\sigma^2}{n})\). This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class.
 
 This means that if we have data from a \(N(\mu, \sigma^2)\) distribution, then the distribution of the sample means from a large number of random samples each of size \(n\) is \(N(\mu, \frac{\sigma^2}{n})\).
 
@@ -3428,7 +3428,7 @@ Intuitively, we know the sample means from each sample are different. We can pri
 ## [1] -0.28824148  0.56248186  0.02602954  0.30351791  0.29413886  0.92128312
 \end{verbatim}
 
-If the sampling distribtuion of the sample mean is correct, we know that \(\bar{X}_{10} \sim N(0, \frac{1}{10})\), at least theoretically. Our simulation should be consistent with this theory.
+If the sampling distribution of the sample mean is correct, we know that \(\bar{X}_{10} \sim N(0, \frac{1}{10})\), theoretically. Our simulation should be consistent with this theory.
 
 We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure \ref{fig:ch6plot} that most of the sample means are close to 0, and values further from 0 are less likely to occur. This also looks like a normal distribution.
 
@@ -3469,13 +3469,11 @@ We know that the mean and variance of the 10,000 sample means should be close to
 ## [1] 0.09895951
 \end{verbatim}
 
-The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 5.
+The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 10.
 
 We have just created a simulation that imitates the sampling distribution of the sample mean when the data are standard normal and each sample has size 10!
 
 Hopefully, this example convinces you that with a large number of replicates, results from a simulation match very closely with theory.
-
-In many other situations, mathematical theory can be difficult to prove. For example, what is the sampling distribution of the median from a non-normal population? While finding this result will be challenging mathematically, we can use simulation to get very close to the result.
 
 Note: you could have gotten similar results by using a for loop, using the code below. However, the for loop is a bit longer as we need to pre-allocate.
 
@@ -3496,6 +3494,8 @@ Note: you could have gotten similar results by using a for loop, using the code 
 \FunctionTok{var}\NormalTok{(sampleMeansLoop)}
 \end{Highlighting}
 \end{Shaded}
+
+In many other situations, mathematical theory can be difficult to prove. For example, what is the sampling distribution of the median from a non-normal population? While finding this result will be challenging mathematically, we can use simulation to get very close to the result.
 
 \hypertarget{considerations-with-simulations}{%
 \subsection{Considerations with Simulations}\label{considerations-with-simulations}}

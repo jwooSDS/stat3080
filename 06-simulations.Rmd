@@ -53,7 +53,7 @@ You have also seen sampling before in Section \@red(distributions), where functi
 
 ## Replicate
 
-You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or replicate, the sampling a lot of times. 
+You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or **replicate**, the sampling a lot of times. 
 
 The `replicate()` function evaluates a given function the specified number of times and returns a matrix with a column containing the results from each replication. There are two arguments: the number of replications and the function to be replicated. 
 
@@ -63,7 +63,7 @@ Going back to the coin tossing example, suppose we want to toss a fair coin 5 ti
 replicate(6, sample(fairCoin, size = 5, replace = TRUE))
 ```
 
-From section \@ref(control), you may think of using a for loop to execute these. A for loop could do the same, but the code is longer. 
+From section \@ref(control), you may think of using a for loop to execute these steps. A for loop could do the same, but the code is longer. 
 
 ## Simulation
 
@@ -81,7 +81,7 @@ In the previous block of code, we see these steps in action:
 
 ### Worked Example: Sampling Distribution of the Sample Mean {#ch6sim}
 
-In introductory statistics, you learned if $X \sim N(\mu, \sigma^2)$, then $\bar{X} \sim N(\mu, \frac{\sigma^2}{n})$. This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class. 
+In introductory statistics, you learned that if $X \sim N(\mu, \sigma^2)$, then $\bar{X} \sim N(\mu, \frac{\sigma^2}{n})$. This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class. 
 
 This means that if we have data from a $N(\mu, \sigma^2)$ distribution, then the distribution of the sample means from a large number of random samples each of size $n$ is $N(\mu, \frac{\sigma^2}{n})$. 
 
@@ -115,7 +115,7 @@ Intuitively, we know the sample means from each sample are different. We can pri
 ```{r}
 head(storeSampMeans)
 ```
-If the sampling distribtuion of the sample mean is correct, we know that $\bar{X}_{10} \sim N(0, \frac{1}{10})$, at least theoretically. Our simulation should be consistent with this theory. 
+If the sampling distribution of the sample mean is correct, we know that $\bar{X}_{10} \sim N(0, \frac{1}{10})$, theoretically. Our simulation should be consistent with this theory. 
 
 We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure \@ref(fig:ch6plot) that most of the sample means are close to 0, and values further from 0 are less likely to occur. This also looks like a normal distribution. 
 
@@ -130,13 +130,11 @@ mean(storeSampMeans)
 var(storeSampMeans)
 ```
 
-The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 5.
+The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 10.
 
 We have just created a simulation that imitates the sampling distribution of the sample mean when the data are standard normal and each sample has size 10!
 
 Hopefully, this example convinces you that with a large number of replicates, results from a simulation match very closely with theory.
-
-In many other situations, mathematical theory can be difficult to prove. For example, what is the sampling distribution of the median from a non-normal population? While finding this result will be challenging mathematically, we can use simulation to get very close to the result. 
 
 Note: you could have gotten similar results by using a for loop, using the code below. However, the for loop is a bit longer as we need to pre-allocate. 
 
@@ -155,6 +153,8 @@ plot(density(sampleMeansLoop), main="")
 mean(sampleMeansLoop)
 var(sampleMeansLoop)
 ```
+
+In many other situations, mathematical theory can be difficult to prove. For example, what is the sampling distribution of the median from a non-normal population? While finding this result will be challenging mathematically, we can use simulation to get very close to the result. 
 
 ### Considerations with Simulations
 

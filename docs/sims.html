@@ -133,7 +133,7 @@
 <h2>
 <span class="header-section-number">6.3</span> Replicate<a class="anchor" aria-label="anchor" href="#replicate"><i class="fas fa-link"></i></a>
 </h2>
-<p>You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or replicate, the sampling a lot of times.</p>
+<p>You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or <strong>replicate</strong>, the sampling a lot of times.</p>
 <p>The <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> function evaluates a given function the specified number of times and returns a matrix with a column containing the results from each replication. There are two arguments: the number of replications and the function to be replicated.</p>
 <p>Going back to the coin tossing example, suppose we want to toss a fair coin 5 times, and replicate this experiment for 6 replicates.</p>
 <div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
@@ -144,7 +144,7 @@
 ## [3,] "tails" "heads" "tails" "heads" "heads" "heads"
 ## [4,] "tails" "heads" "tails" "tails" "tails" "tails"
 ## [5,] "heads" "tails" "tails" "tails" "heads" "heads"</code></pre>
-<p>From section <a href="control.html#control">5</a>, you may think of using a for loop to execute these. A for loop could do the same, but the code is longer.</p>
+<p>From section <a href="control.html#control">5</a>, you may think of using a for loop to execute these steps. A for loop could do the same, but the code is longer.</p>
 </div>
 <div id="simulation" class="section level2" number="6.4">
 <h2>
@@ -166,7 +166,7 @@
 <h3>
 <span class="header-section-number">6.4.1</span> Worked Example: Sampling Distribution of the Sample Mean<a class="anchor" aria-label="anchor" href="#ch6sim"><i class="fas fa-link"></i></a>
 </h3>
-<p>In introductory statistics, you learned if <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then <span class="math inline">\(\bar{X} \sim N(\mu, \frac{\sigma^2}{n})\)</span>. This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class.</p>
+<p>In introductory statistics, you learned that if <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then <span class="math inline">\(\bar{X} \sim N(\mu, \frac{\sigma^2}{n})\)</span>. This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class.</p>
 <p>This means that if we have data from a <span class="math inline">\(N(\mu, \sigma^2)\)</span> distribution, then the distribution of the sample means from a large number of random samples each of size <span class="math inline">\(n\)</span> is <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>.</p>
 <p>We will see how we can use simulation to illustrate the sampling distribution of the sample mean.</p>
 <p>Suppose the data follow a standard normal distribution, i.e. <span class="math inline">\(X \sim N(0,1)\)</span>. The sampling distribution of the sample mean tells us that based on samples each of size 10, <span class="math inline">\(\bar{X}_{10} \sim N(0, \frac{1}{10})\)</span>. So the three main steps of this simulation would be:</p>
@@ -189,7 +189,7 @@
 <div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -0.28824148  0.56248186  0.02602954  0.30351791  0.29413886  0.92128312</code></pre>
-<p>If the sampling distribtuion of the sample mean is correct, we know that <span class="math inline">\(\bar{X}_{10} \sim N(0, \frac{1}{10})\)</span>, at least theoretically. Our simulation should be consistent with this theory.</p>
+<p>If the sampling distribution of the sample mean is correct, we know that <span class="math inline">\(\bar{X}_{10} \sim N(0, \frac{1}{10})\)</span>, theoretically. Our simulation should be consistent with this theory.</p>
 <p>We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure <a href="sims.html#fig:ch6plot">6.1</a> that most of the sample means are close to 0, and values further from 0 are less likely to occur. This also looks like a normal distribution.</p>
 <div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span>, main<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
@@ -206,10 +206,9 @@ Figure 6.1: Density Plot of Sample Means from 10,000 Random Samples of Size 10
 <div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.09895951</code></pre>
-<p>The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 5.</p>
+<p>The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 10.</p>
 <p>We have just created a simulation that imitates the sampling distribution of the sample mean when the data are standard normal and each sample has size 10!</p>
 <p>Hopefully, this example convinces you that with a large number of replicates, results from a simulation match very closely with theory.</p>
-<p>In many other situations, mathematical theory can be difficult to prove. For example, what is the sampling distribution of the median from a non-normal population? While finding this result will be challenging mathematically, we can use simulation to get very close to the result.</p>
 <p>Note: you could have gotten similar results by using a for loop, using the code below. However, the for loop is a bit longer as we need to pre-allocate.</p>
 <div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Repeat for total 10,000 times</span></span>
@@ -225,6 +224,7 @@ Figure 6.1: Density Plot of Sample Means from 10,000 Random Samples of Size 10
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">sampleMeansLoop</span><span class="op">)</span>, main<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sampleMeansLoop</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">sampleMeansLoop</span><span class="op">)</span></span></code></pre></div>
+<p>In many other situations, mathematical theory can be difficult to prove. For example, what is the sampling distribution of the median from a non-normal population? While finding this result will be challenging mathematically, we can use simulation to get very close to the result.</p>
 </div>
 <div id="considerations-with-simulations" class="section level3" number="6.4.2">
 <h3>

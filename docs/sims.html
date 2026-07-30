@@ -134,36 +134,108 @@
 <span class="header-section-number">6.3</span> Replicate<a class="anchor" aria-label="anchor" href="#replicate"><i class="fas fa-link"></i></a>
 </h2>
 <p>You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or replicate, the sampling a lot of times.</p>
-<p>Suppose we want to do the following to investigate the uncertainty associated with the sample mean when the data follows a standard normal distribution, based on samples size 10. You could write code to do the following:</p>
-<ul>
-<li>Draw a random sample of 10 from a standard normal distribution.</li>
-<li>Compute the sample mean of this sample of 10 and store it.</li>
-<li>Repeat the previous two steps for large number of times, say 10,000 times.</li>
-<li>Create a visualization to show the distribution of these 10,000 sample means, or calculate some values such as the mean, variance, and so on.</li>
-</ul>
-<p>From section @ref(), you may think of using a for loop to execute these.</p>
+<p>The <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> function evaluates a given function the specified number of times and returns a matrix with a column containing the results from each replication. There are two arguments: the number of replications and the function to be replicated.</p>
+<p>Going back to the coin tossing example, suppose we want to toss a fair coin 5 times, and replicate this experiment for 6 replicates.</p>
 <div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Repeat for total 10,000 times</span></span>
-<span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span> </span>
-<span><span class="co">## pre allocate vector to store the 10,000 sample means</span></span>
-<span><span class="va">sampleMeans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">Reps</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">Reps</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="co">## draw 10 numbers from standard normal, find the mean, and store</span></span>
-<span>  <span class="va">sampleMeans</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">fairCoin</span>, size <span class="op">=</span> <span class="fl">5</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##      [,1]    [,2]    [,3]    [,4]    [,5]    [,6]   
+## [1,] "heads" "tails" "heads" "heads" "tails" "tails"
+## [2,] "heads" "tails" "heads" "heads" "tails" "tails"
+## [3,] "tails" "heads" "tails" "heads" "heads" "heads"
+## [4,] "tails" "heads" "tails" "tails" "tails" "tails"
+## [5,] "heads" "tails" "tails" "tails" "heads" "heads"</code></pre>
+<p>From section <a href="control.html#control">5</a>, you may think of using a for loop to execute these. A for loop could do the same, but the code is longer.</p>
+</div>
+<div id="simulation" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Simulation<a class="anchor" aria-label="anchor" href="#simulation"><i class="fas fa-link"></i></a>
+</h2>
+<p>According to <span class="citation">Bonnell and Ogihara (<a href="references.html#ref-exploring">2024</a>)</span>, a simulation consists of three main steps:</p>
+<ol style="list-style-type: decimal">
+<li>Decide what to simulate. What process do we want to imitate?</li>
+<li>Figure out how to simulate one value.</li>
+<li>Replicate step 2 many times.</li>
+</ol>
+<p>In the previous block of code, we see these steps in action:</p>
+<ul>
+<li>We want to imitate the results from tossing a fair coin 5 times.</li>
+<li>We use the <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> function to simulate one “value”, which is a vector storing the outcomes from 5 tosses of the coin.</li>
+<li>We use the <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> to repeat the previous step for a total of 6 replicates.</li>
+</ul>
+<div id="ch6sim" class="section level3" number="6.4.1">
+<h3>
+<span class="header-section-number">6.4.1</span> Worked Example: Sampling Distribution of the Sample Mean<a class="anchor" aria-label="anchor" href="#ch6sim"><i class="fas fa-link"></i></a>
+</h3>
+<p>In introductory statistics, you learned if <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then <span class="math inline">\(\bar{X} \sim N(\mu, \frac{\sigma^2}{n})\)</span>. This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class.</p>
+<p>This means that if we have data from a <span class="math inline">\(N(\mu, \sigma^2)\)</span> distribution, then the distribution of the sample means from a large number of random samples each of size <span class="math inline">\(n\)</span> is <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>.</p>
+<p>We will see how we can use simulation to illustrate the sampling distribution of the sample mean.</p>
+<p>Suppose the data follow a standard normal distribution, i.e. <span class="math inline">\(X \sim N(0,1)\)</span>. The sampling distribution of the sample mean tells us that based on samples each of size 10, <span class="math inline">\(\bar{X}_{10} \sim N(0, \frac{1}{10})\)</span>. So the three main steps of this simulation would be:</p>
+<ol style="list-style-type: decimal">
+<li>Draw a random sample of 10 from a standard normal distribution, compute the sample mean, and store this value.</li>
+<li>Use <code>rnorm(10)</code> to simulate 10 draws from a standard normal distribution, then compute the sample mean of these 10 draws, and store this value.</li>
+<li>Repeat step 2 for a large number of times, say for a total of 10,000 replicates.</li>
+</ol>
+<p>Step 3 involves using the <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> function, where we supply the number of replicates and a function that gives the result from step 2, i.e. the sample mean from 10 random draws from a standard normal. While there is no function in base R that does this, we can easily write our own function to do this (see Section <a href="func.html#func">4</a> on how to write functions)!</p>
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sampMean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
+<p>Our created <code>sampMean()</code> computes the sample mean of a certain number of draws (that is supplied) from a standard normal distribution. <code>sampMean()</code> executes step 2.</p>
+<p>For step 3, we can just use <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> on <code>sampMean()</code>. Suppose we want 10,000 replicates. We store the value of the sample mean from 10,000 random samples, each with size 10.</p>
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span><span class="va">storeSampMeans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">Reps</span>, <span class="fu">sampMean</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Intuitively, we know the sample means from each sample are different. We can print out a few of these values to confirm this idea.</p>
-<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sampleMeans</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] -0.30823015 -0.12775532  0.41992670  0.09275484  0.01503494  0.21408720</code></pre>
-<p>We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure <a href="sims.html#fig:ch6plot">6.1</a> that most of the sample means are close to 0, and values further from 0 are less likely to occur.</p>
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -0.28824148  0.56248186  0.02602954  0.30351791  0.29413886  0.92128312</code></pre>
+<p>If the sampling distribtuion of the sample mean is correct, we know that <span class="math inline">\(\bar{X}_{10} \sim N(0, \frac{1}{10})\)</span>, at least theoretically. Our simulation should be consistent with this theory.</p>
+<p>We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure <a href="sims.html#fig:ch6plot">6.1</a> that most of the sample means are close to 0, and values further from 0 are less likely to occur. This also looks like a normal distribution.</p>
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span>, main<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:ch6plot"></span>
 <img src="bookdown-demo_files/figure-html/ch6plot-1.png" alt="Density Plot of Sample Means from 10,000 Random Samples of Size 10" width="672"><p class="caption">
 Figure 6.1: Density Plot of Sample Means from 10,000 Random Samples of Size 10
 </p>
 </div>
-
+<p>We know that the mean and variance of the 10,000 sample means should be close to 0 and 0.1 theoretically.</p>
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -0.005047077</code></pre>
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.09895951</code></pre>
+<p>The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 5.</p>
+<p>We have just created a simulation that imitates the sampling distribution of the sample mean when the data are standard normal and each sample has size 10!</p>
+<p>Hopefully, this example convinces you that with a large number of replicates, results from a simulation match very closely with theory.</p>
+<p>In many other situations, mathematical theory can be difficult to prove. For example, what is the sampling distribution of the median from a non-normal population? While finding this result will be challenging mathematically, we can use simulation to get very close to the result.</p>
+<p>Note: you could have gotten similar results by using a for loop, using the code below. However, the for loop is a bit longer as we need to pre-allocate.</p>
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Repeat for total 10,000 times</span></span>
+<span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span> </span>
+<span><span class="co">## pre allocate vector to store the 10,000 sample means</span></span>
+<span><span class="va">sampleMeansLoop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">Reps</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">Reps</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="co">## draw 10 numbers from standard normal, find the mean, and store</span></span>
+<span>  <span class="va">sampleMeansLoop</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">sampleMeansLoop</span><span class="op">)</span>, main<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sampleMeansLoop</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">sampleMeansLoop</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="considerations-with-simulations" class="section level3" number="6.4.2">
+<h3>
+<span class="header-section-number">6.4.2</span> Considerations with Simulations<a class="anchor" aria-label="anchor" href="#considerations-with-simulations"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the example above in Section <a href="sims.html#ch6sim">6.4.1</a>, we compared results from a simulation with the corresponding theoretical values, so we could see that simulations work. However, if we do not know the theoretical values, two questions will come to mind:</p>
+<ul>
+<li><p>How many replicates do we need? We only know the values from the simulation converge (get close) to the theoretical values as we increase the number of replicates. Using more replicates will make the simulation run longer on your computer.</p></li>
+<li><p>Related to the previous question, how close is close enough? How do you know your value from the simulation is close enough to the theoretical value? There is no way of knowing if the theoretical value is unknown.</p></li>
+</ul>
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -176,6 +248,12 @@ Figure 6.1: Density Plot of Sample Means from 10,000 Random Samples of Size 10
 <li><a class="nav-link" href="#motivation-3"><span class="header-section-number">6.1</span> Motivation</a></li>
 <li><a class="nav-link" href="#sampling"><span class="header-section-number">6.2</span> Sampling</a></li>
 <li><a class="nav-link" href="#replicate"><span class="header-section-number">6.3</span> Replicate</a></li>
+<li>
+<a class="nav-link" href="#simulation"><span class="header-section-number">6.4</span> Simulation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ch6sim"><span class="header-section-number">6.4.1</span> Worked Example: Sampling Distribution of the Sample Mean</a></li>
+<li><a class="nav-link" href="#considerations-with-simulations"><span class="header-section-number">6.4.2</span> Considerations with Simulations</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">

@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -4.5636989  4.0292530 -1.2010709  5.1409959  1.3825723 -8.2694672
-##  [7]  0.7912508  6.4820995  0.4473297 -2.0269787
+##  [1]  2.3613188  0.1837096 -4.0303509  2.5231597  3.7812568 -2.0905174
+##  [7]  0.2495993 -2.8255194 -1.4188294  5.0170675
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3324,33 +3324,95 @@ You have also seen sampling before in Section @red(distributions), where functio
 
 You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or replicate, the sampling a lot of times.
 
-Suppose we want to do the following to investigate the uncertainty associated with the sample mean when the data follows a standard normal distribution, based on samples size 10. You could write code to do the following:
+The \texttt{replicate()} function evaluates a given function the specified number of times and returns a matrix with a column containing the results from each replication. There are two arguments: the number of replications and the function to be replicated.
+
+Going back to the coin tossing example, suppose we want to toss a fair coin 5 times, and replicate this experiment for 6 replicates.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{replicate}\NormalTok{(}\DecValTok{6}\NormalTok{, }\FunctionTok{sample}\NormalTok{(fairCoin, }\AttributeTok{size =} \DecValTok{5}\NormalTok{, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1]    [,2]    [,3]    [,4]    [,5]    [,6]   
+## [1,] "heads" "tails" "heads" "heads" "tails" "tails"
+## [2,] "heads" "tails" "heads" "heads" "tails" "tails"
+## [3,] "tails" "heads" "tails" "heads" "heads" "heads"
+## [4,] "tails" "heads" "tails" "tails" "tails" "tails"
+## [5,] "heads" "tails" "tails" "tails" "heads" "heads"
+\end{verbatim}
+
+From section \ref{control}, you may think of using a for loop to execute these. A for loop could do the same, but the code is longer.
+
+\hypertarget{simulation}{%
+\section{Simulation}\label{simulation}}
+
+According to \citet{exploring}, a simulation consists of three main steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Decide what to simulate. What process do we want to imitate?
+\item
+  Figure out how to simulate one value.
+\item
+  Replicate step 2 many times.
+\end{enumerate}
+
+In the previous block of code, we see these steps in action:
 
 \begin{itemize}
 \tightlist
 \item
-  Draw a random sample of 10 from a standard normal distribution.
+  We want to imitate the results from tossing a fair coin 5 times.
 \item
-  Compute the sample mean of this sample of 10 and store it.
+  We use the \texttt{sample()} function to simulate one ``value'', which is a vector storing the outcomes from 5 tosses of the coin.
 \item
-  Repeat the previous two steps for large number of times, say 10,000 times.
-\item
-  Create a visualization to show the distribution of these 10,000 sample means, or calculate some values such as the mean, variance, and so on.
+  We use the \texttt{replicate()} to repeat the previous step for a total of 6 replicates.
 \end{itemize}
 
-From section @ref(), you may think of using a for loop to execute these.
+\hypertarget{ch6sim}{%
+\subsection{Worked Example: Sampling Distribution of the Sample Mean}\label{ch6sim}}
+
+In introductory statistics, you learned if \(X \sim N(\mu, \sigma^2)\), then \(\bar{X} \sim N(\mu, \frac{\sigma^2}{n})\). This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class.
+
+This means that if we have data from a \(N(\mu, \sigma^2)\) distribution, then the distribution of the sample means from a large number of random samples each of size \(n\) is \(N(\mu, \frac{\sigma^2}{n})\).
+
+We will see how we can use simulation to illustrate the sampling distribution of the sample mean.
+
+Suppose the data follow a standard normal distribution, i.e.~\(X \sim N(0,1)\). The sampling distribution of the sample mean tells us that based on samples each of size 10, \(\bar{X}_{10} \sim N(0, \frac{1}{10})\). So the three main steps of this simulation would be:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Draw a random sample of 10 from a standard normal distribution, compute the sample mean, and store this value.
+\item
+  Use \texttt{rnorm(10)} to simulate 10 draws from a standard normal distribution, then compute the sample mean of these 10 draws, and store this value.
+\item
+  Repeat step 2 for a large number of times, say for a total of 10,000 replicates.
+\end{enumerate}
+
+Step 3 involves using the \texttt{replicate()} function, where we supply the number of replicates and a function that gives the result from step 2, i.e.~the sample mean from 10 random draws from a standard normal. While there is no function in base R that does this, we can easily write our own function to do this (see Section \ref{func} on how to write functions)!
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# Repeat for total 10,000 times}
-\NormalTok{Reps }\OtherTok{\textless{}{-}} \DecValTok{10000} 
-\DocumentationTok{\#\# pre allocate vector to store the 10,000 sample means}
-\NormalTok{sampleMeans }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, Reps) }
-
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Reps)\{}
-  \DocumentationTok{\#\# draw 10 numbers from standard normal, find the mean, and store}
-\NormalTok{  sampleMeans[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{))}
+\NormalTok{sampMean }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(number)\{}
+  \FunctionTok{mean}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(number))}
 \NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Our created \texttt{sampMean()} computes the sample mean of a certain number of draws (that is supplied) from a standard normal distribution. \texttt{sampMean()} executes step 2.
+
+For step 3, we can just use \texttt{replicate()} on \texttt{sampMean()}. Suppose we want 10,000 replicates. We store the value of the sample mean from 10,000 random samples, each with size 10.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Reps }\OtherTok{\textless{}{-}} \DecValTok{10000}
+\NormalTok{storeSampMeans }\OtherTok{\textless{}{-}} \FunctionTok{replicate}\NormalTok{(Reps, }\FunctionTok{sampMean}\NormalTok{(}\DecValTok{10}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3358,15 +3420,23 @@ Intuitively, we know the sample means from each sample are different. We can pri
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{head}\NormalTok{(sampleMeans)}
+\FunctionTok{head}\NormalTok{(storeSampMeans)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] -0.30823015 -0.12775532  0.41992670  0.09275484  0.01503494  0.21408720
+## [1] -0.28824148  0.56248186  0.02602954  0.30351791  0.29413886  0.92128312
 \end{verbatim}
 
-We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure \ref{fig:ch6plot} that most of the sample means are close to 0, and values further from 0 are less likely to occur.
+If the sampling distribtuion of the sample mean is correct, we know that \(\bar{X}_{10} \sim N(0, \frac{1}{10})\), at least theoretically. Our simulation should be consistent with this theory.
+
+We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure \ref{fig:ch6plot} that most of the sample means are close to 0, and values further from 0 are less likely to occur. This also looks like a normal distribution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(storeSampMeans), }\AttributeTok{main=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
 
@@ -3376,6 +3446,68 @@ We can create a density plot of the 10,000 sample means to visualize the uncerta
 
 \caption{Density Plot of Sample Means from 10,000 Random Samples of Size 10}\label{fig:ch6plot}
 \end{figure}
+
+We know that the mean and variance of the 10,000 sample means should be close to 0 and 0.1 theoretically.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(storeSampMeans)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.005047077
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{var}\NormalTok{(storeSampMeans)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.09895951
+\end{verbatim}
+
+The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 5.
+
+We have just created a simulation that imitates the sampling distribution of the sample mean when the data are standard normal and each sample has size 10!
+
+Hopefully, this example convinces you that with a large number of replicates, results from a simulation match very closely with theory.
+
+In many other situations, mathematical theory can be difficult to prove. For example, what is the sampling distribution of the median from a non-normal population? While finding this result will be challenging mathematically, we can use simulation to get very close to the result.
+
+Note: you could have gotten similar results by using a for loop, using the code below. However, the for loop is a bit longer as we need to pre-allocate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Repeat for total 10,000 times}
+\NormalTok{Reps }\OtherTok{\textless{}{-}} \DecValTok{10000} 
+\DocumentationTok{\#\# pre allocate vector to store the 10,000 sample means}
+\NormalTok{sampleMeansLoop }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, Reps) }
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Reps)\{}
+  \DocumentationTok{\#\# draw 10 numbers from standard normal, find the mean, and store}
+\NormalTok{  sampleMeansLoop[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{))}
+\NormalTok{\}}
+
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(sampleMeansLoop), }\AttributeTok{main=}\StringTok{""}\NormalTok{)}
+\FunctionTok{mean}\NormalTok{(sampleMeansLoop)}
+\FunctionTok{var}\NormalTok{(sampleMeansLoop)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{considerations-with-simulations}{%
+\subsection{Considerations with Simulations}\label{considerations-with-simulations}}
+
+In the example above in Section \ref{ch6sim}, we compared results from a simulation with the corresponding theoretical values, so we could see that simulations work. However, if we do not know the theoretical values, two questions will come to mind:
+
+\begin{itemize}
+\item
+  How many replicates do we need? We only know the values from the simulation converge (get close) to the theoretical values as we increase the number of replicates. Using more replicates will make the simulation run longer on your computer.
+\item
+  Related to the previous question, how close is close enough? How do you know your value from the simulation is close enough to the theoretical value? There is no way of knowing if the theoretical value is unknown.
+\end{itemize}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

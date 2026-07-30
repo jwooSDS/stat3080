@@ -96,4 +96,7 @@ sims
 motivation-3
 sampling
 replicate
+simulation
+ch6sim
+considerations-with-simulations
 blank

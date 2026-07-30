@@ -55,38 +55,116 @@ You have also seen sampling before in Section \@red(distributions), where functi
 
 You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or replicate, the sampling a lot of times. 
 
-Suppose we want to do the following to investigate the uncertainty associated with the sample mean when the data follows a standard normal distribution, based on samples size 10. You could write code to do the following:
+The `replicate()` function evaluates a given function the specified number of times and returns a matrix with a column containing the results from each replication. There are two arguments: the number of replications and the function to be replicated. 
 
-- Draw a random sample of 10 from a standard normal distribution.
-- Compute the sample mean of this sample of 10 and store it.
-- Repeat the previous two steps for large number of times, say 10,000 times.
-- Create a visualization to show the distribution of these 10,000 sample means, or calculate some values such as the mean, variance, and so on.
-
-From section \@ref(), you may think of using a for loop to execute these. 
+Going back to the coin tossing example, suppose we want to toss a fair coin 5 times, and replicate this experiment for 6 replicates.
 
 ```{r}
-## Repeat for total 10,000 times
-Reps <- 10000 
-## pre allocate vector to store the 10,000 sample means
-sampleMeans <- c(NA, Reps) 
+replicate(6, sample(fairCoin, size = 5, replace = TRUE))
+```
 
-for (i in 1:Reps){
-  ## draw 10 numbers from standard normal, find the mean, and store
-  sampleMeans[i] <- mean(rnorm(10))
+From section \@ref(control), you may think of using a for loop to execute these. A for loop could do the same, but the code is longer. 
+
+## Simulation
+
+According to @exploring, a simulation consists of three main steps:
+
+1. Decide what to simulate. What process do we want to imitate?
+2. Figure out how to simulate one value.
+3. Replicate step 2 many times.
+
+In the previous block of code, we see these steps in action:
+
+- We want to imitate the results from tossing a fair coin 5 times.
+- We use the `sample()` function to simulate one "value", which is a vector storing the outcomes from 5 tosses of the coin.
+- We use the `replicate()` to repeat the previous step for a total of 6 replicates. 
+
+### Worked Example: Sampling Distribution of the Sample Mean {#ch6sim}
+
+In introductory statistics, you learned if $X \sim N(\mu, \sigma^2)$, then $\bar{X} \sim N(\mu, \frac{\sigma^2}{n})$. This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class. 
+
+This means that if we have data from a $N(\mu, \sigma^2)$ distribution, then the distribution of the sample means from a large number of random samples each of size $n$ is $N(\mu, \frac{\sigma^2}{n})$. 
+
+We will see how we can use simulation to illustrate the sampling distribution of the sample mean. 
+
+Suppose the data follow a standard normal distribution, i.e. $X \sim N(0,1)$. The sampling distribution of the sample mean tells us that based on samples each of size 10, $\bar{X}_{10} \sim N(0, \frac{1}{10})$. So the three main steps of this simulation would be:
+
+1. Draw a random sample of 10 from a standard normal distribution, compute the sample mean, and store this value.
+2. Use `rnorm(10)` to simulate 10 draws from a standard normal distribution, then compute the sample mean of these 10 draws, and store this value.
+3. Repeat step 2 for a large number of times, say for a total of 10,000 replicates.
+
+Step 3 involves using the `replicate()` function, where we supply the number of replicates and a function that gives the result from step 2, i.e. the sample mean from 10 random draws from a standard normal. While there is no function in base R that does this, we can easily write our own function to do this (see Section \@ref(func) on how to write functions)! 
+
+```{r}
+sampMean <- function(number){
+  mean(rnorm(number))
 }
+```
+
+Our created `sampMean()` computes the sample mean of a certain number of draws (that is supplied) from a standard normal distribution. `sampMean()` executes step 2.
+
+For step 3, we can just use `replicate()` on `sampMean()`. Suppose we want 10,000 replicates. We store the value of the sample mean from 10,000 random samples, each with size 10. 
+
+```{r}
+Reps <- 10000
+storeSampMeans <- replicate(Reps, sampMean(10))
 ```
 
 Intuitively, we know the sample means from each sample are different. We can print out a few of these values to confirm this idea.
 
 ```{r}
-head(sampleMeans)
+head(storeSampMeans)
+```
+If the sampling distribtuion of the sample mean is correct, we know that $\bar{X}_{10} \sim N(0, \frac{1}{10})$, at least theoretically. Our simulation should be consistent with this theory. 
+
+We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure \@ref(fig:ch6plot) that most of the sample means are close to 0, and values further from 0 are less likely to occur. This also looks like a normal distribution. 
+
+```{r ch6plot, fig.cap='Density Plot of Sample Means from 10,000 Random Samples of Size 10', fig.align='center'}
+plot(density(storeSampMeans), main="")
 ```
 
-We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure \@ref(fig:ch6plot) that most of the sample means are close to 0, and values further from 0 are less likely to occur. 
+We know that the mean and variance of the 10,000 sample means should be close to 0 and 0.1 theoretically. 
 
-```{r ch6plot, fig.cap='Density Plot of Sample Means from 10,000 Random Samples of Size 10', fig.align='center', echo=FALSE}
-plot(density(sampleMeans), main="")
+```{r}
+mean(storeSampMeans)
+var(storeSampMeans)
 ```
+
+The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 5.
+
+We have just created a simulation that imitates the sampling distribution of the sample mean when the data are standard normal and each sample has size 10!
+
+Hopefully, this example convinces you that with a large number of replicates, results from a simulation match very closely with theory.
+
+In many other situations, mathematical theory can be difficult to prove. For example, what is the sampling distribution of the median from a non-normal population? While finding this result will be challenging mathematically, we can use simulation to get very close to the result. 
+
+Note: you could have gotten similar results by using a for loop, using the code below. However, the for loop is a bit longer as we need to pre-allocate. 
+
+```{r eval=FALSE}
+## Repeat for total 10,000 times
+Reps <- 10000 
+## pre allocate vector to store the 10,000 sample means
+sampleMeansLoop <- c(NA, Reps) 
+
+for (i in 1:Reps){
+  ## draw 10 numbers from standard normal, find the mean, and store
+  sampleMeansLoop[i] <- mean(rnorm(10))
+}
+
+plot(density(sampleMeansLoop), main="")
+mean(sampleMeansLoop)
+var(sampleMeansLoop)
+```
+
+### Considerations with Simulations
+
+In the example above in Section \@ref(ch6sim), we compared results from a simulation with the corresponding theoretical values, so we could see that simulations work. However, if we do not know the theoretical values, two questions will come to mind:
+
+- How many replicates do we need? We only know the values from the simulation converge (get close) to the theoretical values as we increase the number of replicates. Using more replicates will make the simulation run longer on your computer.
+
+- Related to the previous question, how close is close enough? How do you know your value from the simulation is close enough to the theoretical value? There is no way of knowing if the theoretical value is unknown.
+
+
 
 
 

@@ -103,6 +103,6 @@ applyfam
 overview
 apply
 tapply
-lapply
+lapply-and-sapply
 sapply
 blank

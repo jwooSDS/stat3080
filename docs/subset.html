@@ -71,7 +71,8 @@
 <li><a class="" href="func.html"><span class="header-section-number">4</span> Functions</a></li>
 <li><a class="" href="control.html"><span class="header-section-number">5</span> Control Flow</a></li>
 <li><a class="" href="sims.html"><span class="header-section-number">6</span> Simulations</a></li>
-<li><a class="" href="blank.html"><span class="header-section-number">7</span> Blank Canvas</a></li>
+<li><a class="" href="applyfam.html"><span class="header-section-number">7</span> Apply Family</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">8</span> Blank Canvas</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -594,9 +595,9 @@
 <code class="sourceCode R"><span><span class="va">y</span><span class="op">/</span><span class="va">x</span></span></code></pre></div>
 <pre><code>## [1] 0.6 0.6 0.6 0.6 0.6</code></pre>
 </div>
-<div id="applying-functions-on-data-structures" class="section level2" number="3.5">
+<div id="funcDF" class="section level2" number="3.5">
 <h2>
-<span class="header-section-number">3.5</span> Applying Functions on Data Structures<a class="anchor" aria-label="anchor" href="#applying-functions-on-data-structures"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5</span> Applying Functions on Data Structures<a class="anchor" aria-label="anchor" href="#funcDF"><i class="fas fa-link"></i></a>
 </h2>
 <p>Functions can be applied to data structures, for example</p>
 <div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
@@ -605,7 +606,7 @@
 <div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mult_mat2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 12</code></pre>
-<p>When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function. Variants of this function and user-defined functions will be covered later.</p>
+<p>When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function. Variants of this function and user-defined functions will be covered in Section <a href="applyfam.html#applyfam">7</a>.</p>
 <p>Suppose you are working on the <code>airquality</code> data set, that is stored in the object <code>Data.air</code>. The first four columns represents different numeric characteristics associated with air quality and weather conditions. You want to find the average value in each column.</p>
 <p>The <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function is used for a two-dimensional data structure. It uses three arguments: data, margin, and function. The data argument specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied.</p>
 <div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
@@ -657,7 +658,7 @@
 </ul>
 </li>
 <li><a class="nav-link" href="#mathops"><span class="header-section-number">3.4</span> Math Operations on Data Structures</a></li>
-<li><a class="nav-link" href="#applying-functions-on-data-structures"><span class="header-section-number">3.5</span> Applying Functions on Data Structures</a></li>
+<li><a class="nav-link" href="#funcDF"><span class="header-section-number">3.5</span> Applying Functions on Data Structures</a></li>
 </ul>
 
       <div class="book-extra">

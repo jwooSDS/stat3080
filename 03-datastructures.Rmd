@@ -360,7 +360,7 @@ x*y
 y/x
 ```
 
-## Applying Functions on Data Structures
+## Applying Functions on Data Structures {#funcDF}
 
 Functions can be applied to data structures, for example
 
@@ -369,7 +369,7 @@ sum(x)
 mean(mult_mat2)
 ```
 
-When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The `apply()` function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the `apply()` function. Variants of this function and user-defined functions will be covered later.
+When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The `apply()` function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the `apply()` function. Variants of this function and user-defined functions will be covered in Section \@ref(applyfam).
 
 Suppose you are working on the `airquality` data set, that is stored in the object `Data.air`. The first four columns represents different numeric characteristics associated with air quality and weather conditions. You want to find the average value in each column.
 

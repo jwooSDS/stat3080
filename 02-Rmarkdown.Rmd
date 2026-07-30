@@ -172,7 +172,7 @@ To cite the figure, type `\@ref(fig:plot-pressure)` in the narrative, using the 
 
 This is just a simple example. Referencing tables and equations are similar. Details can be found in @xie2020 Chapter 4.7.
 
-Note: you will learn more about creating plots in a later unit. 
+Note: you will learn more about creating plots in a later Section. 
 
 ## Knitting Your Document
 

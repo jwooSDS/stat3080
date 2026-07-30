@@ -1,0 +1,42 @@
+# Apply Family {#applyfam}
+
+## Overview
+
+We often want to apply the same function separately to each element of a vector. R has the `apply` family of functions that implement loops in specialized use cases. This family of functions are useful since it:
+
+- is compact,
+- can iterate over different data structures and return collated results, and
+- use anonymous functions to improve performance.
+
+This family of functions include:
+
+- `apply()`: Apply a function over the margins of an array.
+- `tapply()`: Apply a function over subsets of a vector.
+- `lappy()`: Loop over a list and evaluate a function on each item.
+- `sapply()`: Similar to `lapply()` but attempt to simplify the result.
+
+## `apply()`
+
+You learned about the `apply()` function in Section \@ref(funcDF). It is to apply a function over the margins of an array. To reiterate: it uses three arguments: data, margin, and function. The data argument specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied. For example, to find the average weight and height all respondents in the `Davis` data set from the `carData` package:
+
+```{r}
+library(carData)
+Data.Davis <- carData::Davis
+apply(Data.Davis[,2:3], 2, mean)
+##2 for columns, 1 for rows
+```
+You may realize that one could use a loop to obtain these values. The `apply()` function is more succint, although it does not really run faster than a loop [@peng2015].
+
+We so often compute sums or means of columns or rows that there functions that produce the same output as equivalent `apply()` versions:
+
+- `rowSums(X)` equivalent to `apply(X, 1, sum)`.
+- `rowMeans(X)` equivalent to `apply(X, 1, mean)`.
+- `colSums(X)` equivalent to `apply(X, 2, sum)`.
+- `colMeans(X)` equivalent to `apply(X, 2, mean)`.
+
+
+## `tapply()`
+
+## `lapply()`
+
+## `sapply()`

@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.1622126  3.5850511  2.4461021 -0.4526766 -0.0783924 -0.4259770
-##  [7]  0.4256915  1.5913574  0.2008653 -0.7014705
+##  [1]  2.128084  1.160586 -3.177443  1.569645 -2.560710 -2.260689  5.841004
+##  [8]  2.404003 -1.532265 -4.795236
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1569,7 +1569,7 @@ To cite the figure, type \texttt{\textbackslash{}@ref(fig:plot-pressure)} in the
 
 This is just a simple example. Referencing tables and equations are similar. Details can be found in \citet{xie2020} Chapter 4.7.
 
-Note: you will learn more about creating plots in a later unit.
+Note: you will learn more about creating plots in a later Section.
 
 \hypertarget{knitting-your-document}{%
 \section{Knitting Your Document}\label{knitting-your-document}}
@@ -2615,8 +2615,8 @@ You may have related numeric information stored in two data structures of the sa
 ## [1] 0.6 0.6 0.6 0.6 0.6
 \end{verbatim}
 
-\hypertarget{applying-functions-on-data-structures}{%
-\section{Applying Functions on Data Structures}\label{applying-functions-on-data-structures}}
+\hypertarget{funcDF}{%
+\section{Applying Functions on Data Structures}\label{funcDF}}
 
 Functions can be applied to data structures, for example
 
@@ -2640,7 +2640,7 @@ Functions can be applied to data structures, for example
 ## [1] 12
 \end{verbatim}
 
-When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The \texttt{apply()} function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the \texttt{apply()} function. Variants of this function and user-defined functions will be covered later.
+When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The \texttt{apply()} function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the \texttt{apply()} function. Variants of this function and user-defined functions will be covered in Section \ref{applyfam}.
 
 Suppose you are working on the \texttt{airquality} data set, that is stored in the object \texttt{Data.air}. The first four columns represents different numeric characteristics associated with air quality and weather conditions. You want to find the average value in each column.
 
@@ -3246,7 +3246,7 @@ Suppose you play a gambling game where you start with \$5. Each time you play th
 
 Consider the example in Section \ref{forloops}. We have a vector \texttt{1:10} and we want to square each value. Instead of squaring each entry in the vector one by one for a loop, we can easily type \texttt{(1:10)\^{}2} to get the same result.
 
-As your code gets longer and more complex, making it more efficient with vectorization and pre-allocation will make a difference in how long your code runs.
+As your code gets longer and more complex, making it more efficient with vectorization and pre-allocation will make a difference in how long your code runs. Another way of making code more efficient in R is using the \texttt{apply} family of functions: you have seen a simple example in Section \ref{funcDF}, and you will learn more about this family of functions in Section \ref{applyfam}.
 
 \hypertarget{sims}{%
 \chapter{Simulations}\label{sims}}
@@ -3256,9 +3256,9 @@ As your code gets longer and more complex, making it more efficient with vectori
 
 When we are analyzing data, there is always going to be some degree of uncertainty, as there is \textbf{randomness} in a lot of phenomena that we observe in our world. An example that is common in statistics comes from the field of sample surveys. A poll is conducted to see what proportion of voters will vote each candidate in an upcoming election. Even with a well-designed poll and a large sample size, the value of the sample proportion that will vote for a candidate has some randomness to it. If we get another random sample, the sample proportion is likely to be different (but hopefully close). The act of obtaining a random sample, or \textbf{sampling}, from a population introduces some randomness.
 
-Statisticians and data scientists often want to investigate the degree of randomness involved in what is being studied. You may realize in the previous paragraph that one way of studying the randomness in polls is to repeatedly obtain random samples. But it is practically unfeasible to repeatedly go out in the field to collect data.
+Statisticians and data scientists often want to investigate the degree of randomness involved in what is being studied. Sometimes, this can be done mathematically, but oftentimes, the mathematics is extremely challenging. You may also realize in the previous paragraph that one way of studying the randomness in polls is to repeatedly obtain random samples. But it is practically unfeasible to repeatedly go out in the field to collect data.
 
-This is why simulations are used. We can simulate the studies many times (in the thousands, at least) with computers without spending time and money and repeating these studies physically.
+This is why simulations are used. We do not need to solve complex mathematics, and we can simulate the studies many times (in the thousands, at least) with computers without spending time and money and repeating these studies physically.
 
 You will see how sampling introduces randomness and then learn how to create simulations to quantify the degree of randomness or uncertainty.
 
@@ -3508,6 +3508,87 @@ In the example above in Section \ref{ch6sim}, we compared results from a simulat
 \item
   Related to the previous question, how close is close enough? How do you know your value from the simulation is close enough to the theoretical value? There is no way of knowing if the theoretical value is unknown.
 \end{itemize}
+
+\hypertarget{applyfam}{%
+\chapter{Apply Family}\label{applyfam}}
+
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+We often want to apply the same function separately to each element of a vector. R has the \texttt{apply} family of functions that implement loops in specialized use cases. This family of functions are useful since it:
+
+\begin{itemize}
+\tightlist
+\item
+  is compact,
+\item
+  can iterate over different data structures and return collated results, and
+\item
+  use anonymous functions to improve performance.
+\end{itemize}
+
+This family of functions include:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{apply()}: Apply a function over the margins of an array.
+\item
+  \texttt{tapply()}: Apply a function over subsets of a vector.
+\item
+  \texttt{lappy()}: Loop over a list and evaluate a function on each item.
+\item
+  \texttt{sapply()}: Similar to \texttt{lapply()} but attempt to simplify the result.
+\end{itemize}
+
+\hypertarget{apply}{%
+\section{\texorpdfstring{\texttt{apply()}}{apply()}}\label{apply}}
+
+You learned about the \texttt{apply()} function in Section \ref{funcDF}. It is to apply a function over the margins of an array. To reiterate: it uses three arguments: data, margin, and function. The data argument specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied. For example, to find the average weight and height all respondents in the \texttt{Davis} data set from the \texttt{carData} package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(carData)}
+\NormalTok{Data.Davis }\OtherTok{\textless{}{-}}\NormalTok{ carData}\SpecialCharTok{::}\NormalTok{Davis}
+\FunctionTok{apply}\NormalTok{(Data.Davis[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], }\DecValTok{2}\NormalTok{, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## weight height 
+##  65.80 170.02
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#2 for columns, 1 for rows}
+\end{Highlighting}
+\end{Shaded}
+
+You may realize that one could use a loop to obtain these values. The \texttt{apply()} function is more succint, although it does not really run faster than a loop \citep{peng2015}.
+
+We so often compute sums or means of columns or rows that there functions that produce the same output as equivalent \texttt{apply()} versions:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{rowSums(X)} equivalent to \texttt{apply(X,\ 1,\ sum)}.
+\item
+  \texttt{rowMeans(X)} equivalent to \texttt{apply(X,\ 1,\ mean)}.
+\item
+  \texttt{colSums(X)} equivalent to \texttt{apply(X,\ 2,\ sum)}.
+\item
+  \texttt{colMeans(X)} equivalent to \texttt{apply(X,\ 2,\ mean)}.
+\end{itemize}
+
+\hypertarget{tapply}{%
+\section{\texorpdfstring{\texttt{tapply()}}{tapply()}}\label{tapply}}
+
+\hypertarget{lapply}{%
+\section{\texorpdfstring{\texttt{lapply()}}{lapply()}}\label{lapply}}
+
+\hypertarget{sapply}{%
+\section{\texorpdfstring{\texttt{sapply()}}{sapply()}}\label{sapply}}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

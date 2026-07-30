@@ -72,7 +72,7 @@ data-sets-from-r
 data-sets-from-local-file
 factor-variables
 mathops
-applying-functions-on-data-structures
+funcDF
 func
 motivation-1
 basicFunc
@@ -99,4 +99,10 @@ replicate
 simulation
 ch6sim
 considerations-with-simulations
+applyfam
+overview
+apply
+tapply
+lapply
+sapply
 blank

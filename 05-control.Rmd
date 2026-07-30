@@ -168,4 +168,4 @@ storeCash
 
 Consider the example in Section \@ref(forloops). We have a vector `1:10` and we want to square each value. Instead of squaring each entry in the vector one by one for a loop, we can easily type `(1:10)^2` to get the same result.
 
-As your code gets longer and more complex, making it more efficient with vectorization and pre-allocation will make a difference in how long your code runs.
+As your code gets longer and more complex, making it more efficient with vectorization and pre-allocation will make a difference in how long your code runs. Another way of making code more efficient in R is using the `apply` family of functions: you have seen a simple example in Section \@ref(funcDF), and you will learn more about this family of functions in Section \@ref(applyfam).

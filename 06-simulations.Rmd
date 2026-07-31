@@ -6,7 +6,7 @@ When we are analyzing data, there is always going to be some degree of uncertain
 
 Statisticians and data scientists often want to investigate the degree of randomness involved in what is being studied. Sometimes, this can be done mathematically, but oftentimes, the mathematics is extremely challenging. You may also realize in the previous paragraph that one way of studying the randomness in polls is to repeatedly obtain random samples. But it is practically unfeasible to repeatedly go out in the field to collect data.
 
-This is why simulations are used. We do not need to solve complex mathematics, and we can simulate the studies many times (in the thousands, at least) with computers without spending time and money and repeating these studies physically. 
+This is why simulations are used. We do not need to solve complex mathematics, and we can simulate the studies many times (in the thousands, at least) with computers, saving time and money than if we physically ran these studies many times.
 
 You will see how sampling introduces randomness and then learn how to create simulations to quantify the degree of randomness or uncertainty. 
 

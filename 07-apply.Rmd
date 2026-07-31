@@ -25,7 +25,7 @@ Data.Davis <- carData::Davis
 apply(Data.Davis[,2:3], 2, mean)
 ##2 for columns, 1 for rows
 ```
-You may realize that one could use a loop to obtain these values. The `apply()` function is more succint, although it does not really run faster than a loop [@peng2015].
+You may realize that one could use a loop to obtain these values. The `apply()` function is more succinct, although it does not really run faster than a loop [@peng2015].
 
 We so often compute sums or means of columns or rows that there functions that produce the same output as equivalent `apply()` versions:
 

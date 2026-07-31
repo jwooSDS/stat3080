@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-07-30}
+\date{2026-07-31}
 
 \begin{document}
 \maketitle
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.7475206 -0.7500257  5.5996761 -0.1250830 -2.5628425 -0.8316687
-##  [7]  2.2853106  4.4318809 -1.5344734 -1.3210537
+##  [1]  2.06820142 -0.72928247 -3.17743973  1.68384025 -0.37295666  4.98529482
+##  [7] -0.01488557  3.35690886 -0.51065283  3.31893009
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3258,7 +3258,7 @@ When we are analyzing data, there is always going to be some degree of uncertain
 
 Statisticians and data scientists often want to investigate the degree of randomness involved in what is being studied. Sometimes, this can be done mathematically, but oftentimes, the mathematics is extremely challenging. You may also realize in the previous paragraph that one way of studying the randomness in polls is to repeatedly obtain random samples. But it is practically unfeasible to repeatedly go out in the field to collect data.
 
-This is why simulations are used. We do not need to solve complex mathematics, and we can simulate the studies many times (in the thousands, at least) with computers without spending time and money and repeating these studies physically.
+This is why simulations are used. We do not need to solve complex mathematics, and we can simulate the studies many times (in the thousands, at least) with computers, saving time and money than if we physically ran these studies many times.
 
 You will see how sampling introduces randomness and then learn how to create simulations to quantify the degree of randomness or uncertainty.
 
@@ -3565,7 +3565,7 @@ You learned about the \texttt{apply()} function in Section \ref{funcDF}. It is t
 \end{Highlighting}
 \end{Shaded}
 
-You may realize that one could use a loop to obtain these values. The \texttt{apply()} function is more succint, although it does not really run faster than a loop \citep{peng2015}.
+You may realize that one could use a loop to obtain these values. The \texttt{apply()} function is more succinct, although it does not really run faster than a loop \citep{peng2015}.
 
 We so often compute sums or means of columns or rows that there functions that produce the same output as equivalent \texttt{apply()} versions:
 

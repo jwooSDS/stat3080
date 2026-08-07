@@ -148,7 +148,7 @@
 <h2>
 <span class="header-section-number">7.4</span> <code>lapply()</code> and <code>sapply()</code><a class="anchor" aria-label="anchor" href="#lapply-and-sapply"><i class="fas fa-link"></i></a>
 </h2>
-<p>The <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> functions are both used for lists. Once the specified function is applied, <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> returns a list and sapply() attempts to simply the result. They use two arguments: data and function. The data argument specifies the list of elements to which the function should be applied and function specifies the function. If the function has other arguments, they can be specified as additional arguments in <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>. For example:</p>
+<p>The <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> functions are both used for lists. Once the specified function is applied, <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> returns a list and <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> attempts to simply the result. They use two arguments: data and function. The data argument specifies the list of elements to which the function should be applied and function specifies the function. If the function has other arguments, they can be specified as additional arguments in <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>. For example:</p>
 <div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
@@ -189,8 +189,8 @@
 ## 
 ## [[4]]
 ## [1] 9.751580 3.800813 6.711054 9.158739</code></pre>
-<p>You can also pass your own created function to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code></p>
-<p><strong>Anonymous functions</strong> can also be passed to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> (and other functions in the apply family). Anonymous functions are functions you create that have no variable name and or not stored in the environment. For example, you have a couple of matrices and you want to extract the first row of each one.</p>
+<p>You can also pass your own function to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>.</p>
+<p><strong>Anonymous functions</strong> can also be passed to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> (and other functions in the apply family). Anonymous functions are functions you create that have no variable name and are not stored in the environment. For example, you have a couple of matrices and you want to extract the first row of each one.</p>
 <div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">twoMats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -212,7 +212,7 @@
 ## 
 ## $b
 ## [1] 1 4</code></pre>
-<p>I recommend using anonymous functions only if the function is simple and if you are going to only use it once. Otherwise, create a function and name it before <code>lappy()</code>, and pass the function to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>. For example</p>
+<p>I recommend using anonymous functions only if the function is simple and if you are going to only use it once. Otherwise, create a function and name it before <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>, and pass the function to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>. For example</p>
 <div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">row1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">extract</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">extract</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span></span>
@@ -246,7 +246,7 @@
 <pre><code>##      a b
 ## [1,] 1 1
 ## [2,] 3 4</code></pre>
-<p>I find working with vectors and matrices easier than working with lists, so I prefer using <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>.</p>
+<p>I find working with vectors and matrices easier than working with lists, so I prefer using <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>.</p>
 
 </div>
 </div>
@@ -278,7 +278,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-07-31.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

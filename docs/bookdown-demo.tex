@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-07-31}
+\date{2026-08-07}
 
 \begin{document}
 \maketitle
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  2.06820142 -0.72928247 -3.17743973  1.68384025 -0.37295666  4.98529482
-##  [7] -0.01488557  3.35690886 -0.51065283  3.31893009
+##  [1]  3.98986873 -1.48900894  3.51707080  5.76152738  0.07635981  1.42060148
+##  [7]  7.65499347  1.85465383  2.86959391  1.24090446
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3602,7 +3602,7 @@ The \texttt{tapply()} function is used for a vector of values that can be catego
 \hypertarget{lapply-and-sapply}{%
 \section{\texorpdfstring{\texttt{lapply()} and \texttt{sapply()}}{lapply() and sapply()}}\label{lapply-and-sapply}}
 
-The \texttt{lapply()} and \texttt{sapply()} functions are both used for lists. Once the specified function is applied, \texttt{lapply()} returns a list and sapply() attempts to simply the result. They use two arguments: data and function. The data argument specifies the list of elements to which the function should be applied and function specifies the function. If the function has other arguments, they can be specified as additional arguments in \texttt{lapply()} and \texttt{sapply()}. For example:
+The \texttt{lapply()} and \texttt{sapply()} functions are both used for lists. Once the specified function is applied, \texttt{lapply()} returns a list and \texttt{sapply()} attempts to simply the result. They use two arguments: data and function. The data argument specifies the list of elements to which the function should be applied and function specifies the function. If the function has other arguments, they can be specified as additional arguments in \texttt{lapply()} and \texttt{sapply()}. For example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3672,9 +3672,9 @@ Functions that you pass to \texttt{lapply()} may have other arguments. For examp
 ## [1] 9.751580 3.800813 6.711054 9.158739
 \end{verbatim}
 
-You can also pass your own created function to \texttt{lapply()}
+You can also pass your own function to \texttt{lapply()}.
 
-\textbf{Anonymous functions} can also be passed to \texttt{lapply()} (and other functions in the apply family). Anonymous functions are functions you create that have no variable name and or not stored in the environment. For example, you have a couple of matrices and you want to extract the first row of each one.
+\textbf{Anonymous functions} can also be passed to \texttt{lapply()} (and other functions in the apply family). Anonymous functions are functions you create that have no variable name and are not stored in the environment. For example, you have a couple of matrices and you want to extract the first row of each one.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3711,7 +3711,7 @@ You can also pass your own created function to \texttt{lapply()}
 ## [1] 1 4
 \end{verbatim}
 
-I recommend using anonymous functions only if the function is simple and if you are going to only use it once. Otherwise, create a function and name it before \texttt{lappy()}, and pass the function to \texttt{lapply()}. For example
+I recommend using anonymous functions only if the function is simple and if you are going to only use it once. Otherwise, create a function and name it before \texttt{lapply()}, and pass the function to \texttt{lapply()}. For example
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3773,7 +3773,7 @@ Look at the output from the following, and compare with the output from \texttt{
 ## [2,] 3 4
 \end{verbatim}
 
-I find working with vectors and matrices easier than working with lists, so I prefer using \texttt{sapply()}.
+I find working with vectors and matrices easier than working with lists, so I prefer using \texttt{sapply()} to \texttt{lapply()}.
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

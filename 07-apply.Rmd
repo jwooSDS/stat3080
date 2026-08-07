@@ -47,7 +47,7 @@ tapply(Davis$weight, Davis$sex, mean)
 
 ## `lapply()` and `sapply()`
 
-The `lapply()` and `sapply()` functions are both used for lists. Once the specified function is applied, `lapply()` returns a list and sapply() attempts to simply the result. They use two arguments: data and function. The data argument specifies the list of elements to which the function should be applied and function specifies the function. If the function has other arguments, they can be specified as additional arguments in `lapply()` and `sapply()`. For example:
+The `lapply()` and `sapply()` functions are both used for lists. Once the specified function is applied, `lapply()` returns a list and `sapply()` attempts to simply the result. They use two arguments: data and function. The data argument specifies the list of elements to which the function should be applied and function specifies the function. If the function has other arguments, they can be specified as additional arguments in `lapply()` and `sapply()`. For example:
 
 ```{r}
 v1 <- list(a = 1:5, b = rnorm(10))
@@ -70,9 +70,9 @@ Functions that you pass to `lapply()` may have other arguments. For example, the
 ```{r}
 lapply(v2, runif, min = 3, max = 10)
 ```
-You can also pass your own created function to `lapply()`
+You can also pass your own function to `lapply()`.
 
-**Anonymous functions** can also be passed to `lapply()` (and other functions in the apply family). Anonymous functions are functions you create that have no variable name and or not stored in the environment. For example, you have a couple of matrices and you want to extract the first row of each one.
+**Anonymous functions** can also be passed to `lapply()` (and other functions in the apply family). Anonymous functions are functions you create that have no variable name and are not stored in the environment. For example, you have a couple of matrices and you want to extract the first row of each one.
 
 ```{r}
 twoMats <- list(a = matrix(1:4, 2, 2), b = matrix(1:6, 3, 2))
@@ -82,7 +82,7 @@ twoMats
 lapply(twoMats, function(extract) { extract[1,] })
 ```
 
-I recommend using anonymous functions only if the function is simple and if you are going to only use it once. Otherwise, create a function and name it before `lappy()`, and pass the function to `lapply()`. For example
+I recommend using anonymous functions only if the function is simple and if you are going to only use it once. Otherwise, create a function and name it before `lapply()`, and pass the function to `lapply()`. For example
 
 ```{r}
 row1 <- function(extract){
@@ -107,5 +107,5 @@ Look at the output from the following, and compare with the output from `lapply(
 sapply(v1, mean)
 sapply(twoMats, row1)
 ```
-I find working with vectors and matrices easier than working with lists, so I prefer using `sapply()`. 
+I find working with vectors and matrices easier than working with lists, so I prefer using `sapply()` to `lapply()`. 
 

@@ -107,7 +107,7 @@
 <span class="header-section-number">5.2.1</span> If Statement<a class="anchor" aria-label="anchor" href="#if-statement"><i class="fas fa-link"></i></a>
 </h3>
 <p>Branching with an <strong>if statement</strong> allows our code to execute only if a certain condition is met. If the condition is not met, nothing is executed. For example</p>
-<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
@@ -115,7 +115,7 @@
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code>## [1] "a is positive"</code></pre>
 <p>The parenthesis after the <code>if</code> statement is the condition that has to be met for the code to be executed. In this example, the condition is met since <code>a</code> is equal to 1, so <code>a &gt; 0</code> returns <code>TRUE</code>, and the code in the braces is executed. However, if have the following, notice nothing gets printed.</p>
-<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">9</span></span>
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
@@ -128,7 +128,7 @@
 <span class="header-section-number">5.2.2</span> If-Else Statement<a class="anchor" aria-label="anchor" href="#if-else-statement"><i class="fas fa-link"></i></a>
 </h3>
 <p>If you want to run another block of code when the condition is not met, add an <code>else</code> statement that runs when the condition is not met. This is called an <strong>if-else statement</strong>: it branches out based on two conditions.</p>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## a is still -9</span></span>
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
@@ -145,7 +145,7 @@
 <span class="header-section-number">5.2.3</span> Else If<a class="anchor" aria-label="anchor" href="#else-if"><i class="fas fa-link"></i></a>
 </h3>
 <p>If there are more than two conditions or branches, use <code>else if</code> statements between the <code>if</code> statement at the beginning and an <code>else</code> statement at the end.</p>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## a is still -9</span></span>
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">a</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
@@ -163,12 +163,12 @@
 <span class="header-section-number">5.2.4</span> Vectorized Else-If<a class="anchor" aria-label="anchor" href="#vectorized-else-if"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> function is a vectorized version of an else-if statement. If applies an else-if statement to each element in a vector, and returns a vector with the same length. For example, I have a number of students in class, and they pass if they score at least 60 on a test, other wise they fail.</p>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">80</span>, <span class="fl">90</span>, <span class="fl">40</span>, <span class="fl">95</span>, <span class="fl">55</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">scores</span> <span class="op">&gt;=</span> <span class="fl">60</span>, <span class="st">"pass"</span>, <span class="st">"fail"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "pass" "pass" "fail" "pass" "fail"</code></pre>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## condition applied to vector first, then</span></span>
 <span><span class="co">## what to return if condition is true, then</span></span>
 <span><span class="co">## what to return if condition is false</span></span></code></pre></div>
@@ -183,7 +183,7 @@
 <span class="header-section-number">5.3.1</span> For Loops<a class="anchor" aria-label="anchor" href="#forloops"><i class="fas fa-link"></i></a>
 </h3>
 <p>A for loop iterates a block of code for each element in a sequence. As a simple example, suppose I want to print out the values of <span class="math inline">\(n^2\)</span> for <span class="math inline">\(n = 1, 2, 3, \cdots, 10\)</span>:</p>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">n</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span> <span class="op">(</span><span class="va">n</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
@@ -213,7 +213,7 @@
 <li>Keep iterating until the last value of the index variable, which is 10, so <span class="math inline">\(10^2 = 100\)</span> is printed.</li>
 </ul>
 <p>If values are being calculated in the loop that need to be saved, it is best practice to create a data structure of an appropriate size to record the values during the loop. This practice is called <strong>pre-allocation</strong>. This is preferred to creating a data structure with unknown size and have the data structure grow as the loop is run, as pre-allocation is more efficient.</p>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## create a vector to store the 10 squared values</span></span>
 <span><span class="co">## initialize each entry in the vector to be NA to start</span></span>
 <span><span class="co">## we have to fill the vector with something at the start</span></span>
@@ -232,7 +232,7 @@
 </h3>
 <p>A while loop iterates a block of code until some condition is met. Typically, number of iterations is unknown. While loops are much less common in practice though. We will just use a simple example to illustrate this idea.</p>
 <p>Suppose you play a gambling game where you start with $5. Each time you play the game, the amount of money you lose is a random number that comes from a normal distribution with mean 2, and standard deviation 1. You keep playing the game until you run out of cash. We want to simulate the number of times you play the game, and record the amount of cash after each time you play the game.</p>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## set.seed() for reproducibility due to random nature </span></span>
 <span><span class="co">## of random loss each time you play</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> </span>
@@ -255,7 +255,7 @@
 <span></span>
 <span><span class="va">numPlays</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">storeCash</span></span></code></pre></div>
 <pre><code>## [1]  2.9812538  1.1655064  0.5368369 -0.8639954</code></pre>
 </div>
@@ -309,7 +309,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-07.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

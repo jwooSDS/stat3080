@@ -99,7 +99,7 @@
 <span class="header-section-number">6.2</span> Sampling<a class="anchor" aria-label="anchor" href="#sampling"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> function in R randomly draws a selected number of items from a list of items (the list is usually a vector), and the probabilities of each item being selected are the same for all items. A simple example of randomness is tossing a fair coin a set number of times (equal chance of landing heads or tails).</p>
-<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb297"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fairCoin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"heads"</span>, <span class="st">"tails"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">fairCoin</span>, size <span class="op">=</span> <span class="fl">5</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "heads" "heads" "heads" "tails" "heads"</code></pre>
@@ -113,7 +113,7 @@
 <p><strong>Sampling without replacement</strong> means that means that when we sample a value from the vector, the value does not get returned to the vector and cannot be sampled again.</p>
 <p>Run the code in the block above a few times. You will notice that the returned vector is not always the same, so the result is unpredictable. This is unlike most of the earlier code you have seen in the course notes.</p>
 <p>Another use of sampling is in model validation (i.e. assessing model accuracy). The original data set is randomly split into two mutually exclusive data sets: one called training and the other called test. The training set is used to build the model, and model assessment is done on the test set. Suppose we want to split the <code>Davis</code> data set from the <code>carData</code> package.</p>
-<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">carData</a></span><span class="op">)</span></span>
 <span><span class="va">Data.Davis</span> <span class="op">&lt;-</span> <span class="fu">carData</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/carData/man/Davis.html">Davis</a></span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">Data.Davis</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
@@ -137,7 +137,7 @@
 <p>You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or <strong>replicate</strong>, the sampling a lot of times.</p>
 <p>The <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> function evaluates a given function the specified number of times and returns a matrix with a column containing the results from each replication. There are two arguments: the number of replications and the function to be replicated.</p>
 <p>Going back to the coin tossing example, suppose we want to toss a fair coin 5 times, and replicate this experiment for 6 replicates.</p>
-<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">fairCoin</span>, size <span class="op">=</span> <span class="fl">5</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      [,1]    [,2]    [,3]    [,4]    [,5]    [,6]   
 ## [1,] "heads" "tails" "heads" "heads" "tails" "tails"
@@ -177,22 +177,22 @@
 <li>Repeat step 2 for a large number of times, say for a total of 10,000 replicates.</li>
 </ol>
 <p>Step 3 involves using the <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> function, where we supply the number of replicates and a function that gives the result from step 2, i.e. the sample mean from 10 random draws from a standard normal. While there is no function in base R that does this, we can easily write our own function to do this (see Section <a href="func.html#func">4</a> on how to write functions)!</p>
-<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sampMean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Our created <code>sampMean()</code> computes the sample mean of a certain number of draws (that is supplied) from a standard normal distribution. <code>sampMean()</code> executes step 2.</p>
 <p>For step 3, we can just use <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> on <code>sampMean()</code>. Suppose we want 10,000 replicates. We store the value of the sample mean from 10,000 random samples, each with size 10.</p>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
 <span><span class="va">storeSampMeans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">Reps</span>, <span class="fu">sampMean</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Intuitively, we know the sample means from each sample are different. We can print out a few of these values to confirm this idea.</p>
-<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -0.28824148  0.56248186  0.02602954  0.30351791  0.29413886  0.92128312</code></pre>
 <p>If the sampling distribution of the sample mean is correct, we know that <span class="math inline">\(\bar{X}_{10} \sim N(0, \frac{1}{10})\)</span>, theoretically. Our simulation should be consistent with this theory.</p>
 <p>We can create a density plot of the 10,000 sample means to visualize the uncertainty from sampling. We can see in figure <a href="sims.html#fig:ch6plot">6.1</a> that most of the sample means are close to 0, and values further from 0 are less likely to occur. This also looks like a normal distribution.</p>
-<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span>, main<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:ch6plot"></span>
@@ -201,17 +201,17 @@ Figure 6.1: Density Plot of Sample Means from 10,000 Random Samples of Size 10
 </p>
 </div>
 <p>We know that the mean and variance of the 10,000 sample means should be close to 0 and 0.1 theoretically.</p>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -0.005047077</code></pre>
-<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.09895951</code></pre>
 <p>The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 10.</p>
 <p>We have just created a simulation that imitates the sampling distribution of the sample mean when the data are standard normal and each sample has size 10!</p>
 <p>Hopefully, this example convinces you that with a large number of replicates, results from a simulation match very closely with theory.</p>
 <p>Note: you could have gotten similar results by using a for loop, using the code below. However, the for loop is a bit longer as we need to pre-allocate.</p>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Repeat for total 10,000 times</span></span>
 <span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span> </span>
 <span><span class="co">## pre allocate vector to store the 10,000 sample means</span></span>
@@ -271,7 +271,7 @@ Figure 6.1: Density Plot of Sample Means from 10,000 Random Samples of Size 10
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-07.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

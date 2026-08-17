@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.0876332 -3.4794278  4.5808878 -4.4843939  5.6045268  2.4345586
-##  [7] -0.2324470  0.8272356  0.4905982  5.0768278
+##  [1] -0.9972298  0.1568507  8.0766363 -0.9516264  2.8433250  1.2304536
+##  [7]  1.8388808 -2.8804563  1.3834834  1.0128220
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -4299,7 +4299,7 @@ So which to use? \texttt{ggplot()} produces nicer visuals with much more customi
 Note: I did not add titles and labels to axes in a lot of these plots. Feel free to practice adding them on your own. Visualizations should always be titled and have axes labeled.
 
 \hypertarget{dplyr}{%
-\chapter{Data Wranling (dplyr)}\label{dplyr}}
+\chapter{Data Wrangling (dplyr)}\label{dplyr}}
 
 \hypertarget{motivation-4}{%
 \section{Motivation}\label{motivation-4}}
@@ -4651,6 +4651,311 @@ To count the number of occurrences of each origin and destination combination:
 
 \hypertarget{operations-on-columns}{%
 \section{Operations on Columns}\label{operations-on-columns}}
+
+When operating on columns, we usually want to
+
+\begin{itemize}
+\tightlist
+\item
+  Create new columns (variables) based on existing columns.
+\item
+  Select specific columns.
+\item
+  Change the names of columns.
+\item
+  Change the position of the columns.
+\end{itemize}
+
+\hypertarget{create-new-columns}{%
+\subsection{Create New Columns}\label{create-new-columns}}
+
+You can create new columns based on existing columns using \texttt{mutate()}. For example, to create a new column called \texttt{speed} in miles per hour:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{speed =}\NormalTok{ distance }\SpecialCharTok{/}\NormalTok{ air\_time }\SpecialCharTok{*} \DecValTok{60}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 20
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # i 336,766 more rows
+## # i 12 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>, speed <dbl>
+\end{verbatim}
+
+By default, the new column is placed as the last column. You can add \texttt{.before\ =\ 1} within \texttt{mutate()} to place it before column 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{speed =}\NormalTok{ distance }\SpecialCharTok{/}\NormalTok{ air\_time }\SpecialCharTok{*} \DecValTok{60}\NormalTok{,}
+    \AttributeTok{.before =} \DecValTok{1}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 20
+##    speed  year month   day dep_time sched_dep_time dep_delay arr_time
+##    <dbl> <int> <int> <int>    <int>          <int>     <dbl>    <int>
+##  1  370.  2013     1     1      517            515         2      830
+##  2  374.  2013     1     1      533            529         4      850
+##  3  408.  2013     1     1      542            540         2      923
+##  4  517.  2013     1     1      544            545        -1     1004
+##  5  394.  2013     1     1      554            600        -6      812
+##  6  288.  2013     1     1      554            558        -4      740
+##  7  404.  2013     1     1      555            600        -5      913
+##  8  259.  2013     1     1      557            600        -3      709
+##  9  405.  2013     1     1      557            600        -3      838
+## 10  319.  2013     1     1      558            600        -2      753
+## # i 336,766 more rows
+## # i 12 more variables: sched_arr_time <int>, arr_delay <dbl>, carrier <chr>,
+## #   flight <int>, tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>,
+## #   distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+To place it after column 1:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{speed =}\NormalTok{ distance }\SpecialCharTok{/}\NormalTok{ air\_time }\SpecialCharTok{*} \DecValTok{60}\NormalTok{,}
+    \AttributeTok{.after =} \DecValTok{1}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 20
+##     year speed month   day dep_time sched_dep_time dep_delay arr_time
+##    <int> <dbl> <int> <int>    <int>          <int>     <dbl>    <int>
+##  1  2013  370.     1     1      517            515         2      830
+##  2  2013  374.     1     1      533            529         4      850
+##  3  2013  408.     1     1      542            540         2      923
+##  4  2013  517.     1     1      544            545        -1     1004
+##  5  2013  394.     1     1      554            600        -6      812
+##  6  2013  288.     1     1      554            558        -4      740
+##  7  2013  404.     1     1      555            600        -5      913
+##  8  2013  259.     1     1      557            600        -3      709
+##  9  2013  405.     1     1      557            600        -3      838
+## 10  2013  319.     1     1      558            600        -2      753
+## # i 336,766 more rows
+## # i 12 more variables: sched_arr_time <int>, arr_delay <dbl>, carrier <chr>,
+## #   flight <int>, tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>,
+## #   distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+Alternatively, using \texttt{.keep} within \texttt{mutate()} will only keep the columns that were involved in \texttt{mutate()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{speed =}\NormalTok{ distance }\SpecialCharTok{/}\NormalTok{ air\_time }\SpecialCharTok{*} \DecValTok{60}\NormalTok{,}
+    \AttributeTok{.keep =} \StringTok{"used"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 3
+##    air_time distance speed
+##       <dbl>    <dbl> <dbl>
+##  1      227     1400  370.
+##  2      227     1416  374.
+##  3      160     1089  408.
+##  4      183     1576  517.
+##  5      116      762  394.
+##  6      150      719  288.
+##  7      158     1065  404.
+##  8       53      229  259.
+##  9      140      944  405.
+## 10      138      733  319.
+## # i 336,766 more rows
+\end{verbatim}
+
+\hypertarget{select-columns}{%
+\subsection{Select Columns}\label{select-columns}}
+
+With data frames with many columns, you may want to only focus on a subset of the columns. To select only the departure and arrival delays:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(dep\_delay, arr\_delay)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 2
+##    dep_delay arr_delay
+##        <dbl>     <dbl>
+##  1         2        11
+##  2         4        20
+##  3         2        33
+##  4        -1       -18
+##  5        -6       -25
+##  6        -4        12
+##  7        -5        19
+##  8        -3       -14
+##  9        -3        -8
+## 10        -2         8
+## # i 336,766 more rows
+\end{verbatim}
+
+There are a number of helper functions you can use within \texttt{select()}. These can be useful if there is a pattern in the naming of the columns:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{starts\_with("abc")}: matches names that begin with ``abc''.
+\item
+  \texttt{ends\_with("xyz")}: matches names that end with ``xyz''.
+\item
+  \texttt{contains("ijk")}: matches names that contain ``ijk''.
+\item
+  \texttt{num\_range("x",\ 1:3)}: matches \texttt{x1}, \texttt{x2} and \texttt{x3}.
+\end{itemize}
+
+You can rename variables as you \texttt{select()} them.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(}\AttributeTok{tail\_num =}\NormalTok{ tailnum)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 1
+##    tail_num
+##    <chr>   
+##  1 N14228  
+##  2 N24211  
+##  3 N619AA  
+##  4 N804JB  
+##  5 N668DN  
+##  6 N39463  
+##  7 N516JB  
+##  8 N829AS  
+##  9 N593JB  
+## 10 N3ALAA  
+## # i 336,766 more rows
+\end{verbatim}
+
+The new name appears on the left-hand side of the \texttt{=}, and the old variable appears on the right-hand side.
+
+\hypertarget{rename-columns}{%
+\subsection{Rename Columns}\label{rename-columns}}
+
+If you want to keep all the existing variables and just want to rename a few, you can use \texttt{rename()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{depTime =}\NormalTok{ dep\_time)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 19
+##     year month   day depTime sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>   <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1     517            515         2      830            819
+##  2  2013     1     1     533            529         4      850            830
+##  3  2013     1     1     542            540         2      923            850
+##  4  2013     1     1     544            545        -1     1004           1022
+##  5  2013     1     1     554            600        -6      812            837
+##  6  2013     1     1     554            558        -4      740            728
+##  7  2013     1     1     555            600        -5      913            854
+##  8  2013     1     1     557            600        -3      709            723
+##  9  2013     1     1     557            600        -3      838            846
+## 10  2013     1     1     558            600        -2      753            745
+## # i 336,766 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\hypertarget{relocate-columns}{%
+\subsection{Relocate Columns}\label{relocate-columns}}
+
+You can use \texttt{relocate()} to move variables around. You may want to place important ones in front, or group related variables together. BY default, the variables are moved to the front:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{relocate}\NormalTok{(time\_hour, air\_time)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 19
+##    time_hour           air_time  year month   day dep_time sched_dep_time
+##    <dttm>                 <dbl> <int> <int> <int>    <int>          <int>
+##  1 2013-01-01 05:00:00      227  2013     1     1      517            515
+##  2 2013-01-01 05:00:00      227  2013     1     1      533            529
+##  3 2013-01-01 05:00:00      160  2013     1     1      542            540
+##  4 2013-01-01 05:00:00      183  2013     1     1      544            545
+##  5 2013-01-01 06:00:00      116  2013     1     1      554            600
+##  6 2013-01-01 05:00:00      150  2013     1     1      554            558
+##  7 2013-01-01 06:00:00      158  2013     1     1      555            600
+##  8 2013-01-01 06:00:00       53  2013     1     1      557            600
+##  9 2013-01-01 06:00:00      140  2013     1     1      557            600
+## 10 2013-01-01 06:00:00      138  2013     1     1      558            600
+## # i 336,766 more rows
+## # i 12 more variables: dep_delay <dbl>, arr_time <int>, sched_arr_time <int>,
+## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>, origin <chr>,
+## #   dest <chr>, distance <dbl>, hour <dbl>, minute <dbl>
+\end{verbatim}
+
+Or you can specify where to place them after or before:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{relocate}\NormalTok{(time\_hour, air\_time, }\AttributeTok{.after =}\NormalTok{ day)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 19
+##     year month   day time_hour           air_time dep_time sched_dep_time
+##    <int> <int> <int> <dttm>                 <dbl>    <int>          <int>
+##  1  2013     1     1 2013-01-01 05:00:00      227      517            515
+##  2  2013     1     1 2013-01-01 05:00:00      227      533            529
+##  3  2013     1     1 2013-01-01 05:00:00      160      542            540
+##  4  2013     1     1 2013-01-01 05:00:00      183      544            545
+##  5  2013     1     1 2013-01-01 06:00:00      116      554            600
+##  6  2013     1     1 2013-01-01 05:00:00      150      554            558
+##  7  2013     1     1 2013-01-01 06:00:00      158      555            600
+##  8  2013     1     1 2013-01-01 06:00:00       53      557            600
+##  9  2013     1     1 2013-01-01 06:00:00      140      557            600
+## 10  2013     1     1 2013-01-01 06:00:00      138      558            600
+## # i 336,766 more rows
+## # i 12 more variables: dep_delay <dbl>, arr_time <int>, sched_arr_time <int>,
+## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>, origin <chr>,
+## #   dest <chr>, distance <dbl>, hour <dbl>, minute <dbl>
+\end{verbatim}
 
 \hypertarget{pipes}{%
 \section{Pipes}\label{pipes}}

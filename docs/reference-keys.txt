@@ -134,6 +134,10 @@ select-rows-based-on-condition
 arrange-rows-in-order
 counting
 operations-on-columns
+create-new-columns
+select-columns
+rename-columns
+relocate-columns
 pipes
 grouping
 blank

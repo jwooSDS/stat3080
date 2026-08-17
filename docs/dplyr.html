@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 9 Data Wranling (dplyr) | STAT 3080: From Data to Knowledge</title>
+<title>Chapter 9 Data Wrangling (dplyr) | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="9.1 Motivation The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 9 Data Wranling (dplyr) | STAT 3080: From Data to Knowledge">
+<meta property="og:title" content="Chapter 9 Data Wrangling (dplyr) | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="9.1 Motivation The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 9 Data Wranling (dplyr) | STAT 3080: From Data to Knowledge">
+<meta name="twitter:title" content="Chapter 9 Data Wrangling (dplyr) | STAT 3080: From Data to Knowledge">
 <meta name="twitter:description" content="9.1 Motivation The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -73,7 +73,7 @@
 <li><a class="" href="sims.html"><span class="header-section-number">6</span> Simulations</a></li>
 <li><a class="" href="applyfam.html"><span class="header-section-number">7</span> Apply Family</a></li>
 <li><a class="" href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
-<li><a class="active" href="dplyr.html"><span class="header-section-number">9</span> Data Wranling (dplyr)</a></li>
+<li><a class="active" href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></li>
 <li><a class="" href="blank.html"><span class="header-section-number">10</span> Blank Canvas</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
@@ -85,7 +85,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="dplyr" class="section level1" number="9">
 <h1>
-<span class="header-section-number">9</span> Data Wranling (dplyr)<a class="anchor" aria-label="anchor" href="#dplyr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Data Wrangling (dplyr)<a class="anchor" aria-label="anchor" href="#dplyr"><i class="fas fa-link"></i></a>
 </h1>
 <div id="motivation-4" class="section level2" number="9.1">
 <h2>
@@ -338,6 +338,236 @@
 <h2>
 <span class="header-section-number">9.3</span> Operations on Columns<a class="anchor" aria-label="anchor" href="#operations-on-columns"><i class="fas fa-link"></i></a>
 </h2>
+<p>When operating on columns, we usually want to</p>
+<ul>
+<li>Create new columns (variables) based on existing columns.</li>
+<li>Select specific columns.</li>
+<li>Change the names of columns.</li>
+<li>Change the position of the columns.</li>
+</ul>
+<div id="create-new-columns" class="section level3" number="9.3.1">
+<h3>
+<span class="header-section-number">9.3.1</span> Create New Columns<a class="anchor" aria-label="anchor" href="#create-new-columns"><i class="fas fa-link"></i></a>
+</h3>
+<p>You can create new columns based on existing columns using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>. For example, to create a new column called <code>speed</code> in miles per hour:</p>
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    speed <span class="op">=</span> <span class="va">distance</span> <span class="op">/</span> <span class="va">air_time</span> <span class="op">*</span> <span class="fl">60</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 20
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # ℹ 336,766 more rows
+## # ℹ 12 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, speed &lt;dbl&gt;</code></pre>
+<p>By default, the new column is placed as the last column. You can add <code>.before = 1</code> within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> to place it before column 1.</p>
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    speed <span class="op">=</span> <span class="va">distance</span> <span class="op">/</span> <span class="va">air_time</span> <span class="op">*</span> <span class="fl">60</span>,</span>
+<span>    .before <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 20
+##    speed  year month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1  370.  2013     1     1      517            515         2      830
+##  2  374.  2013     1     1      533            529         4      850
+##  3  408.  2013     1     1      542            540         2      923
+##  4  517.  2013     1     1      544            545        -1     1004
+##  5  394.  2013     1     1      554            600        -6      812
+##  6  288.  2013     1     1      554            558        -4      740
+##  7  404.  2013     1     1      555            600        -5      913
+##  8  259.  2013     1     1      557            600        -3      709
+##  9  405.  2013     1     1      557            600        -3      838
+## 10  319.  2013     1     1      558            600        -2      753
+## # ℹ 336,766 more rows
+## # ℹ 12 more variables: sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>To place it after column 1:</p>
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    speed <span class="op">=</span> <span class="va">distance</span> <span class="op">/</span> <span class="va">air_time</span> <span class="op">*</span> <span class="fl">60</span>,</span>
+<span>    .after <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 20
+##     year speed month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1  2013  370.     1     1      517            515         2      830
+##  2  2013  374.     1     1      533            529         4      850
+##  3  2013  408.     1     1      542            540         2      923
+##  4  2013  517.     1     1      544            545        -1     1004
+##  5  2013  394.     1     1      554            600        -6      812
+##  6  2013  288.     1     1      554            558        -4      740
+##  7  2013  404.     1     1      555            600        -5      913
+##  8  2013  259.     1     1      557            600        -3      709
+##  9  2013  405.     1     1      557            600        -3      838
+## 10  2013  319.     1     1      558            600        -2      753
+## # ℹ 336,766 more rows
+## # ℹ 12 more variables: sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>Alternatively, using <code>.keep</code> within <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> will only keep the columns that were involved in <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>:</p>
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    speed <span class="op">=</span> <span class="va">distance</span> <span class="op">/</span> <span class="va">air_time</span> <span class="op">*</span> <span class="fl">60</span>,</span>
+<span>    .keep <span class="op">=</span> <span class="st">"used"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 3
+##    air_time distance speed
+##       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+##  1      227     1400  370.
+##  2      227     1416  374.
+##  3      160     1089  408.
+##  4      183     1576  517.
+##  5      116      762  394.
+##  6      150      719  288.
+##  7      158     1065  404.
+##  8       53      229  259.
+##  9      140      944  405.
+## 10      138      733  319.
+## # ℹ 336,766 more rows</code></pre>
+</div>
+<div id="select-columns" class="section level3" number="9.3.2">
+<h3>
+<span class="header-section-number">9.3.2</span> Select Columns<a class="anchor" aria-label="anchor" href="#select-columns"><i class="fas fa-link"></i></a>
+</h3>
+<p>With data frames with many columns, you may want to only focus on a subset of the columns. To select only the departure and arrival delays:</p>
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">dep_delay</span>, <span class="va">arr_delay</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 2
+##    dep_delay arr_delay
+##        &lt;dbl&gt;     &lt;dbl&gt;
+##  1         2        11
+##  2         4        20
+##  3         2        33
+##  4        -1       -18
+##  5        -6       -25
+##  6        -4        12
+##  7        -5        19
+##  8        -3       -14
+##  9        -3        -8
+## 10        -2         8
+## # ℹ 336,766 more rows</code></pre>
+<p>There are a number of helper functions you can use within <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>. These can be useful if there is a pattern in the naming of the columns:</p>
+<ul>
+<li>
+<code>starts_with("abc")</code>: matches names that begin with “abc”.</li>
+<li>
+<code>ends_with("xyz")</code>: matches names that end with “xyz”.</li>
+<li>
+<code>contains("ijk")</code>: matches names that contain “ijk”.</li>
+<li>
+<code>num_range("x", 1:3)</code>: matches <code>x1</code>, <code>x2</code> and <code>x3</code>.</li>
+</ul>
+<p>You can rename variables as you <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> them.</p>
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>tail_num <span class="op">=</span> <span class="va">tailnum</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 1
+##    tail_num
+##    &lt;chr&gt;   
+##  1 N14228  
+##  2 N24211  
+##  3 N619AA  
+##  4 N804JB  
+##  5 N668DN  
+##  6 N39463  
+##  7 N516JB  
+##  8 N829AS  
+##  9 N593JB  
+## 10 N3ALAA  
+## # ℹ 336,766 more rows</code></pre>
+<p>The new name appears on the left-hand side of the <code>=</code>, and the old variable appears on the right-hand side.</p>
+</div>
+<div id="rename-columns" class="section level3" number="9.3.3">
+<h3>
+<span class="header-section-number">9.3.3</span> Rename Columns<a class="anchor" aria-label="anchor" href="#rename-columns"><i class="fas fa-link"></i></a>
+</h3>
+<p>If you want to keep all the existing variables and just want to rename a few, you can use <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code>:</p>
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">flights</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>depTime <span class="op">=</span> <span class="va">dep_time</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##     year month   day depTime sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1     517            515         2      830            819
+##  2  2013     1     1     533            529         4      850            830
+##  3  2013     1     1     542            540         2      923            850
+##  4  2013     1     1     544            545        -1     1004           1022
+##  5  2013     1     1     554            600        -6      812            837
+##  6  2013     1     1     554            558        -4      740            728
+##  7  2013     1     1     555            600        -5      913            854
+##  8  2013     1     1     557            600        -3      709            723
+##  9  2013     1     1     557            600        -3      838            846
+## 10  2013     1     1     558            600        -2      753            745
+## # ℹ 336,766 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+<div id="relocate-columns" class="section level3" number="9.3.4">
+<h3>
+<span class="header-section-number">9.3.4</span> Relocate Columns<a class="anchor" aria-label="anchor" href="#relocate-columns"><i class="fas fa-link"></i></a>
+</h3>
+<p>You can use <code><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate()</a></code> to move variables around. You may want to place important ones in front, or group related variables together. BY default, the variables are moved to the front:</p>
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">time_hour</span>, <span class="va">air_time</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##    time_hour           air_time  year month   day dep_time sched_dep_time
+##    &lt;dttm&gt;                 &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;
+##  1 2013-01-01 05:00:00      227  2013     1     1      517            515
+##  2 2013-01-01 05:00:00      227  2013     1     1      533            529
+##  3 2013-01-01 05:00:00      160  2013     1     1      542            540
+##  4 2013-01-01 05:00:00      183  2013     1     1      544            545
+##  5 2013-01-01 06:00:00      116  2013     1     1      554            600
+##  6 2013-01-01 05:00:00      150  2013     1     1      554            558
+##  7 2013-01-01 06:00:00      158  2013     1     1      555            600
+##  8 2013-01-01 06:00:00       53  2013     1     1      557            600
+##  9 2013-01-01 06:00:00      140  2013     1     1      557            600
+## 10 2013-01-01 06:00:00      138  2013     1     1      558            600
+## # ℹ 336,766 more rows
+## # ℹ 12 more variables: dep_delay &lt;dbl&gt;, arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;,
+## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;,
+## #   dest &lt;chr&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;</code></pre>
+<p>Or you can specify where to place them after or before:</p>
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">time_hour</span>, <span class="va">air_time</span>, .after <span class="op">=</span> <span class="va">day</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##     year month   day time_hour           air_time dep_time sched_dep_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dttm&gt;                 &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1 2013-01-01 05:00:00      227      517            515
+##  2  2013     1     1 2013-01-01 05:00:00      227      533            529
+##  3  2013     1     1 2013-01-01 05:00:00      160      542            540
+##  4  2013     1     1 2013-01-01 05:00:00      183      544            545
+##  5  2013     1     1 2013-01-01 06:00:00      116      554            600
+##  6  2013     1     1 2013-01-01 05:00:00      150      554            558
+##  7  2013     1     1 2013-01-01 06:00:00      158      555            600
+##  8  2013     1     1 2013-01-01 06:00:00       53      557            600
+##  9  2013     1     1 2013-01-01 06:00:00      140      557            600
+## 10  2013     1     1 2013-01-01 06:00:00      138      558            600
+## # ℹ 336,766 more rows
+## # ℹ 12 more variables: dep_delay &lt;dbl&gt;, arr_time &lt;int&gt;, sched_arr_time &lt;int&gt;,
+## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;,
+## #   dest &lt;chr&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;</code></pre>
+</div>
 </div>
 <div id="pipes" class="section level2" number="9.4">
 <h2>
@@ -357,7 +587,7 @@
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#dplyr"><span class="header-section-number">9</span> Data Wranling (dplyr)</a></li>
+<li><a class="nav-link" href="#dplyr"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></li>
 <li>
 <a class="nav-link" href="#motivation-4"><span class="header-section-number">9.1</span> Motivation</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#motivating-example-1"><span class="header-section-number">9.1.1</span> Motivating Example</a></li>
@@ -371,7 +601,14 @@
 <li><a class="nav-link" href="#counting"><span class="header-section-number">9.2.3</span> Counting</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#operations-on-columns"><span class="header-section-number">9.3</span> Operations on Columns</a></li>
+<li>
+<a class="nav-link" href="#operations-on-columns"><span class="header-section-number">9.3</span> Operations on Columns</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#create-new-columns"><span class="header-section-number">9.3.1</span> Create New Columns</a></li>
+<li><a class="nav-link" href="#select-columns"><span class="header-section-number">9.3.2</span> Select Columns</a></li>
+<li><a class="nav-link" href="#rename-columns"><span class="header-section-number">9.3.3</span> Rename Columns</a></li>
+<li><a class="nav-link" href="#relocate-columns"><span class="header-section-number">9.3.4</span> Relocate Columns</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#pipes"><span class="header-section-number">9.4</span> Pipes</a></li>
 <li><a class="nav-link" href="#grouping"><span class="header-section-number">9.5</span> Grouping</a></li>
 </ul>

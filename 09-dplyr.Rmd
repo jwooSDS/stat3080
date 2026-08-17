@@ -1,0 +1,26 @@
+# Data Wranling (dplyr) {#dplyr}
+
+## Motivation
+
+The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. As you saw in Section \@ref(ggplot), we want the data frame to have this basic structure:
+
++ Each row of the data frame corresponds to an observation.
++ Each column of the data frame corresponds to a variable.
+
+Sometimes, data are not structured in this way, and we will have to transform the data to take on this basic data structure. This process is called data wrangling. The most common and basic operations to transform the data are:
+
+
++ Select a subset of rows of the data frame based on some criteria.
++ Rearrange rows in some order.
++ Select a subset of columns of the data frame.
++ Create new columns based on existing variables.
++ Change column names.
++ Change the order of columns.
+
+You may realize that you can already perform some of these operations in Sections \@ref(Rbasics) and \@ref(subset). In this section, you will learning how to perform these operations using another core package from the `tidyverse` called `dplyr`, which has gained popularity. Its advocates say the syntax associated with `dplyr` is more readable for the human eye, although its detractors will say that `dplyr` introduces many function names its syntax strays from base R. 
+
+This section is heavily based on [R for Data Science](https://r4ds.hadley.nz/) [@wickham2023], Chapter 3. We will be covering the basics of data wranling with `dplyr`. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.
+
+
+
+

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 10 Blank Canvas | STAT 3080: From Data to Knowledge</title>
+<title>Chapter 9 Data Wranling (dplyr) | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="See Sections ??, 1.7.1. See equation (??). See Figure 10.1, and 10.2 and Table ??. plot(cars)  Figure 10.1: Car   Figure 10.2: Sample Space of Drawing One Card from Standard Deck. Picture from...">
+<meta name="description" content="9.1 Motivation The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 10 Blank Canvas | STAT 3080: From Data to Knowledge">
+<meta property="og:title" content="Chapter 9 Data Wranling (dplyr) | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="See Sections ??, 1.7.1. See equation (??). See Figure 10.1, and 10.2 and Table ??. plot(cars)  Figure 10.1: Car   Figure 10.2: Sample Space of Drawing One Card from Standard Deck. Picture from...">
+<meta property="og:description" content="9.1 Motivation The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 10 Blank Canvas | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="See Sections ??, 1.7.1. See equation (??). See Figure 10.1, and 10.2 and Table ??. plot(cars)  Figure 10.1: Car   Figure 10.2: Sample Space of Drawing One Card from Standard Deck. Picture from...">
+<meta name="twitter:title" content="Chapter 9 Data Wranling (dplyr) | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="9.1 Motivation The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -73,8 +73,8 @@
 <li><a class="" href="sims.html"><span class="header-section-number">6</span> Simulations</a></li>
 <li><a class="" href="applyfam.html"><span class="header-section-number">7</span> Apply Family</a></li>
 <li><a class="" href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
-<li><a class="" href="dplyr.html"><span class="header-section-number">9</span> Data Wranling (dplyr)</a></li>
-<li><a class="active" href="blank.html"><span class="header-section-number">10</span> Blank Canvas</a></li>
+<li><a class="active" href="dplyr.html"><span class="header-section-number">9</span> Data Wranling (dplyr)</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">10</span> Blank Canvas</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -83,35 +83,42 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="blank" class="section level1" number="10">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="dplyr" class="section level1" number="9">
 <h1>
-<span class="header-section-number">10</span> Blank Canvas<a class="anchor" aria-label="anchor" href="#blank"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Data Wranling (dplyr)<a class="anchor" aria-label="anchor" href="#dplyr"><i class="fas fa-link"></i></a>
 </h1>
-<p>See Sections <a href="#RBasics"><strong>??</strong></a>, <a href="Rbasics.html#doc">1.7.1</a>.</p>
-<p>See equation <a href="#eq:union">(<strong>??</strong>)</a>.</p>
-<p>See Figure <a href="blank.html#fig:car">10.1</a>, and <a href="blank.html#fig:cards">10.2</a> and Table <a href="#tab:nice-tab"><strong>??</strong></a>.</p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span></span></code></pre></div>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:car"></span>
-<img src="bookdown-demo_files/figure-html/car-1.png" alt="Car" width="80%"><p class="caption">
-Figure 10.1: Car
-</p>
-</div>
-<div class="figure">
-<span style="display:block;" id="fig:cards"></span>
-<img src="images/02-cards.jpg" alt="Sample Space of Drawing One Card from Standard Deck. Picture from [wikipedia](https://en.wikipedia.org/wiki/Standard_52-card_deck)"><p class="caption">
-Figure 10.2: Sample Space of Drawing One Card from Standard Deck. Picture from <a href="https://en.wikipedia.org/wiki/Standard_52-card_deck">wikipedia</a>
-</p>
-</div>
+<div id="motivation-4" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. As you saw in Section <a href="ggplot.html#ggplot">8</a>, we want the data frame to have this basic structure:</p>
+<ul>
+<li>Each row of the data frame corresponds to an observation.</li>
+<li>Each column of the data frame corresponds to a variable.</li>
+</ul>
+<p>Sometimes, data are not structured in this way, and we will have to transform the data to take on this basic data structure. This process is called data wrangling. The most common and basic operations to transform the data are:</p>
+<ul>
+<li>Select a subset of rows of the data frame based on some criteria.</li>
+<li>Rearrange rows in some order.</li>
+<li>Select a subset of columns of the data frame.</li>
+<li>Create new columns based on existing variables.</li>
+<li>Change column names.</li>
+<li>Change the order of columns.</li>
+</ul>
+<p>You may realize that you can already perform some of these operations in Sections <a href="Rbasics.html#Rbasics">1</a> and <a href="subset.html#subset">3</a>. In this section, you will learning how to perform these operations using another core package from the <code>tidyverse</code> called <code>dplyr</code>, which has gained popularity. Its advocates say the syntax associated with <code>dplyr</code> is more readable for the human eye, although its detractors will say that <code>dplyr</code> introduces many function names its syntax strays from base R.</p>
+<p>This section is heavily based on <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 3. We will be covering the basics of data wranling with <code>dplyr</code>. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.</p>
 
 </div>
+</div>
   <div class="chapter-nav">
-<div class="prev"><a href="dplyr.html"><span class="header-section-number">9</span> Data Wranling (dplyr)</a></div>
-<div class="next"><a href="references.html">References</a></div>
+<div class="prev"><a href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></div>
+<div class="next"><a href="blank.html"><span class="header-section-number">10</span> Blank Canvas</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#blank"><span class="header-section-number">10</span> Blank Canvas</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dplyr"><span class="header-section-number">9</span> Data Wranling (dplyr)</a></li>
+<li><a class="nav-link" href="#motivation-4"><span class="header-section-number">9.1</span> Motivation</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

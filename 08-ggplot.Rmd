@@ -306,7 +306,7 @@ ggplot(newDF, aes(x = x, y = y)) +
 
 ## ggplot vs Base R
 
-So which to use? `ggplot()` produces nicer visuals with much more customizations, but base R can be quicker to type up. 
+So which to use? `ggplot()` produces nicer visuals with much more customization, but base R can be quicker to type up. 
 
 - If I am starting my analysis, I usually start with base R. 
 - For simple visualizations with no or little customization needed, use base R.

@@ -125,4 +125,6 @@ single-categorical-variable
 single-quantitative-variable
 visualizations-from-simulations
 ggplot-vs-base-r
+dplyr
+motivation-4
 blank

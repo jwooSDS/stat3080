@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.03076873  1.68888930 -3.26275687  4.50115606  1.17697484 -0.14633737
-##  [7] -0.27403954 -0.41474569 -1.61328121  0.63740293
+##  [1]  0.9306358 -4.8301480 -3.7834501  0.8320310 -3.9635213  2.0450890
+##  [7] -0.1464972  3.3385988  3.1202552 -2.6709924
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -4282,7 +4282,7 @@ You may realize that \texttt{ggplot()} assumes you are working with a data frame
 \hypertarget{ggplot-vs-base-r}{%
 \section{ggplot vs Base R}\label{ggplot-vs-base-r}}
 
-So which to use? \texttt{ggplot()} produces nicer visuals with much more customizations, but base R can be quicker to type up.
+So which to use? \texttt{ggplot()} produces nicer visuals with much more customization, but base R can be quicker to type up.
 
 \begin{itemize}
 \tightlist
@@ -4295,6 +4295,44 @@ So which to use? \texttt{ggplot()} produces nicer visuals with much more customi
 \item
   Use \texttt{ggplot()} if presenting to an audience.
 \end{itemize}
+
+\hypertarget{dplyr}{%
+\chapter{Data Wranling (dplyr)}\label{dplyr}}
+
+\hypertarget{motivation-4}{%
+\section{Motivation}\label{motivation-4}}
+
+The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. As you saw in Section \ref{ggplot}, we want the data frame to have this basic structure:
+
+\begin{itemize}
+\tightlist
+\item
+  Each row of the data frame corresponds to an observation.
+\item
+  Each column of the data frame corresponds to a variable.
+\end{itemize}
+
+Sometimes, data are not structured in this way, and we will have to transform the data to take on this basic data structure. This process is called data wrangling. The most common and basic operations to transform the data are:
+
+\begin{itemize}
+\tightlist
+\item
+  Select a subset of rows of the data frame based on some criteria.
+\item
+  Rearrange rows in some order.
+\item
+  Select a subset of columns of the data frame.
+\item
+  Create new columns based on existing variables.
+\item
+  Change column names.
+\item
+  Change the order of columns.
+\end{itemize}
+
+You may realize that you can already perform some of these operations in Sections \ref{Rbasics} and \ref{subset}. In this section, you will learning how to perform these operations using another core package from the \texttt{tidyverse} called \texttt{dplyr}, which has gained popularity. Its advocates say the syntax associated with \texttt{dplyr} is more readable for the human eye, although its detractors will say that \texttt{dplyr} introduces many function names its syntax strays from base R.
+
+This section is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 3. We will be covering the basics of data wranling with \texttt{dplyr}. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

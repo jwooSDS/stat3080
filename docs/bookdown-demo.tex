@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-08-11}
+\date{2026-08-17}
 
 \begin{document}
 \maketitle
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -3.1020708 -0.9782687  3.1092734  1.5631652  5.2254111  0.7496556
-##  [7] -1.1559587 -1.1416006 -2.8379719 -0.7732955
+##  [1]  3.6770737 -0.5775769  3.7380861  2.3302209 -2.6267358 -0.7217074
+##  [7]  4.9066366 -2.0507658  0.8369008 -3.7011912
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -2439,8 +2439,8 @@ Instead of yielding a logical vector for each entry in a vector, the \texttt{whi
 
 Two-dimensional data frames can be subsetting similarly, using the an argument for the row and another for the column.
 
-\hypertarget{loading-data-sets-in-r}{%
-\section{Loading Data Sets in R}\label{loading-data-sets-in-r}}
+\hypertarget{Rdata}{%
+\section{Loading Data Sets in R}\label{Rdata}}
 
 We will cover two main ways to load data sets in R:
 
@@ -3789,6 +3789,37 @@ Look at the output from the following, and compare with the output from \texttt{
 \end{verbatim}
 
 I find working with vectors and matrices easier than working with lists, so I prefer using \texttt{sapply()} to \texttt{lapply()}.
+
+\hypertarget{ggplot}{%
+\chapter{Data Visualizations (ggplot2)}\label{ggplot}}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Data visualizations are tools that summarize data. Consider the visualization in \href{https://www.pewresearch.org/short-reads/2025/08/18/how-the-audiences-of-30-major-news-sources-differ-in-their-levels-of-education/}{this article from Pew Reasearch}. Without actually having access to the actual data, we have a sense of the audience associated with 30 major news sources. Good visualizations are easy to interpret for a wide variety of audiences, and are easier to explain than statistical models.
+
+In this section, you will learn how to create common data visualizations. The choice of data visualization is almost always determined by whether the variable(s) involved is categorical or quantitative. Discrete variables are interesting because depending on the circumstance, they can be viewed as either categorical or quantitative in the context of data visualizations.
+
+We will be using functions from the \texttt{ggplot2} package to create visualizations. The \texttt{ggplot2} package enables users to create various kinds of data visualizations, beyond the visualizations that can be made in base R.
+
+This section is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 1. We will be covering the basics of these visualizations in this section. Feel free to consult the book for a more thorough explanation of how the functions from the \texttt{ggplot2} package work. I have added some of my own commentary, as well as some examples on how to create similar visualizations using base R.
+
+\hypertarget{motivating-example}{%
+\subsection{Motivating Example}\label{motivating-example}}
+
+We will use the \texttt{penguins} data set from the \texttt{palmerpenguins} package \citep{penguins}. The data set contains data on penguins near Antarctica, such as measurements on flipper length, body mass, sex, the species, and which island they live in. Suppose we want to see how flipper lengths are related to body mass. Are the body masses of these penguins closely related to their flipper lengths? If so, how strong is this relationship. Is the relationship linear or exponential? Do the relationships vary by species and island?
+
+We will load the \texttt{tidyverse} package, which automatically loads the \texttt{ggplot2} package, as well as the \texttt{palmerpenguins} package and the \texttt{ggthemes} package which uses colorblind safe colors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(palmerpenguins)}
+\FunctionTok{library}\NormalTok{(ggthemes)}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that loading the \texttt{tidyverse} package prints out a couple of messages informing us of functions in the package that conflict with functions in base R (functions with the same name in different packages). As mentioned in Section \ref{Rdata}, R will use the function from the package that was most recently loaded when the function name is called. You will have to type the name of the package and function if you want to use the function from the package that was loaded earlier, e.g.~\texttt{stats::filter()} to use \texttt{filter()} from the \texttt{stats} package.
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

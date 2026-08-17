@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Data Visualizations (ggplot2) | STAT 3080: From Data to Knowledge</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="8.1 Introduction Data visualizations are tools that summarize data. Consider the visualization in this article from Pew Reasearch. Without actually having access to the actual data, we have a...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Data Visualizations (ggplot2) | STAT 3080: From Data to Knowledge">
+<meta property="og:type" content="book">
+<meta property="og:description" content="8.1 Introduction Data visualizations are tools that summarize data. Consider the visualization in this article from Pew Reasearch. Without actually having access to the actual data, we have a...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Data Visualizations (ggplot2) | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="8.1 Introduction Data visualizations are tools that summarize data. Consider the visualization in this article from Pew Reasearch. Without actually having access to the actual data, we have a...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 3080: From Data to Knowledge</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
+<li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
+<li><a class="" href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></li>
+<li><a class="" href="func.html"><span class="header-section-number">4</span> Functions</a></li>
+<li><a class="" href="control.html"><span class="header-section-number">5</span> Control Flow</a></li>
+<li><a class="" href="sims.html"><span class="header-section-number">6</span> Simulations</a></li>
+<li><a class="" href="applyfam.html"><span class="header-section-number">7</span> Apply Family</a></li>
+<li><a class="active" href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">9</span> Blank Canvas</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ggplot" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Data Visualizations (ggplot2)<a class="anchor" aria-label="anchor" href="#ggplot"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
+</h2>
+<p>Data visualizations are tools that summarize data. Consider the visualization in <a href="https://www.pewresearch.org/short-reads/2025/08/18/how-the-audiences-of-30-major-news-sources-differ-in-their-levels-of-education/">this article from Pew Reasearch</a>. Without actually having access to the actual data, we have a sense of the audience associated with 30 major news sources. Good visualizations are easy to interpret for a wide variety of audiences, and are easier to explain than statistical models.</p>
+<p>In this section, you will learn how to create common data visualizations. The choice of data visualization is almost always determined by whether the variable(s) involved is categorical or quantitative. Discrete variables are interesting because depending on the circumstance, they can be viewed as either categorical or quantitative in the context of data visualizations.</p>
+<p>We will be using functions from the <code>ggplot2</code> package to create visualizations. The <code>ggplot2</code> package enables users to create various kinds of data visualizations, beyond the visualizations that can be made in base R.</p>
+<p>This section is heavily based on <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 1. We will be covering the basics of these visualizations in this section. Feel free to consult the book for a more thorough explanation of how the functions from the <code>ggplot2</code> package work. I have added some of my own commentary, as well as some examples on how to create similar visualizations using base R.</p>
+<div id="motivating-example" class="section level3" number="8.1.1">
+<h3>
+<span class="header-section-number">8.1.1</span> Motivating Example<a class="anchor" aria-label="anchor" href="#motivating-example"><i class="fas fa-link"></i></a>
+</h3>
+<p>We will use the <code>penguins</code> data set from the <code>palmerpenguins</code> package <span class="citation">(<a href="references.html#ref-penguins">Horst, Hill, and Gorman 2020</a>)</span>. The data set contains data on penguins near Antarctica, such as measurements on flipper length, body mass, sex, the species, and which island they live in. Suppose we want to see how flipper lengths are related to body mass. Are the body masses of these penguins closely related to their flipper lengths? If so, how strong is this relationship. Is the relationship linear or exponential? Do the relationships vary by species and island?</p>
+<p>We will load the <code>tidyverse</code> package, which automatically loads the <code>ggplot2</code> package, as well as the <code>palmerpenguins</code> package and the <code>ggthemes</code> package which uses colorblind safe colors.</p>
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jrnold.github.io/ggthemes/">ggthemes</a></span><span class="op">)</span></span></code></pre></div>
+<p>Notice that loading the <code>tidyverse</code> package prints out a couple of messages informing us of functions in the package that conflict with functions in base R (functions with the same name in different packages). As mentioned in Section <a href="subset.html#Rdata">3.3</a>, R will use the function from the package that was most recently loaded when the function name is called. You will have to type the name of the package and function if you want to use the function from the package that was loaded earlier, e.g. <code><a href="https://rdrr.io/r/stats/filter.html">stats::filter()</a></code> to use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> from the <code>stats</code> package.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="applyfam.html"><span class="header-section-number">7</span> Apply Family</a></div>
+<div class="next"><a href="blank.html"><span class="header-section-number">9</span> Blank Canvas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ggplot"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
+<li>
+<a class="nav-link" href="#introduction"><span class="header-section-number">8.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#motivating-example"><span class="header-section-number">8.1.1</span> Motivating Example</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-17.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

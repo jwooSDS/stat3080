@@ -1,0 +1,30 @@
+# Data Visualizations (ggplot2) {#ggplot}
+
+## Introduction
+
+Data visualizations are tools that summarize data. Consider the visualization in [this article from Pew Reasearch](https://www.pewresearch.org/short-reads/2025/08/18/how-the-audiences-of-30-major-news-sources-differ-in-their-levels-of-education/). Without actually having access to the actual data, we have a sense of the audience associated with 30 major news sources. Good visualizations are easy to interpret for a wide variety of audiences, and are easier to explain than statistical models. 
+
+In this section, you will learn how to create common data visualizations. The choice of data visualization is almost always determined by whether the variable(s) involved is categorical or quantitative. Discrete variables are interesting because depending on the circumstance, they can be viewed as either categorical or quantitative in the context of data visualizations. 
+
+We will be using functions from the `ggplot2` package to create visualizations. The `ggplot2` package enables users to create various kinds of data visualizations, beyond the visualizations that can be made in base R. 
+
+This section is heavily based on [R for Data Science](https://r4ds.hadley.nz/) [@wickham2023], Chapter 1. We will be covering the basics of these visualizations in this section. Feel free to consult the book for a more thorough explanation of how the functions from the `ggplot2` package work. I have added some of my own commentary, as well as some examples on how to create similar visualizations using base R. 
+
+### Motivating Example
+
+We will use the `penguins` data set from the `palmerpenguins` package [@penguins]. The data set contains data on penguins near Antarctica, such as measurements on flipper length, body mass, sex, the species, and which island they live in. Suppose we want to see how flipper lengths are related to body mass. Are the body masses of these penguins closely related to their flipper lengths? If so, how strong is this relationship. Is the relationship linear or exponential? Do the relationships vary by species and island?
+
+We will load the `tidyverse` package, which automatically loads the `ggplot2` package, as well as the `palmerpenguins` package and the `ggthemes` package which uses colorblind safe colors.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+library(ggthemes)
+```
+
+Notice that loading the `tidyverse` package prints out a couple of messages informing us of functions in the package that conflict with functions in base R (functions with the same name in different packages). As mentioned in Section \@ref(Rdata), R will use the function from the package that was most recently loaded when the function name is called. You will have to type the name of the package and function if you want to use the function from the package that was loaded earlier, e.g. `stats::filter()` to use `filter()` from the `stats` package. 
+
+
+
+
+

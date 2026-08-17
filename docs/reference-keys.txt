@@ -67,7 +67,7 @@ subsetting-with-labels-1
 subsetting-with-logical-expressions
 logicalexp
 subsetting-with-logical-expressions-1
-loading-data-sets-in-r
+Rdata
 data-sets-from-r
 data-sets-from-local-file
 factor-variables
@@ -105,4 +105,7 @@ apply
 tapply
 lapply-and-sapply
 sapply
+ggplot
+introduction
+motivating-example
 blank

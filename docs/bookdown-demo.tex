@@ -423,8 +423,8 @@ R is like any calculator in that these operators follow the standard order of op
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{assignments-and-variables}{%
-\section{Assignments and Variables}\label{assignments-and-variables}}
+\hypertarget{variables}{%
+\section{Assignments and Variables}\label{variables}}
 
 In order to write useful and effective R code, You need to be able to store items to be used later. Anything that is stored is called an object. An object can be a single value resulting from a calculation or a collection of information such as a table of linear regression coefficients.
 
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  3.6770737 -0.5775769  3.7380861  2.3302209 -2.6267358 -0.7217074
-##  [7]  4.9066366 -2.0507658  0.8369008 -3.7011912
+##  [1] -0.03076873  1.68888930 -3.26275687  4.50115606  1.17697484 -0.14633737
+##  [7] -0.27403954 -0.41474569 -1.61328121  0.63740293
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3820,6 +3820,481 @@ We will load the \texttt{tidyverse} package, which automatically loads the \text
 \end{Shaded}
 
 Notice that loading the \texttt{tidyverse} package prints out a couple of messages informing us of functions in the package that conflict with functions in base R (functions with the same name in different packages). As mentioned in Section \ref{Rdata}, R will use the function from the package that was most recently loaded when the function name is called. You will have to type the name of the package and function if you want to use the function from the package that was loaded earlier, e.g.~\texttt{stats::filter()} to use \texttt{filter()} from the \texttt{stats} package.
+
+\hypertarget{visualizing-two-quantitative-variables}{%
+\section{Visualizing Two Quantitative Variables}\label{visualizing-two-quantitative-variables}}
+
+We take a quick peak at the contents of the data frame:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\OtherTok{\textless{}{-}}\NormalTok{ palmerpenguins}\SpecialCharTok{::}\NormalTok{penguins}
+\FunctionTok{head}\NormalTok{(Data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           NA            NA                  NA          NA
+## 5 Adelie  Torgersen           36.7          19.3               193        3450
+## 6 Adelie  Torgersen           39.3          20.6               190        3650
+## # i 2 more variables: sex <fct>, year <int>
+\end{verbatim}
+
+Each row of the data frame should contain measurements on an \textbf{observation} (penguin), and each column of the data frame should contain a \textbf{variable} (characteristic). We are using the term variable in the context of statistics, and not in the context of computer science (see Section \ref{variables}).
+
+\begin{itemize}
+\tightlist
+\item
+  An \textbf{observation} is each object that we collect data on. Often called a data point.
+\item
+  A \textbf{variable} is a characteristic that we measure on each observation.
+\end{itemize}
+
+As mentioned earlier, suppose we want to see how flipper lengths are related to body mass. Notice that both variables, flipper length and body mass, are \textbf{quantitative}, and not \textbf{categorical}.
+
+\begin{itemize}
+\tightlist
+\item
+  A variable is \textbf{quantitative} if its value is numeric and arithmetic operations can be performed.
+\item
+  A variable is \textbf{categorical} if arithmetic operations cannot be performed. In this example, the variables species and island are categorical.
+\end{itemize}
+
+A \textbf{scatterplot} is the most common visualization that is used to display two quantitative variables. Often times, one variable can be designated as the \textbf{response variable} (often denotes as \(Y\)), and the other as the \textbf{predictor} (often denoted as \(X\). The predictor is used to forecast or explain changes in the \textbf{response variable}. In this context, the body mass is the response variable, and flipper length is the predictor.
+
+To create a scatterplot of these two variables, we can use
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{y =}\NormalTok{ body\_mass\_g)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-129-1.pdf}
+
+From these two lines we code, we can see the basic structure of creating data visualizations with the \texttt{ggplot()} function:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use the \texttt{ggplot()} function, and supply the name of the data frame, and the x- and/or y- variables via the \texttt{aes()} (aesthetics) function. End this line with a \texttt{+} operator, and then press enter.
+\item
+  In the next line (also called layer), specify the type of visualization we want to create (called \texttt{geoms}). For a scatterplot, type \texttt{geom\_point()}. By convention, the response variable goes on the vertical axis and the predictor goes on the horizontal axis. \texttt{ggplot()} takes care of this automatically when these are supplied as x- and y- variables via \texttt{aes()}.
+\end{enumerate}
+
+Notice the output prints a message informing us that 2 observations are missing and are removed. This is unlike some previous functions which output \texttt{NA} when missing values are present.
+
+From the scatterplot, it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.
+
+This is the most basic scatterplot that can be created. However, we note in this particular that we know that there are 3 species of penguins being measured, so perhaps the relationship between flipper length and body mass may vary across species, we want to add an additional variable \texttt{species}. One common way to do this is a scatterplot is to use colors. Also notice the axes have labels that are not the most descriptive, and a title is missing. These can be added via additional arguments in \texttt{aes()} or by supplying extra layers.
+
+\hypertarget{adding-aesthetics-and-layers}{%
+\subsection{Adding Aesthetics and Layers}\label{adding-aesthetics-and-layers}}
+
+\hypertarget{scattercolor}{%
+\subsubsection{Color for adding a categorical variable}\label{scattercolor}}
+
+To use different colored plots for each species:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{y =}\NormalTok{ body\_mass\_g, }\AttributeTok{color =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-130-1.pdf}
+
+Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer \texttt{scale\_color\_colorblind()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{y =}\NormalTok{ body\_mass\_g, }\AttributeTok{color =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_colorblind}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-131-1.pdf}
+
+Notice that each layer ends with \texttt{+} and the next layer starts on a new line.
+
+Now, it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species.
+
+\hypertarget{overlaying-lines-and-curves}{%
+\subsubsection{Overlaying lines and curves}\label{overlaying-lines-and-curves}}
+
+A way to help visualize the relationship between the quantitative variables is to overlay a line of best fit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{y =}\NormalTok{ body\_mass\_g, }\AttributeTok{color =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_colorblind}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-132-1.pdf}
+We are overlaying a line over each species, where represents the regression line of body mass against flipper length through \texttt{geom\_smooth} and \texttt{method\ =\ "lm"}. Notice that each line has a grey band around them? These are confidence intervals for the regression line. These can be removed if you mainly want to assess if the relationship is linear
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{y =}\NormalTok{ body\_mass\_g, }\AttributeTok{color =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_colorblind}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-133-1.pdf}
+If the observations fall evenly on both sides of the line, the relationship can be approximated by a line. Overlaying regressions lines only make sense if the relationship is linear. If the relationship is nonlinear, we should overlay loess curves, by changing \texttt{method} inside \texttt{geom\_smooth}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{y =}\NormalTok{ body\_mass\_g, }\AttributeTok{color =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_colorblind}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-134-1.pdf}
+With real data, relationships are rarely perfectly linear, and so a judgment call has to be made if loess curves or linear regression lines are more appropriate. In this example, the curves are pretty close to being straight lines, so using linear regression lines may be chosen as they are simpler than curves.
+
+\hypertarget{adding-titles-and-labeling-axes}{%
+\subsubsection{Adding titles and labeling axes}\label{adding-titles-and-labeling-axes}}
+
+Now, we are ready to add the a layer to label the axes and give a title to the plot via a layer called \texttt{labs}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{y =}\NormalTok{ body\_mass\_g, }\AttributeTok{color =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_colorblind}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Body Mass and Flipper Length of Penguins"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Flipper length (mm)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Body mass (g)"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Species"}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-135-1.pdf}
+
+\hypertarget{base-r}{%
+\subsection{Base R}\label{base-r}}
+
+To create a scatterplot using base R functions, use the \texttt{plot()} function, then supply a vector for the x-variable, then a vector for the y-variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{flipper\_length\_mm, Data}\SpecialCharTok{$}\NormalTok{body\_mass\_g)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-136-1.pdf}
+
+\hypertarget{visualizing-two-categorical-variables}{%
+\section{Visualizing Two Categorical Variables}\label{visualizing-two-categorical-variables}}
+
+A bar chart is often used to visualize the relationship between two categorical variables. Perhaps we want to see if the different species of penguins tend to live in different islands. The most basic bar chart can provide the number of each species in each island:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ island, }\AttributeTok{fill =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-137-1.pdf}
+The predictor is \texttt{island} and the response variable is \texttt{species}. For bar charts, place the response variable in the \texttt{fill} argument.
+
+Notice we use \texttt{geom\_bar()} instead of \texttt{geom\_point()}. The \texttt{geom} tells the \texttt{ggplot()} function what kind of visualization we want.
+
+We can see there are an unequal number of penguins in each island. So using proportions, rather than counts, will be more useful:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ island, }\AttributeTok{fill =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"fill"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-1.pdf}
+In Biscoe island, we have mostly Gentoos and some Adelies. In Dream island, we have a fairly even proportion of Adelies and Chinstrap. Torgensen island is the island of Adelies. Since the proportions of species are so different across the islands, it appears that the island and species are related. If there is no relationship, the proportion of each species would be the same across the islands.
+
+Notice the label of the y-axis is weird? How would you add a title and change the labels of each axes so they make more sense?
+
+\hypertarget{tables}{%
+\subsection{Tables}\label{tables}}
+
+We can also create \textbf{two-way tables} to summarize the data from two categorical variables. These functions are from base R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{island, Data}\SpecialCharTok{$}\NormalTok{species)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            
+##             Adelie Chinstrap Gentoo
+##   Biscoe        44         0    124
+##   Dream         56        68      0
+##   Torgersen     52         0      0
+\end{verbatim}
+
+To find proportions of each species in each island:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{island, Data}\SpecialCharTok{$}\NormalTok{species), }\AttributeTok{margin =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            
+##                Adelie Chinstrap    Gentoo
+##   Biscoe    0.2619048 0.0000000 0.7380952
+##   Dream     0.4516129 0.5483871 0.0000000
+##   Torgersen 1.0000000 0.0000000 0.0000000
+\end{verbatim}
+
+\texttt{margin\ =\ 1} means we want the proportions in each row to add up to 1. Use \texttt{2} for columns. We have placed the predictor in the rows here.
+
+\hypertarget{base-r-1}{%
+\subsection{Base R}\label{base-r-1}}
+
+As a quick example using base R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{species, Data}\SpecialCharTok{$}\NormalTok{island))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-141-1.pdf}
+
+\hypertarget{visualizing-a-quantitative-variable-across-a-categorical-variable}{%
+\section{Visualizing a Quantitative Variable Across a Categorical Variable}\label{visualizing-a-quantitative-variable-across-a-categorical-variable}}
+
+Suppose we want to see if the body mass of the penguins differ across the species. We can create \textbf{side by side boxplots}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ species, }\AttributeTok{y =}\NormalTok{ body\_mass\_g)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-142-1.pdf}
+
+A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. For the Chinstraps, we see an outlier that is bigger than the rest and another outlier that is smaller than the rest. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers.
+
+We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.
+
+How would you add a title and change the labels of each axes so they make more sense?
+
+We can also use density plots of body mass and use different colors for each species and arrive at a similar conclusion.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ body\_mass\_g, }\AttributeTok{color =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-143-1.pdf}
+Areas under the density curve represent proportion of observations in that range. For example, most Chinstraps have body masses between 3000g and 4500g.
+
+How would you add a title and change the labels of each axes so they make more sense?
+
+\hypertarget{base-r-2}{%
+\subsection{Base R}\label{base-r-2}}
+
+As a quick example using base R. For side by side boxplots:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{body\_mass\_g }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Data}\SpecialCharTok{$}\NormalTok{species) }\DocumentationTok{\#\#y \textasciitilde{} x}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-144-1.pdf}
+
+Using density plots for each species is cumbersome in base R.
+
+\hypertarget{adding-an-additional-categorical-variable}{%
+\section{Adding an Additional Categorical Variable}\label{adding-an-additional-categorical-variable}}
+
+Most of these plots visualize two variables. In Section \ref{scattercolor}, we have seen with the scatterplot that in addition to two quantiative variables, we can use color to incorporate a categorical variable.
+
+To incorporate another categorical variable, we can use what \texttt{ggplot()} calls a \texttt{facet\_wrap}. It will create the visualization across each value of the categorical variable in the \texttt{facet\_wrap}. For example,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ flipper\_length\_mm, }\AttributeTok{y =}\NormalTok{ body\_mass\_g, }\AttributeTok{color =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_colorblind}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Body Mass and Flipper Length of Penguins"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Flipper length (mm)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Body mass (g)"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Species"}\NormalTok{ ) }\SpecialCharTok{+} 
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{island)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-145-1.pdf}
+
+\hypertarget{visualizing-single-variables}{%
+\section{Visualizing Single Variables}\label{visualizing-single-variables}}
+
+Thus far, we have looked at visualizing two (or more) variables. In such visualizations, we usually want to see two (or more) variables are related.
+
+Oftentimes, we need to see how are the values of a single variable distributed. Again, our choice of visualization depends on whether the variable is categorical or quantitative.
+
+\hypertarget{single-categorical-variable}{%
+\subsection{Single Categorical Variable}\label{single-categorical-variable}}
+
+A bar chart can also be used for a single categorical variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ species)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-146-1.pdf}
+
+By default, a bar chart showing counts is displayed. If we want proportions instead:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ species, }\AttributeTok{y =} \FunctionTok{after\_stat}\NormalTok{(prop), }\AttributeTok{group =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-147-1.pdf}
+The argument \texttt{y\ =\ after\_stat(prop)} tells the function that we want the proportions on the y axis. \texttt{group\ =\ 1} means we want the proportions across all bars to add up to 1.
+
+If you want to change the order of the species that are displayed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{$}\NormalTok{species }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{species, }\AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\StringTok{"Gentoo"}\NormalTok{,}\StringTok{"Adelie"}\NormalTok{,}\StringTok{"Chinstrap"}\NormalTok{))}
+
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ species, }\AttributeTok{y =} \FunctionTok{after\_stat}\NormalTok{(prop), }\AttributeTok{group =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-148-1.pdf}
+Changing the order may not make much sense in this example, but they will if the categorical variable is \textbf{ordinal}. In such variables, there is an order in the values of the categories. For example, shirt size.
+
+Tables can also be easily created:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{species)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##    Gentoo    Adelie Chinstrap 
+##       124       152        68
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{species))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##    Gentoo    Adelie Chinstrap 
+## 0.3604651 0.4418605 0.1976744
+\end{verbatim}
+
+\hypertarget{single-quantitative-variable}{%
+\subsection{Single Quantitative Variable}\label{single-quantitative-variable}}
+
+A boxplot or a density plot are commonly used to summarize the distribution of a single quantitative variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ body\_mass\_g)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-150-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ body\_mass\_g)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-151-1.pdf}
+
+\hypertarget{visualizations-from-simulations}{%
+\section{Visualizations from Simulations}\label{visualizations-from-simulations}}
+
+You may realize that \texttt{ggplot()} assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-152-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{20}
+\NormalTok{newDF }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(x,y)}
+\FunctionTok{ggplot}\NormalTok{(newDF, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-153-1.pdf}
+
+\hypertarget{ggplot-vs-base-r}{%
+\section{ggplot vs Base R}\label{ggplot-vs-base-r}}
+
+So which to use? \texttt{ggplot()} produces nicer visuals with much more customizations, but base R can be quicker to type up.
+
+\begin{itemize}
+\tightlist
+\item
+  If I am starting my analysis, I usually start with base R.
+\item
+  For simple visualizations with no or little customization needed, use base R.
+\item
+  Use \texttt{ggplot()} for more complicated visualizations.
+\item
+  Use \texttt{ggplot()} if presenting to an audience.
+\end{itemize}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

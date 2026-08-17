@@ -105,8 +105,310 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jrnold.github.io/ggthemes/">ggthemes</a></span><span class="op">)</span></span></code></pre></div>
 <p>Notice that loading the <code>tidyverse</code> package prints out a couple of messages informing us of functions in the package that conflict with functions in base R (functions with the same name in different packages). As mentioned in Section <a href="subset.html#Rdata">3.3</a>, R will use the function from the package that was most recently loaded when the function name is called. You will have to type the name of the package and function if you want to use the function from the package that was loaded earlier, e.g. <code><a href="https://rdrr.io/r/stats/filter.html">stats::filter()</a></code> to use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> from the <code>stats</code> package.</p>
-
 </div>
+</div>
+<div id="visualizing-two-quantitative-variables" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Visualizing Two Quantitative Variables<a class="anchor" aria-label="anchor" href="#visualizing-two-quantitative-variables"><i class="fas fa-link"></i></a>
+</h2>
+<p>We take a quick peak at the contents of the data frame:</p>
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">&lt;-</span> <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           NA            NA                  NA          NA
+## 5 Adelie  Torgersen           36.7          19.3               193        3450
+## 6 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+<p>Each row of the data frame should contain measurements on an <strong>observation</strong> (penguin), and each column of the data frame should contain a <strong>variable</strong> (characteristic). We are using the term variable in the context of statistics, and not in the context of computer science (see Section <a href="Rbasics.html#variables">1.6</a>).</p>
+<ul>
+<li>An <strong>observation</strong> is each object that we collect data on. Often called a data point.</li>
+<li>A <strong>variable</strong> is a characteristic that we measure on each observation.</li>
+</ul>
+<p>As mentioned earlier, suppose we want to see how flipper lengths are related to body mass. Notice that both variables, flipper length and body mass, are <strong>quantitative</strong>, and not <strong>categorical</strong>.</p>
+<ul>
+<li>A variable is <strong>quantitative</strong> if its value is numeric and arithmetic operations can be performed.</li>
+<li>A variable is <strong>categorical</strong> if arithmetic operations cannot be performed. In this example, the variables species and island are categorical.</li>
+</ul>
+<p>A <strong>scatterplot</strong> is the most common visualization that is used to display two quantitative variables. Often times, one variable can be designated as the <strong>response variable</strong> (often denotes as <span class="math inline">\(Y\)</span>), and the other as the <strong>predictor</strong> (often denoted as <span class="math inline">\(X\)</span>. The predictor is used to forecast or explain changes in the <strong>response variable</strong>. In this context, the body mass is the response variable, and flipper length is the predictor.</p>
+<p>To create a scatterplot of these two variables, we can use</p>
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-129-1.png" width="672"></div>
+<p>From these two lines we code, we can see the basic structure of creating data visualizations with the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function:</p>
+<ol style="list-style-type: decimal">
+<li><p>Use the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function, and supply the name of the data frame, and the x- and/or y- variables via the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> (aesthetics) function. End this line with a <code>+</code> operator, and then press enter.</p></li>
+<li><p>In the next line (also called layer), specify the type of visualization we want to create (called <code>geoms</code>). For a scatterplot, type <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>. By convention, the response variable goes on the vertical axis and the predictor goes on the horizontal axis. <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> takes care of this automatically when these are supplied as x- and y- variables via <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>.</p></li>
+</ol>
+<p>Notice the output prints a message informing us that 2 observations are missing and are removed. This is unlike some previous functions which output <code>NA</code> when missing values are present.</p>
+<p>From the scatterplot, it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.</p>
+<p>This is the most basic scatterplot that can be created. However, we note in this particular that we know that there are 3 species of penguins being measured, so perhaps the relationship between flipper length and body mass may vary across species, we want to add an additional variable <code>species</code>. One common way to do this is a scatterplot is to use colors. Also notice the axes have labels that are not the most descriptive, and a title is missing. These can be added via additional arguments in <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> or by supplying extra layers.</p>
+<div id="adding-aesthetics-and-layers" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">8.2.1</span> Adding Aesthetics and Layers<a class="anchor" aria-label="anchor" href="#adding-aesthetics-and-layers"><i class="fas fa-link"></i></a>
+</h3>
+<div id="scattercolor" class="section level4" number="8.2.1.1">
+<h4>
+<span class="header-section-number">8.2.1.1</span> Color for adding a categorical variable<a class="anchor" aria-label="anchor" href="#scattercolor"><i class="fas fa-link"></i></a>
+</h4>
+<p>To use different colored plots for each species:</p>
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-130-1.png" width="672"></div>
+<p>Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer <code><a href="http://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind()</a></code>:</p>
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-131-1.png" width="672"></div>
+<p>Notice that each layer ends with <code>+</code> and the next layer starts on a new line.</p>
+<p>Now, it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species.</p>
+</div>
+<div id="overlaying-lines-and-curves" class="section level4" number="8.2.1.2">
+<h4>
+<span class="header-section-number">8.2.1.2</span> Overlaying lines and curves<a class="anchor" aria-label="anchor" href="#overlaying-lines-and-curves"><i class="fas fa-link"></i></a>
+</h4>
+<p>A way to help visualize the relationship between the quantitative variables is to overlay a line of best fit.</p>
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-132-1.png" width="672">
+We are overlaying a line over each species, where represents the regression line of body mass against flipper length through <code>geom_smooth</code> and <code>method = "lm"</code>. Notice that each line has a grey band around them? These are confidence intervals for the regression line. These can be removed if you mainly want to assess if the relationship is linear</p>
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-133-1.png" width="672">
+If the observations fall evenly on both sides of the line, the relationship can be approximated by a line. Overlaying regressions lines only make sense if the relationship is linear. If the relationship is nonlinear, we should overlay loess curves, by changing <code>method</code> inside <code>geom_smooth</code>:</p>
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"loess"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-134-1.png" width="672">
+With real data, relationships are rarely perfectly linear, and so a judgment call has to be made if loess curves or linear regression lines are more appropriate. In this example, the curves are pretty close to being straight lines, so using linear regression lines may be chosen as they are simpler than curves.</div>
+</div>
+<div id="adding-titles-and-labeling-axes" class="section level4" number="8.2.1.3">
+<h4>
+<span class="header-section-number">8.2.1.3</span> Adding titles and labeling axes<a class="anchor" aria-label="anchor" href="#adding-titles-and-labeling-axes"><i class="fas fa-link"></i></a>
+</h4>
+<p>Now, we are ready to add the a layer to label the axes and give a title to the plot via a layer called <code>labs</code>:</p>
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Body Mass and Flipper Length of Penguins"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Flipper length (mm)"</span>, y <span class="op">=</span> <span class="st">"Body mass (g)"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Species"</span> <span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-135-1.png" width="672"></div>
+</div>
+</div>
+<div id="base-r" class="section level3" number="8.2.2">
+<h3>
+<span class="header-section-number">8.2.2</span> Base R<a class="anchor" aria-label="anchor" href="#base-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>To create a scatterplot using base R functions, use the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function, then supply a vector for the x-variable, then a vector for the y-variable:</p>
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">flipper_length_mm</span>, <span class="va">Data</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-136-1.png" width="672"></div>
+</div>
+</div>
+<div id="visualizing-two-categorical-variables" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Visualizing Two Categorical Variables<a class="anchor" aria-label="anchor" href="#visualizing-two-categorical-variables"><i class="fas fa-link"></i></a>
+</h2>
+<p>A bar chart is often used to visualize the relationship between two categorical variables. Perhaps we want to see if the different species of penguins tend to live in different islands. The most basic bar chart can provide the number of each species in each island:</p>
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">island</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-137-1.png" width="672">
+The predictor is <code>island</code> and the response variable is <code>species</code>. For bar charts, place the response variable in the <code>fill</code> argument.</p>
+<p>Notice we use <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code> instead of <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>. The <code>geom</code> tells the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function what kind of visualization we want.</p>
+<p>We can see there are an unequal number of penguins in each island. So using proportions, rather than counts, will be more useful:</p>
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">island</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-138-1.png" width="672">
+In Biscoe island, we have mostly Gentoos and some Adelies. In Dream island, we have a fairly even proportion of Adelies and Chinstrap. Torgensen island is the island of Adelies. Since the proportions of species are so different across the islands, it appears that the island and species are related. If there is no relationship, the proportion of each species would be the same across the islands.</div>
+<p>Notice the label of the y-axis is weird? How would you add a title and change the labels of each axes so they make more sense?</p>
+<div id="tables" class="section level3" number="8.3.1">
+<h3>
+<span class="header-section-number">8.3.1</span> Tables<a class="anchor" aria-label="anchor" href="#tables"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can also create <strong>two-way tables</strong> to summarize the data from two categorical variables. These functions are from base R.</p>
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">island</span>, <span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            
+##             Adelie Chinstrap Gentoo
+##   Biscoe        44         0    124
+##   Dream         56        68      0
+##   Torgersen     52         0      0</code></pre>
+<p>To find proportions of each species in each island:</p>
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">island</span>, <span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>, margin <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            
+##                Adelie Chinstrap    Gentoo
+##   Biscoe    0.2619048 0.0000000 0.7380952
+##   Dream     0.4516129 0.5483871 0.0000000
+##   Torgersen 1.0000000 0.0000000 0.0000000</code></pre>
+<p><code>margin = 1</code> means we want the proportions in each row to add up to 1. Use <code>2</code> for columns. We have placed the predictor in the rows here.</p>
+</div>
+<div id="base-r-1" class="section level3" number="8.3.2">
+<h3>
+<span class="header-section-number">8.3.2</span> Base R<a class="anchor" aria-label="anchor" href="#base-r-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>As a quick example using base R:</p>
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">species</span>, <span class="va">Data</span><span class="op">$</span><span class="va">island</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-141-1.png" width="672"></div>
+</div>
+</div>
+<div id="visualizing-a-quantitative-variable-across-a-categorical-variable" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> Visualizing a Quantitative Variable Across a Categorical Variable<a class="anchor" aria-label="anchor" href="#visualizing-a-quantitative-variable-across-a-categorical-variable"><i class="fas fa-link"></i></a>
+</h2>
+<p>Suppose we want to see if the body mass of the penguins differ across the species. We can create <strong>side by side boxplots</strong></p>
+<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-142-1.png" width="672"></div>
+<p>A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. For the Chinstraps, we see an outlier that is bigger than the rest and another outlier that is smaller than the rest. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers.</p>
+<p>We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.</p>
+<p>How would you add a title and change the labels of each axes so they make more sense?</p>
+<p>We can also use density plots of body mass and use different colors for each species and arrive at a similar conclusion.</p>
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-143-1.png" width="672">
+Areas under the density curve represent proportion of observations in that range. For example, most Chinstraps have body masses between 3000g and 4500g.</div>
+<p>How would you add a title and change the labels of each axes so they make more sense?</p>
+<div id="base-r-2" class="section level3" number="8.4.1">
+<h3>
+<span class="header-section-number">8.4.1</span> Base R<a class="anchor" aria-label="anchor" href="#base-r-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>As a quick example using base R. For side by side boxplots:</p>
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span> <span class="co">##y ~ x</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-144-1.png" width="672"></div>
+<p>Using density plots for each species is cumbersome in base R.</p>
+</div>
+</div>
+<div id="adding-an-additional-categorical-variable" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Adding an Additional Categorical Variable<a class="anchor" aria-label="anchor" href="#adding-an-additional-categorical-variable"><i class="fas fa-link"></i></a>
+</h2>
+<p>Most of these plots visualize two variables. In Section <a href="ggplot.html#scattercolor">8.2.1.1</a>, we have seen with the scatterplot that in addition to two quantiative variables, we can use color to incorporate a categorical variable.</p>
+<p>To incorporate another categorical variable, we can use what <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> calls a <code>facet_wrap</code>. It will create the visualization across each value of the categorical variable in the <code>facet_wrap</code>. For example,</p>
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Body Mass and Flipper Length of Penguins"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Flipper length (mm)"</span>, y <span class="op">=</span> <span class="st">"Body mass (g)"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Species"</span> <span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">island</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-145-1.png" width="672"></div>
+</div>
+<div id="visualizing-single-variables" class="section level2" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> Visualizing Single Variables<a class="anchor" aria-label="anchor" href="#visualizing-single-variables"><i class="fas fa-link"></i></a>
+</h2>
+<p>Thus far, we have looked at visualizing two (or more) variables. In such visualizations, we usually want to see two (or more) variables are related.</p>
+<p>Oftentimes, we need to see how are the values of a single variable distributed. Again, our choice of visualization depends on whether the variable is categorical or quantitative.</p>
+<div id="single-categorical-variable" class="section level3" number="8.6.1">
+<h3>
+<span class="header-section-number">8.6.1</span> Single Categorical Variable<a class="anchor" aria-label="anchor" href="#single-categorical-variable"><i class="fas fa-link"></i></a>
+</h3>
+<p>A bar chart can also be used for a single categorical variable:</p>
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-146-1.png" width="672"></div>
+<p>By default, a bar chart showing counts is displayed. If we want proportions instead:</p>
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-147-1.png" width="672">
+The argument <code>y = after_stat(prop)</code> tells the function that we want the proportions on the y axis. <code>group = 1</code> means we want the proportions across all bars to add up to 1.</p>
+<p>If you want to change the order of the species that are displayed:</p>
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">species</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Gentoo"</span>,<span class="st">"Adelie"</span>,<span class="st">"Chinstrap"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-148-1.png" width="672">
+Changing the order may not make much sense in this example, but they will if the categorical variable is <strong>ordinal</strong>. In such variables, there is an order in the values of the categories. For example, shirt size.</p>
+<p>Tables can also be easily created:</p>
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##    Gentoo    Adelie Chinstrap 
+##       124       152        68</code></pre>
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##    Gentoo    Adelie Chinstrap 
+## 0.3604651 0.4418605 0.1976744</code></pre>
+</div>
+<div id="single-quantitative-variable" class="section level3" number="8.6.2">
+<h3>
+<span class="header-section-number">8.6.2</span> Single Quantitative Variable<a class="anchor" aria-label="anchor" href="#single-quantitative-variable"><i class="fas fa-link"></i></a>
+</h3>
+<p>A boxplot or a density plot are commonly used to summarize the distribution of a single quantitative variable.</p>
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-150-1.png" width="672"></div>
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-151-1.png" width="672"></div>
+</div>
+</div>
+<div id="visualizations-from-simulations" class="section level2" number="8.7">
+<h2>
+<span class="header-section-number">8.7</span> Visualizations from Simulations<a class="anchor" aria-label="anchor" href="#visualizations-from-simulations"><i class="fas fa-link"></i></a>
+</h2>
+<p>You may realize that <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values:</p>
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-152-1.png" width="672"></div>
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span></span>
+<span><span class="va">newDF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">newDF</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-153-1.png" width="672"></div>
+</div>
+<div id="ggplot-vs-base-r" class="section level2" number="8.8">
+<h2>
+<span class="header-section-number">8.8</span> ggplot vs Base R<a class="anchor" aria-label="anchor" href="#ggplot-vs-base-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>So which to use? <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> produces nicer visuals with much more customizations, but base R can be quicker to type up.</p>
+<ul>
+<li>If I am starting my analysis, I usually start with base R.</li>
+<li>For simple visualizations with no or little customization needed, use base R.</li>
+<li>Use <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> for more complicated visualizations.</li>
+<li>Use <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> if presenting to an audience.</li>
+</ul>
 </div>
 </div>
   <div class="chapter-nav">
@@ -119,6 +421,30 @@
 <li>
 <a class="nav-link" href="#introduction"><span class="header-section-number">8.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#motivating-example"><span class="header-section-number">8.1.1</span> Motivating Example</a></li></ul>
 </li>
+<li>
+<a class="nav-link" href="#visualizing-two-quantitative-variables"><span class="header-section-number">8.2</span> Visualizing Two Quantitative Variables</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#adding-aesthetics-and-layers"><span class="header-section-number">8.2.1</span> Adding Aesthetics and Layers</a></li>
+<li><a class="nav-link" href="#base-r"><span class="header-section-number">8.2.2</span> Base R</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#visualizing-two-categorical-variables"><span class="header-section-number">8.3</span> Visualizing Two Categorical Variables</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#tables"><span class="header-section-number">8.3.1</span> Tables</a></li>
+<li><a class="nav-link" href="#base-r-1"><span class="header-section-number">8.3.2</span> Base R</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#visualizing-a-quantitative-variable-across-a-categorical-variable"><span class="header-section-number">8.4</span> Visualizing a Quantitative Variable Across a Categorical Variable</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#base-r-2"><span class="header-section-number">8.4.1</span> Base R</a></li></ul>
+</li>
+<li><a class="nav-link" href="#adding-an-additional-categorical-variable"><span class="header-section-number">8.5</span> Adding an Additional Categorical Variable</a></li>
+<li>
+<a class="nav-link" href="#visualizing-single-variables"><span class="header-section-number">8.6</span> Visualizing Single Variables</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#single-categorical-variable"><span class="header-section-number">8.6.1</span> Single Categorical Variable</a></li>
+<li><a class="nav-link" href="#single-quantitative-variable"><span class="header-section-number">8.6.2</span> Single Quantitative Variable</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#visualizations-from-simulations"><span class="header-section-number">8.7</span> Visualizations from Simulations</a></li>
+<li><a class="nav-link" href="#ggplot-vs-base-r"><span class="header-section-number">8.8</span> ggplot vs Base R</a></li>
 </ul>
 
       <div class="book-extra">

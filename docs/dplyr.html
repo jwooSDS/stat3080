@@ -106,7 +106,7 @@
 <li>Change the order of columns.</li>
 </ul>
 <p>You may realize that you can already perform some of these operations in Sections <a href="Rbasics.html#Rbasics">1</a> and <a href="subset.html#subset">3</a>. In this section, you will learning how to perform these operations using another core package from the <code>tidyverse</code> called <code>dplyr</code>, which has gained popularity. Its advocates say the syntax associated with <code>dplyr</code> is more readable for the human eye, although its detractors will say that <code>dplyr</code> introduces many function names its syntax strays from base R.</p>
-<p>This section is heavily based on <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 3. We will be covering the basics of data wranling with <code>dplyr</code>. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.</p>
+<p>This section is heavily based on <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 3. We will be covering the basics of data wrangling with <code>dplyr</code>. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.</p>
 <div id="motivating-example-1" class="section level3" number="9.1.1">
 <h3>
 <span class="header-section-number">9.1.1</span> Motivating Example<a class="anchor" aria-label="anchor" href="#motivating-example-1"><i class="fas fa-link"></i></a>
@@ -573,12 +573,171 @@
 <h2>
 <span class="header-section-number">9.4</span> Pipes<a class="anchor" aria-label="anchor" href="#pipes"><i class="fas fa-link"></i></a>
 </h2>
+<p>Pipes are most useful when you want to combine multiple operations. For example, you wanted to find the fastest flights to Houston’s IAH airport while also printing out relevant information:</p>
+<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">dest</span> <span class="op">==</span> <span class="st">"IAH"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">distance</span> <span class="op">/</span> <span class="va">air_time</span> <span class="op">*</span> <span class="fl">60</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">day</span>, <span class="va">dep_time</span>, <span class="va">carrier</span>, <span class="va">flight</span>, <span class="va">speed</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">speed</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 7,198 × 7
+##     year month   day dep_time carrier flight speed
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
+##  1  2013     7     9      707 UA         226  522.
+##  2  2013     8    27     1850 UA        1128  521.
+##  3  2013     8    28      902 UA        1711  519.
+##  4  2013     8    28     2122 UA        1022  519.
+##  5  2013     6    11     1628 UA        1178  515.
+##  6  2013     8    27     1017 UA         333  515.
+##  7  2013     8    27     1205 UA        1421  515.
+##  8  2013     8    27     1758 UA         302  515.
+##  9  2013     9    27      521 UA         252  515.
+## 10  2013     8    28      625 UA         559  515.
+## # ℹ 7,188 more rows</code></pre>
+<p>Without pipes:</p>
+<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">flights1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">dest</span> <span class="op">==</span> <span class="st">"IAH"</span><span class="op">)</span></span>
+<span><span class="va">flights2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">flights1</span>, speed <span class="op">=</span> <span class="va">distance</span> <span class="op">/</span> <span class="va">air_time</span> <span class="op">*</span> <span class="fl">60</span><span class="op">)</span></span>
+<span><span class="va">flights3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">flights2</span>, <span class="va">year</span><span class="op">:</span><span class="va">day</span>, <span class="va">dep_time</span>, <span class="va">carrier</span>, <span class="va">flight</span>, <span class="va">speed</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">flights3</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">speed</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 7,198 × 7
+##     year month   day dep_time carrier flight speed
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
+##  1  2013     7     9      707 UA         226  522.
+##  2  2013     8    27     1850 UA        1128  521.
+##  3  2013     8    28      902 UA        1711  519.
+##  4  2013     8    28     2122 UA        1022  519.
+##  5  2013     6    11     1628 UA        1178  515.
+##  6  2013     8    27     1017 UA         333  515.
+##  7  2013     8    27     1205 UA        1421  515.
+##  8  2013     8    27     1758 UA         302  515.
+##  9  2013     9    27      521 UA         252  515.
+## 10  2013     8    28      625 UA         559  515.
+## # ℹ 7,188 more rows</code></pre>
+<p>Notice multiple objects are created in the intermediate steps.</p>
+<p>The keyboard shortcut for a pipe is Ctrl + Shift + M. You may have to change this in RStudio options, via Tools, Global Options, Code and check the box “Use native pipe operator”. There is another pipe operator <code>%&gt;%</code> which comes from the <code>magrittr</code> package. <code>|&gt;</code> is part of base R.</p>
 </div>
 <div id="grouping" class="section level2" number="9.5">
 <h2>
 <span class="header-section-number">9.5</span> Grouping<a class="anchor" aria-label="anchor" href="#grouping"><i class="fas fa-link"></i></a>
 </h2>
+<p>You can group your data frame to set it up for easier analysis. We often want to summarize data across groups. For example, to find the median arrival delay by carrier:</p>
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">carrier</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>med_arr_delay <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">arr_delay</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 16 × 2
+##    carrier med_arr_delay
+##    &lt;chr&gt;           &lt;dbl&gt;
+##  1 9E                 -7
+##  2 AA                 -9
+##  3 AS                -17
+##  4 B6                 -3
+##  5 DL                 -8
+##  6 EV                 -1
+##  7 F9                  6
+##  8 FL                  5
+##  9 HA                -13
+## 10 MQ                 -1
+## 11 OO                 -7
+## 12 UA                 -6
+## 13 US                 -6
+## 14 VX                 -9
+## 15 WN                 -3
+## 16 YV                 -2</code></pre>
+<p>You can also use <code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code> to find the number of observations in each group</p>
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">carrier</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>med_arr_delay <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">arr_delay</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
+<span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 16 × 3
+##    carrier med_arr_delay     n
+##    &lt;chr&gt;           &lt;dbl&gt; &lt;int&gt;
+##  1 9E                 -7 18460
+##  2 AA                 -9 32729
+##  3 AS                -17   714
+##  4 B6                 -3 54635
+##  5 DL                 -8 48110
+##  6 EV                 -1 54173
+##  7 F9                  6   685
+##  8 FL                  5  3260
+##  9 HA                -13   342
+## 10 MQ                 -1 26397
+## 11 OO                 -7    32
+## 12 UA                 -6 58665
+## 13 US                 -6 20536
+## 14 VX                 -9  5162
+## 15 WN                 -3 12275
+## 16 YV                 -2   601</code></pre>
+<p>You can also summarize by more than 1 group. For example, to find the number of flights for each combination of departure airports and arrival airports:</p>
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">dest</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by 'origin'. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 224 × 3
+## # Groups:   origin [3]
+##    origin dest      n
+##    &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;
+##  1 EWR    ALB     439
+##  2 EWR    ANC       8
+##  3 EWR    ATL    5022
+##  4 EWR    AUS     968
+##  5 EWR    AVL     265
+##  6 EWR    BDL     443
+##  7 EWR    BNA    2336
+##  8 EWR    BOS    5327
+##  9 EWR    BQN     297
+## 10 EWR    BTV     931
+## # ℹ 214 more rows</code></pre>
+<p>Note: if you realize that the functions in Section <a href="dplyr.html#grouping">9.5</a> are similar to <code><a href="https://rdrr.io/r/base/tapply.html">tapply()</a></code> and <code><a href="https://rdrr.io/r/base/table.html">table()</a></code>, you are correct!</p>
+<div id="select-rows-within-group" class="section level3" number="9.5.1">
+<h3>
+<span class="header-section-number">9.5.1</span> Select Rows within Group<a class="anchor" aria-label="anchor" href="#select-rows-within-group"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are five handy functions that allow you to extract specific rows within each group:</p>
+<ul>
+<li>
+<code>df |&gt; slice_head(n = 1)</code> takes the first row from each group.</li>
+<li>
+<code>df |&gt; slice_tail(n = 1)</code> takes the last row in each group.</li>
+<li>
+<code>df |&gt; slice_min(x, n = 1)</code> takes the row with the smallest value of column <code>x</code>.</li>
+<li>
+<code>df |&gt; slice_max(x, n = 1)</code> takes the row with the largest value of column <code>x</code>.</li>
+<li>
+<code>df |&gt; slice_sample(n = 1)</code> takes one random row.</li>
+</ul>
+<p>For example, the following code finds the flights that are most delayed upon arrival at each destination:</p>
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">dest</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="va">arr_delay</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">dest</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 108 × 19
+## # Groups:   dest [105]
+##    dest   year month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1 ABQ    2013     7    22     2145           2007        98      132
+##  2 ACK    2013     7    23     1139            800       219     1250
+##  3 ALB    2013     1    25      123           2000       323      229
+##  4 ANC    2013     8    17     1740           1625        75     2042
+##  5 ATL    2013     7    22     2257            759       898      121
+##  6 AUS    2013     7    10     2056           1505       351     2347
+##  7 AVL    2013     8    13     1156            832       204     1417
+##  8 BDL    2013     2    21     1728           1316       252     1839
+##  9 BGR    2013    12     1     1504           1056       248     1628
+## 10 BHM    2013     4    10       25           1900       325      136
+## # ℹ 98 more rows
+## # ℹ 11 more variables: sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -610,7 +769,9 @@
 </ul>
 </li>
 <li><a class="nav-link" href="#pipes"><span class="header-section-number">9.4</span> Pipes</a></li>
-<li><a class="nav-link" href="#grouping"><span class="header-section-number">9.5</span> Grouping</a></li>
+<li>
+<a class="nav-link" href="#grouping"><span class="header-section-number">9.5</span> Grouping</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#select-rows-within-group"><span class="header-section-number">9.5.1</span> Select Rows within Group</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">

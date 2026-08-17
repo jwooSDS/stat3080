@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.9972298  0.1568507  8.0766363 -0.9516264  2.8433250  1.2304536
-##  [7]  1.8388808 -2.8804563  1.3834834  1.0128220
+##  [1]  4.79354615  3.86632762  0.27336930  5.86605580  1.19428397  3.80708060
+##  [7] -0.13120242 -0.97113545  0.03917382  3.59301222
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -4334,7 +4334,7 @@ Sometimes, data are not structured in this way, and we will have to transform th
 
 You may realize that you can already perform some of these operations in Sections \ref{Rbasics} and \ref{subset}. In this section, you will learning how to perform these operations using another core package from the \texttt{tidyverse} called \texttt{dplyr}, which has gained popularity. Its advocates say the syntax associated with \texttt{dplyr} is more readable for the human eye, although its detractors will say that \texttt{dplyr} introduces many function names its syntax strays from base R.
 
-This section is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 3. We will be covering the basics of data wranling with \texttt{dplyr}. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.
+This section is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 3. We will be covering the basics of data wrangling with \texttt{dplyr}. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.
 
 \hypertarget{motivating-example-1}{%
 \subsection{Motivating Example}\label{motivating-example-1}}
@@ -4960,8 +4960,222 @@ Or you can specify where to place them after or before:
 \hypertarget{pipes}{%
 \section{Pipes}\label{pipes}}
 
+Pipes are most useful when you want to combine multiple operations. For example, you wanted to find the fastest flights to Houston's IAH airport while also printing out relevant information:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(dest }\SpecialCharTok{==} \StringTok{"IAH"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{speed =}\NormalTok{ distance }\SpecialCharTok{/}\NormalTok{ air\_time }\SpecialCharTok{*} \DecValTok{60}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{select}\NormalTok{(year}\SpecialCharTok{:}\NormalTok{day, dep\_time, carrier, flight, speed) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(speed))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7,198 x 7
+##     year month   day dep_time carrier flight speed
+##    <int> <int> <int>    <int> <chr>    <int> <dbl>
+##  1  2013     7     9      707 UA         226  522.
+##  2  2013     8    27     1850 UA        1128  521.
+##  3  2013     8    28      902 UA        1711  519.
+##  4  2013     8    28     2122 UA        1022  519.
+##  5  2013     6    11     1628 UA        1178  515.
+##  6  2013     8    27     1017 UA         333  515.
+##  7  2013     8    27     1205 UA        1421  515.
+##  8  2013     8    27     1758 UA         302  515.
+##  9  2013     9    27      521 UA         252  515.
+## 10  2013     8    28      625 UA         559  515.
+## # i 7,188 more rows
+\end{verbatim}
+
+Without pipes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights1 }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(Data, dest }\SpecialCharTok{==} \StringTok{"IAH"}\NormalTok{)}
+\NormalTok{flights2 }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(flights1, }\AttributeTok{speed =}\NormalTok{ distance }\SpecialCharTok{/}\NormalTok{ air\_time }\SpecialCharTok{*} \DecValTok{60}\NormalTok{)}
+\NormalTok{flights3 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(flights2, year}\SpecialCharTok{:}\NormalTok{day, dep\_time, carrier, flight, speed)}
+\FunctionTok{arrange}\NormalTok{(flights3, }\FunctionTok{desc}\NormalTok{(speed))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7,198 x 7
+##     year month   day dep_time carrier flight speed
+##    <int> <int> <int>    <int> <chr>    <int> <dbl>
+##  1  2013     7     9      707 UA         226  522.
+##  2  2013     8    27     1850 UA        1128  521.
+##  3  2013     8    28      902 UA        1711  519.
+##  4  2013     8    28     2122 UA        1022  519.
+##  5  2013     6    11     1628 UA        1178  515.
+##  6  2013     8    27     1017 UA         333  515.
+##  7  2013     8    27     1205 UA        1421  515.
+##  8  2013     8    27     1758 UA         302  515.
+##  9  2013     9    27      521 UA         252  515.
+## 10  2013     8    28      625 UA         559  515.
+## # i 7,188 more rows
+\end{verbatim}
+
+Notice multiple objects are created in the intermediate steps.
+
+The keyboard shortcut for a pipe is Ctrl + Shift + M. You may have to change this in RStudio options, via Tools, Global Options, Code and check the box ``Use native pipe operator''. There is another pipe operator \texttt{\%\textgreater{}\%} which comes from the \texttt{magrittr} package. \texttt{\textbar{}\textgreater{}} is part of base R.
+
 \hypertarget{grouping}{%
 \section{Grouping}\label{grouping}}
+
+You can group your data frame to set it up for easier analysis. We often want to summarize data across groups. For example, to find the median arrival delay by carrier:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{group\_by}\NormalTok{(carrier) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{med\_arr\_delay =} \FunctionTok{median}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 16 x 2
+##    carrier med_arr_delay
+##    <chr>           <dbl>
+##  1 9E                 -7
+##  2 AA                 -9
+##  3 AS                -17
+##  4 B6                 -3
+##  5 DL                 -8
+##  6 EV                 -1
+##  7 F9                  6
+##  8 FL                  5
+##  9 HA                -13
+## 10 MQ                 -1
+## 11 OO                 -7
+## 12 UA                 -6
+## 13 US                 -6
+## 14 VX                 -9
+## 15 WN                 -3
+## 16 YV                 -2
+\end{verbatim}
+
+You can also use \texttt{n()} to find the number of observations in each group
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(carrier) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{med\_arr\_delay =} \FunctionTok{median}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
+    \AttributeTok{n =} \FunctionTok{n}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 16 x 3
+##    carrier med_arr_delay     n
+##    <chr>           <dbl> <int>
+##  1 9E                 -7 18460
+##  2 AA                 -9 32729
+##  3 AS                -17   714
+##  4 B6                 -3 54635
+##  5 DL                 -8 48110
+##  6 EV                 -1 54173
+##  7 F9                  6   685
+##  8 FL                  5  3260
+##  9 HA                -13   342
+## 10 MQ                 -1 26397
+## 11 OO                 -7    32
+## 12 UA                 -6 58665
+## 13 US                 -6 20536
+## 14 VX                 -9  5162
+## 15 WN                 -3 12275
+## 16 YV                 -2   601
+\end{verbatim}
+
+You can also summarize by more than 1 group. For example, to find the number of flights for each combination of departure airports and arrival airports:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(origin, dest) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'origin'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 224 x 3
+## # Groups:   origin [3]
+##    origin dest      n
+##    <chr>  <chr> <int>
+##  1 EWR    ALB     439
+##  2 EWR    ANC       8
+##  3 EWR    ATL    5022
+##  4 EWR    AUS     968
+##  5 EWR    AVL     265
+##  6 EWR    BDL     443
+##  7 EWR    BNA    2336
+##  8 EWR    BOS    5327
+##  9 EWR    BQN     297
+## 10 EWR    BTV     931
+## # i 214 more rows
+\end{verbatim}
+
+Note: if you realize that the functions in Section \ref{grouping} are similar to \texttt{tapply()} and \texttt{table()}, you are correct!
+
+\hypertarget{select-rows-within-group}{%
+\subsection{Select Rows within Group}\label{select-rows-within-group}}
+
+There are five handy functions that allow you to extract specific rows within each group:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{df\ \textbar{}\textgreater{}\ slice\_head(n\ =\ 1)} takes the first row from each group.
+\item
+  \texttt{df\ \textbar{}\textgreater{}\ slice\_tail(n\ =\ 1)} takes the last row in each group.
+\item
+  \texttt{df\ \textbar{}\textgreater{}\ slice\_min(x,\ n\ =\ 1)} takes the row with the smallest value of column \texttt{x}.
+\item
+  \texttt{df\ \textbar{}\textgreater{}\ slice\_max(x,\ n\ =\ 1)} takes the row with the largest value of column \texttt{x}.
+\item
+  \texttt{df\ \textbar{}\textgreater{}\ slice\_sample(n\ =\ 1)} takes one random row.
+\end{itemize}
+
+For example, the following code finds the flights that are most delayed upon arrival at each destination:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(dest) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{slice\_max}\NormalTok{(arr\_delay, }\AttributeTok{n =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{relocate}\NormalTok{(dest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 108 x 19
+## # Groups:   dest [105]
+##    dest   year month   day dep_time sched_dep_time dep_delay arr_time
+##    <chr> <int> <int> <int>    <int>          <int>     <dbl>    <int>
+##  1 ABQ    2013     7    22     2145           2007        98      132
+##  2 ACK    2013     7    23     1139            800       219     1250
+##  3 ALB    2013     1    25      123           2000       323      229
+##  4 ANC    2013     8    17     1740           1625        75     2042
+##  5 ATL    2013     7    22     2257            759       898      121
+##  6 AUS    2013     7    10     2056           1505       351     2347
+##  7 AVL    2013     8    13     1156            832       204     1417
+##  8 BDL    2013     2    21     1728           1316       252     1839
+##  9 BGR    2013    12     1     1504           1056       248     1628
+## 10 BHM    2013     4    10       25           1900       325      136
+## # i 98 more rows
+## # i 11 more variables: sched_arr_time <int>, arr_delay <dbl>, carrier <chr>,
+## #   flight <int>, tailnum <chr>, origin <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

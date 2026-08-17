@@ -140,4 +140,5 @@ rename-columns
 relocate-columns
 pipes
 grouping
+select-rows-within-group
 blank

@@ -107,6 +107,247 @@
 </ul>
 <p>You may realize that you can already perform some of these operations in Sections <a href="Rbasics.html#Rbasics">1</a> and <a href="subset.html#subset">3</a>. In this section, you will learning how to perform these operations using another core package from the <code>tidyverse</code> called <code>dplyr</code>, which has gained popularity. Its advocates say the syntax associated with <code>dplyr</code> is more readable for the human eye, although its detractors will say that <code>dplyr</code> introduces many function names its syntax strays from base R.</p>
 <p>This section is heavily based on <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 3. We will be covering the basics of data wranling with <code>dplyr</code>. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.</p>
+<div id="motivating-example-1" class="section level3" number="9.1.1">
+<h3>
+<span class="header-section-number">9.1.1</span> Motivating Example<a class="anchor" aria-label="anchor" href="#motivating-example-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>For this section, we will use a data set on flights that departed from New York City in 2013. It comes from the <code>nycflights13</code> package. It contains all 336,776 flights that departed from New York City in 2013 and comes from the US Bureau of Transportation Statistics</p>
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/nycflights13">nycflights13</a></span><span class="op">)</span></span>
+<span><span class="va">Data</span> <span class="op">&lt;-</span> <span class="fu">nycflights13</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/nycflights13/man/flights.html">flights</a></span></span></code></pre></div>
+</div>
+<div id="dplyr-basics" class="section level3" number="9.1.2">
+<h3>
+<span class="header-section-number">9.1.2</span> dplyr Basics<a class="anchor" aria-label="anchor" href="#dplyr-basics"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>dplyr</code> functions typically work in the following manner:</p>
+<ol style="list-style-type: decimal">
+<li>Specify data frame.</li>
+<li>Select which rows and columns to work on.</li>
+<li>Output data frame.</li>
+</ol>
+<p>One of the key operators that we will use is called the <strong>pipe</strong>, <code>\&gt;</code>. Pipes pass the result of one function straight into the next function, which makes code clean, linear, and easy to read from top to bottom like a sentence. The easiest way to interpret a pipe is “and then”. For example</p>
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">dest</span> <span class="op">==</span> <span class="st">"IAH"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">month</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>arr_delay <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">arr_delay</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 12 × 2
+##    month arr_delay
+##    &lt;int&gt;     &lt;dbl&gt;
+##  1     1     4.16 
+##  2     2     5.40 
+##  3     3    -1.19 
+##  4     4    14.8  
+##  5     5     0.972
+##  6     6    11.1  
+##  7     7    11    
+##  8     8     0.705
+##  9     9   -10.6  
+## 10    10     1.81 
+## 11    11    -1.78 
+## 12    12    14.5</code></pre>
+<p>What this block of code does is:</p>
+<ol style="list-style-type: decimal">
+<li>Takes the data frame called <code>Data</code>, and then</li>
+<li>Filters the observations with destination being <code>IAH</code>, and then</li>
+<li>Groups the observations by month, and then</li>
+<li>Computes the mean arrival delay for each month.</li>
+</ol>
+<p>Compare with the code using base R without pipes:</p>
+<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">Data</span><span class="op">[</span><span class="va">Data</span><span class="op">$</span><span class="va">dest</span> <span class="op">==</span> <span class="st">"IAH"</span>,<span class="op">]</span><span class="op">$</span><span class="va">arr_delay</span>, <span class="va">Data</span><span class="op">[</span><span class="va">Data</span><span class="op">$</span><span class="va">dest</span> <span class="op">==</span> <span class="st">"IAH"</span>,<span class="op">]</span><span class="op">$</span><span class="va">month</span>, <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##           1           2           3           4           5           6 
+##   4.1627907   5.4023904  -1.1875000  14.7666667   0.9722222  11.1023490 
+##           7           8           9          10          11          12 
+##  11.0000000   0.7054010 -10.6473684   1.8080645  -1.7763158  14.5000000</code></pre>
+<p>People tend to like the linearity and flow of pipes.</p>
+</div>
+</div>
+<div id="operations-on-rows" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Operations on Rows<a class="anchor" aria-label="anchor" href="#operations-on-rows"><i class="fas fa-link"></i></a>
+</h2>
+<div id="select-rows-based-on-condition" class="section level3" number="9.2.1">
+<h3>
+<span class="header-section-number">9.2.1</span> Select Rows Based on Condition<a class="anchor" aria-label="anchor" href="#select-rows-based-on-condition"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function from the <code>dplyr</code> package selects rows of a data frame based on a condition. For example, to select flights that arrival delays of more than 120 minutes:</p>
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">dep_delay</span> <span class="op">&gt;</span> <span class="fl">120</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 9,723 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      848           1835       853     1001           1950
+##  2  2013     1     1      957            733       144     1056            853
+##  3  2013     1     1     1114            900       134     1447           1222
+##  4  2013     1     1     1540           1338       122     2020           1825
+##  5  2013     1     1     1815           1325       290     2120           1542
+##  6  2013     1     1     1842           1422       260     1958           1535
+##  7  2013     1     1     1856           1645       131     2212           2005
+##  8  2013     1     1     1934           1725       129     2126           1855
+##  9  2013     1     1     1938           1703       155     2109           1823
+## 10  2013     1     1     1942           1705       157     2124           1830
+## # ℹ 9,713 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>You can use an and operator, <code>&amp;</code>, for multiple conditions such as arrival delays more than 120 minutes that departed before 1200:</p>
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">dep_delay</span> <span class="op">&gt;</span> <span class="fl">120</span> <span class="op">&amp;</span> <span class="va">dep_time</span> <span class="op">&lt;</span> <span class="fl">1200</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1,353 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      848           1835       853     1001           1950
+##  2  2013     1     1      957            733       144     1056            853
+##  3  2013     1     1     1114            900       134     1447           1222
+##  4  2013     1     2      126           2250       156      233           2359
+##  5  2013     1     2      833            558       155     1018            727
+##  6  2013     1     2      923            624       179     1051            758
+##  7  2013     1     3       50           2145       185      203           2311
+##  8  2013     1     3      235           2359       156      700            437
+##  9  2013     1     3      854            630       144     1057            810
+## 10  2013     1     3      909            700       129     1103            850
+## # ℹ 1,343 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>You can use an or operator, <code>|</code>, for example, to find flights in January and February:</p>
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">month</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">|</span> <span class="va">month</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 51,955 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # ℹ 51,945 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>The <code>%in%</code> operator can be used in place of <code>|</code> and <code>==</code>. It keeps rows where the variable equals one of the values on the right:</p>
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">month</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 51,955 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # ℹ 51,945 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>Notice in these examples that the resulting data frame is printed but not stored. Remember to assign the output to a variable name if you wish to store it. For example, to store the flights on New Year’s day:</p>
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">jan1</span> <span class="op">&lt;-</span> <span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">month</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">&amp;</span> <span class="va">day</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="arrange-rows-in-order" class="section level3" number="9.2.2">
+<h3>
+<span class="header-section-number">9.2.2</span> Arrange Rows in Order<a class="anchor" aria-label="anchor" href="#arrange-rows-in-order"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> function arranges the rows based on the value in columns. Specifying multiple columns will arrange by the first column, then by the second, and so on. The default order is small to large. To arrange by month, then by day, and then by departure time:</p>
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">month</span>, <span class="va">day</span>, <span class="va">dep_time</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # ℹ 336,766 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>To change the order of just the departure times:</p>
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">month</span>, <span class="va">day</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">dep_time</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1     2356           2359        -3      425            437
+##  2  2013     1     1     2353           2359        -6      425            445
+##  3  2013     1     1     2353           2359        -6      418            442
+##  4  2013     1     1     2343           1724       379      314           1938
+##  5  2013     1     1     2327           2250        37       32           2359
+##  6  2013     1     1     2326           2130       116      131             18
+##  7  2013     1     1     2323           2200        83       22           2313
+##  8  2013     1     1     2312           2000       192       21           2110
+##  9  2013     1     1     2310           2255        15       24             15
+## 10  2013     1     1     2307           2245        22       32           2357
+## # ℹ 336,766 more rows
+## # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+<div id="counting" class="section level3" number="9.2.3">
+<h3>
+<span class="header-section-number">9.2.3</span> Counting<a class="anchor" aria-label="anchor" href="#counting"><i class="fas fa-link"></i></a>
+</h3>
+<p>To count the number of occurrences of each origin and destination combination:</p>
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">dest</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 224 × 3
+##    origin dest      n
+##    &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;
+##  1 JFK    LAX   11262
+##  2 LGA    ATL   10263
+##  3 LGA    ORD    8857
+##  4 JFK    SFO    8204
+##  5 LGA    CLT    6168
+##  6 EWR    ORD    6100
+##  7 JFK    BOS    5898
+##  8 LGA    MIA    5781
+##  9 JFK    MCO    5464
+## 10 EWR    BOS    5327
+## # ℹ 214 more rows</code></pre>
+<p><code>sort = TRUE</code> sorts from largest to smallest.</p>
+</div>
+</div>
+<div id="operations-on-columns" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Operations on Columns<a class="anchor" aria-label="anchor" href="#operations-on-columns"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="pipes" class="section level2" number="9.4">
+<h2>
+<span class="header-section-number">9.4</span> Pipes<a class="anchor" aria-label="anchor" href="#pipes"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="grouping" class="section level2" number="9.5">
+<h2>
+<span class="header-section-number">9.5</span> Grouping<a class="anchor" aria-label="anchor" href="#grouping"><i class="fas fa-link"></i></a>
+</h2>
 
 </div>
 </div>
@@ -117,7 +358,22 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#dplyr"><span class="header-section-number">9</span> Data Wranling (dplyr)</a></li>
-<li><a class="nav-link" href="#motivation-4"><span class="header-section-number">9.1</span> Motivation</a></li>
+<li>
+<a class="nav-link" href="#motivation-4"><span class="header-section-number">9.1</span> Motivation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#motivating-example-1"><span class="header-section-number">9.1.1</span> Motivating Example</a></li>
+<li><a class="nav-link" href="#dplyr-basics"><span class="header-section-number">9.1.2</span> dplyr Basics</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#operations-on-rows"><span class="header-section-number">9.2</span> Operations on Rows</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#select-rows-based-on-condition"><span class="header-section-number">9.2.1</span> Select Rows Based on Condition</a></li>
+<li><a class="nav-link" href="#arrange-rows-in-order"><span class="header-section-number">9.2.2</span> Arrange Rows in Order</a></li>
+<li><a class="nav-link" href="#counting"><span class="header-section-number">9.2.3</span> Counting</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#operations-on-columns"><span class="header-section-number">9.3</span> Operations on Columns</a></li>
+<li><a class="nav-link" href="#pipes"><span class="header-section-number">9.4</span> Pipes</a></li>
+<li><a class="nav-link" href="#grouping"><span class="header-section-number">9.5</span> Grouping</a></li>
 </ul>
 
       <div class="book-extra">

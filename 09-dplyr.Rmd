@@ -1,4 +1,4 @@
-# Data Wranling (dplyr) {#dplyr}
+# Data Wrangling (dplyr) {#dplyr}
 
 ## Motivation
 
@@ -20,6 +20,122 @@ Sometimes, data are not structured in this way, and we will have to transform th
 You may realize that you can already perform some of these operations in Sections \@ref(Rbasics) and \@ref(subset). In this section, you will learning how to perform these operations using another core package from the `tidyverse` called `dplyr`, which has gained popularity. Its advocates say the syntax associated with `dplyr` is more readable for the human eye, although its detractors will say that `dplyr` introduces many function names its syntax strays from base R. 
 
 This section is heavily based on [R for Data Science](https://r4ds.hadley.nz/) [@wickham2023], Chapter 3. We will be covering the basics of data wranling with `dplyr`. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.
+
+### Motivating Example
+
+For this section, we will use a data set on flights that departed from New York City in 2013. It comes from the `nycflights13` package. It contains all 336,776 flights that departed from New York City in 2013 and comes from the US Bureau of Transportation Statistics
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(nycflights13)
+Data <- nycflights13::flights
+```
+
+### dplyr Basics
+
+`dplyr` functions typically work in the following manner:
+
+1. Specify data frame.
+2. Select which rows and columns to work on.
+3. Output data frame.
+
+One of the key operators that we will use is called the **pipe**, `\>`. Pipes pass the result of one function straight into the next function, which makes code clean, linear, and easy to read from top to bottom like a sentence. The easiest way to interpret a pipe is "and then". For example
+
+```{r}
+Data |>
+  filter(dest == "IAH") |> 
+  group_by(month) |> 
+  summarize(arr_delay = mean(arr_delay, na.rm = TRUE))
+```
+
+What this block of code does is:
+
+1. Takes the data frame called `Data`, and then
+2. Filters the observations with destination being `IAH`, and then
+3. Groups the observations by month, and then
+4. Computes the mean arrival delay for each month.
+
+Compare with the code using base R without pipes:
+
+```{r}
+tapply(Data[Data$dest == "IAH",]$arr_delay, Data[Data$dest == "IAH",]$month, mean, na.rm = TRUE)
+```
+People tend to like the linearity and flow of pipes.
+
+
+## Operations on Rows
+
+### Select Rows Based on Condition
+
+The `filter()` function from the `dplyr` package selects rows of a data frame based on a condition. For example, to select flights that arrival delays of more than 120 minutes:
+
+```{r}
+Data |> 
+  filter(dep_delay > 120)
+```
+
+You can use an and operator, `&`, for multiple conditions such as arrival delays more than 120 minutes that departed before 1200:
+
+```{r}
+Data |> 
+  filter(dep_delay > 120 & dep_time < 1200)
+```
+You can use an or operator, `|`, for example, to find flights in January and February:
+
+```{r}
+Data |> 
+  filter(month == 1 | month == 2)
+```
+
+The `%in%` operator can be used in place of `|` and `==`. It keeps rows where the variable equals one of the values on the right:
+
+```{r}
+Data |> 
+  filter(month %in% c(1, 2))
+```
+
+Notice in these examples that the resulting data frame is printed but not stored. Remember to assign the output to a variable name if you wish to store it. For example, to store the flights on New Year's day:
+
+```{r}
+jan1 <- Data |> 
+  filter(month == 1 & day == 1)
+```
+
+### Arrange Rows in Order
+
+The `arrange()` function arranges the rows based on the value in columns. Specifying multiple columns will arrange by the first column, then by the second, and so on. The default order is small to large. To arrange by month, then by day, and then by departure time:
+
+```{r}
+Data |> 
+  arrange(month, day, dep_time)
+```
+
+To change the order of just the departure times:
+
+```{r}
+Data |> 
+  arrange(month, day, desc(dep_time))
+```
+
+### Counting
+
+To count the number of occurrences of each origin and destination combination:
+
+```{r}
+Data |>
+  count(origin, dest, sort = TRUE)
+```
+`sort = TRUE` sorts from largest to smallest.
+
+
+
+
+
+## Operations on Columns
+
+## Pipes
+
+## Grouping
 
 
 

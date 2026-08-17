@@ -127,4 +127,13 @@ visualizations-from-simulations
 ggplot-vs-base-r
 dplyr
 motivation-4
+motivating-example-1
+dplyr-basics
+operations-on-rows
+select-rows-based-on-condition
+arrange-rows-in-order
+counting
+operations-on-columns
+pipes
+grouping
 blank

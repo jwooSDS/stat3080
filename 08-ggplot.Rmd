@@ -313,5 +313,5 @@ So which to use? `ggplot()` produces nicer visuals with much more customization,
 - Use `ggplot()` for more complicated visualizations. 
 - Use `ggplot()` if presenting to an audience. 
 
-
+Note: I did not add titles and labels to axes in a lot of these plots. Feel free to practice adding them on your own. Visualizations should always be titled and have axes labeled. 
 

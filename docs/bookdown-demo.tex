@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.9306358 -4.8301480 -3.7834501  0.8320310 -3.9635213  2.0450890
-##  [7] -0.1464972  3.3385988  3.1202552 -2.6709924
+##  [1]  1.0876332 -3.4794278  4.5808878 -4.4843939  5.6045268  2.4345586
+##  [7] -0.2324470  0.8272356  0.4905982  5.0768278
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -4296,6 +4296,8 @@ So which to use? \texttt{ggplot()} produces nicer visuals with much more customi
   Use \texttt{ggplot()} if presenting to an audience.
 \end{itemize}
 
+Note: I did not add titles and labels to axes in a lot of these plots. Feel free to practice adding them on your own. Visualizations should always be titled and have axes labeled.
+
 \hypertarget{dplyr}{%
 \chapter{Data Wranling (dplyr)}\label{dplyr}}
 
@@ -4333,6 +4335,328 @@ Sometimes, data are not structured in this way, and we will have to transform th
 You may realize that you can already perform some of these operations in Sections \ref{Rbasics} and \ref{subset}. In this section, you will learning how to perform these operations using another core package from the \texttt{tidyverse} called \texttt{dplyr}, which has gained popularity. Its advocates say the syntax associated with \texttt{dplyr} is more readable for the human eye, although its detractors will say that \texttt{dplyr} introduces many function names its syntax strays from base R.
 
 This section is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 3. We will be covering the basics of data wranling with \texttt{dplyr}. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.
+
+\hypertarget{motivating-example-1}{%
+\subsection{Motivating Example}\label{motivating-example-1}}
+
+For this section, we will use a data set on flights that departed from New York City in 2013. It comes from the \texttt{nycflights13} package. It contains all 336,776 flights that departed from New York City in 2013 and comes from the US Bureau of Transportation Statistics
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(nycflights13)}
+\NormalTok{Data }\OtherTok{\textless{}{-}}\NormalTok{ nycflights13}\SpecialCharTok{::}\NormalTok{flights}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{dplyr-basics}{%
+\subsection{dplyr Basics}\label{dplyr-basics}}
+
+\texttt{dplyr} functions typically work in the following manner:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Specify data frame.
+\item
+  Select which rows and columns to work on.
+\item
+  Output data frame.
+\end{enumerate}
+
+One of the key operators that we will use is called the \textbf{pipe}, \texttt{\textbackslash{}\textgreater{}}. Pipes pass the result of one function straight into the next function, which makes code clean, linear, and easy to read from top to bottom like a sentence. The easiest way to interpret a pipe is ``and then''. For example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{filter}\NormalTok{(dest }\SpecialCharTok{==} \StringTok{"IAH"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{group\_by}\NormalTok{(month) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{arr\_delay =} \FunctionTok{mean}\NormalTok{(arr\_delay, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 12 x 2
+##    month arr_delay
+##    <int>     <dbl>
+##  1     1     4.16 
+##  2     2     5.40 
+##  3     3    -1.19 
+##  4     4    14.8  
+##  5     5     0.972
+##  6     6    11.1  
+##  7     7    11    
+##  8     8     0.705
+##  9     9   -10.6  
+## 10    10     1.81 
+## 11    11    -1.78 
+## 12    12    14.5
+\end{verbatim}
+
+What this block of code does is:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Takes the data frame called \texttt{Data}, and then
+\item
+  Filters the observations with destination being \texttt{IAH}, and then
+\item
+  Groups the observations by month, and then
+\item
+  Computes the mean arrival delay for each month.
+\end{enumerate}
+
+Compare with the code using base R without pipes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tapply}\NormalTok{(Data[Data}\SpecialCharTok{$}\NormalTok{dest }\SpecialCharTok{==} \StringTok{"IAH"}\NormalTok{,]}\SpecialCharTok{$}\NormalTok{arr\_delay, Data[Data}\SpecialCharTok{$}\NormalTok{dest }\SpecialCharTok{==} \StringTok{"IAH"}\NormalTok{,]}\SpecialCharTok{$}\NormalTok{month, mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           1           2           3           4           5           6 
+##   4.1627907   5.4023904  -1.1875000  14.7666667   0.9722222  11.1023490 
+##           7           8           9          10          11          12 
+##  11.0000000   0.7054010 -10.6473684   1.8080645  -1.7763158  14.5000000
+\end{verbatim}
+
+People tend to like the linearity and flow of pipes.
+
+\hypertarget{operations-on-rows}{%
+\section{Operations on Rows}\label{operations-on-rows}}
+
+\hypertarget{select-rows-based-on-condition}{%
+\subsection{Select Rows Based on Condition}\label{select-rows-based-on-condition}}
+
+The \texttt{filter()} function from the \texttt{dplyr} package selects rows of a data frame based on a condition. For example, to select flights that arrival delays of more than 120 minutes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(dep\_delay }\SpecialCharTok{\textgreater{}} \DecValTok{120}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 9,723 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      848           1835       853     1001           1950
+##  2  2013     1     1      957            733       144     1056            853
+##  3  2013     1     1     1114            900       134     1447           1222
+##  4  2013     1     1     1540           1338       122     2020           1825
+##  5  2013     1     1     1815           1325       290     2120           1542
+##  6  2013     1     1     1842           1422       260     1958           1535
+##  7  2013     1     1     1856           1645       131     2212           2005
+##  8  2013     1     1     1934           1725       129     2126           1855
+##  9  2013     1     1     1938           1703       155     2109           1823
+## 10  2013     1     1     1942           1705       157     2124           1830
+## # i 9,713 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+You can use an and operator, \texttt{\&}, for multiple conditions such as arrival delays more than 120 minutes that departed before 1200:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(dep\_delay }\SpecialCharTok{\textgreater{}} \DecValTok{120} \SpecialCharTok{\&}\NormalTok{ dep\_time }\SpecialCharTok{\textless{}} \DecValTok{1200}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,353 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      848           1835       853     1001           1950
+##  2  2013     1     1      957            733       144     1056            853
+##  3  2013     1     1     1114            900       134     1447           1222
+##  4  2013     1     2      126           2250       156      233           2359
+##  5  2013     1     2      833            558       155     1018            727
+##  6  2013     1     2      923            624       179     1051            758
+##  7  2013     1     3       50           2145       185      203           2311
+##  8  2013     1     3      235           2359       156      700            437
+##  9  2013     1     3      854            630       144     1057            810
+## 10  2013     1     3      909            700       129     1103            850
+## # i 1,343 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+You can use an or operator, \texttt{\textbar{}}, for example, to find flights in January and February:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(month }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{|}\NormalTok{ month }\SpecialCharTok{==} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51,955 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # i 51,945 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+The \texttt{\%in\%} operator can be used in place of \texttt{\textbar{}} and \texttt{==}. It keeps rows where the variable equals one of the values on the right:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(month }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51,955 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # i 51,945 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+Notice in these examples that the resulting data frame is printed but not stored. Remember to assign the output to a variable name if you wish to store it. For example, to store the flights on New Year's day:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{jan1 }\OtherTok{\textless{}{-}}\NormalTok{ Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(month }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ day }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{arrange-rows-in-order}{%
+\subsection{Arrange Rows in Order}\label{arrange-rows-in-order}}
+
+The \texttt{arrange()} function arranges the rows based on the value in columns. Specifying multiple columns will arrange by the first column, then by the second, and so on. The default order is small to large. To arrange by month, then by day, and then by departure time:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{arrange}\NormalTok{(month, day, dep\_time)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # i 336,766 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+To change the order of just the departure times:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{arrange}\NormalTok{(month, day, }\FunctionTok{desc}\NormalTok{(dep\_time))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 336,776 x 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+##  1  2013     1     1     2356           2359        -3      425            437
+##  2  2013     1     1     2353           2359        -6      425            445
+##  3  2013     1     1     2353           2359        -6      418            442
+##  4  2013     1     1     2343           1724       379      314           1938
+##  5  2013     1     1     2327           2250        37       32           2359
+##  6  2013     1     1     2326           2130       116      131             18
+##  7  2013     1     1     2323           2200        83       22           2313
+##  8  2013     1     1     2312           2000       192       21           2110
+##  9  2013     1     1     2310           2255        15       24             15
+## 10  2013     1     1     2307           2245        22       32           2357
+## # i 336,766 more rows
+## # i 11 more variables: arr_delay <dbl>, carrier <chr>, flight <int>,
+## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>,
+## #   hour <dbl>, minute <dbl>, time_hour <dttm>
+\end{verbatim}
+
+\hypertarget{counting}{%
+\subsection{Counting}\label{counting}}
+
+To count the number of occurrences of each origin and destination combination:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{count}\NormalTok{(origin, dest, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 224 x 3
+##    origin dest      n
+##    <chr>  <chr> <int>
+##  1 JFK    LAX   11262
+##  2 LGA    ATL   10263
+##  3 LGA    ORD    8857
+##  4 JFK    SFO    8204
+##  5 LGA    CLT    6168
+##  6 EWR    ORD    6100
+##  7 JFK    BOS    5898
+##  8 LGA    MIA    5781
+##  9 JFK    MCO    5464
+## 10 EWR    BOS    5327
+## # i 214 more rows
+\end{verbatim}
+
+\texttt{sort\ =\ TRUE} sorts from largest to smallest.
+
+\hypertarget{operations-on-columns}{%
+\section{Operations on Columns}\label{operations-on-columns}}
+
+\hypertarget{pipes}{%
+\section{Pipes}\label{pipes}}
+
+\hypertarget{grouping}{%
+\section{Grouping}\label{grouping}}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

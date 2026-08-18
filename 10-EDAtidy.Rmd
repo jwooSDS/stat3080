@@ -90,14 +90,14 @@ ggplot(Data, aes(x = y)) +
     title = "Histogram of Diamond Widths"
   )
 ```
-Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can "zoom-in" on the plot by limiting the limit on the y-axisby supplying the range of the y-axis via `ylim` inside the layer `coord_cartesian`. You can also limit the range of the x-axis if needed. 
+Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can "zoom-in" on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via `ylim` inside the layer `coord_cartesian`. You can also limit the range of the x-axis if needed. 
 
 ```{r}
 ggplot(diamonds, aes(x = y)) + 
   geom_histogram(binwidth = 0.5) +
   coord_cartesian(ylim = c(0, 50))
 ```
-We see around 7 dimonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
+We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
 
 ```{r}
 Data |> 
@@ -105,7 +105,7 @@ Data |>
   relocate(y)
 ```
 
-or use the `summary()` function to cehck the minimum value of the widths.
+or use the `summary()` function to check the minimum value of the widths.
 
 
 ```{r}
@@ -207,7 +207,7 @@ We can use the tools from \@ref(cat2) to explore the relationship between two ca
 ggplot(Data, aes(x = cut, y = color)) +
   geom_count()
 ```
-Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurence, but it may be better to look at proportions instead of counts. We can use a bar chart:
+Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:
 
 ```{r}
 ggplot(Data, aes(x = cut, fill = color)) +
@@ -265,3 +265,21 @@ If you notice some patterns or relationships in the data, you can ask:
 3. How strong is the relationship?
 4. What other variables might affect the relationship?
 5. Could the relationship change if you look at subgroups of the data? 
+
+## Tidy Data
+
+You may have notice that in Sections \@ref(ggplot) and \@ref(dplyr), data frames were called tibbles. A tibble is the `tidyverse` version of a data frame. Data sets from the `tidyverse` are tibbles. The main difference is that when typing out the name of a tibble, only the first few rows and columns are printed, whereas all rows of a data frame get printed. Therefore, tibbles are nicer when working with large data sets. 
+
+Tidy data have the following characteristics:
+
+1. Each variable is a column; each column is a variable.
+2. Each observation is a row; each row is an observation.
+3. Each value is a cell; each cell is a single value.
+
+The packages in the `tidyverse` work best with tidy data (as do most other packages). So why may data not be tidy?
+
+1. The data are organized for another purpose, usually for ease of data entry rather than data analysis.
+
+2. Most people are not familiar with the principles of tidy data, and it is difficult to derive them yourself unless you spend a lot of time working with data.
+
+Please read [R for Data Science](https://r4ds.hadley.nz/) [@wickham2023], Chapter 5. There are two main classes of non tidy data, and so we lengthen or widen the data. Some of you may have to do these in your project, while most will not. 

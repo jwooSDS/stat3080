@@ -170,14 +170,14 @@
 <span>    title <span class="op">=</span> <span class="st">"Histogram of Diamond Widths"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-183-1.png" width="672">
-Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can “zoom-in” on the plot by limiting the limit on the y-axisby supplying the range of the y-axis via <code>ylim</code> inside the layer <code>coord_cartesian</code>. You can also limit the range of the x-axis if needed.</p>
+Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can “zoom-in” on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via <code>ylim</code> inside the layer <code>coord_cartesian</code>. You can also limit the range of the x-axis if needed.</p>
 <div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">diamonds</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure">
 <img src="bookdown-demo_files/figure-html/unnamed-chunk-184-1.png" width="672">
-We see around 7 dimonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,</div>
+We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,</div>
 <div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -196,7 +196,7 @@ We see around 7 dimonds with width of 0mm, and 1 around 30mm and 1 around 59mm. 
 ##  9  3.71  0.2  Premium   F     VS2      62.6    59   367  3.73  2.33
 ## 10  3.71  0.2  Very Good E     VS2      63.4    59   367  3.74  2.36
 ## # ℹ 53,930 more rows</code></pre>
-<p>or use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to cehck the minimum value of the widths.</p>
+<p>or use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to check the minimum value of the widths.</p>
 <div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -302,7 +302,7 @@ It appears that cut has the opposite relationship with price than expected. What
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_count.html">geom_count</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure">
 <img src="bookdown-demo_files/figure-html/unnamed-chunk-194-1.png" width="672">
-Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurence, but it may be better to look at proportions instead of counts. We can use a bar chart:</div>
+Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:</div>
 <div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cut</span>, fill <span class="op">=</span> <span class="va">color</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -372,6 +372,25 @@ Typical questions for scatterplots include:</div>
 </ol>
 </div>
 </div>
+<div id="tidy-data" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Tidy Data<a class="anchor" aria-label="anchor" href="#tidy-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>You may have notice that in Sections <a href="ggplot.html#ggplot">8</a> and <a href="dplyr.html#dplyr">9</a>, data frames were called tibbles. A tibble is the <code>tidyverse</code> version of a data frame. Data sets from the <code>tidyverse</code> are tibbles. The main difference is that when typing out the name of a tibble, only the first few rows and columns are printed, whereas all rows of a data frame get printed. Therefore, tibbles are nicer when working with large data sets.</p>
+<p>Tidy data have the following characteristics:</p>
+<ol style="list-style-type: decimal">
+<li>Each variable is a column; each column is a variable.</li>
+<li>Each observation is a row; each row is an observation.</li>
+<li>Each value is a cell; each cell is a single value.</li>
+</ol>
+<p>The packages in the <code>tidyverse</code> work best with tidy data (as do most other packages). So why may data not be tidy?</p>
+<ol style="list-style-type: decimal">
+<li><p>The data are organized for another purpose, usually for ease of data entry rather than data analysis.</p></li>
+<li><p>Most people are not familiar with the principles of tidy data, and it is difficult to derive them yourself unless you spend a lot of time working with data.</p></li>
+</ol>
+<p>Please read <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 5. There are two main classes of non tidy data, and so we lengthen or widen the data. Some of you may have to do these in your project, while most will not.</p>
+
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></div>
@@ -388,6 +407,7 @@ Typical questions for scatterplots include:</div>
 <li><a class="nav-link" href="#a-few-things-to-consider"><span class="header-section-number">10.2.3</span> A Few Things to Consider</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#tidy-data"><span class="header-section-number">10.3</span> Tidy Data</a></li>
 </ul>
 
       <div class="book-extra">

@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  2.3498663  4.8052428  0.3881497  1.0818959 -3.2002560  6.5018592
-##  [7] -1.0551731 -2.4315581  2.9817370 -4.1855850
+##  [1]  0.06133425 -1.72291442 -2.43113514  1.60699755  0.02314794  2.12011269
+##  [7] -0.88138532  8.56457889 -3.83193949  3.78019004
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -5311,7 +5311,7 @@ We take a look at the \texttt{y} variable in the diamonds data set, which measur
 \end{Shaded}
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-183-1.pdf}
-Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can ``zoom-in'' on the plot by limiting the limit on the y-axisby supplying the range of the y-axis via \texttt{ylim} inside the layer \texttt{coord\_cartesian}. You can also limit the range of the x-axis if needed.
+Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can ``zoom-in'' on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via \texttt{ylim} inside the layer \texttt{coord\_cartesian}. You can also limit the range of the x-axis if needed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5322,7 +5322,7 @@ Most diamonds have widths between 5 to 10mm. The fact that the histogram has an 
 \end{Shaded}
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-184-1.pdf}
-We see around 7 dimonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
+We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5349,7 +5349,7 @@ We see around 7 dimonds with width of 0mm, and 1 around 30mm and 1 around 59mm. 
 ## # i 53,930 more rows
 \end{verbatim}
 
-or use the \texttt{summary()} function to cehck the minimum value of the widths.
+or use the \texttt{summary()} function to check the minimum value of the widths.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5508,7 +5508,7 @@ We can use the tools from \ref{cat2} to explore the relationship between two cat
 \end{Shaded}
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-194-1.pdf}
-Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurence, but it may be better to look at proportions instead of counts. We can use a bar chart:
+Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5618,6 +5618,36 @@ If you notice some patterns or relationships in the data, you can ask:
 \item
   Could the relationship change if you look at subgroups of the data?
 \end{enumerate}
+
+\hypertarget{tidy-data}{%
+\section{Tidy Data}\label{tidy-data}}
+
+You may have notice that in Sections \ref{ggplot} and \ref{dplyr}, data frames were called tibbles. A tibble is the \texttt{tidyverse} version of a data frame. Data sets from the \texttt{tidyverse} are tibbles. The main difference is that when typing out the name of a tibble, only the first few rows and columns are printed, whereas all rows of a data frame get printed. Therefore, tibbles are nicer when working with large data sets.
+
+Tidy data have the following characteristics:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Each variable is a column; each column is a variable.
+\item
+  Each observation is a row; each row is an observation.
+\item
+  Each value is a cell; each cell is a single value.
+\end{enumerate}
+
+The packages in the \texttt{tidyverse} work best with tidy data (as do most other packages). So why may data not be tidy?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The data are organized for another purpose, usually for ease of data entry rather than data analysis.
+\item
+  Most people are not familiar with the principles of tidy data, and it is difficult to derive them yourself unless you spend a lot of time working with data.
+\end{enumerate}
+
+Please read \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 5. There are two main classes of non tidy data, and so we lengthen or widen the data. Some of you may have to do these in your project, while most will not.
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

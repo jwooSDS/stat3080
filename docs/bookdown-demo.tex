@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-08-17}
+\date{2026-08-18}
 
 \begin{document}
 \maketitle
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  4.79354615  3.86632762  0.27336930  5.86605580  1.19428397  3.80708060
-##  [7] -0.13120242 -0.97113545  0.03917382  3.59301222
+##  [1] -0.8060446  5.4457516  0.9234963  1.1901867 -3.2409051 -0.6638673
+##  [7]  1.4917526  3.6167564  0.1367489  0.4488513
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3804,6 +3804,8 @@ We will be using functions from the \texttt{ggplot2} package to create visualiza
 
 This section is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 1. We will be covering the basics of these visualizations in this section. Feel free to consult the book for a more thorough explanation of how the functions from the \texttt{ggplot2} package work. I have added some of my own commentary, as well as some examples on how to create similar visualizations using base R.
 
+You will learn the basics in this section. For further reading, I will suggest Chapter 9 of \citet{wickham2023}. We also have a full course, STAT 3280, that is dedicated to data visualizations.
+
 \hypertarget{motivating-example}{%
 \subsection{Motivating Example}\label{motivating-example}}
 
@@ -4087,8 +4089,8 @@ As a quick example using base R:
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-141-1.pdf}
 
-\hypertarget{visualizing-a-quantitative-variable-across-a-categorical-variable}{%
-\section{Visualizing a Quantitative Variable Across a Categorical Variable}\label{visualizing-a-quantitative-variable-across-a-categorical-variable}}
+\hypertarget{quantcat}{%
+\section{Visualizing a Quantitative Variable Across a Categorical Variable}\label{quantcat}}
 
 Suppose we want to see if the body mass of the penguins differ across the species. We can create \textbf{side by side boxplots}
 
@@ -4231,8 +4233,8 @@ Tables can also be easily created:
 ## 0.3604651 0.4418605 0.1976744
 \end{verbatim}
 
-\hypertarget{single-quantitative-variable}{%
-\subsection{Single Quantitative Variable}\label{single-quantitative-variable}}
+\hypertarget{quant1}{%
+\subsection{Single Quantitative Variable}\label{quant1}}
 
 A boxplot or a density plot are commonly used to summarize the distribution of a single quantitative variable.
 
@@ -5176,6 +5178,258 @@ For example, the following code finds the flights that are most delayed upon arr
 ## #   flight <int>, tailnum <chr>, origin <chr>, air_time <dbl>, distance <dbl>,
 ## #   hour <dbl>, minute <dbl>, time_hour <dttm>
 \end{verbatim}
+
+\hypertarget{EDA}{%
+\chapter{Exploratory Data Analysis and Tidying Data}\label{EDA}}
+
+\hypertarget{introduction-1}{%
+\section{Introduction}\label{introduction-1}}
+
+This sections covers two slightly different topics, but they will be helpful in your project.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Exploratory data analysis (EDA) is used by statisticians and data scientists to investigate data sets and summarize their main characteristics, often using data visualizations. A lot of the tools you saw in Sections \ref{ggplot} and \ref{dplyr} will be useful. You will learn more about the way to use these skills to perform EDA. This subsection is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 10.
+\item
+  Data tidying is an approach to make the raw data that we get into a ``nice'' format which makes performing EDA and modeling much easier. This subsection is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 5.
+\end{enumerate}
+
+\hypertarget{eda}{%
+\section{EDA}\label{eda}}
+
+EDA can be viewed as a (fairly) systematic and iterative process, but it should not be viewed as a formal process with a strict set of rules. These steps are typically taken:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Generate questions that you want to answer with the data.
+\item
+  Generate data visualizations and / or numerical summaries to address these questions.
+\item
+  Use what you learned to refine the questions, or generate new questions.
+\end{enumerate}
+
+At the beginning, you should feel free to explore your ideas. Not all the ideas will pan out; but you will eventually hone in on some interesting insights.
+
+EDA can also be used to check the quality of your data.
+
+Generally speaking, the main questions that are asked during EDA are
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What type of variation occurs within the variables?
+\item
+  What kind of relationship exists between the variables?
+\end{enumerate}
+
+Domain-specific knowledge will be helpful in this process. Statisticians and data scientists often learn about the domain associated with the data set. You should never work on data where you have little domain-specific knowledge!
+
+\hypertarget{variation-within-variables}{%
+\subsection{Variation Within Variables}\label{variation-within-variables}}
+
+\textbf{Variance} measures the spread associated with a quantitative variable. The a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section \ref{quant1}, such as density plots, boxplots, and histograms.
+
+We take a look at the \texttt{diamonds} data set from the \texttt{tidyverse} package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore that weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\NormalTok{Data }\OtherTok{\textless{}{-}}\NormalTok{ ggplot2}\SpecialCharTok{::}\NormalTok{diamonds}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Carat"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Histogram of Diamond Carats"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-181-1.pdf}
+
+Typical questions are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What are the more common values? The bars appear highest around 0.5 to 1.5 carats, so these carats are common. Carats are concentrated among the smaller carats.
+\item
+  What values are rare? High carat diamonds are rare. Heavier diamonds are rare and therefore fetch a premium. This is to be expected.
+\item
+  Are there unusual patterns? Not really, as we expect more diamonds to be on the smaller end of the scale. The bar for the smallest carats being so low may be surprising.
+\end{enumerate}
+
+Given that most diamonds are less than 3 carats, we can create a similar histogram, but only for diamonds less than 3 carats. We can also refine the width of the bins to examine the distribution of the carats more closely. You must make it clear that you are only examining a certain portion of the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smaller }\OtherTok{\textless{}{-}}\NormalTok{ Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{filter}\NormalTok{(carat }\SpecialCharTok{\textless{}} \DecValTok{3}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(smaller, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.01}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Carat"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Histogram of Diamond Carats (less than 3 carats)"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-182-1.pdf}
+
+Notice that there are more diamonds with full or half carat sizes? According to \href{https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size}{Hamilton Jewelers}, ``this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat''. So this observation is as expected.
+
+\hypertarget{unusual-values}{%
+\subsubsection{Unusual values}\label{unusual-values}}
+
+Use the visualizations created during EDA to help spot unusual values. Sometimes these are data entry errors, sometimes they are correct values that can happen, and sometimes there is something interesting about these values that warrant further investigation.
+
+We take a look at the \texttt{y} variable in the diamonds data set, which measures the width of the diamonds in mm.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ y)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Width in mm"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Histogram of Diamond Widths"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-183-1.pdf}
+Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can ``zoom-in'' on the plot by limiting the limit on the y-axisby supplying the range of the y-axis via \texttt{ylim} inside the layer \texttt{coord\_cartesian}. You can also limit the range of the x-axis if needed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(diamonds, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ y)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-184-1.pdf}
+We see around 7 dimonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{arrange}\NormalTok{(y) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{relocate}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 53,940 x 10
+##        y carat cut       color clarity depth table price     x     z
+##    <dbl> <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl>
+##  1  0     1    Very Good H     VS2      63.3    53  5139  0     0   
+##  2  0     1.14 Fair      G     VS1      57.5    67  6381  0     0   
+##  3  0     1.56 Ideal     G     VS2      62.2    54 12800  0     0   
+##  4  0     1.2  Premium   D     VVS1     62.1    59 15686  0     0   
+##  5  0     2.25 Premium   H     SI2      62.8    59 18034  0     0   
+##  6  0     0.71 Good      F     SI2      64.1    60  2130  0     0   
+##  7  0     0.71 Good      F     SI2      64.1    60  2130  0     0   
+##  8  3.68  0.2  Premium   D     VS2      62.3    60   367  3.73  2.31
+##  9  3.71  0.2  Premium   F     VS2      62.6    59   367  3.73  2.33
+## 10  3.71  0.2  Very Good E     VS2      63.4    59   367  3.74  2.36
+## # i 53,930 more rows
+\end{verbatim}
+
+or use the \texttt{summary()} function to cehck the minimum value of the widths.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   4.720   5.710   5.735   6.540  58.900
+\end{verbatim}
+
+Even though we are not diamond experts, common sense tells us that no diamond can have a width of 0mm. Given that the values were entered using 2 decimal places, these are also unlikely to be values that were rounded down to 0mm. I suspect the 0s were entered to represent missing values, and so we will probably want to replace these 0s with \texttt{NA}. You should always confirm this with the entity that collected these data.
+
+How about the 2 wide diamonds? If they are truly that huge, we'd expect them to be expensive. We can sort the data set by width (descending order) and also look at the prices of these diamonds:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(y)) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{relocate}\NormalTok{(x, y, z, price)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 53,940 x 10
+##        x     y     z price carat cut       color clarity depth table
+##    <dbl> <dbl> <dbl> <int> <dbl> <ord>     <ord> <ord>   <dbl> <dbl>
+##  1  8.09 58.9   8.06 12210  2    Premium   H     SI2      58.9    57
+##  2  5.15 31.8   5.12  2075  0.51 Ideal     E     VS1      61.8    55
+##  3 10.7  10.5   6.98 18018  5.01 Fair      J     I1       65.5    59
+##  4 10.2  10.2   6.72 18531  4.5  Fair      J     I1       65.8    58
+##  5 10.1  10.1   6.17 15223  4.01 Premium   I     I1       61      61
+##  6 10.0   9.94  6.24 15223  4.01 Premium   J     I1       62.5    62
+##  7 10.0   9.94  6.31 15984  4    Very Good I     I1       63.3    58
+##  8 10     9.85  6.43 17329  4.13 Fair      H     I1       64.8    61
+##  9  9.86  9.81  6.13 16193  3.67 Premium   I     I1       62.4    56
+## 10  9.66  9.63  6.03 18701  3.51 Premium   J     VS2      62.5    59
+## # i 53,930 more rows
+\end{verbatim}
+
+We expect that prices are driven by the weight (carat), which in turn is driven by the dimensions of the diamonds. We can take a look at the summary of prices:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{price)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     326     950    2401    3933    5324   18823
+\end{verbatim}
+
+The price of the diamond with width 31.8mm is below the median. The price of the other diamond is above the 3rd quartile. The former is more suspicious, but the latter may be more legitimate. If possible, consult the entity that collected the data or consult a subject-matter expert to ask if such values could be legitimate.
+
+My recommendation will be to perform subsequent analysis with and without these two diamonds, and see how different the analysis is. If the results are similar, omit them but mention that they were omitted. If the results are different, you really need to find out what makes these values so different.
+
+As mentioned earlier, I would replace the 0s with \texttt{NA}. Do not remove the entire row, as the row contains information on other columns.
+
+\hypertarget{relationship-between-variables}{%
+\subsection{Relationship between Variables}\label{relationship-between-variables}}
+
+\hypertarget{one-quantitative-and-one-categorical-variable}{%
+\subsubsection{One quantitative and one categorical variable}\label{one-quantitative-and-one-categorical-variable}}
+
+We can use the visualizations from \ref{quantcat} to explore the relationship between a quantitative variable and a categorical variable. To explore the relationship between the price and cut of diamonds, we can create a density plot of price with separate colors for each cut:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ price, }\AttributeTok{color =}\NormalTok{ cut)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Price"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Density"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Cut"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Density Plot of Prices across Cut"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-189-1.pdf}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

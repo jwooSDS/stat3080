@@ -10,6 +10,8 @@ We will be using functions from the `ggplot2` package to create visualizations. 
 
 This section is heavily based on [R for Data Science](https://r4ds.hadley.nz/) [@wickham2023], Chapter 1. We will be covering the basics of these visualizations in this section. Feel free to consult the book for a more thorough explanation of how the functions from the `ggplot2` package work. I have added some of my own commentary, as well as some examples on how to create similar visualizations using base R. 
 
+You will learn the basics in this section. For further reading, I will suggest Chapter 9 of @wickham2023. We also have a full course, STAT 3280, that is dedicated to data visualizations. 
+
 ### Motivating Example
 
 We will use the `penguins` data set from the `palmerpenguins` package [@penguins]. The data set contains data on penguins near Antarctica, such as measurements on flipper length, body mass, sex, the species, and which island they live in. Suppose we want to see how flipper lengths are related to body mass. Are the body masses of these penguins closely related to their flipper lengths? If so, how strong is this relationship. Is the relationship linear or exponential? Do the relationships vary by species and island?
@@ -183,7 +185,7 @@ As a quick example using base R:
 barplot(table(Data$species, Data$island))
 ```
 
-## Visualizing a Quantitative Variable Across a Categorical Variable
+## Visualizing a Quantitative Variable Across a Categorical Variable {#quantcat}
 
 Suppose we want to see if the body mass of the penguins differ across the species. We can create **side by side boxplots**
 
@@ -275,7 +277,7 @@ table(Data$species)
 prop.table(table(Data$species))
 ```
 
-### Single Quantitative Variable
+### Single Quantitative Variable {#quant1}
 
 A boxplot or a density plot are commonly used to summarize the distribution of a single quantitative variable.
 

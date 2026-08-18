@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 10 Exploratory Data Analysis and Tidying Data | STAT 3080: From Data to Knowledge</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="10.1 Introduction This sections covers two slightly different topics, but they will be helpful in your project. Exploratory data analysis (EDA) is used by statisticians and data scientists to...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 10 Exploratory Data Analysis and Tidying Data | STAT 3080: From Data to Knowledge">
+<meta property="og:type" content="book">
+<meta property="og:description" content="10.1 Introduction This sections covers two slightly different topics, but they will be helpful in your project. Exploratory data analysis (EDA) is used by statisticians and data scientists to...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 10 Exploratory Data Analysis and Tidying Data | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="10.1 Introduction This sections covers two slightly different topics, but they will be helpful in your project. Exploratory data analysis (EDA) is used by statisticians and data scientists to...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 3080: From Data to Knowledge</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
+<li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
+<li><a class="" href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></li>
+<li><a class="" href="func.html"><span class="header-section-number">4</span> Functions</a></li>
+<li><a class="" href="control.html"><span class="header-section-number">5</span> Control Flow</a></li>
+<li><a class="" href="sims.html"><span class="header-section-number">6</span> Simulations</a></li>
+<li><a class="" href="applyfam.html"><span class="header-section-number">7</span> Apply Family</a></li>
+<li><a class="" href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
+<li><a class="" href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></li>
+<li><a class="active" href="EDA.html"><span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data</a></li>
+<li><a class="" href="blank.html"><span class="header-section-number">11</span> Blank Canvas</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="EDA" class="section level1" number="10">
+<h1>
+<span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data<a class="anchor" aria-label="anchor" href="#EDA"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction-1" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>This sections covers two slightly different topics, but they will be helpful in your project.</p>
+<ol style="list-style-type: decimal">
+<li><p>Exploratory data analysis (EDA) is used by statisticians and data scientists to investigate data sets and summarize their main characteristics, often using data visualizations. A lot of the tools you saw in Sections <a href="ggplot.html#ggplot">8</a> and <a href="dplyr.html#dplyr">9</a> will be useful. You will learn more about the way to use these skills to perform EDA. This subsection is heavily based on <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 10.</p></li>
+<li><p>Data tidying is an approach to make the raw data that we get into a “nice” format which makes performing EDA and modeling much easier. This subsection is heavily based on <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 5.</p></li>
+</ol>
+</div>
+<div id="eda" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> EDA<a class="anchor" aria-label="anchor" href="#eda"><i class="fas fa-link"></i></a>
+</h2>
+<p>EDA can be viewed as a (fairly) systematic and iterative process, but it should not be viewed as a formal process with a strict set of rules. These steps are typically taken:</p>
+<ol style="list-style-type: decimal">
+<li>Generate questions that you want to answer with the data.</li>
+<li>Generate data visualizations and / or numerical summaries to address these questions.</li>
+<li>Use what you learned to refine the questions, or generate new questions.</li>
+</ol>
+<p>At the beginning, you should feel free to explore your ideas. Not all the ideas will pan out; but you will eventually hone in on some interesting insights.</p>
+<p>EDA can also be used to check the quality of your data.</p>
+<p>Generally speaking, the main questions that are asked during EDA are</p>
+<ol style="list-style-type: decimal">
+<li>What type of variation occurs within the variables?</li>
+<li>What kind of relationship exists between the variables?</li>
+</ol>
+<p>Domain-specific knowledge will be helpful in this process. Statisticians and data scientists often learn about the domain associated with the data set. You should never work on data where you have little domain-specific knowledge!</p>
+<div id="variation-within-variables" class="section level3" number="10.2.1">
+<h3>
+<span class="header-section-number">10.2.1</span> Variation Within Variables<a class="anchor" aria-label="anchor" href="#variation-within-variables"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Variance</strong> measures the spread associated with a quantitative variable. The a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section <a href="ggplot.html#quant1">8.6.2</a>, such as density plots, boxplots, and histograms.</p>
+<p>We take a look at the <code>diamonds</code> data set from the <code>tidyverse</code> package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore that weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.</p>
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">Data</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/diamonds.html">diamonds</a></span></span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">carat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Carat"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Count"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Histogram of Diamond Carats"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-181-1.png" width="672"></div>
+<p>Typical questions are:</p>
+<ol style="list-style-type: decimal">
+<li><p>What are the more common values? The bars appear highest around 0.5 to 1.5 carats, so these carats are common. Carats are concentrated among the smaller carats.</p></li>
+<li><p>What values are rare? High carat diamonds are rare. Heavier diamonds are rare and therefore fetch a premium. This is to be expected.</p></li>
+<li><p>Are there unusual patterns? Not really, as we expect more diamonds to be on the smaller end of the scale. The bar for the smallest carats being so low may be surprising.</p></li>
+</ol>
+<p>Given that most diamonds are less than 3 carats, we can create a similar histogram, but only for diamonds less than 3 carats. We can also refine the width of the bins to examine the distribution of the carats more closely. You must make it clear that you are only examining a certain portion of the data.</p>
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">smaller</span> <span class="op">&lt;-</span> <span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">carat</span> <span class="op">&lt;</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">smaller</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">carat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Carat"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Count"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Histogram of Diamond Carats (less than 3 carats)"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-182-1.png" width="672"></div>
+<p>Notice that there are more diamonds with full or half carat sizes? According to <a href="https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size">Hamilton Jewelers</a>, “this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat”. So this observation is as expected.</p>
+<div id="unusual-values" class="section level4" number="10.2.1.1">
+<h4>
+<span class="header-section-number">10.2.1.1</span> Unusual values<a class="anchor" aria-label="anchor" href="#unusual-values"><i class="fas fa-link"></i></a>
+</h4>
+<p>Use the visualizations created during EDA to help spot unusual values. Sometimes these are data entry errors, sometimes they are correct values that can happen, and sometimes there is something interesting about these values that warrant further investigation.</p>
+<p>We take a look at the <code>y</code> variable in the diamonds data set, which measures the width of the diamonds in mm.</p>
+<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Width in mm"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Count"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Histogram of Diamond Widths"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-183-1.png" width="672">
+Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can “zoom-in” on the plot by limiting the limit on the y-axisby supplying the range of the y-axis via <code>ylim</code> inside the layer <code>coord_cartesian</code>. You can also limit the range of the x-axis if needed.</p>
+<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">diamonds</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-184-1.png" width="672">
+We see around 7 dimonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,</div>
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 53,940 × 10
+##        y carat cut       color clarity depth table price     x     z
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  0     1    Very Good H     VS2      63.3    53  5139  0     0   
+##  2  0     1.14 Fair      G     VS1      57.5    67  6381  0     0   
+##  3  0     1.56 Ideal     G     VS2      62.2    54 12800  0     0   
+##  4  0     1.2  Premium   D     VVS1     62.1    59 15686  0     0   
+##  5  0     2.25 Premium   H     SI2      62.8    59 18034  0     0   
+##  6  0     0.71 Good      F     SI2      64.1    60  2130  0     0   
+##  7  0     0.71 Good      F     SI2      64.1    60  2130  0     0   
+##  8  3.68  0.2  Premium   D     VS2      62.3    60   367  3.73  2.31
+##  9  3.71  0.2  Premium   F     VS2      62.6    59   367  3.73  2.33
+## 10  3.71  0.2  Very Good E     VS2      63.4    59   367  3.74  2.36
+## # ℹ 53,930 more rows</code></pre>
+<p>or use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to cehck the minimum value of the widths.</p>
+<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   4.720   5.710   5.735   6.540  58.900</code></pre>
+<p>Even though we are not diamond experts, common sense tells us that no diamond can have a width of 0mm. Given that the values were entered using 2 decimal places, these are also unlikely to be values that were rounded down to 0mm. I suspect the 0s were entered to represent missing values, and so we will probably want to replace these 0s with <code>NA</code>. You should always confirm this with the entity that collected these data.</p>
+<p>How about the 2 wide diamonds? If they are truly that huge, we’d expect them to be expensive. We can sort the data set by width (descending order) and also look at the prices of these diamonds:</p>
+<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>, <span class="va">price</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 53,940 × 10
+##        x     y     z price carat cut       color clarity depth table
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1  8.09 58.9   8.06 12210  2    Premium   H     SI2      58.9    57
+##  2  5.15 31.8   5.12  2075  0.51 Ideal     E     VS1      61.8    55
+##  3 10.7  10.5   6.98 18018  5.01 Fair      J     I1       65.5    59
+##  4 10.2  10.2   6.72 18531  4.5  Fair      J     I1       65.8    58
+##  5 10.1  10.1   6.17 15223  4.01 Premium   I     I1       61      61
+##  6 10.0   9.94  6.24 15223  4.01 Premium   J     I1       62.5    62
+##  7 10.0   9.94  6.31 15984  4    Very Good I     I1       63.3    58
+##  8 10     9.85  6.43 17329  4.13 Fair      H     I1       64.8    61
+##  9  9.86  9.81  6.13 16193  3.67 Premium   I     I1       62.4    56
+## 10  9.66  9.63  6.03 18701  3.51 Premium   J     VS2      62.5    59
+## # ℹ 53,930 more rows</code></pre>
+<p>We expect that prices are driven by the weight (carat), which in turn is driven by the dimensions of the diamonds. We can take a look at the summary of prices:</p>
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">price</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     326     950    2401    3933    5324   18823</code></pre>
+<p>The price of the diamond with width 31.8mm is below the median. The price of the other diamond is above the 3rd quartile. The former is more suspicious, but the latter may be more legitimate. If possible, consult the entity that collected the data or consult a subject-matter expert to ask if such values could be legitimate.</p>
+<p>My recommendation will be to perform subsequent analysis with and without these two diamonds, and see how different the analysis is. If the results are similar, omit them but mention that they were omitted. If the results are different, you really need to find out what makes these values so different.</p>
+<p>As mentioned earlier, I would replace the 0s with <code>NA</code>. Do not remove the entire row, as the row contains information on other columns.</p>
+</div>
+</div>
+<div id="relationship-between-variables" class="section level3" number="10.2.2">
+<h3>
+<span class="header-section-number">10.2.2</span> Relationship between Variables<a class="anchor" aria-label="anchor" href="#relationship-between-variables"><i class="fas fa-link"></i></a>
+</h3>
+<div id="one-quantitative-and-one-categorical-variable" class="section level4" number="10.2.2.1">
+<h4>
+<span class="header-section-number">10.2.2.1</span> One quantitative and one categorical variable<a class="anchor" aria-label="anchor" href="#one-quantitative-and-one-categorical-variable"><i class="fas fa-link"></i></a>
+</h4>
+<p>We can use the visualizations from <a href="ggplot.html#quantcat">8.4</a> to explore the relationship between a quantitative variable and a categorical variable. To explore the relationship between the price and cut of diamonds, we can create a density plot of price with separate colors for each cut:</p>
+<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">price</span>, color <span class="op">=</span> <span class="va">cut</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Price"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Density"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Cut"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Density Plot of Prices across Cut"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-189-1.png" width="672"></div>
+
+</div>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></div>
+<div class="next"><a href="blank.html"><span class="header-section-number">11</span> Blank Canvas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#EDA"><span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data</a></li>
+<li><a class="nav-link" href="#introduction-1"><span class="header-section-number">10.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#eda"><span class="header-section-number">10.2</span> EDA</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#variation-within-variables"><span class="header-section-number">10.2.1</span> Variation Within Variables</a></li>
+<li><a class="nav-link" href="#relationship-between-variables"><span class="header-section-number">10.2.2</span> Relationship between Variables</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-18.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

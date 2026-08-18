@@ -117,12 +117,12 @@ base-r
 visualizing-two-categorical-variables
 tables
 base-r-1
-visualizing-a-quantitative-variable-across-a-categorical-variable
+quantcat
 base-r-2
 adding-an-additional-categorical-variable
 visualizing-single-variables
 single-categorical-variable
-single-quantitative-variable
+quant1
 visualizations-from-simulations
 ggplot-vs-base-r
 dplyr
@@ -141,4 +141,11 @@ relocate-columns
 pipes
 grouping
 select-rows-within-group
+EDA
+introduction-1
+eda
+variation-within-variables
+unusual-values
+relationship-between-variables
+one-quantitative-and-one-categorical-variable
 blank

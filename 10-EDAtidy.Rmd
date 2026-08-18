@@ -1,0 +1,166 @@
+# Exploratory Data Analysis and Tidying Data  {#EDA}
+
+## Introduction
+
+This sections covers two slightly different topics, but they will be helpful in your project. 
+
+1. Exploratory data analysis (EDA) is used by statisticians and data scientists to investigate data sets and summarize their main characteristics, often using data visualizations. A lot of the tools you saw in Sections \@ref(ggplot) and \@ref(dplyr) will be useful. You will learn more about the way to use these skills to perform EDA. This subsection is heavily based on [R for Data Science](https://r4ds.hadley.nz/) [@wickham2023], Chapter 10.
+
+2. Data tidying is an approach to make the raw data that we get into a "nice" format which makes performing EDA and modeling much easier. This subsection is heavily based on [R for Data Science](https://r4ds.hadley.nz/) [@wickham2023], Chapter 5.
+
+## EDA
+
+EDA can be viewed as a (fairly) systematic and iterative process, but it should not be viewed as a formal process with a strict set of rules. These steps are typically taken:
+
+1. Generate questions that you want to answer with the data.
+2. Generate data visualizations and / or numerical summaries to address these questions. 
+3. Use what you learned to refine the questions, or generate new questions. 
+
+At the beginning, you should feel free to explore your ideas. Not all the ideas will pan out; but you will eventually hone in on some interesting insights. 
+
+EDA can also be used to check the quality of your data. 
+
+Generally speaking, the main questions that are asked during EDA are
+
+1. What type of variation occurs within the variables?
+2. What kind of relationship exists between the variables?
+
+Domain-specific knowledge will be helpful in this process. Statisticians and data scientists often learn about the domain associated with the data set. You should never work on data where you have little domain-specific knowledge!
+
+### Variation Within Variables
+
+**Variance** measures the spread associated with a quantitative variable. The a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section \@ref(quant1), such as density plots, boxplots, and histograms. 
+
+We take a look at the `diamonds` data set from the `tidyverse` package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore that weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+Data <- ggplot2::diamonds
+```
+
+```{r}
+ggplot(Data, aes(x = carat)) +
+  geom_histogram(binwidth = 0.5) +
+  labs(
+    x = "Carat",
+    y = "Count",
+    title = "Histogram of Diamond Carats"
+  )
+```
+
+Typical questions are:
+
+1. What are the more common values? The bars appear highest around 0.5 to 1.5 carats, so these carats are common. Carats are concentrated among the smaller carats.
+
+2. What values are rare? High carat diamonds are rare. Heavier diamonds are rare and therefore fetch a premium. This is to be expected.
+
+3. Are there unusual patterns? Not really, as we expect more diamonds to be on the smaller end of the scale. The bar for the smallest carats being so low may be surprising. 
+
+Given that most diamonds are less than 3 carats, we can create a similar histogram, but only for diamonds less than 3 carats. We can also refine the width of the bins to examine the distribution of the carats more closely. You must make it clear that you are only examining a certain portion of the data.
+
+```{r}
+smaller <- Data |> 
+  filter(carat < 3)
+
+ggplot(smaller, aes(x = carat)) +
+  geom_histogram(binwidth = 0.01) +
+  labs(
+    x = "Carat",
+    y = "Count",
+    title = "Histogram of Diamond Carats (less than 3 carats)"
+  )
+```
+
+Notice that there are more diamonds with full or half carat sizes? According to [Hamilton Jewelers](https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size), "this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat". So this observation is as expected.  
+
+#### Unusual values
+
+Use the visualizations created during EDA to help spot unusual values. Sometimes these are data entry errors, sometimes they are correct values that can happen, and sometimes there is something interesting about these values that warrant further investigation. 
+
+We take a look at the `y` variable in the diamonds data set, which measures the width of the diamonds in mm. 
+
+```{r}
+ggplot(Data, aes(x = y)) + 
+  geom_histogram(binwidth = 0.5) +
+  labs(
+    x = "Width in mm",
+    y = "Count",
+    title = "Histogram of Diamond Widths"
+  )
+```
+Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can "zoom-in" on the plot by limiting the limit on the y-axisby supplying the range of the y-axis via `ylim` inside the layer `coord_cartesian`. You can also limit the range of the x-axis if needed. 
+
+```{r}
+ggplot(diamonds, aes(x = y)) + 
+  geom_histogram(binwidth = 0.5) +
+  coord_cartesian(ylim = c(0, 50))
+```
+We see around 7 dimonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
+
+```{r}
+Data |> 
+  arrange(y) |> 
+  relocate(y)
+```
+
+or use the `summary()` function to cehck the minimum value of the widths.
+
+
+```{r}
+summary(Data$y)
+```
+
+Even though we are not diamond experts, common sense tells us that no diamond can have a width of 0mm. Given that the values were entered using 2 decimal places, these are also unlikely to be values that were rounded down to 0mm. I suspect the 0s were entered to represent missing values, and so we will probably want to replace these 0s with `NA`. You should always confirm this with the entity that collected these data. 
+
+How about the 2 wide diamonds? If they are truly that huge, we'd expect them to be expensive. We can sort the data set by width (descending order) and also look at the prices of these diamonds:
+
+```{r}
+Data |> 
+  arrange(desc(y)) |> 
+  relocate(x, y, z, price)
+```
+
+We expect that prices are driven by the weight (carat), which in turn is driven by the dimensions of the diamonds. We can take a look at the summary of prices:
+
+```{r}
+summary(Data$price)
+```
+
+The price of the diamond with width 31.8mm is below the median. The price of the other diamond is above the 3rd quartile. The former is more suspicious, but the latter may be more legitimate. If possible, consult the entity that collected the data or consult a subject-matter expert to ask if such values could be legitimate. 
+
+My recommendation will be to perform subsequent analysis with and without these two diamonds, and see how different the analysis is. If the results are similar, omit them but mention that they were omitted. If the results are different, you really need to find out what makes these values so different. 
+
+As mentioned earlier, I would replace the 0s with `NA`. Do not remove the entire row, as the row contains information on other columns. 
+
+### Relationship between Variables
+
+#### One quantitative and one categorical variable
+
+We can use the visualizations from \@ref(quantcat) to explore the relationship between a quantitative variable and a categorical variable. To explore the relationship between the price and cut of diamonds, we can create a density plot of price with separate colors for each cut:
+
+```{r warning=FALSE}
+ggplot(Data, aes(x = price, color = cut)) +
+  geom_density() +
+  labs(
+    x = "Price",
+    y = "Density",
+    color = "Cut",
+    title = "Density Plot of Prices across Cut"
+  )
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

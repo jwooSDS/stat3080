@@ -266,6 +266,15 @@ If you notice some patterns or relationships in the data, you can ask:
 4. What other variables might affect the relationship?
 5. Could the relationship change if you look at subgroups of the data? 
 
+### Tips for Effective Visualizations
+
+- Provide a title.
+- Label axes, avoid using the name of the column. Readers may not have looked at your data frame.
+- Right visualization for variable type (categorical, quantitative). Sometimes, an error message is shown and one reason could be the visualization does not work for the type of variable.
+- Scaling of axes. Pay attention to the range of the axes and they do not mislead.
+- Clear and simple. Avoid unnecessary styling or decorations. The visual needs to convey your key message. Do not cram too many variables. In my opinion, going beyond 3 or 4 becomes questionable. Using `facet_wrap` can be helpful. 
+- Know your audience. Simplify for non-experts. 
+
 ## Tidy Data
 
 You may have notice that in Sections \@ref(ggplot) and \@ref(dplyr), data frames were called tibbles. A tibble is the `tidyverse` version of a data frame. Data sets from the `tidyverse` are tibbles. The main difference is that when typing out the name of a tibble, only the first few rows and columns are printed, whereas all rows of a data frame get printed. Therefore, tibbles are nicer when working with large data sets. 

@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.06133425 -1.72291442 -2.43113514  1.60699755  0.02314794  2.12011269
-##  [7] -0.88138532  8.56457889 -3.83193949  3.78019004
+##  [1]  7.213648 -1.499062 -2.477885  2.181903 -1.127689  3.305728  4.068711
+##  [8] -1.009315  6.300236  2.325875
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -5618,6 +5618,25 @@ If you notice some patterns or relationships in the data, you can ask:
 \item
   Could the relationship change if you look at subgroups of the data?
 \end{enumerate}
+
+\hypertarget{tips-for-effective-visualizations}{%
+\subsection{Tips for Effective Visualizations}\label{tips-for-effective-visualizations}}
+
+\begin{itemize}
+\tightlist
+\item
+  Provide a title.
+\item
+  Label axes, avoid using the name of the column. Readers may not have looked at your data frame.
+\item
+  Right visualization for variable type (categorical, quantitative). Sometimes, an error message is shown and one reason could be the visualization does not work for the type of variable.
+\item
+  Scaling of axes. Pay attention to the range of the axes and they do not mislead.
+\item
+  Clear and simple. Avoid unnecessary styling or decorations. The visual needs to convey your key message. Do not cram too many variables. In my opinion, going beyond 3 or 4 becomes questionable. Using \texttt{facet\_wrap} can be helpful.
+\item
+  Know your audience. Simplify for non-experts.
+\end{itemize}
 
 \hypertarget{tidy-data}{%
 \section{Tidy Data}\label{tidy-data}}

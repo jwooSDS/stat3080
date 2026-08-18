@@ -151,5 +151,6 @@ one-quantitative-and-one-categorical-variable
 two-categorical-variables
 two-quantitative-variables
 a-few-things-to-consider
+tips-for-effective-visualizations
 tidy-data
 blank

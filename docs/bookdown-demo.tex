@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.8060446  5.4457516  0.9234963  1.1901867 -3.2409051 -0.6638673
-##  [7]  1.4917526  3.6167564  0.1367489  0.4488513
+##  [1]  2.3498663  4.8052428  0.3881497  1.0818959 -3.2002560  6.5018592
+##  [7] -1.0551731 -2.4315581  2.9817370 -4.1855850
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3804,7 +3804,7 @@ We will be using functions from the \texttt{ggplot2} package to create visualiza
 
 This section is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 1. We will be covering the basics of these visualizations in this section. Feel free to consult the book for a more thorough explanation of how the functions from the \texttt{ggplot2} package work. I have added some of my own commentary, as well as some examples on how to create similar visualizations using base R.
 
-You will learn the basics in this section. For further reading, I will suggest Chapter 9 of \citet{wickham2023}. We also have a full course, STAT 3280, that is dedicated to data visualizations.
+You will learn the basics in this section. For further reading, I will suggest Chapters 9 and 11 of \citet{wickham2023}. We also have a full course, STAT 3280, that is dedicated to data visualizations.
 
 \hypertarget{motivating-example}{%
 \subsection{Motivating Example}\label{motivating-example}}
@@ -4008,8 +4008,8 @@ To create a scatterplot using base R functions, use the \texttt{plot()} function
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-136-1.pdf}
 
-\hypertarget{visualizing-two-categorical-variables}{%
-\section{Visualizing Two Categorical Variables}\label{visualizing-two-categorical-variables}}
+\hypertarget{cat2}{%
+\section{Visualizing Two Categorical Variables}\label{cat2}}
 
 A bar chart is often used to visualize the relationship between two categorical variables. Perhaps we want to see if the different species of penguins tend to live in different islands. The most basic bar chart can provide the number of each species in each island:
 
@@ -4167,8 +4167,8 @@ Thus far, we have looked at visualizing two (or more) variables. In such visuali
 
 Oftentimes, we need to see how are the values of a single variable distributed. Again, our choice of visualization depends on whether the variable is categorical or quantitative.
 
-\hypertarget{single-categorical-variable}{%
-\subsection{Single Categorical Variable}\label{single-categorical-variable}}
+\hypertarget{cat1}{%
+\subsection{Single Categorical Variable}\label{cat1}}
 
 A bar chart can also be used for a single categorical variable:
 
@@ -5228,6 +5228,8 @@ Generally speaking, the main questions that are asked during EDA are
 
 Domain-specific knowledge will be helpful in this process. Statisticians and data scientists often learn about the domain associated with the data set. You should never work on data where you have little domain-specific knowledge!
 
+Note that modeling is rarely done during EDA. We are just creating visualizations and computing numerical summaries, and these should be done prior to modeling.
+
 \hypertarget{variation-within-variables}{%
 \subsection{Variation Within Variables}\label{variation-within-variables}}
 
@@ -5430,6 +5432,192 @@ We can use the visualizations from \ref{quantcat} to explore the relationship be
 \end{Shaded}
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-189-1.pdf}
+
+Notice in this example the categorical variable cut is ordinal, there is an order to the values. Cut reflects a measure of quality, in increasing order from fair, good, very good, premium, ideal. You have to make sure that they are ordered correctly (which they are in this data set). If they are not, please see Section \ref{cat1} to see how to use the \texttt{factor()} function to order the variable.
+
+If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see that curve for fair cuts appear to be quite different: its prices tend to be a little higher. Which may be counter intuitive as fair is the lowest quality.
+
+Alternatively, we can create a side by side box plot
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{y =}\NormalTok{ price)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Cut"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Price"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Boxplot of Prices across Cut"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-190-1.pdf}
+We see a similar conclusion.
+
+Notice that the prices are right skewed? In that most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data }\OtherTok{\textless{}{-}}\NormalTok{ Data }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{logPrice =} \FunctionTok{log}\NormalTok{(price)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ logPrice, }\AttributeTok{color =}\NormalTok{ cut)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Log Price"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Density"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Cut"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Density Plot of Log Prices across Cut"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-192-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{y =}\NormalTok{ logPrice)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{x =} \StringTok{"Cut"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Log Price"}\NormalTok{,}
+    \AttributeTok{title =} \StringTok{"Boxplot of Log Prices across Cut"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-193-1.pdf}
+It appears that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?
+
+\hypertarget{two-categorical-variables}{%
+\subsubsection{Two categorical variables}\label{two-categorical-variables}}
+
+We can use the tools from \ref{cat2} to explore the relationship between two categorical variables. For example, we want to explore if cut and color of diamonds are related. We can create a visual that summarizes the number of diamonds for each combination of cut and color:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{y =}\NormalTok{ color)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_count}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-194-1.pdf}
+Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurence, but it may be better to look at proportions instead of counts. We can use a bar chart:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{fill =}\NormalTok{ color)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"fill"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Proportion of Colors in Each Cut"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Proportion"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-195-1.pdf}
+The proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{cut, Data}\SpecialCharTok{$}\NormalTok{color)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            
+##                D    E    F    G    H    I    J
+##   Fair       163  224  312  314  303  175  119
+##   Good       662  933  909  871  702  522  307
+##   Very Good 1513 2400 2164 2299 1824 1204  678
+##   Premium   1603 2337 2331 2924 2360 1428  808
+##   Ideal     2834 3903 3826 4884 3115 2093  896
+\end{verbatim}
+
+Or a two-way table using proportions, due to the different number of diamonds in each cut:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{cut, Data}\SpecialCharTok{$}\NormalTok{color), }\AttributeTok{margin =} \DecValTok{1}\NormalTok{), }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            
+##                D    E    F    G    H    I    J
+##   Fair      0.10 0.14 0.19 0.20 0.19 0.11 0.07
+##   Good      0.13 0.19 0.19 0.18 0.14 0.11 0.06
+##   Very Good 0.13 0.20 0.18 0.19 0.15 0.10 0.06
+##   Premium   0.12 0.17 0.17 0.21 0.17 0.10 0.06
+##   Ideal     0.13 0.18 0.18 0.23 0.14 0.10 0.04
+\end{verbatim}
+
+For each cut, the proportion of each color is similar, so there is little evidence of an association between cut and color.
+
+\hypertarget{two-quantitative-variables}{%
+\subsubsection{Two quantitative variables}\label{two-quantitative-variables}}
+
+Scatterplots are often used to explore the relationship between two quantitative variables. To explore how price is related to carat:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat, }\AttributeTok{y =}\NormalTok{ price)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Price Vs Carat of Diamonds"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Carat"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Price"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-198-1.pdf}
+Typical questions for scatterplots include:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Is the relationship linear or not? In this case, the relationship in non linear.
+\item
+  Does the response variable generally increases as the predictor increases? In this example, generally yes, as the carat increases, price tends to increase.
+\item
+  How strong in the relationship? Imagine overlaying a line (if linear) or curve over the plots. How close do the plots fall to the line or curve? The closer they lie, the stronger the relationship. For smaller diamonds the prices are clustered together, but less so for larger diamonds. So the relationship is stronger for smaller diamonds.
+\end{enumerate}
+
+An idea with visualizing quantitative variables is to bin them, i.e.~create a categorical variable base on range of values on a quantitative variable, and then use visualizations involving one quantitative variable and one categorical variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat, }\AttributeTok{y =}\NormalTok{ price)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{group =} \FunctionTok{cut\_width}\NormalTok{(carat, }\FloatTok{0.1}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-199-1.pdf}
+
+\texttt{cut\_width(carat,\ 0.1)} creates boxplots for each group of carats into bins with width 0.1. The interpretations are pretty similar to the scatterplot.
+
+Another tool to assess the strength of the linear relationship is the correlation, via \texttt{cor()}. Note that correlation should only be used if the relationship is linear, and not when the relationship is nonlinear.
+
+\hypertarget{a-few-things-to-consider}{%
+\subsection{A Few Things to Consider}\label{a-few-things-to-consider}}
+
+If you notice some patterns or relationships in the data, you can ask:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Is this pattern coincidence?
+\item
+  How can you describe the relationship?
+\item
+  How strong is the relationship?
+\item
+  What other variables might affect the relationship?
+\item
+  Could the relationship change if you look at subgroups of the data?
+\end{enumerate}
 
 \hypertarget{blank}{%
 \chapter{Blank Canvas}\label{blank}}

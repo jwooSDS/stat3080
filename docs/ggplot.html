@@ -96,7 +96,7 @@
 <p>In this section, you will learn how to create common data visualizations. The choice of data visualization is almost always determined by whether the variable(s) involved is categorical or quantitative. Discrete variables are interesting because depending on the circumstance, they can be viewed as either categorical or quantitative in the context of data visualizations.</p>
 <p>We will be using functions from the <code>ggplot2</code> package to create visualizations. The <code>ggplot2</code> package enables users to create various kinds of data visualizations, beyond the visualizations that can be made in base R.</p>
 <p>This section is heavily based on <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 1. We will be covering the basics of these visualizations in this section. Feel free to consult the book for a more thorough explanation of how the functions from the <code>ggplot2</code> package work. I have added some of my own commentary, as well as some examples on how to create similar visualizations using base R.</p>
-<p>You will learn the basics in this section. For further reading, I will suggest Chapter 9 of <span class="citation">Wickham, Cetinkaya-Rundel, and Grolemun (<a href="references.html#ref-wickham2023">2023</a>)</span>. We also have a full course, STAT 3280, that is dedicated to data visualizations.</p>
+<p>You will learn the basics in this section. For further reading, I will suggest Chapters 9 and 11 of <span class="citation">Wickham, Cetinkaya-Rundel, and Grolemun (<a href="references.html#ref-wickham2023">2023</a>)</span>. We also have a full course, STAT 3280, that is dedicated to data visualizations.</p>
 <div id="motivating-example" class="section level3" number="8.1.1">
 <h3>
 <span class="header-section-number">8.1.1</span> Motivating Example<a class="anchor" aria-label="anchor" href="#motivating-example"><i class="fas fa-link"></i></a>
@@ -230,9 +230,9 @@ With real data, relationships are rarely perfectly linear, and so a judgment cal
 <div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-136-1.png" width="672"></div>
 </div>
 </div>
-<div id="visualizing-two-categorical-variables" class="section level2" number="8.3">
+<div id="cat2" class="section level2" number="8.3">
 <h2>
-<span class="header-section-number">8.3</span> Visualizing Two Categorical Variables<a class="anchor" aria-label="anchor" href="#visualizing-two-categorical-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3</span> Visualizing Two Categorical Variables<a class="anchor" aria-label="anchor" href="#cat2"><i class="fas fa-link"></i></a>
 </h2>
 <p>A bar chart is often used to visualize the relationship between two categorical variables. Perhaps we want to see if the different species of penguins tend to live in different islands. The most basic bar chart can provide the number of each species in each island:</p>
 <div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
@@ -335,9 +335,9 @@ Areas under the density curve represent proportion of observations in that range
 </h2>
 <p>Thus far, we have looked at visualizing two (or more) variables. In such visualizations, we usually want to see two (or more) variables are related.</p>
 <p>Oftentimes, we need to see how are the values of a single variable distributed. Again, our choice of visualization depends on whether the variable is categorical or quantitative.</p>
-<div id="single-categorical-variable" class="section level3" number="8.6.1">
+<div id="cat1" class="section level3" number="8.6.1">
 <h3>
-<span class="header-section-number">8.6.1</span> Single Categorical Variable<a class="anchor" aria-label="anchor" href="#single-categorical-variable"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.6.1</span> Single Categorical Variable<a class="anchor" aria-label="anchor" href="#cat1"><i class="fas fa-link"></i></a>
 </h3>
 <p>A bar chart can also be used for a single categorical variable:</p>
 <div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
@@ -433,7 +433,7 @@ Changing the order may not make much sense in this example, but they will if the
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#visualizing-two-categorical-variables"><span class="header-section-number">8.3</span> Visualizing Two Categorical Variables</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#cat2"><span class="header-section-number">8.3</span> Visualizing Two Categorical Variables</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#tables"><span class="header-section-number">8.3.1</span> Tables</a></li>
 <li><a class="nav-link" href="#base-r-1"><span class="header-section-number">8.3.2</span> Base R</a></li>
 </ul>
@@ -444,7 +444,7 @@ Changing the order may not make much sense in this example, but they will if the
 <li><a class="nav-link" href="#adding-an-additional-categorical-variable"><span class="header-section-number">8.5</span> Adding an Additional Categorical Variable</a></li>
 <li>
 <a class="nav-link" href="#visualizing-single-variables"><span class="header-section-number">8.6</span> Visualizing Single Variables</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#single-categorical-variable"><span class="header-section-number">8.6.1</span> Single Categorical Variable</a></li>
+<li><a class="nav-link" href="#cat1"><span class="header-section-number">8.6.1</span> Single Categorical Variable</a></li>
 <li><a class="nav-link" href="#quant1"><span class="header-section-number">8.6.2</span> Single Quantitative Variable</a></li>
 </ul>
 </li>

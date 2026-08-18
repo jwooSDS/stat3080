@@ -114,14 +114,14 @@ scattercolor
 overlaying-lines-and-curves
 adding-titles-and-labeling-axes
 base-r
-visualizing-two-categorical-variables
+cat2
 tables
 base-r-1
 quantcat
 base-r-2
 adding-an-additional-categorical-variable
 visualizing-single-variables
-single-categorical-variable
+cat1
 quant1
 visualizations-from-simulations
 ggplot-vs-base-r
@@ -148,4 +148,7 @@ variation-within-variables
 unusual-values
 relationship-between-variables
 one-quantitative-and-one-categorical-variable
+two-categorical-variables
+two-quantitative-variables
+a-few-things-to-consider
 blank

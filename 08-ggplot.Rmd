@@ -10,7 +10,7 @@ We will be using functions from the `ggplot2` package to create visualizations. 
 
 This section is heavily based on [R for Data Science](https://r4ds.hadley.nz/) [@wickham2023], Chapter 1. We will be covering the basics of these visualizations in this section. Feel free to consult the book for a more thorough explanation of how the functions from the `ggplot2` package work. I have added some of my own commentary, as well as some examples on how to create similar visualizations using base R. 
 
-You will learn the basics in this section. For further reading, I will suggest Chapter 9 of @wickham2023. We also have a full course, STAT 3280, that is dedicated to data visualizations. 
+You will learn the basics in this section. For further reading, I will suggest Chapters 9 and 11 of @wickham2023. We also have a full course, STAT 3280, that is dedicated to data visualizations. 
 
 ### Motivating Example
 
@@ -140,7 +140,7 @@ To create a scatterplot using base R functions, use the `plot()` function, then 
 plot(Data$flipper_length_mm, Data$body_mass_g)
 ```
 
-## Visualizing Two Categorical Variables
+## Visualizing Two Categorical Variables {#cat2}
 
 A bar chart is often used to visualize the relationship between two categorical variables. Perhaps we want to see if the different species of penguins tend to live in different islands. The most basic bar chart can provide the number of each species in each island:
 
@@ -243,7 +243,7 @@ Thus far, we have looked at visualizing two (or more) variables. In such visuali
 
 Oftentimes, we need to see how are the values of a single variable distributed. Again, our choice of visualization depends on whether the variable is categorical or quantitative.
 
-### Single Categorical Variable
+### Single Categorical Variable {#cat1}
 
 A bar chart can also be used for a single categorical variable:
 

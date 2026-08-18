@@ -27,6 +27,8 @@ Generally speaking, the main questions that are asked during EDA are
 
 Domain-specific knowledge will be helpful in this process. Statisticians and data scientists often learn about the domain associated with the data set. You should never work on data where you have little domain-specific knowledge!
 
+Note that modeling is rarely done during EDA. We are just creating visualizations and computing numerical summaries, and these should be done prior to modeling. 
+
 ### Variation Within Variables
 
 **Variance** measures the spread associated with a quantitative variable. The a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section \@ref(quant1), such as density plots, boxplots, and histograms. 
@@ -149,18 +151,117 @@ ggplot(Data, aes(x = price, color = cut)) +
   )
 ```
 
+Notice in this example the categorical variable cut is ordinal, there is an order to the values. Cut reflects a measure of quality, in increasing order from fair, good, very good, premium, ideal. You have to make sure that they are ordered correctly (which they are in this data set). If they are not, please see Section \@ref(cat1) to see how to use the `factor()` function to order the variable. 
 
+If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see that curve for fair cuts appear to be quite different: its prices tend to be a little higher. Which may be counter intuitive as fair is the lowest quality. 
 
+Alternatively, we can create a side by side box plot
 
+```{r}
+ggplot(Data, aes(x = cut, y = price)) +
+  geom_boxplot() +
+  labs(
+    x = "Cut",
+    y = "Price",
+    title = "Boxplot of Prices across Cut"
+  )
+```
+We see a similar conclusion.
 
+Notice that the prices are right skewed? In that most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.
 
+```{r}
+Data <- Data |> 
+  mutate(
+    logPrice = log(price)
+  )
+```
 
+```{r warning=FALSE}
+ggplot(Data, aes(x = logPrice, color = cut)) +
+  geom_density() +
+  labs(
+    x = "Log Price",
+    y = "Density",
+    color = "Cut",
+    title = "Density Plot of Log Prices across Cut"
+  )
+```
 
+```{r}
+ggplot(Data, aes(x = cut, y = logPrice)) +
+  geom_boxplot() +
+  labs(
+    x = "Cut",
+    y = "Log Price",
+    title = "Boxplot of Log Prices across Cut"
+  )
+```
+It appears that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?
 
+#### Two categorical variables
 
+We can use the tools from \@ref(cat2) to explore the relationship between two categorical variables. For example, we want to explore if cut and color of diamonds are related. We can create a visual that summarizes the number of diamonds for each combination of cut and color:
 
+```{r}
+ggplot(Data, aes(x = cut, y = color)) +
+  geom_count()
+```
+Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurence, but it may be better to look at proportions instead of counts. We can use a bar chart:
 
+```{r}
+ggplot(Data, aes(x = cut, fill = color)) +
+  geom_bar(position = "fill") + 
+  labs(title = "Proportion of Colors in Each Cut", y = "Proportion")
+```
+The proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:
 
+```{r}
+table(Data$cut, Data$color)
+```
 
+Or a two-way table using proportions, due to the different number of diamonds in each cut:
 
+```{r}
+round(prop.table(table(Data$cut, Data$color), margin = 1), 2)
+```
+For each cut, the proportion of each color is similar, so there is little evidence of an association between cut and color. 
 
+#### Two quantitative variables
+
+Scatterplots are often used to explore the relationship between two quantitative variables. To explore how price is related to carat:
+
+```{r}
+ggplot(Data, aes(x = carat, y = price)) +
+  geom_point() + 
+  labs(title = "Price Vs Carat of Diamonds",
+    x = "Carat", y = "Price")
+```
+Typical questions for scatterplots include:
+
+1. Is the relationship linear or not? In this case, the relationship in non linear.
+
+2. Does the response variable generally increases as the predictor increases? In this example, generally yes, as the carat increases, price tends to increase.
+
+3. How strong in the relationship? Imagine overlaying a line (if linear) or curve over the plots. How close do the plots fall to the line or curve? The closer they lie, the stronger the relationship. For smaller diamonds the prices are clustered together, but less so for larger diamonds. So the relationship is stronger for smaller diamonds. 
+
+An idea with visualizing quantitative variables is to bin them, i.e. create a categorical variable base on range of values on a quantitative variable, and then use visualizations involving one quantitative variable and one categorical variable.  
+
+```{r}
+ggplot(Data, aes(x = carat, y = price)) + 
+  geom_boxplot(aes(group = cut_width(carat, 0.1)))
+```
+
+`cut_width(carat, 0.1)` creates boxplots for each group of carats into bins with width 0.1. The interpretations are pretty similar to the scatterplot. 
+
+Another tool to assess the strength of the linear relationship is the correlation, via `cor()`. Note that correlation should only be used if the relationship is linear, and not when the relationship is nonlinear. 
+
+### A Few Things to Consider
+
+If you notice some patterns or relationships in the data, you can ask:
+
+1. Is this pattern coincidence?
+2. How can you describe the relationship?
+3. How strong is the relationship?
+4. What other variables might affect the relationship?
+5. Could the relationship change if you look at subgroups of the data? 

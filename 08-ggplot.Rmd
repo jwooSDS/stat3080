@@ -49,7 +49,7 @@ A **scatterplot** is the most common visualization that is used to display two q
 
 To create a scatterplot of these two variables, we can use
 
-```{r ch8scatter_plain, fig.cap="Basic Scatterplot using ggplot"}
+```{r ch8scatter-plain, fig.cap="Basic Scatterplot with ggplot"}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ```
@@ -62,7 +62,7 @@ From these two lines we code, we can see the basic structure of creating data vi
 
 Notice the output prints a message informing us that 2 observations are missing and are removed. This is unlike some previous functions which output `NA` when missing values are present.
 
-From the scatterplot in Figure \@ref(ch8scatter_plain), it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.
+From the scatterplot in Figure \@ref(fig:ch8scatter-plain), it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.
 
 This is the most basic scatterplot that can be created. However, we note in this particular data set that we know that there are 3 species of penguins being measured, so perhaps the relationship between flipper length and body mass may vary across species, we want to add an additional variable `species`. One common way to do this is a scatterplot is to use colors. Also notice the axes have labels that are not the most descriptive, and a title is missing. These can be added via additional arguments in `aes()` or by supplying extra layers.
 
@@ -72,14 +72,14 @@ This is the most basic scatterplot that can be created. However, we note in this
 
 To use different colored plots for each species:
 
-```{r warning=FALSE, message=FALSE}
+```{r ch8scatter-color, fig.cap="Scatterplot using Color via ggplot", message=FALSE, warning=FALSE}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
   geom_point()
 ```
 
 Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer `scale_color_colorblind()`:
 
-```{r warning=FALSE, message=FALSE}
+```{r ch8scatter-color2, fig.cap="Scatterplot using Colorblind Safe Palette via ggplot", warning=FALSE, message=FALSE}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
   geom_point() +
   scale_color_colorblind()
@@ -87,42 +87,44 @@ ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
 
 Notice that each layer ends with `+` and the next layer starts on a new line.
 
-Now, it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species. 
+Based on Figures \@ref(fig:ch8scatter-color) and \@ref(fig:ch8scatter-color), it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species. 
 
 #### Overlaying lines and curves
 
 A way to help visualize the relationship between the quantitative variables is to overlay a line of best fit.
 
-```{r warning=FALSE, message=FALSE}
+```{r ch8scatter-line, fig.cap="Scatterplot with Regression Lines Overlaid via ggplot", warning=FALSE, message=FALSE}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
   geom_point() +
   scale_color_colorblind() + 
   geom_smooth(method = "lm")
 ```
-We are overlaying a line over each species, where represents the regression line of body mass against flipper length through `geom_smooth` and `method = "lm"`. Notice that each line has a grey band around them? These are confidence intervals for the regression line. These can be removed if you mainly want to assess if the relationship is linear
+We are overlaying a line over each species, where represents the regression line of body mass against flipper length through `geom_smooth` and `method = "lm"`. Notice in Figure \@ref(fig:ch8scatter-line) that each line has a grey band around them? These are confidence intervals for the regression line. These can be removed if you mainly want to assess if the relationship is linear
 
-```{r warning=FALSE, message=FALSE}
+```{r ch8scatter-line2, fig.cap="Scatterplot with Regression Lines Overlaid (CIs Removed) via ggplot", warning=FALSE, message=FALSE}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
   geom_point() +
   scale_color_colorblind() + 
   geom_smooth(method = "lm", se = FALSE)
 ```
+
 If the observations fall evenly on both sides of the line, the relationship can be approximated by a line. Overlaying regressions lines only make sense if the relationship is linear. If the relationship is nonlinear, we should overlay loess curves, by changing `method` inside `geom_smooth`:
 
-```{r warning=FALSE, message=FALSE}
+```{r ch8scatter-loess, fig.cap="Scatterplot with Loess Curves Overlaid via ggplot", warning=FALSE, message=FALSE}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
   geom_point() +
   scale_color_colorblind() + 
   geom_smooth(method = "loess", se = FALSE)
 ```
-With real data, relationships are rarely perfectly linear, and so a judgment call has to be made if loess curves or linear regression lines are more appropriate. In this example, the curves are pretty close to being straight lines, so using linear regression lines may be chosen as they are simpler than curves. 
+
+With real data, relationships are rarely perfectly linear, and so a judgment call has to be made if loess curves or linear regression lines are more appropriate. In this example in Figure \@ref(fig:ch8scatter-loess), the curves are pretty close to being straight lines, so using linear regression lines may be chosen as they are simpler than curves. 
 
 #### Adding titles and labeling axes
 
 Now, we are ready to add the a layer to label the axes and give a title to the plot via a layer called `labs`:
 
 
-```{r warning=FALSE, message=FALSE}
+```{r ch8scatter-labels, fig.cap="Scatterplot with Title and Axes Labeled via ggplot", warning=FALSE, message=FALSE}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
   geom_point() +
   scale_color_colorblind() + 
@@ -136,7 +138,7 @@ ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
 
 To create a scatterplot using base R functions, use the `plot()` function, then supply a vector for the x-variable, then a vector for the y-variable:
 
-```{r}
+```{r ch8scatter-baseR, fig.cap="Scatterplot via Base R"}
 plot(Data$flipper_length_mm, Data$body_mass_g)
 ```
 
@@ -144,21 +146,23 @@ plot(Data$flipper_length_mm, Data$body_mass_g)
 
 A bar chart is often used to visualize the relationship between two categorical variables. Perhaps we want to see if the different species of penguins tend to live in different islands. The most basic bar chart can provide the number of each species in each island:
 
-```{r}
+```{r ch8barchart, fig.cap="Bar Chart via ggplot"}
 ggplot(Data, aes(x = island, fill = species)) +
   geom_bar()
 ```
+
 The predictor is `island` and the response variable is `species`. For bar charts, place the response variable in the `fill` argument. 
 
 Notice we use `geom_bar()` instead of `geom_point()`. The `geom` tells the `ggplot()` function what kind of visualization we want. 
 
-We can see there are an unequal number of penguins in each island. So using proportions, rather than counts, will be more useful:
+From Figure \@ref(fig:ch8barchart), we can see there are an unequal number of penguins in each island. So using proportions, rather than counts, will be more useful:
 
-```{r}
+```{r ch8barchart2, fig.cap="Bar Chart with Proportions via ggplot"} 
 ggplot(Data, aes(x = island, fill = species)) +
   geom_bar(position = "fill")
 ```
-In Biscoe island, we have mostly Gentoos and some Adelies. In Dream island, we have a fairly even proportion of Adelies and Chinstrap. Torgensen island is the island of Adelies. Since the proportions of species are so different across the islands, it appears that the island and species are related. If there is no relationship, the proportion of each species would be the same across the islands. 
+
+From Figure \@ref(fig:ch8barchart2), we see that Biscoe island has mostly Gentoos and some Adelies. In Dream island, we have a fairly even proportion of Adelies and Chinstrap. Torgensen island is the island of Adelies. Since the proportions of species are so different across the islands, it appears that the island and species are related. If there is no relationship, the proportion of each species would be the same across the islands. 
 
 Notice the label of the y-axis is weird? How would you add a title and change the labels of each axes so they make more sense?
 
@@ -181,7 +185,7 @@ prop.table(table(Data$island, Data$species), margin = 1)
 
 As a quick example using base R:
 
-```{r}
+```{r ch8barchart-base, fig.cap="Bar Chart via Base R"}
 barplot(table(Data$species, Data$island))
 ```
 
@@ -189,24 +193,23 @@ barplot(table(Data$species, Data$island))
 
 Suppose we want to see if the body mass of the penguins differ across the species. We can create **side by side boxplots**
 
-```{r warning=FALSE}
+```{r ch8boxplot, fig.cap="Boxplot via ggplot", warning=FALSE}
 ggplot(Data, aes(x = species, y = body_mass_g)) +
   geom_boxplot()
 ```
 
-A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. For the Chinstraps, we see an outlier that is bigger than the rest and another outlier that is smaller than the rest. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. 
-
-We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.
+A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. From Figure \@ref(fig:ch8boxplot) we see that an outlier that is bigger than the rest and another outlier that is smaller than the rest for Chinstraps. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.
 
 How would you add a title and change the labels of each axes so they make more sense?
 
 We can also use density plots of body mass and use different colors for each species and arrive at a similar conclusion.
 
-```{r warning=FALSE}
+```{r ch8densplot, fig.cap="Density Plot via ggplot",warning=FALSE}
 ggplot(penguins, aes(x = body_mass_g, color = species)) +
   geom_density()
 ```
-Areas under the density curve represent proportion of observations in that range. For example, most Chinstraps have body masses between 3000g and 4500g.
+
+Areas under the density curve represent proportion of observations in that range. Based on Figure \@ref(fig:ch8densplot), most Chinstraps have body masses between 3000g and 4500g. 
 
 How would you add a title and change the labels of each axes so they make more sense?
 
@@ -214,7 +217,7 @@ How would you add a title and change the labels of each axes so they make more s
 
 As a quick example using base R. For side by side boxplots:
 
-```{r}
+```{r ch8boxplot-base, fig.cap="Boxplot via Base R",}
 boxplot(Data$body_mass_g ~ Data$species) ##y ~ x
 ```
 
@@ -226,7 +229,7 @@ Most of these plots visualize two variables. In Section \@ref(scattercolor), we 
 
 To incorporate another categorical variable, we can use what `ggplot()` calls a `facet_wrap`. It will create the visualization across each value of the categorical variable in the `facet_wrap`. For example, 
 
-```{r warning=FALSE, message=FALSE}
+```{r ch8facet, fig.cap="Using Facet Wrap with ggplot", warning=FALSE, message=FALSE}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
   geom_point() +
   scale_color_colorblind() + 
@@ -247,14 +250,14 @@ Oftentimes, we need to see how are the values of a single variable distributed. 
 
 A bar chart can also be used for a single categorical variable:
 
-```{r}
+```{r ch8bar1, fig.cap="Barchart via ggplot",}
 ggplot(Data, aes(x = species)) +
   geom_bar()
 ```
 
 By default, a bar chart showing counts is displayed. If we want proportions instead:
 
-```{r}
+```{r ch8barprop, fig.cap="Barchart with Proportions via ggplot",}
 ggplot(Data, aes(x = species, y = after_stat(prop), group = 1)) + 
   geom_bar()
 ```
@@ -262,7 +265,7 @@ The argument `y = after_stat(prop)` tells the function that we want the proporti
 
 If you want to change the order of the species that are displayed:
 
-```{r}
+```{r ch8order, fig.cap="Bar Chart with Species Reordered"}
 Data$species <- factor(Data$species, levels=c("Gentoo","Adelie","Chinstrap"))
 
 ggplot(Data, aes(x = species, y = after_stat(prop), group = 1)) + 
@@ -281,12 +284,12 @@ prop.table(table(Data$species))
 
 A boxplot or a density plot are commonly used to summarize the distribution of a single quantitative variable.
 
-```{r warning=FALSE}
+```{r ch8box1, fig.cap="Boxplot via ggplot", warning=FALSE}
 ggplot(Data, aes(y = body_mass_g)) +
   geom_boxplot()
 ```
 
-```{r warning=FALSE}
+```{r ch8dens1, fig.cap="Density Plot via ggplot", warning=FALSE}
 ggplot(Data, aes(x = body_mass_g)) +
   geom_density()
 ```
@@ -295,10 +298,11 @@ ggplot(Data, aes(x = body_mass_g)) +
 
 You may realize that `ggplot()` assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values:
 
-```{r}
+```{r ch8sim, fig.cap="Visualization Simulations with Base R"}
 plot(rnorm(20))
 ```
-```{r}
+
+```{r ch8sim2, fig.cap="Visualization Simulations with ggplot"}
 y <- rnorm(20)
 x <- 1:20
 newDF <- data.frame(x,y)

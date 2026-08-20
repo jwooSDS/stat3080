@@ -547,3 +547,7 @@ To clear the environment to make it empty:
 
 1. Execute the code `rm(list = ls())`, or
 2. Click on the broom icon on the top-right under the Environment tab. 
+
+These will only delete user-created variables and functions, but do not unload packages or reset global options, which can be problematic if you are sharing the R script with others. 
+
+To work in a fully clean environment, start a new R session and be sure to never save or restore the R session.

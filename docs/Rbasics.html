@@ -335,8 +335,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ul>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1]  5.4506252  0.3509172 -1.0847707  2.2299549 -3.8725034  1.6789325
-##  [7]  0.7234649 -1.4820037  3.4296222  4.6411374</code></pre>
+<pre><code>##  [1] -0.089137974  1.417168049  2.580073659  1.933605923  0.369333769
+##  [6] -0.003813429 -5.686104458 -1.421894180  1.407305516  0.806566160</code></pre>
 <p>Note: you are likely to get a vector of 10 numbers that are different than the ones shown.</p>
 </div>
 <div id="example-2-binomial-distribution" class="section level4" number="1.7.2.2">
@@ -686,6 +686,9 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <li>Execute the code <code>rm(list = ls())</code>, or</li>
 <li>Click on the broom icon on the top-right under the Environment tab.</li>
 </ol>
+<p>These will only delete user-created variables and functions, but do not unload packages or reset global options, which can be problematic if you are sharing the R script with others.</p>
+<p>To work in a fully clean environment, start a new R session and be sure to never save or restore the R session.</p>
+
 </div>
 </div>
 </div>

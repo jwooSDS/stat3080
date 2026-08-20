@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -2.8619138  0.4057839  0.7943642 -0.7463720  1.4089405  0.4521972
-##  [7]  2.0335171 -1.7838243 -2.2501200  3.0918707
+##  [1] -1.9059794 -2.5305813  2.5205643 -2.5422439 -2.0433011  3.2022529
+##  [7] -0.2206341  4.5972203 -2.8633012  2.1656475
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1320,6 +1320,10 @@ To clear the environment to make it empty:
 \item
   Click on the broom icon on the top-right under the Environment tab.
 \end{enumerate}
+
+These will only delete user-created variables and functions, but do not unload packages or reset global options, which can be problematic if you are sharing the R script with others.
+
+To work in a fully clean environment, start a new R session and be sure to never save or restore the R session.
 
 \hypertarget{rmd}{%
 \chapter{R Markdown}\label{rmd}}
@@ -3974,8 +3978,8 @@ To create a scatterplot of these two variables, we can use
 
 \begin{figure}
 \centering
-\includegraphics{bookdown-demo_files/figure-latex/ch8scatter_plain-1.pdf}
-\caption{(\#fig:ch8scatter\_plain)Basic Scatterplot using ggplot}
+\includegraphics{bookdown-demo_files/figure-latex/ch8scatter-plain-1.pdf}
+\caption{\label{fig:ch8scatter-plain}Basic Scatterplot with ggplot}
 \end{figure}
 
 From these two lines we code, we can see the basic structure of creating data visualizations with the \texttt{ggplot()} function:
@@ -3990,7 +3994,7 @@ From these two lines we code, we can see the basic structure of creating data vi
 
 Notice the output prints a message informing us that 2 observations are missing and are removed. This is unlike some previous functions which output \texttt{NA} when missing values are present.
 
-From the scatterplot in Figure @ref(ch8scatter\_plain), it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.
+From the scatterplot in Figure \ref{fig:ch8scatter-plain}, it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.
 
 This is the most basic scatterplot that can be created. However, we note in this particular data set that we know that there are 3 species of penguins being measured, so perhaps the relationship between flipper length and body mass may vary across species, we want to add an additional variable \texttt{species}. One common way to do this is a scatterplot is to use colors. Also notice the axes have labels that are not the most descriptive, and a title is missing. These can be added via additional arguments in \texttt{aes()} or by supplying extra layers.
 
@@ -4009,7 +4013,11 @@ To use different colored plots for each species:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-131-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8scatter-color-1.pdf}
+\caption{\label{fig:ch8scatter-color}Scatterplot using Color via ggplot}
+\end{figure}
 
 Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer \texttt{scale\_color\_colorblind()}:
 
@@ -4021,11 +4029,15 @@ Notice that a legend is automatically created as well. To use a colorblind safe 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-132-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8scatter-color2-1.pdf}
+\caption{\label{fig:ch8scatter-color2}Scatterplot using Colorblind Safe Palette via ggplot}
+\end{figure}
 
 Notice that each layer ends with \texttt{+} and the next layer starts on a new line.
 
-Now, it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species.
+Based on Figures \ref{fig:ch8scatter-color} and \ref{fig:ch8scatter-color}, it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species.
 
 \hypertarget{overlaying-lines-and-curves}{%
 \subsubsection{Overlaying lines and curves}\label{overlaying-lines-and-curves}}
@@ -4041,8 +4053,8 @@ A way to help visualize the relationship between the quantitative variables is t
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-133-1.pdf}
-We are overlaying a line over each species, where represents the regression line of body mass against flipper length through \texttt{geom\_smooth} and \texttt{method\ =\ "lm"}. Notice that each line has a grey band around them? These are confidence intervals for the regression line. These can be removed if you mainly want to assess if the relationship is linear
+\includegraphics{bookdown-demo_files/figure-latex/ch8scatter-line-1.pdf}
+We are overlaying a line over each species, where represents the regression line of body mass against flipper length through \texttt{geom\_smooth} and \texttt{method\ =\ "lm"}. Notice in Figure \ref{fig:ch8scatter-line} that each line has a grey band around them? These are confidence intervals for the regression line. These can be removed if you mainly want to assess if the relationship is linear
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4053,7 +4065,12 @@ We are overlaying a line over each species, where represents the regression line
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-134-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8scatter-line2-1.pdf}
+\caption{\label{fig:ch8scatter-line2}Scatterplot with Regression Lines Overlaid (CIs Removed) via ggplot}
+\end{figure}
+
 If the observations fall evenly on both sides of the line, the relationship can be approximated by a line. Overlaying regressions lines only make sense if the relationship is linear. If the relationship is nonlinear, we should overlay loess curves, by changing \texttt{method} inside \texttt{geom\_smooth}:
 
 \begin{Shaded}
@@ -4065,8 +4082,13 @@ If the observations fall evenly on both sides of the line, the relationship can 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-135-1.pdf}
-With real data, relationships are rarely perfectly linear, and so a judgment call has to be made if loess curves or linear regression lines are more appropriate. In this example, the curves are pretty close to being straight lines, so using linear regression lines may be chosen as they are simpler than curves.
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8scatter-loess-1.pdf}
+\caption{\label{fig:ch8scatter-loess}Scatterplot with Loess Curves Overlaid via ggplot}
+\end{figure}
+
+With real data, relationships are rarely perfectly linear, and so a judgment call has to be made if loess curves or linear regression lines are more appropriate. In this example in Figure \ref{fig:ch8scatter-loess}, the curves are pretty close to being straight lines, so using linear regression lines may be chosen as they are simpler than curves.
 
 \hypertarget{adding-titles-and-labeling-axes}{%
 \subsubsection{Adding titles and labeling axes}\label{adding-titles-and-labeling-axes}}
@@ -4085,7 +4107,11 @@ Now, we are ready to add the a layer to label the axes and give a title to the p
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-136-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8scatter-labels-1.pdf}
+\caption{\label{fig:ch8scatter-labels}Scatterplot with Title and Axes Labeled via ggplot}
+\end{figure}
 
 \hypertarget{base-r}{%
 \subsection{Base R}\label{base-r}}
@@ -4098,7 +4124,11 @@ To create a scatterplot using base R functions, use the \texttt{plot()} function
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-137-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8scatter-baseR-1.pdf}
+\caption{\label{fig:ch8scatter-baseR}Scatterplot via Base R}
+\end{figure}
 
 \hypertarget{cat2}{%
 \section{Visualizing Two Categorical Variables}\label{cat2}}
@@ -4112,12 +4142,17 @@ A bar chart is often used to visualize the relationship between two categorical 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8barchart-1.pdf}
+\caption{\label{fig:ch8barchart}Bar Chart via ggplot}
+\end{figure}
+
 The predictor is \texttt{island} and the response variable is \texttt{species}. For bar charts, place the response variable in the \texttt{fill} argument.
 
 Notice we use \texttt{geom\_bar()} instead of \texttt{geom\_point()}. The \texttt{geom} tells the \texttt{ggplot()} function what kind of visualization we want.
 
-We can see there are an unequal number of penguins in each island. So using proportions, rather than counts, will be more useful:
+From Figure \ref{fig:ch8barchart}, we can see there are an unequal number of penguins in each island. So using proportions, rather than counts, will be more useful:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4126,8 +4161,13 @@ We can see there are an unequal number of penguins in each island. So using prop
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-139-1.pdf}
-In Biscoe island, we have mostly Gentoos and some Adelies. In Dream island, we have a fairly even proportion of Adelies and Chinstrap. Torgensen island is the island of Adelies. Since the proportions of species are so different across the islands, it appears that the island and species are related. If there is no relationship, the proportion of each species would be the same across the islands.
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8barchart2-1.pdf}
+\caption{\label{fig:ch8barchart2}Bar Chart with Proportions via ggplot}
+\end{figure}
+
+From Figure \ref{fig:ch8barchart2}, we see that Biscoe island has mostly Gentoos and some Adelies. In Dream island, we have a fairly even proportion of Adelies and Chinstrap. Torgensen island is the island of Adelies. Since the proportions of species are so different across the islands, it appears that the island and species are related. If there is no relationship, the proportion of each species would be the same across the islands.
 
 Notice the label of the y-axis is weird? How would you add a title and change the labels of each axes so they make more sense?
 
@@ -4179,7 +4219,11 @@ As a quick example using base R:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-142-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8barchart-base-1.pdf}
+\caption{\label{fig:ch8barchart-base}Bar Chart via Base R}
+\end{figure}
 
 \hypertarget{quantcat}{%
 \section{Visualizing a Quantitative Variable Across a Categorical Variable}\label{quantcat}}
@@ -4193,11 +4237,13 @@ Suppose we want to see if the body mass of the penguins differ across the specie
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-143-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8boxplot-1.pdf}
+\caption{\label{fig:ch8boxplot}Boxplot via ggplot}
+\end{figure}
 
-A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. For the Chinstraps, we see an outlier that is bigger than the rest and another outlier that is smaller than the rest. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers.
-
-We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.
+A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. From Figure \ref{fig:ch8boxplot} we see that an outlier that is bigger than the rest and another outlier that is smaller than the rest for Chinstraps. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.
 
 How would you add a title and change the labels of each axes so they make more sense?
 
@@ -4210,8 +4256,13 @@ We can also use density plots of body mass and use different colors for each spe
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-144-1.pdf}
-Areas under the density curve represent proportion of observations in that range. For example, most Chinstraps have body masses between 3000g and 4500g.
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8densplot-1.pdf}
+\caption{\label{fig:ch8densplot}Density Plot via ggplot}
+\end{figure}
+
+Areas under the density curve represent proportion of observations in that range. Based on Figure \ref{fig:ch8densplot}, most Chinstraps have body masses between 3000g and 4500g.
 
 How would you add a title and change the labels of each axes so they make more sense?
 
@@ -4226,7 +4277,11 @@ As a quick example using base R. For side by side boxplots:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-145-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8boxplot-base-1.pdf}
+\caption{\label{fig:ch8boxplot-base}Boxplot via Base R}
+\end{figure}
 
 Using density plots for each species is cumbersome in base R.
 
@@ -4250,7 +4305,11 @@ To incorporate another categorical variable, we can use what \texttt{ggplot()} c
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-146-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8facet-1.pdf}
+\caption{\label{fig:ch8facet}Using Facet Wrap with ggplot}
+\end{figure}
 
 \hypertarget{visualizing-single-variables}{%
 \section{Visualizing Single Variables}\label{visualizing-single-variables}}
@@ -4271,7 +4330,11 @@ A bar chart can also be used for a single categorical variable:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-147-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8bar1-1.pdf}
+\caption{\label{fig:ch8bar1}Barchart via ggplot}
+\end{figure}
 
 By default, a bar chart showing counts is displayed. If we want proportions instead:
 
@@ -4282,7 +4345,7 @@ By default, a bar chart showing counts is displayed. If we want proportions inst
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-148-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/ch8barprop-1.pdf}
 The argument \texttt{y\ =\ after\_stat(prop)} tells the function that we want the proportions on the y axis. \texttt{group\ =\ 1} means we want the proportions across all bars to add up to 1.
 
 If you want to change the order of the species that are displayed:
@@ -4296,7 +4359,7 @@ If you want to change the order of the species that are displayed:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-149-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/ch8order-1.pdf}
 Changing the order may not make much sense in this example, but they will if the categorical variable is \textbf{ordinal}. In such variables, there is an order in the values of the categories. For example, shirt size.
 
 Tables can also be easily created:
@@ -4337,7 +4400,11 @@ A boxplot or a density plot are commonly used to summarize the distribution of a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-151-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8box1-1.pdf}
+\caption{\label{fig:ch8box1}Boxplot via ggplot}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4346,7 +4413,11 @@ A boxplot or a density plot are commonly used to summarize the distribution of a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-152-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8dens1-1.pdf}
+\caption{\label{fig:ch8dens1}Density Plot via ggplot}
+\end{figure}
 
 \hypertarget{visualizations-from-simulations}{%
 \section{Visualizations from Simulations}\label{visualizations-from-simulations}}
@@ -4359,7 +4430,11 @@ You may realize that \texttt{ggplot()} assumes you are working with a data frame
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-153-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8sim-1.pdf}
+\caption{\label{fig:ch8sim}Visualization Simulations with Base R}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4371,7 +4446,11 @@ You may realize that \texttt{ggplot()} assumes you are working with a data frame
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-154-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8sim2-1.pdf}
+\caption{\label{fig:ch8sim2}Visualization Simulations with ggplot}
+\end{figure}
 
 \hypertarget{ggplot-vs-base-r}{%
 \section{ggplot vs Base R}\label{ggplot-vs-base-r}}
@@ -5348,7 +5427,7 @@ We take a look at the \texttt{diamonds} data set from the \texttt{tidyverse} pac
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-182-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-161-1.pdf}
 
 Typical questions are:
 
@@ -5379,7 +5458,7 @@ Given that most diamonds are less than 3 carats, we can create a similar histogr
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-183-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-162-1.pdf}
 
 Notice that there are more diamonds with full or half carat sizes? According to \href{https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size}{Hamilton Jewelers}, ``this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat''. So this observation is as expected.
 
@@ -5402,7 +5481,7 @@ We take a look at the \texttt{y} variable in the diamonds data set, which measur
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-184-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-163-1.pdf}
 Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can ``zoom-in'' on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via \texttt{ylim} inside the layer \texttt{coord\_cartesian}. You can also limit the range of the x-axis if needed.
 
 \begin{Shaded}
@@ -5413,7 +5492,7 @@ Most diamonds have widths between 5 to 10mm. The fact that the histogram has an 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-185-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-164-1.pdf}
 We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
 
 \begin{Shaded}
@@ -5523,7 +5602,7 @@ We can use the visualizations from \ref{quantcat} to explore the relationship be
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-190-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-169-1.pdf}
 
 Notice in this example the categorical variable cut is ordinal, there is an order to the values. Cut reflects a measure of quality, in increasing order from fair, good, very good, premium, ideal. You have to make sure that they are ordered correctly (which they are in this data set). If they are not, please see Section \ref{cat1} to see how to use the \texttt{factor()} function to order the variable.
 
@@ -5543,7 +5622,7 @@ Alternatively, we can create a side by side box plot
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-191-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-170-1.pdf}
 We see a similar conclusion.
 
 Notice that the prices are right skewed? In that most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.
@@ -5570,7 +5649,7 @@ Notice that the prices are right skewed? In that most prices are on the lower en
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-193-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-172-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5584,7 +5663,7 @@ Notice that the prices are right skewed? In that most prices are on the lower en
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-194-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-173-1.pdf}
 It appears that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?
 
 \hypertarget{two-categorical-variables}{%
@@ -5599,7 +5678,7 @@ We can use the tools from \ref{cat2} to explore the relationship between two cat
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-195-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-174-1.pdf}
 Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:
 
 \begin{Shaded}
@@ -5610,7 +5689,7 @@ Large circles indicate the specific combination of cut and color that are more p
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-196-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-175-1.pdf}
 The proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:
 
 \begin{Shaded}
@@ -5663,7 +5742,7 @@ Scatterplots are often used to explore the relationship between two quantitative
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-199-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-178-1.pdf}
 Typical questions for scatterplots include:
 
 \begin{enumerate}
@@ -5685,7 +5764,7 @@ An idea with visualizing quantitative variables is to bin them, i.e.~create a ca
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-200-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-179-1.pdf}
 
 \texttt{cut\_width(carat,\ 0.1)} creates boxplots for each group of carats into bins with width 0.1. The interpretations are pretty similar to the scatterplot.
 

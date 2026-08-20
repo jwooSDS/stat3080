@@ -1,4 +1,4 @@
-# Sampling Distributions and the Central Limit Theorem {#clt}
+# Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION) {#clt}
 
 ## Key Ideas and Terms
 

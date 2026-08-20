@@ -18,7 +18,7 @@ Is there a tool that will help you weave your code, R output, and your narrative
 
 Note: R Markdown is not the only tool that allows you to do this. [Quarto](https://quarto.org/) is another tool. R Markdown and Quarto can be thought of as variants of Markdown. Markdown is a language for formatting plain text. R Markdown and Quarto expand on Markdown. 
 
-### Reproducible Research
+### Reproducible Research {#reproduce}
 
 Another reason for using R Markdown is to adhere to **reproducible research** principles. According to @rep, the definition of reproducible research is "Authors provide all the necessary data and the computer codes to run the analysis again, re-creating the results."
 

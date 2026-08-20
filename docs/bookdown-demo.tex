@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-08-18}
+\date{2026-08-20}
 
 \begin{document}
 \maketitle
@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  7.213648 -1.499062 -2.477885  2.181903 -1.127689  3.305728  4.068711
-##  [8] -1.009315  6.300236  2.325875
+##  [1] -2.8619138  0.4057839  0.7943642 -0.7463720  1.4089405  0.4521972
+##  [7]  2.0335171 -1.7838243 -2.2501200  3.0918707
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1350,8 +1350,8 @@ Is there a tool that will help you weave your code, R output, and your narrative
 
 Note: R Markdown is not the only tool that allows you to do this. \href{https://quarto.org/}{Quarto} is another tool. R Markdown and Quarto can be thought of as variants of Markdown. Markdown is a language for formatting plain text. R Markdown and Quarto expand on Markdown.
 
-\hypertarget{reproducible-research}{%
-\subsection{Reproducible Research}\label{reproducible-research}}
+\hypertarget{reproduce}{%
+\subsection{Reproducible Research}\label{reproduce}}
 
 Another reason for using R Markdown is to adhere to \textbf{reproducible research} principles. According to \citet{rep}, the definition of reproducible research is ``Authors provide all the necessary data and the computer codes to run the analysis again, re-creating the results.''
 
@@ -3524,6 +3524,94 @@ In the example above in Section \ref{ch6sim}, we compared results from a simulat
   Related to the previous question, how close is close enough? How do you know your value from the simulation is close enough to the theoretical value? There is no way of knowing if the theoretical value is unknown.
 \end{itemize}
 
+\hypertarget{random-seeds}{%
+\section{Random Seeds}\label{random-seeds}}
+
+Some of the functions introduced in this section (\texttt{sample()}, \texttt{rnorm()}) \textbf{generate random numbers}. Evaluating the same command multiple times will yield different results. The long-run properties are somewhat predictable (e.g.~the sample mean when drawing a large number of random numbers from \texttt{rnorm()} will be close to the true mean of the normal distribution), but individual outcomes are not predictable. For example, if we run the command \texttt{rnorm(1)} twice, we get two different numbers
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.07546817
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1.177601
+\end{verbatim}
+
+To stay consistent with principles of reproducible research as mentioned in Section \ref{reproduce}, you may need to reproduce the exact results from a simulation. To generate the same random values each time a command is run, the random generation seed can be set by using the \texttt{set.seed()} function. There is one required argument, the seed number.
+
+Seeds operate in a defined order, so once the seed is set, the next random generation commands will use the next seeds in that order. Thus, setting the seed once at the beginning of a program will give the same random values each time the program is run, but each command within the program will generate different results. To yield the same values each time a random generation command is run, the \texttt{set.seed()} function must be rerun prior to each command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# With a set seed specified once}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\FunctionTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.8408555  1.3843593 -1.2554919
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  0.07014277  1.71144087 -0.60290798
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# With a set seed specified each time}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\FunctionTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.8408555  1.3843593 -1.2554919
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\FunctionTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.8408555  1.3843593 -1.2554919
+\end{verbatim}
+
+If you copy and paste the code of the simulation from the worked example in Section \ref{ch6sim}, you will realize that the density plot and the sample mean and variance of the 10,000 sample means are close, but not exactly the same. This is because I did not set the seed. The overall observation from the simulation would be similar regardless.
+
+Being able to reproduce the same exact results is likely to be required if you want to get your work published.
+
+You may want to consider using \texttt{set.seed()} in homework questions that involve generating random numbers, so that you can reproduce your result if needed. Be careful if you clear your environment:
+
+\begin{itemize}
+\tightlist
+\item
+  Running the command \texttt{rm(list\ =\ ls())} does not remove the seed.
+\item
+  Clicking the broom icon removes the seed.
+\end{itemize}
+
 \hypertarget{applyfam}{%
 \chapter{Apply Family}\label{applyfam}}
 
@@ -3631,7 +3719,7 @@ The \texttt{lapply()} and \texttt{sapply()} functions are both used for lists. O
 ## [1] 3
 ## 
 ## $b
-## [1] -0.1321658
+## [1] -0.07310692
 \end{verbatim}
 
 \begin{Shaded}
@@ -3651,16 +3739,16 @@ You can use \texttt{lapply()} to evaluate a function multiple times each with a 
 
 \begin{verbatim}
 ## [[1]]
-## [1] 0.8183945
+## [1] 0.4374119
 ## 
 ## [[2]]
-## [1] 0.10739277 0.09259545
+## [1] 0.9659641 0.1419139
 ## 
 ## [[3]]
-## [1] 0.4691778 0.6536973 0.8917855
+## [1] 0.95497889 0.44473056 0.05936247
 ## 
 ## [[4]]
-## [1] 0.65201199 0.02842239 0.61628714 0.74522073
+## [1] 0.27514918 0.03114826 0.01448234 0.48716903
 \end{verbatim}
 
 When you pass a function to \texttt{lapply()}, \texttt{lapply()} takes elements of the list and passes them as the first argument of the function you are applying. In the above example, the first argument of \texttt{runif()} is \texttt{n}, the number of random draws, and so the elements of the sequence \texttt{1:4} are all passed to the \texttt{n} argument of \texttt{runif()}.
@@ -3675,16 +3763,16 @@ Functions that you pass to \texttt{lapply()} may have other arguments. For examp
 
 \begin{verbatim}
 ## [[1]]
-## [1] 9.151133
+## [1] 7.166061
 ## 
 ## [[2]]
-## [1] 8.42458 9.54934
+## [1] 7.184971 5.783764
 ## 
 ## [[3]]
-## [1] 4.206172 4.269696 4.661913
+## [1] 5.777813 8.712532 4.646391
 ## 
 ## [[4]]
-## [1] 9.751580 3.800813 6.711054 9.158739
+## [1] 8.788092 6.734332 9.502599 6.848563
 \end{verbatim}
 
 You can also pass your own function to \texttt{lapply()}.
@@ -3772,8 +3860,8 @@ Look at the output from the following, and compare with the output from \texttt{
 \end{Shaded}
 
 \begin{verbatim}
-##          a          b 
-##  3.0000000 -0.1321658
+##           a           b 
+##  3.00000000 -0.07310692
 \end{verbatim}
 
 \begin{Shaded}
@@ -3884,7 +3972,11 @@ To create a scatterplot of these two variables, we can use
 ## (`geom_point()`).
 \end{verbatim}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-129-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch8scatter_plain-1.pdf}
+\caption{(\#fig:ch8scatter\_plain)Basic Scatterplot using ggplot}
+\end{figure}
 
 From these two lines we code, we can see the basic structure of creating data visualizations with the \texttt{ggplot()} function:
 
@@ -3898,9 +3990,9 @@ From these two lines we code, we can see the basic structure of creating data vi
 
 Notice the output prints a message informing us that 2 observations are missing and are removed. This is unlike some previous functions which output \texttt{NA} when missing values are present.
 
-From the scatterplot, it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.
+From the scatterplot in Figure @ref(ch8scatter\_plain), it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.
 
-This is the most basic scatterplot that can be created. However, we note in this particular that we know that there are 3 species of penguins being measured, so perhaps the relationship between flipper length and body mass may vary across species, we want to add an additional variable \texttt{species}. One common way to do this is a scatterplot is to use colors. Also notice the axes have labels that are not the most descriptive, and a title is missing. These can be added via additional arguments in \texttt{aes()} or by supplying extra layers.
+This is the most basic scatterplot that can be created. However, we note in this particular data set that we know that there are 3 species of penguins being measured, so perhaps the relationship between flipper length and body mass may vary across species, we want to add an additional variable \texttt{species}. One common way to do this is a scatterplot is to use colors. Also notice the axes have labels that are not the most descriptive, and a title is missing. These can be added via additional arguments in \texttt{aes()} or by supplying extra layers.
 
 \hypertarget{adding-aesthetics-and-layers}{%
 \subsection{Adding Aesthetics and Layers}\label{adding-aesthetics-and-layers}}
@@ -3917,7 +4009,7 @@ To use different colored plots for each species:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-130-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-131-1.pdf}
 
 Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer \texttt{scale\_color\_colorblind()}:
 
@@ -3929,7 +4021,7 @@ Notice that a legend is automatically created as well. To use a colorblind safe 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-131-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-132-1.pdf}
 
 Notice that each layer ends with \texttt{+} and the next layer starts on a new line.
 
@@ -3949,7 +4041,7 @@ A way to help visualize the relationship between the quantitative variables is t
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-132-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-133-1.pdf}
 We are overlaying a line over each species, where represents the regression line of body mass against flipper length through \texttt{geom\_smooth} and \texttt{method\ =\ "lm"}. Notice that each line has a grey band around them? These are confidence intervals for the regression line. These can be removed if you mainly want to assess if the relationship is linear
 
 \begin{Shaded}
@@ -3961,7 +4053,7 @@ We are overlaying a line over each species, where represents the regression line
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-133-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-134-1.pdf}
 If the observations fall evenly on both sides of the line, the relationship can be approximated by a line. Overlaying regressions lines only make sense if the relationship is linear. If the relationship is nonlinear, we should overlay loess curves, by changing \texttt{method} inside \texttt{geom\_smooth}:
 
 \begin{Shaded}
@@ -3973,7 +4065,7 @@ If the observations fall evenly on both sides of the line, the relationship can 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-134-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-135-1.pdf}
 With real data, relationships are rarely perfectly linear, and so a judgment call has to be made if loess curves or linear regression lines are more appropriate. In this example, the curves are pretty close to being straight lines, so using linear regression lines may be chosen as they are simpler than curves.
 
 \hypertarget{adding-titles-and-labeling-axes}{%
@@ -3993,7 +4085,7 @@ Now, we are ready to add the a layer to label the axes and give a title to the p
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-135-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-136-1.pdf}
 
 \hypertarget{base-r}{%
 \subsection{Base R}\label{base-r}}
@@ -4006,7 +4098,7 @@ To create a scatterplot using base R functions, use the \texttt{plot()} function
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-136-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-137-1.pdf}
 
 \hypertarget{cat2}{%
 \section{Visualizing Two Categorical Variables}\label{cat2}}
@@ -4020,7 +4112,7 @@ A bar chart is often used to visualize the relationship between two categorical 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-137-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-1.pdf}
 The predictor is \texttt{island} and the response variable is \texttt{species}. For bar charts, place the response variable in the \texttt{fill} argument.
 
 Notice we use \texttt{geom\_bar()} instead of \texttt{geom\_point()}. The \texttt{geom} tells the \texttt{ggplot()} function what kind of visualization we want.
@@ -4034,7 +4126,7 @@ We can see there are an unequal number of penguins in each island. So using prop
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-138-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-139-1.pdf}
 In Biscoe island, we have mostly Gentoos and some Adelies. In Dream island, we have a fairly even proportion of Adelies and Chinstrap. Torgensen island is the island of Adelies. Since the proportions of species are so different across the islands, it appears that the island and species are related. If there is no relationship, the proportion of each species would be the same across the islands.
 
 Notice the label of the y-axis is weird? How would you add a title and change the labels of each axes so they make more sense?
@@ -4087,7 +4179,7 @@ As a quick example using base R:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-141-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-142-1.pdf}
 
 \hypertarget{quantcat}{%
 \section{Visualizing a Quantitative Variable Across a Categorical Variable}\label{quantcat}}
@@ -4101,7 +4193,7 @@ Suppose we want to see if the body mass of the penguins differ across the specie
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-142-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-143-1.pdf}
 
 A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. For the Chinstraps, we see an outlier that is bigger than the rest and another outlier that is smaller than the rest. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers.
 
@@ -4118,7 +4210,7 @@ We can also use density plots of body mass and use different colors for each spe
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-143-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-144-1.pdf}
 Areas under the density curve represent proportion of observations in that range. For example, most Chinstraps have body masses between 3000g and 4500g.
 
 How would you add a title and change the labels of each axes so they make more sense?
@@ -4134,7 +4226,7 @@ As a quick example using base R. For side by side boxplots:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-144-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-145-1.pdf}
 
 Using density plots for each species is cumbersome in base R.
 
@@ -4158,7 +4250,7 @@ To incorporate another categorical variable, we can use what \texttt{ggplot()} c
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-145-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-146-1.pdf}
 
 \hypertarget{visualizing-single-variables}{%
 \section{Visualizing Single Variables}\label{visualizing-single-variables}}
@@ -4179,7 +4271,7 @@ A bar chart can also be used for a single categorical variable:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-146-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-147-1.pdf}
 
 By default, a bar chart showing counts is displayed. If we want proportions instead:
 
@@ -4190,7 +4282,7 @@ By default, a bar chart showing counts is displayed. If we want proportions inst
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-147-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-148-1.pdf}
 The argument \texttt{y\ =\ after\_stat(prop)} tells the function that we want the proportions on the y axis. \texttt{group\ =\ 1} means we want the proportions across all bars to add up to 1.
 
 If you want to change the order of the species that are displayed:
@@ -4204,7 +4296,7 @@ If you want to change the order of the species that are displayed:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-148-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-149-1.pdf}
 Changing the order may not make much sense in this example, but they will if the categorical variable is \textbf{ordinal}. In such variables, there is an order in the values of the categories. For example, shirt size.
 
 Tables can also be easily created:
@@ -4245,7 +4337,7 @@ A boxplot or a density plot are commonly used to summarize the distribution of a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-150-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-151-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4254,7 +4346,7 @@ A boxplot or a density plot are commonly used to summarize the distribution of a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-151-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-152-1.pdf}
 
 \hypertarget{visualizations-from-simulations}{%
 \section{Visualizations from Simulations}\label{visualizations-from-simulations}}
@@ -4267,7 +4359,7 @@ You may realize that \texttt{ggplot()} assumes you are working with a data frame
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-152-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-153-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4279,7 +4371,7 @@ You may realize that \texttt{ggplot()} assumes you are working with a data frame
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-153-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-154-1.pdf}
 
 \hypertarget{ggplot-vs-base-r}{%
 \section{ggplot vs Base R}\label{ggplot-vs-base-r}}
@@ -5256,7 +5348,7 @@ We take a look at the \texttt{diamonds} data set from the \texttt{tidyverse} pac
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-181-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-182-1.pdf}
 
 Typical questions are:
 
@@ -5287,7 +5379,7 @@ Given that most diamonds are less than 3 carats, we can create a similar histogr
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-182-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-183-1.pdf}
 
 Notice that there are more diamonds with full or half carat sizes? According to \href{https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size}{Hamilton Jewelers}, ``this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat''. So this observation is as expected.
 
@@ -5310,7 +5402,7 @@ We take a look at the \texttt{y} variable in the diamonds data set, which measur
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-183-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-184-1.pdf}
 Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can ``zoom-in'' on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via \texttt{ylim} inside the layer \texttt{coord\_cartesian}. You can also limit the range of the x-axis if needed.
 
 \begin{Shaded}
@@ -5321,7 +5413,7 @@ Most diamonds have widths between 5 to 10mm. The fact that the histogram has an 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-184-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-185-1.pdf}
 We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
 
 \begin{Shaded}
@@ -5431,7 +5523,7 @@ We can use the visualizations from \ref{quantcat} to explore the relationship be
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-189-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-190-1.pdf}
 
 Notice in this example the categorical variable cut is ordinal, there is an order to the values. Cut reflects a measure of quality, in increasing order from fair, good, very good, premium, ideal. You have to make sure that they are ordered correctly (which they are in this data set). If they are not, please see Section \ref{cat1} to see how to use the \texttt{factor()} function to order the variable.
 
@@ -5451,7 +5543,7 @@ Alternatively, we can create a side by side box plot
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-190-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-191-1.pdf}
 We see a similar conclusion.
 
 Notice that the prices are right skewed? In that most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.
@@ -5478,7 +5570,7 @@ Notice that the prices are right skewed? In that most prices are on the lower en
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-192-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-193-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5492,7 +5584,7 @@ Notice that the prices are right skewed? In that most prices are on the lower en
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-193-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-194-1.pdf}
 It appears that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?
 
 \hypertarget{two-categorical-variables}{%
@@ -5507,7 +5599,7 @@ We can use the tools from \ref{cat2} to explore the relationship between two cat
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-194-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-195-1.pdf}
 Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:
 
 \begin{Shaded}
@@ -5518,7 +5610,7 @@ Large circles indicate the specific combination of cut and color that are more p
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-195-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-196-1.pdf}
 The proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:
 
 \begin{Shaded}
@@ -5571,7 +5663,7 @@ Scatterplots are often used to explore the relationship between two quantitative
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-198-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-199-1.pdf}
 Typical questions for scatterplots include:
 
 \begin{enumerate}
@@ -5593,7 +5685,7 @@ An idea with visualizing quantitative variables is to bin them, i.e.~create a ca
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-199-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-200-1.pdf}
 
 \texttt{cut\_width(carat,\ 0.1)} creates boxplots for each group of carats into bins with width 0.1. The interpretations are pretty similar to the scatterplot.
 

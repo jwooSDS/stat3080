@@ -35,7 +35,7 @@ the-workspace
 the-environment
 rmd
 why-use-r-markdown
-reproducible-research
+reproduce
 prerequisites
 getting-started
 yaml-header
@@ -99,6 +99,7 @@ replicate
 simulation
 ch6sim
 considerations-with-simulations
+random-seeds
 applyfam
 overview
 apply

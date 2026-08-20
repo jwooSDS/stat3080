@@ -49,7 +49,7 @@ A **scatterplot** is the most common visualization that is used to display two q
 
 To create a scatterplot of these two variables, we can use
 
-```{r}
+```{r ch8scatter_plain, fig.cap="Basic Scatterplot using ggplot"}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ```
@@ -62,9 +62,9 @@ From these two lines we code, we can see the basic structure of creating data vi
 
 Notice the output prints a message informing us that 2 observations are missing and are removed. This is unlike some previous functions which output `NA` when missing values are present.
 
-From the scatterplot, it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.
+From the scatterplot in Figure \@ref(ch8scatter_plain), it looks like flipper length and body mass have a fairly strong positive linear relationship. As flipper length increases, body mass generally increases. If we were to draw an imaginary line through the plots, the plots fall fairly close to the line.
 
-This is the most basic scatterplot that can be created. However, we note in this particular that we know that there are 3 species of penguins being measured, so perhaps the relationship between flipper length and body mass may vary across species, we want to add an additional variable `species`. One common way to do this is a scatterplot is to use colors. Also notice the axes have labels that are not the most descriptive, and a title is missing. These can be added via additional arguments in `aes()` or by supplying extra layers.
+This is the most basic scatterplot that can be created. However, we note in this particular data set that we know that there are 3 species of penguins being measured, so perhaps the relationship between flipper length and body mass may vary across species, we want to add an additional variable `species`. One common way to do this is a scatterplot is to use colors. Also notice the axes have labels that are not the most descriptive, and a title is missing. These can be added via additional arguments in `aes()` or by supplying extra layers.
 
 ### Adding Aesthetics and Layers
 

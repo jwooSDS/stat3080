@@ -659,8 +659,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.43839568 -1.63302485 -1.29369554  0.28341471  1.52946559  0.12160648
-##  [7]  1.46377774  1.42396948  1.35643959 -0.02540603
+##  [1]  3.0761192  2.6466958  2.8636401 -1.2676305 -3.2032988 -1.7764004
+##  [7]  0.4369455  0.8630795  0.1455746 -0.2258660
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -5877,6 +5877,235 @@ The packages in the \texttt{tidyverse} work best with tidy data (as do most othe
 \end{enumerate}
 
 Please read \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 5. There are two main classes of non tidy data, and so we lengthen or widen the data. Some of you may have to do these in your project, while most will not.
+
+\hypertarget{clt}{%
+\chapter{Sampling Distributions and the Central Limit Theorem}\label{clt}}
+
+\hypertarget{key-ideas-and-terms}{%
+\section{Key Ideas and Terms}\label{key-ideas-and-terms}}
+
+Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would have to get the systolic blood pressure of every single American adult. This is usually not feasible as researchers are unlikely to have the time and money to interview every single American adult. Instead, a representative sample of American adults will be obtained, for example, 750 randomly selected American adults are interviewed. We can then create density plots, histograms, compute the mean, median, variance, skewness, and other summaries that may be of interest, based on these 750 American adults.
+
+\hypertarget{population-vs.-sample}{%
+\subsection{Population Vs. Sample}\label{population-vs.-sample}}
+
+The above scenario illustrates a few concepts and terms that are fundamental in estimation. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample.
+
+The \textbf{population} (sometimes called the population of interest) is the entire set of individuals, or objects, or events that a study is interested in. In the scenario described above, the population would be (all) American adults.
+
+The \textbf{sample} is the set of individuals, or objects, or events which we have data on. In the scenario described above, the sample is the 750 randomly selected American adults.
+
+In short, we are analyzing data from a sample and then try to make an inference about the population.
+
+Ideally, the sample should be \textbf{representative} of the population. A representative sample is often achieved through a simple random sample, where each unit in the population has the same chance of being selected to be in the sample. In this section, we will assume that we have a representative sample. Note: You may feel that obtaining a simple random sample may be difficult. We will not get into a discussion of sampling (sometimes called survey sampling), which is a field of statistics that handles how to obtain representative samples, or how calculations should be adjusted if the sample is not representative. There is still a lot of research that is being done in survey sampling.
+
+\hypertarget{parameter-vs-estimator}{%
+\subsection{Parameter Vs Estimator}\label{parameter-vs-estimator}}
+
+Now that we have made the distinction between a population and a sample, we are ready to define parameters and estimators.
+
+A \textbf{parameter} is a numerical summary associated with a population. In the scenario described above, an example of a population parameter would be the population mean systolic blood pressure of American adults.
+
+An \textbf{estimator} or a \textbf{statistic} is a numerical summary associated with samples. An estimator is typically used to estimate a parameter. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults could be the average systolic blood pressure in our sample. So the sample mean is an estimator of the population mean.
+
+An \textbf{estimated value}, or \textbf{estimate}, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mm Hg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mm Hg.
+
+So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:
+
+\begin{itemize}
+\tightlist
+\item
+  The value of parameters are unknown, while we can actually calculate numerical values of estimators.
+\item
+  The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 American adults. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is \textbf{variance associated with estimators due to random sampling}.
+\end{itemize}
+
+\hypertarget{sampling-distributions}{%
+\subsection{Sampling Distributions}\label{sampling-distributions}}
+
+Now imagine that we keep obtaining representative samples of 750 American adults. We calculate the average systolic blood pressure from each sample. They are all different? We can then create a histogram or density plot (since the averages are numeric) to visualize the distribution of the sample means. Are they all close to each other? Or they spread out? Is the distribution bell-shaped or skewed?
+
+The distribution associated with an estimator (from the same sample size) is called its \textbf{sampling distribution}. Some estimators have known sampling distributions (under certain conditions):
+
+\begin{itemize}
+\tightlist
+\item
+  The sample mean, \(\bar{X}\).
+\item
+  The sample proportion , \(\hat{p}\).
+\end{itemize}
+
+Their sampling distributions have been proven mathematically. However, what happens when the ``certain conditions'' are not met, or if the estimator has no known sampling distribution? We can use simulations in these instances! When using simulations in such a setting, they are called Monte Carlo simulations. Monte Carlo simulations work because of the Law of Large Numbers, which we briefly describe next.
+
+\hypertarget{law-of-large-numbers}{%
+\subsection{Law of Large Numbers}\label{law-of-large-numbers}}
+
+The \textbf{Law of Large Numbers} (LLN) states that as \(n\) gets larger and approaches infinity, the sample mean \(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\) converges to the true mean \(\mu\). This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever \(n\) gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes.
+
+Another implication of the LLN is that we can use Monte Carlo simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications.
+
+We use an example to illustrate the LLN, which comes from flipping a fair coin. Let \(X\) denote whether the coin lands heads or tails, and let \(X=1\) for heads and \(X=0\) for tails. We can say that \(X \sim Bern(0.5)\) since the coin is fair. Imagine flipping the coin \(n\) times, and record the outcome after each flip, so \(X_1, \cdots, X_n\) denote the outcome of each flip. We know that \(E(X) = 0.5\) since \(X \sim Bern(0.5)\). The LLN informs us that \(\bar{X}_1, \cdots, \bar{X}_n\) should usually get closer to 0.5 as \(n\) increases. In other words, the value of the sample proportion after each flip should usually get closer to 0.5 with more flips. The code below simulates this example for \(n=500\), and Figure \ref{fig:LLN} shows how the sample proportions get closer to 0.5, in general, as \(n\) increases.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{500} \DocumentationTok{\#\#make this big, but not too big otherwise picture is difficult to see}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{23}\NormalTok{)}
+
+\NormalTok{X}\OtherTok{\textless{}{-}}\FunctionTok{rbinom}\NormalTok{(n,}\DecValTok{1}\NormalTok{,}\FloatTok{0.5}\NormalTok{) }\DocumentationTok{\#\#simulate 500 flips of fair coin}
+
+\NormalTok{totals}\OtherTok{\textless{}{-}}\FunctionTok{cumsum}\NormalTok{(X) }\DocumentationTok{\#\#count total number of heads after each flip}
+\NormalTok{index}\OtherTok{\textless{}{-}}\DecValTok{1}\SpecialCharTok{:}\NormalTok{n}
+\NormalTok{props}\OtherTok{\textless{}{-}}\NormalTok{totals}\SpecialCharTok{/}\NormalTok{index }\DocumentationTok{\#\#find proportion of heads after each flip}
+
+\DocumentationTok{\#\#create visual. LLN says that as n gets larger, the value of the sample proportion tends to get closer to 0.5}
+\FunctionTok{plot}\NormalTok{(props, }\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Prop vs Sample Size"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Proportion"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\FloatTok{0.5}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{) }\DocumentationTok{\#\#overlay 0.5 for easy comparison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/LLN-1.pdf}
+\caption{\label{fig:LLN}LLN Example with Coin Flips}
+\end{figure}
+
+Note: The LLN actually comes in two versions, the Weak Law of Large Numbers (WLLN), and the Strong Law of Large Numbers (SLLN). What I have written gives an intuitive explanation of what the LLN implies.
+
+\hypertarget{misconceptions-with-lln}{%
+\subsubsection{Misconceptions with LLN}\label{misconceptions-with-lln}}
+
+One key idea with the LLN is that the sample mean \textbf{tends to get closer to the true mean as \(n\) gets larger}. The key words here are ``tends'' and ``as \(n\) gets larger''.
+
+A misunderstanding of the LLN is the \textbf{gambler's fallacy}, which erroneously believes that the sample mean must ``self correct'' and get closer to the population mean with small increments of \(n\).
+
+Using the example from flipping a fair coin. The gambler's fallacy erroneously thinks that:
+
+\begin{itemize}
+\tightlist
+\item
+  The proportion of heads should be close to 0.5, even with small \(n\).
+\item
+  The results of subsequent flips should self correct, i.e.~the proportion of heads get closer to 0.5 with the next flip. For example, if the first 5 flips are heads, the next flip is ``due'' to be tails since the proportion should get closer to 0.5 with the next flip.
+\end{itemize}
+
+The convergence to 0.5 comes from flipping the coin many times.
+
+\hypertarget{monte-carlo-simulations}{%
+\section{Monte Carlo Simulations}\label{monte-carlo-simulations}}
+
+You may have noticed that we have used simulations in previous sections (e.g.~Section \ref{ch6sim}) to help explain certain concepts. These simulations are called \textbf{Monte Carlo} simulations. The idea behind Monte Carlo simulations is to use repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo simulations are used for the following purposes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  When the probability or expectation is too complicated to work out by hand. Recall that finding probabilities and expectations by hand involve summations or integrals, and it becomes obvious that working with summations and especially integrals can get onerous.
+\item
+  To verify theoretical results involving probability or expectations. While a lot of theory is proved using mathematics, most academic papers include Monte Carlo simulations to verify the theoretical results. We have done these to verify the Central Limit Theorem in Section \ref{ch6sim}.
+\item
+  To help confirm that you understand the meaning of theoretical results. The only way your code matches the theory is if you understand the theory.
+\end{enumerate}
+
+\hypertarget{monte-carlo-methods-for-expected-values}{%
+\subsection{Monte Carlo Methods for Expected Values}\label{monte-carlo-methods-for-expected-values}}
+
+Suppose we want to find some expectation for a continuous random variable \(X\), \(E(g(X))\), where \(g\) is some function, i.e.~\(E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).\) Monte Carlo methods avoid doing this integration by simulating \(X_1, \cdots, X_M\) from \(X\) and estimate \(E(g(X))\) with the sample mean of \(g(X)\), \(\frac{1}{M} \sum_{i=1}^M g(X_i)\). The LLN tells us that as \(M\) gets larger, this sample mean converges to \(E(g(X))\).
+
+Monte Carlo methods replace the integral (or summation) with simulating a random variable repeatedly many times. We use a simple example to illustrate this idea.
+
+Let \(X\) be a standard normal distribution. Suppose we want to find the value of \(E(X^2) = \int_{-\infty}^{\infty} x^2 \frac{1}{\sqrt{2 \pi}} e^{-x^2/2} dx\). Instead of working out this integral by hand, we carry out a Monte Carlo simulation by doing these steps:
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate \(M\) random values from a standard normal, where \(M\) is large.
+\item
+  Calculate \(X_1^2, \cdots, X_M^2\).
+\item
+  Find the sample average of \(X_1^2, \cdots, X_M^2\).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} \DocumentationTok{\#\# this is M}
+
+\NormalTok{Xs}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(reps) }\DocumentationTok{\#\#generate M values of X}
+
+\NormalTok{squared.values}\OtherTok{\textless{}{-}}\NormalTok{Xs}\SpecialCharTok{\^{}}\DecValTok{2} \DocumentationTok{\#\#square each X}
+
+\FunctionTok{mean}\NormalTok{(squared.values) }\DocumentationTok{\#\#sample average of squared values. }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.024546
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#when reps is large, this sample mean should be close to the true E(X\^{}2), which is 1}
+\end{Highlighting}
+\end{Shaded}
+
+Since \(X\) is standard normal, we know \(E(X) = 0\) and \(Var(X) = E(X^2) - E(X)^2 = E(X^2) = 1\). We see in our simulation that our estimated value for \(E(X^2)\) is pretty close to its theoretical value.
+
+\hypertarget{monte-carlo-methods-for-probabilities}{%
+\subsection{Monte Carlo Methods for Probabilities}\label{monte-carlo-methods-for-probabilities}}
+
+Suppose we want to find the probability that a random variable satisfies some event \(E\), \(P(E)\). We could perform a summation or integral to find this probability, or estimate the probability using Monte Carlo simulations. What we will do is simulate \(X_1, \cdots, X_M\) from \(X\), where \(M\) is large, in other words, simulate a large number of replicates of \(X\). We then count how many of the \(X_i\)s correspond to event \(E\) happening, and then divide this number by \(M\), the number of replicates. We use an example to illustrate this idea.
+
+Let \(X\) be a standard normal distribution. Suppose we want to find the probability \(P(X^2 > 1)\). We carry out a Monte Carlo simulation by doing these steps:
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate \(M\) random values from a standard normal, where \(M\) is large.
+\item
+  Calculate \(X_1^2, \cdots, X_M^2\).
+\item
+  Count the number of times \(X_i^2\) is greater than 1.
+\item
+  Divide this number by \(M\) to estimate the probability, since probability can be interpreted as a long-run proportion.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} \DocumentationTok{\#\# this is M}
+
+\NormalTok{Xs}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(reps) }\DocumentationTok{\#\#generate M values of X}
+
+\NormalTok{squared.values}\OtherTok{\textless{}{-}}\NormalTok{Xs}\SpecialCharTok{\^{}}\DecValTok{2} \DocumentationTok{\#\#square each X}
+
+\FunctionTok{sum}\NormalTok{(squared.values}\SpecialCharTok{\textgreater{}}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{reps }\DocumentationTok{\#\#count the number of times X\^{}2 is greater than 1, and divide by M}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3178
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#when reps is large, this proportion should be close to}
+\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pchisq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{df=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3173105
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#it turns out that squaring a standard normal gives a chi{-}squared distribution with 1 df.}
+\end{Highlighting}
+\end{Shaded}
+
+We see the estimated probability \(P(X^2 > 1)\) is close to its theoretical probability.
 
   \bibliography{book.bib,packages.bib}
 

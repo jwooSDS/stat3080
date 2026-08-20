@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 11 Sampling Distributions and the Central Limit Theorem | STAT 3080: From Data to Knowledge</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 11 Sampling Distributions and the Central Limit Theorem | STAT 3080: From Data to Knowledge">
+<meta property="og:type" content="book">
+<meta property="og:description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 11 Sampling Distributions and the Central Limit Theorem | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 3080: From Data to Knowledge</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
+<li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
+<li><a class="" href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></li>
+<li><a class="" href="func.html"><span class="header-section-number">4</span> Functions</a></li>
+<li><a class="" href="control.html"><span class="header-section-number">5</span> Control Flow</a></li>
+<li><a class="" href="sims.html"><span class="header-section-number">6</span> Simulations</a></li>
+<li><a class="" href="applyfam.html"><span class="header-section-number">7</span> Apply Family</a></li>
+<li><a class="" href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
+<li><a class="" href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></li>
+<li><a class="" href="EDA.html"><span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data</a></li>
+<li><a class="active" href="clt.html"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="clt" class="section level1" number="11">
+<h1>
+<span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem<a class="anchor" aria-label="anchor" href="#clt"><i class="fas fa-link"></i></a>
+</h1>
+<div id="key-ideas-and-terms" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> Key Ideas and Terms<a class="anchor" aria-label="anchor" href="#key-ideas-and-terms"><i class="fas fa-link"></i></a>
+</h2>
+<p>Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would have to get the systolic blood pressure of every single American adult. This is usually not feasible as researchers are unlikely to have the time and money to interview every single American adult. Instead, a representative sample of American adults will be obtained, for example, 750 randomly selected American adults are interviewed. We can then create density plots, histograms, compute the mean, median, variance, skewness, and other summaries that may be of interest, based on these 750 American adults.</p>
+<div id="population-vs.-sample" class="section level3" number="11.1.1">
+<h3>
+<span class="header-section-number">11.1.1</span> Population Vs. Sample<a class="anchor" aria-label="anchor" href="#population-vs.-sample"><i class="fas fa-link"></i></a>
+</h3>
+<p>The above scenario illustrates a few concepts and terms that are fundamental in estimation. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample.</p>
+<p>The <strong>population</strong> (sometimes called the population of interest) is the entire set of individuals, or objects, or events that a study is interested in. In the scenario described above, the population would be (all) American adults.</p>
+<p>The <strong>sample</strong> is the set of individuals, or objects, or events which we have data on. In the scenario described above, the sample is the 750 randomly selected American adults.</p>
+<p>In short, we are analyzing data from a sample and then try to make an inference about the population.</p>
+<p>Ideally, the sample should be <strong>representative</strong> of the population. A representative sample is often achieved through a simple random sample, where each unit in the population has the same chance of being selected to be in the sample. In this section, we will assume that we have a representative sample. Note: You may feel that obtaining a simple random sample may be difficult. We will not get into a discussion of sampling (sometimes called survey sampling), which is a field of statistics that handles how to obtain representative samples, or how calculations should be adjusted if the sample is not representative. There is still a lot of research that is being done in survey sampling.</p>
+</div>
+<div id="parameter-vs-estimator" class="section level3" number="11.1.2">
+<h3>
+<span class="header-section-number">11.1.2</span> Parameter Vs Estimator<a class="anchor" aria-label="anchor" href="#parameter-vs-estimator"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now that we have made the distinction between a population and a sample, we are ready to define parameters and estimators.</p>
+<p>A <strong>parameter</strong> is a numerical summary associated with a population. In the scenario described above, an example of a population parameter would be the population mean systolic blood pressure of American adults.</p>
+<p>An <strong>estimator</strong> or a <strong>statistic</strong> is a numerical summary associated with samples. An estimator is typically used to estimate a parameter. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults could be the average systolic blood pressure in our sample. So the sample mean is an estimator of the population mean.</p>
+<p>An <strong>estimated value</strong>, or <strong>estimate</strong>, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mm Hg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mm Hg.</p>
+<p>So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:</p>
+<ul>
+<li>The value of parameters are unknown, while we can actually calculate numerical values of estimators.</li>
+<li>The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 American adults. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is <strong>variance associated with estimators due to random sampling</strong>.</li>
+</ul>
+</div>
+<div id="sampling-distributions" class="section level3" number="11.1.3">
+<h3>
+<span class="header-section-number">11.1.3</span> Sampling Distributions<a class="anchor" aria-label="anchor" href="#sampling-distributions"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now imagine that we keep obtaining representative samples of 750 American adults. We calculate the average systolic blood pressure from each sample. They are all different? We can then create a histogram or density plot (since the averages are numeric) to visualize the distribution of the sample means. Are they all close to each other? Or they spread out? Is the distribution bell-shaped or skewed?</p>
+<p>The distribution associated with an estimator (from the same sample size) is called its <strong>sampling distribution</strong>. Some estimators have known sampling distributions (under certain conditions):</p>
+<ul>
+<li>The sample mean, <span class="math inline">\(\bar{X}\)</span>.</li>
+<li>The sample proportion , <span class="math inline">\(\hat{p}\)</span>.</li>
+</ul>
+<p>Their sampling distributions have been proven mathematically. However, what happens when the “certain conditions” are not met, or if the estimator has no known sampling distribution? We can use simulations in these instances! When using simulations in such a setting, they are called Monte Carlo simulations. Monte Carlo simulations work because of the Law of Large Numbers, which we briefly describe next.</p>
+</div>
+<div id="law-of-large-numbers" class="section level3" number="11.1.4">
+<h3>
+<span class="header-section-number">11.1.4</span> Law of Large Numbers<a class="anchor" aria-label="anchor" href="#law-of-large-numbers"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>Law of Large Numbers</strong> (LLN) states that as <span class="math inline">\(n\)</span> gets larger and approaches infinity, the sample mean <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span> converges to the true mean <span class="math inline">\(\mu\)</span>. This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever <span class="math inline">\(n\)</span> gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes.</p>
+<p>Another implication of the LLN is that we can use Monte Carlo simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications.</p>
+<p>We use an example to illustrate the LLN, which comes from flipping a fair coin. Let <span class="math inline">\(X\)</span> denote whether the coin lands heads or tails, and let <span class="math inline">\(X=1\)</span> for heads and <span class="math inline">\(X=0\)</span> for tails. We can say that <span class="math inline">\(X \sim Bern(0.5)\)</span> since the coin is fair. Imagine flipping the coin <span class="math inline">\(n\)</span> times, and record the outcome after each flip, so <span class="math inline">\(X_1, \cdots, X_n\)</span> denote the outcome of each flip. We know that <span class="math inline">\(E(X) = 0.5\)</span> since <span class="math inline">\(X \sim Bern(0.5)\)</span>. The LLN informs us that <span class="math inline">\(\bar{X}_1, \cdots, \bar{X}_n\)</span> should usually get closer to 0.5 as <span class="math inline">\(n\)</span> increases. In other words, the value of the sample proportion after each flip should usually get closer to 0.5 with more flips. The code below simulates this example for <span class="math inline">\(n=500\)</span>, and Figure <a href="clt.html#fig:LLN">11.1</a> shows how the sample proportions get closer to 0.5, in general, as <span class="math inline">\(n\)</span> increases.</p>
+<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##make this big, but not too big otherwise picture is difficult to see</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">n</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span> <span class="co">##simulate 500 flips of fair coin</span></span>
+<span></span>
+<span><span class="va">totals</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##count total number of heads after each flip</span></span>
+<span><span class="va">index</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span></span>
+<span><span class="va">props</span><span class="op">&lt;-</span><span class="va">totals</span><span class="op">/</span><span class="va">index</span> <span class="co">##find proportion of heads after each flip</span></span>
+<span></span>
+<span><span class="co">##create visual. LLN says that as n gets larger, the value of the sample proportion tends to get closer to 0.5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">props</span>, type<span class="op">=</span><span class="st">"l"</span>, main<span class="op">=</span><span class="st">"Prop vs Sample Size"</span>, ylab<span class="op">=</span><span class="st">"Proportion"</span>, xlab<span class="op">=</span><span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0.5</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="co">##overlay 0.5 for easy comparison</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:LLN"></span>
+<img src="bookdown-demo_files/figure-html/LLN-1.png" alt="LLN Example with Coin Flips" width="672"><p class="caption">
+Figure 11.1: LLN Example with Coin Flips
+</p>
+</div>
+<p>Note: The LLN actually comes in two versions, the Weak Law of Large Numbers (WLLN), and the Strong Law of Large Numbers (SLLN). What I have written gives an intuitive explanation of what the LLN implies.</p>
+<div id="misconceptions-with-lln" class="section level4" number="11.1.4.1">
+<h4>
+<span class="header-section-number">11.1.4.1</span> Misconceptions with LLN<a class="anchor" aria-label="anchor" href="#misconceptions-with-lln"><i class="fas fa-link"></i></a>
+</h4>
+<p>One key idea with the LLN is that the sample mean <strong>tends to get closer to the true mean as <span class="math inline">\(n\)</span> gets larger</strong>. The key words here are “tends” and “as <span class="math inline">\(n\)</span> gets larger”.</p>
+<p>A misunderstanding of the LLN is the <strong>gambler’s fallacy</strong>, which erroneously believes that the sample mean must “self correct” and get closer to the population mean with small increments of <span class="math inline">\(n\)</span>.</p>
+<p>Using the example from flipping a fair coin. The gambler’s fallacy erroneously thinks that:</p>
+<ul>
+<li>The proportion of heads should be close to 0.5, even with small <span class="math inline">\(n\)</span>.</li>
+<li>The results of subsequent flips should self correct, i.e. the proportion of heads get closer to 0.5 with the next flip. For example, if the first 5 flips are heads, the next flip is “due” to be tails since the proportion should get closer to 0.5 with the next flip.</li>
+</ul>
+<p>The convergence to 0.5 comes from flipping the coin many times.</p>
+</div>
+</div>
+</div>
+<div id="monte-carlo-simulations" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> Monte Carlo Simulations<a class="anchor" aria-label="anchor" href="#monte-carlo-simulations"><i class="fas fa-link"></i></a>
+</h2>
+<p>You may have noticed that we have used simulations in previous sections (e.g. Section <a href="sims.html#ch6sim">6.4.1</a>) to help explain certain concepts. These simulations are called <strong>Monte Carlo</strong> simulations. The idea behind Monte Carlo simulations is to use repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo simulations are used for the following purposes:</p>
+<ol style="list-style-type: decimal">
+<li><p>When the probability or expectation is too complicated to work out by hand. Recall that finding probabilities and expectations by hand involve summations or integrals, and it becomes obvious that working with summations and especially integrals can get onerous.</p></li>
+<li><p>To verify theoretical results involving probability or expectations. While a lot of theory is proved using mathematics, most academic papers include Monte Carlo simulations to verify the theoretical results. We have done these to verify the Central Limit Theorem in Section <a href="sims.html#ch6sim">6.4.1</a>.</p></li>
+<li><p>To help confirm that you understand the meaning of theoretical results. The only way your code matches the theory is if you understand the theory.</p></li>
+</ol>
+<div id="monte-carlo-methods-for-expected-values" class="section level3" number="11.2.1">
+<h3>
+<span class="header-section-number">11.2.1</span> Monte Carlo Methods for Expected Values<a class="anchor" aria-label="anchor" href="#monte-carlo-methods-for-expected-values"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we want to find some expectation for a continuous random variable <span class="math inline">\(X\)</span>, <span class="math inline">\(E(g(X))\)</span>, where <span class="math inline">\(g\)</span> is some function, i.e. <span class="math inline">\(E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).\)</span> Monte Carlo methods avoid doing this integration by simulating <span class="math inline">\(X_1, \cdots, X_M\)</span> from <span class="math inline">\(X\)</span> and estimate <span class="math inline">\(E(g(X))\)</span> with the sample mean of <span class="math inline">\(g(X)\)</span>, <span class="math inline">\(\frac{1}{M} \sum_{i=1}^M g(X_i)\)</span>. The LLN tells us that as <span class="math inline">\(M\)</span> gets larger, this sample mean converges to <span class="math inline">\(E(g(X))\)</span>.</p>
+<p>Monte Carlo methods replace the integral (or summation) with simulating a random variable repeatedly many times. We use a simple example to illustrate this idea.</p>
+<p>Let <span class="math inline">\(X\)</span> be a standard normal distribution. Suppose we want to find the value of <span class="math inline">\(E(X^2) = \int_{-\infty}^{\infty} x^2 \frac{1}{\sqrt{2 \pi}} e^{-x^2/2} dx\)</span>. Instead of working out this integral by hand, we carry out a Monte Carlo simulation by doing these steps:</p>
+<ul>
+<li>Simulate <span class="math inline">\(M\)</span> random values from a standard normal, where <span class="math inline">\(M\)</span> is large.</li>
+<li>Calculate <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
+<li>Find the sample average of <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
+</ul>
+<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
+<span></span>
+<span><span class="va">Xs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span> <span class="co">##generate M values of X</span></span>
+<span></span>
+<span><span class="va">squared.values</span><span class="op">&lt;-</span><span class="va">Xs</span><span class="op">^</span><span class="fl">2</span> <span class="co">##square each X</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">)</span> <span class="co">##sample average of squared values. </span></span></code></pre></div>
+<pre><code>## [1] 1.024546</code></pre>
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##when reps is large, this sample mean should be close to the true E(X^2), which is 1</span></span></code></pre></div>
+<p>Since <span class="math inline">\(X\)</span> is standard normal, we know <span class="math inline">\(E(X) = 0\)</span> and <span class="math inline">\(Var(X) = E(X^2) - E(X)^2 = E(X^2) = 1\)</span>. We see in our simulation that our estimated value for <span class="math inline">\(E(X^2)\)</span> is pretty close to its theoretical value.</p>
+</div>
+<div id="monte-carlo-methods-for-probabilities" class="section level3" number="11.2.2">
+<h3>
+<span class="header-section-number">11.2.2</span> Monte Carlo Methods for Probabilities<a class="anchor" aria-label="anchor" href="#monte-carlo-methods-for-probabilities"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we want to find the probability that a random variable satisfies some event <span class="math inline">\(E\)</span>, <span class="math inline">\(P(E)\)</span>. We could perform a summation or integral to find this probability, or estimate the probability using Monte Carlo simulations. What we will do is simulate <span class="math inline">\(X_1, \cdots, X_M\)</span> from <span class="math inline">\(X\)</span>, where <span class="math inline">\(M\)</span> is large, in other words, simulate a large number of replicates of <span class="math inline">\(X\)</span>. We then count how many of the <span class="math inline">\(X_i\)</span>s correspond to event <span class="math inline">\(E\)</span> happening, and then divide this number by <span class="math inline">\(M\)</span>, the number of replicates. We use an example to illustrate this idea.</p>
+<p>Let <span class="math inline">\(X\)</span> be a standard normal distribution. Suppose we want to find the probability <span class="math inline">\(P(X^2 &gt; 1)\)</span>. We carry out a Monte Carlo simulation by doing these steps:</p>
+<ul>
+<li>Simulate <span class="math inline">\(M\)</span> random values from a standard normal, where <span class="math inline">\(M\)</span> is large.</li>
+<li>Calculate <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
+<li>Count the number of times <span class="math inline">\(X_i^2\)</span> is greater than 1.</li>
+<li>Divide this number by <span class="math inline">\(M\)</span> to estimate the probability, since probability can be interpreted as a long-run proportion.</li>
+</ul>
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
+<span></span>
+<span><span class="va">Xs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span> <span class="co">##generate M values of X</span></span>
+<span></span>
+<span><span class="va">squared.values</span><span class="op">&lt;-</span><span class="va">Xs</span><span class="op">^</span><span class="fl">2</span> <span class="co">##square each X</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##count the number of times X^2 is greater than 1, and divide by M</span></span></code></pre></div>
+<pre><code>## [1] 0.3178</code></pre>
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##when reps is large, this proportion should be close to</span></span>
+<span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="fl">1</span>, df<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.3173105</code></pre>
+<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##it turns out that squaring a standard normal gives a chi-squared distribution with 1 df.</span></span></code></pre></div>
+<p>We see the estimated probability <span class="math inline">\(P(X^2 &gt; 1)\)</span> is close to its theoretical probability.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="EDA.html"><span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#clt"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem</a></li>
+<li>
+<a class="nav-link" href="#key-ideas-and-terms"><span class="header-section-number">11.1</span> Key Ideas and Terms</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#population-vs.-sample"><span class="header-section-number">11.1.1</span> Population Vs. Sample</a></li>
+<li><a class="nav-link" href="#parameter-vs-estimator"><span class="header-section-number">11.1.2</span> Parameter Vs Estimator</a></li>
+<li><a class="nav-link" href="#sampling-distributions"><span class="header-section-number">11.1.3</span> Sampling Distributions</a></li>
+<li><a class="nav-link" href="#law-of-large-numbers"><span class="header-section-number">11.1.4</span> Law of Large Numbers</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#monte-carlo-simulations"><span class="header-section-number">11.2</span> Monte Carlo Simulations</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#monte-carlo-methods-for-expected-values"><span class="header-section-number">11.2.1</span> Monte Carlo Methods for Expected Values</a></li>
+<li><a class="nav-link" href="#monte-carlo-methods-for-probabilities"><span class="header-section-number">11.2.2</span> Monte Carlo Methods for Probabilities</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-20.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

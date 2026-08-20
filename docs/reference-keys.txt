@@ -36,6 +36,7 @@ fig:ch10counts
 fig:ch10bar
 fig:ch10scatter
 fig:ch10scatter2
+fig:LLN
 Rbasics
 overview-of-r
 rstudio-interface
@@ -186,3 +187,13 @@ two-quantitative-variables
 a-few-things-to-consider
 tips-for-effective-visualizations
 tidy-data
+clt
+key-ideas-and-terms
+population-vs.-sample
+parameter-vs-estimator
+sampling-distributions
+law-of-large-numbers
+misconceptions-with-lln
+monte-carlo-simulations
+monte-carlo-methods-for-expected-values
+monte-carlo-methods-for-probabilities

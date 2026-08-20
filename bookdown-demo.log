@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  20 AUG 2026 13:16
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  20 AUG 2026 13:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -897,8 +897,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [12] [13] [14] [15] [16]
 Overfull \hbox (38.25pt too wide) in paragraph at lines 660--660
-[]\TU/lmtt/m/n/10 ##  [1] -1.9059794 -2.5305813  2.5205643 -2.5422439 -2.043301
-1  3.2022529[] 
+[]\TU/lmtt/m/n/10 ##  [1]  0.1356807 -4.0827393 -2.9109517  3.2997119  0.416551
+4  2.8760137[] 
  []
 
 [17] [18] [19] [20] [21] [22]
@@ -2253,33 +2253,22 @@ Chapter 10.
 [113
 
 ]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-161-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-161-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+File: bookdown-demo_files/figure-latex/ch10hist-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/ch10hist-1.pdf>
 
 Overfull \hbox (4.29454pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 114 \TU/lmr/m/sl/10 CHAPTER 10.  EXPLORATORY DATA ANALYSIS AND T
 IDYING DATA
  []
 
-[114] [115]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-162-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-162-1.pdf>
-File: bookdown-demo_files/figure-latex/unnamed-chunk-163-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-163-1.pdf>
-
-Underfull \hbox (badness 10000) in paragraph at lines 5484--5486
-[][]
- []
-
-
-Underfull \vbox (badness 1960) has occurred while \output is active []
-
+[114]
+File: bookdown-demo_files/figure-latex/ch10hist-small-1.pdf Graphic file (type 
+pdf)
+<use bookdown-demo_files/figure-latex/ch10hist-small-1.pdf>
+[115]
+File: bookdown-demo_files/figure-latex/ch10hist-width-1.pdf Graphic file (type 
+pdf)
+<use bookdown-demo_files/figure-latex/ch10hist-width-1.pdf>
 
 Overfull \hbox (4.29454pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 116 \TU/lmr/m/sl/10 CHAPTER 10.  EXPLORATORY DATA ANALYSIS AND T
@@ -2287,85 +2276,76 @@ IDYING DATA
  []
 
 [116]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-164-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-164-1.pdf>
+File: bookdown-demo_files/figure-latex/ch10zoom-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/ch10zoom-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 5495--5497
-[][]
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[117]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##        y carat cut       color clarity depth table price  
    x     z[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##    <dbl> <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <
 dbl> <dbl>[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##  1  0     1    Very Good H     VS2      63.3    53  5139  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##  2  0     1.14 Fair      G     VS1      57.5    67  6381  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##  3  0     1.56 Ideal     G     VS2      62.2    54 12800  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##  4  0     1.2  Premium   D     VVS1     62.1    59 15686  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##  5  0     2.25 Premium   H     SI2      62.8    59 18034  
 0     0[] 
  []
 
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5521--5521
+[117]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##  6  0     0.71 Good      F     SI2      64.1    60  2130  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##  7  0     0.71 Good      F     SI2      64.1    60  2130  
 0     0[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##  8  3.68  0.2  Premium   D     VS2      62.3    60   367  
 3.73  2.31[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ##  9  3.71  0.2  Premium   F     VS2      62.6    59   367  
 3.73  2.33[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5521--5521
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5539--5539
 []\TU/lmtt/m/n/10 ## 10  3.71  0.2  Very Good E     VS2      63.4    59   367  
 3.74  2.36[] 
  []
@@ -2377,81 +2357,81 @@ IDYING DATA
  []
 
 [118]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##        x     y     z price carat cut       color clarity d
 epth table[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##    <dbl> <dbl> <dbl> <int> <dbl> <ord>     <ord> <ord>   <
 dbl> <dbl>[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##  1  8.09 58.9   8.06 12210  2    Premium   H     SI2      
 58.9    57[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##  2  5.15 31.8   5.12  2075  0.51 Ideal     E     VS1      
 61.8    55[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##  3 10.7  10.5   6.98 18018  5.01 Fair      J     I1       
 65.5    59[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##  4 10.2  10.2   6.72 18531  4.5  Fair      J     I1       
 65.8    58[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##  5 10.1  10.1   6.17 15223  4.01 Premium   I     I1       
 61      61[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##  6 10.0   9.94  6.24 15223  4.01 Premium   J     I1       
 62.5    62[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##  7 10.0   9.94  6.31 15984  4    Very Good I     I1       
 63.3    58[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##  8 10     9.85  6.43 17329  4.13 Fair      H     I1       
 64.8    61[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ##  9  9.86  9.81  6.13 16193  3.67 Premium   I     I1       
 62.4    56[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5563--5563
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5581--5581
 []\TU/lmtt/m/n/10 ## 10  9.66  9.63  6.03 18701  3.51 Premium   J     VS2      
 62.5    59[] 
  []
 
 [119]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-169-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-169-1.pdf>
+File: bookdown-demo_files/figure-latex/ch10dens-cut-1.pdf Graphic file (type pd
+f)
+<use bookdown-demo_files/figure-latex/ch10dens-cut-1.pdf>
 
 Overfull \hbox (4.29454pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 120 \TU/lmr/m/sl/10 CHAPTER 10.  EXPLORATORY DATA ANALYSIS AND T
@@ -2459,23 +2439,35 @@ IDYING DATA
  []
 
 [120]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-170-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-170-1.pdf>
+File: bookdown-demo_files/figure-latex/ch10box-cut-1.pdf Graphic file (type pdf
+)
+<use bookdown-demo_files/figure-latex/ch10box-cut-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 5625--5627
+LaTeX Warning: Reference `fig:ch10box-cut' on page 121 undefined on input line 
+5648.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5647--5649
 [][]
  []
 
-[121]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-172-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-172-1.pdf>
-File: bookdown-demo_files/figure-latex/unnamed-chunk-173-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-173-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 5666--5668
+Overfull \vbox (0.57402pt too high) detected at line 5672
+ []
+
+[121]
+File: bookdown-demo_files/figure-latex/ch10dens-log-1.pdf Graphic file (type pd
+f)
+<use bookdown-demo_files/figure-latex/ch10dens-log-1.pdf>
+File: bookdown-demo_files/figure-latex/ch10box-log-1.pdf Graphic file (type pdf
+)
+<use bookdown-demo_files/figure-latex/ch10box-log-1.pdf>
+
+LaTeX Warning: Reference `fig:ch10box-log' on page 122 undefined on input line 
+5693.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5692--5694
 [][]
  []
 
@@ -2489,11 +2481,15 @@ IDYING DATA
  []
 
 [122]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-174-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-174-1.pdf>
+File: bookdown-demo_files/figure-latex/ch10counts-1.pdf Graphic file (type pdf)
 
-Underfull \hbox (badness 10000) in paragraph at lines 5681--5683
+<use bookdown-demo_files/figure-latex/ch10counts-1.pdf>
+
+LaTeX Warning: Reference `fig:ch10counts' on page 123 undefined on input line 5
+708.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5707--5709
 [][]
  []
 
@@ -2501,11 +2497,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 5681--5683
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [123]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-175-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-175-1.pdf>
+File: bookdown-demo_files/figure-latex/ch10bar-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/ch10bar-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 5692--5694
+LaTeX Warning: Reference `fig:ch10bar' on page 124 undefined on input line 5719
+.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5718--5720
 [][]
  []
 
@@ -2519,14 +2518,9 @@ IDYING DATA
  []
 
 [124] [125]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-178-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-178-1.pdf>
-
-Underfull \hbox (badness 10000) in paragraph at lines 5745--5747
-[][]
- []
-
+File: bookdown-demo_files/figure-latex/ch10scatter-1.pdf Graphic file (type pdf
+)
+<use bookdown-demo_files/figure-latex/ch10scatter-1.pdf>
 
 Overfull \hbox (4.29454pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 126 \TU/lmr/m/sl/10 CHAPTER 10.  EXPLORATORY DATA ANALYSIS AND T
@@ -2534,34 +2528,16 @@ IDYING DATA
  []
 
 [126]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-179-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-179-1.pdf>
-[127]
+File: bookdown-demo_files/figure-latex/ch10scatter2-1.pdf Graphic file (type pd
+f)
+<use bookdown-demo_files/figure-latex/ch10scatter2-1.pdf>
+[127] (bookdown-demo.bbl
 Overfull \hbox (4.29454pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 128 \TU/lmr/m/sl/10 CHAPTER 10.  EXPLORATORY DATA ANALYSIS AND T
 IDYING DATA
  []
 
-[128]
-Chapter 11.
-
-LaTeX Warning: Reference `RBasics' on page 129 undefined on input line 5845.
-
-
-LaTeX Warning: Reference `eq:union' on page 129 undefined on input line 5847.
-
-
-LaTeX Warning: Reference `tab:nice-tab' on page 129 undefined on input line 584
-9.
-
-File: bookdown-demo_files/figure-latex/car-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/car-1.pdf>
-File: images/02-cards.jpg Graphic file (type bmp)
-<images/02-cards.jpg>
-(bookdown-demo.bbl [129
-
-] [130]) [131
+[128]) [129
 
 ] (bookdown-demo.aux)
 
@@ -2569,12 +2545,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20062 strings out of 411472
- 372890 string characters out of 5818265
+ 20047 strings out of 411472
+ 371801 string characters out of 5818265
  1872012 words of memory out of 5000000
- 39991 multiletter control sequences out of 15000+600000
+ 39980 multiletter control sequences out of 15000+600000
  518810 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,6n,121p,1012b,544s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (131 pages).
+Output written on bookdown-demo.pdf (129 pages).

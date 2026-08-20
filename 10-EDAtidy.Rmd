@@ -40,7 +40,7 @@ library(tidyverse)
 Data <- ggplot2::diamonds
 ```
 
-```{r}
+```{r ch10hist, fig.cap="Diamond Carats are Right Skewed"}
 ggplot(Data, aes(x = carat)) +
   geom_histogram(binwidth = 0.5) +
   labs(
@@ -50,7 +50,7 @@ ggplot(Data, aes(x = carat)) +
   )
 ```
 
-Typical questions are:
+Typical questions are (and the answers based on Figure \@ref(fig:ch10hist)):
 
 1. What are the more common values? The bars appear highest around 0.5 to 1.5 carats, so these carats are common. Carats are concentrated among the smaller carats.
 
@@ -60,7 +60,7 @@ Typical questions are:
 
 Given that most diamonds are less than 3 carats, we can create a similar histogram, but only for diamonds less than 3 carats. We can also refine the width of the bins to examine the distribution of the carats more closely. You must make it clear that you are only examining a certain portion of the data.
 
-```{r}
+```{r ch10hist-small, fig.cap="Histogram with Big Diamonds Removed"}
 smaller <- Data |> 
   filter(carat < 3)
 
@@ -81,7 +81,7 @@ Use the visualizations created during EDA to help spot unusual values. Sometimes
 
 We take a look at the `y` variable in the diamonds data set, which measures the width of the diamonds in mm. 
 
-```{r}
+```{r ch10hist-width, fig.cap="Width of Diamonds in mm"}
 ggplot(Data, aes(x = y)) + 
   geom_histogram(binwidth = 0.5) +
   labs(
@@ -90,14 +90,16 @@ ggplot(Data, aes(x = y)) +
     title = "Histogram of Diamond Widths"
   )
 ```
-Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can "zoom-in" on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via `ylim` inside the layer `coord_cartesian`. You can also limit the range of the x-axis if needed. 
 
-```{r}
+From Figure \@ref(fig:ch10hist-width), most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can "zoom-in" on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via `ylim` inside the layer `coord_cartesian`. You can also limit the range of the x-axis if needed. 
+
+```{r ch10zoom, fig.cap="Zooming in by Changing Limits of Y Axis"}
 ggplot(diamonds, aes(x = y)) + 
   geom_histogram(binwidth = 0.5) +
   coord_cartesian(ylim = c(0, 50))
 ```
-We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
+
+From Figure \@ref(fig:ch10zoom), we see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
 
 ```{r}
 Data |> 
@@ -140,7 +142,7 @@ As mentioned earlier, I would replace the 0s with `NA`. Do not remove the entire
 
 We can use the visualizations from \@ref(quantcat) to explore the relationship between a quantitative variable and a categorical variable. To explore the relationship between the price and cut of diamonds, we can create a density plot of price with separate colors for each cut:
 
-```{r warning=FALSE}
+```{r ch10dens-cut, fig.cap="Prices Across Cuts are Right Skewed", warning=FALSE}
 ggplot(Data, aes(x = price, color = cut)) +
   geom_density() +
   labs(
@@ -153,11 +155,11 @@ ggplot(Data, aes(x = price, color = cut)) +
 
 Notice in this example the categorical variable cut is ordinal, there is an order to the values. Cut reflects a measure of quality, in increasing order from fair, good, very good, premium, ideal. You have to make sure that they are ordered correctly (which they are in this data set). If they are not, please see Section \@ref(cat1) to see how to use the `factor()` function to order the variable. 
 
-If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see that curve for fair cuts appear to be quite different: its prices tend to be a little higher. Which may be counter intuitive as fair is the lowest quality. 
+If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see in Figure \@ref(fig:ch10dens-cut) that the curve for fair cuts appear to be quite different: its prices tend to be a little higher, which may be counter intuitive as fair is the lowest quality. 
 
 Alternatively, we can create a side by side box plot
 
-```{r}
+```{r ch10box-cut, fig.cap="Prices Across Cuts"}
 ggplot(Data, aes(x = cut, y = price)) +
   geom_boxplot() +
   labs(
@@ -166,9 +168,9 @@ ggplot(Data, aes(x = cut, y = price)) +
     title = "Boxplot of Prices across Cut"
   )
 ```
-We see a similar conclusion.
+We see a similar conclusion in Figure \@ref(fig:ch10box-cut) that diamonds with fair cut may have slightly higher prices.
 
-Notice that the prices are right skewed? In that most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.
+Notice that the prices across cuts are right skewed? Most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.
 
 ```{r}
 Data <- Data |> 
@@ -177,7 +179,7 @@ Data <- Data |>
   )
 ```
 
-```{r warning=FALSE}
+```{r ch10dens-log, fig.cap="Density Plot with Log Transformed Prices Across Cut", warning=FALSE}
 ggplot(Data, aes(x = logPrice, color = cut)) +
   geom_density() +
   labs(
@@ -188,7 +190,7 @@ ggplot(Data, aes(x = logPrice, color = cut)) +
   )
 ```
 
-```{r}
+```{r ch10box-log, fig.cap="Boxplot with Log Transformed Prices Across Cut"}
 ggplot(Data, aes(x = cut, y = logPrice)) +
   geom_boxplot() +
   labs(
@@ -197,24 +199,24 @@ ggplot(Data, aes(x = cut, y = logPrice)) +
     title = "Boxplot of Log Prices across Cut"
   )
 ```
-It appears that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?
+It appears from Figures \@ref(fig:ch10dens-log) and \@ref(fig:ch10box-log) that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?
 
 #### Two categorical variables
 
 We can use the tools from \@ref(cat2) to explore the relationship between two categorical variables. For example, we want to explore if cut and color of diamonds are related. We can create a visual that summarizes the number of diamonds for each combination of cut and color:
 
-```{r}
+```{r ch10counts, fig.cap="Counts of Color and Cut"}
 ggplot(Data, aes(x = cut, y = color)) +
   geom_count()
 ```
-Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:
+Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. We see in Figure \@ref(fig:ch10counts) that ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:
 
-```{r}
+```{r ch10bar, fig.cap="Bar Chart of Proportion of Colors in Each Cut"}
 ggplot(Data, aes(x = cut, fill = color)) +
   geom_bar(position = "fill") + 
   labs(title = "Proportion of Colors in Each Cut", y = "Proportion")
 ```
-The proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:
+In Figure \@ref(fig:ch10bar), the proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:
 
 ```{r}
 table(Data$cut, Data$color)
@@ -231,13 +233,14 @@ For each cut, the proportion of each color is similar, so there is little eviden
 
 Scatterplots are often used to explore the relationship between two quantitative variables. To explore how price is related to carat:
 
-```{r}
+```{r ch10scatter, fig.cap="Scatterplot of Price Against Carat"}
 ggplot(Data, aes(x = carat, y = price)) +
   geom_point() + 
   labs(title = "Price Vs Carat of Diamonds",
     x = "Carat", y = "Price")
 ```
-Typical questions for scatterplots include:
+
+Typical questions for scatterplots include (and answers based on Figure \@ref(fig:ch10scatter)):
 
 1. Is the relationship linear or not? In this case, the relationship in non linear.
 
@@ -247,7 +250,7 @@ Typical questions for scatterplots include:
 
 An idea with visualizing quantitative variables is to bin them, i.e. create a categorical variable base on range of values on a quantitative variable, and then use visualizations involving one quantitative variable and one categorical variable.  
 
-```{r}
+```{r ch10scatter2, fig.cap="Boxplots of Price Against Binned Carat"}
 ggplot(Data, aes(x = carat, y = price)) + 
   geom_boxplot(aes(group = cut_width(carat, 0.1)))
 ```

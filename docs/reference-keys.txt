@@ -24,8 +24,18 @@ fig:ch8box1
 fig:ch8dens1
 fig:ch8sim
 fig:ch8sim2
-fig:car
-fig:cards
+fig:ch10hist
+fig:ch10hist-small
+fig:ch10hist-width
+fig:ch10zoom
+fig:ch10dens-cut
+fig:ch10box-cut
+fig:ch10dens-log
+fig:ch10box-log
+fig:ch10counts
+fig:ch10bar
+fig:ch10scatter
+fig:ch10scatter2
 Rbasics
 overview-of-r
 rstudio-interface
@@ -176,4 +186,3 @@ two-quantitative-variables
 a-few-things-to-consider
 tips-for-effective-visualizations
 tidy-data
-blank

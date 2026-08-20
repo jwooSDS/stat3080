@@ -655,8 +655,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -1.9059794 -2.5305813  2.5205643 -2.5422439 -2.0433011  3.2022529
-##  [7] -0.2206341  4.5972203 -2.8633012  2.1656475
+##  [1]  0.1356807 -4.0827393 -2.9109517  3.2997119  0.4165514  2.8760137
+##  [7]  1.9289380  2.0140270  1.2981859 -1.9643604
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -5427,9 +5427,13 @@ We take a look at the \texttt{diamonds} data set from the \texttt{tidyverse} pac
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-161-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch10hist-1.pdf}
+\caption{\label{fig:ch10hist}Diamond Carats are Right Skewed}
+\end{figure}
 
-Typical questions are:
+Typical questions are (and the answers based on Figure \ref{fig:ch10hist}):
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -5458,7 +5462,11 @@ Given that most diamonds are less than 3 carats, we can create a similar histogr
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-162-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch10hist-small-1.pdf}
+\caption{\label{fig:ch10hist-small}Histogram with Big Diamonds Removed}
+\end{figure}
 
 Notice that there are more diamonds with full or half carat sizes? According to \href{https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size}{Hamilton Jewelers}, ``this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat''. So this observation is as expected.
 
@@ -5481,8 +5489,13 @@ We take a look at the \texttt{y} variable in the diamonds data set, which measur
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-163-1.pdf}
-Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can ``zoom-in'' on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via \texttt{ylim} inside the layer \texttt{coord\_cartesian}. You can also limit the range of the x-axis if needed.
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch10hist-width-1.pdf}
+\caption{\label{fig:ch10hist-width}Width of Diamonds in mm}
+\end{figure}
+
+From Figure \ref{fig:ch10hist-width}, most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can ``zoom-in'' on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via \texttt{ylim} inside the layer \texttt{coord\_cartesian}. You can also limit the range of the x-axis if needed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5492,8 +5505,13 @@ Most diamonds have widths between 5 to 10mm. The fact that the histogram has an 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-164-1.pdf}
-We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch10zoom-1.pdf}
+\caption{\label{fig:ch10zoom}Zooming in by Changing Limits of Y Axis}
+\end{figure}
+
+From Figure \ref{fig:ch10zoom}, we see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5602,11 +5620,15 @@ We can use the visualizations from \ref{quantcat} to explore the relationship be
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-169-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch10dens-cut-1.pdf}
+\caption{\label{fig:ch10dens-cut}Prices Across Cuts are Right Skewed}
+\end{figure}
 
 Notice in this example the categorical variable cut is ordinal, there is an order to the values. Cut reflects a measure of quality, in increasing order from fair, good, very good, premium, ideal. You have to make sure that they are ordered correctly (which they are in this data set). If they are not, please see Section \ref{cat1} to see how to use the \texttt{factor()} function to order the variable.
 
-If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see that curve for fair cuts appear to be quite different: its prices tend to be a little higher. Which may be counter intuitive as fair is the lowest quality.
+If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see in Figure \ref{fig:ch10dens-cut} that the curve for fair cuts appear to be quite different: its prices tend to be a little higher, which may be counter intuitive as fair is the lowest quality.
 
 Alternatively, we can create a side by side box plot
 
@@ -5622,10 +5644,10 @@ Alternatively, we can create a side by side box plot
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-170-1.pdf}
-We see a similar conclusion.
+\includegraphics{bookdown-demo_files/figure-latex/ch10box-cut-1.pdf}
+We see a similar conclusion in Figure \ref{fig:ch10box-cut} that diamonds with fair cut may have slightly higher prices.
 
-Notice that the prices are right skewed? In that most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.
+Notice that the prices across cuts are right skewed? Most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5649,7 +5671,11 @@ Notice that the prices are right skewed? In that most prices are on the lower en
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-172-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch10dens-log-1.pdf}
+\caption{\label{fig:ch10dens-log}Density Plot with Log Transformed Prices Across Cut}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5663,8 +5689,8 @@ Notice that the prices are right skewed? In that most prices are on the lower en
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-173-1.pdf}
-It appears that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?
+\includegraphics{bookdown-demo_files/figure-latex/ch10box-log-1.pdf}
+It appears from Figures \ref{fig:ch10dens-log} and \ref{fig:ch10box-log} that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?
 
 \hypertarget{two-categorical-variables}{%
 \subsubsection{Two categorical variables}\label{two-categorical-variables}}
@@ -5678,8 +5704,8 @@ We can use the tools from \ref{cat2} to explore the relationship between two cat
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-174-1.pdf}
-Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:
+\includegraphics{bookdown-demo_files/figure-latex/ch10counts-1.pdf}
+Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. We see in Figure \ref{fig:ch10counts} that ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5689,8 +5715,8 @@ Large circles indicate the specific combination of cut and color that are more p
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-175-1.pdf}
-The proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:
+\includegraphics{bookdown-demo_files/figure-latex/ch10bar-1.pdf}
+In Figure \ref{fig:ch10bar}, the proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5742,8 +5768,13 @@ Scatterplots are often used to explore the relationship between two quantitative
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-178-1.pdf}
-Typical questions for scatterplots include:
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch10scatter-1.pdf}
+\caption{\label{fig:ch10scatter}Scatterplot of Price Against Carat}
+\end{figure}
+
+Typical questions for scatterplots include (and answers based on Figure \ref{fig:ch10scatter}):
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -5764,7 +5795,11 @@ An idea with visualizing quantitative variables is to bin them, i.e.~create a ca
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-179-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ch10scatter2-1.pdf}
+\caption{\label{fig:ch10scatter2}Boxplots of Price Against Binned Carat}
+\end{figure}
 
 \texttt{cut\_width(carat,\ 0.1)} creates boxplots for each group of carats into bins with width 0.1. The interpretations are pretty similar to the scatterplot.
 
@@ -5838,36 +5873,6 @@ The packages in the \texttt{tidyverse} work best with tidy data (as do most othe
 \end{enumerate}
 
 Please read \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 5. There are two main classes of non tidy data, and so we lengthen or widen the data. Some of you may have to do these in your project, while most will not.
-
-\hypertarget{blank}{%
-\chapter{Blank Canvas}\label{blank}}
-
-See Sections \ref{RBasics}, \ref{doc}.
-
-See equation \eqref{eq:union}.
-
-See Figure \ref{fig:car}, and \ref{fig:cards} and Table \ref{tab:nice-tab}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(cars)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/car-1} 
-
-}
-
-\caption{Car}\label{fig:car}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{images/02-cards.jpg}
-\caption{\label{fig:cards}Sample Space of Drawing One Card from Standard Deck. Picture from \href{https://en.wikipedia.org/wiki/Standard_52-card_deck}{wikipedia}}
-\end{figure}
 
   \bibliography{book.bib,packages.bib}
 

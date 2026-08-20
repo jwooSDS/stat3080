@@ -75,7 +75,6 @@
 <li><a class="" href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
 <li><a class="" href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></li>
 <li><a class="active" href="EDA.html"><span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data</a></li>
-<li><a class="" href="blank.html"><span class="header-section-number">11</span> Blank Canvas</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -134,8 +133,13 @@
 <span>    y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Histogram of Diamond Carats"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-161-1.png" width="672"></div>
-<p>Typical questions are:</p>
+<div class="figure">
+<span style="display:block;" id="fig:ch10hist"></span>
+<img src="bookdown-demo_files/figure-html/ch10hist-1.png" alt="Diamond Carats are Right Skewed" width="672"><p class="caption">
+Figure 10.1: Diamond Carats are Right Skewed
+</p>
+</div>
+<p>Typical questions are (and the answers based on Figure <a href="EDA.html#fig:ch10hist">10.1</a>):</p>
 <ol style="list-style-type: decimal">
 <li><p>What are the more common values? The bars appear highest around 0.5 to 1.5 carats, so these carats are common. Carats are concentrated among the smaller carats.</p></li>
 <li><p>What values are rare? High carat diamonds are rare. Heavier diamonds are rare and therefore fetch a premium. This is to be expected.</p></li>
@@ -153,7 +157,12 @@
 <span>    y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Histogram of Diamond Carats (less than 3 carats)"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-162-1.png" width="672"></div>
+<div class="figure">
+<span style="display:block;" id="fig:ch10hist-small"></span>
+<img src="bookdown-demo_files/figure-html/ch10hist-small-1.png" alt="Histogram with Big Diamonds Removed" width="672"><p class="caption">
+Figure 10.2: Histogram with Big Diamonds Removed
+</p>
+</div>
 <p>Notice that there are more diamonds with full or half carat sizes? According to <a href="https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size">Hamilton Jewelers</a>, “this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat”. So this observation is as expected.</p>
 <div id="unusual-values" class="section level4" number="10.2.1.1">
 <h4>
@@ -169,15 +178,24 @@
 <span>    y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Histogram of Diamond Widths"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-163-1.png" width="672">
-Most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can “zoom-in” on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via <code>ylim</code> inside the layer <code>coord_cartesian</code>. You can also limit the range of the x-axis if needed.</p>
+<div class="figure">
+<span style="display:block;" id="fig:ch10hist-width"></span>
+<img src="bookdown-demo_files/figure-html/ch10hist-width-1.png" alt="Width of Diamonds in mm" width="672"><p class="caption">
+Figure 10.3: Width of Diamonds in mm
+</p>
+</div>
+<p>From Figure <a href="EDA.html#fig:ch10hist-width">10.3</a>, most diamonds have widths between 5 to 10mm. The fact that the histogram has an x-axis ranging from 0 to 60mm informs us that there exist diamonds with widths in the extremes. You can “zoom-in” on the plot by limiting the limit on the y-axis by supplying the range of the y-axis via <code>ylim</code> inside the layer <code>coord_cartesian</code>. You can also limit the range of the x-axis if needed.</p>
 <div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">diamonds</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure">
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-164-1.png" width="672">
-We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,</div>
+<div class="figure">
+<span style="display:block;" id="fig:ch10zoom"></span>
+<img src="bookdown-demo_files/figure-html/ch10zoom-1.png" alt="Zooming in by Changing Limits of Y Axis" width="672"><p class="caption">
+Figure 10.4: Zooming in by Changing Limits of Y Axis
+</p>
+</div>
+<p>From Figure <a href="EDA.html#fig:ch10zoom">10.4</a>, we see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm. The latter two diamonds could be legitimate, but there cannot be diamonds with width 0mm. Are there really diamonds with width recorded 0? To confirm, we can arrange the data frame by width,</p>
 <div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -249,9 +267,14 @@ We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm.
 <span>    color <span class="op">=</span> <span class="st">"Cut"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Density Plot of Prices across Cut"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-169-1.png" width="672"></div>
+<div class="figure">
+<span style="display:block;" id="fig:ch10dens-cut"></span>
+<img src="bookdown-demo_files/figure-html/ch10dens-cut-1.png" alt="Prices Across Cuts are Right Skewed" width="672"><p class="caption">
+Figure 10.5: Prices Across Cuts are Right Skewed
+</p>
+</div>
 <p>Notice in this example the categorical variable cut is ordinal, there is an order to the values. Cut reflects a measure of quality, in increasing order from fair, good, very good, premium, ideal. You have to make sure that they are ordered correctly (which they are in this data set). If they are not, please see Section <a href="ggplot.html#cat1">8.6.1</a> to see how to use the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function to order the variable.</p>
-<p>If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see that curve for fair cuts appear to be quite different: its prices tend to be a little higher. Which may be counter intuitive as fair is the lowest quality.</p>
+<p>If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see in Figure <a href="EDA.html#fig:ch10dens-cut">10.5</a> that the curve for fair cuts appear to be quite different: its prices tend to be a little higher, which may be counter intuitive as fair is the lowest quality.</p>
 <p>Alternatively, we can create a side by side box plot</p>
 <div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cut</span>, y <span class="op">=</span> <span class="va">price</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -261,10 +284,14 @@ We see around 7 diamonds with width of 0mm, and 1 around 30mm and 1 around 59mm.
 <span>    y <span class="op">=</span> <span class="st">"Price"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Boxplot of Prices across Cut"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="inline-figure">
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-170-1.png" width="672">
-We see a similar conclusion.</div>
-<p>Notice that the prices are right skewed? In that most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.</p>
+<div class="figure">
+<span style="display:block;" id="fig:ch10box-cut"></span>
+<img src="bookdown-demo_files/figure-html/ch10box-cut-1.png" alt="Prices Across Cuts" width="672"><p class="caption">
+Figure 10.6: Prices Across Cuts
+</p>
+</div>
+<p>We see a similar conclusion in Figure <a href="EDA.html#fig:ch10box-cut">10.6</a> that diamonds with fair cut may have slightly higher prices.</p>
+<p>Notice that the prices across cuts are right skewed? Most prices are on the lower end, and a few prices are really high. Sometimes, log transforming a right skewed variable helps the visualization.</p>
 <div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Data</span> <span class="op">&lt;-</span> <span class="va">Data</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -279,7 +306,12 @@ We see a similar conclusion.</div>
 <span>    color <span class="op">=</span> <span class="st">"Cut"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Density Plot of Log Prices across Cut"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-172-1.png" width="672"></div>
+<div class="figure">
+<span style="display:block;" id="fig:ch10dens-log"></span>
+<img src="bookdown-demo_files/figure-html/ch10dens-log-1.png" alt="Density Plot with Log Transformed Prices Across Cut" width="672"><p class="caption">
+Figure 10.7: Density Plot with Log Transformed Prices Across Cut
+</p>
+</div>
 <div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cut</span>, y <span class="op">=</span> <span class="va">logPrice</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -288,9 +320,13 @@ We see a similar conclusion.</div>
 <span>    y <span class="op">=</span> <span class="st">"Log Price"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Boxplot of Log Prices across Cut"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="inline-figure">
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-173-1.png" width="672">
-It appears that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?</div>
+<div class="figure">
+<span style="display:block;" id="fig:ch10box-log"></span>
+<img src="bookdown-demo_files/figure-html/ch10box-log-1.png" alt="Boxplot with Log Transformed Prices Across Cut" width="672"><p class="caption">
+Figure 10.8: Boxplot with Log Transformed Prices Across Cut
+</p>
+</div>
+<p>It appears from Figures <a href="EDA.html#fig:ch10dens-log">10.7</a> and <a href="EDA.html#fig:ch10box-log">10.8</a> that cut has the opposite relationship with price than expected. What are some plausible reasons for this observation?</p>
 </div>
 <div id="two-categorical-variables" class="section level4" number="10.2.2.2">
 <h4>
@@ -300,16 +336,24 @@ It appears that cut has the opposite relationship with price than expected. What
 <div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cut</span>, y <span class="op">=</span> <span class="va">color</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_count.html">geom_count</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure">
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-174-1.png" width="672">
-Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. Ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:</div>
+<div class="figure">
+<span style="display:block;" id="fig:ch10counts"></span>
+<img src="bookdown-demo_files/figure-html/ch10counts-1.png" alt="Counts of Color and Cut" width="672"><p class="caption">
+Figure 10.9: Counts of Color and Cut
+</p>
+</div>
+<p>Large circles indicate the specific combination of cut and color that are more prevalent and more likely to occur together. We see in Figure <a href="EDA.html#fig:ch10counts">10.9</a> that ideal cut with color G has the most occurrence, but it may be better to look at proportions instead of counts. We can use a bar chart:</p>
 <div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cut</span>, fill <span class="op">=</span> <span class="va">color</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Proportion of Colors in Each Cut"</span>, y <span class="op">=</span> <span class="st">"Proportion"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure">
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-175-1.png" width="672">
-The proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:</div>
+<div class="figure">
+<span style="display:block;" id="fig:ch10bar"></span>
+<img src="bookdown-demo_files/figure-html/ch10bar-1.png" alt="Bar Chart of Proportion of Colors in Each Cut" width="672"><p class="caption">
+Figure 10.10: Bar Chart of Proportion of Colors in Each Cut
+</p>
+</div>
+<p>In Figure <a href="EDA.html#fig:ch10bar">10.10</a>, the proportions of colors in each cut, while not identical, are pretty similar. So there is little evidence that color and cut are associated. We can create a two-way table:</p>
 <div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">cut</span>, <span class="va">Data</span><span class="op">$</span><span class="va">color</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##            
@@ -341,9 +385,13 @@ The proportions of colors in each cut, while not identical, are pretty similar. 
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Price Vs Carat of Diamonds"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Carat"</span>, y <span class="op">=</span> <span class="st">"Price"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure">
-<img src="bookdown-demo_files/figure-html/unnamed-chunk-178-1.png" width="672">
-Typical questions for scatterplots include:</div>
+<div class="figure">
+<span style="display:block;" id="fig:ch10scatter"></span>
+<img src="bookdown-demo_files/figure-html/ch10scatter-1.png" alt="Scatterplot of Price Against Carat" width="672"><p class="caption">
+Figure 10.11: Scatterplot of Price Against Carat
+</p>
+</div>
+<p>Typical questions for scatterplots include (and answers based on Figure <a href="EDA.html#fig:ch10scatter">10.11</a>):</p>
 <ol style="list-style-type: decimal">
 <li><p>Is the relationship linear or not? In this case, the relationship in non linear.</p></li>
 <li><p>Does the response variable generally increases as the predictor increases? In this example, generally yes, as the carat increases, price tends to increase.</p></li>
@@ -353,7 +401,12 @@ Typical questions for scatterplots include:</div>
 <div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">carat</span>, y <span class="op">=</span> <span class="va">price</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/cut_interval.html">cut_width</a></span><span class="op">(</span><span class="va">carat</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-179-1.png" width="672"></div>
+<div class="figure">
+<span style="display:block;" id="fig:ch10scatter2"></span>
+<img src="bookdown-demo_files/figure-html/ch10scatter2-1.png" alt="Boxplots of Price Against Binned Carat" width="672"><p class="caption">
+Figure 10.12: Boxplots of Price Against Binned Carat
+</p>
+</div>
 <p><code>cut_width(carat, 0.1)</code> creates boxplots for each group of carats into bins with width 0.1. The interpretations are pretty similar to the scatterplot.</p>
 <p>Another tool to assess the strength of the linear relationship is the correlation, via <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code>. Note that correlation should only be used if the relationship is linear, and not when the relationship is nonlinear.</p>
 </div>
@@ -407,7 +460,7 @@ Typical questions for scatterplots include:</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></div>
-<div class="next"><a href="blank.html"><span class="header-section-number">11</span> Blank Canvas</a></div>
+<div class="next"><a href="references.html">References</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">

@@ -48,12 +48,14 @@ The software introduced and featured in this course is R. RStudio is a software 
 - R will need to be [downloaded first](https://www.r-project.org/). 
 - Then [downloaded RStudio](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads).
 
-You are **highly encouraged** to use R Markdown to create PDF documents for homeworks and the project, which uses a type-setting platform called LaTeX. LaTeX can be installed by running the following two commands in the R Console:
+You will also need to use R Markdown for your homeworks. You will upload an .Rmd file onto Gradescope and an autograder will grade your work. Some questions are free response and will be manually graded. R Markdown uses a type-setting platform called LaTeX. LaTeX can be installed by running the following two commands in the R Console:
 
 ```{r, eval=FALSE}
 install.packages("tinytex")
 tinytex::install_tinytex()
 ```
+
+You will also be using R Markdown to produce PDF documents for your project. Some basics of using R Markdown are covered in Section \@ref(rmd).
 
 ## Sections {-}
 

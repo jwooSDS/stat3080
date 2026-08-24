@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-08-20}
+\date{2026-08-24}
 
 \begin{document}
 \maketitle
@@ -200,7 +200,7 @@ The software introduced and featured in this course is R. RStudio is a software 
   Then \href{https://docs.posit.co/ide/user/\#rstudio-ide-oss-downloads}{downloaded RStudio}.
 \end{itemize}
 
-You are \textbf{highly encouraged} to use R Markdown to create PDF documents for homeworks and the project, which uses a type-setting platform called LaTeX. LaTeX can be installed by running the following two commands in the R Console:
+You will also need to use R Markdown for your homeworks. You will upload an .Rmd file onto Gradescope and an autograder will grade your work. Some questions are free response and will be manually graded. R Markdown uses a type-setting platform called LaTeX. LaTeX can be installed by running the following two commands in the R Console:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -208,6 +208,8 @@ You are \textbf{highly encouraged} to use R Markdown to create PDF documents for
 \NormalTok{tinytex}\SpecialCharTok{::}\FunctionTok{install\_tinytex}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+You will also be using R Markdown to produce PDF documents for your project. Some basics of using R Markdown are covered in Section \ref{rmd}.
 
 \hypertarget{sections}{%
 \section*{Sections}\label{sections}}
@@ -659,8 +661,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.8633943 -0.6920900  4.2709129  0.8769717  4.3267434  2.7141592
-##  [7]  9.0230014 -0.8313933 -3.5819774  4.7514435
+##  [1]  1.291935  4.499171  6.943632 -1.748669  4.450472  1.826925 -3.864793
+##  [8]  3.914437  2.553682  5.319533
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.

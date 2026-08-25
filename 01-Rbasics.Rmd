@@ -442,7 +442,7 @@ The `class()` function can be used to find out the class of an object, for examp
 class(log_vect)
 ```
 
-Alternatively, functions such as `is.character(), `is.numeric()`, `is.logical()` can be used to test for the class:
+Alternatively, functions such as `is.character()`, `is.numeric()`, `is.logical()` can be used to test for the class:
 
 ```{r}
 is.numeric(log_vect)

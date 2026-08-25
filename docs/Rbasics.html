@@ -7,7 +7,7 @@
 <title>Chapter 1 R Basics | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="1.1 Overview of R R is an open-source programming language and software environment specifically designed for statistical computing, data analysis, and graphical visualization. It is widely used...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 1 R Basics | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="1.1 Overview of R R is an open-source programming language and software environment specifically designed for statistical computing, data analysis, and graphical visualization. It is widely used...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="1.1 Overview of R R is an open-source programming language and software environment specifically designed for statistical computing, data analysis, and graphical visualization. It is widely used...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -141,7 +142,7 @@
 <p>Typing <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> will display the path of the working directory:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] "C:/Users/jeffr/Dropbox/UVA/book_stat3080/stat3080"</code></pre>
+<pre><code>## [1] "C:/Users/yjw4b/Dropbox/UVA/book_stat3080/stat3080"</code></pre>
 </div>
 <div id="changing-the-working-directory" class="section level3" number="1.3.2">
 <h3>
@@ -177,8 +178,10 @@
 <li>If you are a creating a new directory, select New Project. Then you will enter the name of your project and choose a path for the folder.</li>
 </ul>
 <p>If you open the folder associated with the created working directory, you will find a file with a <code>.Rproj</code> extension created (its name should be the name of the project that you gave in the last step above).</p>
-<p>Now, close your RStudio. Navigate to the project folder on your computer and double-click the <code>.Rproj</code> file. Your working directory will be where this <code>.Rproj</code> file is located. You can confirm using <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>, or by looking at the pane called “Files / Plots / Packages / Help”. Click on the files tab and it will display the path of your working directory, and you can also see the other files in this folder.
-2. If you have created an RStudio Project before and have a file with a <code>.RProj</code> extension, you can just copy and paste this file and place it into another folder to make it your working directory. This is the approach I almost exclusively use.</p>
+<p>Now, close your RStudio. Navigate to the project folder on your computer and double-click the <code>.Rproj</code> file. Your working directory will be where this <code>.Rproj</code> file is located. You can confirm using <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>, or by looking at the pane called “Files / Plots / Packages / Help”. Click on the files tab and it will display the path of your working directory, and you can also see the other files in this folder.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>If you have created an RStudio Project before and have a file with a <code>.RProj</code> extension, you can just copy and paste this file and place it into another folder to make it your working directory. This is the approach I almost exclusively use.</li>
+</ol>
 <p>I highly recommend that you create a folder on your computer that is exclusively for this class. You should also create separate subfolders for each assignment.</p>
 <p><strong><em>Key idea:</em></strong> The working directory is the folder on your computer where all files that R generates will be saved and where R will search for files.</p>
 <p><em>Practice</em>: create an RStudio Project on your own.</p>
@@ -198,12 +201,19 @@
 <h2>
 <span class="header-section-number">1.5</span> Basic Math Operations<a class="anchor" aria-label="anchor" href="#basic-math-operations"><i class="fas fa-link"></i></a>
 </h2>
-<p>R can be used as a calculator by using the standard arithmetic operators: +
-- <code>+</code>: addition
-- <code>-</code>: subtraction
-- <code>*</code>: multiplication
-- <code>/</code>: division
-- <code>^</code>: power</p>
+<p>R can be used as a calculator by using the standard arithmetic operators:</p>
+<ul>
+<li>
+<code>+</code>: addition</li>
+<li>
+<code>-</code>: subtraction</li>
+<li>
+<code>*</code>: multiplication</li>
+<li>
+<code>/</code>: division</li>
+<li>
+<code>^</code>: power</li>
+</ul>
 <p>R is like any calculator in that these operators follow the standard order of operations. Some examples:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">15</span><span class="op">+</span><span class="fl">10</span></span>
@@ -335,8 +345,8 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </ul>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  [1]  1.6769636 -1.9499853  0.7279606 -1.0728050  2.4438421 -1.6177969
-##  [7] -0.8180362 -1.8598874  3.7042599 -1.7532715</code></pre>
+<pre><code>##  [1]  0.6809179  6.9827837 -4.8991515 -1.2155661  1.1835856  3.5326489
+##  [7]  7.3087282 -2.3132900 -0.9118775  0.8610440</code></pre>
 <p>Note: you are likely to get a vector of 10 numbers that are different than the ones shown.</p>
 </div>
 <div id="example-2-binomial-distribution" class="section level4" number="1.7.2.2">
@@ -375,6 +385,11 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <p>You can then load the package in order to able to use the functions from that package, by using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Attaching package: 'palmerpenguins'</code></pre>
+<pre><code>## The following objects are masked from 'package:datasets':
+## 
+##     penguins, penguins_raw</code></pre>
 <p><strong><em>Key idea:</em></strong> packages only need to be installed once (unless you update R). Packages must be loaded prior to an R session using <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</p>
 </div>
 <div id="structures" class="section level2" number="1.9">
@@ -382,7 +397,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9</span> Types, Data Structures, Classes<a class="anchor" aria-label="anchor" href="#structures"><i class="fas fa-link"></i></a>
 </h2>
 <p>In R, <strong>type</strong> refers to how an object is stored in memory. You can refer to this <a href="https://cran.r-project.org/doc/manuals/r-patched/R-lang.html#Objects">table</a> for a list of types in R. To find the type of an R object, use the <code><a href="https://rdrr.io/r/base/typeof.html">typeof()</a></code> function:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">total1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "double"</code></pre>
 <p><strong>Data structures</strong> are used to store and organize values. They are classified based on dimensionality and homogeneity.</p>
@@ -435,25 +450,25 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.1</span> Vectors<a class="anchor" aria-label="anchor" href="#vec"><i class="fas fa-link"></i></a>
 </h3>
 <p>The concatenate function, <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, is commonly used to create a vector. The inputs for this function are the data that you would like stored in the vector in the order in which you would like them stored. For example:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>,<span class="fl">25</span><span class="op">)</span></span>
 <span><span class="va">x</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">9</span>,<span class="fl">12</span>,<span class="fl">15</span><span class="op">)</span></span>
 <span><span class="va">y</span></span></code></pre></div>
 <pre><code>## [1]  3  6  9 12 15</code></pre>
 <p>The concatenate function can also be used to add a value to a vector or to combine preexisting vectors.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">30</span><span class="op">)</span></span>
 <span><span class="va">x2</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25 30</code></pre>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">z</span></span></code></pre></div>
 <pre><code>##  [1]  5 10 15 20 25  3  6  9 12 15</code></pre>
 <p>It is important to remember that the order in which the objects are specified is the order in which they will be saved in the vector.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y</span>,<span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1]  3  6  9 12 15  5 10 15 20 25</code></pre>
 <div id="pattern-vectors" class="section level4" number="1.9.1.1">
@@ -464,38 +479,38 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <ol style="list-style-type: decimal">
 <li>If you are wanting to create a vector that contains a sequence of consecutive integers, then you can use the syntax a:b to create a vector that starts at a and increases or decreases by one until b.</li>
 </ol>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">5</span><span class="op">:</span><span class="fl">1</span></span></code></pre></div>
 <pre><code>## [1] 5 4 3 2 1</code></pre>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="op">-</span><span class="fl">5</span></span></code></pre></div>
 <pre><code>## [1] -1 -2 -3 -4 -5</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>If you are wanting a sequence where the values have a constant difference other than one, then you can use the sequence function, <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code>. This function takes three arguments: from, to, by. These inputs specify the first and last number of the sequence as well as the difference between each value in the sequence.</li>
 </ol>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fl">1</span>, to<span class="op">=</span><span class="fl">5</span>, by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0</code></pre>
 <p>There is another optional input for the sequence function: length. The length option specifies the length that you want your vector to be or how many values you want contained in the vector. The sequence function will use this value to determine a constant difference between each of the values that yields the number of values that you specify.</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>, length<span class="op">=</span><span class="fl">9</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Another function that creates a useful type of vector is the replicate function, <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code>. This function takes two arguments: vector and number of replicates. These specify what you would like R to repeat and how many times. Depending on the format of what you provide in the times option, this function will either repeat the given vector a specified number of times or repeat the elements of the vector a specified number of times.</li>
 </ol>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] 1 2 3 4 5 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 2 2 3 3 3 4 4 5</code></pre>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] 1 1 2 2 3 3 4 4 5 5</code></pre>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, each<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] 1 1 2 2 3 3 4 4 5 5</code></pre>
 </div>
@@ -505,18 +520,18 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.2</span> Matrices<a class="anchor" aria-label="anchor" href="#mat"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code> function can be used to create a matrix. This function takes four arguments: vector, nrow, ncol, and byrow. These arguments instruct R what values to put in the matrix, how many rows and columns the matrix should have, and whether values should be assigned across the rows or down the columns. The default for the byrow option is false, meaning that the values will be assigned down the columns if the byrow option is not provided.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>,<span class="fl">25</span>,<span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">9</span>,<span class="fl">12</span>,<span class="fl">15</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">2</span>, ncol<span class="op">=</span><span class="fl">5</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    5   10   15   20   25
 ## [2,]    3    6    9   12   15</code></pre>
 <p>Another way to create a matrix is to use either the <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> or <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> function. Both of these functions use vectors as inputs. The <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> function will bind these vectors together as columns and the <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> function will bind these vectors together as rows.</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   [,1] [,2] [,3] [,4] [,5]
 ## x    5   10   15   20   25
 ## y    3    6    9   12   15</code></pre>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##       x  y
 ## [1,]  5  3
@@ -537,22 +552,22 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <li>Logical: Represents Boolean values for binary conditions.</li>
 </ul>
 <p>The vectors and matrices created in sections <a href="Rbasics.html#vec">1.9.1</a> and <a href="Rbasics.html#mat">1.9.2</a> are numeric.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "numeric"</code></pre>
 <p>To create a logical vector:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">log_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">T</span>, <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="co">## Note that T and F are equivalent to TRUE and FALSE resp</span></span></code></pre></div>
 <p>To create a character vector:</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">char_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ByOne"</span>, <span class="st">"ByTwo"</span>, <span class="st">"ByThree"</span>, <span class="st">"ByFour"</span>, <span class="st">"ByFive"</span><span class="op">)</span></span></code></pre></div>
 <p>The <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> function can be used to find out the class of an object, for example:</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "logical"</code></pre>
 <p>Alternatively, functions such as <code>is.character(),</code>is.numeric()<code>,</code>is.logical()` can be used to test for the class:</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p>If a vector or matrix contains multiple types of data, an error message is unlikely to show up. R will modify the data to all be of the same type according to the following hierarchical structure:</p>
@@ -562,13 +577,13 @@ Wherever possible, it is best practice to avoid using the names of existing func
 </li>
 <li>logical</li>
 </ol>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 5</code></pre>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"ByFive"</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "TRUE"   "ByFive" "5"</code></pre>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">char_vect</span>,<span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">mult_mat</span></span></code></pre></div>
 <pre><code>##      char_vect x    y   
@@ -582,18 +597,18 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.3.1</span> Example 1: Mixing numeric with character<a class="anchor" aria-label="anchor" href="#example-1-mixing-numeric-with-character"><i class="fas fa-link"></i></a>
 </h4>
 <p>The most common kind of mixing of classes usually involve a data structure containing a mix of numeric and character, for example:</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mixed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="st">"3"</span><span class="op">)</span></span>
 <span><span class="va">mixed</span> <span class="co">## notice all characters, since they are in quotes</span></span></code></pre></div>
 <pre><code>## [1] "1" "2" "3"</code></pre>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "character"</code></pre>
 <p>Trying to add the numbers in the variable <code>mixed</code> results in an error:</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span></span></code></pre></div>
 <p>In this example, we can <strong>coerce</strong> all entries to become numeric:</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mixed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span> <span class="co">## overwrite existing variable</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">mixed</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
@@ -605,10 +620,10 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.3.2</span> Example 2: Math operations with logical<a class="anchor" aria-label="anchor" href="#example-2-math-operations-with-logical"><i class="fas fa-link"></i></a>
 </h4>
 <p>Interestingly, math operations can be performed on logicals. <code>TRUE</code> and <code>FALSE</code> are considered to be 1 and 0 respectively.</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">log_vect</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>This will be extremely useful later on when working with simulations, as we often want to evaluate the proportion of times certain conditions are met.</p>
@@ -619,7 +634,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.4</span> Data Frames<a class="anchor" aria-label="anchor" href="#data-frames"><i class="fas fa-link"></i></a>
 </h3>
 <p>Data frames are commonly used to store data. There is typically a row for each observation and a column for each variable measured on the observations (think of an EXCEL spreadsheet). A data frame can be created using the <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> function. The arguments to this function are the vectors that you would like to be in the data frame.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">char_vect</span>,<span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">mult_data</span></span></code></pre></div>
 <pre><code>##   char_vect  x  y
@@ -635,7 +650,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <span class="header-section-number">1.9.5</span> Lists<a class="anchor" aria-label="anchor" href="#lists"><i class="fas fa-link"></i></a>
 </h3>
 <p>Lists are the most flexible type of object in R. Lists are similar to vectors in that there is one row containing multiple values. However, in a list, those values can be objects of varying types and sizes. A list is created using the list function, <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>. The arguments specify what you would like in each element of the list.</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">mult_data</span>, <span class="va">z</span>, <span class="va">log_vect</span>, <span class="fl">7</span><span class="op">)</span></span>
 <span><span class="va">mult_list</span></span></code></pre></div>
 <pre><code>## [[1]]
@@ -655,7 +670,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 ## [[4]]
 ## [1] 7</code></pre>
 <p>There are testing and coercion functions for all of the types of data structures. As with the classes of data, coercion may not yield a valid result. Some examples are shown below:</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">is.vector</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">mult_list</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">mult_mat</span><span class="op">)</span></span></code></pre></div>
@@ -751,7 +766,7 @@ Wherever possible, it is best practice to avoid using the names of existing func
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-24.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

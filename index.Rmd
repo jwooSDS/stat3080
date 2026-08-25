@@ -63,7 +63,7 @@ The sections for the book is as follows:
 
 - Sections \@ref(Rbasics) to \@ref(applyfam) focus on core R skills.
 - Sections \@ref(ggplot) to \@ref(EDA) focus on the `tidyverse`, which are a set of packages that are useful when working with data.
-- Sections 10 to 19 focus on simulation-based inference.
+- Sections 11 to 19 focus on simulation-based inference.
 - Section 20 uses simulations to explore key concepts in evaluating statistical estimators and models. 
 
 ## Reporting Issues with Course Notes {-}

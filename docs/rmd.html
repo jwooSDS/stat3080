@@ -7,7 +7,7 @@
 <title>Chapter 2 R Markdown | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="2.1 Why Use R Markdown Imagine you are in this scenario: you have a homework assignment where you are supposed to produce data visualizations and answer some questions based on a data set using R....">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 2 R Markdown | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="2.1 Why Use R Markdown Imagine you are in this scenario: you have a homework assignment where you are supposed to produce data visualizations and answer some questions based on a data set using R....">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="2.1 Why Use R Markdown Imagine you are in this scenario: you have a homework assignment where you are supposed to produce data visualizations and answer some questions based on a data set using R....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -135,12 +136,12 @@
 <span class="header-section-number">2.2.1</span> YAML Header<a class="anchor" aria-label="anchor" href="#yaml-header"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>YAML header</strong> controls the settings associated with the document. At this point, your YAML header looks like this:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb102-1"><a href="rmd.html#cb102-1" tabindex="-1"></a>---</span>
-<span id="cb102-2"><a href="rmd.html#cb102-2" tabindex="-1"></a>title: "Untitled"</span>
-<span id="cb102-3"><a href="rmd.html#cb102-3" tabindex="-1"></a>author: "Jeffrey Woo"</span>
-<span id="cb102-4"><a href="rmd.html#cb102-4" tabindex="-1"></a>date: "2026-07-23"</span>
-<span id="cb102-5"><a href="rmd.html#cb102-5" tabindex="-1"></a>output: html_document</span>
-<span id="cb102-6"><a href="rmd.html#cb102-6" tabindex="-1"></a>---</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb104-1"><a href="rmd.html#cb104-1" tabindex="-1"></a>---</span>
+<span id="cb104-2"><a href="rmd.html#cb104-2" tabindex="-1"></a>title: "Untitled"</span>
+<span id="cb104-3"><a href="rmd.html#cb104-3" tabindex="-1"></a>author: "Jeffrey Woo"</span>
+<span id="cb104-4"><a href="rmd.html#cb104-4" tabindex="-1"></a>date: "2026-07-23"</span>
+<span id="cb104-5"><a href="rmd.html#cb104-5" tabindex="-1"></a>output: html_document</span>
+<span id="cb104-6"><a href="rmd.html#cb104-6" tabindex="-1"></a>---</span></code></pre></div>
 <p>The YAML header is fenced by three dashes, <code>---</code>. These three dashes are also called a <strong>delimiter</strong>. A delimiter is a specific character or symbol used to indicate the boundary between separate, independent regions of the file. You can easily change the title, name, and date by changing the values inside the quotes in the YAML.</p>
 </div>
 <div id="narrative-text" class="section level3" number="2.2.2">
@@ -153,9 +154,9 @@
 <span class="header-section-number">2.2.2.1</span> Section Headers<a class="anchor" aria-label="anchor" href="#section-headers"><i class="fas fa-link"></i></a>
 </h4>
 <p>Use hashtags <code>#</code> followed by a space to create a section header. The more hashtags the smaller the header.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb103-1"><a href="rmd.html#cb103-1" tabindex="-1"></a># 1st level header</span>
-<span id="cb103-2"><a href="rmd.html#cb103-2" tabindex="-1"></a>## 2nd level header</span>
-<span id="cb103-3"><a href="rmd.html#cb103-3" tabindex="-1"></a>### 3rd level header</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb105-1"><a href="rmd.html#cb105-1" tabindex="-1"></a># 1st level header</span>
+<span id="cb105-2"><a href="rmd.html#cb105-2" tabindex="-1"></a>## 2nd level header</span>
+<span id="cb105-3"><a href="rmd.html#cb105-3" tabindex="-1"></a>### 3rd level header</span></code></pre></div>
 </div>
 <div id="text-styles" class="section level4" number="2.2.2.2">
 <h4>
@@ -166,33 +167,33 @@
 <li>For bold, fence the word(s) with <code>**</code>.</li>
 <li>To display short code in a text, fence the code with ```.</li>
 </ul>
-<div class="sourceCode" id="cb104"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb104-1"><a href="rmd.html#cb104-1" tabindex="-1"></a>*italicize these words*</span>
-<span id="cb104-2"><a href="rmd.html#cb104-2" tabindex="-1"></a>**bold these words**</span>
-<span id="cb104-3"><a href="rmd.html#cb104-3" tabindex="-1"></a>`mean(c(4,6,10))`</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb106-1"><a href="rmd.html#cb106-1" tabindex="-1"></a>*italicize these words*</span>
+<span id="cb106-2"><a href="rmd.html#cb106-2" tabindex="-1"></a>**bold these words**</span>
+<span id="cb106-3"><a href="rmd.html#cb106-3" tabindex="-1"></a>`mean(c(4,6,10))`</span></code></pre></div>
 </div>
 <div id="hyperlinks" class="section level4" number="2.2.2.3">
 <h4>
 <span class="header-section-number">2.2.2.3</span> Hyperlinks<a class="anchor" aria-label="anchor" href="#hyperlinks"><i class="fas fa-link"></i></a>
 </h4>
 <p>For hyperlinks, fence the text with <code>[ ]</code> then add the URL in parentheses. For example:</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb105-1"><a href="rmd.html#cb105-1" tabindex="-1"></a>Check out the official [R Markdown Documentation](https://rmarkdown.rstudio.com).</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb107-1"><a href="rmd.html#cb107-1" tabindex="-1"></a>Check out the official [R Markdown Documentation](https://rmarkdown.rstudio.com).</span></code></pre></div>
 </div>
 <div id="lists-1" class="section level4" number="2.2.2.4">
 <h4>
 <span class="header-section-number">2.2.2.4</span> Lists<a class="anchor" aria-label="anchor" href="#lists-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>For an unordered bullet point list, start each line with a dash <code>-</code>, asterisk <code>*</code>, or plus <code>+</code> followed by a space.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb106-1"><a href="rmd.html#cb106-1" tabindex="-1"></a>- First item</span>
-<span id="cb106-2"><a href="rmd.html#cb106-2" tabindex="-1"></a>- Second item</span>
-<span id="cb106-3"><a href="rmd.html#cb106-3" tabindex="-1"></a>- Third item</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb108-1"><a href="rmd.html#cb108-1" tabindex="-1"></a>- First item</span>
+<span id="cb108-2"><a href="rmd.html#cb108-2" tabindex="-1"></a>- Second item</span>
+<span id="cb108-3"><a href="rmd.html#cb108-3" tabindex="-1"></a>- Third item</span></code></pre></div>
 <p>For a numbered list, start each line with a number followed by a period and a space.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb107-1"><a href="rmd.html#cb107-1" tabindex="-1"></a>1. First item</span>
-<span id="cb107-2"><a href="rmd.html#cb107-2" tabindex="-1"></a>2. Second item</span>
-<span id="cb107-3"><a href="rmd.html#cb107-3" tabindex="-1"></a>3. Third item</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb109-1"><a href="rmd.html#cb109-1" tabindex="-1"></a>1. First item</span>
+<span id="cb109-2"><a href="rmd.html#cb109-2" tabindex="-1"></a>2. Second item</span>
+<span id="cb109-3"><a href="rmd.html#cb109-3" tabindex="-1"></a>3. Third item</span></code></pre></div>
 <p>For a nested list, indent the line with two or four spaces (or one tab) and use the list marker.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb108-1"><a href="rmd.html#cb108-1" tabindex="-1"></a>- Main item 1</span>
-<span id="cb108-2"><a href="rmd.html#cb108-2" tabindex="-1"></a>    - Sub-item 1a</span>
-<span id="cb108-3"><a href="rmd.html#cb108-3" tabindex="-1"></a>    - Sub-item 1b</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb110-1"><a href="rmd.html#cb110-1" tabindex="-1"></a>- Main item 1</span>
+<span id="cb110-2"><a href="rmd.html#cb110-2" tabindex="-1"></a>    - Sub-item 1a</span>
+<span id="cb110-3"><a href="rmd.html#cb110-3" tabindex="-1"></a>    - Sub-item 1b</span></code></pre></div>
 </div>
 </div>
 <div id="code-chunks" class="section level3" number="2.2.3">
@@ -225,7 +226,7 @@
 <span class="header-section-number">2.2.3.2</span> Inline Code<a class="anchor" aria-label="anchor" href="#inline-code"><i class="fas fa-link"></i></a>
 </h4>
 <p>To display the result from R directly inside the narrative text, use inline R code by fencing the R code with single backticks starting with the letter <code>r</code>, for example:</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb109-1"><a href="rmd.html#cb109-1" tabindex="-1"></a>The average of 2, 5, and 9 is`r mean(c(2, 5, 9))`.</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb111-1"><a href="rmd.html#cb111-1" tabindex="-1"></a>The average of 2, 5, and 9 is`r mean(c(2, 5, 9))`.</span></code></pre></div>
 <p>You may want to consider using the <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> function as R tends to print out a lot of decimal places</p>
 </div>
 </div>
@@ -236,12 +237,12 @@
 </h2>
 <p><strong>Cross-referencing</strong> is done in a document to help connect related information to readers. You will often that you will want to connect a narrative with a graphical output, information presented in a table, a math equation, or a citation.</p>
 <p>Cross-referencing is not provided directly within the <code>rmarkdown</code> package, but via the <code>bookdown</code> extension package. The output format in the YAML needs to be <code>html_document2</code>, <code>pdf_document2</code>, or <code>word_document2</code>. For example</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb110-1"><a href="rmd.html#cb110-1" tabindex="-1"></a>---</span>
-<span id="cb110-2"><a href="rmd.html#cb110-2" tabindex="-1"></a>title: "Untitled"</span>
-<span id="cb110-3"><a href="rmd.html#cb110-3" tabindex="-1"></a>author: "Jeffrey Woo"</span>
-<span id="cb110-4"><a href="rmd.html#cb110-4" tabindex="-1"></a>date: "2026-07-23"</span>
-<span id="cb110-5"><a href="rmd.html#cb110-5" tabindex="-1"></a>output: bookdown::html_document2: default</span>
-<span id="cb110-6"><a href="rmd.html#cb110-6" tabindex="-1"></a>---</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb112-1"><a href="rmd.html#cb112-1" tabindex="-1"></a>---</span>
+<span id="cb112-2"><a href="rmd.html#cb112-2" tabindex="-1"></a>title: "Untitled"</span>
+<span id="cb112-3"><a href="rmd.html#cb112-3" tabindex="-1"></a>author: "Jeffrey Woo"</span>
+<span id="cb112-4"><a href="rmd.html#cb112-4" tabindex="-1"></a>date: "2026-07-23"</span>
+<span id="cb112-5"><a href="rmd.html#cb112-5" tabindex="-1"></a>output: bookdown::html_document2: default</span>
+<span id="cb112-6"><a href="rmd.html#cb112-6" tabindex="-1"></a>---</span></code></pre></div>
 <p>R Markdown does cross-referencing and automatically numbers them for you. Below, we will go over a simple example of how to label a figure produced by R, and then refer to it in a narrative.</p>
 <p>For this example, we will use the <code>pressure</code> data set that is loaded in base R. Per its documentation, the data are the temperature in degrees Celsius and vapor pressure of mercury in millimeters (of mercury).</p>
 <p>In the code chunk below, notice a couple of items are added inside the curly braces:</p>
@@ -249,9 +250,9 @@
 <li>A label, <code>plot-pressure</code> for this example.</li>
 <li>A caption via <code>fig.cap</code>.</li>
 </ol>
-<div class="sourceCode" id="cb111"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb111-1"><a href="rmd.html#cb111-1" tabindex="-1"></a>```{r plot-pressure, fig.cap="Vapor Pressure of Mercury in mm Hg Against Temp in Celcius"}</span>
-<span id="cb111-2"><a href="rmd.html#cb111-2" tabindex="-1"></a>plot(pressure)  # a scatterplot</span>
-<span id="cb111-3"><a href="rmd.html#cb111-3" tabindex="-1"></a>```</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb113-1"><a href="rmd.html#cb113-1" tabindex="-1"></a>```{r plot-pressure, fig.cap="Vapor Pressure of Mercury in mm Hg Against Temp in Celcius"}</span>
+<span id="cb113-2"><a href="rmd.html#cb113-2" tabindex="-1"></a>plot(pressure)  # a scatterplot</span>
+<span id="cb113-3"><a href="rmd.html#cb113-3" tabindex="-1"></a>```</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:plot-pressure"></span>
 <img src="bookdown-demo_files/figure-html/plot-pressure-1.png" alt="Vapor Pressure of Mercury in mm Hg Against Temp in Celcius" width="672"><p class="caption">
@@ -305,7 +306,7 @@ Figure 2.1: Vapor Pressure of Mercury in mm Hg Against Temp in Celcius
 <ul>
 <li>To knit the file into a PDF, you need LaTeX, which can be installed by running the following two commands in the R Console:</li>
 </ul>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tinytex"</span><span class="op">)</span></span>
 <span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
@@ -371,7 +372,7 @@ Figure 2.1: Vapor Pressure of Mercury in mm Hg Against Temp in Celcius
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-24.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

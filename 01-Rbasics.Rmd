@@ -84,6 +84,7 @@ An **RStudio Project** is a folder with a `.Rproj` file that in it. There are a 
 If you open the folder associated with the created working directory, you will find a file with a `.Rproj` extension created (its name should be the name of the project that you gave in the last step above).
 
 Now, close your RStudio. Navigate to the project folder on your computer and double-click the `.Rproj` file. Your working directory will be where this `.Rproj` file is located. You can confirm using `getwd()`, or by looking at the pane called "Files / Plots / Packages / Help". Click on the files tab and it will display the path of your working directory, and you can also see the other files in this folder. 
+
 2. If you have created an RStudio Project before and have a file with a `.RProj` extension, you can just copy and paste this file and place it into another folder to make it your working directory. This is the approach I almost exclusively use. 
 
 I highly recommend that you create a folder on your computer that is exclusively for this class. You should also create separate subfolders for each assignment. 
@@ -106,12 +107,13 @@ To open a saved R script, open the `.Rproj` file in the working directory, and y
 
 ## Basic Math Operations
 
-R can be used as a calculator by using the standard arithmetic operators:                                                             + 
-- `+`: addition
-- `-`: subtraction
-- `*`: multiplication
-- `/`: division
-- `^`: power
+R can be used as a calculator by using the standard arithmetic operators:
+
+* `+`: addition
+* `-`: subtraction
+* `*`: multiplication
+* `/`: division
+* `^`: power
 
 R is like any calculator in that these operators follow the standard order of operations. Some examples:
 

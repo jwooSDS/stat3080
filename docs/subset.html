@@ -108,7 +108,7 @@
 <h2>
 <span class="header-section-number">3.2</span> Subsetting Data Structures<a class="anchor" aria-label="anchor" href="#subsetting-data-structures"><i class="fas fa-link"></i></a>
 </h2>
-<p>Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the <code>dplyr</code> package, and you will learn these in a later section.</p>
+<p>Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the <code>dplyr</code> package, and you will learn these in Section <a href="dplyr.html#dplyr">9</a>.</p>
 <div id="subsetting-with-brackets" class="section level3" number="3.2.1">
 <h3>
 <span class="header-section-number">3.2.1</span> Subsetting with Brackets<a class="anchor" aria-label="anchor" href="#subsetting-with-brackets"><i class="fas fa-link"></i></a>
@@ -125,7 +125,7 @@
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="co">## for comparison</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
-<p>Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g. statisticians think in terms of sample size). This is unlike indexing from 0 for other software such as Python and C, who audiences tend to be programmers and software engineers.</p>
+<p>Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g. statisticians think in terms of sample size). This is unlike indexing from 0 for other software such as Python and C, whose audiences tend to be programmers and software engineers.</p>
 <p>Multiple positions can be specified by using a vector in the brackets.</p>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co">##1st and 3rd elements</span></span></code></pre></div>

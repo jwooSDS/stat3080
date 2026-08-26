@@ -19,7 +19,7 @@ mult_list <- list(mult_data, z, log_vect, 7)
 
 ## Subsetting Data Structures
 
-Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the `dplyr` package, and you will learn these in a later section. 
+Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the `dplyr` package, and you will learn these in Section \@ref(dplyr). 
 
 ### Subsetting with Brackets
 
@@ -34,7 +34,7 @@ x[3]
 x ## for comparison
 ```
 
-Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g. statisticians think in terms of sample size). This is unlike indexing from 0 for other software such as Python and C, who audiences tend to be programmers and software engineers.
+Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g. statisticians think in terms of sample size). This is unlike indexing from 0 for other software such as Python and C, whose audiences tend to be programmers and software engineers.
 
 Multiple positions can be specified by using a vector in the brackets.
 

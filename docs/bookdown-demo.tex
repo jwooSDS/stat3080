@@ -677,8 +677,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  3.65808859  2.44719478  3.64781254 -2.58692694  0.03396362  0.42438246
-##  [7]  1.43313329  1.92703237  5.84024048  1.55279774
+##  [1]  0.5357409  0.5073902  1.0030488  1.8640830 -2.0193691 -1.4222053
+##  [7]  3.3039361 -0.1810332 -2.3979459  0.7794357
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -1725,7 +1725,7 @@ We will create the same data structures in section \ref{structures} of the notes
 \hypertarget{subsetting-data-structures}{%
 \section{Subsetting Data Structures}\label{subsetting-data-structures}}
 
-Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the \texttt{dplyr} package, and you will learn these in a later section.
+Once a data structure is created and stored, it may be useful in subsequent analyses to subset that data structure. You will learn how to subset data structures using base R functions in this section. Similar operations can be performed using functions from the \texttt{dplyr} package, and you will learn these in Section \ref{dplyr}.
 
 \hypertarget{subsetting-with-brackets}{%
 \subsection{Subsetting with Brackets}\label{subsetting-with-brackets}}
@@ -1757,7 +1757,7 @@ The position index of any vector begins at 1 and uses consecutive positive integ
 ## [1]  5 10 15 20 25
 \end{verbatim}
 
-Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g.~statisticians think in terms of sample size). This is unlike indexing from 0 for other software such as Python and C, who audiences tend to be programmers and software engineers.
+Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g.~statisticians think in terms of sample size). This is unlike indexing from 0 for other software such as Python and C, whose audiences tend to be programmers and software engineers.
 
 Multiple positions can be specified by using a vector in the brackets.
 

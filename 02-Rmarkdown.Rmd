@@ -131,7 +131,8 @@ You can type in your R commands inside the code chunks.
 
 You can customize how the code runs and displays by using chunk options inside the curly braces. There a lot of options; the ones you may use are:
 
-- `message = FALSE`: which hides messages or warnings that R produces from your document.
+- `message = FALSE`: which hides messages that R produces from your document.
+- `warning = FALSE`: which hides warnings that R produces from your document.
 - `echo = FALSE`: which hides the code, but allows the results from R to be displayed in your document. This should be used if readers do not want the R code.
 - `eval = FALSE`: which shows the code but does not execute the code in your document. This is used for displaying example R code. (I use it a lot in these notes)
 
@@ -166,7 +167,7 @@ For this example, we will use the `pressure` data set that is loaded in base R. 
 
 In the code chunk below, notice a couple of items are added inside the curly braces:
 
-1. A label, `plot-pressure` for this example. 
+1. A label, `plot-pressure`, for this example. 
 2. A caption via `fig.cap`.
 
 ````{verbatim}
@@ -185,7 +186,7 @@ To cite the figure, type `\@ref(fig:plot-pressure)` in the narrative, using the 
 
 This is just a simple example. Referencing tables and equations are similar. Details can be found in @xie2020 Chapter 4.7.
 
-Note: you will learn more about creating plots in a later Section. 
+Note: you will learn more about creating plots later in Section \@ref(ggplot). 
 
 ## Knitting Your Document
 

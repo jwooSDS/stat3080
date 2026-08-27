@@ -66,12 +66,12 @@ CtoFrounded <- function(celsius, decimals = 0) {
 }
 
 CtoFrounded(27)
-CtoFrounded(27, decimals = 1)
+CtoFrounded(celsius = 27, decimals = 1)
 ```
 
-In the function `CtoFrounded()`, a second argument appears, `decimals`, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value. The first argument `celsius` is not set to any default, and must be specified when calling the function.
+In the function `CtoFrounded()`, a second argument appears, `decimals`, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value when using the function. The first argument `celsius` is not set to any default, and must be specified when calling the function.
 
-You can also use `CtoFrounded(27, 1)` to get 27 degrees Celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created. 
+You can also use `CtoFrounded(27, 1)` to get 27 degrees Celsius converted to 1 decimal place. The values for the arguments entered in the function must be in the same order as the order of the arguments when the function is created. 
 
 ```{r}
 CtoFrounded(27, 1)
@@ -96,7 +96,7 @@ CtoFnodef(27, 1)
 
 ## Argument Validation {#validation}
 
-Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function `CtoF()`. This is called **argument validation**. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
+Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. This is called **argument validation**. Consider our function `CtoF()`. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
 
 ```{r error=TRUE}
 CtoFcheck <- function(celsius) {
@@ -139,7 +139,7 @@ get_summary_stats(c(4,3,1,2,8))$mean
 
 ## Scope
 
-Variables inside a function are **local**. This means that the value of a variable is not stored in the environment after the function is run (see Section \@ref(#basicFunc) where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,
+Variables inside a function are **local**. This means that the value of a variable is not stored in the environment after the function is run (see Section \@ref(basicFunc) where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,
 
 ```{r}
 a <- 3 ## global

@@ -154,10 +154,10 @@
 <span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 81</code></pre>
 <div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span>celsius <span class="op">=</span> <span class="fl">27</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
-<p>In the function <code>CtoFrounded()</code>, a second argument appears, <code>decimals</code>, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value. The first argument <code>celsius</code> is not set to any default, and must be specified when calling the function.</p>
-<p>You can also use <code>CtoFrounded(27, 1)</code> to get 27 degrees Celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created.</p>
+<p>In the function <code>CtoFrounded()</code>, a second argument appears, <code>decimals</code>, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value when using the function. The first argument <code>celsius</code> is not set to any default, and must be specified when calling the function.</p>
+<p>You can also use <code>CtoFrounded(27, 1)</code> to get 27 degrees Celsius converted to 1 decimal place. The values for the arguments entered in the function must be in the same order as the order of the arguments when the function is created.</p>
 <div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
@@ -179,7 +179,7 @@
 <h2>
 <span class="header-section-number">4.5</span> Argument Validation<a class="anchor" aria-label="anchor" href="#validation"><i class="fas fa-link"></i></a>
 </h2>
-<p>Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function <code>CtoF()</code>. This is called <strong>argument validation</strong>. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.</p>
+<p>Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. This is called <strong>argument validation</strong>. Consider our function <code>CtoF()</code>. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.</p>
 <div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CtoFcheck</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -230,7 +230,7 @@
 <h2>
 <span class="header-section-number">4.7</span> Scope<a class="anchor" aria-label="anchor" href="#scope"><i class="fas fa-link"></i></a>
 </h2>
-<p>Variables inside a function are <strong>local</strong>. This means that the value of a variable is not stored in the environment after the function is run (see Section @ref(#basicFunc) where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,</p>
+<p>Variables inside a function are <strong>local</strong>. This means that the value of a variable is not stored in the environment after the function is run (see Section <a href="func.html#basicFunc">4.2</a> where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,</p>
 <div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">3</span> <span class="co">## global</span></span>
 <span></span>
@@ -278,7 +278,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-26.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

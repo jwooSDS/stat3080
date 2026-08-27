@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-08-26}
+\date{2026-08-27}
 
 \begin{document}
 \maketitle
@@ -677,8 +677,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.5357409  0.5073902  1.0030488  1.8640830 -2.0193691 -1.4222053
-##  [7]  3.3039361 -0.1810332 -2.3979459  0.7794357
+##  [1]  2.9326763  4.0862056 -1.5262368 -0.6490301  0.1819479  5.0663647
+##  [7]  4.4213425 -1.9721255  2.3544601 -2.9404784
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -2855,7 +2855,7 @@ A function can take more than one argument (or even zero arguments such as \text
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{CtoFrounded}\NormalTok{(}\DecValTok{27}\NormalTok{, }\AttributeTok{decimals =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{CtoFrounded}\NormalTok{(}\AttributeTok{celsius =} \DecValTok{27}\NormalTok{, }\AttributeTok{decimals =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2863,9 +2863,9 @@ A function can take more than one argument (or even zero arguments such as \text
 ## [1] 80.6
 \end{verbatim}
 
-In the function \texttt{CtoFrounded()}, a second argument appears, \texttt{decimals}, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value. The first argument \texttt{celsius} is not set to any default, and must be specified when calling the function.
+In the function \texttt{CtoFrounded()}, a second argument appears, \texttt{decimals}, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value when using the function. The first argument \texttt{celsius} is not set to any default, and must be specified when calling the function.
 
-You can also use \texttt{CtoFrounded(27,\ 1)} to get 27 degrees Celsius converted to 1 decimal place. The numbers entered in the function must be in the same order as the order of the arguments when the function is created.
+You can also use \texttt{CtoFrounded(27,\ 1)} to get 27 degrees Celsius converted to 1 decimal place. The values for the arguments entered in the function must be in the same order as the order of the arguments when the function is created.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2909,7 +2909,7 @@ You can also decide to have no defaults for any argument at all
 \hypertarget{validation}{%
 \section{Argument Validation}\label{validation}}
 
-Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. Consider out function \texttt{CtoF()}. This is called \textbf{argument validation}. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
+Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. This is called \textbf{argument validation}. Consider our function \texttt{CtoF()}. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2992,7 +2992,7 @@ R functions return a single object. If you need to return multiple objects, you 
 \hypertarget{scope}{%
 \section{Scope}\label{scope}}
 
-Variables inside a function are \textbf{local}. This means that the value of a variable is not stored in the environment after the function is run (see Section @ref(\#basicFunc) where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,
+Variables inside a function are \textbf{local}. This means that the value of a variable is not stored in the environment after the function is run (see Section \ref{basicFunc} where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,
 
 \begin{Shaded}
 \begin{Highlighting}[]

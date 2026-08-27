@@ -7,7 +7,7 @@
 <title>Chapter 4 Functions | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="4.1 Motivation Imagine you are using R to work on a project. You may notice that you have copied and pasted blocks of code in a number of places of your code, with minor tweaks in the value of a...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Functions | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="4.1 Motivation Imagine you are using R to work on a project. You may notice that you have copied and pasted blocks of code in a number of places of your code, with minor tweaks in the value of a...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="4.1 Motivation Imagine you are using R to work on a project. You may notice that you have copied and pasted blocks of code in a number of places of your code, with minor tweaks in the value of a...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -106,13 +107,13 @@
 <span class="header-section-number">4.2</span> Basic Syntax<a class="anchor" aria-label="anchor" href="#basicFunc"><i class="fas fa-link"></i></a>
 </h2>
 <p>Suppose you want to convert temperature from Celsius to Fahrenheit in your code. You can create a function in the following manner:</p>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CtoF</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>In this particular example, the function name is <code>CtoF()</code>. It only takes in one argument named <code>celsius</code>. The value of the argument is the value that can change each time the function is used. We then use an open brace, press enter to enter the body of the function, and then press enter and then use a close brace. The body of the function are the commands that are executed when the function is used.</p>
 <p>To use this function to convert 27 degrees Celsius to Fahrenheit</p>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">CtoF</span><span class="op">(</span><span class="fl">27</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
 <p>In this example, you can think of the following sequence of events happening when executing the function named <code>CtoF(27)</code>:</p>
@@ -129,7 +130,7 @@
 <span class="header-section-number">4.3</span> Returning a Value<a class="anchor" aria-label="anchor" href="#returning-a-value"><i class="fas fa-link"></i></a>
 </h2>
 <p>A function in R returns the value of its last evaluated expression. You could explicitly use <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> in the body to clearly state what you want returned. The function below performs identically to <code>CtoF()</code>:</p>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## explicit return</span></span>
 <span><span class="va">CtoFexp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">fahrenheit</span> <span class="op">&lt;-</span> <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
@@ -145,7 +146,7 @@
 <span class="header-section-number">4.4</span> Arguments and Default Values<a class="anchor" aria-label="anchor" href="#arguments-and-default-values"><i class="fas fa-link"></i></a>
 </h2>
 <p>A function can take more than one argument (or even zero arguments such as <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code>), and any number of arguments can have a <strong>default</strong> value. Suppose we want to convert Celsius to Fahrenheit, but also want to function to round to the nearest whole number, by default.</p>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CtoFrounded</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span>, <span class="va">decimals</span> <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">fahrenheit</span> <span class="op">&lt;-</span> <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">fahrenheit</span>, <span class="va">decimals</span><span class="op">)</span></span>
@@ -153,20 +154,20 @@
 <span></span>
 <span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 81</code></pre>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span>celsius <span class="op">=</span> <span class="fl">27</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
 <p>In the function <code>CtoFrounded()</code>, a second argument appears, <code>decimals</code>, and is set to 0 by default with the equal sign. This argument does not need to be entered if you want to use the default value when using the function. The first argument <code>celsius</code> is not set to any default, and must be specified when calling the function.</p>
 <p>You can also use <code>CtoFrounded(27, 1)</code> to get 27 degrees Celsius converted to 1 decimal place. The values for the arguments entered in the function must be in the same order as the order of the arguments when the function is created.</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span><span class="fl">27</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
 <p>Alternatively, you can use <code>CtoFrounded(decimals = 1, celsius = 27)</code>. The order does not matter if you specify the names of the arguments.</p>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">CtoFrounded</span><span class="op">(</span>decimals <span class="op">=</span> <span class="fl">1</span>, celsius <span class="op">=</span> <span class="fl">27</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 80.6</code></pre>
 <p>You can also decide to have no defaults for any argument at all</p>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CtoFnodef</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span>, <span class="va">decimals</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">fahrenheit</span> <span class="op">&lt;-</span> <span class="va">celsius</span> <span class="op">*</span> <span class="op">(</span><span class="fl">9</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span> <span class="op">+</span> <span class="fl">32</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">fahrenheit</span>, <span class="va">decimals</span><span class="op">)</span></span>
@@ -180,7 +181,7 @@
 <span class="header-section-number">4.5</span> Argument Validation<a class="anchor" aria-label="anchor" href="#validation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Ideally, your function should check if the argument entered satisfies certain conditions, and outputs either an error message if the argument does not work, or a warning message if the argument is suspicious. This is called <strong>argument validation</strong>. Consider our function <code>CtoF()</code>. To convert Celsius to Fahrenheit, the argument entered must be numeric, and the numeric should be within a reasonable range for temperatures.</p>
-<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CtoFcheck</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">celsius</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"celsius must be numeric "</span><span class="op">)</span></span>
@@ -192,8 +193,9 @@
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu">CtoFcheck</span><span class="op">(</span><span class="st">"blah"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Error in CtoFcheck("blah"): celsius must be numeric</code></pre>
-<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<pre><code>## Error in `CtoFcheck()`:
+## ! celsius must be numeric</code></pre>
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">CtoFcheck</span><span class="op">(</span><span class="fl">250</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in CtoFcheck(250): Is celsius within acceptable range?</code></pre>
 <pre><code>## [1] 482</code></pre>
@@ -206,7 +208,7 @@
 <span class="header-section-number">4.6</span> Return Multiple Objects<a class="anchor" aria-label="anchor" href="#funcMult"><i class="fas fa-link"></i></a>
 </h2>
 <p>R functions return a single object. If you need to return multiple objects, you can return those objects into a named list. For example,</p>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Returning multiple items using a list</span></span>
 <span><span class="va">get_summary_stats</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">vec</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">my_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vec</span><span class="op">)</span></span>
@@ -222,7 +224,7 @@
 ## 
 ## $sd
 ## [1] 2.701851</code></pre>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">get_summary_stats</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">mean</span></span></code></pre></div>
 <pre><code>## [1] 3.6</code></pre>
 </div>
@@ -231,7 +233,7 @@
 <span class="header-section-number">4.7</span> Scope<a class="anchor" aria-label="anchor" href="#scope"><i class="fas fa-link"></i></a>
 </h2>
 <p>Variables inside a function are <strong>local</strong>. This means that the value of a variable is not stored in the environment after the function is run (see Section <a href="func.html#basicFunc">4.2</a> where I described the sequence of events when the function is executed). This means that if there is a variable with the same name outside the function, the variable outside is not overwritten. For example,</p>
-<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">3</span> <span class="co">## global</span></span>
 <span></span>
 <span><span class="va">toy1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
@@ -241,7 +243,7 @@
 <span></span>
 <span><span class="fu">toy1</span><span class="op">(</span><span class="op">)</span> <span class="co">## function uses local a</span></span></code></pre></div>
 <pre><code>## [1] 30</code></pre>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="co">## global untouched</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>This means that we do not have to be concerned with names of variables inside a function that we create, as these variables will not overwrite variables with the same name outside the function.</p>

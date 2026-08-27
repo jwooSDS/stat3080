@@ -22,6 +22,8 @@ fig:ch8barprop
 fig:ch8order
 fig:ch8box1
 fig:ch8dens1
+fig:ch8box2
+fig:ch8dens2
 fig:ch8sim
 fig:ch8sim2
 fig:ch10hist

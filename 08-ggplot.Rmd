@@ -294,6 +294,16 @@ ggplot(Data, aes(x = body_mass_g)) +
   geom_density()
 ```
 
+Or with base R
+
+```{r ch8box2, fig.cap="Boxplot via Base R",}
+boxplot(Data$body_mass_g) 
+```
+
+```{r ch8dens2, fig.cap="Density Plot via Base R",}
+plot(density(Data$body_mass_g, na.rm=TRUE)) 
+```
+
 ## Visualizations from Simulations
 
 You may realize that `ggplot()` assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values:

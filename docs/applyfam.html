@@ -7,7 +7,7 @@
 <title>Chapter 7 Apply Family | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="7.1 Overview We often want to apply the same function separately to each element of a vector. R has the apply family of functions that implement loops in specialized use cases. This family of...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Apply Family | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="7.1 Overview We often want to apply the same function separately to each element of a vector. R has the apply family of functions that implement loops in specialized use cases. This family of...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="7.1 Overview We often want to apply the same function separately to each element of a vector. R has the apply family of functions that implement loops in specialized use cases. This family of...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -115,13 +116,13 @@
 <span class="header-section-number">7.2</span> <code>apply()</code><a class="anchor" aria-label="anchor" href="#apply"><i class="fas fa-link"></i></a>
 </h2>
 <p>You learned about the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function in Section <a href="subset.html#funcDF">3.5</a>. It is to apply a function over the margins of an array. To reiterate: it uses three arguments: data, margin, and function. The data argument specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied. For example, to find the average weight and height all respondents in the <code>Davis</code> data set from the <code>carData</code> package:</p>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">carData</a></span><span class="op">)</span></span>
 <span><span class="va">Data.Davis</span> <span class="op">&lt;-</span> <span class="fu">carData</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/carData/man/Davis.html">Davis</a></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">Data.Davis</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## weight height 
 ##  65.80 170.02</code></pre>
-<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##2 for columns, 1 for rows</span></span></code></pre></div>
 <p>You may realize that one could use a loop to obtain these values. The <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function is more succinct, although it does not really run faster than a loop <span class="citation">(<a href="references.html#ref-peng2015">Peng 2015</a>)</span>.</p>
 <p>We so often compute sums or means of columns or rows that there functions that produce the same output as equivalent <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> versions:</p>
@@ -142,7 +143,7 @@
 <span class="header-section-number">7.3</span> <code>tapply()</code><a class="anchor" aria-label="anchor" href="#tapply"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <code><a href="https://rdrr.io/r/base/tapply.html">tapply()</a></code> function is used for a vector of values that can be categorized by a second vector of values. It uses three arguments: data, categorizations, and function. The data input specifies the vector of values that should be grouped and to which the function should be applied, categorizations specifies the category of each corresponding value in the data vector, and function specifies the function to be applied to each resulting group. For example, to find the average weight of female and male respondents in the <code>Davis</code> data set.</p>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">Davis</span><span class="op">$</span><span class="va">weight</span>, <span class="va">Davis</span><span class="op">$</span><span class="va">sex</span>, <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##        F        M 
 ## 57.86607 75.89773</code></pre>
@@ -152,7 +153,7 @@
 <span class="header-section-number">7.4</span> <code>lapply()</code> and <code>sapply()</code><a class="anchor" aria-label="anchor" href="#lapply-and-sapply"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> functions are both used for lists. Once the specified function is applied, <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> returns a list and <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> attempts to simply the result. They use two arguments: data and function. The data argument specifies the list of elements to which the function should be applied and function specifies the function. If the function has other arguments, they can be specified as additional arguments in <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>. For example:</p>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $a
@@ -160,10 +161,10 @@
 ## 
 ## $b
 ## [1] -0.07310692</code></pre>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##get the mean of 1:5 and the mean for 10 draws from standard normal</span></span></code></pre></div>
 <p>You can use <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> to evaluate a function multiple times each with a different argument. This can be useful if you want to vary the value of an argument in a simulation. For example, to replicate drawing <span class="math inline">\(n\)</span> values from a standard uniform distribution, with <span class="math inline">\(n = 1, 2, 3, 4\)</span>.</p>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">v2</span>, <span class="va">runif</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [[1]]
@@ -179,7 +180,7 @@
 ## [1] 0.27514918 0.03114826 0.01448234 0.48716903</code></pre>
 <p>When you pass a function to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>, <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> takes elements of the list and passes them as the first argument of the function you are applying. In the above example, the first argument of <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> is <code>n</code>, the number of random draws, and so the elements of the sequence <code>1:4</code> are all passed to the <code>n</code> argument of <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code>.</p>
 <p>Functions that you pass to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> may have other arguments. For example, the <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> function has a <code>min</code> and <code>max</code> argument. When these are unspecified, the default values are 0 and 1 respectively, which gives the standard uniform distribution. If these arguments need to be specified, they are passed to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> next. For example, to replicate drawing <span class="math inline">\(n\)</span> values from a uniform distribution with <code>min=3</code> and <code>max=10</code>, with <span class="math inline">\(n = 1, 2, 3, 4\)</span>.</p>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">v2</span>, <span class="va">runif</span>, min <span class="op">=</span> <span class="fl">3</span>, max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 7.166061
@@ -194,7 +195,7 @@
 ## [1] 8.788092 6.734332 9.502599 6.848563</code></pre>
 <p>You can also pass your own function to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>.</p>
 <p><strong>Anonymous functions</strong> can also be passed to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> (and other functions in the apply family). Anonymous functions are functions you create that have no variable name and are not stored in the environment. For example, you have a couple of matrices and you want to extract the first row of each one.</p>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">twoMats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">twoMats</span></span></code></pre></div>
@@ -208,7 +209,7 @@
 ## [1,]    1    4
 ## [2,]    2    5
 ## [3,]    3    6</code></pre>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">twoMats</span>, <span class="kw">function</span><span class="op">(</span><span class="va">extract</span><span class="op">)</span> <span class="op">{</span> <span class="va">extract</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $a
 ## [1] 1 3
@@ -216,7 +217,7 @@
 ## $b
 ## [1] 1 4</code></pre>
 <p>I recommend using anonymous functions only if the function is simple and if you are going to only use it once. Otherwise, create a function and name it before <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>, and pass the function to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>. For example</p>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">row1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">extract</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">extract</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span></span>
 <span><span class="op">}</span></span>
@@ -240,11 +241,11 @@
 <li>Otherwise, a list is returned, just like <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>.</li>
 </ul>
 <p>Look at the output from the following, and compare with the output from <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>.</p>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##           a           b 
 ##  3.00000000 -0.07310692</code></pre>
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">twoMats</span>, <span class="va">row1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      a b
 ## [1,] 1 1

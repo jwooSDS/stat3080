@@ -7,7 +7,7 @@
 <title>Chapter 11 Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION) | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 11 Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION) | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,7 +26,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -137,7 +136,7 @@
 <p>The <strong>Law of Large Numbers</strong> (LLN) states that as <span class="math inline">\(n\)</span> gets larger and approaches infinity, the sample mean <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span> converges to the true mean <span class="math inline">\(\mu\)</span>. This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever <span class="math inline">\(n\)</span> gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes.</p>
 <p>Another implication of the LLN is that we can use Monte Carlo simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications.</p>
 <p>We use an example to illustrate the LLN, which comes from flipping a fair coin. Let <span class="math inline">\(X\)</span> denote whether the coin lands heads or tails, and let <span class="math inline">\(X=1\)</span> for heads and <span class="math inline">\(X=0\)</span> for tails. We can say that <span class="math inline">\(X \sim Bern(0.5)\)</span> since the coin is fair. Imagine flipping the coin <span class="math inline">\(n\)</span> times, and record the outcome after each flip, so <span class="math inline">\(X_1, \cdots, X_n\)</span> denote the outcome of each flip. We know that <span class="math inline">\(E(X) = 0.5\)</span> since <span class="math inline">\(X \sim Bern(0.5)\)</span>. The LLN informs us that <span class="math inline">\(\bar{X}_1, \cdots, \bar{X}_n\)</span> should usually get closer to 0.5 as <span class="math inline">\(n\)</span> increases. In other words, the value of the sample proportion after each flip should usually get closer to 0.5 with more flips. The code below simulates this example for <span class="math inline">\(n=500\)</span>, and Figure <a href="clt.html#fig:LLN">11.1</a> shows how the sample proportions get closer to 0.5, in general, as <span class="math inline">\(n\)</span> increases.</p>
-<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##make this big, but not too big otherwise picture is difficult to see</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span></span>
@@ -195,7 +194,7 @@ Figure 11.1: LLN Example with Coin Flips
 <li>Calculate <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
 <li>Find the sample average of <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
@@ -206,7 +205,7 @@ Figure 11.1: LLN Example with Coin Flips
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">)</span> <span class="co">##sample average of squared values. </span></span></code></pre></div>
 <pre><code>## [1] 1.024546</code></pre>
-<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##when reps is large, this sample mean should be close to the true E(X^2), which is 1</span></span></code></pre></div>
 <p>Since <span class="math inline">\(X\)</span> is standard normal, we know <span class="math inline">\(E(X) = 0\)</span> and <span class="math inline">\(Var(X) = E(X^2) - E(X)^2 = E(X^2) = 1\)</span>. We see in our simulation that our estimated value for <span class="math inline">\(E(X^2)\)</span> is pretty close to its theoretical value.</p>
 </div>
@@ -222,7 +221,7 @@ Figure 11.1: LLN Example with Coin Flips
 <li>Count the number of times <span class="math inline">\(X_i^2\)</span> is greater than 1.</li>
 <li>Divide this number by <span class="math inline">\(M\)</span> to estimate the probability, since probability can be interpreted as a long-run proportion.</li>
 </ul>
-<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
@@ -233,11 +232,11 @@ Figure 11.1: LLN Example with Coin Flips
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##count the number of times X^2 is greater than 1, and divide by M</span></span></code></pre></div>
 <pre><code>## [1] 0.3178</code></pre>
-<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##when reps is large, this proportion should be close to</span></span>
 <span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="fl">1</span>, df<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.3173105</code></pre>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##it turns out that squaring a standard normal gives a chi-squared distribution with 1 df.</span></span></code></pre></div>
 <p>We see the estimated probability <span class="math inline">\(P(X^2 &gt; 1)\)</span> is close to its theoretical probability.</p>
 
@@ -281,7 +280,7 @@ Figure 11.1: LLN Example with Coin Flips
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-27.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

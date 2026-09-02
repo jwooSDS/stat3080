@@ -126,7 +126,7 @@ vectorized-else-if
 iterating
 forloops
 while-loops
-vectorization-in-r
+vectorization
 sims
 motivation-3
 sampling

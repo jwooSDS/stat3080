@@ -7,7 +7,7 @@
 <title>Chapter 3 Working with Data Structures | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="3.1 Motivation Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Working with Data Structures | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="3.1 Motivation Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="3.1 Motivation Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,7 +26,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -95,7 +94,7 @@
 </h2>
 <p>Imagine you are working on a data frame in R. For most analyses, common tasks will include subsetting the data frame, performing math operations on the data frame, and computing summaries of some columns of the data frame. You will learn how to perform these tasks in this section.</p>
 <p>We will create the same data structures in section <a href="Rbasics.html#structures">1.9</a> of the notes to use as examples in this section.</p>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>,<span class="fl">25</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">9</span>,<span class="fl">12</span>,<span class="fl">15</span><span class="op">)</span></span>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
@@ -120,62 +119,62 @@
 </h4>
 <p>The typical notation to <strong>subset</strong> vectors is a set of <strong>brackets</strong>, <code>[ ]</code>, used directly after the variable name of the vector. The information given inside the brackets specifies which elements (in terms of index) should be extracted from the vector.</p>
 <p>The position index of any vector begins at 1 and uses consecutive positive integers up to the length of the vector. For example, to obtain the 3rd element of the vector <code>x</code>:</p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 15</code></pre>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="co">## for comparison</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
 <p>Note: Indexing in R starts from 1. R is designed for data analysis, statistics, and mathematics, where standard notations begin counting at 1 (e.g. statisticians think in terms of sample size). This is unlike indexing from 0 for other software such as Python and C, whose audiences tend to be programmers and software engineers.</p>
 <p>Multiple positions can be specified by using a vector in the brackets.</p>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co">##1st and 3rd elements</span></span></code></pre></div>
 <pre><code>## [1]  5 15</code></pre>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="co">##2nd and 3rd elements</span></span></code></pre></div>
 <pre><code>## [1] 10 15</code></pre>
 <p>If a position is duplicated in the brackets, the corresponding value in the vector will be subset twice.</p>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="co">##1st elements displayed twice</span></span></code></pre></div>
 <pre><code>## [1] 5 5</code></pre>
 <p>If a negative sign is used in the brackets, the specified value(s) will be omitted instead of included in the subset.</p>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="co">##omit element 1</span></span></code></pre></div>
 <pre><code>## [1] 10 15 20 25</code></pre>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co">##omit elements 2, 3</span></span></code></pre></div>
 <pre><code>## [1]  5 20 25</code></pre>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span><span class="op">]</span> <span class="co">##omit elements 1, 4</span></span></code></pre></div>
 <pre><code>## [1] 10 15 25</code></pre>
 <p>Instead of specifying the positions that you would like included or excluded from the subset, you can specify a logical vector in the brackets. R will include the elements corresponding to TRUE and exclude the elements corresponding to FALSE.</p>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">F</span>,<span class="cn">T</span>,<span class="cn">T</span>,<span class="cn">F</span>,<span class="cn">T</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 10 15 25</code></pre>
 <p>If the number of logical inputs does not match the length of the vector, R will repeat the logical inputs until there is a logical input corresponding to each vector element.</p>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">F</span>,<span class="cn">T</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 10 20</code></pre>
 <p>The resulting subset vectors will only be stored if you define a variable name and assign the subset vector to it.</p>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">evens</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">F</span>,<span class="cn">T</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">x</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">evens</span></span></code></pre></div>
 <pre><code>## [1] 10 20</code></pre>
 <p>The brackets following a vector can also be used to replace or add one or more values in a vector.</p>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="va">x</span></span>
 <span></span>
 <span><span class="va">x2</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">30</span> <span class="co">## add 30 as element 6</span></span>
 <span><span class="va">x2</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25 30</code></pre>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x2</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">35</span>,<span class="fl">40</span>,<span class="fl">45</span><span class="op">)</span> <span class="co">##then add 3 values</span></span>
 <span><span class="va">x2</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25 30 35 40 45</code></pre>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">##change value of elements 1, 3 to 0</span></span>
 <span><span class="va">x2</span></span></code></pre></div>
 <pre><code>## [1]  0 10  0 20 25 30 35 40 45</code></pre>
@@ -187,7 +186,7 @@
 <p>To subset a matrix or data frame, a similar bracket notation is used. However, because matrices and data frames are two-dimensional structures, two arguments are required in the brackets. The first argument references the row index and the second input references the column index.</p>
 <p>Note: subsetting data frames is very common when analyzing data, as data are usually stored in data frames.</p>
 <p>The examples below are applied to a data frame. Subsetting matrices work in the same way.</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_data</span></span></code></pre></div>
 <pre><code>##   char_vect  x  y
 ## 1     ByOne  5  3
@@ -195,34 +194,34 @@
 ## 3   ByThree 15  9
 ## 4    ByFour 20 12
 ## 5    ByFive 25 15</code></pre>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Subsetting the value in the first row and second column</span></span>
 <span><span class="va">mult_data</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Subsetting the values in the first two rows and first two columns</span></span>
 <span><span class="va">mult_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##   char_vect  x
 ## 1     ByOne  5
 ## 2     ByTwo 10</code></pre>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Subsetting the values in rows 1, 4 and columns 2, 3</span></span>
 <span><span class="va">mult_data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##    x  y
 ## 1  5  3
 ## 4 20 12</code></pre>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Subsetting the entire first row.</span></span>
 <span><span class="co">## Comma as the 2nd argument means want all columns</span></span>
 <span><span class="va">mult_data</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span></span></code></pre></div>
 <pre><code>##   char_vect x y
 ## 1     ByOne 5 3</code></pre>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Subsetting the entire second column</span></span>
 <span><span class="co">## Comma as the 1st argument means want all rows</span></span>
 <span><span class="va">mult_data</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Subsetting all but the first row</span></span>
 <span><span class="va">mult_data</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>,<span class="op">]</span></span></code></pre></div>
 <pre><code>##   char_vect  x  y
@@ -230,7 +229,7 @@
 ## 3   ByThree 15  9
 ## 4    ByFour 20 12
 ## 5    ByFive 25 15</code></pre>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Subsetting all but the third column</span></span>
 <span><span class="va">mult_data</span><span class="op">[</span>,<span class="op">-</span><span class="fl">3</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##   char_vect  x
@@ -239,7 +238,7 @@
 ## 3   ByThree 15
 ## 4    ByFour 20
 ## 5    ByFive 25</code></pre>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Subsetting the third column twice</span></span>
 <span><span class="va">mult_data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##    y y.1
@@ -248,7 +247,7 @@
 ## 3  9   9
 ## 4 12  12
 ## 5 15  15</code></pre>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Subsetting columns 1, 2, 3 and duplicating the third column</span></span>
 <span><span class="va">mult_data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##   char_vect  x  y y.1
@@ -263,11 +262,11 @@
 <span class="header-section-number">3.2.1.3</span> Subsetting Lists<a class="anchor" aria-label="anchor" href="#subsetting-lists"><i class="fas fa-link"></i></a>
 </h4>
 <p>A list is subset to any of its elements by using <strong>double brackets</strong>, <code>[[ ]]</code>.</p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_list</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
 <p>Double brackets are limited to one value. In order to subset multiple elements of a list, single brackets can be used.</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_list</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [[1]]
 ##  [1]  5 10 15 20 25  3  6  9 12 15
@@ -285,7 +284,7 @@
 <span class="header-section-number">3.2.2.1</span> Label Names with Data Structures<a class="anchor" aria-label="anchor" href="#label-names-with-data-structures"><i class="fas fa-link"></i></a>
 </h4>
 <p>Take a look at the output for <code>mult_data</code>. Notice there is an extra row on top (as if they are headings or labels for the columns) and an extra column (as if they are labels for the rows).</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_data</span></span></code></pre></div>
 <pre><code>##   char_vect  x  y
 ## 1     ByOne  5  3
@@ -294,7 +293,7 @@
 ## 4    ByFour 20 12
 ## 5    ByFive 25 15</code></pre>
 <p><strong>Descriptive names</strong> can be added to columns, rows, or values within data structures. For data frames and lists, column names can be added while creating the data structure.</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_data2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Factor<span class="op">=</span><span class="va">char_vect</span>, Fives<span class="op">=</span><span class="va">x</span>, Threes<span class="op">=</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">mult_data2</span></span></code></pre></div>
 <pre><code>##    Factor Fives Threes
@@ -303,7 +302,7 @@
 ## 3 ByThree    15      9
 ## 4  ByFour    20     12
 ## 5  ByFive    25     15</code></pre>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_list2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Factor.Table<span class="op">=</span><span class="va">mult_data</span>, FiveThree<span class="op">=</span><span class="va">z</span>, </span>
 <span>                   Logical.values<span class="op">=</span><span class="va">log_vect</span>, DaysPerWeek<span class="op">=</span><span class="fl">7</span><span class="op">)</span></span>
 <span><span class="va">mult_list2</span></span></code></pre></div>
@@ -361,16 +360,16 @@
 </tbody>
 </table></div>
 <p>My advice: use <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> for one-dimensional data structures, <code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code> and <code><a href="https://rdrr.io/r/base/colnames.html">rownames()</a></code> for two-dimensional data structures. Examples are displayed below:</p>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="co">## For comparison</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Labeling values in a vector</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">char_vect</span></span>
 <span><span class="va">x</span></span></code></pre></div>
 <pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
 ##       5      10      15      20      25</code></pre>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Labeling rows and columns in a matrix</span></span>
 <span><span class="va">mult_mat2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">mult_mat2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">char_vect</span></span>
@@ -382,7 +381,7 @@
 ## ByThree    15      9
 ## ByFour     20     12
 ## ByFive     25     15</code></pre>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Labeling columns in a data frame</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mult_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Factor"</span>,<span class="st">"Fives"</span>,<span class="st">"Threes"</span><span class="op">)</span></span>
 <span><span class="va">mult_data</span></span></code></pre></div>
@@ -392,7 +391,7 @@
 ## 3 ByThree    15      9
 ## 4  ByFour    20     12
 ## 5  ByFive    25     15</code></pre>
-<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Labeling values in a list</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mult_list</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Factor.Table"</span>, <span class="st">"FiveThree"</span>, <span class="st">"Logical.values"</span>, </span>
 <span>                      <span class="st">"DaysPerWeek"</span><span class="op">)</span></span>
@@ -414,13 +413,13 @@
 ## $DaysPerWeek
 ## [1] 7</code></pre>
 <p>The <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function can also be used to display the names of a data structure.</p>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "ByOne"   "ByTwo"   "ByThree" "ByFour"  "ByFive"</code></pre>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mult_data</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Factor" "Fives"  "Threes"</code></pre>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mult_list</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Factor.Table"   "FiveThree"      "Logical.values" "DaysPerWeek"</code></pre>
 </div>
@@ -429,16 +428,16 @@
 <span class="header-section-number">3.2.2.2</span> Subsetting with Labels<a class="anchor" aria-label="anchor" href="#subsetting-with-labels-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Data structures with labels can be subsetted using their labels. The name of the column or element can be used within the brackets or after the <code>$</code> symbol.</p>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_data</span><span class="op">[</span>,<span class="st">"Fives"</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_data</span><span class="op">$</span><span class="va">Fives</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_list</span><span class="op">[[</span><span class="st">"Logical.values"</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult_list</span><span class="op">$</span><span class="va">Logical.values</span></span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
 </div>
@@ -452,33 +451,33 @@
 <span class="header-section-number">3.2.3.1</span> Logical Expressions<a class="anchor" aria-label="anchor" href="#logicalexp"><i class="fas fa-link"></i></a>
 </h4>
 <p>It may be useful to use a <strong>logical expression</strong> to determine which, if any, elements in a vector have certain qualities. When a logical expression is applied to a vector, the result will be a vector containing TRUE where the condition is satisfied and a FALSE where the condition is not satisfied.</p>
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Are any elements greater than 15?</span></span>
 <span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span></span></code></pre></div>
 <pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
 ##   FALSE   FALSE   FALSE    TRUE    TRUE</code></pre>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Are any elements greater than or equal to 15?</span></span>
 <span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">15</span></span></code></pre></div>
 <pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
 ##   FALSE   FALSE    TRUE    TRUE    TRUE</code></pre>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Are any elements exactly equal to 15?</span></span>
 <span><span class="va">x</span> <span class="op">==</span> <span class="fl">15</span></span></code></pre></div>
 <pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
 ##   FALSE   FALSE    TRUE   FALSE   FALSE</code></pre>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Are any elements not equal to 15?</span></span>
 <span><span class="va">x</span> <span class="op">!=</span> <span class="fl">15</span></span></code></pre></div>
 <pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
 ##    TRUE    TRUE   FALSE    TRUE    TRUE</code></pre>
 <p>Multiple logical expressions can be combined using either <strong>and</strong> or <strong>or</strong>.</p>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Are any elements in x greater than 15 AND the same element in y is equal to 12?</span></span>
 <span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">&amp;</span> <span class="va">y</span> <span class="op">==</span> <span class="fl">12</span></span></code></pre></div>
 <pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
 ##   FALSE   FALSE   FALSE    TRUE   FALSE</code></pre>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Are any elements greater than 15 OR less than 7?</span></span>
 <span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">15</span> <span class="op">|</span> <span class="va">x</span> <span class="op">&lt;</span> <span class="fl">7</span></span></code></pre></div>
 <pre><code>##   ByOne   ByTwo ByThree  ByFour  ByFive 
@@ -489,16 +488,16 @@
 <span class="header-section-number">3.2.3.2</span> Subsetting with Logical Expressions<a class="anchor" aria-label="anchor" href="#subsetting-with-logical-expressions-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>The logical vectors that result from logical expression statements can be used in the brackets to subset a vector just to the values that satisfy the condition.</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">15</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## ByFour ByFive 
 ##     20     25</code></pre>
 <p>Instead of yielding a logical vector for each entry in a vector, the <code><a href="https://rdrr.io/r/base/which.html">which()</a></code> function yields the indexes in the vector where the condition is satisfied. <code>The which()</code> function can also be used in the brackets to subset a vector to just the values that satisfy the condition.</p>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">15</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## ByFour ByFive 
 ##      4      5</code></pre>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">15</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## ByFour ByFive 
 ##     20     25</code></pre>
@@ -520,7 +519,7 @@
 <span class="header-section-number">3.3.1</span> Data Sets from R<a class="anchor" aria-label="anchor" href="#data-sets-from-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>Base R comes pre-loaded with some data sets. You can view them by typing <code><a href="https://rdrr.io/r/utils/data.html">data()</a></code>. You can use the specific data set by typing out its name in the list. To view the <code>airquality</code> data set:</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   Ozone Solar.R Wind Temp Month Day
 ## 1    41     190  7.4   67     5   1
@@ -531,10 +530,10 @@
 ## 6    28      NA 14.9   66     5   6</code></pre>
 <p>You can use the <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> function to print out the first 6 rows of a data frame instead of displaying the entire data frame. This gives the reader a good idea of the data without cluttering the document.</p>
 <p>Notice that this data frame does not appear in the environment. Personally, I like to assign such data frames to an object so it appears on my environment.</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Data.air</span> <span class="op">&lt;-</span> <span class="va">airquality</span></span></code></pre></div>
 <p>Data sets could also come from an R package. For example, the <code>Davis</code> data set comes from the <code>carData</code> package. So install (if needed) and load the package, and type the name of the data set. Again, I prefer to assign the data set to an object so it appears on the environment.</p>
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">carData</a></span><span class="op">)</span></span>
 <span><span class="va">Data.Davis</span> <span class="op">&lt;-</span> <span class="fu">carData</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/carData/man/Davis.html">Davis</a></span></span></code></pre></div>
 <p>Notice that I typed <code><a href="https://rdrr.io/pkg/carData/man/Davis.html">carData::Davis</a></code>. This command tells R to go into the <code>carData</code> package and use the data set called <code>Davis</code>.</p>
@@ -546,11 +545,11 @@
 </h3>
 <p>A file containing a data set can be easily loaded into the workspace. Be sure the file is in the working directory (see Section <a href="Rbasics.html#wd">1.3</a> on how to set the working directory).</p>
 <p>If the data file is comma separated (<code>.csv</code>), the function <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> is used to read in the data.</p>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"Data1.csv"</span>, header<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>The argument <code>header=TRUE</code> tells R that the first row of the file is a label for the columns (header). If the file does not have a header, specify <code>header=FALSE</code>.</p>
 <p>Another common type of data file is a <code>.txt</code> file. In this case, use <code><a href="https://rdrr.io/r/utils/read.table.html">read.table()</a></code>.</p>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## file has headers</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"Data1.txt"</span>, header<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span></code></pre></div>
 <div id="factor-variables" class="section level4" number="3.3.2.1">
@@ -569,33 +568,33 @@
 <span class="header-section-number">3.4</span> Math Operations on Data Structures<a class="anchor" aria-label="anchor" href="#mathops"><i class="fas fa-link"></i></a>
 </h2>
 <p>The standard arithmetic operators can be applied to data structures containing numeric values. To perform the same constant arithmetic operation on each element of a numeric data structure, you will use the object name, the arithmetic operation symbol, and the constant.</p>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co">## remove the name for x</span></span>
 <span><span class="va">x</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">*</span><span class="fl">2</span></span></code></pre></div>
 <pre><code>## [1] 10 20 30 40 50</code></pre>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">/</span><span class="fl">5</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">^</span><span class="fl">3</span></span></code></pre></div>
 <pre><code>## [1]   125  1000  3375  8000 15625</code></pre>
 <p>You may have related numeric information stored in two data structures of the same length / dimensions and you may want to perform an arithmetic operation on each pair of related values.</p>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span></span></code></pre></div>
 <pre><code>## [1]  5 10 15 20 25</code></pre>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span></span></code></pre></div>
 <pre><code>## [1]  3  6  9 12 15</code></pre>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">+</span><span class="va">y</span></span></code></pre></div>
 <pre><code>## [1]  8 16 24 32 40</code></pre>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">*</span><span class="va">y</span></span></code></pre></div>
 <pre><code>## [1]  15  60 135 240 375</code></pre>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span><span class="op">/</span><span class="va">x</span></span></code></pre></div>
 <pre><code>## [1] 0.6 0.6 0.6 0.6 0.6</code></pre>
 </div>
@@ -604,16 +603,16 @@
 <span class="header-section-number">3.5</span> Applying Functions on Data Structures<a class="anchor" aria-label="anchor" href="#funcDF"><i class="fas fa-link"></i></a>
 </h2>
 <p>Functions can be applied to data structures, for example</p>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 75</code></pre>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mult_mat2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 12</code></pre>
 <p>When working with a data frame, we often want to compute some numerical summaries of some or all of the columns. The <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function applies a pre-existing or user-defined function to the data structure in a manner specified by the user. In this unit, we will just cover the most basic application of the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function. Variants of this function and user-defined functions will be covered in Section <a href="applyfam.html#applyfam">7</a>.</p>
 <p>Suppose you are working on the <code>airquality</code> data set, that is stored in the object <code>Data.air</code>. The first four columns represents different numeric characteristics associated with air quality and weather conditions. You want to find the average value in each column.</p>
 <p>The <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function is used for a two-dimensional data structure. It uses three arguments: data, margin, and function. The data argument specifies the matrix or data frame to which the function should be applied, margin specifies whether you want the function applied to the rows, columns, or individual values, and function specifies the function to be applied.</p>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 2 since we want to apply the mean to the columns</span></span>
 <span><span class="co">## use 1 if want to apply mean to the row</span></span>
 <span><span class="co">## applying to columns is more common as each column </span></span>
@@ -623,18 +622,18 @@
 ##        NA        NA  9.957516 77.882353</code></pre>
 <p>Notice the NA for two of the columns? This happens when at least one entry in those columns has a missing value. Missing values in R are denoted by <code>NA</code>. If you look at the data frame, you can find some NAs in these columns.</p>
 <p>If you want R to ignore values and exclude them in calculating the mean, add an argument <code>na.rm=TRUE</code> in the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function.</p>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">Data.air</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">mean</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      Ozone    Solar.R       Wind       Temp 
 ##  42.129310 185.931507   9.957516  77.882353</code></pre>
 <p>Suppose you want to count the number of missing values in the column <code>Ozone</code>. The <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> function returns a logical identifying whether an entry is missing or not.</p>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## the head function returns only the first 6 entries of a vector</span></span>
 <span><span class="co">## or first 6 rows of a data frame</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Data.air</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE  TRUE FALSE</code></pre>
 <p>Recall that <code>TRUE</code> and <code>FALSE</code> are considered to be 1 and 0 respectively. So you can find the number of missing values for <code>Ozone</code> with</p>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Data.air</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 37</code></pre>
 
@@ -679,7 +678,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-08-27.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

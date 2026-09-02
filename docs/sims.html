@@ -131,14 +131,14 @@
 <span><span class="co">## split data into training and test</span></span>
 <span><span class="va">trainData</span> <span class="op">&lt;-</span> <span class="va">Data.Davis</span><span class="op">[</span><span class="va">trainInd</span>,<span class="op">]</span></span>
 <span><span class="va">testData</span> <span class="op">&lt;-</span> <span class="va">Data.Davis</span><span class="op">[</span><span class="op">-</span><span class="va">trainInd</span>,<span class="op">]</span></span></code></pre></div>
-<p>You have also seen sampling before in Section @red(distributions), where functions such as <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> and <code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code> draw random numbers from known probability distributions such as the normal and binomial distributions. Try typing <code>rnorm(10)</code> a few times. You should get a vector containing 10 random draws from a standard normal, and the vectors are not always the same.</p>
+<p>You have also seen sampling before in Section <a href="Rbasics.html#distributions">1.7.2</a>, where functions such as <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> and <code><a href="https://rdrr.io/r/stats/Binomial.html">rbinom()</a></code> draw random numbers from known probability distributions such as the normal and binomial distributions. Try typing <code>rnorm(10)</code> a few times. You should get a vector containing 10 random draws from a standard normal, and the vectors are not always the same.</p>
 </div>
 <div id="replicate" class="section level2" number="6.3">
 <h2>
 <span class="header-section-number">6.3</span> Replicate<a class="anchor" aria-label="anchor" href="#replicate"><i class="fas fa-link"></i></a>
 </h2>
 <p>You have seen how sampling is inherently random. In order to quantify the uncertainty introduced through sampling, we want to be able to repeat, or <strong>replicate</strong>, the sampling a lot of times.</p>
-<p>The <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> function evaluates a given function the specified number of times and returns a matrix with a column containing the results from each replication. There are two arguments: the number of replications and the function to be replicated.</p>
+<p>The <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> function repeatedly evaluates a given function or expression, returning a matrix where each column contains the output of each replicate. There are two arguments: the number of replications and the function to be replicated.</p>
 <p>Going back to the coin tossing example, suppose we want to toss a fair coin 5 times, and replicate this experiment for 6 replicates.</p>
 <div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">fairCoin</span>, size <span class="op">=</span> <span class="fl">5</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -170,12 +170,11 @@
 <h3>
 <span class="header-section-number">6.4.1</span> Worked Example: Sampling Distribution of the Sample Mean<a class="anchor" aria-label="anchor" href="#ch6sim"><i class="fas fa-link"></i></a>
 </h3>
-<p>In introductory statistics, you learned that if <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then <span class="math inline">\(\bar{X} \sim N(\mu, \frac{\sigma^2}{n})\)</span>. This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class.</p>
-<p>This means that if we have data from a <span class="math inline">\(N(\mu, \sigma^2)\)</span> distribution, then the distribution of the sample means from a large number of random samples each of size <span class="math inline">\(n\)</span> is <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>.</p>
-<p>We will see how we can use simulation to illustrate the sampling distribution of the sample mean.</p>
+<p>In introductory statistics, you learned that if <span class="math inline">\(X_i \sim N(\mu, \sigma^2)\)</span>, then <span class="math inline">\(\bar{X} \sim N(\mu, \frac{\sigma^2}{n})\)</span> (where <span class="math inline">\(\bar{X} = \frac{X_1 + X_2 + \cdots + X_n}{n}\)</span> and <span class="math inline">\(X_i\)</span> are independent. Independence is achieved via random sampling). This result is sometimes called the sampling distribution of the sample mean, and can be proved mathematically. However, such proofs are not the scope of this class.</p>
+<p>This means that if we have data from a <span class="math inline">\(N(\mu, \sigma^2)\)</span> distribution, then the distribution of the sample means from a large number of random samples each of size <span class="math inline">\(n\)</span> is <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>. We will see how we can use simulation to illustrate the sampling distribution of the sample mean.</p>
 <p>Suppose the data follow a standard normal distribution, i.e. <span class="math inline">\(X \sim N(0,1)\)</span>. The sampling distribution of the sample mean tells us that based on samples each of size 10, <span class="math inline">\(\bar{X}_{10} \sim N(0, \frac{1}{10})\)</span>. So the three main steps of this simulation would be:</p>
 <ol style="list-style-type: decimal">
-<li>Draw a random sample of 10 from a standard normal distribution, compute the sample mean, and store this value.</li>
+<li>We want to simulate 10 random draws from a standard normal distribution, compute their sample mean, and store this value.</li>
 <li>Use <code>rnorm(10)</code> to simulate 10 draws from a standard normal distribution, then compute the sample mean of these 10 draws, and store this value.</li>
 <li>Repeat step 2 for a large number of times, say for a total of 10,000 replicates.</li>
 </ol>
@@ -211,9 +210,10 @@ Figure 6.1: Density Plot of Sample Means from 10,000 Random Samples of Size 10
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">storeSampMeans</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.09895951</code></pre>
 <p>The variance measures how spread out the sample means are, and is considered a measure of the uncertainty associated with the sample mean from samples of size 10.</p>
+<p>Pay attention to the difference between the number of replicates, which is 10,000, and the sample size (number of data points drawn) of each replicate, which is 10. People often confuse these two.</p>
 <p>We have just created a simulation that imitates the sampling distribution of the sample mean when the data are standard normal and each sample has size 10!</p>
 <p>Hopefully, this example convinces you that with a large number of replicates, results from a simulation match very closely with theory.</p>
-<p>Note: you could have gotten similar results by using a for loop, using the code below. However, the for loop is a bit longer as we need to pre-allocate.</p>
+<p>Note: you could have gotten similar results by using a for loop, using the code below. However, the for loop is a bit longer as we need to pre-allocate, and is less efficient.</p>
 <div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Repeat for total 10,000 times</span></span>
 <span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span> </span>
@@ -245,7 +245,7 @@ Figure 6.1: Density Plot of Sample Means from 10,000 Random Samples of Size 10
 <h2>
 <span class="header-section-number">6.5</span> Random Seeds<a class="anchor" aria-label="anchor" href="#random-seeds"><i class="fas fa-link"></i></a>
 </h2>
-<p>Some of the functions introduced in this section (<code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code>, <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>) <strong>generate random numbers</strong>. Evaluating the same command multiple times will yield different results. The long-run properties are somewhat predictable (e.g. the sample mean when drawing a large number of random numbers from <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> will be close to the true mean of the normal distribution), but individual outcomes are not predictable. For example, if we run the command <code>rnorm(1)</code> twice, we get two different numbers</p>
+<p>Some of the functions introduced in this section (for example <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> and <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>) <strong>generate random numbers</strong>. Evaluating the same command multiple times will yield different results. The long-run properties are somewhat predictable (e.g. the sample mean when drawing a large number of random numbers from <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> will be close to the true mean of the normal distribution), but individual outcomes are not predictable. For example, if we run the command <code>rnorm(1)</code> twice, we get two different numbers</p>
 <div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -0.07546817</code></pre>

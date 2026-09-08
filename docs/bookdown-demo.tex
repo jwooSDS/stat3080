@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-09-02}
+\date{2026-09-08}
 
 \begin{document}
 \maketitle
@@ -677,8 +677,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.04197219  5.09711642 -2.11481728  2.26533405  3.19992318 -0.06007211
-##  [7]  6.74701303  0.72762392 -0.79091709  3.11865863
+##  [1]  3.8821323  5.1047446 -3.6461170  0.6496043 -3.0722949 -0.7836632
+##  [7]  4.5457197  6.0568294 -5.3143043  1.3542692
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3106,6 +3106,33 @@ Since the condition \texttt{a\ \textgreater{}\ 0} is not met, the code inside th
 
 So, add an \texttt{else} statement if you have two conditions or branches.
 
+\hypertarget{vectorized-if-else}{%
+\subsection{Vectorized If-Else}\label{vectorized-if-else}}
+
+The \texttt{ifelse()} function is a vectorized version of an if-else statement. It applies an if-else statement to each element in a vector, and returns a vector with the same length. For example, I have a number of students in class, and they pass if they score at least 60 on a test, otherwise they fail.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scores }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{80}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{95}\NormalTok{, }\DecValTok{55}\NormalTok{)}
+
+\FunctionTok{ifelse}\NormalTok{(scores }\SpecialCharTok{\textgreater{}=} \DecValTok{60}\NormalTok{, }\StringTok{"pass"}\NormalTok{, }\StringTok{"fail"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "pass" "pass" "fail" "pass" "fail"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# condition applied to vector first, then}
+\DocumentationTok{\#\# what to return if condition is true, then}
+\DocumentationTok{\#\# what to return if condition is false}
+\end{Highlighting}
+\end{Shaded}
+
+This is a very common way to convert a quantitative variable into a binary variable during data wrangling.
+
 \hypertarget{else-if}{%
 \subsection{Else If}\label{else-if}}
 
@@ -3131,32 +3158,24 @@ If there are more than two conditions or branches, use \texttt{else\ if} stateme
 
 The condition \texttt{a\ \textgreater{}\ 0} is not met, so the code in its braces is not run. The next condition \texttt{a\ ==\ 0} is not met, so the code in its braces is not run. Therefore, the code in the braces after the \texttt{else} is executed.
 
-\hypertarget{vectorized-else-if}{%
-\subsection{Vectorized Else-If}\label{vectorized-else-if}}
+\hypertarget{example}{%
+\subsubsection{Example}\label{example}}
 
-The \texttt{ifelse()} function is a vectorized version of an if-else statement. It applies an if-else statement to each element in a vector, and returns a vector with the same length. For example, I have a number of students in class, and they pass if they score at least 60 on a test, otherwise they fail.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{scores }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{80}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{95}\NormalTok{, }\DecValTok{55}\NormalTok{)}
-
-\FunctionTok{ifelse}\NormalTok{(scores }\SpecialCharTok{\textgreater{}=} \DecValTok{60}\NormalTok{, }\StringTok{"pass"}\NormalTok{, }\StringTok{"fail"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "pass" "pass" "fail" "pass" "fail"
-\end{verbatim}
+What do you think gets printed in this example?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\# condition applied to vector first, then}
-\DocumentationTok{\#\# what to return if condition is true, then}
-\DocumentationTok{\#\# what to return if condition is false}
+\DocumentationTok{\#\# a is still {-}9}
+
+\ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is positive"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{==} \DecValTok{0}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is 0"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{\textless{}} \DecValTok{0} \SpecialCharTok{\&\&}\NormalTok{ a }\SpecialCharTok{\textgreater{}} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{)\{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"a is betwwen {-}2 and 0"}\NormalTok{)}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
-
-This is a very common way to convert a quantitative variable into a binary variable during data wrangling.
 
 \hypertarget{iterating}{%
 \section{Iterating}\label{iterating}}

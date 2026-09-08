@@ -56,6 +56,21 @@ Since the condition `a > 0` is not met, the code inside the other set of braces 
 
 So, add an `else` statement if you have two conditions or branches. 
 
+### Vectorized If-Else
+
+The `ifelse()` function is a vectorized version of an if-else statement. It applies an if-else statement to each element in a vector, and returns a vector with the same length. For example, I have a number of students in class, and they pass if they score at least 60 on a test, otherwise they fail.
+
+```{r}
+scores <- c(80, 90, 40, 95, 55)
+
+ifelse(scores >= 60, "pass", "fail")
+## condition applied to vector first, then
+## what to return if condition is true, then
+## what to return if condition is false
+```
+
+This is a very common way to convert a quantitative variable into a binary variable during data wrangling. 
+
 ### Else If
 
 If there are more than two conditions or branches, use `else if` statements between the `if` statement at the beginning and an `else` statement at the end.
@@ -74,20 +89,21 @@ if (a > 0){
 
 The condition `a > 0` is not met, so the code in its braces is not run. The next condition `a == 0` is not met, so the code in its braces is not run. Therefore, the code in the braces after the `else` is executed. 
 
-### Vectorized Else-If
+#### Example
 
-The `ifelse()` function is a vectorized version of an if-else statement. It applies an if-else statement to each element in a vector, and returns a vector with the same length. For example, I have a number of students in class, and they pass if they score at least 60 on a test, otherwise they fail.
+What do you think gets printed in this example?
 
-```{r}
-scores <- c(80, 90, 40, 95, 55)
+```{r, eval= FALSE}
+## a is still -9
 
-ifelse(scores >= 60, "pass", "fail")
-## condition applied to vector first, then
-## what to return if condition is true, then
-## what to return if condition is false
+if (a > 0){
+  print("a is positive")
+} else if (a == 0) {
+  print("a is 0")
+} else if (a < 0 && a > -2){
+  print("a is betwwen -2 and 0")
+}
 ```
-
-This is a very common way to convert a quantitative variable into a binary variable during data wrangling. 
 
 ## Iterating
 

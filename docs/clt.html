@@ -136,7 +136,7 @@
 <p>The <strong>Law of Large Numbers</strong> (LLN) states that as <span class="math inline">\(n\)</span> gets larger and approaches infinity, the sample mean <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span> converges to the true mean <span class="math inline">\(\mu\)</span>. This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever <span class="math inline">\(n\)</span> gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes.</p>
 <p>Another implication of the LLN is that we can use Monte Carlo simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications.</p>
 <p>We use an example to illustrate the LLN, which comes from flipping a fair coin. Let <span class="math inline">\(X\)</span> denote whether the coin lands heads or tails, and let <span class="math inline">\(X=1\)</span> for heads and <span class="math inline">\(X=0\)</span> for tails. We can say that <span class="math inline">\(X \sim Bern(0.5)\)</span> since the coin is fair. Imagine flipping the coin <span class="math inline">\(n\)</span> times, and record the outcome after each flip, so <span class="math inline">\(X_1, \cdots, X_n\)</span> denote the outcome of each flip. We know that <span class="math inline">\(E(X) = 0.5\)</span> since <span class="math inline">\(X \sim Bern(0.5)\)</span>. The LLN informs us that <span class="math inline">\(\bar{X}_1, \cdots, \bar{X}_n\)</span> should usually get closer to 0.5 as <span class="math inline">\(n\)</span> increases. In other words, the value of the sample proportion after each flip should usually get closer to 0.5 with more flips. The code below simulates this example for <span class="math inline">\(n=500\)</span>, and Figure <a href="clt.html#fig:LLN">11.1</a> shows how the sample proportions get closer to 0.5, in general, as <span class="math inline">\(n\)</span> increases.</p>
-<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##make this big, but not too big otherwise picture is difficult to see</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span></span>
@@ -194,7 +194,7 @@ Figure 11.1: LLN Example with Coin Flips
 <li>Calculate <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
 <li>Find the sample average of <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
@@ -205,7 +205,7 @@ Figure 11.1: LLN Example with Coin Flips
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">)</span> <span class="co">##sample average of squared values. </span></span></code></pre></div>
 <pre><code>## [1] 1.024546</code></pre>
-<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##when reps is large, this sample mean should be close to the true E(X^2), which is 1</span></span></code></pre></div>
 <p>Since <span class="math inline">\(X\)</span> is standard normal, we know <span class="math inline">\(E(X) = 0\)</span> and <span class="math inline">\(Var(X) = E(X^2) - E(X)^2 = E(X^2) = 1\)</span>. We see in our simulation that our estimated value for <span class="math inline">\(E(X^2)\)</span> is pretty close to its theoretical value.</p>
 </div>
@@ -221,7 +221,7 @@ Figure 11.1: LLN Example with Coin Flips
 <li>Count the number of times <span class="math inline">\(X_i^2\)</span> is greater than 1.</li>
 <li>Divide this number by <span class="math inline">\(M\)</span> to estimate the probability, since probability can be interpreted as a long-run proportion.</li>
 </ul>
-<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
@@ -232,11 +232,11 @@ Figure 11.1: LLN Example with Coin Flips
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##count the number of times X^2 is greater than 1, and divide by M</span></span></code></pre></div>
 <pre><code>## [1] 0.3178</code></pre>
-<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##when reps is large, this proportion should be close to</span></span>
 <span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="fl">1</span>, df<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.3173105</code></pre>
-<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##it turns out that squaring a standard normal gives a chi-squared distribution with 1 df.</span></span></code></pre></div>
 <p>We see the estimated probability <span class="math inline">\(P(X^2 &gt; 1)\)</span> is close to its theoretical probability.</p>
 
@@ -280,7 +280,7 @@ Figure 11.1: LLN Example with Coin Flips
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-02.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

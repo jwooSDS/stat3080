@@ -121,8 +121,9 @@ motivation-2
 branching
 if-statement
 if-else-statement
+vectorized-if-else
 else-if
-vectorized-else-if
+example
 iterating
 forloops
 while-loops

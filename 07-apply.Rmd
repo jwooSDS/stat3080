@@ -27,7 +27,7 @@ apply(Data.Davis[,2:3], 2, mean)
 ```
 You may realize that one could use a loop to obtain these values. The `apply()` function is more succinct, although it does not really run faster than a loop [@peng2015].
 
-We so often compute sums or means of columns or rows that there functions that produce the same output as equivalent `apply()` versions:
+We often compute sums or means of columns or rows that there functions that produce the same output as equivalent `apply()` versions:
 
 - `rowSums(X)` equivalent to `apply(X, 1, sum)`.
 - `rowMeans(X)` equivalent to `apply(X, 1, mean)`.

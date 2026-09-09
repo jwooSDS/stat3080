@@ -677,8 +677,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  2.1281880  2.7390068 -0.8723502  1.0138230 -4.6367228 -2.2165290
-##  [7]  2.0718992 -2.5052947  1.7215192 -1.5248006
+##  [1]  0.5502859  0.5054891  3.5235691 -1.3599639 -1.3140188 -2.3355287
+##  [7] -0.6525352  2.4311546  4.5086746 -4.3202963
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -4005,7 +4005,7 @@ As mentioned earlier, suppose we want to see how flipper lengths are related to 
   A variable is \textbf{categorical} if arithmetic operations cannot be performed. In this example, the variables species and island are categorical.
 \end{itemize}
 
-A \textbf{scatterplot} is the most common visualization that is used to display two quantitative variables. Often times, one variable can be designated as the \textbf{response variable} (often denotes as \(Y\)), and the other as the \textbf{predictor} (often denoted as \(X\). The predictor is used to forecast or explain changes in the \textbf{response variable}. In this context, the body mass is the response variable, and flipper length is the predictor.
+A \textbf{scatterplot} is the most common visualization that is used to display two quantitative variables. Often times, one variable can be designated as the \textbf{response variable} (often denoted as \(Y\)), and the other as the \textbf{predictor} (often denoted as \(X\)). The predictor is used to forecast or explain changes in the \textbf{response variable}. In this context, the body mass is the response variable, and flipper length is the predictor.
 
 To create a scatterplot of these two variables, we can use
 
@@ -4064,7 +4064,7 @@ To use different colored plots for each species:
 \caption{\label{fig:ch8scatter-color}Scatterplot using Color via ggplot}
 \end{figure}
 
-Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer \texttt{scale\_color\_colorblind()}:
+Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer \texttt{scale\_color\_colorblind()} (this function comes from the \texttt{ggthemes} package that we loaded earlier):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4082,7 +4082,7 @@ Notice that a legend is automatically created as well. To use a colorblind safe 
 
 Notice that each layer ends with \texttt{+} and the next layer starts on a new line.
 
-Based on Figures \ref{fig:ch8scatter-color} and \ref{fig:ch8scatter-color}, it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species.
+Based on Figures \ref{fig:ch8scatter-color} and \ref{fig:ch8scatter-color2}, it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species.
 
 \hypertarget{overlaying-lines-and-curves}{%
 \subsubsection{Overlaying lines and curves}\label{overlaying-lines-and-curves}}
@@ -4288,7 +4288,7 @@ Suppose we want to see if the body mass of the penguins differ across the specie
 \caption{\label{fig:ch8boxplot}Boxplot via ggplot}
 \end{figure}
 
-A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. From Figure \ref{fig:ch8boxplot} we see that an outlier that is bigger than the rest and another outlier that is smaller than the rest for Chinstraps. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.
+A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule (\(1.5 \times\) IQR rule). From Figure \ref{fig:ch8boxplot} we see that an outlier that is bigger than the rest and another outlier that is smaller than the rest for Chinstraps. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.
 
 How would you add a title and change the labels of each axes so they make more sense?
 
@@ -4493,7 +4493,7 @@ Or with base R
 \hypertarget{visualizations-from-simulations}{%
 \section{Visualizations from Simulations}\label{visualizations-from-simulations}}
 
-You may realize that \texttt{ggplot()} assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values:
+You may realize that \texttt{ggplot()} assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values. Using base R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4506,6 +4506,8 @@ You may realize that \texttt{ggplot()} assumes you are working with a data frame
 \includegraphics{bookdown-demo_files/figure-latex/ch8sim-1.pdf}
 \caption{\label{fig:ch8sim}Visualization Simulations with Base R}
 \end{figure}
+
+Using \texttt{ggplot()} involves more code to type:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4540,7 +4542,7 @@ So which to use? \texttt{ggplot()} produces nicer visuals with much more customi
   Use \texttt{ggplot()} if presenting to an audience.
 \end{itemize}
 
-Note: I did not add titles and labels to axes in a lot of these plots. Feel free to practice adding them on your own. Visualizations should always be titled and have axes labeled.
+Note: I did not add titles and labels to axes in a lot of these plots. Feel free to practice adding them on your own. Visualizations should always be titled and axes should always be labeled.
 
 \hypertarget{dplyr}{%
 \chapter{Data Wrangling (dplyr)}\label{dplyr}}

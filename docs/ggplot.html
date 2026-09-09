@@ -138,7 +138,7 @@
 <li>A variable is <strong>quantitative</strong> if its value is numeric and arithmetic operations can be performed.</li>
 <li>A variable is <strong>categorical</strong> if arithmetic operations cannot be performed. In this example, the variables species and island are categorical.</li>
 </ul>
-<p>A <strong>scatterplot</strong> is the most common visualization that is used to display two quantitative variables. Often times, one variable can be designated as the <strong>response variable</strong> (often denotes as <span class="math inline">\(Y\)</span>), and the other as the <strong>predictor</strong> (often denoted as <span class="math inline">\(X\)</span>. The predictor is used to forecast or explain changes in the <strong>response variable</strong>. In this context, the body mass is the response variable, and flipper length is the predictor.</p>
+<p>A <strong>scatterplot</strong> is the most common visualization that is used to display two quantitative variables. Often times, one variable can be designated as the <strong>response variable</strong> (often denoted as <span class="math inline">\(Y\)</span>), and the other as the <strong>predictor</strong> (often denoted as <span class="math inline">\(X\)</span>). The predictor is used to forecast or explain changes in the <strong>response variable</strong>. In this context, the body mass is the response variable, and flipper length is the predictor.</p>
 <p>To create a scatterplot of these two variables, we can use</p>
 <div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -177,7 +177,7 @@ Figure 8.1: Basic Scatterplot with ggplot
 Figure 8.2: Scatterplot using Color via ggplot
 </p>
 </div>
-<p>Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer <code><a href="https://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind()</a></code>:</p>
+<p>Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer <code><a href="https://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind()</a></code> (this function comes from the <code>ggthemes</code> package that we loaded earlier):</p>
 <div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -189,7 +189,7 @@ Figure 8.3: Scatterplot using Colorblind Safe Palette via ggplot
 </p>
 </div>
 <p>Notice that each layer ends with <code>+</code> and the next layer starts on a new line.</p>
-<p>Based on Figures <a href="ggplot.html#fig:ch8scatter-color">8.2</a> and <a href="ggplot.html#fig:ch8scatter-color">8.2</a>, it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species.</p>
+<p>Based on Figures <a href="ggplot.html#fig:ch8scatter-color">8.2</a> and <a href="ggplot.html#fig:ch8scatter-color2">8.3</a>, it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species.</p>
 </div>
 <div id="overlaying-lines-and-curves" class="section level4" number="8.2.1.2">
 <h4>
@@ -348,7 +348,7 @@ Figure 8.11: Bar Chart via Base R
 Figure 8.12: Boxplot via ggplot
 </p>
 </div>
-<p>A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. From Figure <a href="ggplot.html#fig:ch8boxplot">8.12</a> we see that an outlier that is bigger than the rest and another outlier that is smaller than the rest for Chinstraps. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.</p>
+<p>A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule (<span class="math inline">\(1.5 \times\)</span> IQR rule). From Figure <a href="ggplot.html#fig:ch8boxplot">8.12</a> we see that an outlier that is bigger than the rest and another outlier that is smaller than the rest for Chinstraps. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.</p>
 <p>How would you add a title and change the labels of each axes so they make more sense?</p>
 <p>We can also use density plots of body mass and use different colors for each species and arrive at a similar conclusion.</p>
 <div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
@@ -502,7 +502,7 @@ Figure 8.22: Density Plot via Base R
 <h2>
 <span class="header-section-number">8.7</span> Visualizations from Simulations<a class="anchor" aria-label="anchor" href="#visualizations-from-simulations"><i class="fas fa-link"></i></a>
 </h2>
-<p>You may realize that <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values:</p>
+<p>You may realize that <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values. Using base R:</p>
 <div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
@@ -511,6 +511,7 @@ Figure 8.22: Density Plot via Base R
 Figure 8.23: Visualization Simulations with Base R
 </p>
 </div>
+<p>Using <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> involves more code to type:</p>
 <div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span></span>
@@ -535,7 +536,7 @@ Figure 8.24: Visualization Simulations with ggplot
 <li>Use <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> for more complicated visualizations.</li>
 <li>Use <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> if presenting to an audience.</li>
 </ul>
-<p>Note: I did not add titles and labels to axes in a lot of these plots. Feel free to practice adding them on your own. Visualizations should always be titled and have axes labeled.</p>
+<p>Note: I did not add titles and labels to axes in a lot of these plots. Feel free to practice adding them on your own. Visualizations should always be titled and axes should always be labeled.</p>
 
 </div>
 </div>

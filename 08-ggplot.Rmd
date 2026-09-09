@@ -45,7 +45,7 @@ As mentioned earlier, suppose we want to see how flipper lengths are related to 
 - A variable is **quantitative** if its value is numeric and arithmetic operations can be performed.
 - A variable is **categorical** if arithmetic operations cannot be performed. In this example, the variables species and island are categorical. 
 
-A **scatterplot** is the most common visualization that is used to display two quantitative variables. Often times, one variable can be designated as the **response variable** (often denotes as $Y$), and the other as the **predictor** (often denoted as $X$. The predictor is used to forecast or explain changes in the **response variable**. In this context, the body mass is the response variable, and flipper length is the predictor.
+A **scatterplot** is the most common visualization that is used to display two quantitative variables. Often times, one variable can be designated as the **response variable** (often denoted as $Y$), and the other as the **predictor** (often denoted as $X$). The predictor is used to forecast or explain changes in the **response variable**. In this context, the body mass is the response variable, and flipper length is the predictor.
 
 To create a scatterplot of these two variables, we can use
 
@@ -77,7 +77,7 @@ ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
   geom_point()
 ```
 
-Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer `scale_color_colorblind()`:
+Notice that a legend is automatically created as well. To use a colorblind safe palette, add an extra layer `scale_color_colorblind()` (this function comes from the `ggthemes` package that we loaded earlier):
 
 ```{r ch8scatter-color2, fig.cap="Scatterplot using Colorblind Safe Palette via ggplot", warning=FALSE, message=FALSE}
 ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
@@ -87,7 +87,7 @@ ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
 
 Notice that each layer ends with `+` and the next layer starts on a new line.
 
-Based on Figures \@ref(fig:ch8scatter-color) and \@ref(fig:ch8scatter-color), it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species. 
+Based on Figures \@ref(fig:ch8scatter-color) and \@ref(fig:ch8scatter-color2), it looks like there are a few clusters in our plots. The Gentoo penguins appear in one cluster, while the Adelie and Chinstrap penguins have their measurements in one cluster. For each species, the body mass is linearly related to the flipper length; although Gentoo penguins have larger body masses and longer flipper lengths than the other two species. 
 
 #### Overlaying lines and curves
 
@@ -198,7 +198,7 @@ ggplot(Data, aes(x = species, y = body_mass_g)) +
   geom_boxplot()
 ```
 
-A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule. From Figure \@ref(fig:ch8boxplot) we see that an outlier that is bigger than the rest and another outlier that is smaller than the rest for Chinstraps. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.
+A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule ($1.5 \times$ IQR rule). From Figure \@ref(fig:ch8boxplot) we see that an outlier that is bigger than the rest and another outlier that is smaller than the rest for Chinstraps. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.
 
 How would you add a title and change the labels of each axes so they make more sense?
 
@@ -306,11 +306,13 @@ plot(density(Data$body_mass_g, na.rm=TRUE))
 
 ## Visualizations from Simulations
 
-You may realize that `ggplot()` assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values:
+You may realize that `ggplot()` assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values. Using base R:
 
 ```{r ch8sim, fig.cap="Visualization Simulations with Base R"}
 plot(rnorm(20))
 ```
+
+Using `ggplot()` involves more code to type:
 
 ```{r ch8sim2, fig.cap="Visualization Simulations with ggplot"}
 y <- rnorm(20)
@@ -329,5 +331,5 @@ So which to use? `ggplot()` produces nicer visuals with much more customization,
 - Use `ggplot()` for more complicated visualizations. 
 - Use `ggplot()` if presenting to an audience. 
 
-Note: I did not add titles and labels to axes in a lot of these plots. Feel free to practice adding them on your own. Visualizations should always be titled and have axes labeled. 
+Note: I did not add titles and labels to axes in a lot of these plots. Feel free to practice adding them on your own. Visualizations should always be titled and axes should always be labeled. 
 

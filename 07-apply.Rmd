@@ -2,7 +2,7 @@
 
 ## Overview
 
-We often want to apply the same function separately to each element of a vector. R has the `apply` family of functions that implement loops in specialized use cases. This family of functions are useful since it:
+We often want to apply the same function separately to each element of a vector. R has the `apply` family of functions that implement loops in specialized use cases. This family of functions is useful since it:
 
 - is compact,
 - can iterate over different data structures and return collated results, and

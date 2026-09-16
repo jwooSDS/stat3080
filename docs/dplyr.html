@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 9 Data Wrangling (dplyr) | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="9.1 Motivation The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like...">
+<meta name="description" content="9.1 Motivation The data structure that we will be dealing with most often when working with real data will be data frames. A data frame can be viewed like an EXCEL spreadsheet, where data are...">
 <meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 9 Data Wrangling (dplyr) | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="9.1 Motivation The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like...">
+<meta property="og:description" content="9.1 Motivation The data structure that we will be dealing with most often when working with real data will be data frames. A data frame can be viewed like an EXCEL spreadsheet, where data are...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 9 Data Wrangling (dplyr) | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="9.1 Motivation The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like...">
+<meta name="twitter:description" content="9.1 Motivation The data structure that we will be dealing with most often when working with real data will be data frames. A data frame can be viewed like an EXCEL spreadsheet, where data are...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -93,7 +93,7 @@
 <h2>
 <span class="header-section-number">9.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-4"><i class="fas fa-link"></i></a>
 </h2>
-<p>The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. As you saw in Section <a href="ggplot.html#ggplot">8</a>, we want the data frame to have this basic structure:</p>
+<p>The data structure that we will be dealing with most often when working with real data will be data frames. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. As you saw in Section <a href="ggplot.html#ggplot">8</a>, we want the data frame to have this basic structure:</p>
 <ul>
 <li>Each row of the data frame corresponds to an observation.</li>
 <li>Each column of the data frame corresponds to a variable.</li>
@@ -107,13 +107,13 @@
 <li>Change column names.</li>
 <li>Change the order of columns.</li>
 </ul>
-<p>You may realize that you can already perform some of these operations in Sections <a href="Rbasics.html#Rbasics">1</a> and <a href="subset.html#subset">3</a>. In this section, you will learning how to perform these operations using another core package from the <code>tidyverse</code> called <code>dplyr</code>, which has gained popularity. Its advocates say the syntax associated with <code>dplyr</code> is more readable for the human eye, although its detractors will say that <code>dplyr</code> introduces many function names its syntax strays from base R.</p>
+<p>You may realize that you can already perform some of these operations in Sections <a href="Rbasics.html#Rbasics">1</a> and <a href="subset.html#subset">3</a>. In this section, you will learning how to perform these operations using another core package from the <code>tidyverse</code> called <code>dplyr</code>, which has gained popularity. Its advocates say the syntax associated with <code>dplyr</code> is more readable for the human eye than the syntax with base R, although its detractors will say that <code>dplyr</code> introduces many function names and its syntax strays from base R.</p>
 <p>This section is heavily based on <a href="https://r4ds.hadley.nz/">R for Data Science</a> <span class="citation">(<a href="references.html#ref-wickham2023">Wickham, Cetinkaya-Rundel, and Grolemun 2023</a>)</span>, Chapter 3. We will be covering the basics of data wrangling with <code>dplyr</code>. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.</p>
 <div id="motivating-example-1" class="section level3" number="9.1.1">
 <h3>
 <span class="header-section-number">9.1.1</span> Motivating Example<a class="anchor" aria-label="anchor" href="#motivating-example-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>For this section, we will use a data set on flights that departed from New York City in 2013. It comes from the <code>nycflights13</code> package. It contains all 336,776 flights that departed from New York City in 2013 and comes from the US Bureau of Transportation Statistics</p>
+<p>For this section, we will use a data set on flights that departed from New York City in 2013. It comes from the <code>nycflights13</code> package. It contains all 336,776 flights that departed from New York City in 2013 and comes from the US Bureau of Transportation Statistics.</p>
 <div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/nycflights13">nycflights13</a></span><span class="op">)</span></span>
@@ -129,7 +129,7 @@
 <li>Select which rows and columns to work on.</li>
 <li>Output data frame.</li>
 </ol>
-<p>One of the key operators that we will use is called the <strong>pipe</strong>, <code>\&gt;</code>. Pipes pass the result of one function straight into the next function, which makes code clean, linear, and easy to read from top to bottom like a sentence. The easiest way to interpret a pipe is “and then”. For example</p>
+<p>One of the key operators that we will use is called the <strong>pipe</strong>, <code>|&gt;</code>. Pipes pass the result of one function straight into the next function, which makes code clean, linear, and easy to read from left to right and from top to bottom like a sentence. The easiest way to interpret a pipe is “and then”. For example</p>
 <div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">dest</span> <span class="op">==</span> <span class="st">"IAH"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>

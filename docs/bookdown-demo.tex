@@ -656,8 +656,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 6.0387285 0.4566372 3.5923948 1.5284283 1.3337256 1.4837977 0.1671110
-##  [8] 8.4911521 5.0549140 3.7768816
+##  [1]  6.1788829 -4.9245862  2.1677027  1.4883496 -2.2520268 -1.1956980
+##  [7]  5.7203110  0.1318376  2.9806620 -0.4583646
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -4449,7 +4449,7 @@ Note: I did not add titles and labels to axes in a lot of these plots. Feel free
 
 \section{Motivation}\label{motivation-4}
 
-The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. As you saw in Section \ref{ggplot}, we want the data frame to have this basic structure:
+The data structure that we will be dealing with most often when working with real data will be data frames. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. As you saw in Section \ref{ggplot}, we want the data frame to have this basic structure:
 
 \begin{itemize}
 \tightlist
@@ -4477,13 +4477,13 @@ Sometimes, data are not structured in this way, and we will have to transform th
   Change the order of columns.
 \end{itemize}
 
-You may realize that you can already perform some of these operations in Sections \ref{Rbasics} and \ref{subset}. In this section, you will learning how to perform these operations using another core package from the \texttt{tidyverse} called \texttt{dplyr}, which has gained popularity. Its advocates say the syntax associated with \texttt{dplyr} is more readable for the human eye, although its detractors will say that \texttt{dplyr} introduces many function names its syntax strays from base R.
+You may realize that you can already perform some of these operations in Sections \ref{Rbasics} and \ref{subset}. In this section, you will learning how to perform these operations using another core package from the \texttt{tidyverse} called \texttt{dplyr}, which has gained popularity. Its advocates say the syntax associated with \texttt{dplyr} is more readable for the human eye than the syntax with base R, although its detractors will say that \texttt{dplyr} introduces many function names and its syntax strays from base R.
 
 This section is heavily based on \href{https://r4ds.hadley.nz/}{R for Data Science} \citep{wickham2023}, Chapter 3. We will be covering the basics of data wrangling with \texttt{dplyr}. Feel free to consult the book for a more thorough explanation of how these functions work. I have added some of my own commentary.
 
 \subsection{Motivating Example}\label{motivating-example-1}
 
-For this section, we will use a data set on flights that departed from New York City in 2013. It comes from the \texttt{nycflights13} package. It contains all 336,776 flights that departed from New York City in 2013 and comes from the US Bureau of Transportation Statistics
+For this section, we will use a data set on flights that departed from New York City in 2013. It comes from the \texttt{nycflights13} package. It contains all 336,776 flights that departed from New York City in 2013 and comes from the US Bureau of Transportation Statistics.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4508,7 +4508,7 @@ For this section, we will use a data set on flights that departed from New York 
   Output data frame.
 \end{enumerate}
 
-One of the key operators that we will use is called the \textbf{pipe}, \texttt{\textbackslash{}\textgreater{}}. Pipes pass the result of one function straight into the next function, which makes code clean, linear, and easy to read from top to bottom like a sentence. The easiest way to interpret a pipe is ``and then''. For example
+One of the key operators that we will use is called the \textbf{pipe}, \texttt{\textbar{}\textgreater{}}. Pipes pass the result of one function straight into the next function, which makes code clean, linear, and easy to read from left to right and from top to bottom like a sentence. The easiest way to interpret a pipe is ``and then''. For example
 
 \begin{Shaded}
 \begin{Highlighting}[]

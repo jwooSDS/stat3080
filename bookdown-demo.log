@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  16 SEP 2026 13:40
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  16 SEP 2026 14:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -864,9 +864,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 [16]
 
 [17]
-Overfull \hbox (59.25pt too wide) in paragraph at lines 661--661
-[]\TU/lmtt/m/n/10 ##  [1] 6.0387285 0.4566372 3.5923948 1.5284283 1.3337256 1.4
-837977 0.1671110[] 
+Overfull \hbox (38.25pt too wide) in paragraph at lines 661--661
+[]\TU/lmtt/m/n/10 ##  [1]  6.1788829 -4.9245862  2.1677027  1.4883496 -2.252026
+8 -1.1956980[] 
  []
 
 

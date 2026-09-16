@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  16 SEP 2026 13:17
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  16 SEP 2026 13:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -865,8 +865,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [17]
 Overfull \hbox (69.75pt too wide) in paragraph at lines 661--661
-[]\TU/lmtt/m/n/10 ##  [1] -4.07718091  1.62075265  0.29847312 -0.09930857 -2.85
-010922  0.78423804[] 
+[]\TU/lmtt/m/n/10 ##  [1] -0.49776855  0.47244671 -0.98743152  2.63592484  4.15
+733252 -0.73256683[] 
  []
 
 
@@ -1060,57 +1060,57 @@ Chapter 8.
 
 
 [77]
-Overfull \hbox (80.25pt too wide) in paragraph at lines 3885--3885
+Overfull \hbox (80.25pt too wide) in paragraph at lines 3887--3887
 []\TU/lmtt/m/n/10 ##   species island    bill_length_mm bill_depth_mm flipper_l
 ength_mm body_mass_g[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 3885--3885
+Overfull \hbox (80.25pt too wide) in paragraph at lines 3887--3887
 []\TU/lmtt/m/n/10 ##   <fct>   <fct>              <dbl>         <dbl>          
    <int>       <int>[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 3885--3885
+Overfull \hbox (80.25pt too wide) in paragraph at lines 3887--3887
 []\TU/lmtt/m/n/10 ## 1 Adelie  Torgersen           39.1          18.7          
      181        3750[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 3885--3885
+Overfull \hbox (80.25pt too wide) in paragraph at lines 3887--3887
 []\TU/lmtt/m/n/10 ## 2 Adelie  Torgersen           39.5          17.4          
      186        3800[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 3885--3885
+
+[78]
+Overfull \hbox (80.25pt too wide) in paragraph at lines 3887--3887
 []\TU/lmtt/m/n/10 ## 3 Adelie  Torgersen           40.3          18            
      195        3250[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 3885--3885
+Overfull \hbox (80.25pt too wide) in paragraph at lines 3887--3887
 []\TU/lmtt/m/n/10 ## 4 Adelie  Torgersen           NA            NA            
       NA          NA[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 3885--3885
+Overfull \hbox (80.25pt too wide) in paragraph at lines 3887--3887
 []\TU/lmtt/m/n/10 ## 5 Adelie  Torgersen           36.7          19.3          
      193        3450[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 3885--3885
+Overfull \hbox (80.25pt too wide) in paragraph at lines 3887--3887
 []\TU/lmtt/m/n/10 ## 6 Adelie  Torgersen           39.3          20.6          
      190        3650[] 
  []
 
 
-
-[78]
-Overfull \hbox (106.5pt too wide) in paragraph at lines 3921--3921
+Overfull \hbox (106.5pt too wide) in paragraph at lines 3923--3923
 []\TU/lmtt/m/n/10 ## Warning: Removed 2 rows containing missing values or value
 s outside the scale range[] 
  []
@@ -1121,6 +1121,11 @@ e pdf)
 
 
 [79]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[80]
 File: bookdown-demo_files/figure-latex/ch8scatter-color-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/ch8scatter-color-1.pdf>
@@ -1129,24 +1134,21 @@ pe pdf)
 <use bookdown-demo_files/figure-latex/ch8scatter-color2-1.pdf>
 
 
-[80]
-
 [81]
 File: bookdown-demo_files/figure-latex/ch8scatter-line-1.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/ch8scatter-line-1.pdf>
 
 LaTeX Warning: Reference `fig:ch8scatter-line' on page 82 undefined on input li
-ne 3998.
+ne 4000.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3997--3999
+Underfull \hbox (badness 10000) in paragraph at lines 3999--4001
 [][]
  []
 
 
-Overfull \vbox (1.96693pt too high) detected at line 4007
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
@@ -1158,8 +1160,13 @@ File: bookdown-demo_files/figure-latex/ch8scatter-loess-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/ch8scatter-loess-1.pdf>
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [83]
+
+[84]
 File: bookdown-demo_files/figure-latex/ch8scatter-labels-1.pdf Graphic file (ty
 pe pdf)
 <use bookdown-demo_files/figure-latex/ch8scatter-labels-1.pdf>
@@ -1167,17 +1174,18 @@ File: bookdown-demo_files/figure-latex/ch8scatter-baseR-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/ch8scatter-baseR-1.pdf>
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[84]
+
 
 [85]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 4089--4089
+Overfull \hbox (27.75pt too wide) in paragraph at lines 4091--4091
 []\TU/lmtt/m/n/10 ## Warning: []scale_fill_colorblind()[] was deprecated in ggt
 hemes 5.2.0.[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 4089--4089
+Overfull \hbox (54.0pt too wide) in paragraph at lines 4091--4091
 []\TU/lmtt/m/n/10 ## Call []lifecycle::last_lifecycle_warnings()[] to see where
  this warning was[] 
  []
@@ -1185,12 +1193,13 @@ Overfull \hbox (54.0pt too wide) in paragraph at lines 4089--4089
 File: bookdown-demo_files/figure-latex/ch8barchart-1.pdf Graphic file (type pdf
 )
 <use bookdown-demo_files/figure-latex/ch8barchart-1.pdf>
+
+
+[86]
 File: bookdown-demo_files/figure-latex/ch8barchart2-1.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/ch8barchart2-1.pdf>
 
-
-[86]
 
 [87]
 File: bookdown-demo_files/figure-latex/ch8barchart-base-1.pdf Graphic file (typ
@@ -1202,9 +1211,6 @@ e pdf)
 File: bookdown-demo_files/figure-latex/ch8boxplot-1.pdf Graphic file (type pdf)
 
 <use bookdown-demo_files/figure-latex/ch8boxplot-1.pdf>
-File: bookdown-demo_files/figure-latex/ch8densplot-1.pdf Graphic file (type pdf
-)
-<use bookdown-demo_files/figure-latex/ch8densplot-1.pdf>
 
 
 
@@ -1214,27 +1220,54 @@ VARIABLE \TU/lmr/m/n/10 89
  []
 
 [89]
+File: bookdown-demo_files/figure-latex/ch8densplot-1.pdf Graphic file (type pdf
+)
+<use bookdown-demo_files/figure-latex/ch8densplot-1.pdf>
 File: bookdown-demo_files/figure-latex/ch8boxplot-base-1.pdf Graphic file (type
  pdf)
 <use bookdown-demo_files/figure-latex/ch8boxplot-base-1.pdf>
 
+Underfull \vbox (badness 7221) has occurred while \output is active []
+
+
 
 [90]
+
+
+Overfull \hbox (84.20233pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 8.4.  VISUALIZING A QUANTITATIVE VARIABLE ACROSS A CATEGORICAL 
+VARIABLE \TU/lmr/m/n/10 91
+ []
+
+[91]
 File: bookdown-demo_files/figure-latex/ch8facet-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ch8facet-1.pdf>
 
-Underfull \vbox (badness 1117) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[91]
+[92]
 File: bookdown-demo_files/figure-latex/ch8bar1-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ch8bar1-1.pdf>
 File: bookdown-demo_files/figure-latex/ch8barprop-1.pdf Graphic file (type pdf)
 
 <use bookdown-demo_files/figure-latex/ch8barprop-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 4291--4293
+Underfull \hbox (badness 10000) in paragraph at lines 4293--4295
+[][]
+ []
+
+
+Underfull \vbox (badness 3758) has occurred while \output is active []
+
+
+
+[93]
+File: bookdown-demo_files/figure-latex/ch8order-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/ch8order-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 4307--4309
 [][]
  []
 
@@ -1243,47 +1276,30 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[92]
-
-[93]
-File: bookdown-demo_files/figure-latex/ch8order-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/ch8order-1.pdf>
-
-Underfull \hbox (badness 10000) in paragraph at lines 4305--4307
-[][]
- []
-
-
-Underfull \vbox (badness 5726) has occurred while \output is active []
-
-
-
 [94]
 File: bookdown-demo_files/figure-latex/ch8box1-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ch8box1-1.pdf>
 File: bookdown-demo_files/figure-latex/ch8dens1-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ch8dens1-1.pdf>
-File: bookdown-demo_files/figure-latex/ch8box2-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/ch8box2-1.pdf>
-File: bookdown-demo_files/figure-latex/ch8dens2-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/ch8dens2-1.pdf>
-
-Underfull \vbox (badness 4181) has occurred while \output is active []
-
 
 
 [95]
 
 [96]
+File: bookdown-demo_files/figure-latex/ch8box2-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/ch8box2-1.pdf>
+File: bookdown-demo_files/figure-latex/ch8dens2-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/ch8dens2-1.pdf>
 File: bookdown-demo_files/figure-latex/ch8sim-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ch8sim-1.pdf>
-File: bookdown-demo_files/figure-latex/ch8sim2-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/ch8sim2-1.pdf>
 
 
 [97]
 
 [98]
+File: bookdown-demo_files/figure-latex/ch8sim2-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/ch8sim2-1.pdf>
+
 
 [99]
 
@@ -1296,109 +1312,109 @@ Chapter 9.
 [101]
 
 [102]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 4566--4566
+Overfull \hbox (43.5pt too wide) in paragraph at lines 4568--4568
 []\TU/lmtt/m/n/10 ##           1           2           3           4           
 5           6[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 4566--4566
+Overfull \hbox (43.5pt too wide) in paragraph at lines 4568--4568
 []\TU/lmtt/m/n/10 ##   4.1627907   5.4023904  -1.1875000  14.7666667   0.972222
 2  11.1023490[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 4566--4566
+Overfull \hbox (43.5pt too wide) in paragraph at lines 4568--4568
 []\TU/lmtt/m/n/10 ##           7           8           9          10          1
 1          12[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 4566--4566
+Overfull \hbox (43.5pt too wide) in paragraph at lines 4568--4568
 []\TU/lmtt/m/n/10 ##  11.0000000   0.7054010 -10.6473684   1.8080645  -1.776315
 8  14.5000000[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##     year month   day dep_time sched_dep_time dep_delay arr
 _time sched_arr_time[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##    <int> <int> <int>    <int>          <int>     <dbl>    
 <int>          <int>[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##  1  2013     1     1      848           1835       853    
  1001           1950[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##  2  2013     1     1      957            733       144    
  1056            853[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##  3  2013     1     1     1114            900       134    
  1447           1222[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##  4  2013     1     1     1540           1338       122    
  2020           1825[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##  5  2013     1     1     1815           1325       290    
  2120           1542[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##  6  2013     1     1     1842           1422       260    
  1958           1535[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##  7  2013     1     1     1856           1645       131    
  2212           2005[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##  8  2013     1     1     1934           1725       129    
  2126           1855[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ##  9  2013     1     1     1938           1703       155    
  2109           1823[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ## 10  2013     1     1     1942           1705       157    
  2124           1830[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (27.75pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ## # i 11 more variables: arr_delay <dbl>, carrier <chr>, fli
 ght <int>,[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4601--4601
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4603--4603
 []\TU/lmtt/m/n/10 ## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl
 >, distance <dbl>,[] 
  []
@@ -1406,169 +1422,169 @@ Overfull \hbox (69.75pt too wide) in paragraph at lines 4601--4601
 
 
 [103]
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##     year month   day dep_time sched_dep_time dep_delay arr
 _time sched_arr_time[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##    <int> <int> <int>    <int>          <int>     <dbl>    
 <int>          <int>[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##  1  2013     1     1      848           1835       853    
  1001           1950[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##  2  2013     1     1      957            733       144    
  1056            853[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##  3  2013     1     1     1114            900       134    
  1447           1222[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##  4  2013     1     2      126           2250       156    
   233           2359[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##  5  2013     1     2      833            558       155    
  1018            727[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##  6  2013     1     2      923            624       179    
  1051            758[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##  7  2013     1     3       50           2145       185    
   203           2311[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##  8  2013     1     3      235           2359       156    
   700            437[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ##  9  2013     1     3      854            630       144    
  1057            810[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ## 10  2013     1     3      909            700       129    
  1103            850[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (27.75pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ## # i 11 more variables: arr_delay <dbl>, carrier <chr>, fli
 ght <int>,[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4630--4630
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4632--4632
 []\TU/lmtt/m/n/10 ## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl
 >, distance <dbl>,[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##     year month   day dep_time sched_dep_time dep_delay arr
 _time sched_arr_time[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##    <int> <int> <int>    <int>          <int>     <dbl>    
 <int>          <int>[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##  1  2013     1     1      517            515         2    
   830            819[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##  2  2013     1     1      533            529         4    
   850            830[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##  3  2013     1     1      542            540         2    
   923            850[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##  4  2013     1     1      544            545        -1    
  1004           1022[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##  5  2013     1     1      554            600        -6    
   812            837[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##  6  2013     1     1      554            558        -4    
   740            728[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##  7  2013     1     1      555            600        -5    
   913            854[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##  8  2013     1     1      557            600        -3    
   709            723[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ##  9  2013     1     1      557            600        -3    
   838            846[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ## 10  2013     1     1      558            600        -2    
   753            745[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (27.75pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ## # i 11 more variables: arr_delay <dbl>, carrier <chr>, fli
 ght <int>,[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4659--4659
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4661--4661
 []\TU/lmtt/m/n/10 ## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl
 >, distance <dbl>,[] 
  []
@@ -1576,139 +1592,139 @@ Overfull \hbox (69.75pt too wide) in paragraph at lines 4659--4659
 
 
 [104]
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##     year month   day dep_time sched_dep_time dep_delay arr
 _time sched_arr_time[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##    <int> <int> <int>    <int>          <int>     <dbl>    
 <int>          <int>[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##  1  2013     1     1      517            515         2    
   830            819[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##  2  2013     1     1      533            529         4    
   850            830[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##  3  2013     1     1      542            540         2    
   923            850[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##  4  2013     1     1      544            545        -1    
  1004           1022[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##  5  2013     1     1      554            600        -6    
   812            837[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##  6  2013     1     1      554            558        -4    
   740            728[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##  7  2013     1     1      555            600        -5    
   913            854[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##  8  2013     1     1      557            600        -3    
   709            723[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ##  9  2013     1     1      557            600        -3    
   838            846[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ## 10  2013     1     1      558            600        -2    
   753            745[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (27.75pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ## # i 11 more variables: arr_delay <dbl>, carrier <chr>, fli
 ght <int>,[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4688--4688
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4690--4690
 []\TU/lmtt/m/n/10 ## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl
 >, distance <dbl>,[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##     year month   day dep_time sched_dep_time dep_delay arr
 _time sched_arr_time[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##    <int> <int> <int>    <int>          <int>     <dbl>    
 <int>          <int>[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##  1  2013     1     1      517            515         2    
   830            819[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##  2  2013     1     1      533            529         4    
   850            830[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##  3  2013     1     1      542            540         2    
   923            850[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##  4  2013     1     1      544            545        -1    
  1004           1022[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##  5  2013     1     1      554            600        -6    
   812            837[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##  6  2013     1     1      554            558        -4    
   740            728[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##  7  2013     1     1      555            600        -5    
   913            854[] 
  []
@@ -1716,115 +1732,115 @@ Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
 
 
 [105]
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##  8  2013     1     1      557            600        -3    
   709            723[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ##  9  2013     1     1      557            600        -3    
   838            846[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ## 10  2013     1     1      558            600        -2    
   753            745[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (27.75pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ## # i 11 more variables: arr_delay <dbl>, carrier <chr>, fli
 ght <int>,[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4728--4728
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4730--4730
 []\TU/lmtt/m/n/10 ## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl
 >, distance <dbl>,[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##     year month   day dep_time sched_dep_time dep_delay arr
 _time sched_arr_time[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##    <int> <int> <int>    <int>          <int>     <dbl>    
 <int>          <int>[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##  1  2013     1     1     2356           2359        -3    
   425            437[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##  2  2013     1     1     2353           2359        -6    
   425            445[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##  3  2013     1     1     2353           2359        -6    
   418            442[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##  4  2013     1     1     2343           1724       379    
   314           1938[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##  5  2013     1     1     2327           2250        37    
    32           2359[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##  6  2013     1     1     2326           2130       116    
   131             18[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##  7  2013     1     1     2323           2200        83    
    22           2313[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##  8  2013     1     1     2312           2000       192    
    21           2110[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ##  9  2013     1     1     2310           2255        15    
    24             15[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ## 10  2013     1     1     2307           2245        22    
    32           2357[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (27.75pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ## # i 11 more variables: arr_delay <dbl>, carrier <chr>, fli
 ght <int>,[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4757--4757
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4759--4759
 []\TU/lmtt/m/n/10 ## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl
 >, distance <dbl>,[] 
  []
@@ -1832,85 +1848,85 @@ Overfull \hbox (69.75pt too wide) in paragraph at lines 4757--4757
 
 
 [106]
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##     year month   day dep_time sched_dep_time dep_delay arr
 _time sched_arr_time[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##    <int> <int> <int>    <int>          <int>     <dbl>    
 <int>          <int>[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##  1  2013     1     1      517            515         2    
   830            819[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##  2  2013     1     1      533            529         4    
   850            830[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##  3  2013     1     1      542            540         2    
   923            850[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##  4  2013     1     1      544            545        -1    
  1004           1022[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##  5  2013     1     1      554            600        -6    
   812            837[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##  6  2013     1     1      554            558        -4    
   740            728[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##  7  2013     1     1      555            600        -5    
   913            854[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##  8  2013     1     1      557            600        -3    
   709            723[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ##  9  2013     1     1      557            600        -3    
   838            846[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (80.25pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ## 10  2013     1     1      558            600        -2    
   753            745[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (27.75pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ## # i 12 more variables: arr_delay <dbl>, carrier <chr>, fli
 ght <int>,[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4836--4836
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4838--4838
 []\TU/lmtt/m/n/10 ## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl
 >, distance <dbl>,[] 
  []
@@ -1918,169 +1934,169 @@ Overfull \hbox (69.75pt too wide) in paragraph at lines 4836--4836
 
 
 [107]
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##    speed  year month   day dep_time sched_dep_time dep_del
 ay arr_time[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##    <dbl> <int> <int> <int>    <int>          <int>     <db
 l>    <int>[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##  1  370.  2013     1     1      517            515        
  2      830[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##  2  374.  2013     1     1      533            529        
  4      850[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##  3  408.  2013     1     1      542            540        
  2      923[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##  4  517.  2013     1     1      544            545        
 -1     1004[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##  5  394.  2013     1     1      554            600        
 -6      812[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##  6  288.  2013     1     1      554            558        
 -4      740[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##  7  404.  2013     1     1      555            600        
 -5      913[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##  8  259.  2013     1     1      557            600        
 -3      709[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ##  9  405.  2013     1     1      557            600        
 -3      838[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ## 10  319.  2013     1     1      558            600        
 -2      753[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ## # i 12 more variables: sched_arr_time <int>, arr_delay <db
 l>, carrier <chr>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 4868--4868
+Overfull \hbox (59.25pt too wide) in paragraph at lines 4870--4870
 []\TU/lmtt/m/n/10 ## #   flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
  air_time <dbl>,[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##     year speed month   day dep_time sched_dep_time dep_del
 ay arr_time[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##    <int> <dbl> <int> <int>    <int>          <int>     <db
 l>    <int>[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##  1  2013  370.     1     1      517            515        
  2      830[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##  2  2013  374.     1     1      533            529        
  4      850[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##  3  2013  408.     1     1      542            540        
  2      923[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##  4  2013  517.     1     1      544            545        
 -1     1004[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##  5  2013  394.     1     1      554            600        
 -6      812[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##  6  2013  288.     1     1      554            558        
 -4      740[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##  7  2013  404.     1     1      555            600        
 -5      913[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##  8  2013  259.     1     1      557            600        
 -3      709[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ##  9  2013  405.     1     1      557            600        
 -3      838[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (33.0pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ## 10  2013  319.     1     1      558            600        
 -2      753[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (69.75pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ## # i 12 more variables: sched_arr_time <int>, arr_delay <db
 l>, carrier <chr>,[] 
  []
 
 
-Overfull \hbox (59.25pt too wide) in paragraph at lines 4900--4900
+Overfull \hbox (59.25pt too wide) in paragraph at lines 4902--4902
 []\TU/lmtt/m/n/10 ## #   flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
  air_time <dbl>,[] 
  []
@@ -2090,49 +2106,49 @@ Overfull \hbox (59.25pt too wide) in paragraph at lines 4900--4900
 [108]
 
 [109]
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##     year month   day depTime sched_dep_time dep_delay arr_
 time sched_arr_time[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##    <int> <int> <int>   <int>          <int>     <dbl>    <
 int>          <int>[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##  1  2013     1     1     517            515         2     
  830            819[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##  2  2013     1     1     533            529         4     
  850            830[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##  3  2013     1     1     542            540         2     
  923            850[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##  4  2013     1     1     544            545        -1     
 1004           1022[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##  5  2013     1     1     554            600        -6     
  812            837[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##  6  2013     1     1     554            558        -4     
  740            728[] 
  []
@@ -2140,157 +2156,157 @@ Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
 
 
 [110]
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##  7  2013     1     1     555            600        -5     
  913            854[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##  8  2013     1     1     557            600        -3     
  709            723[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ##  9  2013     1     1     557            600        -3     
  838            846[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ## 10  2013     1     1     558            600        -2     
  753            745[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ## # i 11 more variables: arr_delay <dbl>, carrier <chr>, fli
 ght <int>,[] 
  []
 
 
-Overfull \hbox (69.75pt too wide) in paragraph at lines 5030--5030
+Overfull \hbox (69.75pt too wide) in paragraph at lines 5032--5032
 []\TU/lmtt/m/n/10 ## #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl
 >, distance <dbl>,[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##    time_hour           air_time  year month   day dep_time
  sched_dep_time[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##    <dttm>                 <dbl> <int> <int> <int>    <int>
           <int>[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##  1 2013-01-01 05:00:00      227  2013     1     1      517
             515[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##  2 2013-01-01 05:00:00      227  2013     1     1      533
             529[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##  3 2013-01-01 05:00:00      160  2013     1     1      542
             540[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##  4 2013-01-01 05:00:00      183  2013     1     1      544
             545[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##  5 2013-01-01 06:00:00      116  2013     1     1      554
             600[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##  6 2013-01-01 05:00:00      150  2013     1     1      554
             558[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##  7 2013-01-01 06:00:00      158  2013     1     1      555
             600[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##  8 2013-01-01 06:00:00       53  2013     1     1      557
             600[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ##  9 2013-01-01 06:00:00      140  2013     1     1      557
             600[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ## 10 2013-01-01 06:00:00      138  2013     1     1      558
             600[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ## # i 12 more variables: dep_delay <dbl>, arr_time <int>, sc
 hed_arr_time <int>,[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 5061--5061
+Overfull \hbox (80.25pt too wide) in paragraph at lines 5063--5063
 []\TU/lmtt/m/n/10 ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum 
 <chr>, origin <chr>,[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##     year month   day time_hour           air_time dep_time
  sched_dep_time[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##    <int> <int> <int> <dttm>                 <dbl>    <int>
           <int>[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##  1  2013     1     1 2013-01-01 05:00:00      227      517
             515[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##  2  2013     1     1 2013-01-01 05:00:00      227      533
             529[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##  3  2013     1     1 2013-01-01 05:00:00      160      542
             540[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##  4  2013     1     1 2013-01-01 05:00:00      183      544
             545[] 
  []
@@ -2298,49 +2314,49 @@ Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
 
 
 [111]
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##  5  2013     1     1 2013-01-01 06:00:00      116      554
             600[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##  6  2013     1     1 2013-01-01 05:00:00      150      554
             558[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##  7  2013     1     1 2013-01-01 06:00:00      158      555
             600[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##  8  2013     1     1 2013-01-01 06:00:00       53      557
             600[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ##  9  2013     1     1 2013-01-01 06:00:00      140      557
             600[] 
  []
 
 
-Overfull \hbox (54.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (54.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ## 10  2013     1     1 2013-01-01 06:00:00      138      558
             600[] 
  []
 
 
-Overfull \hbox (75.0pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (75.0pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ## # i 12 more variables: dep_delay <dbl>, arr_time <int>, sc
 hed_arr_time <int>,[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 5090--5090
+Overfull \hbox (80.25pt too wide) in paragraph at lines 5092--5092
 []\TU/lmtt/m/n/10 ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum 
 <chr>, origin <chr>,[] 
  []
@@ -2350,7 +2366,7 @@ Overfull \hbox (80.25pt too wide) in paragraph at lines 5090--5090
 [112]
 
 [113]
-Overfull \hbox (48.75pt too wide) in paragraph at lines 5237--5237
+Overfull \hbox (48.75pt too wide) in paragraph at lines 5239--5239
 []\TU/lmtt/m/n/10 ## []summarise()[] has grouped output by []origin[]. You can 
 override using the[] 
  []
@@ -2358,73 +2374,73 @@ override using the[]
 
 
 [114]
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##    dest   year month   day dep_time sched_dep_time dep_del
 ay arr_time[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##    <chr> <int> <int> <int>    <int>          <int>     <db
 l>    <int>[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##  1 ABQ    2013     7    22     2145           2007        
 98      132[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##  2 ACK    2013     7    23     1139            800       2
 19     1250[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##  3 ALB    2013     1    25      123           2000       3
 23      229[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##  4 ANC    2013     8    17     1740           1625        
 75     2042[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##  5 ATL    2013     7    22     2257            759       8
 98      121[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##  6 AUS    2013     7    10     2056           1505       3
 51     2347[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##  7 AVL    2013     8    13     1156            832       2
 04     1417[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##  8 BDL    2013     2    21     1728           1316       2
 52     1839[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ##  9 BGR    2013    12     1     1504           1056       2
 48     1628[] 
  []
 
 
-Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (33.0pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ## 10 BHM    2013     4    10       25           1900       3
 25      136[] 
  []
@@ -2432,13 +2448,13 @@ Overfull \hbox (33.0pt too wide) in paragraph at lines 5307--5307
 
 
 [115]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (69.75pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ## # i 11 more variables: sched_arr_time <int>, arr_delay <db
 l>, carrier <chr>,[] 
  []
 
 
-Overfull \hbox (80.25pt too wide) in paragraph at lines 5307--5307
+Overfull \hbox (80.25pt too wide) in paragraph at lines 5309--5309
 []\TU/lmtt/m/n/10 ## #   flight <int>, tailnum <chr>, origin <chr>, air_time <d
 bl>, distance <dbl>,[] 
  []
@@ -2484,43 +2500,43 @@ IDYING DATA
 File: bookdown-demo_files/figure-latex/ch10zoom-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ch10zoom-1.pdf>
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##        y carat cut       color clarity depth table price  
    x     z[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##    <dbl> <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <
 dbl> <dbl>[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##  1  0     1    Very Good H     VS2      63.3    53  5139  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##  2  0     1.14 Fair      G     VS1      57.5    67  6381  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##  3  0     1.56 Ideal     G     VS2      62.2    54 12800  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##  4  0     1.2  Premium   D     VVS1     62.1    59 15686  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##  5  0     2.25 Premium   H     SI2      62.8    59 18034  
 0     0[] 
  []
@@ -2528,31 +2544,31 @@ Overfull \hbox (12.0pt too wide) in paragraph at lines 5490--5490
 
 
 [121]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##  6  0     0.71 Good      F     SI2      64.1    60  2130  
 0     0[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (12.0pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##  7  0     0.71 Good      F     SI2      64.1    60  2130  
 0     0[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##  8  3.68  0.2  Premium   D     VS2      62.3    60   367  
 3.73  2.31[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ##  9  3.71  0.2  Premium   F     VS2      62.6    59   367  
 3.73  2.33[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5490--5490
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5492--5492
 []\TU/lmtt/m/n/10 ## 10  3.71  0.2  Very Good E     VS2      63.4    59   367  
 3.74  2.36[] 
  []
@@ -2566,73 +2582,73 @@ IDYING DATA
  []
 
 [122]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##        x     y     z price carat cut       color clarity d
 epth table[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##    <dbl> <dbl> <dbl> <int> <dbl> <ord>     <ord> <ord>   <
 dbl> <dbl>[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##  1  8.09 58.9   8.06 12210  2    Premium   H     SI2      
 58.9    57[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##  2  5.15 31.8   5.12  2075  0.51 Ideal     E     VS1      
 61.8    55[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##  3 10.7  10.5   6.98 18018  5.01 Fair      J     I1       
 65.5    59[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##  4 10.2  10.2   6.72 18531  4.5  Fair      J     I1       
 65.8    58[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##  5 10.1  10.1   6.17 15223  4.01 Premium   I     I1       
 61      61[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##  6 10.0   9.94  6.24 15223  4.01 Premium   J     I1       
 62.5    62[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##  7 10.0   9.94  6.31 15984  4    Very Good I     I1       
 63.3    58[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##  8 10     9.85  6.43 17329  4.13 Fair      H     I1       
 64.8    61[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ##  9  9.86  9.81  6.13 16193  3.67 Premium   I     I1       
 62.4    56[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 5532--5532
+Overfull \hbox (27.75pt too wide) in paragraph at lines 5534--5534
 []\TU/lmtt/m/n/10 ## 10  9.66  9.63  6.03 18701  3.51 Premium   J     VS2      
 62.5    59[] 
  []
@@ -2657,15 +2673,15 @@ File: bookdown-demo_files/figure-latex/ch10box-cut-1.pdf Graphic file (type pdf
 <use bookdown-demo_files/figure-latex/ch10box-cut-1.pdf>
 
 LaTeX Warning: Reference `fig:ch10box-cut' on page 125 undefined on input line 
-5597.
+5599.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5596--5598
+Underfull \hbox (badness 10000) in paragraph at lines 5598--5600
 [][]
  []
 
 
-Overfull \vbox (0.57402pt too high) detected at line 5621
+Overfull \vbox (0.57402pt too high) detected at line 5623
  []
 
 
@@ -2679,10 +2695,10 @@ File: bookdown-demo_files/figure-latex/ch10box-log-1.pdf Graphic file (type pdf
 <use bookdown-demo_files/figure-latex/ch10box-log-1.pdf>
 
 LaTeX Warning: Reference `fig:ch10box-log' on page 126 undefined on input line 
-5642.
+5644.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5641--5643
+Underfull \hbox (badness 10000) in paragraph at lines 5643--5645
 [][]
  []
 
@@ -2703,10 +2719,10 @@ File: bookdown-demo_files/figure-latex/ch10counts-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ch10counts-1.pdf>
 
 LaTeX Warning: Reference `fig:ch10counts' on page 127 undefined on input line 5
-656.
+658.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5655--5657
+Underfull \hbox (badness 10000) in paragraph at lines 5657--5659
 [][]
  []
 
@@ -2719,11 +2735,11 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: bookdown-demo_files/figure-latex/ch10bar-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ch10bar-1.pdf>
 
-LaTeX Warning: Reference `fig:ch10bar' on page 128 undefined on input line 5667
+LaTeX Warning: Reference `fig:ch10bar' on page 128 undefined on input line 5669
 .
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5666--5668
+Underfull \hbox (badness 10000) in paragraph at lines 5668--5670
 [][]
  []
 
@@ -2753,7 +2769,7 @@ IDYING DATA
  []
 
 [130]
-Overfull \hbox (106.5pt too wide) in paragraph at lines 5748--5748
+Overfull \hbox (106.5pt too wide) in paragraph at lines 5750--5750
 []\TU/lmtt/m/n/10 ## Warning: Orientation is not uniquely specified when both t
 he x and y aesthetics are[] 
  []

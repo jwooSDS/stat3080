@@ -656,8 +656,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -4.07718091  1.62075265  0.29847312 -0.09930857 -2.85010922  0.78423804
-##  [7]  2.98276140  2.73504558 10.10959085  1.50695075
+##  [1] -0.49776855  0.47244671 -0.98743152  2.63592484  4.15733252 -0.73256683
+##  [7] -1.93595027 -0.59024352 -3.74691780 -0.03304814
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -3836,7 +3836,9 @@ I find working with vectors and matrices easier than working with lists, so I pr
 
 Data visualizations are tools that summarize data. Consider the visualization in \href{https://www.pewresearch.org/short-reads/2025/08/18/how-the-audiences-of-30-major-news-sources-differ-in-their-levels-of-education/}{this article from Pew Reasearch}. Without actually having access to the actual data, we have a sense of the audience associated with 30 major news sources. Good visualizations are easy to interpret for a wide variety of audiences, and are easier to explain than statistical models.
 
-In this section, you will learn how to create common data visualizations. The choice of data visualization is almost always determined by whether the variable(s) involved is categorical or quantitative. Discrete variables are interesting because depending on the circumstance, they can be viewed as either categorical or quantitative in the context of data visualizations.
+In this section, you will learn how to create common data visualizations. The choice of data visualization is almost always determined by whether the variable(s) involved is categorical or quantitative. Discrete variables are interesting because depending on the circumstance, they can be viewed as either categorical or quantitative in the context of data visualizations. With discrete variables, the consideration is how many distinct values exist. The more distinct values in the discrete variable, the more likely we want to use visualizations associated with quantitative variables.
+
+Note: some practitioners use the term discrete variable interchangeably with categorical variable. For example, this \href{https://rstudio.github.io/cheatsheets/html/data-visualization.html}{cheat sheet} provided by RStudio. I disagree with this. Discrete variables are quantitative variables where the number of values can be counted, as opposed to continuous variables which are quantitative variables where the number of values cannot be counted. My view is consistent with most academics, but some practitioners interchange discrete with categorical.
 
 We will be using functions from the \texttt{ggplot2} package to create visualizations. The \texttt{ggplot2} package enables users to create various kinds of data visualizations, beyond the visualizations that can be made in base R.
 

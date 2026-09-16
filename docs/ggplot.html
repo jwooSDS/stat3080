@@ -507,9 +507,15 @@ Figure 8.22: Density Plot via Base R
 </div>
 </div>
 </div>
-<div id="visualizations-from-simulations" class="section level2" number="8.7">
+<div id="cheat-sheet" class="section level2" number="8.7">
 <h2>
-<span class="header-section-number">8.7</span> Visualizations from Simulations<a class="anchor" aria-label="anchor" href="#visualizations-from-simulations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.7</span> Cheat Sheet<a class="anchor" aria-label="anchor" href="#cheat-sheet"><i class="fas fa-link"></i></a>
+</h2>
+<p>We have covered basic visualizations with <code>ggplot</code>. Feel free to refer to this <a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html">cheat sheet</a> provided by RStudio for more.</p>
+</div>
+<div id="visualizations-from-simulations" class="section level2" number="8.8">
+<h2>
+<span class="header-section-number">8.8</span> Visualizations from Simulations<a class="anchor" aria-label="anchor" href="#visualizations-from-simulations"><i class="fas fa-link"></i></a>
 </h2>
 <p>You may realize that <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values. Using base R:</p>
 <div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
@@ -534,9 +540,9 @@ Figure 8.24: Visualization Simulations with ggplot
 </p>
 </div>
 </div>
-<div id="ggplot-vs-base-r" class="section level2" number="8.8">
+<div id="ggplot-vs-base-r" class="section level2" number="8.9">
 <h2>
-<span class="header-section-number">8.8</span> ggplot vs Base R<a class="anchor" aria-label="anchor" href="#ggplot-vs-base-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.9</span> ggplot vs Base R<a class="anchor" aria-label="anchor" href="#ggplot-vs-base-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>So which to use? <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> produces nicer visuals with much more customization, but base R can be quicker to type up.</p>
 <ul>
@@ -581,8 +587,9 @@ Figure 8.24: Visualization Simulations with ggplot
 <li><a class="nav-link" href="#quant1"><span class="header-section-number">8.6.2</span> Single Quantitative Variable</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#visualizations-from-simulations"><span class="header-section-number">8.7</span> Visualizations from Simulations</a></li>
-<li><a class="nav-link" href="#ggplot-vs-base-r"><span class="header-section-number">8.8</span> ggplot vs Base R</a></li>
+<li><a class="nav-link" href="#cheat-sheet"><span class="header-section-number">8.7</span> Cheat Sheet</a></li>
+<li><a class="nav-link" href="#visualizations-from-simulations"><span class="header-section-number">8.8</span> Visualizations from Simulations</a></li>
+<li><a class="nav-link" href="#ggplot-vs-base-r"><span class="header-section-number">8.9</span> ggplot vs Base R</a></li>
 </ul>
 
       <div class="book-extra">

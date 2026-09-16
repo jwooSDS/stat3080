@@ -309,6 +309,10 @@ boxplot(Data$body_mass_g)
 plot(density(Data$body_mass_g, na.rm=TRUE)) 
 ```
 
+## Cheat Sheet
+
+We have covered basic visualizations with `ggplot`. Feel free to refer to this [cheat sheet](https://rstudio.github.io/cheatsheets/html/data-visualization.html) provided by RStudio for more.
+
 ## Visualizations from Simulations
 
 You may realize that `ggplot()` assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values. Using base R:
@@ -326,6 +330,8 @@ newDF <- data.frame(x,y)
 ggplot(newDF, aes(x = x, y = y)) +
   geom_point()
 ```
+
+
 
 ## ggplot vs Base R
 

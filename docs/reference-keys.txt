@@ -160,6 +160,7 @@ adding-an-additional-categorical-variable
 visualizing-single-variables
 cat1
 quant1
+cheat-sheet
 visualizations-from-simulations
 ggplot-vs-base-r
 dplyr

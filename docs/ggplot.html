@@ -277,19 +277,25 @@ Figure 8.8: Scatterplot via Base R
 <p>A bar chart is often used to visualize the relationship between two categorical variables. Perhaps we want to see if the different species of penguins tend to live in different islands. The most basic bar chart can provide the number of each species in each island:</p>
 <div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">island</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://jrnold.github.io/ggthemes/reference/colorblind.html">scale_fill_colorblind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: `scale_fill_colorblind()` was deprecated in ggthemes 5.2.0.
+## This warning is displayed once per session.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
 <div class="figure">
 <span style="display:block;" id="fig:ch8barchart"></span>
 <img src="bookdown-demo_files/figure-html/ch8barchart-1.png" alt="Bar Chart via ggplot" width="672"><p class="caption">
 Figure 8.9: Bar Chart via ggplot
 </p>
 </div>
-<p>The predictor is <code>island</code> and the response variable is <code>species</code>. For bar charts, place the response variable in the <code>fill</code> argument.</p>
+<p>The predictor is <code>island</code> and the response variable is <code>species</code>. For bar charts, place the response variable in the <code>fill</code> argument. Notice the extra layer for the color blind palette is a bit different.</p>
 <p>Notice we use <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code> instead of <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>. The <code>geom</code> tells the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function what kind of visualization we want.</p>
 <p>From Figure <a href="ggplot.html#fig:ch8barchart">8.9</a>, we can see there are an unequal number of penguins in each island. So using proportions, rather than counts, will be more useful:</p>
-<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">island</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://jrnold.github.io/ggthemes/reference/colorblind.html">scale_fill_colorblind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:ch8barchart2"></span>
 <img src="bookdown-demo_files/figure-html/ch8barchart2-1.png" alt="Bar Chart with Proportions via ggplot" width="672"><p class="caption">
@@ -303,7 +309,7 @@ Figure 8.10: Bar Chart with Proportions via ggplot
 <span class="header-section-number">8.3.1</span> Tables<a class="anchor" aria-label="anchor" href="#tables"><i class="fas fa-link"></i></a>
 </h3>
 <p>We can also create <strong>two-way tables</strong> to summarize the data from two categorical variables. These functions are from base R.</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">island</span>, <span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##            
 ##             Adelie Chinstrap Gentoo
@@ -311,7 +317,7 @@ Figure 8.10: Bar Chart with Proportions via ggplot
 ##   Dream         56        68      0
 ##   Torgersen     52         0      0</code></pre>
 <p>To find proportions of each species in each island:</p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">island</span>, <span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>, margin <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##            
 ##                Adelie Chinstrap    Gentoo
@@ -325,7 +331,7 @@ Figure 8.10: Bar Chart with Proportions via ggplot
 <span class="header-section-number">8.3.2</span> Base R<a class="anchor" aria-label="anchor" href="#base-r-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>As a quick example using base R:</p>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">species</span>, <span class="va">Data</span><span class="op">$</span><span class="va">island</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:ch8barchart-base"></span>
@@ -340,7 +346,7 @@ Figure 8.11: Bar Chart via Base R
 <span class="header-section-number">8.4</span> Visualizing a Quantitative Variable Across a Categorical Variable<a class="anchor" aria-label="anchor" href="#quantcat"><i class="fas fa-link"></i></a>
 </h2>
 <p>Suppose we want to see if the body mass of the penguins differ across the species. We can create <strong>side by side boxplots</strong></p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
@@ -352,9 +358,10 @@ Figure 8.12: Boxplot via ggplot
 <p>A boxplot represents these values: minimum (lower end of whisker), first quartile (lower end of box), median (line in box), third quartile (upper end of box), and maximum (upper end of whisker). Dots represent outliers based on some rule (<span class="math inline">\(1.5 \times\)</span> IQR rule). From Figure <a href="ggplot.html#fig:ch8boxplot">8.12</a> we see that an outlier that is bigger than the rest and another outlier that is smaller than the rest for Chinstraps. For the Chinstraps, the lower and upper ends of the whiskers represent the values that are the minimum and maximum that are not considered outliers. We can see that Gentoos tend to be larger than Adelies and Chinstraps. The body mass of Adelies and Chinstraps are similar.</p>
 <p>How would you add a title and change the labels of each axes so they make more sense?</p>
 <p>We can also use density plots of body mass and use different colors for each species and arrive at a similar conclusion.</p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:ch8densplot"></span>
 <img src="bookdown-demo_files/figure-html/ch8densplot-1.png" alt="Density Plot via ggplot" width="672"><p class="caption">
@@ -368,7 +375,7 @@ Figure 8.13: Density Plot via ggplot
 <span class="header-section-number">8.4.1</span> Base R<a class="anchor" aria-label="anchor" href="#base-r-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>As a quick example using base R. For side by side boxplots:</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span> <span class="co">##y ~ x</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:ch8boxplot-base"></span>
@@ -383,9 +390,9 @@ Figure 8.14: Boxplot via Base R
 <h2>
 <span class="header-section-number">8.5</span> Adding an Additional Categorical Variable<a class="anchor" aria-label="anchor" href="#adding-an-additional-categorical-variable"><i class="fas fa-link"></i></a>
 </h2>
-<p>Most of these plots visualize two variables. In Section <a href="ggplot.html#scattercolor">8.2.1.1</a>, we have seen with the scatterplot that in addition to two quantiative variables, we can use color to incorporate a categorical variable.</p>
+<p>Most of these plots visualize two variables. In Section <a href="ggplot.html#scattercolor">8.2.1.1</a>, we have a scatterplot which incorporates color to highlight a third, categorical variable.</p>
 <p>To incorporate another categorical variable, we can use what <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> calls a <code>facet_wrap</code>. It will create the visualization across each value of the categorical variable in the <code>facet_wrap</code>. For example,</p>
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">flipper_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://jrnold.github.io/ggthemes/reference/colorblind.html">scale_color_colorblind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -400,6 +407,7 @@ Figure 8.14: Boxplot via Base R
 Figure 8.15: Using Facet Wrap with ggplot
 </p>
 </div>
+<p>The <code>facet_wrap</code> essentially subsets the data frame based on the variable supplied to it.</p>
 </div>
 <div id="visualizing-single-variables" class="section level2" number="8.6">
 <h2>
@@ -412,7 +420,7 @@ Figure 8.15: Using Facet Wrap with ggplot
 <span class="header-section-number">8.6.1</span> Single Categorical Variable<a class="anchor" aria-label="anchor" href="#cat1"><i class="fas fa-link"></i></a>
 </h3>
 <p>A bar chart can also be used for a single categorical variable:</p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
@@ -422,7 +430,7 @@ Figure 8.16: Barchart via ggplot
 </p>
 </div>
 <p>By default, a bar chart showing counts is displayed. If we want proportions instead:</p>
-<div class="sourceCode" id="cb373"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
@@ -433,7 +441,7 @@ Figure 8.17: Barchart with Proportions via ggplot
 </div>
 <p>The argument <code>y = after_stat(prop)</code> tells the function that we want the proportions on the y axis. <code>group = 1</code> means we want the proportions across all bars to add up to 1.</p>
 <p>If you want to change the order of the species that are displayed:</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Data</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">species</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Gentoo"</span>,<span class="st">"Adelie"</span>,<span class="st">"Chinstrap"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -444,14 +452,14 @@ Figure 8.17: Barchart with Proportions via ggplot
 Figure 8.18: Bar Chart with Species Reordered
 </p>
 </div>
-<p>Changing the order may not make much sense in this example, but they will if the categorical variable is <strong>ordinal</strong>. In such variables, there is an order in the values of the categories. For example, shirt size.</p>
+<p>Changing the order may not make much sense in this example, but they will if the categorical variable is <strong>ordinal</strong>. In such variables, there is an order in the values of the categories, for example, shirt size.</p>
 <p>Tables can also be easily created:</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##    Gentoo    Adelie Chinstrap 
 ##       124       152        68</code></pre>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##    Gentoo    Adelie Chinstrap 
@@ -462,7 +470,7 @@ Figure 8.18: Bar Chart with Species Reordered
 <span class="header-section-number">8.6.2</span> Single Quantitative Variable<a class="anchor" aria-label="anchor" href="#quant1"><i class="fas fa-link"></i></a>
 </h3>
 <p>A boxplot or a density plot are commonly used to summarize the distribution of a single quantitative variable.</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
@@ -471,7 +479,7 @@ Figure 8.18: Bar Chart with Species Reordered
 Figure 8.19: Boxplot via ggplot
 </p>
 </div>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
@@ -481,7 +489,7 @@ Figure 8.20: Density Plot via ggplot
 </p>
 </div>
 <p>Or with base R</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:ch8box2"></span>
@@ -489,7 +497,7 @@ Figure 8.20: Density Plot via ggplot
 Figure 8.21: Boxplot via Base R
 </p>
 </div>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">body_mass_g</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:ch8dens2"></span>
@@ -504,7 +512,7 @@ Figure 8.22: Density Plot via Base R
 <span class="header-section-number">8.7</span> Visualizations from Simulations<a class="anchor" aria-label="anchor" href="#visualizations-from-simulations"><i class="fas fa-link"></i></a>
 </h2>
 <p>You may realize that <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> assumes you are working with a data frame. However, when running your own simulations, results are often stored in other kinds of data structures such as vectors and matrices. In such instances, using a base R function to create visuals may be more efficient, as we can skip a step by not needing to create a data frame. For example, we simulate 20 values from a standard normal and want a plot to show their values. Using base R:</p>
-<div class="sourceCode" id="cb383"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:ch8sim"></span>
@@ -513,7 +521,7 @@ Figure 8.23: Visualization Simulations with Base R
 </p>
 </div>
 <p>Using <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> involves more code to type:</p>
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span></span>
 <span><span class="va">newDF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
@@ -591,7 +599,7 @@ Figure 8.24: Visualization Simulations with ggplot
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-14.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

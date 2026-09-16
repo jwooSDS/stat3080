@@ -148,10 +148,11 @@ A bar chart is often used to visualize the relationship between two categorical 
 
 ```{r ch8barchart, fig.cap="Bar Chart via ggplot"}
 ggplot(Data, aes(x = island, fill = species)) +
-  geom_bar()
+  geom_bar() + 
+  scale_fill_colorblind()
 ```
 
-The predictor is `island` and the response variable is `species`. For bar charts, place the response variable in the `fill` argument. 
+The predictor is `island` and the response variable is `species`. For bar charts, place the response variable in the `fill` argument. Notice the extra layer for the color blind palette is a bit different.
 
 Notice we use `geom_bar()` instead of `geom_point()`. The `geom` tells the `ggplot()` function what kind of visualization we want. 
 
@@ -159,7 +160,8 @@ From Figure \@ref(fig:ch8barchart), we can see there are an unequal number of pe
 
 ```{r ch8barchart2, fig.cap="Bar Chart with Proportions via ggplot"} 
 ggplot(Data, aes(x = island, fill = species)) +
-  geom_bar(position = "fill")
+  geom_bar(position = "fill") + 
+  scale_fill_colorblind()
 ```
 
 From Figure \@ref(fig:ch8barchart2), we see that Biscoe island has mostly Gentoos and some Adelies. In Dream island, we have a fairly even proportion of Adelies and Chinstrap. Torgensen island is the island of Adelies. Since the proportions of species are so different across the islands, it appears that the island and species are related. If there is no relationship, the proportion of each species would be the same across the islands. 
@@ -206,7 +208,8 @@ We can also use density plots of body mass and use different colors for each spe
 
 ```{r ch8densplot, fig.cap="Density Plot via ggplot",warning=FALSE}
 ggplot(penguins, aes(x = body_mass_g, color = species)) +
-  geom_density()
+  geom_density() + 
+  scale_color_colorblind()
 ```
 
 Areas under the density curve represent proportion of observations in that range. Based on Figure \@ref(fig:ch8densplot), most Chinstraps have body masses between 3000g and 4500g. 
@@ -225,7 +228,7 @@ Using density plots for each species is cumbersome in base R.
 
 ## Adding an Additional Categorical Variable
 
-Most of these plots visualize two variables. In Section \@ref(scattercolor), we have seen with the scatterplot that in addition to two quantiative variables, we can use color to incorporate a categorical variable.
+Most of these plots visualize two variables. In Section \@ref(scattercolor), we have a scatterplot which incorporates color to highlight a third, categorical variable.
 
 To incorporate another categorical variable, we can use what `ggplot()` calls a `facet_wrap`. It will create the visualization across each value of the categorical variable in the `facet_wrap`. For example, 
 
@@ -239,6 +242,8 @@ ggplot(Data, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
     color = "Species" ) + 
   facet_wrap(~island)
 ```
+
+The `facet_wrap` essentially subsets the data frame based on the variable supplied to it. 
 
 ## Visualizing Single Variables
 
@@ -271,7 +276,7 @@ Data$species <- factor(Data$species, levels=c("Gentoo","Adelie","Chinstrap"))
 ggplot(Data, aes(x = species, y = after_stat(prop), group = 1)) + 
   geom_bar()
 ```
-Changing the order may not make much sense in this example, but they will if the categorical variable is **ordinal**. In such variables, there is an order in the values of the categories. For example, shirt size. 
+Changing the order may not make much sense in this example, but they will if the categorical variable is **ordinal**. In such variables, there is an order in the values of the categories, for example, shirt size. 
 
 Tables can also be easily created:
 

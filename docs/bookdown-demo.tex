@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-09-14}
+\date{2026-09-16}
 
 \begin{document}
 \maketitle
@@ -656,8 +656,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.9286507 -2.3006468 -4.2513784  1.3318058  0.6162317 -4.2879269
-##  [7] -1.6267467  6.6288594 -2.1425699 -0.4881599
+##  [1] -0.3743301 -0.8139392  2.9997975  1.4513752 -2.0786208  4.4425453
+##  [7]  4.5726886  6.8205912  3.5838086  6.1730957
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -4076,9 +4076,17 @@ A bar chart is often used to visualize the relationship between two categorical 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ island, }\AttributeTok{fill =}\NormalTok{ species)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{()}
+  \FunctionTok{geom\_bar}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_colorblind}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Warning: `scale_fill_colorblind()` was deprecated in ggthemes 5.2.0.
+## This warning is displayed once per session.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
 
 \begin{figure}
 \centering
@@ -4086,7 +4094,7 @@ A bar chart is often used to visualize the relationship between two categorical 
 \caption{\label{fig:ch8barchart}Bar Chart via ggplot}
 \end{figure}
 
-The predictor is \texttt{island} and the response variable is \texttt{species}. For bar charts, place the response variable in the \texttt{fill} argument.
+The predictor is \texttt{island} and the response variable is \texttt{species}. For bar charts, place the response variable in the \texttt{fill} argument. Notice the extra layer for the color blind palette is a bit different.
 
 Notice we use \texttt{geom\_bar()} instead of \texttt{geom\_point()}. The \texttt{geom} tells the \texttt{ggplot()} function what kind of visualization we want.
 
@@ -4095,7 +4103,8 @@ From Figure \ref{fig:ch8barchart}, we can see there are an unequal number of pen
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ island, }\AttributeTok{fill =}\NormalTok{ species)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"fill"}\NormalTok{)}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"fill"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_colorblind}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4187,7 +4196,8 @@ We can also use density plots of body mass and use different colors for each spe
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ body\_mass\_g, }\AttributeTok{color =}\NormalTok{ species)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_density}\NormalTok{()}
+  \FunctionTok{geom\_density}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{scale\_color\_colorblind}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4221,7 +4231,7 @@ Using density plots for each species is cumbersome in base R.
 
 \section{Adding an Additional Categorical Variable}\label{adding-an-additional-categorical-variable}
 
-Most of these plots visualize two variables. In Section \ref{scattercolor}, we have seen with the scatterplot that in addition to two quantiative variables, we can use color to incorporate a categorical variable.
+Most of these plots visualize two variables. In Section \ref{scattercolor}, we have a scatterplot which incorporates color to highlight a third, categorical variable.
 
 To incorporate another categorical variable, we can use what \texttt{ggplot()} calls a \texttt{facet\_wrap}. It will create the visualization across each value of the categorical variable in the \texttt{facet\_wrap}. For example,
 
@@ -4243,6 +4253,8 @@ To incorporate another categorical variable, we can use what \texttt{ggplot()} c
 \includegraphics{bookdown-demo_files/figure-latex/ch8facet-1.pdf}
 \caption{\label{fig:ch8facet}Using Facet Wrap with ggplot}
 \end{figure}
+
+The \texttt{facet\_wrap} essentially subsets the data frame based on the variable supplied to it.
 
 \section{Visualizing Single Variables}\label{visualizing-single-variables}
 
@@ -4291,7 +4303,7 @@ If you want to change the order of the species that are displayed:
 \end{Shaded}
 
 \includegraphics{bookdown-demo_files/figure-latex/ch8order-1.pdf}
-Changing the order may not make much sense in this example, but they will if the categorical variable is \textbf{ordinal}. In such variables, there is an order in the values of the categories. For example, shirt size.
+Changing the order may not make much sense in this example, but they will if the categorical variable is \textbf{ordinal}. In such variables, there is an order in the values of the categories, for example, shirt size.
 
 Tables can also be easily created:
 

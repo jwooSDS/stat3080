@@ -7,7 +7,7 @@
 <title>Chapter 11 Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION) | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 11 Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION) | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,7 +26,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -135,9 +134,8 @@
 <span class="header-section-number">11.1.4</span> Law of Large Numbers<a class="anchor" aria-label="anchor" href="#law-of-large-numbers"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>Law of Large Numbers</strong> (LLN) states that as <span class="math inline">\(n\)</span> gets larger and approaches infinity, the sample mean <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span> converges to the true mean <span class="math inline">\(\mu\)</span>. This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever <span class="math inline">\(n\)</span> gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes.</p>
-<p>Another implication of the LLN is that we can use Monte Carlo simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications.</p>
 <p>We use an example to illustrate the LLN, which comes from flipping a fair coin. Let <span class="math inline">\(X\)</span> denote whether the coin lands heads or tails, and let <span class="math inline">\(X=1\)</span> for heads and <span class="math inline">\(X=0\)</span> for tails. We can say that <span class="math inline">\(X \sim Bern(0.5)\)</span> since the coin is fair. Imagine flipping the coin <span class="math inline">\(n\)</span> times, and record the outcome after each flip, so <span class="math inline">\(X_1, \cdots, X_n\)</span> denote the outcome of each flip. We know that <span class="math inline">\(E(X) = 0.5\)</span> since <span class="math inline">\(X \sim Bern(0.5)\)</span>. The LLN informs us that <span class="math inline">\(\bar{X}_1, \cdots, \bar{X}_n\)</span> should usually get closer to 0.5 as <span class="math inline">\(n\)</span> increases. In other words, the value of the sample proportion after each flip should usually get closer to 0.5 with more flips. The code below simulates this example for <span class="math inline">\(n=500\)</span>, and Figure <a href="clt.html#fig:LLN">11.1</a> shows how the sample proportions get closer to 0.5, in general, as <span class="math inline">\(n\)</span> increases.</p>
-<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##make this big, but not too big otherwise picture is difficult to see</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span></span>
@@ -177,12 +175,13 @@ Figure 11.1: LLN Example with Coin Flips
 <h2>
 <span class="header-section-number">11.2</span> Monte Carlo Simulations<a class="anchor" aria-label="anchor" href="#monte-carlo-simulations"><i class="fas fa-link"></i></a>
 </h2>
-<p>You may have noticed that we have used simulations in previous sections (e.g. Section <a href="sims.html#ch6sim">6.4.1</a>) to help explain certain concepts. These simulations are called <strong>Monte Carlo</strong> simulations. The idea behind Monte Carlo simulations is to use repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo simulations are used for the following purposes:</p>
+<p>You may have noticed that we have used simulations in previous sections (see the example in Section <a href="sims.html#ch6sim">6.4.1</a> for the sampling distribution of the sample mean) to help explain certain concepts. These simulations are called <strong>Monte Carlo</strong> simulations. The idea behind Monte Carlo simulations is to use repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data based on expected values. Monte Carlo simulations are used for the following purposes:</p>
 <ol style="list-style-type: decimal">
 <li><p>When the probability or expectation is too complicated to work out by hand. Recall that finding probabilities and expectations by hand involve summations or integrals, and it becomes obvious that working with summations and especially integrals can get onerous.</p></li>
 <li><p>To verify theoretical results involving probability or expectations. While a lot of theory is proved using mathematics, most academic papers include Monte Carlo simulations to verify the theoretical results. We have done these to verify the Central Limit Theorem in Section <a href="sims.html#ch6sim">6.4.1</a>.</p></li>
 <li><p>To help confirm that you understand the meaning of theoretical results. The only way your code matches the theory is if you understand the theory.</p></li>
 </ol>
+<p>The Law of Large Numbers (LLN) provides the mathematical backbone for Monte Carlo Simulations. LLN guarantees that as you repeat an experiment or random trial more times, your average result gets closer and closer to the true expected value.</p>
 <div id="monte-carlo-methods-for-expected-values" class="section level3" number="11.2.1">
 <h3>
 <span class="header-section-number">11.2.1</span> Monte Carlo Methods for Expected Values<a class="anchor" aria-label="anchor" href="#monte-carlo-methods-for-expected-values"><i class="fas fa-link"></i></a>
@@ -195,7 +194,7 @@ Figure 11.1: LLN Example with Coin Flips
 <li>Calculate <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
 <li>Find the sample average of <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
@@ -206,7 +205,7 @@ Figure 11.1: LLN Example with Coin Flips
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">)</span> <span class="co">##sample average of squared values. </span></span></code></pre></div>
 <pre><code>## [1] 1.024546</code></pre>
-<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##when reps is large, this sample mean should be close to the true E(X^2), which is 1</span></span></code></pre></div>
 <p>Since <span class="math inline">\(X\)</span> is standard normal, we know <span class="math inline">\(E(X) = 0\)</span> and <span class="math inline">\(Var(X) = E(X^2) - E(X)^2 = E(X^2) = 1\)</span>. We see in our simulation that our estimated value for <span class="math inline">\(E(X^2)\)</span> is pretty close to its theoretical value.</p>
 </div>
@@ -222,7 +221,7 @@ Figure 11.1: LLN Example with Coin Flips
 <li>Count the number of times <span class="math inline">\(X_i^2\)</span> is greater than 1.</li>
 <li>Divide this number by <span class="math inline">\(M\)</span> to estimate the probability, since probability can be interpreted as a long-run proportion.</li>
 </ul>
-<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
@@ -233,15 +232,158 @@ Figure 11.1: LLN Example with Coin Flips
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##count the number of times X^2 is greater than 1, and divide by M</span></span></code></pre></div>
 <pre><code>## [1] 0.3178</code></pre>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##alternatively, same result as previous line</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.3178</code></pre>
+<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##when reps is large, this proportion should be close to</span></span>
 <span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="fl">1</span>, df<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.3173105</code></pre>
-<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##it turns out that squaring a standard normal gives a chi-squared distribution with 1 df.</span></span></code></pre></div>
 <p>We see the estimated probability <span class="math inline">\(P(X^2 &gt; 1)\)</span> is close to its theoretical probability.</p>
-
+<p>Why do Monte Carlo simulations work with probabilities? The probability from the Monte carlo simulation finds the proportion of times a certain condition is met, which is the same as finding the average of the 1s (when condition is met) and 0s (when condition is not met), so the proportion is equivalent to a mean. So our results are backed by the LLN.</p>
 </div>
+</div>
+<div id="distsampmean" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> Sampling Distribution of the Sample Mean<a class="anchor" aria-label="anchor" href="#distsampmean"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will state the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>. Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. from a normal distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. Then <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n} \sim N(\mu, \frac{\sigma^2}{n})\)</span>.</p>
+<p>This implies that if the data are originally normally distributed, the sample mean will also be normally distributed, regardless of the sample size.</p>
+<p>For example, if the data are i.i.d. standard normal, the sample means follow a normal distribution:</p>
+<ul>
+<li>When <span class="math inline">\(n=10\)</span>, <span class="math inline">\(\bar{X}_n \sim N(0, \frac{1}{10}) = N(0, 0.1)\)</span>.</li>
+<li>When <span class="math inline">\(n=100\)</span>, <span class="math inline">\(\bar{X}_n \sim N(0, \frac{1}{100}) = N(0,0.01)\)</span>.</li>
+<li>When <span class="math inline">\(n=1000\)</span>, <span class="math inline">\(\bar{X}_n \sim N(0, \frac{1}{1000}) = N(0,0.001)\)</span>.</li>
+</ul>
+<p>We see that when the sample size gets larger, the variance of the sample mean decreases, so there is less spread and their resulting density plot is more concentrated around the mean.</p>
+<p>We can run the following Monte Carlo simulation to display the sampling distributions of the sample means when the data are i.i.d. standard normal when <span class="math inline">\(n=10, 100, 100\)</span> in Figure <a href="clt.html#fig:dist-samp-mean">11.2</a> below (this simulation is similar to what was done in Section <a href="sims.html#ch6sim">6.4.1</a>):</p>
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##function to find sample mean of data from standard normal</span></span>
+<span><span class="va">sampMean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span></span>
+<span><span class="co">##find the sample means of n data points, with 10000 replicates</span></span>
+<span><span class="va">repSampMean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">Reps</span>, <span class="fu">sampMean</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">##find the sample means when n = 10, 100, 1000 with 10000 replicates each</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">100</span>, <span class="fl">1000</span><span class="op">)</span>, <span class="va">repSampMean</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##visualize the sampling distributions of the sample means when n=10, 100, 1000</span></span>
+<span></span>
+<span><span class="co">##set the max limit of the y axis </span></span>
+<span><span class="va">max_y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co">##n = 10</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">max_y1</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Sample Mean with n Varied"</span><span class="op">)</span></span>
+<span><span class="co">##n = 100</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="co">##n = 1000</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n=10"</span>, <span class="st">"n=100"</span>, <span class="st">"n=1000"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>,<span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, cex<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dist-samp-mean"></span>
+<img src="bookdown-demo_files/figure-html/dist-samp-mean-1.png" alt="Sampling Distribution of Sample Mean when Data are Standard Normal with n = 10, 100, 1000" width="672"><p class="caption">
+Figure 11.2: Sampling Distribution of Sample Mean when Data are Standard Normal with n = 10, 100, 1000
+</p>
+</div>
+<p>From Figure <a href="clt.html#fig:dist-samp-mean">11.2</a>, we can see that as <span class="math inline">\(n\)</span> gets larger, the distribution of the sample mean has less variance and the resulting density plot is more concentrated around the mean.</p>
+<p>We can also find the average of the sample means when <span class="math inline">\(n = 10, 100, 1000\)</span>, which should be 0 theoretically:</p>
+<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">results</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -0.0088640968 -0.0002700293  0.0004294338</code></pre>
+<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##close to 0</span></span></code></pre></div>
+<p>As well as the variance of the sample means when <span class="math inline">\(n = 10, 100, 1000\)</span>, which should be 0.1, 0.01, and 0.001 respectively:</p>
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">results</span>, <span class="fl">2</span>, <span class="va">var</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.100813295 0.009996330 0.001000144</code></pre>
+</div>
+<div id="central-limit-theorem" class="section level2" number="11.4">
+<h2>
+<span class="header-section-number">11.4</span> Central Limit Theorem<a class="anchor" aria-label="anchor" href="#central-limit-theorem"><i class="fas fa-link"></i></a>
+</h2>
+<p>The previous subsection writes about the sampling distribution of the sample means when the data were original i.i.d. normal. However, normal data rarely happens in real life. So is the sampling distribution of the sample mean useless? It turns out that under some conditions, the result is still applicable.</p>
+<p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. from a distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. The Central Limit Theorem (CLT) states that as the sample size <span class="math inline">\(n\)</span> gets larger and tends to infinity, <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span> is <strong>approximately</strong> <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>.</p>
+<p>The implication of the CLT is that even if our data do not follow a normal distribution, the average value of the data can be approximated by a normal distribution, if our sample size is large enough. This is useful since a lot of research questions deal with averages, and we do not need the data to be normal as long as our sample size is large enough (e.g. do average test scores improve after the implementation of a new program?).</p>
+<p>The question then becomes: how large does the sample size <span class="math inline">\(n\)</span> have to be for the approximation to work? Most books will say at least 25, or 30. It turns out that the skewness (or asymmetry) of the data plays a role:</p>
+<ul>
+<li>If the data is symmetric (but not normal), a smaller sample size may be enough.</li>
+<li>The more skewed (or asymmetric) the data, a larger sample size may be needed.</li>
+</ul>
+<div id="example-1-data-are-uniform" class="section level3" number="11.4.1">
+<h3>
+<span class="header-section-number">11.4.1</span> Example 1: Data are Uniform<a class="anchor" aria-label="anchor" href="#example-1-data-are-uniform"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sampMean_Unif</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span></span>
+<span><span class="co">##find the sample means of n data points, with 10000 replicates</span></span>
+<span><span class="va">repSampMean_Unif</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">Reps</span>, <span class="fu">sampMean_Unif</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">results_Unif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">25</span><span class="op">)</span>, <span class="va">repSampMean_Unif</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##set the max limit of the y axis </span></span>
+<span><span class="va">max_y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Unif</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Unif</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Unif</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co">##n = 1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Unif</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">max_y1</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Sample Mean with n Varied"</span><span class="op">)</span></span>
+<span><span class="co">##n = 5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Unif</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="co">##n = 25</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Unif</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n=1"</span>, <span class="st">"n=5"</span>, <span class="st">"n=25"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>,<span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, cex<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dist-U"></span>
+<img src="bookdown-demo_files/figure-html/dist-U-1.png" alt="Sampling Distribution of Sample Mean when Data are Standard Uniform with n = 1, 5, 25" width="672"><p class="caption">
+Figure 11.3: Sampling Distribution of Sample Mean when Data are Standard Uniform with n = 1, 5, 25
+</p>
+</div>
+</div>
+<div id="example-2-data-are-skewed" class="section level3" number="11.4.2">
+<h3>
+<span class="header-section-number">11.4.2</span> Example 2: Data are Skewed<a class="anchor" aria-label="anchor" href="#example-2-data-are-skewed"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sampMean_Pois</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">rpois</a></span><span class="op">(</span><span class="va">number</span>, lambda <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span></span>
+<span><span class="va">repSampMean_Pois</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">Reps</span>, <span class="fu">sampMean_Pois</span><span class="op">(</span><span class="va">number</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">results_Pois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">25</span><span class="op">)</span>, <span class="va">repSampMean_Pois</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">max_y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Pois</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Pois</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Pois</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Pois</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">max_y1</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Sample Mean with n Varied"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Pois</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">results_Pois</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n=1"</span>, <span class="st">"n=5"</span>, <span class="st">"n=25"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>,<span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, cex<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-173-1.png" width="672"></div>
+</div>
+</div>
+<div id="sampling-distribution-of-the-sample-proportion" class="section level2" number="11.5">
+<h2>
+<span class="header-section-number">11.5</span> Sampling Distribution of the Sample Proportion<a class="anchor" aria-label="anchor" href="#sampling-distribution-of-the-sample-proportion"><i class="fas fa-link"></i></a>
+</h2>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -265,6 +407,14 @@ Figure 11.1: LLN Example with Coin Flips
 <li><a class="nav-link" href="#monte-carlo-methods-for-probabilities"><span class="header-section-number">11.2.2</span> Monte Carlo Methods for Probabilities</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#distsampmean"><span class="header-section-number">11.3</span> Sampling Distribution of the Sample Mean</a></li>
+<li>
+<a class="nav-link" href="#central-limit-theorem"><span class="header-section-number">11.4</span> Central Limit Theorem</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#example-1-data-are-uniform"><span class="header-section-number">11.4.1</span> Example 1: Data are Uniform</a></li>
+<li><a class="nav-link" href="#example-2-data-are-skewed"><span class="header-section-number">11.4.2</span> Example 2: Data are Skewed</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#sampling-distribution-of-the-sample-proportion"><span class="header-section-number">11.5</span> Sampling Distribution of the Sample Proportion</a></li>
 </ul>
 
       <div class="book-extra">
@@ -281,7 +431,7 @@ Figure 11.1: LLN Example with Coin Flips
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-16.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

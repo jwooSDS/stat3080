@@ -46,8 +46,6 @@ Their sampling distributions have been proven mathematically. However, what happ
 
 The **Law of Large Numbers** (LLN) states that as $n$ gets larger and approaches infinity, the sample mean $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$ converges to the true mean $\mu$. This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever $n$ gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes. 
 
-Another implication of the LLN is that we can use Monte Carlo simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications.
-
 We use an example to illustrate the LLN, which comes from flipping a fair coin. Let $X$ denote whether the coin lands heads or tails, and let $X=1$ for heads and $X=0$ for tails. We can say that $X \sim Bern(0.5)$ since the coin is fair. Imagine flipping the coin $n$ times, and record the outcome after each flip, so $X_1, \cdots, X_n$ denote the outcome of each flip. We know that $E(X) = 0.5$ since $X \sim Bern(0.5)$. The LLN informs us that $\bar{X}_1, \cdots, \bar{X}_n$ should usually get closer to 0.5 as $n$ increases. In other words, the value of the sample proportion after each flip should usually get closer to 0.5 with more flips. The code below simulates this example for $n=500$, and Figure \@ref(fig:LLN) shows how the sample proportions get closer to 0.5, in general, as $n$ increases. 
 
 ```{r LLN, fig.cap="LLN Example with Coin Flips"}
@@ -83,13 +81,15 @@ The convergence to 0.5 comes from flipping the coin many times.
 
 ## Monte Carlo Simulations
 
-You may have noticed that we have used simulations in previous sections (e.g. Section \@ref(ch6sim)) to help explain certain concepts. These simulations are called **Monte Carlo** simulations. The idea behind Monte Carlo simulations is to use repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo simulations are used for the following purposes:
+You may have noticed that we have used simulations in previous sections (see the example in Section \@ref(ch6sim) for the sampling distribution of the sample mean) to help explain certain concepts. These simulations are called **Monte Carlo** simulations. The idea behind Monte Carlo simulations is to use repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data based on expected values. Monte Carlo simulations are used for the following purposes:
 
 1. When the probability or expectation is too complicated to work out by hand. Recall that finding probabilities and expectations by hand involve summations or integrals, and it becomes obvious that working with summations and especially integrals can get onerous. 
 
 2. To verify theoretical results involving probability or expectations. While a lot of theory is proved using mathematics, most academic papers include Monte Carlo simulations to verify the theoretical results. We have done these to verify the Central Limit Theorem in Section \@ref(ch6sim).
 
 3. To help confirm that you understand the meaning of theoretical results. The only way your code matches the theory is if you understand the theory. 
+
+The Law of Large Numbers (LLN) provides the mathematical backbone for Monte Carlo Simulations. LLN guarantees that as you repeat an experiment or random trial more times, your average result gets closer and closer to the true expected value.
 
 ### Monte Carlo Methods for Expected Values
 
@@ -141,6 +141,9 @@ squared.values<-Xs^2 ##square each X
 
 sum(squared.values>1)/reps ##count the number of times X^2 is greater than 1, and divide by M
 
+##alternatively, same result as previous line
+mean(squared.values>1)
+
 ##when reps is large, this proportion should be close to
 1-pchisq(1, df=1)
 ##it turns out that squaring a standard normal gives a chi-squared distribution with 1 df.
@@ -148,4 +151,133 @@ sum(squared.values>1)/reps ##count the number of times X^2 is greater than 1, an
 
 We see the estimated probability $P(X^2 > 1)$ is close to its theoretical probability. 
 
+Why do Monte Carlo simulations work with probabilities? The probability from the Monte carlo simulation finds the proportion of times a certain condition is met, which is the same as finding the average of the 1s (when condition is met) and 0s (when condition is not met), so the proportion is equivalent to a mean. So our results are backed by the LLN. 
 
+## Sampling Distribution of the Sample Mean {#distsampmean}
+
+We will state the sampling distribution of the sample mean, $\bar{X}_n$. Let $X_1, \cdots, X_n$ be i.i.d. from a normal distribution with finite mean $\mu$ and finite variance $\sigma^2$. Then $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n} \sim N(\mu, \frac{\sigma^2}{n})$.
+
+This implies that if the data are originally normally distributed, the sample mean will also be normally distributed, regardless of the sample size. 
+
+For example, if the data are i.i.d. standard normal, the sample means follow a normal distribution: 
+
+- When $n=10$, $\bar{X}_n \sim N(0, \frac{1}{10}) = N(0, 0.1)$.
+- When $n=100$, $\bar{X}_n \sim N(0, \frac{1}{100}) = N(0,0.01)$.
+- When $n=1000$, $\bar{X}_n \sim N(0, \frac{1}{1000}) = N(0,0.001)$.
+
+We see that when the sample size gets larger, the variance of the sample mean decreases, so there is less spread and their resulting density plot is more concentrated around the mean.
+
+We can run the following Monte Carlo simulation to display the sampling distributions of the sample means when the data are i.i.d. standard normal when $n=10, 100, 100$ in Figure \@ref(fig:dist-samp-mean) below (this simulation is similar to what was done in Section \@ref(ch6sim)):
+
+```{r dist-samp-mean, fig.cap="Sampling Distribution of Sample Mean when Data are Standard Normal with n = 10, 100, 1000"}
+##function to find sample mean of data from standard normal
+sampMean <- function(number){
+  mean(rnorm(number))
+}
+
+Reps <- 10000
+
+##find the sample means of n data points, with 10000 replicates
+repSampMean <- function(number){
+  return(replicate(Reps, sampMean(number)))
+}
+
+##find the sample means when n = 10, 100, 1000 with 10000 replicates each
+results <- sapply(c(10, 100, 1000), repSampMean)
+
+##visualize the sampling distributions of the sample means when n=10, 100, 1000
+
+##set the max limit of the y axis 
+max_y1 <- max(density(results[,1])$y, density(results[,2])$y, density(results[,3])$y) 
+
+##n = 10
+plot(density(results[,1]), ylim=c(0, max_y1), main="Density Plot of Sample Mean with n Varied")
+##n = 100
+lines(density(results[,2]), col="blue")
+##n = 1000
+lines(density(results[,3]), col="red")
+legend("topright", legend = c("n=10", "n=100", "n=1000"), col = c("black","blue", "red"), lty = 1, cex=0.7)
+```
+
+From Figure \@ref(fig:dist-samp-mean), we can see that as $n$ gets larger, the distribution of the sample mean has less variance and the resulting density plot is more concentrated around the mean. 
+
+We can also find the average of the sample means when $n = 10, 100, 1000$, which should be 0 theoretically:
+
+```{r}
+apply(results, 2, mean)
+##close to 0
+```
+
+As well as the variance of the sample means when $n = 10, 100, 1000$, which should be 0.1, 0.01, and 0.001 respectively:
+
+```{r}
+apply(results, 2, var)
+```
+
+## Central Limit Theorem
+
+The previous subsection writes about the sampling distribution of the sample means when the data were original i.i.d. normal. However, normal data rarely happens in real life. So is the sampling distribution of the sample mean useless? It turns out that under some conditions, the result is still applicable. 
+
+Let $X_1, \cdots, X_n$ be i.i.d. from a distribution with finite mean $\mu$ and finite variance $\sigma^2$. The Central Limit Theorem (CLT) states that as the sample size $n$ gets larger and tends to infinity,  $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$ is **approximately** $N(\mu, \frac{\sigma^2}{n})$.
+
+The implication of the CLT is that even if our data do not follow a normal distribution, the average value of the data can be approximated by a normal distribution, if our sample size is large enough. This is useful since a lot of research questions deal with averages, and we do not need the data to be normal as long as our sample size is large enough (e.g. do average test scores improve after the implementation of a new program?).
+
+The question then becomes: how large does the sample size $n$ have to be for the approximation to work? Most books will say at least 25, or 30. It turns out that the skewness (or asymmetry) of the data plays a role:
+
+- If the data is symmetric (but not normal), a smaller sample size may be enough.
+- The more skewed (or asymmetric) the data, a larger sample size may be needed.
+
+### Example 1: Data are Uniform
+
+```{r dist-U, fig.cap="Sampling Distribution of Sample Mean when Data are Standard Uniform with n = 1, 5, 25"}
+
+sampMean_Unif <- function(number){
+  mean(runif(number))
+}
+
+Reps <- 10000
+
+##find the sample means of n data points, with 10000 replicates
+repSampMean_Unif <- function(number){
+  return(replicate(Reps, sampMean_Unif(number)))
+}
+
+results_Unif <- sapply(c(1, 5, 25), repSampMean_Unif)
+
+##set the max limit of the y axis 
+max_y1 <- max(density(results_Unif[,1])$y, density(results_Unif[,2])$y, density(results_Unif[,3])$y) 
+
+##n = 1
+plot(density(results_Unif[,1]), ylim=c(0, max_y1), main="Density Plot of Sample Mean with n Varied")
+##n = 5
+lines(density(results_Unif[,2]), col="blue")
+##n = 25
+lines(density(results_Unif[,3]), col="red")
+legend("topright", legend = c("n=1", "n=5", "n=25"), col = c("black","blue", "red"), lty = 1, cex=0.7)
+```
+
+### Example 2: Data are Skewed
+
+```{r}
+sampMean_Pois <- function(number){
+  mean(rpois(number, lambda = 1))
+}
+
+Reps <- 10000
+
+repSampMean_Pois <- function(number){
+  return(replicate(Reps, sampMean_Pois(number)))
+}
+
+results_Pois <- sapply(c(1, 5, 25), repSampMean_Pois)
+
+max_y1 <- max(density(results_Pois[,1])$y, density(results_Pois[,2])$y, density(results_Pois[,3])$y) 
+
+plot(density(results_Pois[,1]), ylim=c(0, max_y1), main="Density Plot of Sample Mean with n Varied")
+lines(density(results_Pois[,2]), col="blue")
+lines(density(results_Pois[,3]), col="red")
+legend("topright", legend = c("n=1", "n=5", "n=25"), col = c("black","blue", "red"), lty = 1, cex=0.7)
+```
+
+
+## Sampling Distribution of the Sample Proportion

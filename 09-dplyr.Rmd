@@ -4,10 +4,10 @@
 
 The data structure that we will be dealing with most often when working with real data will be data frames. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. As you saw in Section \@ref(ggplot), we want the data frame to have this basic structure:
 
-+ Each row of the data frame corresponds to an observation.
-+ Each column of the data frame corresponds to a variable.
++ Each row of the data frame corresponds to an **observation**.
++ Each column of the data frame corresponds to a **variable**.
 
-Sometimes, data are not structured in this way, and we will have to transform the data to take on this basic data structure. This process is called data wrangling. The most common and basic operations to transform the data are:
+Sometimes, data are not structured in this way, and we will have to transform the data to take on this basic data structure. This process is called **data wrangling**. The most common and basic operations to transform the data are:
 
 
 + Select a subset of rows of the data frame based on some criteria.
@@ -74,12 +74,13 @@ Data |>
   filter(dep_delay > 120)
 ```
 
-You can use an and operator, `&`, for multiple conditions such as arrival delays more than 120 minutes that departed before 1200:
+You can use an and operator, `&`, for multiple conditions such as arrival delays of more than 120 minutes that departed before 1200:
 
 ```{r}
 Data |> 
   filter(dep_delay > 120 & dep_time < 1200)
 ```
+
 You can use an or operator, `|`, for example, to find flights in January and February:
 
 ```{r}

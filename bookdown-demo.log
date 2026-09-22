@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  22 SEP 2026 13:39
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  22 SEP 2026 15:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -865,8 +865,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [17]
 Overfull \hbox (69.75pt too wide) in paragraph at lines 661--661
-[]\TU/lmtt/m/n/10 ##  [1] -0.66465073 -3.91013692  3.02485764 -2.25448683 -0.05
-909884 -0.95854097[] 
+[]\TU/lmtt/m/n/10 ##  [1] -3.17829264 -1.61756836  0.03667163  0.66060205 -3.81
+548324  0.77813558[] 
  []
 
 
@@ -2821,6 +2821,9 @@ CENTRAL LIMIT THEOREM (UNDER CONSTRUCTION)
 File: bookdown-demo_files/figure-latex/LLN-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/LLN-1.pdf>
 
+Underfull \vbox (badness 7203) has occurred while \output is active []
+
+
 
 
 Overfull \hbox (199.28123pt too wide) has occurred while \output is active
@@ -2855,9 +2858,6 @@ CENTRAL LIMIT THEOREM (UNDER CONSTRUCTION)
 [142]
 
 [143]
-File: bookdown-demo_files/figure-latex/dist-U-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/dist-U-1.pdf>
-
 
 
 Overfull \hbox (199.28123pt too wide) has occurred while \output is active
@@ -2866,15 +2866,14 @@ CENTRAL LIMIT THEOREM (UNDER CONSTRUCTION)
  []
 
 [144]
-File: bookdown-demo_files/figure-latex/unnamed-chunk-173-1.pdf Graphic file (ty
-pe pdf)
-<use bookdown-demo_files/figure-latex/unnamed-chunk-173-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+File: bookdown-demo_files/figure-latex/dist-U-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/dist-U-1.pdf>
 
 
+[145]
+File: bookdown-demo_files/figure-latex/dist-E-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/dist-E-1.pdf>
 
-[145] (bookdown-demo.bbl
 
 
 Overfull \hbox (199.28123pt too wide) has occurred while \output is active
@@ -2882,9 +2881,22 @@ Overfull \hbox (199.28123pt too wide) has occurred while \output is active
 CENTRAL LIMIT THEOREM (UNDER CONSTRUCTION)
  []
 
-[146])
+[146]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[147
+
+
+[147] (bookdown-demo.bbl
+
+
+Overfull \hbox (199.28123pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 148 \TU/lmr/m/sl/10 CHAPTER 11.  SAMPLING DISTRIBUTIONS AND THE 
+CENTRAL LIMIT THEOREM (UNDER CONSTRUCTION)
+ []
+
+[148])
+
+[149
 
 ] (bookdown-demo.aux)
  ***********
@@ -2896,12 +2908,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19994 strings out of 409029
- 368821 string characters out of 5763847
+ 20003 strings out of 409029
+ 369006 string characters out of 5763847
  1949612 words of memory out of 5000000
- 42378 multiletter control sequences out of 15000+600000
+ 42387 multiletter control sequences out of 15000+600000
  564592 words of font info for 98 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,6n,123p,1012b,553s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (147 pages).
+Output written on bookdown-demo.pdf (149 pages).

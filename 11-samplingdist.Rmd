@@ -35,16 +35,18 @@ So a parameter is a number that is associated with a population, while an estima
 
 Now imagine that we keep obtaining representative samples of 750 American adults. We calculate the average systolic blood pressure from each sample. They are all different? We can then create a histogram or density plot (since the averages are numeric) to visualize the distribution of the sample means. Are they all close to each other? Or they spread out? Is the distribution bell-shaped or skewed?
 
-The distribution associated with an estimator (from the same sample size) is called its **sampling distribution**. Some estimators have known sampling distributions (under certain conditions):
+The distribution associated with a statistic (from the same sample size) is called its **sampling distribution**. A sampling distribution is the probability distribution of a given statistic (like a mean or proportion) calculated from multiple random samples of the same size taken from a larger population. Some statistics have known sampling distributions (under certain conditions):
 
 - The sample mean, $\bar{X}$.
 - The sample proportion , $\hat{p}$.
 
-Their sampling distributions have been proven mathematically. However, what happens when the "certain conditions" are not met, or if the estimator has no known sampling distribution? We can use simulations in these instances! When using simulations in such a setting, they are called Monte Carlo simulations. Monte Carlo simulations work because of the Law of Large Numbers, which we briefly describe next.
+The sampling distributions of the statistics $\bar{X}$ and $hat{p}$ have been proven mathematically. However, what happens when the "certain conditions" are not met, or if the statistic has no known sampling distribution? We can use simulations in these instances! We have seen an example in Section \@ref(ch6sim), where we used a simulation to derive the sampling distribution of the sample mean. 
+
+It turns out we can use simulations to also estimate expected values and probabilities. When using simulations in these settings, the simulations are called **Monte Carlo** simulations. Monte Carlo simulations work because of the Law of Large Numbers, which we briefly describe next.
 
 ### Law of Large Numbers
 
-The **Law of Large Numbers** (LLN) states that as $n$ gets larger and approaches infinity, the sample mean $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$ converges to the true mean $\mu$. This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever $n$ gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes. 
+The **Law of Large Numbers** (LLN) states that as $n$ gets larger and approaches infinity, the sample mean $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$ converges to the true mean (or expected value) $\mu$. This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever $n$ gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes. 
 
 We use an example to illustrate the LLN, which comes from flipping a fair coin. Let $X$ denote whether the coin lands heads or tails, and let $X=1$ for heads and $X=0$ for tails. We can say that $X \sim Bern(0.5)$ since the coin is fair. Imagine flipping the coin $n$ times, and record the outcome after each flip, so $X_1, \cdots, X_n$ denote the outcome of each flip. We know that $E(X) = 0.5$ since $X \sim Bern(0.5)$. The LLN informs us that $\bar{X}_1, \cdots, \bar{X}_n$ should usually get closer to 0.5 as $n$ increases. In other words, the value of the sample proportion after each flip should usually get closer to 0.5 with more flips. The code below simulates this example for $n=500$, and Figure \@ref(fig:LLN) shows how the sample proportions get closer to 0.5, in general, as $n$ increases. 
 
@@ -81,7 +83,7 @@ The convergence to 0.5 comes from flipping the coin many times.
 
 ## Monte Carlo Simulations
 
-You may have noticed that we have used simulations in previous sections (see the example in Section \@ref(ch6sim) for the sampling distribution of the sample mean) to help explain certain concepts. These simulations are called **Monte Carlo** simulations. The idea behind Monte Carlo simulations is to use repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data based on expected values. Monte Carlo simulations are used for the following purposes:
+The idea behind Monte Carlo simulations is to use repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data based on expected values. Monte Carlo simulations are used for the following purposes:
 
 1. When the probability or expectation is too complicated to work out by hand. Recall that finding probabilities and expectations by hand involve summations or integrals, and it becomes obvious that working with summations and especially integrals can get onerous. 
 
@@ -121,7 +123,7 @@ Since $X$ is standard normal, we know $E(X) = 0$ and $Var(X) = E(X^2) - E(X)^2 =
 
 ### Monte Carlo Methods for Probabilities
 
-Suppose we want to find the probability that a random variable satisfies some event $E$, $P(E)$. We could perform a summation or integral to find this probability, or estimate the probability using Monte Carlo simulations. What we will do is simulate $X_1, \cdots, X_M$ from $X$, where $M$ is large, in other words, simulate a large number of replicates of $X$. We then count how many of the $X_i$s correspond to event $E$ happening, and then divide this number by $M$, the number of replicates. We use an example to illustrate this idea.
+Suppose we want to find the probability that a random variable satisfies some event $E$, $P(E)$. We could perform a summation or integral to find this probability, or estimate the probability using Monte Carlo simulations. What we will do is simulate $X_1, \cdots, X_M$ from $X$, where $M$ is large, in other words, simulate a large number of replicates of $X$. We then count how many of the $X_i$s correspond to event $E$ happening, and then divide this number by $M$, the number of replicates. This proportion can also be viewed as the average number of times event $E$ happens, if we encode the event $E$ happening as 1 and the event $E$ does not happen as 0. We use an example to illustrate this idea.
 
 Let $X$ be a standard normal distribution. Suppose we want to find the probability $P(X^2 > 1)$. We carry out a Monte Carlo simulation by doing these steps:
 
@@ -214,9 +216,11 @@ As well as the variance of the sample means when $n = 10, 100, 1000$, which shou
 apply(results, 2, var)
 ```
 
+**Thought question:** How would you use this simulation to estimate the probability $P(\bar{X} > 0.5)$ when $n=10$ and the data $X_1, \cdots, X_n$ are i.i.d. standard normal? 
+
 ## Central Limit Theorem
 
-The previous subsection writes about the sampling distribution of the sample means when the data were original i.i.d. normal. However, normal data rarely happens in real life. So is the sampling distribution of the sample mean useless? It turns out that under some conditions, the result is still applicable. 
+The previous subsection writes about the sampling distribution of the sample means when the data were i.i.d. normal. However, normal data rarely happens in real life. So is the sampling distribution of the sample mean useless? It turns out that under some conditions, the result is still applicable. 
 
 Let $X_1, \cdots, X_n$ be i.i.d. from a distribution with finite mean $\mu$ and finite variance $\sigma^2$. The Central Limit Theorem (CLT) states that as the sample size $n$ gets larger and tends to infinity,  $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$ is **approximately** $N(\mu, \frac{\sigma^2}{n})$.
 
@@ -224,10 +228,18 @@ The implication of the CLT is that even if our data do not follow a normal distr
 
 The question then becomes: how large does the sample size $n$ have to be for the approximation to work? Most books will say at least 25, or 30. It turns out that the skewness (or asymmetry) of the data plays a role:
 
-- If the data is symmetric (but not normal), a smaller sample size may be enough.
+- If the data are symmetric (but not normal), a smaller sample size may be enough.
 - The more skewed (or asymmetric) the data, a larger sample size may be needed.
 
 ### Example 1: Data are Uniform
+
+In this example, we do the following:
+
+- Simulate $n$ observations from a standard uniform distribution. 
+- Calculate the sample mean.
+- The previous two steps are repeated for 10,000 replicates.
+- We set $n = 1, 5, 25$.
+- We then plot the sampling distributions of the sample mean for each sample size. The plots are shown in Fig \@ref(fig:dist-U) below.
 
 ```{r dist-U, fig.cap="Sampling Distribution of Sample Mean when Data are Standard Uniform with n = 1, 5, 25"}
 
@@ -256,28 +268,87 @@ lines(density(results_Unif[,3]), col="red")
 legend("topright", legend = c("n=1", "n=5", "n=25"), col = c("black","blue", "red"), lty = 1, cex=0.7)
 ```
 
+From Figure \@ref(fig:dist-U), we can see that when $n=1$, the distribution of the sample means is not normal. This is expected since this is just the distribution of the standard uniform. However, notice that when $n=5$, the distribution already looks approximately normal. We did not need as large a sample size as 25 for the CLT to kick in. 
+
 ### Example 2: Data are Skewed
 
-```{r}
-sampMean_Pois <- function(number){
-  mean(rpois(number, lambda = 1))
+In this example, we do the following:
+
+- Simulate $n$ observations from an exponential distribution with rate parameter 1. This is known to be a skewed distribution. 
+- Calculate the sample mean.
+- The previous two steps are repeated for 10,000 replicates.
+- We set $n = 1, 5, 25$.
+- We then plot the sampling distributions of the sample mean for each sample size. The plots are shown in Fig \@ref(fig:dist-E) below.
+
+```{r dist-E, fig.cap="Sampling Distribution of Sample Mean when Data are Exp(1) with n = 1, 5, 25"}
+sampMean_E <- function(number){
+  mean(rexp(number, rate = 1))
 }
 
 Reps <- 10000
 
-repSampMean_Pois <- function(number){
-  return(replicate(Reps, sampMean_Pois(number)))
+repSampMean_E <- function(number){
+  return(replicate(Reps, sampMean_E(number)))
 }
 
-results_Pois <- sapply(c(1, 5, 25), repSampMean_Pois)
+results_E <- sapply(c(1, 5, 25), repSampMean_E)
 
-max_y1 <- max(density(results_Pois[,1])$y, density(results_Pois[,2])$y, density(results_Pois[,3])$y) 
+max_y1 <- max(density(results_E[,1])$y, density(results_E[,2])$y, density(results_E[,3])$y) 
 
-plot(density(results_Pois[,1]), ylim=c(0, max_y1), main="Density Plot of Sample Mean with n Varied")
-lines(density(results_Pois[,2]), col="blue")
-lines(density(results_Pois[,3]), col="red")
+plot(density(results_E[,1]), ylim=c(0, max_y1), main="Density Plot of Sample Mean with n Varied")
+lines(density(results_E[,2]), col="blue")
+lines(density(results_E[,3]), col="red")
 legend("topright", legend = c("n=1", "n=5", "n=25"), col = c("black","blue", "red"), lty = 1, cex=0.7)
 ```
 
+From Figure \@ref(fig:dist-E), we can see that when $n=5$, the distribution of the sample means when the data is exponential (skewed) is not normal. This was unlike the distribution of the sample means when the data were uniform. Although at $n=25$, the distribution is approximately normal.  
+
+**Thought question:** How would you use this simulation to estimate the probability $P(\bar{X} > 0.3)$ when $n=25$ and the data $X_1, \cdots, X_n$ are i.i.d. exponential with rate parameter 1? 
 
 ## Sampling Distribution of the Sample Proportion
+
+Thus far, we've talked about the distribution of the sample mean (for example, the mean systolic blood pressure of American adults). The variable of interest, the blood pressure of American adults, is quantitative. What if the variable of interest is binary (categorical with two outcomes)? The parameter and statistic of interest is usually the population proportion and sample proportion. 
+
+Suppose we know that the proportion of American adults who support a particular candidate is $p = 0.55$, which is our parameter of interest. If we were to take a poll of 1,000 American adults on this topic, the estimate would not be perfectly equal to 0.55, but how close to 0.55 might we expect the sample proportion to be? We want to understand how the sample proportion, $\hat{p}$, behaves when the true population proportion is 0.55. We can simulate responses we would get from a simple random sample of 1,000 American adults, which is only possible because we know the actual support for the candidate is 0.55.
+
+It turns out the CLT can also be applied to the sampling distribution of the sample proportions, since $\hat{p}$ can be viewed as the average of the outcomes, if a supporter is encoded as 1 and a non supporter is encoded as 0.
+
+When the data are independent, and if the sample size is large enough, the sampling distribution of the sample proportions is approximately $N(p, \frac{p(1-p)}{n})$.
+
+Most books will write that the sample size is large enough if $np \geq 10$ and $n(10-p) \geq 10$. Some books will say 5 instead of 10. The approximation to the normal distribution gets better as $np$ and $n(1-p)$ get larger.
+
+**Thought question:** Is there a contextual meaning behind the values of $np$ and $n(1-p)$?
+
+## Other Common Sampling Distributions
+
+Before listing a couple of other common sampling distributions, we state a couple of theoretical results involving expected values and variances.
+
+Let $X$ and $Y$ denote random variables, and $a,b,c$ denote some constants, then
+
+\begin{equation} 
+E(aX + bY + c) = aE(X) + bE(Y) + c.
+(\#eq:11-expectations)
+\end{equation}
+
+If $X$ and $Y$ are independent random variables, then 
+
+\begin{equation} 
+Var(aX + bY + c) = a^2 Var(X) + b^2 Var(Y).
+(\#eq:11-variances)
+\end{equation}
+
+### Sampling Distirbution for Difference in Two Independent Means
+
+Suppose we want to investigate the difference in the average systolic blood pressure between female and male American adults. Suppose the systolic blood pressure for females has population mean $\mu_X$ and population variance $\sigma^2_X$ and the systolic blood pressure for males has population mean $\mu_Y$ and population variance $\sigma^2_Y$.
+
+The population parameter is $\mu_X - \mu_Y$ and the statistic is $\bar{X} - \bar{Y}$, where $X$ and $Y$ denote the systolic blood pressures of female and male American adults respectively. 
+
+Under certain conditions, the sampling distribution of $\bar{X} - \bar{Y}$ is (approximately) $N(\bar{X} - \bar{Y}, \frac{\sigma^2_X}{n_X} + \frac{\sigma^2_Y}{n_Y})$, where $n_X$ and $n_Y$ denote the sample sizes of female and male American adults. 
+
+### Sampling Distirbution for Difference in Two Independent Proportions
+
+Suppose we want to investigate the difference in the proportion of female and male voters who support a candidate. Suppose the population proportion of females who support is $p_X$ and the population proportion of males who support is $p_Y$.
+
+The population parameter is $p_X - p_Y$ and the statistic is $\hat{p}_X - \hat{p}_Y$.
+
+Under certain conditions, the sampling distribution of $\hat{p}_X - \hat{p}_Y$ is (approximately) $N(\hat{p}_X - \hat{p}_Y, \frac{p_X(1-p_X)}{n_X} + \frac{p_Y(1-p_Y)}{n_Y})$, where $n_X$ and $n_Y$ denote the sample sizes of female and male voters. 

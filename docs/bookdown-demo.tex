@@ -656,8 +656,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  8.269496  6.269868 -1.953626  1.232240 -3.049439  2.903317 -2.209976
-##  [8]  2.971243  5.190262  3.729784
+##  [1] -0.66465073 -3.91013692  3.02485764 -2.25448683 -0.05909884 -0.95854097
+##  [7]  5.85604634  0.71809088  4.15936510  2.18505256
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -4569,6 +4569,8 @@ Compare with the code using base R without pipes:
 
 People tend to like the linearity and flow of pipes.
 
+The keyboard shortcut for a pipe is Ctrl + Shift + M. You may have to change this in RStudio options, via Tools, Global Options, Code and check the box ``Use native pipe operator''. There is another pipe operator \texttt{\%\textgreater{}\%} which comes from the \texttt{magrittr} package. \texttt{\textbar{}\textgreater{}} is part of base R.
+
 \section{Operations on Rows}\label{operations-on-rows}
 
 \subsection{Select Rows Based on Condition}\label{select-rows-based-on-condition}
@@ -5151,8 +5153,6 @@ Without pipes:
 \end{verbatim}
 
 Notice multiple objects are created in the intermediate steps.
-
-The keyboard shortcut for a pipe is Ctrl + Shift + M. You may have to change this in RStudio options, via Tools, Global Options, Code and check the box ``Use native pipe operator''. There is another pipe operator \texttt{\%\textgreater{}\%} which comes from the \texttt{magrittr} package. \texttt{\textbar{}\textgreater{}} is part of base R.
 
 \section{Grouping}\label{grouping}
 

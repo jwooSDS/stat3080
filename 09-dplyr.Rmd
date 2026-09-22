@@ -62,6 +62,8 @@ tapply(Data[Data$dest == "IAH",]$arr_delay, Data[Data$dest == "IAH",]$month, mea
 ```
 People tend to like the linearity and flow of pipes.
 
+The keyboard shortcut for a pipe is Ctrl + Shift + M. You may have to change this in RStudio options, via Tools, Global Options, Code and check the box "Use native pipe operator". There is another pipe operator `%>%` which comes from the `magrittr` package. `|>` is part of base R. 
+
 
 ## Operations on Rows
 
@@ -254,8 +256,6 @@ arrange(flights3, desc(speed))
 ```
 
 Notice multiple objects are created in the intermediate steps.
-
-The keyboard shortcut for a pipe is Ctrl + Shift + M. You may have to change this in RStudio options, via Tools, Global Options, Code and check the box "Use native pipe operator". There is another pipe operator `%>%` which comes from the `magrittr` package. `|>` is part of base R. 
 
 ## Grouping {#grouping}
 

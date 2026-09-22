@@ -67,14 +67,14 @@ People tend to like the linearity and flow of pipes.
 
 ### Select Rows Based on Condition
 
-The `filter()` function from the `dplyr` package selects rows of a data frame based on a condition. For example, to select flights that arrival delays of more than 120 minutes:
+The `filter()` function from the `dplyr` package selects rows of a data frame based on a condition. For example, to select flights with arrival delays of more than 120 minutes:
 
 ```{r}
 Data |> 
   filter(dep_delay > 120)
 ```
 
-You can use an and operator, `&`, for multiple conditions such as arrival delays of more than 120 minutes that departed before 1200:
+You can use an and operator, `&`, for multiple conditions such as arrival delays of more than 120 minutes and departed before 1200:
 
 ```{r}
 Data |> 
@@ -180,7 +180,7 @@ Data |>
 
 ### Select Columns
 
-With data frames with many columns, you may want to only focus on a subset of the columns. To select only the departure and arrival delays:
+When working with data frames with many columns, you may want to only focus on a subset of the columns. To select only the departure and arrival delays:
 
 ```{r}
 Data |> 
@@ -214,7 +214,7 @@ flights |>
 
 ### Relocate Columns
 
-You can use `relocate()` to move variables around. You may want to place important ones in front, or group related variables together. BY default, the variables are moved to the front:
+You can use `relocate()` to move variables around. You may want to place important ones in front, or group related variables together. By default, the variables are moved to the front:
 
 ```{r}
 Data |> 

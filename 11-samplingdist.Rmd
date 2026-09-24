@@ -270,7 +270,7 @@ legend("topright", legend = c("n=1", "n=5", "n=25"), col = c("black","blue", "re
 
 From Figure \@ref(fig:dist-U), we can see that when $n=1$, the distribution of the sample means is not normal. This is expected since this is just the distribution of the standard uniform. However, notice that when $n=5$, the distribution already looks approximately normal. We did not need as large a sample size as 25 for the CLT to kick in. 
 
-### Example 2: Data are Skewed
+### Example 2: Data are Skewed {#samp-dist-skewed}
 
 In this example, we do the following:
 
@@ -307,7 +307,7 @@ From Figure \@ref(fig:dist-E), we can see that when $n=5$, the distribution of t
 
 **Thought question:** How would you use this simulation to estimate the probability $P(\bar{X} > 1.2)$ when $n=5$ and the data $X_1, \cdots, X_n$ are i.i.d. exponential with rate parameter 1? Explain why we cannot calculate an answer based on the CLT. 
 
-## Sampling Distribution of the Sample Proportion
+## Sampling Distribution of the Sample Proportion {#distsampprop}
 
 Thus far, we've talked about the distribution of the sample mean (for example, the mean systolic blood pressure of American adults). The variable of interest, the blood pressure of American adults, is quantitative. What if the variable of interest is binary (categorical with two outcomes)? The parameter and statistic of interest is usually the population proportion and sample proportion. 
 
@@ -346,7 +346,7 @@ Let $X$ and $Y$ denote independent normal random variables. Any linear combinati
 ```
 
 
-### Sampling Distirbution for Difference in Two Independent Means
+### Sampling Distirbution for Difference in Two Independent Sample Means {#two-means}
 
 Suppose we want to investigate the difference in the average systolic blood pressure between female and male American adults. Suppose the systolic blood pressure for females has population mean $\mu_X$ and population variance $\sigma^2_X$ and the systolic blood pressure for males has population mean $\mu_Y$ and population variance $\sigma^2_Y$.
 
@@ -356,7 +356,7 @@ Under certain conditions, the sampling distribution of $\bar{X} - \bar{Y}$ is (a
 
 **Thought Question:** How would you use equations \@ref(eq:11-expectations) and \@ref(eq:11-variances) and theorem \@ref(thm:sum-norms) to explain this sampling distribution?
 
-### Sampling Distirbution for Difference in Two Independent Proportions
+### Sampling Distirbution for Difference in Two Independent Sample Proportions {#two-props}
 
 Suppose we want to investigate the difference in the proportion of female and male voters who support a candidate. Suppose the population proportion of females who support is $p_X$ and the population proportion of males who support is $p_Y$.
 
@@ -365,3 +365,16 @@ The population parameter is $p_X - p_Y$ and the statistic is $\hat{p}_X - \hat{p
 Under certain conditions, the sampling distribution of $\hat{p}_X - \hat{p}_Y$ is (approximately) $N(\hat{p}_X - \hat{p}_Y, \frac{p_X(1-p_X)}{n_X} + \frac{p_Y(1-p_Y)}{n_Y})$, where $n_X$ and $n_Y$ denote the sample sizes of female and male voters. 
 
 **Thought Question:** How would you use equations \@ref(eq:11-expectations) and \@ref(eq:11-variances) and theorem \@ref(thm:sum-norms) to explain this sampling distribution?
+
+## Sampling Distribution of Other Statistics
+
+So far, we have talked about the sampling distributions of 
+
+- the sample mean (Section \@ref(distsampmean))
+- the sample proportion (Section \@ref(distsampprop))
+- the difference in two independent sample means (Section \@ref(two-means))
+- the difference in two independent sample proportions (Section \@ref(two-props))
+
+For these statistics, we know their distributions, or approximate distributions, under certain conditions. We can peform probability calculations associated with these statistics without using Monte Carlo simulations.
+
+However, you may encounter a situation where you need to estimate the sampling distribution of a statistic which has no known mathematical. We saw an example in Section \@ref(samp-dist-skewed), where we needed the sampling distribution of the sample when the data are i.i.d. exponential with rate parameter 1, and when $n=5$. The CLT does not apply in this situation so the sampling distribution of the sample mean should not be approximated by a normal distribution. However, we can still estimate probabilities using a Monte Carlo simulation as shown in Section \@ref(samp-dist-skewed).

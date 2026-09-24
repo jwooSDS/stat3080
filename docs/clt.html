@@ -367,9 +367,9 @@ Figure 11.3: Sampling Distribution of Sample Mean when Data are Standard Uniform
 </div>
 <p>From Figure <a href="clt.html#fig:dist-U">11.3</a>, we can see that when <span class="math inline">\(n=1\)</span>, the distribution of the sample means is not normal. This is expected since this is just the distribution of the standard uniform. However, notice that when <span class="math inline">\(n=5\)</span>, the distribution already looks approximately normal. We did not need as large a sample size as 25 for the CLT to kick in.</p>
 </div>
-<div id="example-2-data-are-skewed" class="section level3" number="11.4.2">
+<div id="samp-dist-skewed" class="section level3" number="11.4.2">
 <h3>
-<span class="header-section-number">11.4.2</span> Example 2: Data are Skewed<a class="anchor" aria-label="anchor" href="#example-2-data-are-skewed"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.2</span> Example 2: Data are Skewed<a class="anchor" aria-label="anchor" href="#samp-dist-skewed"><i class="fas fa-link"></i></a>
 </h3>
 <p>In this example, we do the following:</p>
 <ul>
@@ -409,9 +409,9 @@ Figure 11.4: Sampling Distribution of Sample Mean when Data are Exp(1) with n = 
 <p><strong>Thought question:</strong> How would you use this simulation to estimate the probability <span class="math inline">\(P(\bar{X} &gt; 1.2)\)</span> when <span class="math inline">\(n=5\)</span> and the data <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. exponential with rate parameter 1? Explain why we cannot calculate an answer based on the CLT.</p>
 </div>
 </div>
-<div id="sampling-distribution-of-the-sample-proportion" class="section level2" number="11.5">
+<div id="distsampprop" class="section level2" number="11.5">
 <h2>
-<span class="header-section-number">11.5</span> Sampling Distribution of the Sample Proportion<a class="anchor" aria-label="anchor" href="#sampling-distribution-of-the-sample-proportion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5</span> Sampling Distribution of the Sample Proportion<a class="anchor" aria-label="anchor" href="#distsampprop"><i class="fas fa-link"></i></a>
 </h2>
 <p>Thus far, we’ve talked about the distribution of the sample mean (for example, the mean systolic blood pressure of American adults). The variable of interest, the blood pressure of American adults, is quantitative. What if the variable of interest is binary (categorical with two outcomes)? The parameter and statistic of interest is usually the population proportion and sample proportion.</p>
 <p>Suppose we know that the proportion of American adults who support a particular candidate is <span class="math inline">\(p = 0.55\)</span>, which is our parameter of interest. If we were to take a poll of 1,000 American adults on this topic, the estimate would not be perfectly equal to 0.55, but how close to 0.55 might we expect the sample proportion to be? We want to understand how the sample proportion, <span class="math inline">\(\hat{p}\)</span>, behaves when the true population proportion is 0.55. We can simulate responses we would get from a simple random sample of 1,000 American adults, which is only possible because we know the actual support for the candidate is 0.55.</p>
@@ -439,25 +439,39 @@ Var(aX + bY + c) = a^2 Var(X) + b^2 Var(Y).
 <div class="theorem">
 <p><span id="thm:sum-norms" class="theorem"><strong>Theorem 11.1  (Linear Combination of Independent Normals) </strong></span>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote independent normal random variables. Any linear combination of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is normal, i.e. aX + bY is normal with <span class="math inline">\(a, b\)</span> denoting constants.</p>
 </div>
-<div id="sampling-distirbution-for-difference-in-two-independent-means" class="section level3" number="11.6.1">
+<div id="two-means" class="section level3" number="11.6.1">
 <h3>
-<span class="header-section-number">11.6.1</span> Sampling Distirbution for Difference in Two Independent Means<a class="anchor" aria-label="anchor" href="#sampling-distirbution-for-difference-in-two-independent-means"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6.1</span> Sampling Distirbution for Difference in Two Independent Sample Means<a class="anchor" aria-label="anchor" href="#two-means"><i class="fas fa-link"></i></a>
 </h3>
 <p>Suppose we want to investigate the difference in the average systolic blood pressure between female and male American adults. Suppose the systolic blood pressure for females has population mean <span class="math inline">\(\mu_X\)</span> and population variance <span class="math inline">\(\sigma^2_X\)</span> and the systolic blood pressure for males has population mean <span class="math inline">\(\mu_Y\)</span> and population variance <span class="math inline">\(\sigma^2_Y\)</span>.</p>
 <p>The population parameter is <span class="math inline">\(\mu_X - \mu_Y\)</span> and the statistic is <span class="math inline">\(\bar{X} - \bar{Y}\)</span>, where <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote the systolic blood pressures of female and male American adults respectively.</p>
 <p>Under certain conditions, the sampling distribution of <span class="math inline">\(\bar{X} - \bar{Y}\)</span> is (approximately) <span class="math inline">\(N(\bar{X} - \bar{Y}, \frac{\sigma^2_X}{n_X} + \frac{\sigma^2_Y}{n_Y})\)</span>, where <span class="math inline">\(n_X\)</span> and <span class="math inline">\(n_Y\)</span> denote the sample sizes of female and male American adults.</p>
 <p><strong>Thought Question:</strong> How would you use equations <a href="clt.html#eq:11-expectations">(11.1)</a> and <a href="clt.html#eq:11-variances">(11.2)</a> and theorem <a href="clt.html#thm:sum-norms">11.1</a> to explain this sampling distribution?</p>
 </div>
-<div id="sampling-distirbution-for-difference-in-two-independent-proportions" class="section level3" number="11.6.2">
+<div id="two-props" class="section level3" number="11.6.2">
 <h3>
-<span class="header-section-number">11.6.2</span> Sampling Distirbution for Difference in Two Independent Proportions<a class="anchor" aria-label="anchor" href="#sampling-distirbution-for-difference-in-two-independent-proportions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6.2</span> Sampling Distirbution for Difference in Two Independent Sample Proportions<a class="anchor" aria-label="anchor" href="#two-props"><i class="fas fa-link"></i></a>
 </h3>
 <p>Suppose we want to investigate the difference in the proportion of female and male voters who support a candidate. Suppose the population proportion of females who support is <span class="math inline">\(p_X\)</span> and the population proportion of males who support is <span class="math inline">\(p_Y\)</span>.</p>
 <p>The population parameter is <span class="math inline">\(p_X - p_Y\)</span> and the statistic is <span class="math inline">\(\hat{p}_X - \hat{p}_Y\)</span>.</p>
 <p>Under certain conditions, the sampling distribution of <span class="math inline">\(\hat{p}_X - \hat{p}_Y\)</span> is (approximately) <span class="math inline">\(N(\hat{p}_X - \hat{p}_Y, \frac{p_X(1-p_X)}{n_X} + \frac{p_Y(1-p_Y)}{n_Y})\)</span>, where <span class="math inline">\(n_X\)</span> and <span class="math inline">\(n_Y\)</span> denote the sample sizes of female and male voters.</p>
 <p><strong>Thought Question:</strong> How would you use equations <a href="clt.html#eq:11-expectations">(11.1)</a> and <a href="clt.html#eq:11-variances">(11.2)</a> and theorem <a href="clt.html#thm:sum-norms">11.1</a> to explain this sampling distribution?</p>
-
 </div>
+</div>
+<div id="sampling-distribution-of-other-statistics" class="section level2" number="11.7">
+<h2>
+<span class="header-section-number">11.7</span> Sampling Distribution of Other Statistics<a class="anchor" aria-label="anchor" href="#sampling-distribution-of-other-statistics"><i class="fas fa-link"></i></a>
+</h2>
+<p>So far, we have talked about the sampling distributions of</p>
+<ul>
+<li>the sample mean (Section <a href="clt.html#distsampmean">11.3</a>)</li>
+<li>the sample proportion (Section <a href="clt.html#distsampprop">11.5</a>)</li>
+<li>the difference in two independent sample means (Section <a href="clt.html#two-means">11.6.1</a>)</li>
+<li>the difference in two independent sample proportions (Section <a href="clt.html#two-props">11.6.2</a>)</li>
+</ul>
+<p>For these statistics, we know their distributions, or approximate distributions, under certain conditions. We can peform probability calculations associated with these statistics without using Monte Carlo simulations.</p>
+<p>However, you may encounter a situation where you need to estimate the sampling distribution of a statistic which has no known mathematical. We saw an example in Section <a href="clt.html#samp-dist-skewed">11.4.2</a>, where we needed the sampling distribution of the sample when the data are i.i.d. exponential with rate parameter 1, and when <span class="math inline">\(n=5\)</span>. The CLT does not apply in this situation so the sampling distribution of the sample mean should not be approximated by a normal distribution. However, we can still estimate probabilities using a Monte Carlo simulation as shown in Section <a href="clt.html#samp-dist-skewed">11.4.2</a>.</p>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -485,16 +499,17 @@ Var(aX + bY + c) = a^2 Var(X) + b^2 Var(Y).
 <li>
 <a class="nav-link" href="#central-limit-theorem"><span class="header-section-number">11.4</span> Central Limit Theorem</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#example-1-data-are-uniform"><span class="header-section-number">11.4.1</span> Example 1: Data are Uniform</a></li>
-<li><a class="nav-link" href="#example-2-data-are-skewed"><span class="header-section-number">11.4.2</span> Example 2: Data are Skewed</a></li>
+<li><a class="nav-link" href="#samp-dist-skewed"><span class="header-section-number">11.4.2</span> Example 2: Data are Skewed</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#sampling-distribution-of-the-sample-proportion"><span class="header-section-number">11.5</span> Sampling Distribution of the Sample Proportion</a></li>
+<li><a class="nav-link" href="#distsampprop"><span class="header-section-number">11.5</span> Sampling Distribution of the Sample Proportion</a></li>
 <li>
 <a class="nav-link" href="#other-common-sampling-distributions"><span class="header-section-number">11.6</span> Other Common Sampling Distributions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#sampling-distirbution-for-difference-in-two-independent-means"><span class="header-section-number">11.6.1</span> Sampling Distirbution for Difference in Two Independent Means</a></li>
-<li><a class="nav-link" href="#sampling-distirbution-for-difference-in-two-independent-proportions"><span class="header-section-number">11.6.2</span> Sampling Distirbution for Difference in Two Independent Proportions</a></li>
+<li><a class="nav-link" href="#two-means"><span class="header-section-number">11.6.1</span> Sampling Distirbution for Difference in Two Independent Sample Means</a></li>
+<li><a class="nav-link" href="#two-props"><span class="header-section-number">11.6.2</span> Sampling Distirbution for Difference in Two Independent Sample Proportions</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#sampling-distribution-of-other-statistics"><span class="header-section-number">11.7</span> Sampling Distribution of Other Statistics</a></li>
 </ul>
 
       <div class="book-extra">

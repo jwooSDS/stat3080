@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  24 SEP 2026 13:48
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  24 SEP 2026 14:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,15 +874,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 [16]
 
 [17]
-Overfull \hbox (33.0pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1]  1.991151907  2.073421077 -1.028898459 -1.925452269  
-0.006736066[] 
- []
-
-
-Overfull \hbox (33.0pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [6] -2.310199187  2.428687839  0.951994356 -3.678082030  
-0.694673059[] 
+Overfull \hbox (38.25pt too wide) in paragraph at lines 678--678
+[]\TU/lmtt/m/n/10 ##  [1] -0.6883332 -0.2997015 -0.1176667 -4.2778861  2.861047
+0  5.6797389[] 
  []
 
 
@@ -2953,10 +2947,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20086 strings out of 409029
- 370188 string characters out of 5763847
+ 20088 strings out of 409029
+ 370084 string characters out of 5763847
  1949612 words of memory out of 5000000
- 42470 multiletter control sequences out of 15000+600000
+ 42472 multiletter control sequences out of 15000+600000
  564592 words of font info for 98 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,6n,123p,1012b,553s stack positions out of 10000i,1000n,20000p,200000b,200000s

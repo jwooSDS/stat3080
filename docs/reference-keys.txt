@@ -210,10 +210,11 @@ monte-carlo-methods-for-probabilities
 distsampmean
 central-limit-theorem
 example-1-data-are-uniform
-example-2-data-are-skewed
-sampling-distribution-of-the-sample-proportion
+samp-dist-skewed
+distsampprop
 other-common-sampling-distributions
-sampling-distirbution-for-difference-in-two-independent-means
-sampling-distirbution-for-difference-in-two-independent-proportions
+two-means
+two-props
+sampling-distribution-of-other-statistics
 CI
 boot

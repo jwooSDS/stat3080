@@ -45,6 +45,11 @@ fig:dist-E
 eq:11-expectations
 eq:11-variances
 thm:sum-norms
+eq:8-CIbasic
+eq:8-CIbasic2
+eq:8-CIprob
+fig:8-CI
+eq:8-CIalpha
 Rbasics
 overview-of-r
 rstudio-interface
@@ -217,4 +222,8 @@ two-means
 two-props
 sampling-distribution-of-other-statistics
 CI
+introduction-2
+CImean
+randomness-of-estimators
+randomness-of-confidence-intervals
 boot

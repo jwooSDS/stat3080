@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 12 Confidence Intervals | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="Course Notes for STAT 3080">
+<meta name="description" content="12.1 Introduction In Section 11, we learned about sampling distributions of statistics. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults...">
 <meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 12 Confidence Intervals | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Course Notes for STAT 3080">
+<meta property="og:description" content="12.1 Introduction In Section 11, we learned about sampling distributions of statistics. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 12 Confidence Intervals | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="Course Notes for STAT 3080">
+<meta name="twitter:description" content="12.1 Introduction In Section 11, we learned about sampling distributions of statistics. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -91,14 +91,102 @@
 <h1>
 <span class="header-section-number">12</span> Confidence Intervals<a class="anchor" aria-label="anchor" href="#CI"><i class="fas fa-link"></i></a>
 </h1>
+<div id="introduction-2" class="section level2" number="12.1">
+<h2>
+<span class="header-section-number">12.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>In Section <a href="clt.html#clt">11</a>, we learned about sampling distributions of statistics. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults to estimate the mean systolic blood pressure of all American adults. We also established that statistics such as the sample mean have randomness in them. If we were to obtain another random sample of 750 American adults, the sample mean blood pressure from this other sample is likely to be different from the original random sample. So is there uncertainty in our sample mean due to random sampling.</p>
+<p>You might notice in Section <a href="clt.html#clt">11</a> that we know the sampling distribution of some common statistics, or we can derive the sampling distribution using simulations. In these instances, the value of the corresponding parameters were known. This is unrealistic in real life; the purpose of what we do is to use data from our sample to infer the characteristics in the population!</p>
+<p>This section will be more realistic: the values of the population parameters are unknown. In this section, we will introduce confidence intervals. Confidence intervals build on the ideas from Section <a href="clt.html#clt">11</a>: that statistics are random and we can quantify their uncertainty. The purpose of a confidence interval is to provide a range of plausible values for an unknown population parameter, based on a sample. A confidence interval not only provides the estimated value of the parameter, but also a measure of uncertainty associated with the estimation.</p>
+<p>We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding statistics, the sample mean and sample proportion, are known as long as certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other statistics that have known distributions will be constructed similarly.</p>
+<p>We will learn about the bootstrap, which is used when the distribution of a statistic is unknown, in Section <a href="boot.html#boot">13</a>.</p>
+</div>
+<div id="CImean" class="section level2" number="12.2">
+<h2>
+<span class="header-section-number">12.2</span> Confidence Interval for the Mean<a class="anchor" aria-label="anchor" href="#CImean"><i class="fas fa-link"></i></a>
+</h2>
+<div id="randomness-of-estimators" class="section level3" number="12.2.1">
+<h3>
+<span class="header-section-number">12.2.1</span> Randomness of Estimators<a class="anchor" aria-label="anchor" href="#randomness-of-estimators"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we are trying to estimate the mean systolic blood pressure of all American adults, by using the sample mean of 750 randomly selected American adults. The sample mean is an estimator for the population mean. We want to be able to report the value of the estimator, as well as our uncertainty about the estimator. A way to measure the uncertainty of an estimator is through the variance or standard error of the estimator. Larger values indicate a higher degree of uncertainty, as an estimator with larger variance means that the value of the estimator is likely to be different among random samples.</p>
+<p>We will start with the confidence interval for a mean, since its sampling distribution is known (see Section <a href="clt.html#distsampmean">11.3</a>). We will use this setting to explain concepts associated with confidence intervals. We will then generalizing these concepts to other estimators with known distributions.</p>
+</div>
+<div id="randomness-of-confidence-intervals" class="section level3" number="12.2.2">
+<h3>
+<span class="header-section-number">12.2.2</span> Randomness of Confidence Intervals<a class="anchor" aria-label="anchor" href="#randomness-of-confidence-intervals"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>confidence interval</strong> is a probability applied to the estimator <span class="math inline">\(\bar{X}_n\)</span>. Instead of focusing on the estimated value of the sample mean and its variance, we construct a confidence interval for the mean that takes the form:</p>
+<p><span class="math display" id="eq:8-CIbasic">\[\begin{equation}
+I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
+\tag{12.1}
+\end{equation}\]</span></p>
+<p>Some terminology associated with intervals of the form in equation <a href="CI.html#eq:8-CIbasic">(12.1)</a>:</p>
+<ul>
+<li>
+<p><span class="math inline">\(\epsilon\)</span> is often called the <strong>margin of error</strong>. (Yes that margin of error that you often see reported in election polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value.</p>
+<ul>
+<li>Remember that the uncertainty being measured is the uncertainty due to random sampling, not due to other sources of uncertainty such as not getting a representative sample, people lying, etc. As mentioned in earlier modules, other methods are used to handle such issues and belong to the field of survey sampling, which is very interesting and an active area of research. We will not get into these issues in this class.</li>
+</ul>
+</li>
+<li><p>The value of <span class="math inline">\(\bar{X}_n - \epsilon\)</span> is often called the <strong>lower bound</strong> of the confidence interval.</p></li>
+<li><p>The value of <span class="math inline">\(\bar{X}_n + \epsilon\)</span> is often called the <strong>upper bound</strong> of the confidence interval.</p></li>
+<li><p>The value of <span class="math inline">\(\bar{X}_n\)</span> is often called the <strong>point estimate</strong> of the population mean.</p></li>
+</ul>
+<p>Equation <a href="CI.html#eq:8-CIbasic">(12.1)</a> is sometimes expressed as</p>
+<p><span class="math display" id="eq:8-CIbasic2">\[\begin{equation}
+\text{point estimate } \pm \text{ margin of error}.
+\tag{12.2}
+\end{equation}\]</span></p>
+<p>Indeed, a lot of confidence intervals take on the form expressed in equation <a href="CI.html#eq:8-CIbasic2">(12.2)</a>, as long as the sampling distribution of the estimator is symmetric. Given the interval for the mean expressed in equation <a href="CI.html#eq:8-CIbasic">(12.1)</a>, we ask what is the probability that the interval <span class="math inline">\(I\)</span> includes the true value of the parameter <span class="math inline">\(\mu\)</span>, i.e. we want to evaluate</p>
+<p><span class="math display" id="eq:8-CIprob">\[\begin{equation}
+P(\mu \in  I) = P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon).
+\tag{12.3}
+\end{equation}\]</span></p>
+<p>It is important to bear in mind that since the estimator, the sample mean <span class="math inline">\(\bar{X}_n\)</span> is a random variable, there will also be randomness in the interval <span class="math inline">\(I\)</span>. The numerical values of the lower and upper bounds will change with a different random sample, since the value of <span class="math inline">\(\bar{X}_n\)</span> will change.</p>
+<p>The idea of the interval <span class="math inline">\(I\)</span> being random is represented in Figure <a href="CI.html#fig:8-CI">12.1</a> below:</p>
+<div class="figure">
+<span style="display:block;" id="fig:8-CI"></span>
+<img src="images/08-CI.png" alt="Randomness of Confidence Interval. Picture from [wikipedia](https://en.wikipedia.org/wiki/Confidence_interval)"><p class="caption">
+Figure 12.1: Randomness of Confidence Interval. Picture from <a href="https://en.wikipedia.org/wiki/Confidence_interval">wikipedia</a>
+</p>
+</div>
+<ul>
+<li>The density curve in the top of Figure <a href="CI.html#fig:8-CI">12.1</a> represents the PDF of a random variable, that represents the distribution of some variable in the population that we wish to study.</li>
+<li>Each row of dots represents the values of 10 randomly sampled data points from the PDF.</li>
+<li>The colored lines in each row represent the lower and upper bounds of a 50% confidence interval calculated from the sampled data points in the row.</li>
+<li>The colored dot in the center of the confidence interval represents <span class="math inline">\(\bar{x}\)</span> for the sampled data points in the row.</li>
+<li>The intervals in blue represent confidence intervals that contain the value of <span class="math inline">\(\mu\)</span>, while the intervals in red represent confidence intervals that do not contain the value of <span class="math inline">\(\mu\)</span>.</li>
+</ul>
+<p>In Figure <a href="CI.html#fig:8-CI">12.1</a>, we note that 50% of the confidence intervals capture the value of <span class="math inline">\(\mu\)</span>, so the probability per equation <a href="CI.html#eq:8-CIprob">(12.3)</a> is 0.5. This matches with theory since each confidence interval in Figure <a href="CI.html#fig:8-CI">12.1</a> was computed at 50% confidence.</p>
+<p>If we were to create 95% confidence intervals for each row in Figure <a href="CI.html#fig:8-CI">12.1</a>, the upper and lower bounds of the intervals will be adjusted so that we will expect 19 of these 20 intervals to contain the value of <span class="math inline">\(\mu\)</span>.</p>
+<p>This illustration gives us an interpretation of the probability associated with a confidence interval per equation <a href="CI.html#eq:8-CIprob">(12.3)</a>: When we construct a 95% confidence interval, there is a 95% chance the random interval <span class="math inline">\(I\)</span> will contain the true value of the parameter. In other words, if we have 100 random samples and we construct 95% confidence intervals based on each sample, we expect 95 of these intervals to contain the value of the parameter.</p>
+<p>The idea of the probability that the random interval <span class="math inline">\(I\)</span> captures the true parameter gives rise to the <strong>confidence level</strong>. The confidence level of a confidence interval is denoted by <span class="math inline">\(1-\alpha\)</span>, i.e. if we construct an interval at 95% confidence, <span class="math inline">\(\alpha=0.05\)</span>. Equation <a href="CI.html#eq:8-CIprob">(12.3)</a> can be written as</p>
+<p><span class="math display" id="eq:8-CIalpha">\[\begin{equation}
+P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) = 1 - \alpha.
+\tag{12.4}
+\end{equation}\]</span></p>
+<p>We will then say <span class="math inline">\(I\)</span> is a <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence interval, or <span class="math inline">\(I\)</span> is a confidence interval with confidence level of <span class="math inline">\((1-\alpha) \times 100\%\)</span>.</p>
+<p>Now that we have established that confidence intervals are random and the definition of the confidence level, we are ready to go into the details of constructing the confidence interval for the mean.</p>
 
+</div>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="clt.html"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem</a></div>
 <div class="next"><a href="boot.html"><span class="header-section-number">13</span> The Bootstrap</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#CI"><span class="header-section-number">12</span> Confidence Intervals</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#CI"><span class="header-section-number">12</span> Confidence Intervals</a></li>
+<li><a class="nav-link" href="#introduction-2"><span class="header-section-number">12.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#CImean"><span class="header-section-number">12.2</span> Confidence Interval for the Mean</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#randomness-of-estimators"><span class="header-section-number">12.2.1</span> Randomness of Estimators</a></li>
+<li><a class="nav-link" href="#randomness-of-confidence-intervals"><span class="header-section-number">12.2.2</span> Randomness of Confidence Intervals</a></li>
+</ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

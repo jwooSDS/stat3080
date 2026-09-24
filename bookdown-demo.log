@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  24 SEP 2026 14:07
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  24 SEP 2026 14:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,9 +874,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 [16]
 
 [17]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1] -0.6883332 -0.2997015 -0.1176667 -4.2778861  2.861047
-0  5.6797389[] 
+Overfull \hbox (59.25pt too wide) in paragraph at lines 678--678
+[]\TU/lmtt/m/n/10 ##  [1]  2.081785  3.973142  1.374096  1.497766 -4.629783  3.
+626163  1.554804[] 
  []
 
 
@@ -2925,19 +2925,30 @@ Chapter 12.
 
 [151]
 
-[152
+[152]
+File: images/08-CI.png Graphic file (type bmp)
+<images/08-CI.png>
+
+
+[153]
+
+[154]
+
+[155]
+
+[156
 
 ]
 Chapter 13.
 (bookdown-demo.bbl
 
-[153]
+[157]
 
-[154
+[158
 
 ])
 
-[155] (bookdown-demo.aux)
+[159] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -2947,12 +2958,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20088 strings out of 409029
- 370084 string characters out of 5763847
+ 20110 strings out of 409029
+ 370444 string characters out of 5763847
  1949612 words of memory out of 5000000
- 42472 multiletter control sequences out of 15000+600000
+ 42491 multiletter control sequences out of 15000+600000
  564592 words of font info for 98 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,6n,123p,1012b,553s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (155 pages).
+Output written on bookdown-demo.pdf (159 pages).

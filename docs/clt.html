@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 11 Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION) | STAT 3080: From Data to Knowledge</title>
+<title>Chapter 11 Sampling Distributions and the Central Limit Theorem | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
 <meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 11 Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION) | STAT 3080: From Data to Knowledge">
+<meta property="og:title" content="Chapter 11 Sampling Distributions and the Central Limit Theorem | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 11 Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION) | STAT 3080: From Data to Knowledge">
+<meta name="twitter:title" content="Chapter 11 Sampling Distributions and the Central Limit Theorem | STAT 3080: From Data to Knowledge">
 <meta name="twitter:description" content="11.1 Key Ideas and Terms Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -76,7 +76,9 @@
 <li><a class="" href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
 <li><a class="" href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></li>
 <li><a class="" href="EDA.html"><span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data</a></li>
-<li><a class="active" href="clt.html"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION)</a></li>
+<li><a class="active" href="clt.html"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem</a></li>
+<li><a class="" href="CI.html"><span class="header-section-number">12</span> Confidence Intervals</a></li>
+<li><a class="" href="boot.html"><span class="header-section-number">13</span> The Bootstrap</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -87,7 +89,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="clt" class="section level1" number="11">
 <h1>
-<span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION)<a class="anchor" aria-label="anchor" href="#clt"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem<a class="anchor" aria-label="anchor" href="#clt"><i class="fas fa-link"></i></a>
 </h1>
 <div id="key-ideas-and-terms" class="section level2" number="11.1">
 <h2>
@@ -128,7 +130,7 @@
 <li>The sample mean, <span class="math inline">\(\bar{X}\)</span>.</li>
 <li>The sample proportion , <span class="math inline">\(\hat{p}\)</span>.</li>
 </ul>
-<p>The sampling distributions of the statistics <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(hat{p}\)</span> have been proven mathematically. However, what happens when the “certain conditions” are not met, or if the statistic has no known sampling distribution? We can use simulations in these instances! We have seen an example in Section <a href="sims.html#ch6sim">6.4.1</a>, where we used a simulation to derive the sampling distribution of the sample mean.</p>
+<p>The sampling distributions of the statistics <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(\hat{p}\)</span> have been proven mathematically. However, what happens when the “certain conditions” are not met, or if the statistic has no known sampling distribution? We can use simulations in these instances! We have seen an example in Section <a href="sims.html#ch6sim">6.4.1</a>, where we used a simulation to derive the sampling distribution of the sample mean.</p>
 <p>It turns out we can use simulations to also estimate expected values and probabilities. When using simulations in these settings, the simulations are called <strong>Monte Carlo</strong> simulations. Monte Carlo simulations work because of the Law of Large Numbers, which we briefly describe next.</p>
 </div>
 <div id="law-of-large-numbers" class="section level3" number="11.1.4">
@@ -183,7 +185,7 @@ Figure 11.1: LLN Example with Coin Flips
 <li><p>To verify theoretical results involving probability or expectations. While a lot of theory is proved using mathematics, most academic papers include Monte Carlo simulations to verify the theoretical results. We have done these to verify the Central Limit Theorem in Section <a href="sims.html#ch6sim">6.4.1</a>.</p></li>
 <li><p>To help confirm that you understand the meaning of theoretical results. The only way your code matches the theory is if you understand the theory.</p></li>
 </ol>
-<p>The Law of Large Numbers (LLN) provides the mathematical backbone for Monte Carlo Simulations. LLN guarantees that as you repeat an experiment or random trial more times, your average result gets closer and closer to the true expected value.</p>
+<p>The Law of Large Numbers (LLN) provides the mathematical backbone for Monte Carlo Simulations. LLN guarantees that as you repeat an experiment or random trial more times, your average result tends to get closer to the true expected value.</p>
 <div id="monte-carlo-methods-for-expected-values" class="section level3" number="11.2.1">
 <h3>
 <span class="header-section-number">11.2.1</span> Monte Carlo Methods for Expected Values<a class="anchor" aria-label="anchor" href="#monte-carlo-methods-for-expected-values"><i class="fas fa-link"></i></a>
@@ -307,7 +309,7 @@ Figure 11.2: Sampling Distribution of Sample Mean when Data are Standard Normal 
 <div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">results</span>, <span class="fl">2</span>, <span class="va">var</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.100813295 0.009996330 0.001000144</code></pre>
-<p><strong>Thought question:</strong> How would you use this simulation to estimate the probability <span class="math inline">\(P(\bar{X} &gt; 0.5)\)</span> when <span class="math inline">\(n=10\)</span> and the data <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. standard normal?</p>
+<p><strong>Thought question:</strong> How would you use this simulation to estimate the probability <span class="math inline">\(P(\bar{X} &gt; 0.5)\)</span> when <span class="math inline">\(n=10\)</span> and the data <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. standard normal? Compare the answer from the simulation with the answer based on the known sampling distribution of the sample mean.</p>
 </div>
 <div id="central-limit-theorem" class="section level2" number="11.4">
 <h2>
@@ -315,7 +317,7 @@ Figure 11.2: Sampling Distribution of Sample Mean when Data are Standard Normal 
 </h2>
 <p>The previous subsection writes about the sampling distribution of the sample means when the data were i.i.d. normal. However, normal data rarely happens in real life. So is the sampling distribution of the sample mean useless? It turns out that under some conditions, the result is still applicable.</p>
 <p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. from a distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. The Central Limit Theorem (CLT) states that as the sample size <span class="math inline">\(n\)</span> gets larger and tends to infinity, <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span> is <strong>approximately</strong> <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>.</p>
-<p>The implication of the CLT is that even if our data do not follow a normal distribution, the average value of the data can be approximated by a normal distribution, if our sample size is large enough. This is useful since a lot of research questions deal with averages, and we do not need the data to be normal as long as our sample size is large enough (e.g. do average test scores improve after the implementation of a new program?).</p>
+<p>An implication of the CLT is that even if our data do not follow a normal distribution, the average value of the data can be approximated by a normal distribution, as long as our sample size is large enough, and if the data are independent and all follow the same distribution. This is useful since a lot of research questions deal with averages, and we do not need the data to be normal as long as our sample size is large enough (e.g. do average test scores improve after the implementation of a new program?).</p>
 <p>The question then becomes: how large does the sample size <span class="math inline">\(n\)</span> have to be for the approximation to work? Most books will say at least 25, or 30. It turns out that the skewness (or asymmetry) of the data plays a role:</p>
 <ul>
 <li>If the data are symmetric (but not normal), a smaller sample size may be enough.</li>
@@ -403,7 +405,8 @@ Figure 11.4: Sampling Distribution of Sample Mean when Data are Exp(1) with n = 
 </p>
 </div>
 <p>From Figure <a href="clt.html#fig:dist-E">11.4</a>, we can see that when <span class="math inline">\(n=5\)</span>, the distribution of the sample means when the data is exponential (skewed) is not normal. This was unlike the distribution of the sample means when the data were uniform. Although at <span class="math inline">\(n=25\)</span>, the distribution is approximately normal.</p>
-<p><strong>Thought question:</strong> How would you use this simulation to estimate the probability <span class="math inline">\(P(\bar{X} &gt; 0.3)\)</span> when <span class="math inline">\(n=25\)</span> and the data <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. exponential with rate parameter 1?</p>
+<p><strong>Thought question:</strong> How would you use this simulation to estimate the probability <span class="math inline">\(P(\bar{X} &gt; 1.2)\)</span> when <span class="math inline">\(n=25\)</span> and the data <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. exponential with rate parameter 1? Compare the answer from the simulation with the answer based on the CLT.</p>
+<p><strong>Thought question:</strong> How would you use this simulation to estimate the probability <span class="math inline">\(P(\bar{X} &gt; 1.2)\)</span> when <span class="math inline">\(n=5\)</span> and the data <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. exponential with rate parameter 1? Explain why we cannot calculate an answer based on the CLT.</p>
 </div>
 </div>
 <div id="sampling-distribution-of-the-sample-proportion" class="section level2" number="11.5">
@@ -432,6 +435,10 @@ E(aX + bY + c) = aE(X) + bE(Y) + c.
 Var(aX + bY + c) = a^2 Var(X) + b^2 Var(Y).
 \tag{11.2}
 \end{equation}\]</span></p>
+<p>We also state another theorem:</p>
+<div class="theorem">
+<p><span id="thm:sum-norms" class="theorem"><strong>Theorem 11.1  (Linear Combination of Independent Normals) </strong></span>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote independent normal random variables. Any linear combination of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is normal, i.e. aX + bY is normal with <span class="math inline">\(a, b\)</span> denoting constants.</p>
+</div>
 <div id="sampling-distirbution-for-difference-in-two-independent-means" class="section level3" number="11.6.1">
 <h3>
 <span class="header-section-number">11.6.1</span> Sampling Distirbution for Difference in Two Independent Means<a class="anchor" aria-label="anchor" href="#sampling-distirbution-for-difference-in-two-independent-means"><i class="fas fa-link"></i></a>
@@ -439,6 +446,7 @@ Var(aX + bY + c) = a^2 Var(X) + b^2 Var(Y).
 <p>Suppose we want to investigate the difference in the average systolic blood pressure between female and male American adults. Suppose the systolic blood pressure for females has population mean <span class="math inline">\(\mu_X\)</span> and population variance <span class="math inline">\(\sigma^2_X\)</span> and the systolic blood pressure for males has population mean <span class="math inline">\(\mu_Y\)</span> and population variance <span class="math inline">\(\sigma^2_Y\)</span>.</p>
 <p>The population parameter is <span class="math inline">\(\mu_X - \mu_Y\)</span> and the statistic is <span class="math inline">\(\bar{X} - \bar{Y}\)</span>, where <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote the systolic blood pressures of female and male American adults respectively.</p>
 <p>Under certain conditions, the sampling distribution of <span class="math inline">\(\bar{X} - \bar{Y}\)</span> is (approximately) <span class="math inline">\(N(\bar{X} - \bar{Y}, \frac{\sigma^2_X}{n_X} + \frac{\sigma^2_Y}{n_Y})\)</span>, where <span class="math inline">\(n_X\)</span> and <span class="math inline">\(n_Y\)</span> denote the sample sizes of female and male American adults.</p>
+<p><strong>Thought Question:</strong> How would you use equations <a href="clt.html#eq:11-expectations">(11.1)</a> and <a href="clt.html#eq:11-variances">(11.2)</a> and theorem <a href="clt.html#thm:sum-norms">11.1</a> to explain this sampling distribution?</p>
 </div>
 <div id="sampling-distirbution-for-difference-in-two-independent-proportions" class="section level3" number="11.6.2">
 <h3>
@@ -447,17 +455,18 @@ Var(aX + bY + c) = a^2 Var(X) + b^2 Var(Y).
 <p>Suppose we want to investigate the difference in the proportion of female and male voters who support a candidate. Suppose the population proportion of females who support is <span class="math inline">\(p_X\)</span> and the population proportion of males who support is <span class="math inline">\(p_Y\)</span>.</p>
 <p>The population parameter is <span class="math inline">\(p_X - p_Y\)</span> and the statistic is <span class="math inline">\(\hat{p}_X - \hat{p}_Y\)</span>.</p>
 <p>Under certain conditions, the sampling distribution of <span class="math inline">\(\hat{p}_X - \hat{p}_Y\)</span> is (approximately) <span class="math inline">\(N(\hat{p}_X - \hat{p}_Y, \frac{p_X(1-p_X)}{n_X} + \frac{p_Y(1-p_Y)}{n_Y})\)</span>, where <span class="math inline">\(n_X\)</span> and <span class="math inline">\(n_Y\)</span> denote the sample sizes of female and male voters.</p>
+<p><strong>Thought Question:</strong> How would you use equations <a href="clt.html#eq:11-expectations">(11.1)</a> and <a href="clt.html#eq:11-variances">(11.2)</a> and theorem <a href="clt.html#thm:sum-norms">11.1</a> to explain this sampling distribution?</p>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="EDA.html"><span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data</a></div>
-<div class="next"><a href="references.html">References</a></div>
+<div class="next"><a href="CI.html"><span class="header-section-number">12</span> Confidence Intervals</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#clt"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION)</a></li>
+<li><a class="nav-link" href="#clt"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem</a></li>
 <li>
 <a class="nav-link" href="#key-ideas-and-terms"><span class="header-section-number">11.1</span> Key Ideas and Terms</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#population-vs.-sample"><span class="header-section-number">11.1.1</span> Population Vs. Sample</a></li>
@@ -502,7 +511,7 @@ Var(aX + bY + c) = a^2 Var(X) + b^2 Var(Y).
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-22.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -44,6 +44,7 @@ fig:dist-U
 fig:dist-E
 eq:11-expectations
 eq:11-variances
+thm:sum-norms
 Rbasics
 overview-of-r
 rstudio-interface
@@ -214,3 +215,5 @@ sampling-distribution-of-the-sample-proportion
 other-common-sampling-distributions
 sampling-distirbution-for-difference-in-two-independent-means
 sampling-distirbution-for-difference-in-two-independent-proportions
+CI
+boot

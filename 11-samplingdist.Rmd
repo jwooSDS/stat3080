@@ -1,4 +1,4 @@
-# Sampling Distributions and the Central Limit Theorem (UNDER CONSTRUCTION) {#clt}
+# Sampling Distributions and the Central Limit Theorem  {#clt}
 
 ## Key Ideas and Terms
 
@@ -40,7 +40,7 @@ The distribution associated with a statistic (from the same sample size) is call
 - The sample mean, $\bar{X}$.
 - The sample proportion , $\hat{p}$.
 
-The sampling distributions of the statistics $\bar{X}$ and $hat{p}$ have been proven mathematically. However, what happens when the "certain conditions" are not met, or if the statistic has no known sampling distribution? We can use simulations in these instances! We have seen an example in Section \@ref(ch6sim), where we used a simulation to derive the sampling distribution of the sample mean. 
+The sampling distributions of the statistics $\bar{X}$ and $\hat{p}$ have been proven mathematically. However, what happens when the "certain conditions" are not met, or if the statistic has no known sampling distribution? We can use simulations in these instances! We have seen an example in Section \@ref(ch6sim), where we used a simulation to derive the sampling distribution of the sample mean. 
 
 It turns out we can use simulations to also estimate expected values and probabilities. When using simulations in these settings, the simulations are called **Monte Carlo** simulations. Monte Carlo simulations work because of the Law of Large Numbers, which we briefly describe next.
 
@@ -91,7 +91,7 @@ The idea behind Monte Carlo simulations is to use repeated random sampling (and 
 
 3. To help confirm that you understand the meaning of theoretical results. The only way your code matches the theory is if you understand the theory. 
 
-The Law of Large Numbers (LLN) provides the mathematical backbone for Monte Carlo Simulations. LLN guarantees that as you repeat an experiment or random trial more times, your average result gets closer and closer to the true expected value.
+The Law of Large Numbers (LLN) provides the mathematical backbone for Monte Carlo Simulations. LLN guarantees that as you repeat an experiment or random trial more times, your average result tends to get closer to the true expected value.
 
 ### Monte Carlo Methods for Expected Values
 
@@ -216,7 +216,7 @@ As well as the variance of the sample means when $n = 10, 100, 1000$, which shou
 apply(results, 2, var)
 ```
 
-**Thought question:** How would you use this simulation to estimate the probability $P(\bar{X} > 0.5)$ when $n=10$ and the data $X_1, \cdots, X_n$ are i.i.d. standard normal? 
+**Thought question:** How would you use this simulation to estimate the probability $P(\bar{X} > 0.5)$ when $n=10$ and the data $X_1, \cdots, X_n$ are i.i.d. standard normal? Compare the answer from the simulation with the answer based on the known sampling distribution of the sample mean.
 
 ## Central Limit Theorem
 
@@ -224,7 +224,7 @@ The previous subsection writes about the sampling distribution of the sample mea
 
 Let $X_1, \cdots, X_n$ be i.i.d. from a distribution with finite mean $\mu$ and finite variance $\sigma^2$. The Central Limit Theorem (CLT) states that as the sample size $n$ gets larger and tends to infinity,  $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$ is **approximately** $N(\mu, \frac{\sigma^2}{n})$.
 
-The implication of the CLT is that even if our data do not follow a normal distribution, the average value of the data can be approximated by a normal distribution, if our sample size is large enough. This is useful since a lot of research questions deal with averages, and we do not need the data to be normal as long as our sample size is large enough (e.g. do average test scores improve after the implementation of a new program?).
+An implication of the CLT is that even if our data do not follow a normal distribution, the average value of the data can be approximated by a normal distribution, as long as our sample size is large enough, and if the data are independent and all follow the same distribution. This is useful since a lot of research questions deal with averages, and we do not need the data to be normal as long as our sample size is large enough (e.g. do average test scores improve after the implementation of a new program?).
 
 The question then becomes: how large does the sample size $n$ have to be for the approximation to work? Most books will say at least 25, or 30. It turns out that the skewness (or asymmetry) of the data plays a role:
 
@@ -303,7 +303,9 @@ legend("topright", legend = c("n=1", "n=5", "n=25"), col = c("black","blue", "re
 
 From Figure \@ref(fig:dist-E), we can see that when $n=5$, the distribution of the sample means when the data is exponential (skewed) is not normal. This was unlike the distribution of the sample means when the data were uniform. Although at $n=25$, the distribution is approximately normal.  
 
-**Thought question:** How would you use this simulation to estimate the probability $P(\bar{X} > 0.3)$ when $n=25$ and the data $X_1, \cdots, X_n$ are i.i.d. exponential with rate parameter 1? 
+**Thought question:** How would you use this simulation to estimate the probability $P(\bar{X} > 1.2)$ when $n=25$ and the data $X_1, \cdots, X_n$ are i.i.d. exponential with rate parameter 1? Compare the answer from the simulation with the answer based on the CLT.
+
+**Thought question:** How would you use this simulation to estimate the probability $P(\bar{X} > 1.2)$ when $n=5$ and the data $X_1, \cdots, X_n$ are i.i.d. exponential with rate parameter 1? Explain why we cannot calculate an answer based on the CLT. 
 
 ## Sampling Distribution of the Sample Proportion
 
@@ -337,6 +339,13 @@ Var(aX + bY + c) = a^2 Var(X) + b^2 Var(Y).
 (\#eq:11-variances)
 \end{equation}
 
+We also state another theorem: 
+
+```{theorem, label="sum-norms", name="Linear Combination of Independent Normals"}
+Let $X$ and $Y$ denote independent normal random variables. Any linear combination of $X$ and $Y$ is normal, i.e. aX + bY is normal with $a, b$ denoting constants.
+```
+
+
 ### Sampling Distirbution for Difference in Two Independent Means
 
 Suppose we want to investigate the difference in the average systolic blood pressure between female and male American adults. Suppose the systolic blood pressure for females has population mean $\mu_X$ and population variance $\sigma^2_X$ and the systolic blood pressure for males has population mean $\mu_Y$ and population variance $\sigma^2_Y$.
@@ -345,6 +354,8 @@ The population parameter is $\mu_X - \mu_Y$ and the statistic is $\bar{X} - \bar
 
 Under certain conditions, the sampling distribution of $\bar{X} - \bar{Y}$ is (approximately) $N(\bar{X} - \bar{Y}, \frac{\sigma^2_X}{n_X} + \frac{\sigma^2_Y}{n_Y})$, where $n_X$ and $n_Y$ denote the sample sizes of female and male American adults. 
 
+**Thought Question:** How would you use equations \@ref(eq:11-expectations) and \@ref(eq:11-variances) and theorem \@ref(thm:sum-norms) to explain this sampling distribution?
+
 ### Sampling Distirbution for Difference in Two Independent Proportions
 
 Suppose we want to investigate the difference in the proportion of female and male voters who support a candidate. Suppose the population proportion of females who support is $p_X$ and the population proportion of males who support is $p_Y$.
@@ -352,3 +363,5 @@ Suppose we want to investigate the difference in the proportion of female and ma
 The population parameter is $p_X - p_Y$ and the statistic is $\hat{p}_X - \hat{p}_Y$.
 
 Under certain conditions, the sampling distribution of $\hat{p}_X - \hat{p}_Y$ is (approximately) $N(\hat{p}_X - \hat{p}_Y, \frac{p_X(1-p_X)}{n_X} + \frac{p_Y(1-p_Y)}{n_Y})$, where $n_X$ and $n_Y$ denote the sample sizes of female and male voters. 
+
+**Thought Question:** How would you use equations \@ref(eq:11-expectations) and \@ref(eq:11-variances) and theorem \@ref(thm:sum-norms) to explain this sampling distribution?

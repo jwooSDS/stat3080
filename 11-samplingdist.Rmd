@@ -218,7 +218,7 @@ apply(results, 2, var)
 
 **Thought question:** How would you use this simulation to estimate the probability $P(\bar{X} > 0.5)$ when $n=10$ and the data $X_1, \cdots, X_n$ are i.i.d. standard normal? Compare the answer from the simulation with the answer based on the known sampling distribution of the sample mean.
 
-## Central Limit Theorem
+## Central Limit Theorem {#distsampmean2}
 
 The previous subsection writes about the sampling distribution of the sample means when the data were i.i.d. normal. However, normal data rarely happens in real life. So is the sampling distribution of the sample mean useless? It turns out that under some conditions, the result is still applicable. 
 
@@ -346,7 +346,7 @@ Let $X$ and $Y$ denote independent normal random variables. Any linear combinati
 ```
 
 
-### Sampling Distirbution for Difference in Two Independent Sample Means {#two-means}
+### Sampling Distribution for Difference in Two Independent Sample Means {#two-means}
 
 Suppose we want to investigate the difference in the average systolic blood pressure between female and male American adults. Suppose the systolic blood pressure for females has population mean $\mu_X$ and population variance $\sigma^2_X$ and the systolic blood pressure for males has population mean $\mu_Y$ and population variance $\sigma^2_Y$.
 
@@ -370,7 +370,7 @@ Under certain conditions, the sampling distribution of $\hat{p}_X - \hat{p}_Y$ i
 
 So far, we have talked about the sampling distributions of 
 
-- the sample mean (Section \@ref(distsampmean))
+- the sample mean (Sections \@ref(distsampmean) and \@ref(distsampmean2))
 - the sample proportion (Section \@ref(distsampprop))
 - the difference in two independent sample means (Section \@ref(two-means))
 - the difference in two independent sample proportions (Section \@ref(two-props))

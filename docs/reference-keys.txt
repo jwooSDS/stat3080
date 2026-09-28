@@ -62,6 +62,8 @@ eq:8-CImeant
 eq:8-CIprop
 eq:8-CI2means
 eq:8-CI2props
+eq:8-CIboot
+fig:8-credit
 Rbasics
 overview-of-r
 rstudio-interface
@@ -258,3 +260,6 @@ boot
 introduction-3
 bootstrap
 estimating-sampling-distributions-using-many-random-samples
+the-bootstrap-algorithm
+confidence-intervals-using-the-bootstrap
+worked-example-2

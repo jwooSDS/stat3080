@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  3.1608696 -1.4793699  6.0479398  3.9721836  0.3641775 -2.0724267
-##  [7] -1.9194045  2.0074485  2.1438817 -0.4168008
+##  [1] -3.0938410 -4.0860272  0.2528582  0.3810699  0.5715305  0.3389214
+##  [7]  2.8906353  4.0361910 -0.3927318  3.4617562
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -6987,26 +6987,158 @@ When using Monte Carlo simulations to estimate the sampling distribution of esti
 \item
   Assume the data follow some known distribution with PDF \(f_X\).
 \item
-  Simulate \(n\) data points from this assumed distribution \(K\) times, with \(K\) being large, to obtain \(K\) replicate datasets of size \(n\) denoted by \(\mathcal{X}^{1}, \cdots, \mathcal{X}^{K}\). (In a lot of my code \(K\) is called \texttt{reps}).
+  Simulate \(n\) data points from this assumed distribution \(K\) times, with \(K\) being large, to obtain \(K\) replicate datasets of size \(n\) denoted by \(\mathcal{X}^{1}, \cdots, \mathcal{X}^{K}\).
 \item
   For each dataset, calculate the value of the estimator \(\hat{\Theta}\). Since we have \(K\) datasets, we will have \(K\) values for the estimators, denoted by \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\).
 \item
   We estimate the true mean of \(\hat{\Theta}\) by taking the sample mean of \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\).
 \item
   We estimate the true variance of \(\hat{\Theta}\) by taking the sample variance of \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\). Square-rooting this value gives an estimate for the standard error of \(\hat{\Theta}\).
-\end{enumerate}
-
-Note: this step is a bit different than what is described in the book. In the book, the author uses the population variance, instead of the sample variance. The population variance divides the sum of the squared deviations from the mean by \(K\), while the sample variance divides by \(K-1\). I have seen some authors divide by \(K\), and others divide by \(K-1\). The \texttt{var()} function in R calculates the sample variance, so I will admit that there is a level of convenience to use the sample variance so I can use an R function. \(K\) needs to be large for the bootstrap to work well, so the end result is the numerical values are very close to each other.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{5}
-\tightlist
 \item
   We create a density plot of \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\) to estimate the sampling distribution of \(\hat{\Theta}\).
 \end{enumerate}
 
-As written earlier, the problem with applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF \(f_X\) and CDF \(F_X\). So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above.
+As written earlier, the problem with applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF \(f_X\). So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above.
+
+\subsection{The Bootstrap Algorithm}\label{the-bootstrap-algorithm}
+
+Instead of simulating \(K\) replicate datasets from an assumed distribution, we simulate \(K\) replicate datasets by sampling, \textbf{with replacement}, \(n\) data points from the original dataset. The ``with replacement'' term is key: it means that when a data point is sampled, it is returned to the original dataset and it can be sampled again.
+
+Let \(\mathcal{X}\) denote the original dataset with \(n\) observations. Let \(\hat{\theta}\) denote the value of the estimator from the original dataset.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Synthesize \(K\) bootstrapped datasets \(\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}\) where each bootstrapped dataset is derived by sampling \(n\) data points from the original dataset, with replacement.
+\item
+  For each dataset, calculate the value of the estimator \(\hat{\Theta}\). Since we have \(K\) bootstrapped datasets, we will have \(K\) values for the estimators, denoted by \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\).
+\item
+  We estimate the true mean of \(\hat{\Theta}\) by taking the sample mean of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\). This value is denoted by \(M_b(\hat{\Theta})\).
+\item
+  We estimate the true variance of \(\hat{\Theta}\) by taking the sample variance of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\). This value is denoted by \(V_b(\hat{\Theta})\), which we call the bootstrap variance of the estimator. Square-rooting \(V_b(\hat{\Theta})\) gives an estimate for the standard error of \(\hat{\Theta}\), denoted by \(SE_b(\Theta)\). If \(K\) is large enough, \(V_b(\hat{\Theta})\) will approximate the true variance of the estimator.
+\item
+  We can create a density plot of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\) to estimate the sampling distribution of \(\hat{\Theta}\). If \(K\) is large enough, this density plot will approximate the true PDF \(f_X\) well.
+\end{enumerate}
+
+Comparing this algorithm with Monte Carlo simulations, the main differences are:
+
+\begin{itemize}
+\item
+  With the bootstrap, we do not assume any distribution for the original data. With Monte Carlo simulations, we do make an assumption on the distribution for the original data.
+\item
+  The \(K\) datasets are produced slightly differently. For the bootstrap, they are synthesized by sampling with replacement \(n\) data points from the original dataset of size \(n\). With Monte Carlo simulations, we draw \(n\) data points from its assumed distribution.
+\end{itemize}
+
+The math that proves the bootstrap works is beyond the level of this class, although it is freely available online.
+
+The bootstrap variance of an estimator, \(V_b(\hat{\Theta})\), tends to work better as the number of bootstrap datasets ,\(K\), increases and as the sample size, \(n\), increases.
+
+\subsection{Confidence Intervals using the Bootstrap}\label{confidence-intervals-using-the-bootstrap}
+
+The \textbf{basic} (or reverse percentile ) bootstrap \((1-\alpha) \times 100\%\) confidence interval for \(\theta\) is
+
+\begin{equation} 
+\left( \hat{\theta} - \hat{\delta}_{1-\alpha/2}^*, \hat{\theta} - \hat{\delta}_{\alpha/2}^* \right), 
+\label{eq:8-CIboot}
+\end{equation}
+
+where \(\delta^* = (\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta}\), which is the difference between the estimator in the \(K\) bootstrap samples and the true value of the estimator, so \(\hat{\delta}_{\beta}^*\) is the \(\beta \times 100\)th percentile of \(\delta^*\).
+
+You may notice that the confidence interval in equation \eqref{eq:8-CIboot} does not fit the general framework given in equation \eqref{eq:8-CIbasic2}. This is because the sampling distribution of the estimator may not be symmetric.
+
+The math that derives this confidence interval is beyond the level of this class, although it is freely available online.
+
+The bootstrap confidence interval tends to work better as \(K\) increases and as \(n\) increases.
+
+Note: there are variations of the confidence interval based on the bootstrap. We will use the basic bootstrap confidence interval as specified in equation \eqref{eq:8-CIboot}.
+
+\subsection{Worked Example}\label{worked-example-2}
+
+We have data on 400 credit card customers. A density plot of their credit limits is shown below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ISLR2)}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{ISLR2}\SpecialCharTok{::}\NormalTok{Credit}\SpecialCharTok{$}\NormalTok{Limit}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(Data), }\AttributeTok{xlab=}\StringTok{"Credit Limit"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Density Plot of Credit Limits"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/8-credit-1.pdf}
+\caption{\label{fig:8-credit}Density Plot of Credit Limits}
+\end{figure}
+
+The density plot in Figure \ref{fig:8-credit} informs us that the values of credit limits are skewed, so the median is a better measure of centrality for credit limits. We wish to estimate the population median credit limit, give a measure of uncertainty, as well as report a 95\% confidence interval for the median credit limit. Since the sampling distribution of the sample median is unknown, we use the bootstrap:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{K}\OtherTok{\textless{}{-}}\DecValTok{1000} \DocumentationTok{\#\#Number of bootstrap samples}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{77}\NormalTok{)}
+
+\DocumentationTok{\#\#the sample function, with replace=TRUE, samples with replacement. }
+\DocumentationTok{\#\#The replicate function repeats the sample function K times}
+\DocumentationTok{\#\#if no size is specified in sample(), default is the length of the vector called Data}
+\NormalTok{boot.samples}\OtherTok{\textless{}{-}}\FunctionTok{replicate}\NormalTok{(K,}\FunctionTok{sample}\NormalTok{(Data, }\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{))}
+\DocumentationTok{\#\#Each column in boot.samples represents each bootstrap sample}
+
+\DocumentationTok{\#\#find the sample median of each column, since each column represents a bootstrap sample}
+\NormalTok{boot.medians}\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(boot.samples,}\DecValTok{2}\NormalTok{,median)}
+
+\DocumentationTok{\#\#actual sample median}
+\NormalTok{samp\_median }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(Data)}
+\NormalTok{samp\_median}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4622.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#bootstrap SE of the median is just the SD of the sample medians from each bootstrap sample}
+\FunctionTok{sd}\NormalTok{(boot.medians)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 152.0525
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#deltas}
+\NormalTok{boot\_median\_error }\OtherTok{\textless{}{-}}\NormalTok{ boot.medians}\SpecialCharTok{{-}}\NormalTok{ samp\_median}
+
+\DocumentationTok{\#\#sort deltas}
+\NormalTok{boot\_median\_error\_sort }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(boot\_median\_error)}
+
+\DocumentationTok{\#\#find CI based on equation}
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\NormalTok{p1 }\OtherTok{\textless{}{-}}\NormalTok{ K}\SpecialCharTok{*}\NormalTok{(alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{p2 }\OtherTok{\textless{}{-}}\NormalTok{ K}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{samp\_median }\SpecialCharTok{{-}}\NormalTok{ boot\_median\_error\_sort[}\FunctionTok{c}\NormalTok{(p2,p1)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4380.0 4949.5
+\end{verbatim}
+
+We report the following:
+
+\begin{itemize}
+\tightlist
+\item
+  The sample median is \$4622.5.
+\item
+  The standard error of the sample median is \$152.0525.
+\item
+  The 95\% confidence interval for the median credit limit is (4380.000, 4949.5). There is 95\% probability that the true population median credit limit lies in the random interval between \$4380 and \$4949.50.
+\end{itemize}
 
   \bibliography{book.bib,packages.bib}
 

@@ -33,7 +33,7 @@ When using Monte Carlo simulations to estimate the sampling distribution of esti
 
 1. Assume the data follow some known distribution with PDF $f_X$.
 
-2. Simulate $n$ data points from this assumed distribution $K$ times, with $K$ being large, to obtain $K$ replicate datasets of size $n$ denoted by $\mathcal{X}^{1}, \cdots, \mathcal{X}^{K}$. (In a lot of my code $K$ is called `reps`).
+2. Simulate $n$ data points from this assumed distribution $K$ times, with $K$ being large, to obtain $K$ replicate datasets of size $n$ denoted by $\mathcal{X}^{1}, \cdots, \mathcal{X}^{K}$. 
 
 3. For each dataset, calculate the value of the estimator $\hat{\Theta}$. Since we have $K$ datasets, we will have $K$ values for the estimators, denoted by $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$.
 
@@ -41,11 +41,105 @@ When using Monte Carlo simulations to estimate the sampling distribution of esti
 
 5. We estimate the true variance of $\hat{\Theta}$ by taking the sample variance of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$. Square-rooting this value gives an estimate for the standard error of $\hat{\Theta}$.
 
-Note: this step is a bit different than what is described in the book. In the book, the author uses the population variance, instead of the sample variance. The population variance divides the sum of the squared deviations from the mean by $K$, while the sample variance divides by $K-1$. I have seen some authors divide by $K$, and others divide by $K-1$. The `var()` function in R calculates the sample variance, so I will admit that there is a level of convenience to use the sample variance so I can use an R function. $K$ needs to be large for the bootstrap to work well, so the end result is the numerical values are very close to each other. 
-
 6. We create a density plot of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$ to estimate the sampling distribution of $\hat{\Theta}$.
 
-As written earlier, the problem with applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF $f_X$ and CDF $F_X$. So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above. 
+As written earlier, the problem with applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF $f_X$. So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above. 
+
+### The Bootstrap Algorithm
+
+Instead of simulating $K$ replicate datasets from an assumed distribution, we simulate $K$ replicate datasets by sampling, **with replacement**, $n$ data points from the original dataset. The "with replacement" term is key: it means that when a data point is sampled, it is returned to the original dataset and it can be sampled again.
+
+Let $\mathcal{X}$ denote the original dataset with $n$ observations. Let $\hat{\theta}$ denote the value of the estimator from the original dataset. 
+
+1. Synthesize $K$ bootstrapped datasets $\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}$ where each bootstrapped dataset is derived by sampling $n$ data points from the original dataset, with replacement. 
+2. For each dataset, calculate the value of the estimator $\hat{\Theta}$. Since we have $K$ bootstrapped datasets, we will have $K$ values for the estimators, denoted by $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$.
+
+3. We estimate the true mean of $\hat{\Theta}$ by taking the sample mean of $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$. This value is denoted by $M_b(\hat{\Theta})$.
+
+4. We estimate the true variance of $\hat{\Theta}$ by taking the sample variance of $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$. This value is denoted by $V_b(\hat{\Theta})$, which we call the bootstrap variance of the estimator. Square-rooting $V_b(\hat{\Theta})$ gives an estimate for the standard error of $\hat{\Theta}$, denoted by $SE_b(\Theta)$. If $K$ is large enough, $V_b(\hat{\Theta})$ will approximate the true variance of the estimator.
+
+5. We can create a density plot of $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$ to estimate the sampling distribution of $\hat{\Theta}$. If $K$ is large enough, this density plot will approximate the true PDF $f_X$ well. 
+
+Comparing this algorithm with Monte Carlo simulations, the main differences are:
+
+- With the bootstrap, we do not assume any distribution for the original data. With Monte Carlo simulations, we do make an assumption on the distribution for the original data.
+
+- The $K$ datasets are produced slightly differently. For the bootstrap, they are synthesized by sampling with replacement $n$ data points from the original dataset of size $n$. With Monte Carlo simulations, we draw $n$ data points from its assumed distribution. 
+
+The math that proves the bootstrap works is beyond the level of this class, although it is freely available online. 
+
+The bootstrap variance of an estimator, $V_b(\hat{\Theta})$, tends to work better as the number of bootstrap datasets ,$K$, increases and as the sample size, $n$, increases.
+
+### Confidence Intervals using the Bootstrap
+
+The **basic** (or reverse percentile ) bootstrap $(1-\alpha) \times 100\%$ confidence interval for $\theta$ is
+
+\begin{equation} 
+\left( \hat{\theta} - \hat{\delta}_{1-\alpha/2}^*, \hat{\theta} - \hat{\delta}_{\alpha/2}^* \right), 
+(\#eq:8-CIboot)
+\end{equation}
+
+where $\delta^* = (\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta}$, which is the difference between the estimator in the $K$ bootstrap samples and the true value of the estimator, so $\hat{\delta}_{\beta}^*$ is the $\beta \times 100$th percentile of $\delta^*$.
+
+You may notice that the confidence interval in equation \@ref(eq:8-CIboot) does not fit the general framework given in equation \@ref(eq:8-CIbasic2). This is because the sampling distribution of the estimator may not be symmetric.
+
+The math that derives this confidence interval is beyond the level of this class, although it is freely available online.
+
+The bootstrap confidence interval tends to work better as $K$ increases and as $n$ increases.
+
+Note: there are variations of the confidence interval based on the bootstrap. We will use the basic bootstrap confidence interval as specified in equation \@ref(eq:8-CIboot).
+
+### Worked Example
+
+We have data on 400 credit card customers. A density plot of their credit limits is shown below:
+
+```{r 8-credit, fig.cap="Density Plot of Credit Limits", message=FALSE}
+library(ISLR2)
+Data<-ISLR2::Credit$Limit
+plot(density(Data), xlab="Credit Limit", main="Density Plot of Credit Limits")
+```
+
+The density plot in Figure \@ref(fig:8-credit) informs us that the values of credit limits are skewed, so the median is a better measure of centrality for credit limits. We wish to estimate the population median credit limit, give a measure of uncertainty, as well as report a 95% confidence interval for the median credit limit. Since the sampling distribution of the sample median is unknown, we use the bootstrap:
+
+```{r}
+K<-1000 ##Number of bootstrap samples
+set.seed(77)
+
+##the sample function, with replace=TRUE, samples with replacement. 
+##The replicate function repeats the sample function K times
+##if no size is specified in sample(), default is the length of the vector called Data
+boot.samples<-replicate(K,sample(Data, replace=TRUE))
+##Each column in boot.samples represents each bootstrap sample
+
+##find the sample median of each column, since each column represents a bootstrap sample
+boot.medians<-apply(boot.samples,2,median)
+
+##actual sample median
+samp_median <- median(Data)
+samp_median
+
+##bootstrap SE of the median is just the SD of the sample medians from each bootstrap sample
+sd(boot.medians)
+
+##deltas
+boot_median_error <- boot.medians- samp_median
+
+##sort deltas
+boot_median_error_sort <- sort(boot_median_error)
+
+##find CI based on equation
+alpha<-0.05
+p1 <- K*(alpha/2)
+p2 <- K*(1 - alpha/2)
+
+samp_median - boot_median_error_sort[c(p2,p1)]
+```
+
+We report the following:
+
+- The sample median is \$4622.5.
+- The standard error of the sample median is \$152.0525.
+- The 95% confidence interval for the median credit limit is (4380.000, 4949.5). There is 95% probability that the true population median credit limit lies in the random interval between \$4380 and \$4949.50.
 
 
 

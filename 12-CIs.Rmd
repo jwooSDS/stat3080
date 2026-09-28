@@ -235,8 +235,8 @@ rep_mean_Z_cover <- function(n, alpha){
   return(mean(result))
 }
 
-## should be close to the value of alpha, which is 0.05 
-## in this simulation
+## should be close to the value of 1-alpha (confidence level), 
+## which is 0.95 in this simulation
 
 set.seed(31)
 rep_mean_Z_cover(10, alpha)
@@ -436,6 +436,8 @@ The only question is: what is the degrees of freedom associated with this test? 
 
 In some older references, it is suggested to approximate the degrees of freedom using $min(n_X, n_Y) - 1$. The confidence interval using this approximation is considered to be more **conservative** than the approximation based on the Welch–Satterthwaite equation. A confidence interval that is more conservative means that it is wider than it needs to be. 
 
+**Thought Question:** How is the coverage probability of a conservative confidence interval related to its confidence level?
+
 ### Pooled vs Unpooled
 
 The confidence interval for the difference in two independent means given in equation \@ref(eq:8-CI2means) is the modern default. It is sometimes called a **Welch's $t$** confidence interval, or an **unpooled version** of the confidence interval. 
@@ -449,7 +451,7 @@ If we want to compare the proportions (based on a binary variable) between two g
 The $(1-\alpha) \times 100\%$ confidence interval for the difference in two independent proportions, is
 
 \begin{equation} 
-\left( (\hat{p}_X - \hat{p}_Y) - z^{*} \sqrt{\frac{\hat{p}_X(1-\hat{p}_X)}{n_X} + \frac{\hat{p}_Y(1-\hat{p}_Y)}{n_Y}}, (\hat{p}_X - \hat{p}_Y) + z^{*} \sqrt{\frac{\hat{p}_X(1\hat{p}_X)}{n_X} + \frac{\hat{p}_Y(1-\hat{p}_Y)}{n_Y}} \right).
+(\hat{p}_X - \hat{p}_Y) \pm z^{*} \sqrt{\frac{\hat{p}_X(1-\hat{p}_X)}{n_X} + \frac{\hat{p}_Y(1-\hat{p}_Y)}{n_Y}}
 (\#eq:8-CI2props)
 \end{equation}
 

@@ -1,2 +1,6 @@
 # The Bootstrap  {#boot}
 
+## Introduction
+
+In Section \@ref(CI),
+

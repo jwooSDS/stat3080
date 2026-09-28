@@ -255,3 +255,4 @@ confidence-interval-for-difference-in-two-independent-means
 pooled-vs-unpooled
 confidence-interval-for-difference-in-two-independent-proportions
 boot
+introduction-3

@@ -2,5 +2,51 @@
 
 ## Introduction
 
-In Section \@ref(CI),
+In Section \@ref(CI), we learned about confidence intervals for
+
+- the mean,
+- the proportion,
+- the difference in two independent means, and
+- the difference in two independent proportions.
+
+These intervals are based on their known sampling distributions, which usually require some conditions to be met. Confidence intervals for any other parameter that are based on known sampling distributions work similarly. Wwe work out the confidence interval of an estimator by using the framework in equation \@ref(eq:8-CIbasic2): we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.
+
+This naturally leads to a question: what if the conditions for these sampling distributions are not met, or if the estimator we are working on has no known sampling distribution? In this section, we will learn about the bootstrap, which is used when the sampling distribution of an estimator is unknown. 
+
+## The Bootstrap {#bootstrap}
+
+There are estimators whose sampling distributions are unknown, for example, the sample median. How can we construct confidence intervals for the median? 
+
+One idea could be to collect many random samples, compute the sample median from each sample, and create a density plot like we did in Monte Carlo simulations in Figures \@ref(fig:dist-samp-mean), \@ref(fig:dist-U), and \@ref(fig:dist-E). However, this is not feasible in real life as we rarely have the time and money to go around obtaining many random samples. We are only able to work with the one random sample that we have. 
+
+A method to work around these issues is the **bootstrap**. The bootstrap will enable us to:
+
+- Estimate the standard error and variance of estimators if there are no known formulas for them.
+
+- Construct confidence intervals for estimators with unknown sampling distributions and unknown formulas for their standard errors.
+
+We can do these without having to collect data from many random samples. Before going into how the bootstrap works, we remind ourselves of how Monte Carlo simulations work in terms of finding the sampling distribution and standard errors of estimators.
+
+### Estimating Sampling Distributions Using Many Random Samples
+
+When using Monte Carlo simulations to estimate the sampling distribution of estimators (see the code that generated Figures \@ref(fig:dist-samp-mean), \@ref(fig:dist-U), and \@ref(fig:dist-E) as examples), we typically did the following:
+
+1. Assume the data follow some known distribution with PDF $f_X$.
+
+2. Simulate $n$ data points from this assumed distribution $K$ times, with $K$ being large, to obtain $K$ replicate datasets of size $n$ denoted by $\mathcal{X}^{1}, \cdots, \mathcal{X}^{K}$. (In a lot of my code $K$ is called `reps`).
+
+3. For each dataset, calculate the value of the estimator $\hat{\Theta}$. Since we have $K$ datasets, we will have $K$ values for the estimators, denoted by $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$.
+
+4. We estimate the true mean of $\hat{\Theta}$ by taking the sample mean of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$.
+
+5. We estimate the true variance of $\hat{\Theta}$ by taking the sample variance of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$. Square-rooting this value gives an estimate for the standard error of $\hat{\Theta}$.
+
+Note: this step is a bit different than what is described in the book. In the book, the author uses the population variance, instead of the sample variance. The population variance divides the sum of the squared deviations from the mean by $K$, while the sample variance divides by $K-1$. I have seen some authors divide by $K$, and others divide by $K-1$. The `var()` function in R calculates the sample variance, so I will admit that there is a level of convenience to use the sample variance so I can use an R function. $K$ needs to be large for the bootstrap to work well, so the end result is the numerical values are very close to each other. 
+
+6. We create a density plot of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$ to estimate the sampling distribution of $\hat{\Theta}$.
+
+As written earlier, the problem with applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF $f_X$ and CDF $F_X$. So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above. 
+
+
+
 

@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 13 The Bootstrap | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="13.1 Introduction In Section 12,">
+<meta name="description" content="13.1 Introduction In Section 12, we learned about confidence intervals for the mean, the proportion, the difference in two independent means, and the difference in two independent proportions....">
 <meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 13 The Bootstrap | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="13.1 Introduction In Section 12,">
+<meta property="og:description" content="13.1 Introduction In Section 12, we learned about confidence intervals for the mean, the proportion, the difference in two independent means, and the difference in two independent proportions....">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 13 The Bootstrap | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="13.1 Introduction In Section 12,">
+<meta name="twitter:description" content="13.1 Introduction In Section 12, we learned about confidence intervals for the mean, the proportion, the difference in two independent means, and the difference in two independent proportions....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -95,8 +95,47 @@
 <h2>
 <span class="header-section-number">13.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-3"><i class="fas fa-link"></i></a>
 </h2>
-<p>In Section <a href="CI.html#CI">12</a>,</p>
+<p>In Section <a href="CI.html#CI">12</a>, we learned about confidence intervals for</p>
+<ul>
+<li>the mean,</li>
+<li>the proportion,</li>
+<li>the difference in two independent means, and</li>
+<li>the difference in two independent proportions.</li>
+</ul>
+<p>These intervals are based on their known sampling distributions, which usually require some conditions to be met. Confidence intervals for any other parameter that are based on known sampling distributions work similarly. Wwe work out the confidence interval of an estimator by using the framework in equation <a href="CI.html#eq:8-CIbasic2">(12.2)</a>: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.</p>
+<p>This naturally leads to a question: what if the conditions for these sampling distributions are not met, or if the estimator we are working on has no known sampling distribution? In this section, we will learn about the bootstrap, which is used when the sampling distribution of an estimator is unknown.</p>
+</div>
+<div id="bootstrap" class="section level2" number="13.2">
+<h2>
+<span class="header-section-number">13.2</span> The Bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are estimators whose sampling distributions are unknown, for example, the sample median. How can we construct confidence intervals for the median?</p>
+<p>One idea could be to collect many random samples, compute the sample median from each sample, and create a density plot like we did in Monte Carlo simulations in Figures <a href="clt.html#fig:dist-samp-mean">11.2</a>, <a href="clt.html#fig:dist-U">11.3</a>, and <a href="clt.html#fig:dist-E">11.4</a>. However, this is not feasible in real life as we rarely have the time and money to go around obtaining many random samples. We are only able to work with the one random sample that we have.</p>
+<p>A method to work around these issues is the <strong>bootstrap</strong>. The bootstrap will enable us to:</p>
+<ul>
+<li><p>Estimate the standard error and variance of estimators if there are no known formulas for them.</p></li>
+<li><p>Construct confidence intervals for estimators with unknown sampling distributions and unknown formulas for their standard errors.</p></li>
+</ul>
+<p>We can do these without having to collect data from many random samples. Before going into how the bootstrap works, we remind ourselves of how Monte Carlo simulations work in terms of finding the sampling distribution and standard errors of estimators.</p>
+<div id="estimating-sampling-distributions-using-many-random-samples" class="section level3" number="13.2.1">
+<h3>
+<span class="header-section-number">13.2.1</span> Estimating Sampling Distributions Using Many Random Samples<a class="anchor" aria-label="anchor" href="#estimating-sampling-distributions-using-many-random-samples"><i class="fas fa-link"></i></a>
+</h3>
+<p>When using Monte Carlo simulations to estimate the sampling distribution of estimators (see the code that generated Figures <a href="clt.html#fig:dist-samp-mean">11.2</a>, <a href="clt.html#fig:dist-U">11.3</a>, and <a href="clt.html#fig:dist-E">11.4</a> as examples), we typically did the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>Assume the data follow some known distribution with PDF <span class="math inline">\(f_X\)</span>.</p></li>
+<li><p>Simulate <span class="math inline">\(n\)</span> data points from this assumed distribution <span class="math inline">\(K\)</span> times, with <span class="math inline">\(K\)</span> being large, to obtain <span class="math inline">\(K\)</span> replicate datasets of size <span class="math inline">\(n\)</span> denoted by <span class="math inline">\(\mathcal{X}^{1}, \cdots, \mathcal{X}^{K}\)</span>. (In a lot of my code <span class="math inline">\(K\)</span> is called <code>reps</code>).</p></li>
+<li><p>For each dataset, calculate the value of the estimator <span class="math inline">\(\hat{\Theta}\)</span>. Since we have <span class="math inline">\(K\)</span> datasets, we will have <span class="math inline">\(K\)</span> values for the estimators, denoted by <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>.</p></li>
+<li><p>We estimate the true mean of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample mean of <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>.</p></li>
+<li><p>We estimate the true variance of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample variance of <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>. Square-rooting this value gives an estimate for the standard error of <span class="math inline">\(\hat{\Theta}\)</span>.</p></li>
+</ol>
+<p>Note: this step is a bit different than what is described in the book. In the book, the author uses the population variance, instead of the sample variance. The population variance divides the sum of the squared deviations from the mean by <span class="math inline">\(K\)</span>, while the sample variance divides by <span class="math inline">\(K-1\)</span>. I have seen some authors divide by <span class="math inline">\(K\)</span>, and others divide by <span class="math inline">\(K-1\)</span>. The <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code> function in R calculates the sample variance, so I will admit that there is a level of convenience to use the sample variance so I can use an R function. <span class="math inline">\(K\)</span> needs to be large for the bootstrap to work well, so the end result is the numerical values are very close to each other.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>We create a density plot of <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span> to estimate the sampling distribution of <span class="math inline">\(\hat{\Theta}\)</span>.</li>
+</ol>
+<p>As written earlier, the problem with applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF <span class="math inline">\(f_X\)</span> and CDF <span class="math inline">\(F_X\)</span>. So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above.</p>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -107,6 +146,9 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#boot"><span class="header-section-number">13</span> The Bootstrap</a></li>
 <li><a class="nav-link" href="#introduction-3"><span class="header-section-number">13.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#bootstrap"><span class="header-section-number">13.2</span> The Bootstrap</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#estimating-sampling-distributions-using-many-random-samples"><span class="header-section-number">13.2.1</span> Estimating Sampling Distributions Using Many Random Samples</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">

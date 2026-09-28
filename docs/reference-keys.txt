@@ -256,3 +256,5 @@ pooled-vs-unpooled
 confidence-interval-for-difference-in-two-independent-proportions
 boot
 introduction-3
+bootstrap
+estimating-sampling-distributions-using-many-random-samples

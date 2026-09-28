@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  28 SEP 2026 15:08
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  28 SEP 2026 15:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -875,8 +875,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [17]
 Overfull \hbox (38.25pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1] -3.0938410 -4.0860272  0.2528582  0.3810699  0.571530
-5  0.3389214[] 
+[]\TU/lmtt/m/n/10 ##  [1] -2.4188598  0.6221466  3.1629181 -1.5846562 -1.698162
+5 -3.7601982[] 
  []
 
 
@@ -3011,6 +3011,10 @@ File: bookdown-demo_files/figure-latex/8-credit-1.pdf Graphic file (type pdf)
 
 
 [172]
+Underfull \vbox (badness 10000) detected at line 7126
+ []
+
+
 
 [173] (bookdown-demo.bbl
 

@@ -79,7 +79,7 @@ The **basic** (or reverse percentile ) bootstrap $(1-\alpha) \times 100\%$ confi
 (\#eq:8-CIboot)
 \end{equation}
 
-where $\delta^* = (\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta}$, which is the difference between the estimator in the $K$ bootstrap samples and the true value of the estimator, so $\hat{\delta}_{\beta}^*$ is the $\beta \times 100$th percentile of $\delta^*$.
+where $\delta^* = (\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta})$, which is the difference between the estimator in the $K$ bootstrap samples and the true value of the estimator, so $\hat{\delta}_{\beta}^*$ is the $\beta \times 100$th percentile of $\delta^*$.
 
 You may notice that the confidence interval in equation \@ref(eq:8-CIboot) does not fit the general framework given in equation \@ref(eq:8-CIbasic2). This is because the sampling distribution of the estimator may not be symmetric.
 
@@ -102,6 +102,10 @@ plot(density(Data), xlab="Credit Limit", main="Density Plot of Credit Limits")
 The density plot in Figure \@ref(fig:8-credit) informs us that the values of credit limits are skewed, so the median is a better measure of centrality for credit limits. We wish to estimate the population median credit limit, give a measure of uncertainty, as well as report a 95% confidence interval for the median credit limit. Since the sampling distribution of the sample median is unknown, we use the bootstrap:
 
 ```{r}
+##actual sample median
+samp_median <- median(Data)
+samp_median
+
 K<-1000 ##Number of bootstrap samples
 set.seed(77)
 
@@ -114,9 +118,6 @@ boot.samples<-replicate(K,sample(Data, replace=TRUE))
 ##find the sample median of each column, since each column represents a bootstrap sample
 boot.medians<-apply(boot.samples,2,median)
 
-##actual sample median
-samp_median <- median(Data)
-samp_median
 
 ##bootstrap SE of the median is just the SD of the sample medians from each bootstrap sample
 sd(boot.medians)

@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -3.0938410 -4.0860272  0.2528582  0.3810699  0.5715305  0.3389214
-##  [7]  2.8906353  4.0361910 -0.3927318  3.4617562
+##  [1] -2.4188598  0.6221466  3.1629181 -1.5846562 -1.6981625 -3.7601982
+##  [7]  1.9447936  2.8545933 -3.5204322 -1.7522851
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -7042,7 +7042,7 @@ The \textbf{basic} (or reverse percentile ) bootstrap \((1-\alpha) \times 100\%\
 \label{eq:8-CIboot}
 \end{equation}
 
-where \(\delta^* = (\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta}\), which is the difference between the estimator in the \(K\) bootstrap samples and the true value of the estimator, so \(\hat{\delta}_{\beta}^*\) is the \(\beta \times 100\)th percentile of \(\delta^*\).
+where \(\delta^* = (\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta})\), which is the difference between the estimator in the \(K\) bootstrap samples and the true value of the estimator, so \(\hat{\delta}_{\beta}^*\) is the \(\beta \times 100\)th percentile of \(\delta^*\).
 
 You may notice that the confidence interval in equation \eqref{eq:8-CIboot} does not fit the general framework given in equation \eqref{eq:8-CIbasic2}. This is because the sampling distribution of the estimator may not be symmetric.
 
@@ -7074,18 +7074,6 @@ The density plot in Figure \ref{fig:8-credit} informs us that the values of cred
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{K}\OtherTok{\textless{}{-}}\DecValTok{1000} \DocumentationTok{\#\#Number of bootstrap samples}
-\FunctionTok{set.seed}\NormalTok{(}\DecValTok{77}\NormalTok{)}
-
-\DocumentationTok{\#\#the sample function, with replace=TRUE, samples with replacement. }
-\DocumentationTok{\#\#The replicate function repeats the sample function K times}
-\DocumentationTok{\#\#if no size is specified in sample(), default is the length of the vector called Data}
-\NormalTok{boot.samples}\OtherTok{\textless{}{-}}\FunctionTok{replicate}\NormalTok{(K,}\FunctionTok{sample}\NormalTok{(Data, }\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{))}
-\DocumentationTok{\#\#Each column in boot.samples represents each bootstrap sample}
-
-\DocumentationTok{\#\#find the sample median of each column, since each column represents a bootstrap sample}
-\NormalTok{boot.medians}\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(boot.samples,}\DecValTok{2}\NormalTok{,median)}
-
 \DocumentationTok{\#\#actual sample median}
 \NormalTok{samp\_median }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(Data)}
 \NormalTok{samp\_median}
@@ -7098,6 +7086,19 @@ The density plot in Figure \ref{fig:8-credit} informs us that the values of cred
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{K}\OtherTok{\textless{}{-}}\DecValTok{1000} \DocumentationTok{\#\#Number of bootstrap samples}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{77}\NormalTok{)}
+
+\DocumentationTok{\#\#the sample function, with replace=TRUE, samples with replacement. }
+\DocumentationTok{\#\#The replicate function repeats the sample function K times}
+\DocumentationTok{\#\#if no size is specified in sample(), default is the length of the vector called Data}
+\NormalTok{boot.samples}\OtherTok{\textless{}{-}}\FunctionTok{replicate}\NormalTok{(K,}\FunctionTok{sample}\NormalTok{(Data, }\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{))}
+\DocumentationTok{\#\#Each column in boot.samples represents each bootstrap sample}
+
+\DocumentationTok{\#\#find the sample median of each column, since each column represents a bootstrap sample}
+\NormalTok{boot.medians}\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(boot.samples,}\DecValTok{2}\NormalTok{,median)}
+
+
 \DocumentationTok{\#\#bootstrap SE of the median is just the SD of the sample medians from each bootstrap sample}
 \FunctionTok{sd}\NormalTok{(boot.medians)}
 \end{Highlighting}

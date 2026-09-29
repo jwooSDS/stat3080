@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.7616913 -2.3481465 -3.1691085 -3.2634780  0.9647200 -2.6365727
-##  [7] -1.7595366 -1.6960434  0.4032176  2.0931686
+##  [1]  3.23052348  2.76485282  2.48485748  1.94655173  7.49710166  0.06225073
+##  [7]  2.80007538  1.82233298  4.45086481 -2.38290459
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -7233,7 +7233,7 @@ In the Freshman 15 example, researchers claim that with better education, the av
 
 \subsubsection{Some Comments about the Null Hypothesis with a One-sided Alternative}\label{some-comments-about-the-null-hypothesis-with-a-one-sided-alternative}
 
-A number of textbooks (including the one we are using!) take the view that the null and alternative hypotheses are opposites, so if we write \(H_a: \mu < \mu_0\), then we must write \(H_0: \mu \geq \mu_0\). This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to \(\mu_0\). There are a couple of reasons why I say the null hypothesis is a statement involving an equality, rather than an inequality:
+A number of textbooks take the view that the null and alternative hypotheses are complements, so if we write \(H_a: \mu < \mu_0\), then we must write \(H_0: \mu \geq \mu_0\). This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to \(\mu_0\). There are a couple of reasons why I say the null hypothesis is a statement involving an equality, rather than an inequality:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -7396,7 +7396,236 @@ Using R, this p-value is 0.01123. If our test is conducted at 5\% significance l
 ## [1] 0.01123111
 \end{verbatim}
 
-\emph{Thought question}: Suppose the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is \(H_a:\mu > 15\). Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is \(H_a: \mu \neq 15\), show that the p-value is 0.02246.
+\textbf{Thought question}: Suppose the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is \(H_a:\mu > 15\). Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is \(H_a: \mu \neq 15\), show that the p-value is 0.02246.
+
+\subsubsection{Critical Value}\label{critical-value-1}
+
+Informally, the critical value is the value of the test statistic that is considered ``enough'' to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level.
+
+We use the PDF of a \(t\) distribution to visualize what a critical value is. We want to find the ``cut off'' value, denoted by \(t_{n-1}^*\), of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level \(\alpha\). Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \ref{fig:9-critneq}, \ref{fig:9-critgreater}, and \ref{fig:9-critless} below, we have examples on the relevant areas under the PDF if \(\alpha=0.05\) and \(n=50\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  If \(H_a: \mu \neq \mu_0\), i.e.~we have a two-sided alternative, we want the areas under the PDF of the \(t_{49}\) distribution to the right of \(t_{49}^*\) and to the left of \(-t_{49}^*\) to be equal to 0.05. This is shown in Figure \ref{fig:9-critneq}:
+\end{enumerate}
+
+\begin{figure}
+\centering
+\includegraphics{images/09-crit_2sided.jpeg}
+\caption{\label{fig:9-critneq}Critical Value for 2-Sided Alternative, with 0.05 Sig Level}
+\end{figure}
+
+Note that since the \(t\) distribution is symmetric and both areas in blue add up to 0.05, each shaded area must be 0.025. So \(-t_{49}^*\) and \(t_{49}^*\) correspond to the 2.5th and 97.5th percentiles of a \(t_{49}\) distribution respectively. We can show that \(-t_{49}^*\) is -2.009575 by typing
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{50}
+\FunctionTok{qt}\NormalTok{(alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, n}\DecValTok{{-}1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -2.009575
+\end{verbatim}
+
+and by symmetry of the \(t\) distribution, \(t_{49}^*\) is 2.009575. The critical value is therefore \(t_{49}^* = 2.009575\) for a 2-sided test. We will reject the null hypothesis if our \(t\) statistic is to the right of 2.009575 or if it is to the left of -2.009575.
+
+In general, for any significance level \(\alpha\), the negative critical value \(-t_{n-1}^*\) corresponds to the \((\alpha/2) \times 100\)th percentile, and the positive critical value \(t_{n-1}^*\) corresponds to the \((1 - \alpha/2) \times 100\)th percentile of the appropriate \(t_{n-1}\) distribution, if \(H_a: \mu \neq \mu_0\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  If \(H_a: \mu > \mu_0\), i.e.~the population mean is greater than some specified value, we want the area under the PDF of the \(t_{49}\) distribution to the right of \(t_{49}^*\) to be equal to 0.05. This is shown in Figure \ref{fig:9-critgreater}:
+\end{enumerate}
+
+\begin{figure}
+\centering
+\includegraphics{images/09-crit_greater.jpeg}
+\caption{\label{fig:9-critgreater}Critical Value for Greater Than Alternative, with 0.05 Sig Level}
+\end{figure}
+
+Note that \(t_{49}^*\) corresponds to the 95th percentile of a \(t_{49}\) distribution. We can show that \(t_{49}^*\) is 1.677 by typing
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{50}
+\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha, n}\DecValTok{{-}1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.676551
+\end{verbatim}
+
+The critical value is therefore \(t_{49}^* = 1.676551\) when \(H_a: \mu > \mu_0\). We will reject the null hypothesis if our \(t\) statistic is to the right of 1.676551.
+
+In general, for any significance level \(\alpha\), the critical value \(t_{n-1}^*\) corresponds to the \((1 - \alpha) \times 100\)th percentile of the appropriate \(t_{n-1}\) distribution, if \(H_a: \mu > \mu_0\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  If \(H_a: \mu < \mu_0\), i.e.~the population mean is less than some specified value, we want the area under the PDF of the \(t_{49}\) distribution to the left of \(t_{49}^*\) to be equal to 0.05. This is shown in Figure \ref{fig:9-critless}:
+\end{enumerate}
+
+\begin{figure}
+\centering
+\includegraphics{images/09-crit_less.jpeg}
+\caption{\label{fig:9-critless}Critical Value for Less Than Alternative, with 0.05 Sig Level}
+\end{figure}
+
+Note that \(t_{49}^*\) corresponds to the 5th percentile of a \(t_{49}\) distribution. We can show that \(t_{49}^*\) is -1.677 by typing
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{50}
+\FunctionTok{qt}\NormalTok{(alpha, n}\DecValTok{{-}1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1.676551
+\end{verbatim}
+
+The critical value is therefore \(t_{49}^* = -1.676551\) when \(H_a: \mu < \mu_0\). We will reject the null hypothesis if our \(t\) statistic is to the left of -1.676551.
+
+In general, for any significance level \(\alpha\), the critical value \(t_{n-1}^*\) corresponds to the \((\alpha) \times 100\)th percentile of the appropriate \(t_{n-1}\) distribution, if \(H_a: \mu < \mu_0\).
+
+Going back to the Freshman 15 example, we found the \(t\) statistic to be −2.357023. We had earlier written the alternative hypothesis as \(H_a: \mu < 15\), so the critical value is the 5th percentile of a \(t_{49}\) distribution, which we found to be -1.676551. Since our \(t\) statistic is to the left of this critical value, we reject the null hypothesis.
+
+\textbf{Thought question}: Consider a hypothesis test for the mean with \(n=10\). Assume the conditions for the sampling distribution of the sample mean to be met. Suppose \(\alpha=0.10\). If the alternative hypothesis is 2-sided, show that the critical value is 1.833113. If the alternative hypothesis is 1-sided, show that the critical value is 1.383029.
+
+\subsection{Writing Conclusions}\label{writing-conclusions}
+
+In the previous subsection, we decide whether to reject the null hypothesis based on two approaches:
+
+\begin{itemize}
+\tightlist
+\item
+  If the p-value of our test is less than the significance level.
+\item
+  If the test statistic of our test is more extreme than the critical value, in the direction of the alternative hypothesis.
+\end{itemize}
+
+The decision based on both approaches should always be the same and never contradict each other. All you need is to use one of these approaches, the other is redundant. It is up to you to choose which one you want to use, but you must be clear which one you are using.
+
+We decide between:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Rejecting the null hypothesis. This implies that we have enough evidence against the null hypothesis to reject it and support the alternative hypothesis. Our data support the claim in the alternative hypothesis. Using the court trial analogy, this is equivalent to saying we have enough evidence to prove a defendants guilt as we reject the assumption that the defendant is innocent, and give a guilty verdict.
+\item
+  Failing to reject the null hypothesis. This implies that we do not have enough evidence against the null hypothesis and so we do not reject it. Our data do not support the claim in the alternative hypothesis. Using the court trial analogy, this is equivalent to saying we do not have enough evidence to prove a defendants and so give a not guilty verdict.
+\end{enumerate}
+
+A common mistake with failing to reject the null hypothesis is to say that our data support and proves the null hypothesis is true. Using the court trial analogy, a not guilty verdict is not the same as saying the defendant is innocent.
+
+After making a decision, we write a conclusion in the context of our research question. Using the Freshman 15 example, we rejected the null hypothesis. So our conclusion is our data support the claim that the average weight gain among first-year college students is less than 15 pounds.
+
+We look at one more example to show how a hypothesis test is done from start to finish.
+
+\subsection{Worked Example}\label{wafer}
+
+The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. As part of an assessment if the silicon wafers are meeting the target thickness, a sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.
+
+The variable we are investigating is the thickness for silicon wafers, which is quantitative, so we performing a hypothesis test for the mean.
+
+The null and alternative hypotheses are \(H_0: \mu = 245, H_a: \mu \neq 245\).
+
+We do not know the distribution of the thickness for silicon wafers. But we have a sample of 50, which is usually large enough so the CLT applies, and the relevant distributions for the test statistic apply.
+
+The \(t\) statistic is
+
+\[
+\begin{split}
+\hat{t} &= \frac{245.88 - 245}{\frac{3.6}{\sqrt{50}}} \\
+        &= 1.728483.
+\end{split}
+\]
+Since this is a two-sided test, the p-value can derived by finding the following area under the PDF of a \(t_{49}\) distribution, as shown in Figure \ref{fig:9-pvalworked} below.
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/9-pvalworked-1.pdf}
+\caption{\label{fig:9-pvalworked}Finding P-value, For Silicon Wafer Example}
+\end{figure}
+
+Using R, we can find the p-value by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pt}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.728483}\NormalTok{, }\DecValTok{49}\NormalTok{)}\SpecialCharTok{*}\DecValTok{2} 
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.09019905
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#supply test stat, then DF.}
+\DocumentationTok{\#\#multiply by 2 since pt only gives area to left of {-}1.728483, }
+\DocumentationTok{\#\#but we also want area to right of 1.728483. }
+\end{Highlighting}
+\end{Shaded}
+
+Alternatively, we can work out the critical value by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{49}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.009575
+\end{verbatim}
+
+Since our p-value is 0.09, which is greater than the significance level of 0.05, (or since our test statistic is 1.728483 which is not to the right of the critical value of 2.009575 ), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.
+
+Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 245 micrometers.
+
+\section{Hypothesis Test for Paired Means}\label{hypothesis-test-for-paired-means}
+
+\section{Hypothesis Test for Difference in Two Independent Means}\label{hypothesis-test-for-difference-in-two-independent-means}
+
+\section{Additional Comments on Hypothesis Test of Parameters}\label{infcomments}
+
+\subsection{Two-Sided Tests and Confidence Intervals}\label{inference}
+
+Notice how hypothesis tests and confidence intervals are based on the sampling distribution of the relevant estimator? If you look at how the critical value of a two-sided test and the critical value of a confidence interval are derived, you will notice that they are found in the exact same manner. Refer to Figure \ref{fig:9-critneq} and Figure \ref{fig:8-crit}, and notice how these pictures look exactly the same, with the middle portion of the PDF having an area of \(1-\alpha\) and the two tail ends having an area of \(\alpha\).
+
+What this implies is that conclusions from a \((1-\alpha) \times 100\%\) confidence interval will be consistent with a 2-sided hypothesis test conducted at significance \(\alpha\). Also notice how we use the same notation \(\alpha\) for the confidence level and significance level?
+
+\begin{itemize}
+\item
+  If the null hypothesis is \textbf{rejected} for a 2-sided test, than the value of the parameter under the null hypothesis will lie \textbf{outside} the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be ``ruled out''.
+\item
+  If the null hypothesis is \textbf{not rejected} for a 2-sided test, than the value of the parameter under the null hypothesis will lie \textbf{inside} the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be ``ruled out''.
+\end{itemize}
+
+We go back to the thickness of silicon wafers worked example in Section \ref{wafer}. The null and alternative hypotheses were \(H_0: \mu = 245, H_a: \mu \neq 245\) and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95\% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis.
+
+\textbf{Thought question}: Show that the 95\% confidence interval for the mean thickness of silicon wafers in the worked example is (244.8569, 246.9031) which contains the value of 245.
+
+\subsection{Reporting Conclusions}\label{reporting-conclusions}
+
+You may have noticed that we make a binary decision at the end of a hypothesis test: we either reject or fail to reject a null hypothesis, by comparing our test statistic with a critical value or by comparing a p-value (which depends on the value of the test statistic) with a significance level.
+
+While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. Are p-values of 0.049 and 0.051 really that much different? So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.
+
+Therefore, when writing conclusions, it is recommended to also provide the p-value or the value of the test statistic, instead of just reporting that the ``null hypothesis is rejected'' or ``the null hypothesis is not rejected''. Readers than then make an assessment of how strong the evidence is against the null hypothesis, based on their judgement of what the value of the significance level should be.
 
   \bibliography{book.bib,packages.bib}
 

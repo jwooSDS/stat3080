@@ -70,6 +70,10 @@ fig:9-pvalneq
 fig:9-pvalgreater
 fig:9-pvalless
 fig:9-pvaleg
+fig:9-critneq
+fig:9-critgreater
+fig:9-critless
+fig:9-pvalworked
 Rbasics
 overview-of-r
 rstudio-interface
@@ -280,3 +284,11 @@ test-statistic
 factors
 decision
 p-value
+critical-value-1
+writing-conclusions
+wafer
+hypothesis-test-for-paired-means
+hypothesis-test-for-difference-in-two-independent-means
+infcomments
+inference
+reporting-conclusions

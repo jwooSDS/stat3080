@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  29 SEP 2026 13:55
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  29 SEP 2026 14:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,9 +874,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 [16]
 
 [17]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1]  1.7616913 -2.3481465 -3.1691085 -3.2634780  0.964720
-0 -2.6365727[] 
+Overfull \hbox (69.75pt too wide) in paragraph at lines 678--678
+[]\TU/lmtt/m/n/10 ##  [1]  3.23052348  2.76485282  2.48485748  1.94655173  7.49
+710166  0.06225073[] 
  []
 
 
@@ -3066,15 +3066,39 @@ File: bookdown-demo_files/figure-latex/9-pvaleg-1.pdf Graphic file (type pdf)
 
 [181]
 
-[182] (bookdown-demo.bbl
+[182]
 
 [183]
+File: images/09-crit_2sided.jpeg Graphic file (type bmp)
+<images/09-crit_2sided.jpeg>
+File: images/09-crit_greater.jpeg Graphic file (type bmp)
+<images/09-crit_greater.jpeg>
 
-[184
 
-])
+[184]
+File: images/09-crit_less.jpeg Graphic file (type bmp)
+<images/09-crit_less.jpeg>
 
-[185] (bookdown-demo.aux)
+
+[185]
+
+[186]
+
+[187]
+File: bookdown-demo_files/figure-latex/9-pvalworked-1.pdf Graphic file (type pd
+f)
+<use bookdown-demo_files/figure-latex/9-pvalworked-1.pdf>
+
+
+[188]
+
+[189] (bookdown-demo.bbl
+
+[190])
+
+[191
+
+] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -3084,12 +3108,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20241 strings out of 409029
- 375036 string characters out of 5763847
+ 20293 strings out of 409029
+ 376608 string characters out of 5763847
  1949612 words of memory out of 5000000
- 42615 multiletter control sequences out of 15000+600000
+ 42662 multiletter control sequences out of 15000+600000
  564592 words of font info for 98 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,17n,123p,1012b,553s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (185 pages).
+Output written on bookdown-demo.pdf (191 pages).

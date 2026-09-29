@@ -148,7 +148,7 @@
 <h4>
 <span class="header-section-number">14.2.1.2</span> Some Comments about the Null Hypothesis with a One-sided Alternative<a class="anchor" aria-label="anchor" href="#some-comments-about-the-null-hypothesis-with-a-one-sided-alternative"><i class="fas fa-link"></i></a>
 </h4>
-<p>A number of textbooks (including the one we are using!) take the view that the null and alternative hypotheses are opposites, so if we write <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, then we must write <span class="math inline">\(H_0: \mu \geq \mu_0\)</span>. This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to <span class="math inline">\(\mu_0\)</span>. There are a couple of reasons why I say the null hypothesis is a statement involving an equality, rather than an inequality:</p>
+<p>A number of textbooks take the view that the null and alternative hypotheses are complements, so if we write <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, then we must write <span class="math inline">\(H_0: \mu \geq \mu_0\)</span>. This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to <span class="math inline">\(\mu_0\)</span>. There are a couple of reasons why I say the null hypothesis is a statement involving an equality, rather than an inequality:</p>
 <ol style="list-style-type: decimal">
 <li><p>The calculations performed to assess the evidence our data provides are done assuming the null hypothesis is true. You will realize in the later subsections that one can only perform these calculations if the null hypothesis says the parameter is equal to some specific value.</p></li>
 <li><p>I have seen many people get confused with the null and alternative hypotheses if they insist the null and alternative must be opposite with a one-sided alternative. Indeed, if you look at Practice Exercise 9.3 and 9.4 in our book, the author has gotten these confused in the proposed solutions.</p></li>
@@ -262,9 +262,162 @@ Figure 14.4: Finding P-value, For Freshman 15 Example
 <div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2.357023</span>, <span class="fl">49</span><span class="op">)</span> <span class="co">##enter t stat, then df</span></span></code></pre></div>
 <pre><code>## [1] 0.01123111</code></pre>
-<p><em>Thought question</em>: Suppose the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is <span class="math inline">\(H_a:\mu &gt; 15\)</span>. Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is <span class="math inline">\(H_a: \mu \neq 15\)</span>, show that the p-value is 0.02246.</p>
-
+<p><strong>Thought question</strong>: Suppose the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is <span class="math inline">\(H_a:\mu &gt; 15\)</span>. Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is <span class="math inline">\(H_a: \mu \neq 15\)</span>, show that the p-value is 0.02246.</p>
 </div>
+<div id="critical-value-1" class="section level4" number="14.2.3.2">
+<h4>
+<span class="header-section-number">14.2.3.2</span> Critical Value<a class="anchor" aria-label="anchor" href="#critical-value-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Informally, the critical value is the value of the test statistic that is considered “enough” to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level.</p>
+<p>We use the PDF of a <span class="math inline">\(t\)</span> distribution to visualize what a critical value is. We want to find the “cut off” value, denoted by <span class="math inline">\(t_{n-1}^*\)</span>, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level <span class="math inline">\(\alpha\)</span>. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures <a href="hyp.html#fig:9-critneq">14.5</a>, <a href="hyp.html#fig:9-critgreater">14.6</a>, and <a href="hyp.html#fig:9-critless">14.7</a> below, we have examples on the relevant areas under the PDF if <span class="math inline">\(\alpha=0.05\)</span> and <span class="math inline">\(n=50\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>If <span class="math inline">\(H_a: \mu \neq \mu_0\)</span>, i.e. we have a two-sided alternative, we want the areas under the PDF of the <span class="math inline">\(t_{49}\)</span> distribution to the right of <span class="math inline">\(t_{49}^*\)</span> and to the left of <span class="math inline">\(-t_{49}^*\)</span> to be equal to 0.05. This is shown in Figure <a href="hyp.html#fig:9-critneq">14.5</a>:</li>
+</ol>
+<div class="figure">
+<span style="display:block;" id="fig:9-critneq"></span>
+<img src="images/09-crit_2sided.jpeg" alt="Critical Value for 2-Sided Alternative, with 0.05 Sig Level"><p class="caption">
+Figure 14.5: Critical Value for 2-Sided Alternative, with 0.05 Sig Level
+</p>
+</div>
+<p>Note that since the <span class="math inline">\(t\)</span> distribution is symmetric and both areas in blue add up to 0.05, each shaded area must be 0.025. So <span class="math inline">\(-t_{49}^*\)</span> and <span class="math inline">\(t_{49}^*\)</span> correspond to the 2.5th and 97.5th percentiles of a <span class="math inline">\(t_{49}\)</span> distribution respectively. We can show that <span class="math inline">\(-t_{49}^*\)</span> is -2.009575 by typing</p>
+<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -2.009575</code></pre>
+<p>and by symmetry of the <span class="math inline">\(t\)</span> distribution, <span class="math inline">\(t_{49}^*\)</span> is 2.009575. The critical value is therefore <span class="math inline">\(t_{49}^* = 2.009575\)</span> for a 2-sided test. We will reject the null hypothesis if our <span class="math inline">\(t\)</span> statistic is to the right of 2.009575 or if it is to the left of -2.009575.</p>
+<p>In general, for any significance level <span class="math inline">\(\alpha\)</span>, the negative critical value <span class="math inline">\(-t_{n-1}^*\)</span> corresponds to the <span class="math inline">\((\alpha/2) \times 100\)</span>th percentile, and the positive critical value <span class="math inline">\(t_{n-1}^*\)</span> corresponds to the <span class="math inline">\((1 - \alpha/2) \times 100\)</span>th percentile of the appropriate <span class="math inline">\(t_{n-1}\)</span> distribution, if <span class="math inline">\(H_a: \mu \neq \mu_0\)</span>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>If <span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>, i.e. the population mean is greater than some specified value, we want the area under the PDF of the <span class="math inline">\(t_{49}\)</span> distribution to the right of <span class="math inline">\(t_{49}^*\)</span> to be equal to 0.05. This is shown in Figure <a href="hyp.html#fig:9-critgreater">14.6</a>:</li>
+</ol>
+<div class="figure">
+<span style="display:block;" id="fig:9-critgreater"></span>
+<img src="images/09-crit_greater.jpeg" alt="Critical Value for Greater Than Alternative, with 0.05 Sig Level"><p class="caption">
+Figure 14.6: Critical Value for Greater Than Alternative, with 0.05 Sig Level
+</p>
+</div>
+<p>Note that <span class="math inline">\(t_{49}^*\)</span> corresponds to the 95th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is 1.677 by typing</p>
+<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.676551</code></pre>
+<p>The critical value is therefore <span class="math inline">\(t_{49}^* = 1.676551\)</span> when <span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>. We will reject the null hypothesis if our <span class="math inline">\(t\)</span> statistic is to the right of 1.676551.</p>
+<p>In general, for any significance level <span class="math inline">\(\alpha\)</span>, the critical value <span class="math inline">\(t_{n-1}^*\)</span> corresponds to the <span class="math inline">\((1 - \alpha) \times 100\)</span>th percentile of the appropriate <span class="math inline">\(t_{n-1}\)</span> distribution, if <span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>If <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, i.e. the population mean is less than some specified value, we want the area under the PDF of the <span class="math inline">\(t_{49}\)</span> distribution to the left of <span class="math inline">\(t_{49}^*\)</span> to be equal to 0.05. This is shown in Figure <a href="hyp.html#fig:9-critless">14.7</a>:</li>
+</ol>
+<div class="figure">
+<span style="display:block;" id="fig:9-critless"></span>
+<img src="images/09-crit_less.jpeg" alt="Critical Value for Less Than Alternative, with 0.05 Sig Level"><p class="caption">
+Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
+</p>
+</div>
+<p>Note that <span class="math inline">\(t_{49}^*\)</span> corresponds to the 5th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is -1.677 by typing</p>
+<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -1.676551</code></pre>
+<p>The critical value is therefore <span class="math inline">\(t_{49}^* = -1.676551\)</span> when <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>. We will reject the null hypothesis if our <span class="math inline">\(t\)</span> statistic is to the left of -1.676551.</p>
+<p>In general, for any significance level <span class="math inline">\(\alpha\)</span>, the critical value <span class="math inline">\(t_{n-1}^*\)</span> corresponds to the <span class="math inline">\((\alpha) \times 100\)</span>th percentile of the appropriate <span class="math inline">\(t_{n-1}\)</span> distribution, if <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>.</p>
+<p>Going back to the Freshman 15 example, we found the <span class="math inline">\(t\)</span> statistic to be −2.357023. We had earlier written the alternative hypothesis as <span class="math inline">\(H_a: \mu &lt; 15\)</span>, so the critical value is the 5th percentile of a <span class="math inline">\(t_{49}\)</span> distribution, which we found to be -1.676551. Since our <span class="math inline">\(t\)</span> statistic is to the left of this critical value, we reject the null hypothesis.</p>
+<p><strong>Thought question</strong>: Consider a hypothesis test for the mean with <span class="math inline">\(n=10\)</span>. Assume the conditions for the sampling distribution of the sample mean to be met. Suppose <span class="math inline">\(\alpha=0.10\)</span>. If the alternative hypothesis is 2-sided, show that the critical value is 1.833113. If the alternative hypothesis is 1-sided, show that the critical value is 1.383029.</p>
+</div>
+</div>
+<div id="writing-conclusions" class="section level3" number="14.2.4">
+<h3>
+<span class="header-section-number">14.2.4</span> Writing Conclusions<a class="anchor" aria-label="anchor" href="#writing-conclusions"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the previous subsection, we decide whether to reject the null hypothesis based on two approaches:</p>
+<ul>
+<li>If the p-value of our test is less than the significance level.</li>
+<li>If the test statistic of our test is more extreme than the critical value, in the direction of the alternative hypothesis.</li>
+</ul>
+<p>The decision based on both approaches should always be the same and never contradict each other. All you need is to use one of these approaches, the other is redundant. It is up to you to choose which one you want to use, but you must be clear which one you are using.</p>
+<p>We decide between:</p>
+<ol style="list-style-type: decimal">
+<li><p>Rejecting the null hypothesis. This implies that we have enough evidence against the null hypothesis to reject it and support the alternative hypothesis. Our data support the claim in the alternative hypothesis. Using the court trial analogy, this is equivalent to saying we have enough evidence to prove a defendants guilt as we reject the assumption that the defendant is innocent, and give a guilty verdict.</p></li>
+<li><p>Failing to reject the null hypothesis. This implies that we do not have enough evidence against the null hypothesis and so we do not reject it. Our data do not support the claim in the alternative hypothesis. Using the court trial analogy, this is equivalent to saying we do not have enough evidence to prove a defendants and so give a not guilty verdict.</p></li>
+</ol>
+<p>A common mistake with failing to reject the null hypothesis is to say that our data support and proves the null hypothesis is true. Using the court trial analogy, a not guilty verdict is not the same as saying the defendant is innocent.</p>
+<p>After making a decision, we write a conclusion in the context of our research question. Using the Freshman 15 example, we rejected the null hypothesis. So our conclusion is our data support the claim that the average weight gain among first-year college students is less than 15 pounds.</p>
+<p>We look at one more example to show how a hypothesis test is done from start to finish.</p>
+</div>
+<div id="wafer" class="section level3" number="14.2.5">
+<h3>
+<span class="header-section-number">14.2.5</span> Worked Example<a class="anchor" aria-label="anchor" href="#wafer"><i class="fas fa-link"></i></a>
+</h3>
+<p>The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. As part of an assessment if the silicon wafers are meeting the target thickness, a sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.</p>
+<p>The variable we are investigating is the thickness for silicon wafers, which is quantitative, so we performing a hypothesis test for the mean.</p>
+<p>The null and alternative hypotheses are <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span>.</p>
+<p>We do not know the distribution of the thickness for silicon wafers. But we have a sample of 50, which is usually large enough so the CLT applies, and the relevant distributions for the test statistic apply.</p>
+<p>The <span class="math inline">\(t\)</span> statistic is</p>
+<p><span class="math display">\[
+\begin{split}
+\hat{t} &amp;= \frac{245.88 - 245}{\frac{3.6}{\sqrt{50}}} \\
+        &amp;= 1.728483.
+\end{split}
+\]</span>
+Since this is a two-sided test, the p-value can derived by finding the following area under the PDF of a <span class="math inline">\(t_{49}\)</span> distribution, as shown in Figure <a href="hyp.html#fig:9-pvalworked">14.8</a> below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:9-pvalworked"></span>
+<img src="bookdown-demo_files/figure-html/9-pvalworked-1.png" alt="Finding P-value, For Silicon Wafer Example" width="672"><p class="caption">
+Figure 14.8: Finding P-value, For Silicon Wafer Example
+</p>
+</div>
+<p>Using R, we can find the p-value by typing:</p>
+<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.728483</span>, <span class="fl">49</span><span class="op">)</span><span class="op">*</span><span class="fl">2</span> </span></code></pre></div>
+<pre><code>## [1] 0.09019905</code></pre>
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##supply test stat, then DF.</span></span>
+<span><span class="co">##multiply by 2 since pt only gives area to left of -1.728483, </span></span>
+<span><span class="co">##but we also want area to right of 1.728483. </span></span></code></pre></div>
+<p>Alternatively, we can work out the critical value by typing:</p>
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">49</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2.009575</code></pre>
+<p>Since our p-value is 0.09, which is greater than the significance level of 0.05, (or since our test statistic is 1.728483 which is not to the right of the critical value of 2.009575 ), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.</p>
+<p>Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 245 micrometers.</p>
+</div>
+</div>
+<div id="hypothesis-test-for-paired-means" class="section level2" number="14.3">
+<h2>
+<span class="header-section-number">14.3</span> Hypothesis Test for Paired Means<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-paired-means"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="hypothesis-test-for-difference-in-two-independent-means" class="section level2" number="14.4">
+<h2>
+<span class="header-section-number">14.4</span> Hypothesis Test for Difference in Two Independent Means<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-difference-in-two-independent-means"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="infcomments" class="section level2" number="14.5">
+<h2>
+<span class="header-section-number">14.5</span> Additional Comments on Hypothesis Test of Parameters<a class="anchor" aria-label="anchor" href="#infcomments"><i class="fas fa-link"></i></a>
+</h2>
+<div id="inference" class="section level3" number="14.5.1">
+<h3>
+<span class="header-section-number">14.5.1</span> Two-Sided Tests and Confidence Intervals<a class="anchor" aria-label="anchor" href="#inference"><i class="fas fa-link"></i></a>
+</h3>
+<p>Notice how hypothesis tests and confidence intervals are based on the sampling distribution of the relevant estimator? If you look at how the critical value of a two-sided test and the critical value of a confidence interval are derived, you will notice that they are found in the exact same manner. Refer to Figure <a href="hyp.html#fig:9-critneq">14.5</a> and Figure <a href="CI.html#fig:8-crit">12.2</a>, and notice how these pictures look exactly the same, with the middle portion of the PDF having an area of <span class="math inline">\(1-\alpha\)</span> and the two tail ends having an area of <span class="math inline">\(\alpha\)</span>.</p>
+<p>What this implies is that conclusions from a <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence interval will be consistent with a 2-sided hypothesis test conducted at significance <span class="math inline">\(\alpha\)</span>. Also notice how we use the same notation <span class="math inline">\(\alpha\)</span> for the confidence level and significance level?</p>
+<ul>
+<li><p>If the null hypothesis is <strong>rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>outside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
+<li><p>If the null hypothesis is <strong>not rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>inside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
+</ul>
+<p>We go back to the thickness of silicon wafers worked example in Section <a href="hyp.html#wafer">14.2.5</a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span> and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis.</p>
+<p><strong>Thought question</strong>: Show that the 95% confidence interval for the mean thickness of silicon wafers in the worked example is (244.8569, 246.9031) which contains the value of 245.</p>
+</div>
+<div id="reporting-conclusions" class="section level3" number="14.5.2">
+<h3>
+<span class="header-section-number">14.5.2</span> Reporting Conclusions<a class="anchor" aria-label="anchor" href="#reporting-conclusions"><i class="fas fa-link"></i></a>
+</h3>
+<p>You may have noticed that we make a binary decision at the end of a hypothesis test: we either reject or fail to reject a null hypothesis, by comparing our test statistic with a critical value or by comparing a p-value (which depends on the value of the test statistic) with a significance level.</p>
+<p>While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. Are p-values of 0.049 and 0.051 really that much different? So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.</p>
+<p>Therefore, when writing conclusions, it is recommended to also provide the p-value or the value of the test statistic, instead of just reporting that the “null hypothesis is rejected” or “the null hypothesis is not rejected”. Readers than then make an assessment of how strong the evidence is against the null hypothesis, based on their judgement of what the value of the significance level should be.</p>
+
 </div>
 </div>
 </div>
@@ -281,6 +434,16 @@ Figure 14.4: Finding P-value, For Freshman 15 Example
 <li><a class="nav-link" href="#null-and-alternative-hypotheses"><span class="header-section-number">14.2.1</span> Null and Alternative Hypotheses</a></li>
 <li><a class="nav-link" href="#test-statistic"><span class="header-section-number">14.2.2</span> Test Statistic</a></li>
 <li><a class="nav-link" href="#decision"><span class="header-section-number">14.2.3</span> Making a Decision</a></li>
+<li><a class="nav-link" href="#writing-conclusions"><span class="header-section-number">14.2.4</span> Writing Conclusions</a></li>
+<li><a class="nav-link" href="#wafer"><span class="header-section-number">14.2.5</span> Worked Example</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#hypothesis-test-for-paired-means"><span class="header-section-number">14.3</span> Hypothesis Test for Paired Means</a></li>
+<li><a class="nav-link" href="#hypothesis-test-for-difference-in-two-independent-means"><span class="header-section-number">14.4</span> Hypothesis Test for Difference in Two Independent Means</a></li>
+<li>
+<a class="nav-link" href="#infcomments"><span class="header-section-number">14.5</span> Additional Comments on Hypothesis Test of Parameters</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#inference"><span class="header-section-number">14.5.1</span> Two-Sided Tests and Confidence Intervals</a></li>
+<li><a class="nav-link" href="#reporting-conclusions"><span class="header-section-number">14.5.2</span> Reporting Conclusions</a></li>
 </ul>
 </li>
 </ul>

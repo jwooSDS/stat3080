@@ -28,6 +28,8 @@ When testing for the mean, the parameter is the population mean. This happens wh
 
 The term "Freshman 15" is an expression which says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average. 
 
+We will conduct a hypothesis test for the mean. Some authors call this a 1-sample $t$ test for the mean, since it involves only 1 sample (college students) and is based on the $t$ distribution. 
+
 Next, we cover the first step in hypothesis testing: how to write the null and alternative hypothesis statements.
 
 ### Null and Alternative Hypotheses
@@ -93,6 +95,8 @@ Note: A number of hypothesis tests involving other estimators and parameters are
 \end{equation}
 
 Notice how equation \@ref(eq:9-tstatGen) is a generalization of equation \@ref(eq:9-teststatMean).
+
+Note: A variation of this test is the 1-sample $z$-test for the mean. This assumes the population standard deviation is known, but that is unlikely in reality. The sample standard deviation in equation \@ref(eq:9-teststatMean) is replaced by the population standard deviation and the test statistic becomes a $Z$ statistic as it is compared with a standard normal distribution. 
 
 We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight gain is 14 pounds, with standard deviation of 3 pounds. Derive the value of the $t$ statistic.
 
@@ -292,61 +296,42 @@ After making a decision, we write a conclusion in the context of our research qu
 
 We look at one more example to show how a hypothesis test is done from start to finish.
 
-### Worked Example {#wafer}
+### Worked Example
 
-The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. As part of an assessment if the silicon wafers are meeting the target thickness, a sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level. 
+A university bookstore claims that, on average, a student will pay $ 101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed.
 
-The variable we are investigating is the thickness for silicon wafers, which is quantitative, so we performing a hypothesis test for the mean. 
-
-The null and alternative hypotheses are $H_0: \mu = 245, H_a: \mu \neq 245$.
-
-We do not know the distribution of the thickness for silicon wafers. But we have a sample of 50, which is usually large enough so the CLT applies, and the relevant distributions for the test statistic apply.
-
-The $t$ statistic is
-
-$$
-\begin{split}
-\hat{t} &= \frac{245.88 - 245}{\frac{3.6}{\sqrt{50}}} \\
-        &= 1.728483.
-\end{split}
-$$
-Since this is a two-sided test, the p-value can derived by finding the following area under the PDF of a $t_{49}$ distribution, as shown in Figure \@ref(fig:9-pvalworked) below.
-
-```{r 9-pvalworked, fig.cap="Finding P-value, For Silicon Wafer Example", echo=FALSE}
-curve(dnorm, from = -4, to = 4, main = "PDF for t Dist", ylab="Density", xlab="")
-
-colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
-    y_seq <- seq(from, to, length.out=500)
-    d <- c(0, density(y_seq, ...), 0)
-    polygon(c(from, y_seq, to), d, col=col, density=dens)
-}
-
-colorArea(from=-4, to= -1.728483, dnorm)
-colorArea(from=1.728483, to=4, dnorm)
-```
-
-Using R, we can find the p-value by typing:
+We have one quantitative variable, the amount of money students will pay per class for textbooks. A t-test for a mean is appropriate since textbook prices are normally distributed. 
 
 ```{r}
-pt(-1.728483, 49)*2 
-##supply test stat, then DF.
-##multiply by 2 since pt only gives area to left of -1.728483, 
-##but we also want area to right of 1.728483. 
+## Record sample data collected
+news.samp <- c(140, 125, 150, 87, 170, 195, 94, 127, 53)
+
+## Conduct hypothesis test
+t.test(news.samp, mu=101.75, alternative="greater")
+
+text.test <- t.test(news.samp, mu=101.75, alternative="greater")
+text.test$statistic ##t stat
+text.test$parameter ##degrees of freedom
+text.test$p.value ##p-value
+text.test$estimate ##value of estimator (sample mean here)
 ```
 
-Alternatively, we can work out the critical value by typing:
+- $H_0: \mu = 101.75, H_a: \mu > 101.75$.
+- The test statistic is $t = $ `r text.test$statistic`.
+- The p-value is `r text.test$p.value`.
 
-```{r}
-alpha<-0.05
-qt(1-alpha/2, 49)
-```
-Since our p-value is 0.09, which is greater than the significance level of 0.05, (or since our test statistic is 1.728483 which is not to the right of the critical value of 2.009575 ), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.
-
-Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 245 micrometers.
+So we reject the null hypothesis. Our data support the student newspaper' claim that the claimed average by the bookstore is too low.
 
 ## Hypothesis Test for Paired Means
 
+The hypothesis test for paired means (also called the paired t-test or the hypothesis test for two dependent means) is a special case of the hypothesis test for the mean where instead of testing the mean of one population, the difference of two means is tested by using the differences in pairs of data points that are dependent. As this is a special case of the one-sample t-test, the same assumptions are required: the differences of the paired values are normally distributed, or if the number of paired values is large enough. 
+
+In order to conduct a paired t-test, the optional `t.test()` argument `paired` should be designated as `TRUE`. When conducting a paired t-test, the data are either given in two vectors (the second will be subtracted from the first position-by-position).  
+
+
 ## Hypothesis Test for Difference in Two Independent Means
+
+The hypothesis test for difference in two independent means (also called a 2-sample $t$-test) compares the average of a quantitative variable across two independent populations (created by a binary variable).
 
 ## Additional Comments on Hypothesis Test of Parameters {#infcomments}
 

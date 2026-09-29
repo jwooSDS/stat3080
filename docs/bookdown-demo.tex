@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  3.23052348  2.76485282  2.48485748  1.94655173  7.49710166  0.06225073
-##  [7]  2.80007538  1.82233298  4.45086481 -2.38290459
+##  [1] -3.406940  2.067208  1.767727  4.610803  4.854533  1.245754  2.958270
+##  [8]  1.409208  2.885025  1.309813
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -7199,6 +7199,8 @@ When testing for the mean, the parameter is the population mean. This happens wh
 
 The term ``Freshman 15'' is an expression which says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average.
 
+We will conduct a hypothesis test for the mean. Some authors call this a 1-sample \(t\) test for the mean, since it involves only 1 sample (college students) and is based on the \(t\) distribution.
+
 Next, we cover the first step in hypothesis testing: how to write the null and alternative hypothesis statements.
 
 \subsection{Null and Alternative Hypotheses}\label{null-and-alternative-hypotheses}
@@ -7247,7 +7249,7 @@ A number of textbooks take the view that the null and alternative hypotheses are
 
 After writing the null and alternative hypotheses, the next step is to compute a value that measures how far our sample data are from their expected value if the null hypothesis is true. This value is called the \textbf{test statistic}. How a test statistic is calculated is based on the sampling distribution of the estimator being used.
 
-We remind ourselves of the sampling distribution of the sample mean, \(\bar{X}_n\), from Section \ref{sampdistmean}. There are a couple of conditions to consider:
+We remind ourselves of the sampling distribution of the sample mean, \(\bar{X}_n\), from Section \ref{distsampmean}. There are a couple of conditions to consider:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -7278,6 +7280,8 @@ Note: A number of hypothesis tests involving other estimators and parameters are
 \end{equation}
 
 Notice how equation \eqref{eq:9-tstatGen} is a generalization of equation \eqref{eq:9-teststatMean}.
+
+Note: A variation of this test is the 1-sample \(z\)-test for the mean. This assumes the population standard deviation is known, but that is unlikely in reality. The sample standard deviation in equation \eqref{eq:9-teststatMean} is replaced by the population standard deviation and the test statistic becomes a \(Z\) statistic as it is compared with a standard normal distribution.
 
 We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight gain is 14 pounds, with standard deviation of 3 pounds. Derive the value of the \(t\) statistic.
 
@@ -7533,72 +7537,101 @@ After making a decision, we write a conclusion in the context of our research qu
 
 We look at one more example to show how a hypothesis test is done from start to finish.
 
-\subsection{Worked Example}\label{wafer}
+\subsection{Worked Example}\label{worked-example-3}
 
-The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. As part of an assessment if the silicon wafers are meeting the target thickness, a sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.
+A university bookstore claims that, on average, a student will pay \$ 101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed.
 
-The variable we are investigating is the thickness for silicon wafers, which is quantitative, so we performing a hypothesis test for the mean.
-
-The null and alternative hypotheses are \(H_0: \mu = 245, H_a: \mu \neq 245\).
-
-We do not know the distribution of the thickness for silicon wafers. But we have a sample of 50, which is usually large enough so the CLT applies, and the relevant distributions for the test statistic apply.
-
-The \(t\) statistic is
-
-\[
-\begin{split}
-\hat{t} &= \frac{245.88 - 245}{\frac{3.6}{\sqrt{50}}} \\
-        &= 1.728483.
-\end{split}
-\]
-Since this is a two-sided test, the p-value can derived by finding the following area under the PDF of a \(t_{49}\) distribution, as shown in Figure \ref{fig:9-pvalworked} below.
-
-\begin{figure}
-\centering
-\includegraphics{bookdown-demo_files/figure-latex/9-pvalworked-1.pdf}
-\caption{\label{fig:9-pvalworked}Finding P-value, For Silicon Wafer Example}
-\end{figure}
-
-Using R, we can find the p-value by typing:
+We have one quantitative variable, the amount of money students will pay per class for textbooks. A t-test for a mean is appropriate since textbook prices are normally distributed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{pt}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.728483}\NormalTok{, }\DecValTok{49}\NormalTok{)}\SpecialCharTok{*}\DecValTok{2} 
+\DocumentationTok{\#\# Record sample data collected}
+\NormalTok{news.samp }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{140}\NormalTok{, }\DecValTok{125}\NormalTok{, }\DecValTok{150}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{170}\NormalTok{, }\DecValTok{195}\NormalTok{, }\DecValTok{94}\NormalTok{, }\DecValTok{127}\NormalTok{, }\DecValTok{53}\NormalTok{)}
+
+\DocumentationTok{\#\# Conduct hypothesis test}
+\FunctionTok{t.test}\NormalTok{(news.samp, }\AttributeTok{mu=}\FloatTok{101.75}\NormalTok{, }\AttributeTok{alternative=}\StringTok{"greater"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.09019905
+## 
+##  One Sample t-test
+## 
+## data:  news.samp
+## t = 1.7147, df = 8, p-value = 0.06237
+## alternative hypothesis: true mean is greater than 101.75
+## 95 percent confidence interval:
+##  99.63542      Inf
+## sample estimates:
+## mean of x 
+##  126.7778
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\#supply test stat, then DF.}
-\DocumentationTok{\#\#multiply by 2 since pt only gives area to left of {-}1.728483, }
-\DocumentationTok{\#\#but we also want area to right of 1.728483. }
-\end{Highlighting}
-\end{Shaded}
-
-Alternatively, we can work out the critical value by typing:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
-\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{49}\NormalTok{)}
+\NormalTok{text.test }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(news.samp, }\AttributeTok{mu=}\FloatTok{101.75}\NormalTok{, }\AttributeTok{alternative=}\StringTok{"greater"}\NormalTok{)}
+\NormalTok{text.test}\SpecialCharTok{$}\NormalTok{statistic }\DocumentationTok{\#\#t stat}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2.009575
+##        t 
+## 1.714676
 \end{verbatim}
 
-Since our p-value is 0.09, which is greater than the significance level of 0.05, (or since our test statistic is 1.728483 which is not to the right of the critical value of 2.009575 ), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{text.test}\SpecialCharTok{$}\NormalTok{parameter }\DocumentationTok{\#\#degrees of freedom}
+\end{Highlighting}
+\end{Shaded}
 
-Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 245 micrometers.
+\begin{verbatim}
+## df 
+##  8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{text.test}\SpecialCharTok{$}\NormalTok{p.value }\DocumentationTok{\#\#p{-}value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.06237429
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{text.test}\SpecialCharTok{$}\NormalTok{estimate }\DocumentationTok{\#\#value of estimator (sample mean here)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## mean of x 
+##  126.7778
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \(H_0: \mu = 101.75, H_a: \mu > 101.75\).
+\item
+  The test statistic is \$t = \$ 1.7146763.
+\item
+  The p-value is 0.0623743.
+\end{itemize}
+
+So we reject the null hypothesis. Our data support the student newspaper' claim that the claimed average by the bookstore is too low.
 
 \section{Hypothesis Test for Paired Means}\label{hypothesis-test-for-paired-means}
 
+The hypothesis test for paired means (also called the paired t-test or the hypothesis test for two dependent means) is a special case of the hypothesis test for the mean where instead of testing the mean of one population, the difference of two means is tested by using the differences in pairs of data points that are dependent. As this is a special case of the one-sample t-test, the same assumptions are required: the differences of the paired values are normally distributed, or if the number of paired values is large enough.
+
+In order to conduct a paired t-test, the optional \texttt{t.test()} argument \texttt{paired} should be designated as \texttt{TRUE}. When conducting a paired t-test, the data are either given in two vectors (the second will be subtracted from the first position-by-position).
+
 \section{Hypothesis Test for Difference in Two Independent Means}\label{hypothesis-test-for-difference-in-two-independent-means}
+
+The hypothesis test for difference in two independent means (also called a 2-sample \(t\)-test) compares the average of a quantitative variable across two independent populations (created by a binary variable).
 
 \section{Additional Comments on Hypothesis Test of Parameters}\label{infcomments}
 

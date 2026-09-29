@@ -73,7 +73,6 @@ fig:9-pvaleg
 fig:9-critneq
 fig:9-critgreater
 fig:9-critless
-fig:9-pvalworked
 Rbasics
 overview-of-r
 rstudio-interface
@@ -286,7 +285,7 @@ decision
 p-value
 critical-value-1
 writing-conclusions
-wafer
+worked-example-3
 hypothesis-test-for-paired-means
 hypothesis-test-for-difference-in-two-independent-means
 infcomments

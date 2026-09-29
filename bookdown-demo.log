@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  29 SEP 2026 14:05
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  29 SEP 2026 14:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,9 +874,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 [16]
 
 [17]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1]  3.23052348  2.76485282  2.48485748  1.94655173  7.49
-710166  0.06225073[] 
+Overfull \hbox (59.25pt too wide) in paragraph at lines 678--678
+[]\TU/lmtt/m/n/10 ##  [1] -3.406940  2.067208  1.767727  4.610803  4.854533  1.
+245754  2.958270[] 
  []
 
 
@@ -3023,34 +3023,31 @@ Chapter 14.
 [175
 
 ]
+Underfull \vbox (badness 1565) has occurred while \output is active []
+
+
 
 [176]
 
 [177]
 
-LaTeX Warning: Reference `sampdistmean' on page 178 undefined on input line 725
-0.
-
-
-
 [178]
 
 [179]
 
-LaTeX Warning: Reference `fig:9-pvalneq' on page 180 undefined on input line 73
-35.
-
-
-
 [180]
 
 LaTeX Warning: Reference `fig:9-pvalneq' on page 181 undefined on input line 73
-41.
+39.
+
+
+LaTeX Warning: Reference `fig:9-pvalneq' on page 181 undefined on input line 73
+45.
 
 File: bookdown-demo_files/figure-latex/9-pvalneq-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/9-pvalneq-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 7344--7346
+Underfull \hbox (badness 10000) in paragraph at lines 7348--7350
 [][]
  []
 
@@ -3060,22 +3057,23 @@ df)
 File: bookdown-demo_files/figure-latex/9-pvalless-1.pdf Graphic file (type pdf)
 
 <use bookdown-demo_files/figure-latex/9-pvalless-1.pdf>
-File: bookdown-demo_files/figure-latex/9-pvaleg-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/9-pvaleg-1.pdf>
 
 
 [181]
 
 [182]
+File: bookdown-demo_files/figure-latex/9-pvaleg-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/9-pvaleg-1.pdf>
+
 
 [183]
 File: images/09-crit_2sided.jpeg Graphic file (type bmp)
 <images/09-crit_2sided.jpeg>
-File: images/09-crit_greater.jpeg Graphic file (type bmp)
-<images/09-crit_greater.jpeg>
 
 
 [184]
+File: images/09-crit_greater.jpeg Graphic file (type bmp)
+<images/09-crit_greater.jpeg>
 File: images/09-crit_less.jpeg Graphic file (type bmp)
 <images/09-crit_less.jpeg>
 
@@ -3083,14 +3081,24 @@ File: images/09-crit_less.jpeg Graphic file (type bmp)
 [185]
 
 [186]
+Overfull \vbox (0.18289pt too high) detected at line 7554
+ []
+
+
 
 [187]
-File: bookdown-demo_files/figure-latex/9-pvalworked-1.pdf Graphic file (type pd
-f)
-<use bookdown-demo_files/figure-latex/9-pvalworked-1.pdf>
-
 
 [188]
+
+LaTeX Warning: Reference `wafer' on page 189 undefined on input line 7651.
+
+
+
+
+Overfull \hbox (41.75235pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 14.4.  HYPOTHESIS TEST FOR DIFFERENCE IN TWO INDEPENDENT MEANS 
+\TU/lmr/m/n/10 189
+ []
 
 [189] (bookdown-demo.bbl
 
@@ -3108,10 +3116,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20293 strings out of 409029
- 376608 string characters out of 5763847
+ 20283 strings out of 409029
+ 376104 string characters out of 5763847
  1949612 words of memory out of 5000000
- 42662 multiletter control sequences out of 15000+600000
+ 42653 multiletter control sequences out of 15000+600000
  564592 words of font info for 98 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,17n,123p,1012b,553s stack positions out of 10000i,1000n,20000p,200000b,200000s

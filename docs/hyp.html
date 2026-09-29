@@ -118,6 +118,7 @@
 </h2>
 <p>When testing for the mean, the parameter is the population mean. This happens when the variable we are measuring is quantitative. Consider this example:</p>
 <p>The term “Freshman 15” is an expression which says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average.</p>
+<p>We will conduct a hypothesis test for the mean. Some authors call this a 1-sample <span class="math inline">\(t\)</span> test for the mean, since it involves only 1 sample (college students) and is based on the <span class="math inline">\(t\)</span> distribution.</p>
 <p>Next, we cover the first step in hypothesis testing: how to write the null and alternative hypothesis statements.</p>
 <div id="null-and-alternative-hypotheses" class="section level3" number="14.2.1">
 <h3>
@@ -160,7 +161,7 @@
 <span class="header-section-number">14.2.2</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic"><i class="fas fa-link"></i></a>
 </h3>
 <p>After writing the null and alternative hypotheses, the next step is to compute a value that measures how far our sample data are from their expected value if the null hypothesis is true. This value is called the <strong>test statistic</strong>. How a test statistic is calculated is based on the sampling distribution of the estimator being used.</p>
-<p>We remind ourselves of the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>, from Section <a href="#sampdistmean"><strong>??</strong></a>. There are a couple of conditions to consider:</p>
+<p>We remind ourselves of the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>, from Section <a href="clt.html#distsampmean">11.3</a>. There are a couple of conditions to consider:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from a normal distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. Then <span class="math inline">\(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\)</span>.</p></li>
 <li><p><span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from any distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, and if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\bar{X}_n\)</span> is approximately <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>.</p></li>
@@ -179,6 +180,7 @@
 \tag{14.2}
 \end{equation}\]</span></p>
 <p>Notice how equation <a href="hyp.html#eq:9-tstatGen">(14.2)</a> is a generalization of equation <a href="hyp.html#eq:9-teststatMean">(14.1)</a>.</p>
+<p>Note: A variation of this test is the 1-sample <span class="math inline">\(z\)</span>-test for the mean. This assumes the population standard deviation is known, but that is unlikely in reality. The sample standard deviation in equation <a href="hyp.html#eq:9-teststatMean">(14.1)</a> is replaced by the population standard deviation and the test statistic becomes a <span class="math inline">\(Z\)</span> statistic as it is compared with a standard normal distribution.</p>
 <p>We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight gain is 14 pounds, with standard deviation of 3 pounds. Derive the value of the <span class="math inline">\(t\)</span> statistic.</p>
 <p>Using equation <a href="hyp.html#eq:9-teststatMean">(14.1)</a>, the <span class="math inline">\(t\)</span> statistic is:</p>
 <p><span class="math display">\[
@@ -344,54 +346,66 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <p>After making a decision, we write a conclusion in the context of our research question. Using the Freshman 15 example, we rejected the null hypothesis. So our conclusion is our data support the claim that the average weight gain among first-year college students is less than 15 pounds.</p>
 <p>We look at one more example to show how a hypothesis test is done from start to finish.</p>
 </div>
-<div id="wafer" class="section level3" number="14.2.5">
+<div id="worked-example-3" class="section level3" number="14.2.5">
 <h3>
-<span class="header-section-number">14.2.5</span> Worked Example<a class="anchor" aria-label="anchor" href="#wafer"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.5</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-3"><i class="fas fa-link"></i></a>
 </h3>
-<p>The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. As part of an assessment if the silicon wafers are meeting the target thickness, a sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.</p>
-<p>The variable we are investigating is the thickness for silicon wafers, which is quantitative, so we performing a hypothesis test for the mean.</p>
-<p>The null and alternative hypotheses are <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span>.</p>
-<p>We do not know the distribution of the thickness for silicon wafers. But we have a sample of 50, which is usually large enough so the CLT applies, and the relevant distributions for the test statistic apply.</p>
-<p>The <span class="math inline">\(t\)</span> statistic is</p>
-<p><span class="math display">\[
-\begin{split}
-\hat{t} &amp;= \frac{245.88 - 245}{\frac{3.6}{\sqrt{50}}} \\
-        &amp;= 1.728483.
-\end{split}
-\]</span>
-Since this is a two-sided test, the p-value can derived by finding the following area under the PDF of a <span class="math inline">\(t_{49}\)</span> distribution, as shown in Figure <a href="hyp.html#fig:9-pvalworked">14.8</a> below.</p>
-<div class="figure">
-<span style="display:block;" id="fig:9-pvalworked"></span>
-<img src="bookdown-demo_files/figure-html/9-pvalworked-1.png" alt="Finding P-value, For Silicon Wafer Example" width="672"><p class="caption">
-Figure 14.8: Finding P-value, For Silicon Wafer Example
-</p>
-</div>
-<p>Using R, we can find the p-value by typing:</p>
+<p>A university bookstore claims that, on average, a student will pay $ 101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed.</p>
+<p>We have one quantitative variable, the amount of money students will pay per class for textbooks. A t-test for a mean is appropriate since textbook prices are normally distributed.</p>
 <div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.728483</span>, <span class="fl">49</span><span class="op">)</span><span class="op">*</span><span class="fl">2</span> </span></code></pre></div>
-<pre><code>## [1] 0.09019905</code></pre>
+<code class="sourceCode R"><span><span class="co">## Record sample data collected</span></span>
+<span><span class="va">news.samp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">140</span>, <span class="fl">125</span>, <span class="fl">150</span>, <span class="fl">87</span>, <span class="fl">170</span>, <span class="fl">195</span>, <span class="fl">94</span>, <span class="fl">127</span>, <span class="fl">53</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Conduct hypothesis test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">news.samp</span>, mu<span class="op">=</span><span class="fl">101.75</span>, alternative<span class="op">=</span><span class="st">"greater"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  news.samp
+## t = 1.7147, df = 8, p-value = 0.06237
+## alternative hypothesis: true mean is greater than 101.75
+## 95 percent confidence interval:
+##  99.63542      Inf
+## sample estimates:
+## mean of x 
+##  126.7778</code></pre>
 <div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">##supply test stat, then DF.</span></span>
-<span><span class="co">##multiply by 2 since pt only gives area to left of -1.728483, </span></span>
-<span><span class="co">##but we also want area to right of 1.728483. </span></span></code></pre></div>
-<p>Alternatively, we can work out the critical value by typing:</p>
-<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">49</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 2.009575</code></pre>
-<p>Since our p-value is 0.09, which is greater than the significance level of 0.05, (or since our test statistic is 1.728483 which is not to the right of the critical value of 2.009575 ), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.</p>
-<p>Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 245 micrometers.</p>
+<code class="sourceCode R"><span><span class="va">text.test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">news.samp</span>, mu<span class="op">=</span><span class="fl">101.75</span>, alternative<span class="op">=</span><span class="st">"greater"</span><span class="op">)</span></span>
+<span><span class="va">text.test</span><span class="op">$</span><span class="va">statistic</span> <span class="co">##t stat</span></span></code></pre></div>
+<pre><code>##        t 
+## 1.714676</code></pre>
+<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">text.test</span><span class="op">$</span><span class="va">parameter</span> <span class="co">##degrees of freedom</span></span></code></pre></div>
+<pre><code>## df 
+##  8</code></pre>
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">text.test</span><span class="op">$</span><span class="va">p.value</span> <span class="co">##p-value</span></span></code></pre></div>
+<pre><code>## [1] 0.06237429</code></pre>
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">text.test</span><span class="op">$</span><span class="va">estimate</span> <span class="co">##value of estimator (sample mean here)</span></span></code></pre></div>
+<pre><code>## mean of x 
+##  126.7778</code></pre>
+<ul>
+<li>
+<span class="math inline">\(H_0: \mu = 101.75, H_a: \mu &gt; 101.75\)</span>.</li>
+<li>The test statistic is $t = $ 1.7146763.</li>
+<li>The p-value is 0.0623743.</li>
+</ul>
+<p>So we reject the null hypothesis. Our data support the student newspaper’ claim that the claimed average by the bookstore is too low.</p>
 </div>
 </div>
 <div id="hypothesis-test-for-paired-means" class="section level2" number="14.3">
 <h2>
 <span class="header-section-number">14.3</span> Hypothesis Test for Paired Means<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-paired-means"><i class="fas fa-link"></i></a>
 </h2>
+<p>The hypothesis test for paired means (also called the paired t-test or the hypothesis test for two dependent means) is a special case of the hypothesis test for the mean where instead of testing the mean of one population, the difference of two means is tested by using the differences in pairs of data points that are dependent. As this is a special case of the one-sample t-test, the same assumptions are required: the differences of the paired values are normally distributed, or if the number of paired values is large enough.</p>
+<p>In order to conduct a paired t-test, the optional <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> argument <code>paired</code> should be designated as <code>TRUE</code>. When conducting a paired t-test, the data are either given in two vectors (the second will be subtracted from the first position-by-position).</p>
 </div>
 <div id="hypothesis-test-for-difference-in-two-independent-means" class="section level2" number="14.4">
 <h2>
 <span class="header-section-number">14.4</span> Hypothesis Test for Difference in Two Independent Means<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-difference-in-two-independent-means"><i class="fas fa-link"></i></a>
 </h2>
+<p>The hypothesis test for difference in two independent means (also called a 2-sample <span class="math inline">\(t\)</span>-test) compares the average of a quantitative variable across two independent populations (created by a binary variable).</p>
 </div>
 <div id="infcomments" class="section level2" number="14.5">
 <h2>
@@ -407,7 +421,7 @@ Figure 14.8: Finding P-value, For Silicon Wafer Example
 <li><p>If the null hypothesis is <strong>rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>outside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
 <li><p>If the null hypothesis is <strong>not rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>inside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
 </ul>
-<p>We go back to the thickness of silicon wafers worked example in Section <a href="hyp.html#wafer">14.2.5</a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span> and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis.</p>
+<p>We go back to the thickness of silicon wafers worked example in Section <a href="#wafer"><strong>??</strong></a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span> and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis.</p>
 <p><strong>Thought question</strong>: Show that the 95% confidence interval for the mean thickness of silicon wafers in the worked example is (244.8569, 246.9031) which contains the value of 245.</p>
 </div>
 <div id="reporting-conclusions" class="section level3" number="14.5.2">
@@ -435,7 +449,7 @@ Figure 14.8: Finding P-value, For Silicon Wafer Example
 <li><a class="nav-link" href="#test-statistic"><span class="header-section-number">14.2.2</span> Test Statistic</a></li>
 <li><a class="nav-link" href="#decision"><span class="header-section-number">14.2.3</span> Making a Decision</a></li>
 <li><a class="nav-link" href="#writing-conclusions"><span class="header-section-number">14.2.4</span> Writing Conclusions</a></li>
-<li><a class="nav-link" href="#wafer"><span class="header-section-number">14.2.5</span> Worked Example</a></li>
+<li><a class="nav-link" href="#worked-example-3"><span class="header-section-number">14.2.5</span> Worked Example</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#hypothesis-test-for-paired-means"><span class="header-section-number">14.3</span> Hypothesis Test for Paired Means</a></li>

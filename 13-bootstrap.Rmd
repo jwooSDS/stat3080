@@ -9,7 +9,7 @@ In Section \@ref(CI), we learned about confidence intervals for
 - the difference in two independent means, and
 - the difference in two independent proportions.
 
-These intervals are based on their known sampling distributions, which usually require some conditions to be met. Confidence intervals for any other parameter that are based on known sampling distributions work similarly. Wwe work out the confidence interval of an estimator by using the framework in equation \@ref(eq:8-CIbasic2): we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.
+These intervals are based on their known sampling distributions, which usually require some conditions to be met. Confidence intervals for any other parameter that are based on known sampling distributions work similarly. We work out the confidence interval of an estimator by using the framework in equation \@ref(eq:8-CIbasic2): we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.
 
 This naturally leads to a question: what if the conditions for these sampling distributions are not met, or if the estimator we are working on has no known sampling distribution? In this section, we will learn about the bootstrap, which is used when the sampling distribution of an estimator is unknown. 
 
@@ -52,9 +52,10 @@ Instead of simulating $K$ replicate datasets from an assumed distribution, we si
 Let $\mathcal{X}$ denote the original dataset with $n$ observations. Let $\hat{\theta}$ denote the value of the estimator from the original dataset. 
 
 1. Synthesize $K$ bootstrapped datasets $\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}$ where each bootstrapped dataset is derived by sampling $n$ data points from the original dataset, with replacement. 
+
 2. For each dataset, calculate the value of the estimator $\hat{\Theta}$. Since we have $K$ bootstrapped datasets, we will have $K$ values for the estimators, denoted by $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$.
 
-3. We estimate the true mean of $\hat{\Theta}$ by taking the sample mean of $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$. This value is denoted by $M_b(\hat{\Theta})$.
+3. We estimate the expected value of $\hat{\Theta}$ by taking the sample mean of $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$. This value is denoted by $M_b(\hat{\Theta})$.
 
 4. We estimate the true variance of $\hat{\Theta}$ by taking the sample variance of $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$. This value is denoted by $V_b(\hat{\Theta})$, which we call the bootstrap variance of the estimator. Square-rooting $V_b(\hat{\Theta})$ gives an estimate for the standard error of $\hat{\Theta}$, denoted by $SE_b(\Theta)$. If $K$ is large enough, $V_b(\hat{\Theta})$ will approximate the true variance of the estimator.
 
@@ -68,7 +69,7 @@ Comparing this algorithm with Monte Carlo simulations, the main differences are:
 
 The math that proves the bootstrap works is beyond the level of this class, although it is freely available online. 
 
-The bootstrap variance of an estimator, $V_b(\hat{\Theta})$, tends to work better as the number of bootstrap datasets ,$K$, increases and as the sample size, $n$, increases.
+The bootstrap tends to work better as the number of bootstrap datasets ,$K$, increases and as the sample size, $n$, increases.
 
 ### Confidence Intervals using the Bootstrap
 
@@ -79,7 +80,7 @@ The **basic** (or reverse percentile ) bootstrap $(1-\alpha) \times 100\%$ confi
 (\#eq:8-CIboot)
 \end{equation}
 
-where $\delta^* = (\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta})$, which is the difference between the estimator in the $K$ bootstrap samples and the true value of the estimator, so $\hat{\delta}_{\beta}^*$ is the $\beta \times 100$th percentile of $\delta^*$.
+where $\delta^* = (\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - \hat{\theta}$, which is the difference between the estimator in the $K$ bootstrap samples and the value of the estimator in the original dataset, so $\hat{\delta}_{\beta}^*$ is the $\beta \times 100$th percentile of $\delta^*$.
 
 You may notice that the confidence interval in equation \@ref(eq:8-CIboot) does not fit the general framework given in equation \@ref(eq:8-CIbasic2). This is because the sampling distribution of the estimator may not be symmetric.
 
@@ -141,6 +142,19 @@ We report the following:
 - The sample median is \$4622.5.
 - The standard error of the sample median is \$152.0525.
 - The 95% confidence interval for the median credit limit is (4380.000, 4949.5). There is 95% probability that the true population median credit limit lies in the random interval between \$4380 and \$4949.50.
+
+## Parametric Vs Non-Parametric Methods
+
+The confidence intervals from Section \@ref(CIs) are based on the known sampling distributions of estimators, and have a closed form formula to calculate them. These confidence intervals are typically based on some conditions in order to be valid. 
+
+Such methods are sometimes called **parametric methods**, as the distributions they are based on fits a known probability distribution which can be specified by an equation via its PDF, $f_X$.
+
+The bootstrap, on the other hand, does not assume a known probability distribution. Therefore, the bootstrap is considered a **non-parametric method**, as the associated probability distribution is unknown and not associated with an equation like a PDF. Non-parametric methods tend to be more versatile, in the sense that they are based on less assumptions or conditions, and so can be applied in a wider variety of settings. 
+
+The only assumptions / conditions associated with the bootstrap are:
+
+- The sample has to be representative of the population (similar to parametric methods).
+- The underlying population does not have very heavy tails.
 
 
 

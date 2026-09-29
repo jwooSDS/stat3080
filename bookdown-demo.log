@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  28 SEP 2026 15:17
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  29 SEP 2026 13:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -875,8 +875,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [17]
 Overfull \hbox (38.25pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1] -2.4188598  0.6221466  3.1629181 -1.5846562 -1.698162
-5 -3.7601982[] 
+[]\TU/lmtt/m/n/10 ##  [1]  1.7616913 -2.3481465 -3.1691085 -3.2634780  0.964720
+0 -2.6365727[] 
  []
 
 
@@ -2998,12 +2998,6 @@ e each boot-
  []
 
 
-Underfull \hbox (badness 1194) in paragraph at lines 7016--7018
-[]\TU/lmr/m/n/10 We estimate the true mean of $[]$ by taking the sample mean of
-
- []
-
-
 
 [171]
 File: bookdown-demo_files/figure-latex/8-credit-1.pdf Graphic file (type pdf)
@@ -3016,13 +3010,71 @@ Underfull \vbox (badness 10000) detected at line 7126
 
 
 
-[173] (bookdown-demo.bbl
+[173]
 
-[174])
+LaTeX Warning: Reference `CIs' on page 174 undefined on input line 7146.
+
+
+
+[174]
+Chapter 14.
+
 
 [175
 
-] (bookdown-demo.aux)
+]
+
+[176]
+
+[177]
+
+LaTeX Warning: Reference `sampdistmean' on page 178 undefined on input line 725
+0.
+
+
+
+[178]
+
+[179]
+
+LaTeX Warning: Reference `fig:9-pvalneq' on page 180 undefined on input line 73
+35.
+
+
+
+[180]
+
+LaTeX Warning: Reference `fig:9-pvalneq' on page 181 undefined on input line 73
+41.
+
+File: bookdown-demo_files/figure-latex/9-pvalneq-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/9-pvalneq-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 7344--7346
+[][]
+ []
+
+File: bookdown-demo_files/figure-latex/9-pvalgreater-1.pdf Graphic file (type p
+df)
+<use bookdown-demo_files/figure-latex/9-pvalgreater-1.pdf>
+File: bookdown-demo_files/figure-latex/9-pvalless-1.pdf Graphic file (type pdf)
+
+<use bookdown-demo_files/figure-latex/9-pvalless-1.pdf>
+File: bookdown-demo_files/figure-latex/9-pvaleg-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/9-pvaleg-1.pdf>
+
+
+[181]
+
+[182] (bookdown-demo.bbl
+
+[183]
+
+[184
+
+])
+
+[185] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -3032,12 +3084,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20182 strings out of 409029
- 372746 string characters out of 5763847
+ 20241 strings out of 409029
+ 375036 string characters out of 5763847
  1949612 words of memory out of 5000000
- 42560 multiletter control sequences out of 15000+600000
+ 42615 multiletter control sequences out of 15000+600000
  564592 words of font info for 98 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,17n,123p,1012b,553s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (175 pages).
+Output written on bookdown-demo.pdf (185 pages).

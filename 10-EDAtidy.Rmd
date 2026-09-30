@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This sections covers two slightly different topics, but they will be helpful in your project. 
+This section covers two slightly different topics, but they will be helpful in your project. 
 
 1. Exploratory data analysis (EDA) is used by statisticians and data scientists to investigate data sets and summarize their main characteristics, often using data visualizations. A lot of the tools you saw in Sections \@ref(ggplot) and \@ref(dplyr) will be useful. You will learn more about the way to use these skills to perform EDA. This subsection is heavily based on [R for Data Science](https://r4ds.hadley.nz/) [@wickham2023], Chapter 10.
 
@@ -31,7 +31,7 @@ Note that modeling is rarely done during EDA. We are just creating visualization
 
 ### Variation Within Variables
 
-**Variance** measures the spread associated with a quantitative variable. The a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section \@ref(quant1), such as density plots, boxplots, and histograms. 
+**Variance** measures the spread associated with a quantitative variable. If a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section \@ref(quant1), such as density plots, boxplots, and histograms. 
 
 We take a look at the `diamonds` data set from the `tidyverse` package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore that weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.
 
@@ -73,11 +73,11 @@ ggplot(smaller, aes(x = carat)) +
   )
 ```
 
-Notice that there are more diamonds with full or half carat sizes? According to [Hamilton Jewelers](https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size), "this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat". So this observation is as expected.  
+Notice that there are more diamonds with full or half carat sizes. According to [Hamilton Jewelers](https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size), "this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat". So this observation is as expected.  
 
 #### Unusual values
 
-Use the visualizations created during EDA to help spot unusual values. Sometimes these are data entry errors, sometimes they are correct values that can happen, and sometimes there is something interesting about these values that warrant further investigation. 
+We can use visualizations created during EDA to help spot unusual values. Sometimes these are data entry errors, sometimes they are correct values that can happen, and sometimes there is something interesting about these values that warrant further investigation. 
 
 We take a look at the `y` variable in the diamonds data set, which measures the width of the diamonds in mm. 
 
@@ -114,7 +114,7 @@ or use the `summary()` function to check the minimum value of the widths.
 summary(Data$y)
 ```
 
-Even though we are not diamond experts, common sense tells us that no diamond can have a width of 0mm. Given that the values were entered using 2 decimal places, these are also unlikely to be values that were rounded down to 0mm. I suspect the 0s were entered to represent missing values, and so we will probably want to replace these 0s with `NA`. You should always confirm this with the entity that collected these data. 
+Even though we are not diamond experts, common sense tells us that no diamond can have a width of 0mm. Given that the values were entered using 2 decimal places, these are also unlikely to be values that were rounded down to 0mm. I suspect the 0s were entered to represent missing values, and so we will probably want to replace these 0s with `NA`. Notice their length (x) and depth (z) are also 0. You should always confirm this with the entity that collected these data. 
 
 How about the 2 wide diamonds? If they are truly that huge, we'd expect them to be expensive. We can sort the data set by width (descending order) and also look at the prices of these diamonds:
 
@@ -134,7 +134,7 @@ The price of the diamond with width 31.8mm is below the median. The price of the
 
 My recommendation will be to perform subsequent analysis with and without these two diamonds, and see how different the analysis is. If the results are similar, omit them but mention that they were omitted. If the results are different, you really need to find out what makes these values so different. 
 
-As mentioned earlier, I would replace the 0s with `NA`. Do not remove the entire row, as the row contains information on other columns. 
+As mentioned earlier, I would probably replace the 0s with `NA`. Do not remove the entire row, as the row contains information on other columns. 
 
 ### Relationship between Variables
 

@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-09-29}
+\date{2026-09-30}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -3.406940  2.067208  1.767727  4.610803  4.854533  1.245754  2.958270
-##  [8]  1.409208  2.885025  1.309813
+##  [1] -0.6473624 -2.3402354 -1.7924317  6.2283281  3.6320869 -1.6658740
+##  [7]  1.7962424 -2.1884964  2.5515587 -3.1122638
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -5329,7 +5329,7 @@ For example, the following code finds the flights that are most delayed upon arr
 
 \section{Introduction}\label{introduction-1}
 
-This sections covers two slightly different topics, but they will be helpful in your project.
+This section covers two slightly different topics, but they will be helpful in your project.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -5375,7 +5375,7 @@ Note that modeling is rarely done during EDA. We are just creating visualization
 
 \subsection{Variation Within Variables}\label{variation-within-variables}
 
-\textbf{Variance} measures the spread associated with a quantitative variable. The a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section \ref{quant1}, such as density plots, boxplots, and histograms.
+\textbf{Variance} measures the spread associated with a quantitative variable. If a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section \ref{quant1}, such as density plots, boxplots, and histograms.
 
 We take a look at the \texttt{diamonds} data set from the \texttt{tidyverse} package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore that weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.
 
@@ -5439,11 +5439,11 @@ Given that most diamonds are less than 3 carats, we can create a similar histogr
 \caption{\label{fig:ch10hist-small}Histogram with Big Diamonds Removed}
 \end{figure}
 
-Notice that there are more diamonds with full or half carat sizes? According to \href{https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size}{Hamilton Jewelers}, ``this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat''. So this observation is as expected.
+Notice that there are more diamonds with full or half carat sizes. According to \href{https://hamiltonjewelers.com/blogs/engagement/engagement-ring-what-carat-size}{Hamilton Jewelers}, ``this is done to create more precise measurements and because the price of a diamond will jump at each half and full carat''. So this observation is as expected.
 
 \subsubsection{Unusual values}\label{unusual-values}
 
-Use the visualizations created during EDA to help spot unusual values. Sometimes these are data entry errors, sometimes they are correct values that can happen, and sometimes there is something interesting about these values that warrant further investigation.
+We can use visualizations created during EDA to help spot unusual values. Sometimes these are data entry errors, sometimes they are correct values that can happen, and sometimes there is something interesting about these values that warrant further investigation.
 
 We take a look at the \texttt{y} variable in the diamonds data set, which measures the width of the diamonds in mm.
 
@@ -5521,7 +5521,7 @@ or use the \texttt{summary()} function to check the minimum value of the widths.
 ##   0.000   4.720   5.710   5.735   6.540  58.900
 \end{verbatim}
 
-Even though we are not diamond experts, common sense tells us that no diamond can have a width of 0mm. Given that the values were entered using 2 decimal places, these are also unlikely to be values that were rounded down to 0mm. I suspect the 0s were entered to represent missing values, and so we will probably want to replace these 0s with \texttt{NA}. You should always confirm this with the entity that collected these data.
+Even though we are not diamond experts, common sense tells us that no diamond can have a width of 0mm. Given that the values were entered using 2 decimal places, these are also unlikely to be values that were rounded down to 0mm. I suspect the 0s were entered to represent missing values, and so we will probably want to replace these 0s with \texttt{NA}. Notice their length (x) and depth (z) are also 0. You should always confirm this with the entity that collected these data.
 
 How about the 2 wide diamonds? If they are truly that huge, we'd expect them to be expensive. We can sort the data set by width (descending order) and also look at the prices of these diamonds:
 
@@ -5567,7 +5567,7 @@ The price of the diamond with width 31.8mm is below the median. The price of the
 
 My recommendation will be to perform subsequent analysis with and without these two diamonds, and see how different the analysis is. If the results are similar, omit them but mention that they were omitted. If the results are different, you really need to find out what makes these values so different.
 
-As mentioned earlier, I would replace the 0s with \texttt{NA}. Do not remove the entire row, as the row contains information on other columns.
+As mentioned earlier, I would probably replace the 0s with \texttt{NA}. Do not remove the entire row, as the row contains information on other columns.
 
 \subsection{Relationship between Variables}\label{relationship-between-variables}
 

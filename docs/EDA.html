@@ -126,13 +126,13 @@
 <span class="header-section-number">10.2.1</span> Variation Within Variables<a class="anchor" aria-label="anchor" href="#variation-within-variables"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Variance</strong> measures the spread associated with a quantitative variable. If a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section <a href="ggplot.html#quant1">8.6.2</a>, such as density plots, boxplots, and histograms.</p>
-<p>We take a look at the <code>diamonds</code> data set from the <code>tidyverse</code> package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore that weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.</p>
+<p>We take a look at the <code>diamonds</code> data set from the <code>tidyverse</code> package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore the weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.</p>
 <div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">Data</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/diamonds.html">diamonds</a></span></span></code></pre></div>
 <div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">carat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> <span class="co">##use binwidth that makes sense</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="st">"Carat"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Count"</span>,</span>
@@ -280,7 +280,7 @@ Figure 10.5: Prices Across Cuts are Right Skewed
 </div>
 <p>Notice in this example the categorical variable cut is ordinal, there is an order to the values. Cut reflects a measure of quality, in increasing order from fair, good, very good, premium, ideal. You have to make sure that they are ordered correctly (which they are in this data set). If they are not, please see Section <a href="ggplot.html#cat1">8.6.1</a> to see how to use the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function to order the variable.</p>
 <p>If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see in Figure <a href="EDA.html#fig:ch10dens-cut">10.5</a> that the curve for fair cuts appear to be quite different: its prices tend to be a little higher, which may be counter intuitive as fair is the lowest quality.</p>
-<p>Alternatively, we can create a side by side box plot</p>
+<p>Alternatively, we can create side by side box plots</p>
 <div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cut</span>, y <span class="op">=</span> <span class="va">price</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -498,7 +498,7 @@ Figure 10.12: Boxplots of Price Against Binned Carat
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-09-30.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

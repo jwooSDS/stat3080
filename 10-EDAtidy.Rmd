@@ -33,7 +33,7 @@ Note that modeling is rarely done during EDA. We are just creating visualization
 
 **Variance** measures the spread associated with a quantitative variable. If a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section \@ref(quant1), such as density plots, boxplots, and histograms. 
 
-We take a look at the `diamonds` data set from the `tidyverse` package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore that weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.
+We take a look at the `diamonds` data set from the `tidyverse` package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore the weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -42,7 +42,7 @@ Data <- ggplot2::diamonds
 
 ```{r ch10hist, fig.cap="Diamond Carats are Right Skewed"}
 ggplot(Data, aes(x = carat)) +
-  geom_histogram(binwidth = 0.5) +
+  geom_histogram(binwidth = 0.5) + ##use binwidth that makes sense
   labs(
     x = "Carat",
     y = "Count",
@@ -157,7 +157,7 @@ Notice in this example the categorical variable cut is ordinal, there is an orde
 
 If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see in Figure \@ref(fig:ch10dens-cut) that the curve for fair cuts appear to be quite different: its prices tend to be a little higher, which may be counter intuitive as fair is the lowest quality. 
 
-Alternatively, we can create a side by side box plot
+Alternatively, we can create side by side box plots
 
 ```{r ch10box-cut, fig.cap="Prices Across Cuts"}
 ggplot(Data, aes(x = cut, y = price)) +

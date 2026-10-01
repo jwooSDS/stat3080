@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-09-30}
+\date{2026-10-01}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.6473624 -2.3402354 -1.7924317  6.2283281  3.6320869 -1.6658740
-##  [7]  1.7962424 -2.1884964  2.5515587 -3.1122638
+##  [1]  2.9362840  1.9558604 -0.1372552  1.6647343 -1.1594913  3.1469331
+##  [7]  6.5723997  0.8109388  1.8782752  1.7686985
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -5377,7 +5377,7 @@ Note that modeling is rarely done during EDA. We are just creating visualization
 
 \textbf{Variance} measures the spread associated with a quantitative variable. If a particular variable is constant, there is no variance, as it always takes on the same value. When we have a quantitative variable, we can use tools from Section \ref{quant1}, such as density plots, boxplots, and histograms.
 
-We take a look at the \texttt{diamonds} data set from the \texttt{tidyverse} package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore that weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.
+We take a look at the \texttt{diamonds} data set from the \texttt{tidyverse} package. It contains the prices and other attributes of almost 54,000 diamonds. We wish to explore the weight of the diamonds, carat, as it is a characteristic that buyers are most familiar with.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5389,7 +5389,7 @@ We take a look at the \texttt{diamonds} data set from the \texttt{tidyverse} pac
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+} \DocumentationTok{\#\#use binwidth that makes sense}
   \FunctionTok{labs}\NormalTok{(}
     \AttributeTok{x =} \StringTok{"Carat"}\NormalTok{,}
     \AttributeTok{y =} \StringTok{"Count"}\NormalTok{,}
@@ -5598,7 +5598,7 @@ Notice in this example the categorical variable cut is ordinal, there is an orde
 
 If prices are similar across each cut, these density curves should be similar to each other for all cuts. However, we see in Figure \ref{fig:ch10dens-cut} that the curve for fair cuts appear to be quite different: its prices tend to be a little higher, which may be counter intuitive as fair is the lowest quality.
 
-Alternatively, we can create a side by side box plot
+Alternatively, we can create side by side box plots
 
 \begin{Shaded}
 \begin{Highlighting}[]

@@ -438,11 +438,11 @@ In some older references, it is suggested to approximate the degrees of freedom 
 
 **Thought Question:** How is the coverage probability of a conservative confidence interval related to its confidence level?
 
-### Pooled vs Unpooled
+### Pooled vs Unpooled {#pooled}
 
 The confidence interval for the difference in two independent means given in equation \@ref(eq:8-CI2means) is the modern default. It is sometimes called a **Welch's $t$** confidence interval, or an **unpooled version** of the confidence interval. 
 
-You may have come across another version called the **pooled version** of the confidence interval. The pooled version has an additional assumption: that the variances of the quantitative variance is equal in the two populations (i.e. $\sigma_X^2 = \sigma_Y^2$). The pooled version has fallen out of favor especially when the variances are unequal and when the sample sizes are unequal, as the coverage probabilities do not match the confidence level. 
+You may have come across another version called the **pooled version** of the confidence interval. The pooled version has an additional assumption: that the variances of the quantitative variable is equal in the two populations (i.e. $\sigma_X^2 = \sigma_Y^2$). The pooled version has fallen out of favor especially when the variances are unequal and when the sample sizes are unequal, as the coverage probabilities do not match the confidence level. 
 
 ## Confidence Interval for Difference in Two Independent Proportions
 

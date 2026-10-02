@@ -336,7 +336,7 @@ The test statistic is
 
 where $\bar{d}_n$ denotes the sample average difference between the pairs, $s_d$ denotes the standard deviation of the differences between the pairs, $n_d$ denotes the number of pairs, and $\mu_0$ denotes the mean difference under the null hypothesis. The test statistic follows a $t_{n_d - 1}$ distribution. 
 
-**Thought question:** compare equation \@ref(9-teststatPaired) with equations \@ref(9-teststatMean) and \@ref(eq:9-tstatGen). Do you see their similarities?
+**Thought question:** compare equation \@ref(eq:9-teststatPaired) with equations \@ref(eq:9-teststatMean) and \@ref(eq:9-tstatGen). Do you see their similarities?
 
 In order to conduct a paired t-test, the optional `t.test()` argument `paired` should be designated as `TRUE`. When conducting a paired t-test, the data are given in two vectors (the second will be subtracted from the first position-by-position).  
 
@@ -380,11 +380,46 @@ other_result
 
 Notice the results are identical in both approaches. 
 
-
-
 ## Hypothesis Test for Difference in Two Independent Means
 
 The hypothesis test for difference in two independent means (also called a 2-sample $t$-test) compares the average of a quantitative variable across two independent populations (created by a binary variable).
+
+The test statistic is
+
+\begin{equation} 
+\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y}},
+(\#eq:9-teststat2Means)
+\end{equation}
+
+where $\bar{X}, \bar{Y}$ denote the sample averages in each sample, $s_X, s_Y$ denote the standard deviation in each sample, $n_X, n_Y$ denote the sample sizes in in each sample, and $\mu_X - \mu_Y$ denotes the mean difference under the null hypothesis. The test statistic follows a $t$ distribution. The degrees of freedom is approximated using the [Welch–Satterthwaite equation](https://en.wikipedia.org/wiki/Welch%27s_t-test#Calculations).
+
+In some older references, it is suggested to approximate the degrees of freedom using $min(n_X, n_Y) - 1$. The hypothesis test using this approximation is considered to be more **conservative** than the approximation based on the Welch–Satterthwaite equation. A hypothesis test that is conservative is a test why the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section \@ref(prac).
+
+Similar to what we wrote in Section \@ref(pooled), the test statistic for the difference in two independent means given in equation \@ref(eq:9-teststat2Means) is the modern default. It is sometimes called a **Welch's $t$** test, or an **unpooled version** of test.
+
+A **pooled version** of this test exists. It has an additional assumption: that the variances of the quantitative variable is equal in the two populations (i.e. $\sigma_X^2 = \sigma_Y^2$). The pooled version has fallen out of favor especially when the variances are unequal and when the sample sizes are unequal, as the type I error rates do not match the significance level. 
+
+### Worked Example {#eg2t}
+
+We want to assess if there is a significant difference in the average body masses of male and female Gentoo penguins.
+
+From the question, we have $H_0: \mu_f - \mu_m = 0, H_a: \mu_f - \mu_m \neq 0$.
+
+```{r}
+library(palmerpenguins)
+
+Data <- palmerpenguins::penguins
+
+result_2samp <- t.test(body_mass_g ~ sex, data = Data,
+       subset = species %in% c("Gentoo"))
+
+result_2samp
+```
+- The test statistic is $t = $ `r result_2samp$statistic`.
+- The p-value is `r result_2samp$p.value`. So we reject the null hypothesis. The data provide evidence that the average weights of female and male Gentoo penguins are significantly different
+- The 95% confidence interval is `r result_2samp$conf.int`. Notice how this interval does not contain the value under the null hypothesis, 0. In fact, since the entire interval is below 0, we can also say that the male Gentoo penguins are heavier, on average, than their female counterparts. The conclusion is consistent with the hypothesis test. 
+
+
 
 ## Additional Comments on Hypothesis Test of Parameters {#infcomments}
 
@@ -398,9 +433,7 @@ What this implies is that conclusions from a $(1-\alpha) \times 100\%$ confidenc
 
 - If the null hypothesis is **not rejected** for a 2-sided test, than the value of the parameter under the null hypothesis will lie **inside** the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be "ruled out".
 
-We go back to the thickness of silicon wafers worked example in Section \@ref(eg1samplet). The null and alternative hypotheses were $H_0: \mu = 245, H_a: \mu \neq 245$ and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis. 
-
-**Thought question**: Show that the 95% confidence interval for the mean thickness of silicon wafers in the worked example is (244.8569, 246.9031) which contains the value of 245.
+We noted this in the worked examples in Sections \@ref(egpairedt) and \@ref(eg2t).
 
 ### Reporting Conclusions
 
@@ -409,5 +442,3 @@ You may have noticed that we make a binary decision at the end of a hypothesis t
 While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. Are p-values of 0.049 and 0.051 really that much different? So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.
 
 Therefore, when writing conclusions, it is recommended to also provide the p-value or the value of the test statistic, instead of just reporting that the "null hypothesis is rejected" or "the null hypothesis is not rejected". Readers than then make an assessment of how strong the evidence is against the null hypothesis, based on their judgement of what the value of the significance level should be.
-
-

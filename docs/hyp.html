@@ -79,6 +79,7 @@
 <li><a class="" href="CI.html"><span class="header-section-number">12</span> Confidence Intervals</a></li>
 <li><a class="" href="boot.html"><span class="header-section-number">13</span> The Bootstrap</a></li>
 <li><a class="active" href="hyp.html"><span class="header-section-number">14</span> Hypothesis Testing (Under Construction)</a></li>
+<li><a class="" href="prac.html"><span class="header-section-number">15</span> Practical Considerations with Hypothesis Testing</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -403,7 +404,7 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 \tag{14.3}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(\bar{d}_n\)</span> denotes the sample average difference between the pairs, <span class="math inline">\(s_d\)</span> denotes the standard deviation of the differences between the pairs, <span class="math inline">\(n_d\)</span> denotes the number of pairs, and <span class="math inline">\(\mu_0\)</span> denotes the mean difference under the null hypothesis. The test statistic follows a <span class="math inline">\(t_{n_d - 1}\)</span> distribution.</p>
-<p><strong>Thought question:</strong> compare equation <a href="#9-teststatPaired"><strong>??</strong></a> with equations <a href="#9-teststatMean"><strong>??</strong></a> and <a href="hyp.html#eq:9-tstatGen">(14.2)</a>. Do you see their similarities?</p>
+<p><strong>Thought question:</strong> compare equation <a href="hyp.html#eq:9-teststatPaired">(14.3)</a> with equations <a href="hyp.html#eq:9-teststatMean">(14.1)</a> and <a href="hyp.html#eq:9-tstatGen">(14.2)</a>. Do you see their similarities?</p>
 <p>In order to conduct a paired t-test, the optional <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> argument <code>paired</code> should be designated as <code>TRUE</code>. When conducting a paired t-test, the data are given in two vectors (the second will be subtracted from the first position-by-position).</p>
 <div id="egpairedt" class="section level3" number="14.3.1">
 <h3>
@@ -470,6 +471,47 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <span class="header-section-number">14.4</span> Hypothesis Test for Difference in Two Independent Means<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-difference-in-two-independent-means"><i class="fas fa-link"></i></a>
 </h2>
 <p>The hypothesis test for difference in two independent means (also called a 2-sample <span class="math inline">\(t\)</span>-test) compares the average of a quantitative variable across two independent populations (created by a binary variable).</p>
+<p>The test statistic is</p>
+<p><span class="math display" id="eq:9-teststat2Means">\[\begin{equation}
+\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y}},
+\tag{14.4}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\bar{X}, \bar{Y}\)</span> denote the sample averages in each sample, <span class="math inline">\(s_X, s_Y\)</span> denote the standard deviation in each sample, <span class="math inline">\(n_X, n_Y\)</span> denote the sample sizes in in each sample, and <span class="math inline">\(\mu_X - \mu_Y\)</span> denotes the mean difference under the null hypothesis. The test statistic follows a <span class="math inline">\(t\)</span> distribution. The degrees of freedom is approximated using the <a href="https://en.wikipedia.org/wiki/Welch%27s_t-test#Calculations">Welch–Satterthwaite equation</a>.</p>
+<p>In some older references, it is suggested to approximate the degrees of freedom using <span class="math inline">\(min(n_X, n_Y) - 1\)</span>. The hypothesis test using this approximation is considered to be more <strong>conservative</strong> than the approximation based on the Welch–Satterthwaite equation. A hypothesis test that is conservative is a test why the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section <a href="prac.html#prac">15</a>.</p>
+<p>Similar to what we wrote in Section <a href="CI.html#pooled">12.4.1</a>, the test statistic for the difference in two independent means given in equation <a href="hyp.html#eq:9-teststat2Means">(14.4)</a> is the modern default. It is sometimes called a <strong>Welch’s <span class="math inline">\(t\)</span></strong> test, or an <strong>unpooled version</strong> of test.</p>
+<p>A <strong>pooled version</strong> of this test exists. It has an additional assumption: that the variances of the quantitative variable is equal in the two populations (i.e. <span class="math inline">\(\sigma_X^2 = \sigma_Y^2\)</span>). The pooled version has fallen out of favor especially when the variances are unequal and when the sample sizes are unequal, as the type I error rates do not match the significance level.</p>
+<div id="eg2t" class="section level3" number="14.4.1">
+<h3>
+<span class="header-section-number">14.4.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#eg2t"><i class="fas fa-link"></i></a>
+</h3>
+<p>We want to assess if there is a significant difference in the average body masses of male and female Gentoo penguins.</p>
+<p>From the question, we have <span class="math inline">\(H_0: \mu_f - \mu_m = 0, H_a: \mu_f - \mu_m \neq 0\)</span>.</p>
+<div class="sourceCode" id="cb516"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Data</span> <span class="op">&lt;-</span> <span class="fu">palmerpenguins</span><span class="fu">::</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html">penguins</a></span></span>
+<span></span>
+<span><span class="va">result_2samp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">Data</span>,</span>
+<span>       subset <span class="op">=</span> <span class="va">species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Gentoo"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">result_2samp</span></span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  body_mass_g by sex
+## t = -14.761, df = 116.64, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means between group female and group male is not equal to 0
+## 95 percent confidence interval:
+##  -913.1130 -697.0763
+## sample estimates:
+## mean in group female   mean in group male 
+##             4679.741             5484.836</code></pre>
+<ul>
+<li>The test statistic is $t = $ -14.7613684.</li>
+<li>The p-value is 1.8677597^{-28}. So we reject the null hypothesis. The data provide evidence that the average weights of female and male Gentoo penguins are significantly different</li>
+<li>The 95% confidence interval is -913.1130428, -697.0763297. Notice how this interval does not contain the value under the null hypothesis, 0. In fact, since the entire interval is below 0, we can also say that the male Gentoo penguins are heavier, on average, than their female counterparts. The conclusion is consistent with the hypothesis test.</li>
+</ul>
+</div>
 </div>
 <div id="infcomments" class="section level2" number="14.5">
 <h2>
@@ -485,8 +527,7 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <li><p>If the null hypothesis is <strong>rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>outside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
 <li><p>If the null hypothesis is <strong>not rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>inside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
 </ul>
-<p>We go back to the thickness of silicon wafers worked example in Section <a href="hyp.html#eg1samplet">14.2.5</a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span> and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis.</p>
-<p><strong>Thought question</strong>: Show that the 95% confidence interval for the mean thickness of silicon wafers in the worked example is (244.8569, 246.9031) which contains the value of 245.</p>
+<p>We noted this in the worked examples in Sections <a href="hyp.html#egpairedt">14.3.1</a> and <a href="hyp.html#eg2t">14.4.1</a>.</p>
 </div>
 <div id="reporting-conclusions" class="section level3" number="14.5.2">
 <h3>
@@ -501,7 +542,7 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="boot.html"><span class="header-section-number">13</span> The Bootstrap</a></div>
-<div class="next"><a href="references.html">References</a></div>
+<div class="next"><a href="prac.html"><span class="header-section-number">15</span> Practical Considerations with Hypothesis Testing</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -519,7 +560,9 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <li>
 <a class="nav-link" href="#hypothesis-test-for-paired-means"><span class="header-section-number">14.3</span> Hypothesis Test for Paired Means</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#egpairedt"><span class="header-section-number">14.3.1</span> Worked Example</a></li></ul>
 </li>
-<li><a class="nav-link" href="#hypothesis-test-for-difference-in-two-independent-means"><span class="header-section-number">14.4</span> Hypothesis Test for Difference in Two Independent Means</a></li>
+<li>
+<a class="nav-link" href="#hypothesis-test-for-difference-in-two-independent-means"><span class="header-section-number">14.4</span> Hypothesis Test for Difference in Two Independent Means</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#eg2t"><span class="header-section-number">14.4.1</span> Worked Example</a></li></ul>
+</li>
 <li>
 <a class="nav-link" href="#infcomments"><span class="header-section-number">14.5</span> Additional Comments on Hypothesis Test of Parameters</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#inference"><span class="header-section-number">14.5.1</span> Two-Sided Tests and Confidence Intervals</a></li>

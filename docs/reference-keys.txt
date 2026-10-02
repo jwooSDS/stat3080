@@ -74,6 +74,7 @@ fig:9-critneq
 fig:9-critgreater
 fig:9-critless
 eq:9-teststatPaired
+eq:9-teststat2Means
 Rbasics
 overview-of-r
 rstudio-interface
@@ -264,7 +265,7 @@ sampling-distribution-of-sample-proportions
 constructing-confidence-interval-for-the-proportion
 worked-example-1
 confidence-interval-for-difference-in-two-independent-means
-pooled-vs-unpooled
+pooled
 confidence-interval-for-difference-in-two-independent-proportions
 boot
 introduction-3
@@ -290,6 +291,8 @@ eg1samplet
 hypothesis-test-for-paired-means
 egpairedt
 hypothesis-test-for-difference-in-two-independent-means
+eg2t
 infcomments
 inference
 reporting-conclusions
+prac

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  2 OCT 2026 13:23
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  2 OCT 2026 14:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -907,8 +907,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [12] [13] [14] [15] [16] [17]
 Overfull \hbox (38.25pt too wide) in paragraph at lines 699--699
-[]\TU/lmtt/m/n/10 ##  [1]  4.4287509  0.1529088  3.2889948  1.4024415 -0.269818
-2 -1.6377429[] 
+[]\TU/lmtt/m/n/10 ##  [1] -0.9309305  3.5091589 -1.3307016 -0.4879353 -2.029207
+6 -2.1997551[] 
  []
 
 [18] [19] [20] [21] [22]
@@ -2762,35 +2762,48 @@ File: images/09-crit_greater.jpeg Graphic file (type bmp)
 <images/09-crit_greater.jpeg>
 File: images/09-crit_less.jpeg Graphic file (type bmp)
 <images/09-crit_less.jpeg>
-[183] [184] [185] [186]
-
-LaTeX Warning: Reference `9-teststatPaired' on page 187 undefined on input line
- 7842.
-
-
-LaTeX Warning: Reference `9-teststatMean' on page 187 undefined on input line 7
-842.
-
-[187] [188]
-Overfull \hbox (30.36343pt too wide) has occurred while \output is active
-\TU/lmr/m/sl/10 14.5.  ADDITIONAL COMMENTS ON HYPOTHESIS TEST OF PARAMETERS \TU
-/lmr/m/n/10 189
+[183] [184] [185] [186] [187] [188]
+Overfull \hbox (41.75235pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 14.4.  HYPOTHESIS TEST FOR DIFFERENCE IN TWO INDEPENDENT MEANS 
+\TU/lmr/m/n/10 189
  []
 
-[189] (bookdown-demo.bbl [190]) [191
+[189]
+Overfull \hbox (206.25pt too wide) in paragraph at lines 7978--7978
+[]\TU/lmtt/m/n/10 ## alternative hypothesis: true difference in means between g
+roup female and group male is not equal to 0[] 
+ []
 
-] (bookdown-demo.aux)
+[190]
+Overfull \hbox (30.36343pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 14.5.  ADDITIONAL COMMENTS ON HYPOTHESIS TEST OF PARAMETERS \TU
+/lmr/m/n/10 191
+ []
+
+[191] [192
+
+]
+Chapter 15.
+(bookdown-demo.bbl [193]
+Overfull \hbox (43.04564pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 194 \TU/lmr/m/sl/10 CHAPTER 15.  PRACTICAL CONSIDERATIONS WITH H
+YPOTHESIS TESTING
+ []
+
+[194
+
+]) [195] (bookdown-demo.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20389 strings out of 411472
- 380939 string characters out of 5818265
+ 20391 strings out of 411472
+ 380932 string characters out of 5818265
  1873012 words of memory out of 5000000
- 40302 multiletter control sequences out of 15000+600000
+ 40304 multiletter control sequences out of 15000+600000
  518810 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,17n,121p,1012b,544s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (191 pages).
+Output written on bookdown-demo.pdf (195 pages).

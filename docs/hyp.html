@@ -7,7 +7,7 @@
 <title>Chapter 14 Hypothesis Testing (Under Construction) | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="14.1 Introduction Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 14 Hypothesis Testing (Under Construction) | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="14.1 Introduction Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="14.1 Introduction Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,7 +26,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -224,7 +223,7 @@ This <span class="math inline">\(t\)</span> statistic is valid since our sample 
 <p>Informally, this is also the probability of observing the value of our sample mean, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true.</p>
 <p>Recall that for a hypothesis test of the mean, the <span class="math inline">\(t\)</span> statistic follows a <span class="math inline">\(t_{n-1}\)</span> distribution, as our calculations assume the null hypothesis is true. Visually, we can use areas under the PDF of a <span class="math inline">\(t_{n-1}\)</span> to illustrate how the p-value is found. The specific area under the PDF depends on which of the three alternative hypotheses we are using. In Figures <a href="hyp.html#fig:9-pvalneq">14.1</a>, <a href="hyp.html#fig:9-pvalgreater">14.2</a>, and <a href="hyp.html#fig:9-pvalless">14.3</a> below, we have examples on the relevant areas under the PDF if the value of the <span class="math inline">\(t\)</span> statistic is <span class="math inline">\(\hat{t} = 1\)</span>.</p>
 <ol style="list-style-type: decimal">
-<li>If <span class="math inline">\(H_a: \mu  \neq \mu_0\)</span>, i.e. we have a two-sided alternative, the corresponding areas under the PDF of the <span class="math inline">\(t_{n-1}\)</span> distribution that is the p-value is shown below in Figure <a href="hyp.html#fig:9-pvalneq">14.1</a>:</li>
+<li>If <span class="math inline">\(H_a: \mu \neq \mu_0\)</span>, i.e. we have a two-sided alternative, the corresponding areas under the PDF of the <span class="math inline">\(t_{n-1}\)</span> distribution that is the p-value is shown below in Figure <a href="hyp.html#fig:9-pvalneq">14.1</a>:</li>
 </ol>
 <div class="figure">
 <span style="display:block;" id="fig:9-pvalneq"></span>
@@ -261,7 +260,7 @@ Figure 14.4: Finding P-value, For Freshman 15 Example
 </p>
 </div>
 <p>Using R, this p-value is 0.01123. If our test is conducted at 5% significance level, we reject the null hypothesis, since this p-value is less than 0.05.</p>
-<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2.357023</span>, <span class="fl">49</span><span class="op">)</span> <span class="co">##enter t stat, then df</span></span></code></pre></div>
 <pre><code>## [1] 0.01123111</code></pre>
 <p><strong>Thought question</strong>: Suppose the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is <span class="math inline">\(H_a:\mu &gt; 15\)</span>. Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is <span class="math inline">\(H_a: \mu \neq 15\)</span>, show that the p-value is 0.02246.</p>
@@ -282,7 +281,7 @@ Figure 14.5: Critical Value for 2-Sided Alternative, with 0.05 Sig Level
 </p>
 </div>
 <p>Note that since the <span class="math inline">\(t\)</span> distribution is symmetric and both areas in blue add up to 0.05, each shaded area must be 0.025. So <span class="math inline">\(-t_{49}^*\)</span> and <span class="math inline">\(t_{49}^*\)</span> correspond to the 2.5th and 97.5th percentiles of a <span class="math inline">\(t_{49}\)</span> distribution respectively. We can show that <span class="math inline">\(-t_{49}^*\)</span> is -2.009575 by typing</p>
-<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
@@ -299,7 +298,7 @@ Figure 14.6: Critical Value for Greater Than Alternative, with 0.05 Sig Level
 </p>
 </div>
 <p>Note that <span class="math inline">\(t_{49}^*\)</span> corresponds to the 95th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is 1.677 by typing</p>
-<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
@@ -316,7 +315,7 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 </p>
 </div>
 <p>Note that <span class="math inline">\(t_{49}^*\)</span> corresponds to the 5th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is -1.677 by typing</p>
-<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
@@ -346,13 +345,14 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <p>After making a decision, we write a conclusion in the context of our research question. Using the Freshman 15 example, we rejected the null hypothesis. So our conclusion is our data support the claim that the average weight gain among first-year college students is less than 15 pounds.</p>
 <p>We look at one more example to show how a hypothesis test is done from start to finish.</p>
 </div>
-<div id="worked-example-3" class="section level3" number="14.2.5">
+<div id="eg1samplet" class="section level3" number="14.2.5">
 <h3>
-<span class="header-section-number">14.2.5</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.5</span> Worked Example<a class="anchor" aria-label="anchor" href="#eg1samplet"><i class="fas fa-link"></i></a>
 </h3>
 <p>A university bookstore claims that, on average, a student will pay $ 101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed.</p>
 <p>We have one quantitative variable, the amount of money students will pay per class for textbooks. A t-test for a mean is appropriate since textbook prices are normally distributed.</p>
-<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<p>From the question, we have <span class="math inline">\(H_0: \mu = 101.75, H_a: \mu &gt; 101.75\)</span>.</p>
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Record sample data collected</span></span>
 <span><span class="va">news.samp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">140</span>, <span class="fl">125</span>, <span class="fl">150</span>, <span class="fl">87</span>, <span class="fl">170</span>, <span class="fl">195</span>, <span class="fl">94</span>, <span class="fl">127</span>, <span class="fl">53</span><span class="op">)</span></span>
 <span></span>
@@ -369,25 +369,23 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 ## sample estimates:
 ## mean of x 
 ##  126.7778</code></pre>
-<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">text.test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">news.samp</span>, mu<span class="op">=</span><span class="fl">101.75</span>, alternative<span class="op">=</span><span class="st">"greater"</span><span class="op">)</span></span>
 <span><span class="va">text.test</span><span class="op">$</span><span class="va">statistic</span> <span class="co">##t stat</span></span></code></pre></div>
 <pre><code>##        t 
 ## 1.714676</code></pre>
-<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">text.test</span><span class="op">$</span><span class="va">parameter</span> <span class="co">##degrees of freedom</span></span></code></pre></div>
 <pre><code>## df 
 ##  8</code></pre>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">text.test</span><span class="op">$</span><span class="va">p.value</span> <span class="co">##p-value</span></span></code></pre></div>
 <pre><code>## [1] 0.06237429</code></pre>
-<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">text.test</span><span class="op">$</span><span class="va">estimate</span> <span class="co">##value of estimator (sample mean here)</span></span></code></pre></div>
 <pre><code>## mean of x 
 ##  126.7778</code></pre>
 <ul>
-<li>
-<span class="math inline">\(H_0: \mu = 101.75, H_a: \mu &gt; 101.75\)</span>.</li>
 <li>The test statistic is $t = $ 1.7146763.</li>
 <li>The p-value is 0.0623743.</li>
 </ul>
@@ -399,7 +397,73 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <span class="header-section-number">14.3</span> Hypothesis Test for Paired Means<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-paired-means"><i class="fas fa-link"></i></a>
 </h2>
 <p>The hypothesis test for paired means (also called the paired t-test or the hypothesis test for two dependent means) is a special case of the hypothesis test for the mean where instead of testing the mean of one population, the difference of two means is tested by using the differences in pairs of data points that are dependent. As this is a special case of the one-sample t-test, the same assumptions are required: the differences of the paired values are normally distributed, or if the number of paired values is large enough.</p>
-<p>In order to conduct a paired t-test, the optional <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> argument <code>paired</code> should be designated as <code>TRUE</code>. When conducting a paired t-test, the data are either given in two vectors (the second will be subtracted from the first position-by-position).</p>
+<p>The test statistic is</p>
+<p><span class="math display" id="eq:9-teststatPaired">\[\begin{equation}
+\hat{t} =  \frac{\bar{d}_n - \mu_0}{\frac{s_d}{\sqrt{n_d}}} = \frac{\bar{d}_n - \mu_0}{SE(\bar{d}_n)},
+\tag{14.3}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\bar{d}_n\)</span> denotes the sample average difference between the pairs, <span class="math inline">\(s_d\)</span> denotes the standard deviation of the differences between the pairs, <span class="math inline">\(n_d\)</span> denotes the number of pairs, and <span class="math inline">\(\mu_0\)</span> denotes the mean difference under the null hypothesis. The test statistic follows a <span class="math inline">\(t_{n_d - 1}\)</span> distribution.</p>
+<p><strong>Thought question:</strong> compare equation <a href="#9-teststatPaired"><strong>??</strong></a> with equations <a href="#9-teststatMean"><strong>??</strong></a> and <a href="hyp.html#eq:9-tstatGen">(14.2)</a>. Do you see their similarities?</p>
+<p>In order to conduct a paired t-test, the optional <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> argument <code>paired</code> should be designated as <code>TRUE</code>. When conducting a paired t-test, the data are given in two vectors (the second will be subtracted from the first position-by-position).</p>
+<div id="egpairedt" class="section level3" number="14.3.1">
+<h3>
+<span class="header-section-number">14.3.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#egpairedt"><i class="fas fa-link"></i></a>
+</h3>
+<p>A weight study was conducted on twins in Australia. Is there evidence that identical twins over the age of 50 have significantly different weights?</p>
+<p>From the question, we have <span class="math inline">\(H_0: \mu_d = 0, H_a: \mu_d \neq 0\)</span>.</p>
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openmx.ssri.psu.edu">OpenMx</a></span><span class="op">)</span> <span class="co">##data twinData from this package</span></span>
+<span></span>
+<span><span class="co">## using which is another to extract the rows that pertain to multiple conditions, we want identical twins with ages over 50.</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="op">(</span><span class="va">twinData</span><span class="op">$</span><span class="va">zygosity</span> <span class="op">==</span> <span class="st">"MZFF"</span> <span class="op">|</span> <span class="va">twinData</span><span class="op">$</span><span class="va">zygosity</span> <span class="op">==</span> <span class="st">"MZMM"</span> <span class="op">)</span> <span class="op">&amp;</span> <span class="va">twinData</span><span class="op">$</span><span class="va">age</span> <span class="op">&gt;</span> <span class="fl">50</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## weights of twin 1</span></span>
+<span><span class="va">wt1</span> <span class="op">&lt;-</span> <span class="va">twinData</span><span class="op">$</span><span class="va">wt1</span><span class="op">[</span><span class="va">a</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co">## corresponding weights of twin 2</span></span>
+<span><span class="va">wt2</span> <span class="op">&lt;-</span> <span class="va">twinData</span><span class="op">$</span><span class="va">wt2</span><span class="op">[</span><span class="va">a</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co">## Conduct the hypothesis test</span></span>
+<span><span class="va">pair_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">wt1</span>, <span class="va">wt2</span>, mu<span class="op">=</span><span class="fl">0</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span>, paired<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pair_result</span></span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  wt1 and wt2
+## t = 0.49766, df = 306, p-value = 0.6191
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -0.5773256  0.9682051
+## sample estimates:
+## mean difference 
+##       0.1954397</code></pre>
+<ul>
+<li>The test statistic is $t = $ 0.497662.</li>
+<li>The p-value is 0.6190797. So we fail to reject the null hypothesis. The data do not provide evidence that the weights of identical twins over 50 years old are significantly different</li>
+<li>The 95% confidence interval is -0.5773256, 0.9682051. Notice how this interval contains the value under the null hypothesis, 0. The conclusion is consistent with the hypothesis test.</li>
+</ul>
+<p>We could have also used the $t.test()4 function a little differently. We could have found the differences in weights between each pair of twins, and then performed a 1-sample t-test on these differences.</p>
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## do a 1 sample t test</span></span>
+<span><span class="va">diffs</span> <span class="op">&lt;-</span> <span class="va">wt1</span> <span class="op">-</span> <span class="va">wt2</span></span>
+<span></span>
+<span><span class="va">other_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">diffs</span>, mu<span class="op">=</span> <span class="fl">0</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span>, paired <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">other_result</span></span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  diffs
+## t = 0.49766, df = 306, p-value = 0.6191
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.5773256  0.9682051
+## sample estimates:
+## mean of x 
+## 0.1954397</code></pre>
+<p>Notice the results are identical in both approaches.</p>
+</div>
 </div>
 <div id="hypothesis-test-for-difference-in-two-independent-means" class="section level2" number="14.4">
 <h2>
@@ -421,7 +485,7 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <li><p>If the null hypothesis is <strong>rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>outside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
 <li><p>If the null hypothesis is <strong>not rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>inside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
 </ul>
-<p>We go back to the thickness of silicon wafers worked example in Section <a href="#wafer"><strong>??</strong></a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span> and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis.</p>
+<p>We go back to the thickness of silicon wafers worked example in Section <a href="hyp.html#eg1samplet">14.2.5</a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span> and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis.</p>
 <p><strong>Thought question</strong>: Show that the 95% confidence interval for the mean thickness of silicon wafers in the worked example is (244.8569, 246.9031) which contains the value of 245.</p>
 </div>
 <div id="reporting-conclusions" class="section level3" number="14.5.2">
@@ -449,10 +513,12 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <li><a class="nav-link" href="#test-statistic"><span class="header-section-number">14.2.2</span> Test Statistic</a></li>
 <li><a class="nav-link" href="#decision"><span class="header-section-number">14.2.3</span> Making a Decision</a></li>
 <li><a class="nav-link" href="#writing-conclusions"><span class="header-section-number">14.2.4</span> Writing Conclusions</a></li>
-<li><a class="nav-link" href="#worked-example-3"><span class="header-section-number">14.2.5</span> Worked Example</a></li>
+<li><a class="nav-link" href="#eg1samplet"><span class="header-section-number">14.2.5</span> Worked Example</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#hypothesis-test-for-paired-means"><span class="header-section-number">14.3</span> Hypothesis Test for Paired Means</a></li>
+<li>
+<a class="nav-link" href="#hypothesis-test-for-paired-means"><span class="header-section-number">14.3</span> Hypothesis Test for Paired Means</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#egpairedt"><span class="header-section-number">14.3.1</span> Worked Example</a></li></ul>
+</li>
 <li><a class="nav-link" href="#hypothesis-test-for-difference-in-two-independent-means"><span class="header-section-number">14.4</span> Hypothesis Test for Difference in Two Independent Means</a></li>
 <li>
 <a class="nav-link" href="#infcomments"><span class="header-section-number">14.5</span> Additional Comments on Hypothesis Test of Parameters</a><ul class="nav navbar-nav">
@@ -476,7 +542,7 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-01.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

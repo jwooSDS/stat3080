@@ -1,4 +1,4 @@
-# Hypothesis Testing (Under Construction)  {#hyp}
+# Hypothesis Testing for Means  {#hyp}
 
 ## Introduction
 
@@ -382,18 +382,20 @@ Notice the results are identical in both approaches.
 
 ## Hypothesis Test for Difference in Two Independent Means
 
-The hypothesis test for difference in two independent means (also called a 2-sample $t$-test) compares the average of a quantitative variable across two independent populations (created by a binary variable).
+The hypothesis test for difference in two independent means (also called a 2-sample $t$-test) compares the average of a quantitative variable across two independent populations (created by a binary variable). The condition for this test is that both populations are normally distributed, or that the sample sizes are both large enough.
 
 The test statistic is
 
 \begin{equation} 
-\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y}},
+\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y})},
 (\#eq:9-teststat2Means)
 \end{equation}
 
 where $\bar{X}, \bar{Y}$ denote the sample averages in each sample, $s_X, s_Y$ denote the standard deviation in each sample, $n_X, n_Y$ denote the sample sizes in in each sample, and $\mu_X - \mu_Y$ denotes the mean difference under the null hypothesis. The test statistic follows a $t$ distribution. The degrees of freedom is approximated using the [Welch–Satterthwaite equation](https://en.wikipedia.org/wiki/Welch%27s_t-test#Calculations).
 
-In some older references, it is suggested to approximate the degrees of freedom using $min(n_X, n_Y) - 1$. The hypothesis test using this approximation is considered to be more **conservative** than the approximation based on the Welch–Satterthwaite equation. A hypothesis test that is conservative is a test why the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section \@ref(prac).
+In some older references, it is suggested to approximate the degrees of freedom using $min(n_X, n_Y) - 1$. The hypothesis test using this approximation is considered to be more **conservative** than the approximation based on the Welch–Satterthwaite equation. A hypothesis test that is conservative is a test when the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section \@ref(prac).
+
+**Thought question:** what are the factors that lead to stronger evidence against the null hypothesis for this test?
 
 Similar to what we wrote in Section \@ref(pooled), the test statistic for the difference in two independent means given in equation \@ref(eq:9-teststat2Means) is the modern default. It is sometimes called a **Welch's $t$** test, or an **unpooled version** of test.
 
@@ -416,7 +418,7 @@ result_2samp <- t.test(body_mass_g ~ sex, data = Data,
 result_2samp
 ```
 - The test statistic is $t = $ `r result_2samp$statistic`.
-- The p-value is `r result_2samp$p.value`. So we reject the null hypothesis. The data provide evidence that the average weights of female and male Gentoo penguins are significantly different
+- The p-value is virtually 0. So we reject the null hypothesis. The data provide evidence that the average weights of female and male Gentoo penguins are significantly different
 - The 95% confidence interval is `r result_2samp$conf.int`. Notice how this interval does not contain the value under the null hypothesis, 0. In fact, since the entire interval is below 0, we can also say that the male Gentoo penguins are heavier, on average, than their female counterparts. The conclusion is consistent with the hypothesis test. 
 
 

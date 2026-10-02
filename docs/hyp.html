@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 14 Hypothesis Testing (Under Construction) | STAT 3080: From Data to Knowledge</title>
+<title>Chapter 14 Hypothesis Testing for Means | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="14.1 Introduction Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 14 Hypothesis Testing (Under Construction) | STAT 3080: From Data to Knowledge">
+<meta property="og:title" content="Chapter 14 Hypothesis Testing for Means | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="14.1 Introduction Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 14 Hypothesis Testing (Under Construction) | STAT 3080: From Data to Knowledge">
+<meta name="twitter:title" content="Chapter 14 Hypothesis Testing for Means | STAT 3080: From Data to Knowledge">
 <meta name="twitter:description" content="14.1 Introduction Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -78,7 +78,7 @@
 <li><a class="" href="clt.html"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem</a></li>
 <li><a class="" href="CI.html"><span class="header-section-number">12</span> Confidence Intervals</a></li>
 <li><a class="" href="boot.html"><span class="header-section-number">13</span> The Bootstrap</a></li>
-<li><a class="active" href="hyp.html"><span class="header-section-number">14</span> Hypothesis Testing (Under Construction)</a></li>
+<li><a class="active" href="hyp.html"><span class="header-section-number">14</span> Hypothesis Testing for Means</a></li>
 <li><a class="" href="prac.html"><span class="header-section-number">15</span> Practical Considerations with Hypothesis Testing</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
@@ -90,7 +90,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="hyp" class="section level1" number="14">
 <h1>
-<span class="header-section-number">14</span> Hypothesis Testing (Under Construction)<a class="anchor" aria-label="anchor" href="#hyp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14</span> Hypothesis Testing for Means<a class="anchor" aria-label="anchor" href="#hyp"><i class="fas fa-link"></i></a>
 </h1>
 <div id="introduction-4" class="section level2" number="14.1">
 <h2>
@@ -470,14 +470,15 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <h2>
 <span class="header-section-number">14.4</span> Hypothesis Test for Difference in Two Independent Means<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-difference-in-two-independent-means"><i class="fas fa-link"></i></a>
 </h2>
-<p>The hypothesis test for difference in two independent means (also called a 2-sample <span class="math inline">\(t\)</span>-test) compares the average of a quantitative variable across two independent populations (created by a binary variable).</p>
+<p>The hypothesis test for difference in two independent means (also called a 2-sample <span class="math inline">\(t\)</span>-test) compares the average of a quantitative variable across two independent populations (created by a binary variable). The condition for this test is that both populations are normally distributed, or that the sample sizes are both large enough.</p>
 <p>The test statistic is</p>
 <p><span class="math display" id="eq:9-teststat2Means">\[\begin{equation}
-\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y}},
+\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y})},
 \tag{14.4}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(\bar{X}, \bar{Y}\)</span> denote the sample averages in each sample, <span class="math inline">\(s_X, s_Y\)</span> denote the standard deviation in each sample, <span class="math inline">\(n_X, n_Y\)</span> denote the sample sizes in in each sample, and <span class="math inline">\(\mu_X - \mu_Y\)</span> denotes the mean difference under the null hypothesis. The test statistic follows a <span class="math inline">\(t\)</span> distribution. The degrees of freedom is approximated using the <a href="https://en.wikipedia.org/wiki/Welch%27s_t-test#Calculations">Welch–Satterthwaite equation</a>.</p>
-<p>In some older references, it is suggested to approximate the degrees of freedom using <span class="math inline">\(min(n_X, n_Y) - 1\)</span>. The hypothesis test using this approximation is considered to be more <strong>conservative</strong> than the approximation based on the Welch–Satterthwaite equation. A hypothesis test that is conservative is a test why the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section <a href="prac.html#prac">15</a>.</p>
+<p>In some older references, it is suggested to approximate the degrees of freedom using <span class="math inline">\(min(n_X, n_Y) - 1\)</span>. The hypothesis test using this approximation is considered to be more <strong>conservative</strong> than the approximation based on the Welch–Satterthwaite equation. A hypothesis test that is conservative is a test when the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section <a href="prac.html#prac">15</a>.</p>
+<p><strong>Thought question:</strong> what are the factors that lead to stronger evidence against the null hypothesis for this test?</p>
 <p>Similar to what we wrote in Section <a href="CI.html#pooled">12.4.1</a>, the test statistic for the difference in two independent means given in equation <a href="hyp.html#eq:9-teststat2Means">(14.4)</a> is the modern default. It is sometimes called a <strong>Welch’s <span class="math inline">\(t\)</span></strong> test, or an <strong>unpooled version</strong> of test.</p>
 <p>A <strong>pooled version</strong> of this test exists. It has an additional assumption: that the variances of the quantitative variable is equal in the two populations (i.e. <span class="math inline">\(\sigma_X^2 = \sigma_Y^2\)</span>). The pooled version has fallen out of favor especially when the variances are unequal and when the sample sizes are unequal, as the type I error rates do not match the significance level.</p>
 <div id="eg2t" class="section level3" number="14.4.1">
@@ -508,7 +509,7 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 ##             4679.741             5484.836</code></pre>
 <ul>
 <li>The test statistic is $t = $ -14.7613684.</li>
-<li>The p-value is 1.8677597^{-28}. So we reject the null hypothesis. The data provide evidence that the average weights of female and male Gentoo penguins are significantly different</li>
+<li>The p-value is virtually 0. So we reject the null hypothesis. The data provide evidence that the average weights of female and male Gentoo penguins are significantly different</li>
 <li>The 95% confidence interval is -913.1130428, -697.0763297. Notice how this interval does not contain the value under the null hypothesis, 0. In fact, since the entire interval is below 0, we can also say that the male Gentoo penguins are heavier, on average, than their female counterparts. The conclusion is consistent with the hypothesis test.</li>
 </ul>
 </div>
@@ -546,7 +547,7 @@ Figure 14.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#hyp"><span class="header-section-number">14</span> Hypothesis Testing (Under Construction)</a></li>
+<li><a class="nav-link" href="#hyp"><span class="header-section-number">14</span> Hypothesis Testing for Means</a></li>
 <li><a class="nav-link" href="#introduction-4"><span class="header-section-number">14.1</span> Introduction</a></li>
 <li>
 <a class="nav-link" href="#testmean"><span class="header-section-number">14.2</span> Hypothesis Test for the Mean</a><ul class="nav navbar-nav">

@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.9309305  3.5091589 -1.3307016 -0.4879353 -2.0292076 -2.1997551
-##  [7]  0.4390954 -5.0945204  1.7071656  4.2178035
+##  [1] -3.321799636  0.008635991 -1.985387693 -1.533757306  1.769439826
+##  [6] -1.192489345 -0.338182032  2.673773839  2.167312524 -0.853248430
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -7093,6 +7093,8 @@ Given what we have established about confidence intervals and knowing the sampli
 \label{eq:8-CI2means}
 \end{equation}
 
+The condition for this confidence interval is that both populations are normally distributed, or that the sample sizes are both large enough.
+
 The only question is: what is the degrees of freedom associated with this test? It is actually quite complicated, and is approximated using the \href{https://en.wikipedia.org/wiki/Welch\%27s_t-test\#Calculations}{Welch--Satterthwaite equation}. The \texttt{t.test()} function in R computes confidence intervals using this degrees of freedom.
 
 In some older references, it is suggested to approximate the degrees of freedom using \(min(n_X, n_Y) - 1\). The confidence interval using this approximation is considered to be more \textbf{conservative} than the approximation based on the Welch--Satterthwaite equation. A confidence interval that is more conservative means that it is wider than it needs to be.
@@ -7349,7 +7351,7 @@ The only assumptions / conditions associated with the bootstrap are:
 \end{itemize}
 
 \hypertarget{hyp}{%
-\chapter{Hypothesis Testing (Under Construction)}\label{hyp}}
+\chapter{Hypothesis Testing for Means}\label{hyp}}
 
 \hypertarget{introduction-4}{%
 \section{Introduction}\label{introduction-4}}
@@ -7926,18 +7928,20 @@ Notice the results are identical in both approaches.
 \hypertarget{hypothesis-test-for-difference-in-two-independent-means}{%
 \section{Hypothesis Test for Difference in Two Independent Means}\label{hypothesis-test-for-difference-in-two-independent-means}}
 
-The hypothesis test for difference in two independent means (also called a 2-sample \(t\)-test) compares the average of a quantitative variable across two independent populations (created by a binary variable).
+The hypothesis test for difference in two independent means (also called a 2-sample \(t\)-test) compares the average of a quantitative variable across two independent populations (created by a binary variable). The condition for this test is that both populations are normally distributed, or that the sample sizes are both large enough.
 
 The test statistic is
 
 \begin{equation} 
-\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y}},
+\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y})},
 \label{eq:9-teststat2Means}
 \end{equation}
 
 where \(\bar{X}, \bar{Y}\) denote the sample averages in each sample, \(s_X, s_Y\) denote the standard deviation in each sample, \(n_X, n_Y\) denote the sample sizes in in each sample, and \(\mu_X - \mu_Y\) denotes the mean difference under the null hypothesis. The test statistic follows a \(t\) distribution. The degrees of freedom is approximated using the \href{https://en.wikipedia.org/wiki/Welch\%27s_t-test\#Calculations}{Welch--Satterthwaite equation}.
 
-In some older references, it is suggested to approximate the degrees of freedom using \(min(n_X, n_Y) - 1\). The hypothesis test using this approximation is considered to be more \textbf{conservative} than the approximation based on the Welch--Satterthwaite equation. A hypothesis test that is conservative is a test why the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section \ref{prac}.
+In some older references, it is suggested to approximate the degrees of freedom using \(min(n_X, n_Y) - 1\). The hypothesis test using this approximation is considered to be more \textbf{conservative} than the approximation based on the Welch--Satterthwaite equation. A hypothesis test that is conservative is a test when the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section \ref{prac}.
+
+\textbf{Thought question:} what are the factors that lead to stronger evidence against the null hypothesis for this test?
 
 Similar to what we wrote in Section \ref{pooled}, the test statistic for the difference in two independent means given in equation \eqref{eq:9-teststat2Means} is the modern default. It is sometimes called a \textbf{Welch's \(t\)} test, or an \textbf{unpooled version} of test.
 
@@ -7982,7 +7986,7 @@ From the question, we have \(H_0: \mu_f - \mu_m = 0, H_a: \mu_f - \mu_m \neq 0\)
 \item
   The test statistic is \$t = \$ -14.7613684.
 \item
-  The p-value is \ensuremath{1.8677597\times 10^{-28}}. So we reject the null hypothesis. The data provide evidence that the average weights of female and male Gentoo penguins are significantly different
+  The p-value is virtually 0. So we reject the null hypothesis. The data provide evidence that the average weights of female and male Gentoo penguins are significantly different
 \item
   The 95\% confidence interval is -913.1130428, -697.0763297. Notice how this interval does not contain the value under the null hypothesis, 0. In fact, since the entire interval is below 0, we can also say that the male Gentoo penguins are heavier, on average, than their female counterparts. The conclusion is consistent with the hypothesis test.
 \end{itemize}

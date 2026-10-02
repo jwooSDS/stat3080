@@ -78,7 +78,7 @@
 <li><a class="" href="clt.html"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem</a></li>
 <li><a class="active" href="CI.html"><span class="header-section-number">12</span> Confidence Intervals</a></li>
 <li><a class="" href="boot.html"><span class="header-section-number">13</span> The Bootstrap</a></li>
-<li><a class="" href="hyp.html"><span class="header-section-number">14</span> Hypothesis Testing (Under Construction)</a></li>
+<li><a class="" href="hyp.html"><span class="header-section-number">14</span> Hypothesis Testing for Means</a></li>
 <li><a class="" href="prac.html"><span class="header-section-number">15</span> Practical Considerations with Hypothesis Testing</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
@@ -505,6 +505,7 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 \left( (\bar{X} - \bar{Y}) - t^{*} \sqrt{\frac{s^2_X}{n_X} + \frac{s^2_Y}{n_Y})}, (\bar{X} - \bar{Y}) + t^{*} \sqrt{\frac{s^2_X}{n_X} + \frac{s^2_Y}{n_Y})} \right).
 \tag{12.13}
 \end{equation}\]</span></p>
+<p>The condition for this confidence interval is that both populations are normally distributed, or that the sample sizes are both large enough.</p>
 <p>The only question is: what is the degrees of freedom associated with this test? It is actually quite complicated, and is approximated using the <a href="https://en.wikipedia.org/wiki/Welch%27s_t-test#Calculations">Welch–Satterthwaite equation</a>. The <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> function in R computes confidence intervals using this degrees of freedom.</p>
 <p>In some older references, it is suggested to approximate the degrees of freedom using <span class="math inline">\(min(n_X, n_Y) - 1\)</span>. The confidence interval using this approximation is considered to be more <strong>conservative</strong> than the approximation based on the Welch–Satterthwaite equation. A confidence interval that is more conservative means that it is wider than it needs to be.</p>
 <p><strong>Thought Question:</strong> How is the coverage probability of a conservative confidence interval related to its confidence level?</p>

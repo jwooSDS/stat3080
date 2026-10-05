@@ -75,6 +75,7 @@ fig:9-critgreater
 fig:9-critless
 eq:9-teststatPaired
 eq:9-teststat2Means
+tab:practical
 Rbasics
 overview-of-r
 rstudio-interface
@@ -296,3 +297,8 @@ infcomments
 inference
 reporting-conclusions
 prac
+introduction-5
+type-i-and-type-ii-errors
+significance-level-and-type-i-error
+power
+statistical-vs-practical-significance

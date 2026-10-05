@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 15 Practical Considerations with Hypothesis Testing | STAT 3080: From Data to Knowledge</title>
+<title>Chapter 15 Type I and II Errors, Significance Level, Power | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="Course Notes for STAT 3080">
+<meta name="description" content="15.1 Introduction Section 14 introduced hypothesis testing for quantitative data (mean, paired means, two independent means). In this section, we will cover some additional concepts associated...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 15 Practical Considerations with Hypothesis Testing | STAT 3080: From Data to Knowledge">
+<meta property="og:title" content="Chapter 15 Type I and II Errors, Significance Level, Power | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Course Notes for STAT 3080">
+<meta property="og:description" content="15.1 Introduction Section 14 introduced hypothesis testing for quantitative data (mean, paired means, two independent means). In this section, we will cover some additional concepts associated...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 15 Practical Considerations with Hypothesis Testing | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="Course Notes for STAT 3080">
+<meta name="twitter:title" content="Chapter 15 Type I and II Errors, Significance Level, Power | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="15.1 Introduction Section 14 introduced hypothesis testing for quantitative data (mean, paired means, two independent means). In this section, we will cover some additional concepts associated...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -79,7 +79,7 @@
 <li><a class="" href="CI.html"><span class="header-section-number">12</span> Confidence Intervals</a></li>
 <li><a class="" href="boot.html"><span class="header-section-number">13</span> The Bootstrap</a></li>
 <li><a class="" href="hyp.html"><span class="header-section-number">14</span> Hypothesis Testing for Means</a></li>
-<li><a class="active" href="prac.html"><span class="header-section-number">15</span> Practical Considerations with Hypothesis Testing</a></li>
+<li><a class="active" href="prac.html"><span class="header-section-number">15</span> Type I and II Errors, Significance Level, Power</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -90,16 +90,236 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="prac" class="section level1" number="15">
 <h1>
-<span class="header-section-number">15</span> Practical Considerations with Hypothesis Testing<a class="anchor" aria-label="anchor" href="#prac"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15</span> Type I and II Errors, Significance Level, Power<a class="anchor" aria-label="anchor" href="#prac"><i class="fas fa-link"></i></a>
 </h1>
+<div id="introduction-5" class="section level2" number="15.1">
+<h2>
+<span class="header-section-number">15.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Section <a href="hyp.html#hyp">14</a> introduced hypothesis testing for quantitative data (mean, paired means, two independent means). In this section, we will cover some additional concepts associated with hypothesis testing: type I and II errors, significance level, and power.</p>
+</div>
+<div id="type-i-and-type-ii-errors" class="section level2" number="15.2">
+<h2>
+<span class="header-section-number">15.2</span> Type I and Type II Errors<a class="anchor" aria-label="anchor" href="#type-i-and-type-ii-errors"><i class="fas fa-link"></i></a>
+</h2>
+<p>The decision we make from hypothesis testing is not going to be perfect, as we have inherent uncertainty in estimators due to random sampling. So we may sometimes reject a null hypothesis when it is true, or we may fail to reject a null hypothesis when the alternative hypothesis is true. These errors are called <strong>type I</strong> and <strong>type II</strong> errors respectively.</p>
+<p>We go back to the university bookstore worked example in Section <a href="hyp.html#eg1samplet">14.2.5</a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 101.75, H_a: \mu &gt; 101.75\)</span>.</p>
+<ul>
+<li><p>The type I error in this study is concluding that students pay more than $101.75, on average, when the average amount paid is $101.75.</p></li>
+<li><p>The type II error in this study is concluding that there is not enough evidence that students pay more than $101.75, on average, when the average amount paid greater $101.75.</p></li>
+</ul>
+<p>Next, we discuss how we can measure or control the probability of making these errors.</p>
+</div>
+<div id="significance-level-and-type-i-error" class="section level2" number="15.3">
+<h2>
+<span class="header-section-number">15.3</span> Significance Level and Type I Error<a class="anchor" aria-label="anchor" href="#significance-level-and-type-i-error"><i class="fas fa-link"></i></a>
+</h2>
+<p>The probability of making a type I error is controlled by the <strong>significance level</strong>, <span class="math inline">\(\alpha\)</span>, of the hypothesis test. The significance level is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. So if we conduct a hypothesis test with significance level <span class="math inline">\(\alpha = 0.05\)</span>, we are saying that we are willing to have a 5% probability of making a type I error if the null hypothesis is true.</p>
+<p>The value of the significance level for a hypothesis should be made in consultation with a subject matter expert and understanding the practical cost of making a type I error. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the significance level should not be adjusted in order to be able to conclude that the null hypothesis is rejected.</p>
+<p>We will run a Monte Carlo simulation to demonstrate the significance level determines the probability of making a type I error. This simulation is very similar to the one that was done in Section <a href="CI.html#CP">12.2.3.3</a> to explain coverage probabilities. You should realize that the probability of making a type I error is directly related to coverage probability which continues with the idea written in Section <a href="hyp.html#inference">14.5.1</a> about how confidence intervals and 2-sided hypothesis tests are consistent. The code below does the following:</p>
+<ul>
+<li>Simulate <span class="math inline">\(X_1, \cdots, X_{10}\)</span> i.i.d. from standard normal.</li>
+<li>Calculate a <span class="math inline">\(t\)</span> statistic for the hypothesis test using equation <a href="hyp.html#eq:9-teststatMean">(14.1)</a>.
+<ul>
+<li>The hypotheses will be <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span>.</li>
+<li>Note that our data are simulated from a standard normal, so the null hypothesis is true in this simulation.</li>
+</ul>
+</li>
+<li>Assess if the calculated <span class="math inline">\(t\)</span> statistic is more extreme than the critical value.
+<ul>
+<li>We set the significance level to be <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+<li>The critical value is <span class="math inline">\(t_9^* = 2.262157\)</span> since we are conducting a 2-sided test with <span class="math inline">\(n=10\)</span>.</li>
+</ul>
+</li>
+<li>Repeat these steps for a total of 10 thousand replicates.</li>
+<li>Count the number of times we reject the null hypothesis, and divide by the number of replicates. This value estimates the probability of making a type I error.
+<ul>
+<li>If we did things correctly the estimated probability of making a type I error should be close to the value of the significance level of 0.05.</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## sig level</span></span>
+<span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span></span>
+<span><span class="co">## function that simulates data from standard normal,</span></span>
+<span><span class="co">## then constructs test for mean, and assesses if test</span></span>
+<span><span class="co">## wrongly rejects H0</span></span>
+<span><span class="va">mean_type1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>, <span class="va">alpha</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##draw n data points from standard normal</span></span>
+<span>  </span>
+<span>  <span class="co">##calculate elements needed for CI of mean</span></span>
+<span>  <span class="va">xbar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##sample mean</span></span>
+<span>  <span class="va">SE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##SE of sample mean</span></span>
+<span>  <span class="va">t.stat</span> <span class="op">&lt;-</span> <span class="va">xbar</span><span class="op">/</span><span class="va">SE</span></span>
+<span>  <span class="va">crit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co">##critical value</span></span>
+<span>  </span>
+<span>  <span class="co">## check if reject H0</span></span>
+<span>  <span class="va">reject</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">t.stat</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">crit</span></span>
+<span> </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">reject</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## write another function to replicate this simulation, and</span></span>
+<span><span class="co">## find the proportion of samples that wrongly reject H0</span></span>
+<span><span class="va">reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span></span>
+<span><span class="va">rep_mean_type1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>, <span class="va">alpha</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">reps</span>, <span class="fu">mean_type1</span><span class="op">(</span><span class="va">n</span>, <span class="va">alpha</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## should be close to the value of the sig level, alpha, </span></span>
+<span><span class="co">## which is 0.05 in this simulation</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">31</span><span class="op">)</span></span>
+<span><span class="fu">rep_mean_type1</span><span class="op">(</span><span class="fl">10</span>, <span class="va">alpha</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.0531</code></pre>
+<p>The estimated probability of making a type I error is 0.0531, which matches the significance level which was set to be 0.05.</p>
+<p><strong>Thought question</strong>: Feel free to play around with the code and adjust the value of the significance level, change the alternative hypothesis to a 1-sided test, or any other factor. The estimated probability of making a type I error should always match the significance level.</p>
+<p>If the type I error of a hypothesis test does not match its significance level, the test is considered unreliable.</p>
+</div>
+<div id="power" class="section level2" number="15.4">
+<h2>
+<span class="header-section-number">15.4</span> Power and Type II Error<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
+</h2>
+<p>The <strong>power</strong> of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. power of a test is 1 minus the probability of making a type II error.</p>
+<p>Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section <a href="hyp.html#factors">14.2.2.1</a>, these are:</p>
+<ul>
+<li><p>The effect size, which is the difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true <span class="math inline">\(\mu_0\)</span>. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.</p></li>
+<li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the test statistic.</p></li>
+<li><p>The standard error of the estimator. Smaller standard errors of the estimator lead to larger magnitudes for the test statistic.</p></li>
+<li><p>Another factor that increases the power of a hypothesis test is to raise the significance level <span class="math inline">\(\alpha\)</span>. Think of the following extreme example: Suppose we set the significance level to be as low as possible, <span class="math inline">\(\alpha=0\)</span>. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.</p></li>
+</ul>
+<p>Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test.</p>
+<p>Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from <span class="math inline">\(N(1,1)\)</span> (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span>. The code below does the following:</p>
+<ul>
+<li>Simulate <span class="math inline">\(X_1, \cdots, X_{10}\)</span> i.i.d. from <span class="math inline">\(N(1,1)\)</span>.</li>
+<li>Calculate a <span class="math inline">\(t\)</span> statistic for the hypothesis test using equation <a href="hyp.html#eq:9-teststatMean">(14.1)</a>.
+<ul>
+<li>The hypotheses are <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span>.</li>
+<li>Note that our data are simulated from <span class="math inline">\(N(1,1)\)</span>, so the alternative hypothesis is true in this simulation.</li>
+</ul>
+</li>
+<li>Assess if the calculated <span class="math inline">\(t\)</span> statistic is more extreme than the critical value.
+<ul>
+<li>We set the significance level to be <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+<li>The critical value is <span class="math inline">\(t_9^* = 2.262157\)</span> since we are conducting a 2-sided test with <span class="math inline">\(n=10\)</span>.</li>
+</ul>
+</li>
+<li>Repeat these steps for a total of 10 thousand replicates.</li>
+<li>Count the number of times we reject the null hypothesis, and divide by the number of replicates. This value estimates the probability of correctly rejecting the null hypothesis, i.e. the power of this test.</li>
+</ul>
+<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## sig level</span></span>
+<span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span></span>
+<span><span class="co">## function that simulates data from N(1,1),</span></span>
+<span><span class="co">## then constructs test for mean, and assesses if test</span></span>
+<span><span class="co">## correctly rejects H0</span></span>
+<span><span class="va">mean_type1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>, <span class="va">alpha</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##draw n data points from standard normal</span></span>
+<span>  </span>
+<span>  <span class="co">##calculate elements needed for CI of mean</span></span>
+<span>  <span class="va">xbar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##sample mean</span></span>
+<span>  <span class="va">SE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##SE of sample mean</span></span>
+<span>  <span class="va">t.stat</span> <span class="op">&lt;-</span> <span class="va">xbar</span><span class="op">/</span><span class="va">SE</span></span>
+<span>  <span class="va">crit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co">##critical value</span></span>
+<span>  </span>
+<span>  <span class="co">## check if reject H0</span></span>
+<span>  <span class="va">reject</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">t.stat</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">crit</span></span>
+<span> </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">reject</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## write another function to replicate this simulation, and</span></span>
+<span><span class="co">## find the proportion of samples that wrongly reject H0</span></span>
+<span><span class="va">reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span></span>
+<span><span class="va">rep_mean_type1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>, <span class="va">alpha</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">reps</span>, <span class="fu">mean_type1</span><span class="op">(</span><span class="va">n</span>, <span class="va">alpha</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## should be close to the value of the sig level, alpha, </span></span>
+<span><span class="co">## which is 0.05 in this simulation</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">31</span><span class="op">)</span></span>
+<span><span class="fu">rep_mean_type1</span><span class="op">(</span><span class="fl">10</span>, <span class="va">alpha</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.0531</code></pre>
+<p>The estimated power of this test is 0.8003. So if the data come from a <span class="math inline">\(N(1,1)\)</span>, the power of testing <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span> using a sample of size 10 and significance level of 0.05 is 0.8003.</p>
+<p>Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of <span class="math inline">\(n\)</span> and <span class="math inline">\(\alpha\)</span>.</p>
+<p><strong>Power analysis</strong> or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).</p>
+<p><strong>Thought question</strong>: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?</p>
+</div>
+<div id="statistical-vs-practical-significance" class="section level2" number="15.5">
+<h2>
+<span class="header-section-number">15.5</span> Statistical Vs Practical Significance<a class="anchor" aria-label="anchor" href="#statistical-vs-practical-significance"><i class="fas fa-link"></i></a>
+</h2>
+<p>However, even with a p-value being reported, we need to be careful with conflating a “statistically significant” result (i.e. null hypothesis is rejected) with a “practically significant” result.</p>
+<p>We had earlier mentioned in Section <a href="prac.html#power">15.4</a> that the power of a hypothesis test can be increased when the sample size gets larger. This implies that we may be able to reject the null hypothesis when we have a small effect size but we have a huge sample size.</p>
+<p>Consider this hypothetical example. We have <span class="math inline">\(H_0: \mu = 100, H_a: \mu \neq 100\)</span>, with <span class="math inline">\(\bar{x} = 101, \sigma=10\)</span>, and various values for the sample size <span class="math inline">\(n\)</span>. Suppose these values represent IQ scores. We work out the p-values as well as the corresponding 95% confidence intervals for the mean, and present the results in Table <a href="prac.html#tab:practical">15.1</a> below.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:practical">Table 15.1: </span> Sample Size on P-Values and CIs</caption>
+<thead><tr class="header">
+<th align="left"><span class="math inline">\(n\)</span></th>
+<th align="left">p-value</th>
+<th align="left">95% CI</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">25</td>
+<td align="left">0.617</td>
+<td align="left">(97.080, 104.920)</td>
+</tr>
+<tr class="even">
+<td align="left">350</td>
+<td align="left">0.061</td>
+<td align="left">(99.952, 102.408)</td>
+</tr>
+<tr class="odd">
+<td align="left">400</td>
+<td align="left">0.455</td>
+<td align="left">(100.020, 101.980)</td>
+</tr>
+<tr class="even">
+<td align="left">2,500</td>
+<td align="left"><span class="math inline">\(5.7 \times 10^{-7}\)</span></td>
+<td align="left">(100.608, 101.392)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Most would probably agree that the effect size in this example is small, yet for a sample size of 400 or more, we will reject the null hypothesis. When the sample size is huge, the p-value is extremely small, which we may interpret as having strong evidence against the null hypothesis, so we have “statistical significance”. On the other hand, the small effect size tells us that the practical significance may be of little consequence.</p>
+<p>A couple of recommendations when reporting results from a hypothesis test:</p>
+<ul>
+<li><p>If possible, report the corresponding confidence interval, so the reader can see what is the range of plausible values for the parameter and make their own decision. However, not every hypothesis test has an associated confidence interval; we will see one such class of hypothesis tests in the next subsection.</p></li>
+<li><p>Researchers need to establish the minimum effect size for a result to be considered practically significant. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the this value should not be adjusted in order to be able to conclude that the null hypothesis is rejected.</p></li>
+</ul>
+<p>To remind ourselves, we use hypothesis tests to test for “statistical significance”. What we are testing is whether the deviation of our sample estimate from its value if the null hypothesis is true can be attributed to random sampling alone or not. If we reject the null hypothesis, the deviation is unlikely to be attributed to random sampling alone.</p>
+<p>To summarize, hypothesis testing is used to assess “statistical significance”, but we use subject matter knowledge to assess “practical significance”.</p>
 
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="hyp.html"><span class="header-section-number">14</span> Hypothesis Testing for Means</a></div>
 <div class="next"><a href="references.html">References</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#prac"><span class="header-section-number">15</span> Practical Considerations with Hypothesis Testing</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#prac"><span class="header-section-number">15</span> Type I and II Errors, Significance Level, Power</a></li>
+<li><a class="nav-link" href="#introduction-5"><span class="header-section-number">15.1</span> Introduction</a></li>
+<li><a class="nav-link" href="#type-i-and-type-ii-errors"><span class="header-section-number">15.2</span> Type I and Type II Errors</a></li>
+<li><a class="nav-link" href="#significance-level-and-type-i-error"><span class="header-section-number">15.3</span> Significance Level and Type I Error</a></li>
+<li><a class="nav-link" href="#power"><span class="header-section-number">15.4</span> Power and Type II Error</a></li>
+<li><a class="nav-link" href="#statistical-vs-practical-significance"><span class="header-section-number">15.5</span> Statistical Vs Practical Significance</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -115,7 +335,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-02.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -298,7 +298,7 @@ We look at one more example to show how a hypothesis test is done from start to 
 
 ### Worked Example {#eg1samplet}
 
-A university bookstore claims that, on average, a student will pay $ 101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed.
+A university bookstore claims that, on average, a student will pay \$101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed.
 
 We have one quantitative variable, the amount of money students will pay per class for textbooks. A t-test for a mean is appropriate since textbook prices are normally distributed. 
 

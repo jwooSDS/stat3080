@@ -238,7 +238,7 @@ In this example, we do the following:
 - Simulate $n$ observations from a standard uniform distribution. 
 - Calculate the sample mean.
 - The previous two steps are repeated for 10,000 replicates.
-- We set $n = 1, 5, 25$.
+- We set $n = 2, 5, 25$.
 - We then plot the sampling distributions of the sample mean for each sample size. The plots are shown in Fig \@ref(fig:dist-U) below.
 
 ```{r dist-U, fig.cap="Sampling Distribution of Sample Mean when Data are Standard Uniform with n = 1, 5, 25"}
@@ -254,12 +254,12 @@ repSampMean_Unif <- function(number){
   return(replicate(Reps, sampMean_Unif(number)))
 }
 
-results_Unif <- sapply(c(1, 5, 25), repSampMean_Unif)
+results_Unif <- sapply(c(2, 5, 25), repSampMean_Unif)
 
 ##set the max limit of the y axis 
 max_y1 <- max(density(results_Unif[,1])$y, density(results_Unif[,2])$y, density(results_Unif[,3])$y) 
 
-##n = 1
+##n = 2
 plot(density(results_Unif[,1]), ylim=c(0, max_y1), main="Density Plot of Sample Mean with n Varied")
 ##n = 5
 lines(density(results_Unif[,2]), col="blue")
@@ -277,7 +277,7 @@ In this example, we do the following:
 - Simulate $n$ observations from an exponential distribution with rate parameter 1. This is known to be a skewed distribution. 
 - Calculate the sample mean.
 - The previous two steps are repeated for 10,000 replicates.
-- We set $n = 1, 5, 25$.
+- We set $n = 2, 5, 25$.
 - We then plot the sampling distributions of the sample mean for each sample size. The plots are shown in Fig \@ref(fig:dist-E) below.
 
 ```{r dist-E, fig.cap="Sampling Distribution of Sample Mean when Data are Exp(1) with n = 1, 5, 25"}
@@ -291,7 +291,7 @@ repSampMean_E <- function(number){
   return(replicate(Reps, sampMean_E(number)))
 }
 
-results_E <- sapply(c(1, 5, 25), repSampMean_E)
+results_E <- sapply(c(2, 5, 25), repSampMean_E)
 
 max_y1 <- max(density(results_E[,1])$y, density(results_E[,2])$y, density(results_E[,3])$y) 
 

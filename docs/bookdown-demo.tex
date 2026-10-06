@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-10-05}
+\date{2026-10-06}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.4133129 -2.0101326  2.2671957  6.9130386 -0.5321962 -0.7776248
-##  [7] -3.9482051 -4.8050362  0.7838292  0.4171795
+##  [1] -1.5543149  1.3214872  2.5845909  3.4176527  6.0074608  2.8600075
+##  [7]  6.2594804  2.6002668  0.1702753  1.7913317
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -7933,7 +7933,7 @@ The hypothesis test for difference in two independent means (also called a 2-sam
 The test statistic is
 
 \begin{equation} 
-\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y})},
+\hat{t} =  \frac{(\bar{x} - \bar{y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{x} - \bar{y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y})},
 \label{eq:9-teststat2Means}
 \end{equation}
 
@@ -8146,19 +8146,6 @@ If the type I error of a hypothesis test does not match its significance level, 
 
 The \textbf{power} of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e.~power of a test is 1 minus the probability of making a type II error.
 
-Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \ref{factors}, these are:
-
-\begin{itemize}
-\item
-  The effect size, which is the difference between the sample mean \(\bar{x}\) of our data and the value of the population mean if the null is true \(\mu_0\). Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.
-\item
-  The sample size \(n\). Larger sample sizes lead to larger magnitudes for the test statistic.
-\item
-  The standard error of the estimator. Smaller standard errors of the estimator lead to larger magnitudes for the test statistic.
-\item
-  Another factor that increases the power of a hypothesis test is to raise the significance level \(\alpha\). Think of the following extreme example: Suppose we set the significance level to be as low as possible, \(\alpha=0\). Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.
-\end{itemize}
-
 Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test.
 
 Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from \(N(1,1)\) (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are \(H_0: \mu = 0, H_a: \mu \neq 0\). The code below does the following:
@@ -8247,6 +8234,249 @@ Note: we must specify a specific value for the parameter that makes the alternat
 \textbf{Power analysis} or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).
 
 \textbf{Thought question}: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?
+
+\hypertarget{factors-affecting-power}{%
+\subsection{Factors Affecting Power}\label{factors-affecting-power}}
+
+Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \ref{factors}, these are:
+
+\begin{itemize}
+\item
+  The effect size. There are a couple of definitions of effect size:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    The difference between the value of the estimator and the value of the parameter under the null hypothesis.
+  \item
+    A ``standardized'' difference between the value of the estimator and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is \(\frac{\bar{x}_n - \mu_0}{s}\). For a 2-sample t-test, this is \(\frac{(\bar{x} - \bar{y}) - (\mu_x - \mu_y)}{\sqrt{s_x^2 + s_y^2}}\). General guidelines for interpretating the effect size when defined this way:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      0.2: small effect.
+    \item
+      0.5: moderate effect.
+    \item
+      0.8: large effect.
+    \end{itemize}
+  \end{enumerate}
+\end{itemize}
+
+In either definition, larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.
+
+\begin{itemize}
+\item
+  The sample size \(n\). Larger sample sizes lead to larger magnitudes for the test statistic.
+\item
+  The standard error of the estimator. Smaller standard errors of the estimator lead to larger magnitudes for the test statistic.
+\item
+  Another factor that increases the power of a hypothesis test is to raise the significance level \(\alpha\). Think of the following extreme example: Suppose we set the significance level to be as low as possible, \(\alpha=0\). Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.
+\end{itemize}
+
+\hypertarget{worked-examples}{%
+\subsection{Worked Examples}\label{worked-examples}}
+
+We will use a couple of functions from the \texttt{pwr} package to compute power. These functions are useful if you are working in terms of standardized effect size.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  We go back to the example in Section \ref{eg1samplet}. A university bookstore claims that, on average, a student will pay \$101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  What is the effect size?
+\item
+  What is the power of their planned test to identify a significant difference when the true cost per textbook is moderately higher?
+\item
+  What is the minimum sample size to attain a power of at least 0.80 with moderate effect size?
+\end{itemize}
+
+From the question, we have \(H_0: \mu = 101.75, H_a: \mu > 101.75\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# data}
+\NormalTok{news.samp }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{140}\NormalTok{, }\DecValTok{125}\NormalTok{, }\DecValTok{150}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{170}\NormalTok{, }\DecValTok{195}\NormalTok{, }\DecValTok{94}\NormalTok{, }\DecValTok{127}\NormalTok{, }\DecValTok{53}\NormalTok{)}
+
+\DocumentationTok{\#\# effect size}
+\NormalTok{efs }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(news.samp) }\SpecialCharTok{{-}} \FloatTok{101.75}\NormalTok{)}\SpecialCharTok{/}\FunctionTok{sd}\NormalTok{(news.samp)}
+\NormalTok{efs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5715588
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(pwr)}
+
+\DocumentationTok{\#\# power from pwr package}
+\NormalTok{pow }\OtherTok{\textless{}{-}} \FunctionTok{pwr.t.test}\NormalTok{(}\AttributeTok{d =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{n =} \DecValTok{9}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }
+                  \AttributeTok{type =} \StringTok{"one.sample"}\NormalTok{, }
+                  \AttributeTok{alternative =} \StringTok{"greater"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{power}
+\NormalTok{pow}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3927739
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Determine the sample size required for power of 0.8}
+\DocumentationTok{\#\# need to round up to whole number}
+\NormalTok{min.n }\OtherTok{\textless{}{-}} \FunctionTok{ceiling}\NormalTok{(}\FunctionTok{pwr.t.test}\NormalTok{(}\AttributeTok{d =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }
+                            \AttributeTok{power =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{type =} \StringTok{"one.sample"}\NormalTok{, }
+                            \AttributeTok{alternative =} \StringTok{"greater"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{n)}
+\NormalTok{min.n}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 27
+\end{verbatim}
+
+The effect size is 0.5715588.
+
+The power with moderate effect size is 0.3927739.
+
+The minimum sample size for moderate effect size with at least 0.80 power is 27.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Calculate the power}
+\NormalTok{pow2 }\OtherTok{\textless{}{-}} \FunctionTok{pwr.t.test}\NormalTok{(}\AttributeTok{d =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{n =} \DecValTok{307}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }
+                   \AttributeTok{type =} \StringTok{"paired"}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{power}
+\NormalTok{pow2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.937399
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Determine the sample size required for power of 0.8}
+\NormalTok{min.n2 }\OtherTok{\textless{}{-}} \FunctionTok{ceiling}\NormalTok{(}\FunctionTok{pwr.t.test}\NormalTok{(}\AttributeTok{d =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }
+                     \AttributeTok{power =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{type =} \StringTok{"paired"}\NormalTok{, }
+                     \AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{n)}
+\NormalTok{min.n2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 199
+\end{verbatim}
+
+The power with small effect size is 0.937399.
+
+The minimum sample size for small effect size with at least 0.80 power is 199.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist's test when the effect size is small?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Calculate the power}
+\NormalTok{pow3 }\OtherTok{\textless{}{-}} \FunctionTok{pwr.t.test}\NormalTok{(}\AttributeTok{d =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{n =} \DecValTok{150}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }
+                   \AttributeTok{type =} \StringTok{"two.sample"}\NormalTok{, }
+                   \AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{power}
+\NormalTok{pow3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4078021
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Determine the sample size required for power of 0.8}
+\NormalTok{min.n3 }\OtherTok{\textless{}{-}} \FunctionTok{ceiling}\NormalTok{(}\FunctionTok{pwr.t.test}\NormalTok{(}\AttributeTok{d =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }
+                             \AttributeTok{power =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{type =} \StringTok{"two.sample"}\NormalTok{, }
+                             \AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{n)}
+\NormalTok{min.n3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 394
+\end{verbatim}
+
+The power with small effect size is 0.4078021.
+
+The minimum sample size for small effect size with at least 0.80 power is 394.
+
+Note that the \texttt{pwr.t.test()} function assumes equal sample sizes when applied to a 2-sample t-test. The \texttt{pwr.2t.test()} function should be used when sample sizes are not the same.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  The biologist conducting the experiment to identify differences in sepal widths between iris species has planted the irises, but 5 of the Versicolor plants have died as have 9 of the virginica plants. What is the power of the biologist's updated test when the effect size is small?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Calculate the power}
+\NormalTok{pow4 }\OtherTok{\textless{}{-}} \FunctionTok{pwr.t2n.test}\NormalTok{(}\AttributeTok{d =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{n1 =} \DecValTok{145}\NormalTok{, }\AttributeTok{n2 =} \DecValTok{141}\NormalTok{, }
+                     \AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }
+                     \AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{power}
+\NormalTok{pow4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3919092
+\end{verbatim}
+
+The power with small effect size is 0.3919092.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  The biologist decides that it is possible to plant additional virginica irises for the study. How many more should the biologist plant for 50\% power?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Determine the sample size required for power of 0.5}
+\NormalTok{min.n5 }\OtherTok{\textless{}{-}} \FunctionTok{ceiling}\NormalTok{(}\FunctionTok{pwr.t2n.test}\NormalTok{(}\AttributeTok{d =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{n1 =} \DecValTok{145}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{power =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{n2)}
+\NormalTok{min.n5 }\SpecialCharTok{{-}} \DecValTok{141}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 148
+\end{verbatim}
+
+The biologist needs to plant 148 more virginica irises for the study to achieve 0.50 power.
 
 \hypertarget{statistical-vs-practical-significance}{%
 \section{Statistical Vs Practical Significance}\label{statistical-vs-practical-significance}}

@@ -187,13 +187,6 @@
 <span class="header-section-number">15.4</span> Power and Type II Error<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <strong>power</strong> of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. power of a test is 1 minus the probability of making a type II error.</p>
-<p>Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section <a href="hyp.html#factors">14.2.2.1</a>, these are:</p>
-<ul>
-<li><p>The effect size, which is the difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true <span class="math inline">\(\mu_0\)</span>. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.</p></li>
-<li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the test statistic.</p></li>
-<li><p>The standard error of the estimator. Smaller standard errors of the estimator lead to larger magnitudes for the test statistic.</p></li>
-<li><p>Another factor that increases the power of a hypothesis test is to raise the significance level <span class="math inline">\(\alpha\)</span>. Think of the following extreme example: Suppose we set the significance level to be as low as possible, <span class="math inline">\(\alpha=0\)</span>. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.</p></li>
-</ul>
 <p>Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test.</p>
 <p>Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from <span class="math inline">\(N(1,1)\)</span> (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span>. The code below does the following:</p>
 <ul>
@@ -257,6 +250,134 @@
 <p>Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of <span class="math inline">\(n\)</span> and <span class="math inline">\(\alpha\)</span>.</p>
 <p><strong>Power analysis</strong> or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).</p>
 <p><strong>Thought question</strong>: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?</p>
+<div id="factors-affecting-power" class="section level3" number="15.4.1">
+<h3>
+<span class="header-section-number">15.4.1</span> Factors Affecting Power<a class="anchor" aria-label="anchor" href="#factors-affecting-power"><i class="fas fa-link"></i></a>
+</h3>
+<p>Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section <a href="hyp.html#factors">14.2.2.1</a>, these are:</p>
+<ul>
+<li>
+<p>The effect size. There are a couple of definitions of effect size:</p>
+<ol style="list-style-type: decimal">
+<li>The difference between the value of the estimator and the value of the parameter under the null hypothesis.</li>
+<li>A “standardized” difference between the value of the estimator and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is <span class="math inline">\(\frac{\bar{x}_n - \mu_0}{s}\)</span>. For a 2-sample t-test, this is <span class="math inline">\(\frac{(\bar{x} - \bar{y}) - (\mu_x - \mu_y)}{\sqrt{s_x^2 + s_y^2}}\)</span>. General guidelines for interpretating the effect size when defined this way:
+<ul>
+<li>0.2: small effect.</li>
+<li>0.5: moderate effect.</li>
+<li>0.8: large effect.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>In either definition, larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.</p>
+<ul>
+<li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the test statistic.</p></li>
+<li><p>The standard error of the estimator. Smaller standard errors of the estimator lead to larger magnitudes for the test statistic.</p></li>
+<li><p>Another factor that increases the power of a hypothesis test is to raise the significance level <span class="math inline">\(\alpha\)</span>. Think of the following extreme example: Suppose we set the significance level to be as low as possible, <span class="math inline">\(\alpha=0\)</span>. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.</p></li>
+</ul>
+</div>
+<div id="worked-examples" class="section level3" number="15.4.2">
+<h3>
+<span class="header-section-number">15.4.2</span> Worked Examples<a class="anchor" aria-label="anchor" href="#worked-examples"><i class="fas fa-link"></i></a>
+</h3>
+<p>We will use a couple of functions from the <code>pwr</code> package to compute power. These functions are useful if you are working in terms of standardized effect size.</p>
+<ol style="list-style-type: decimal">
+<li>We go back to the example in Section <a href="hyp.html#eg1samplet">14.2.5</a>. A university bookstore claims that, on average, a student will pay $101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed.</li>
+</ol>
+<ul>
+<li>What is the effect size?</li>
+<li>What is the power of their planned test to identify a significant difference when the true cost per textbook is moderately higher?</li>
+<li>What is the minimum sample size to attain a power of at least 0.80 with moderate effect size?</li>
+</ul>
+<p>From the question, we have <span class="math inline">\(H_0: \mu = 101.75, H_a: \mu &gt; 101.75\)</span>.</p>
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## data</span></span>
+<span><span class="va">news.samp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">140</span>, <span class="fl">125</span>, <span class="fl">150</span>, <span class="fl">87</span>, <span class="fl">170</span>, <span class="fl">195</span>, <span class="fl">94</span>, <span class="fl">127</span>, <span class="fl">53</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## effect size</span></span>
+<span><span class="va">efs</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">news.samp</span><span class="op">)</span> <span class="op">-</span> <span class="fl">101.75</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">news.samp</span><span class="op">)</span></span>
+<span><span class="va">efs</span></span></code></pre></div>
+<pre><code>## [1] 0.5715588</code></pre>
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## power from pwr package</span></span>
+<span><span class="va">pow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, n <span class="op">=</span> <span class="fl">9</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
+<span>                  type <span class="op">=</span> <span class="st">"one.sample"</span>, </span>
+<span>                  alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span>
+<span><span class="va">pow</span></span></code></pre></div>
+<pre><code>## [1] 0.3927739</code></pre>
+<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
+<span><span class="co">## need to round up to whole number</span></span>
+<span><span class="va">min.n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
+<span>                            power <span class="op">=</span> <span class="fl">0.8</span>, type <span class="op">=</span> <span class="st">"one.sample"</span>, </span>
+<span>                            alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span><span class="op">$</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">min.n</span></span></code></pre></div>
+<pre><code>## [1] 27</code></pre>
+<p>The effect size is 0.5715588.</p>
+<p>The power with moderate effect size is 0.3927739.</p>
+<p>The minimum sample size for moderate effect size with at least 0.80 power is 27.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small?</li>
+</ol>
+<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
+<span><span class="va">pow2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, n <span class="op">=</span> <span class="fl">307</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
+<span>                   type <span class="op">=</span> <span class="st">"paired"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span>
+<span><span class="va">pow2</span></span></code></pre></div>
+<pre><code>## [1] 0.937399</code></pre>
+<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
+<span><span class="va">min.n2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
+<span>                     power <span class="op">=</span> <span class="fl">0.8</span>, type <span class="op">=</span> <span class="st">"paired"</span>, </span>
+<span>                     alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">min.n2</span></span></code></pre></div>
+<pre><code>## [1] 199</code></pre>
+<p>The power with small effect size is 0.937399.</p>
+<p>The minimum sample size for small effect size with at least 0.80 power is 199.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist’s test when the effect size is small?</li>
+</ol>
+<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
+<span><span class="va">pow3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, n <span class="op">=</span> <span class="fl">150</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
+<span>                   type <span class="op">=</span> <span class="st">"two.sample"</span>, </span>
+<span>                   alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span>
+<span><span class="va">pow3</span></span></code></pre></div>
+<pre><code>## [1] 0.4078021</code></pre>
+<div class="sourceCode" id="cb534"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
+<span><span class="va">min.n3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
+<span>                             power <span class="op">=</span> <span class="fl">0.8</span>, type <span class="op">=</span> <span class="st">"two.sample"</span>, </span>
+<span>                             alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">min.n3</span></span></code></pre></div>
+<pre><code>## [1] 394</code></pre>
+<p>The power with small effect size is 0.4078021.</p>
+<p>The minimum sample size for small effect size with at least 0.80 power is 394.</p>
+<p>Note that the <code><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test()</a></code> function assumes equal sample sizes when applied to a 2-sample t-test. The <code>pwr.2t.test()</code> function should be used when sample sizes are not the same.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>The biologist conducting the experiment to identify differences in sepal widths between iris species has planted the irises, but 5 of the Versicolor plants have died as have 9 of the virginica plants. What is the power of the biologist’s updated test when the effect size is small?</li>
+</ol>
+<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
+<span><span class="va">pow4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t2n.test.html">pwr.t2n.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, n1 <span class="op">=</span> <span class="fl">145</span>, n2 <span class="op">=</span> <span class="fl">141</span>, </span>
+<span>                     sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
+<span>                     alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span>
+<span><span class="va">pow4</span></span></code></pre></div>
+<pre><code>## [1] 0.3919092</code></pre>
+<p>The power with small effect size is 0.3919092.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>The biologist decides that it is possible to plant additional virginica irises for the study. How many more should the biologist plant for 50% power?</li>
+</ol>
+<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.5</span></span>
+<span><span class="va">min.n5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t2n.test.html">pwr.t2n.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, n1 <span class="op">=</span> <span class="fl">145</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.5</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">n2</span><span class="op">)</span></span>
+<span><span class="va">min.n5</span> <span class="op">-</span> <span class="fl">141</span></span></code></pre></div>
+<pre><code>## [1] 148</code></pre>
+<p>The biologist needs to plant 148 more virginica irises for the study to achieve 0.50 power.</p>
+</div>
 </div>
 <div id="statistical-vs-practical-significance" class="section level2" number="15.5">
 <h2>
@@ -317,7 +438,12 @@
 <li><a class="nav-link" href="#introduction-5"><span class="header-section-number">15.1</span> Introduction</a></li>
 <li><a class="nav-link" href="#type-i-and-type-ii-errors"><span class="header-section-number">15.2</span> Type I and Type II Errors</a></li>
 <li><a class="nav-link" href="#significance-level-and-type-i-error"><span class="header-section-number">15.3</span> Significance Level and Type I Error</a></li>
-<li><a class="nav-link" href="#power"><span class="header-section-number">15.4</span> Power and Type II Error</a></li>
+<li>
+<a class="nav-link" href="#power"><span class="header-section-number">15.4</span> Power and Type II Error</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#factors-affecting-power"><span class="header-section-number">15.4.1</span> Factors Affecting Power</a></li>
+<li><a class="nav-link" href="#worked-examples"><span class="header-section-number">15.4.2</span> Worked Examples</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#statistical-vs-practical-significance"><span class="header-section-number">15.5</span> Statistical Vs Practical Significance</a></li>
 </ul>
 
@@ -335,7 +461,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-05.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

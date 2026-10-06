@@ -86,16 +86,6 @@ If the type I error of a hypothesis test does not match its significance level, 
 
 The **power** of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. power of a test is 1 minus the probability of making a type II error. 
 
-Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \@ref(factors), these are:
-
-- The effect size, which is the difference between the sample mean $\bar{x}$ of our data and the value of the population mean if the null is true $\mu_0$. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true. 
-
-- The sample size $n$. Larger sample sizes lead to larger magnitudes for the test statistic.
-
-- The standard error of the estimator. Smaller standard errors of the estimator lead to larger magnitudes for the test statistic.
-
-- Another factor that increases the power of a hypothesis test is to raise the significance level $\alpha$. Think of the following extreme example: Suppose we set the significance level to be as low as possible, $\alpha=0$. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other. 
-
 Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test. 
 
 Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from $N(1,1)$ (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are $H_0: \mu = 0, H_a: \mu \neq 0$. The code below does the following:
@@ -158,6 +148,133 @@ Note: we must specify a specific value for the parameter that makes the alternat
 **Power analysis** or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).
 
 **Thought question**: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?
+
+### Factors Affecting Power
+
+Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \@ref(factors), these are:
+
+- The effect size. There are a couple of definitions of effect size:
+
+    1. The difference between the value of the estimator and the value of the parameter under the null hypothesis.
+    2. A "standardized" difference between the value of the estimator and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is $\frac{\bar{x}_n - \mu_0}{s}$. For a 2-sample t-test, this is $\frac{(\bar{x} - \bar{y}) - (\mu_x - \mu_y)}{\sqrt{s_x^2 + s_y^2}}$. General guidelines for interpretating the effect size when defined this way:
+        - 0.2: small effect.
+        - 0.5: moderate effect.
+        - 0.8: large effect.
+
+In either definition, larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true. 
+
+- The sample size $n$. Larger sample sizes lead to larger magnitudes for the test statistic.
+
+- The standard error of the estimator. Smaller standard errors of the estimator lead to larger magnitudes for the test statistic.
+
+- Another factor that increases the power of a hypothesis test is to raise the significance level $\alpha$. Think of the following extreme example: Suppose we set the significance level to be as low as possible, $\alpha=0$. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other. 
+
+### Worked Examples
+
+We will use a couple of functions from the `pwr` package to compute power. These functions are useful if you are working in terms of standardized effect size. 
+
+1. We go back to the example in Section \@ref(eg1samplet). A university bookstore claims that, on average, a student will pay \$101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed. 
+
+- What is the effect size? 
+- What is the power of their planned test to identify a significant difference when the true cost per textbook is moderately higher?
+- What is the minimum sample size to attain a power of at least 0.80 with moderate effect size?
+
+From the question, we have $H_0: \mu = 101.75, H_a: \mu > 101.75$.
+
+```{r}
+## data
+news.samp <- c(140, 125, 150, 87, 170, 195, 94, 127, 53)
+
+## effect size
+efs <- (mean(news.samp) - 101.75)/sd(news.samp)
+efs
+
+library(pwr)
+
+## power from pwr package
+pow <- pwr.t.test(d = 0.5, n = 9, sig.level = 0.05, 
+                  type = "one.sample", 
+                  alternative = "greater")$power
+pow
+
+## Determine the sample size required for power of 0.8
+## need to round up to whole number
+min.n <- ceiling(pwr.t.test(d = 0.5, sig.level = 0.05, 
+                            power = 0.8, type = "one.sample", 
+                            alternative = "greater")$n)
+min.n
+```
+
+The effect size is `r efs`. 
+
+The power with moderate effect size is `r pow`.
+
+The minimum sample size for moderate effect size with at least 0.80 power is `r min.n`.
+
+2. A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small?    
+
+```{r}
+
+## Calculate the power
+pow2 <- pwr.t.test(d = 0.2, n = 307, sig.level = 0.05, 
+                   type = "paired", alternative = "two.sided")$power
+pow2
+
+## Determine the sample size required for power of 0.8
+min.n2 <- ceiling(pwr.t.test(d = 0.2, sig.level = 0.05, 
+                     power = 0.8, type = "paired", 
+                     alternative = "two.sided")$n)
+min.n2
+
+```
+
+The power with small effect size is `r pow2`.
+
+The minimum sample size for small effect size with at least 0.80 power is `r min.n2`.
+
+3. A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist's test when the effect size is small?  
+
+```{r}
+## Calculate the power
+pow3 <- pwr.t.test(d = 0.2, n = 150, sig.level = 0.05, 
+                   type = "two.sample", 
+                   alternative = "two.sided")$power
+pow3
+
+## Determine the sample size required for power of 0.8
+min.n3 <- ceiling(pwr.t.test(d = 0.2, sig.level = 0.05, 
+                             power = 0.8, type = "two.sample", 
+                             alternative = "two.sided")$n)
+min.n3
+```
+
+The power with small effect size is `r pow3`.
+
+The minimum sample size for small effect size with at least 0.80 power is `r min.n3`.
+
+Note that the `pwr.t.test()` function assumes equal sample sizes when applied to a 2-sample t-test. The `pwr.2t.test()` function should be used when sample sizes are not the same. 
+
+4. The biologist conducting the experiment to identify  differences in sepal widths between iris species has planted the irises, but 5 of the Versicolor plants have died as have 9 of the virginica plants. What is the power of the biologist's updated test when the effect size is small? 
+
+```{r}
+## Calculate the power
+pow4 <- pwr.t2n.test(d = 0.2, n1 = 145, n2 = 141, 
+                     sig.level = 0.05, 
+                     alternative = "two.sided")$power
+pow4
+```
+
+The power with small effect size is `r pow4`.
+
+5. The biologist decides that it is possible to plant additional virginica irises for the study. How many more should the biologist plant for 50% power? 
+
+```{r}
+## Determine the sample size required for power of 0.5
+min.n5 <- ceiling(pwr.t2n.test(d = 0.2, n1 = 145, sig.level = 0.05, power = 0.5, alternative = "two.sided")$n2)
+min.n5 - 141
+```
+
+The biologist needs to plant `r min.n5 - 141` more virginica irises for the study to achieve 0.50 power. 
 
 ## Statistical Vs Practical Significance
 

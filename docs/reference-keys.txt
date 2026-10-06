@@ -301,4 +301,6 @@ introduction-5
 type-i-and-type-ii-errors
 significance-level-and-type-i-error
 power
+factors-affecting-power
+worked-examples
 statistical-vs-practical-significance

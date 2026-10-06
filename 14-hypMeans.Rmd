@@ -387,7 +387,7 @@ The hypothesis test for difference in two independent means (also called a 2-sam
 The test statistic is
 
 \begin{equation} 
-\hat{t} =  \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{X} - \bar{Y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y})},
+\hat{t} =  \frac{(\bar{x} - \bar{y}) - (\mu_X - \mu_Y)}{\sqrt{\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}}} = \frac{(\bar{x} - \bar{y}) - (\mu_X - \mu_Y)}{SE(\bar{X} - \bar{Y})},
 (\#eq:9-teststat2Means)
 \end{equation}
 

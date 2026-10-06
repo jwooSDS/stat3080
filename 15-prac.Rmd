@@ -154,13 +154,13 @@ Ideally, we would like the power of our hypothesis test to be large. So what are
 
 - The effect size. There are a couple of definitions of effect size:
 
-    1. The difference between the value of the estimator and the value of the parameter under the null hypothesis.
-    2. A "standardized" difference between the value of the estimator and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is $\frac{\bar{x}_n - \mu_0}{s}$. For a 2-sample t-test, this is $\frac{(\bar{x} - \bar{y}) - (\mu_x - \mu_y)}{\sqrt{s_x^2 + s_y^2}}$. General guidelines for interpretating the effect size when defined this way:
+    1. The difference between the true value of the parameter and the value of the parameter under the null hypothesis.
+    2. A "standardized" difference between the true value of the parameter and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is $\frac{\mu_x - \mu_0}{s}$. For a 2-sample t-test, this is $\frac{(\mu_x - \mu_y) - (\text{diff in null})}{\sqrt{s_x^2 + s_y^2}}$. General guidelines for interpretating the effect size when defined this way:
         - 0.2: small effect.
         - 0.5: moderate effect.
         - 0.8: large effect.
 
-In either definition, larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true. 
+In either definition, larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean is likely to deviate more from the null value if the null hypothesis is true. 
 
 - The sample size $n$. Larger sample sizes lead to larger magnitudes for the test statistic.
 
@@ -174,7 +174,7 @@ We will use a couple of functions from the `pwr` package to compute power. These
 
 1. We go back to the example in Section \@ref(eg1samplet). A university bookstore claims that, on average, a student will pay \$101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed. 
 
-- What is the effect size? 
+- What is the effect size based on the sample? 
 - What is the power of their planned test to identify a significant difference when the true cost per textbook is moderately higher?
 - What is the minimum sample size to attain a power of at least 0.80 with moderate effect size?
 

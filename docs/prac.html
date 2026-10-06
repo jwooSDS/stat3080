@@ -139,7 +139,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## sig level</span></span>
 <span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span></span>
@@ -207,7 +207,7 @@
 <li>Repeat these steps for a total of 10 thousand replicates.</li>
 <li>Count the number of times we reject the null hypothesis, and divide by the number of replicates. This value estimates the probability of correctly rejecting the null hypothesis, i.e. the power of this test.</li>
 </ul>
-<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## sig level</span></span>
 <span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span></span>
@@ -259,8 +259,8 @@
 <li>
 <p>The effect size. There are a couple of definitions of effect size:</p>
 <ol style="list-style-type: decimal">
-<li>The difference between the value of the estimator and the value of the parameter under the null hypothesis.</li>
-<li>A “standardized” difference between the value of the estimator and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is <span class="math inline">\(\frac{\bar{x}_n - \mu_0}{s}\)</span>. For a 2-sample t-test, this is <span class="math inline">\(\frac{(\bar{x} - \bar{y}) - (\mu_x - \mu_y)}{\sqrt{s_x^2 + s_y^2}}\)</span>. General guidelines for interpretating the effect size when defined this way:
+<li>The difference between the true value of the parameter and the value of the parameter under the null hypothesis.</li>
+<li>A “standardized” difference between the true value of the parameter and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is <span class="math inline">\(\frac{\mu_x - \mu_0}{s}\)</span>. For a 2-sample t-test, this is <span class="math inline">\(\frac{(\mu_x - \mu_y) - (\text{diff in null})}{\sqrt{s_x^2 + s_y^2}}\)</span>. General guidelines for interpretating the effect size when defined this way:
 <ul>
 <li>0.2: small effect.</li>
 <li>0.5: moderate effect.</li>
@@ -270,7 +270,7 @@
 </ol>
 </li>
 </ul>
-<p>In either definition, larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.</p>
+<p>In either definition, larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean is likely to deviate more from the null value if the null hypothesis is true.</p>
 <ul>
 <li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the test statistic.</p></li>
 <li><p>The standard error of the estimator. Smaller standard errors of the estimator lead to larger magnitudes for the test statistic.</p></li>
@@ -286,12 +286,12 @@
 <li>We go back to the example in Section <a href="hyp.html#eg1samplet">14.2.5</a>. A university bookstore claims that, on average, a student will pay $101.75 per class for textbooks. The student newspaper suspects that the claimed average is too low and investigates by randomly selecting 9 courses from the current semester offerings and finding the textbook costs for each. The students conducting the investigation reason that with the collection of courses being offered courses, the textbook prices are normally distributed.</li>
 </ol>
 <ul>
-<li>What is the effect size?</li>
+<li>What is the effect size based on the sample?</li>
 <li>What is the power of their planned test to identify a significant difference when the true cost per textbook is moderately higher?</li>
 <li>What is the minimum sample size to attain a power of at least 0.80 with moderate effect size?</li>
 </ul>
 <p>From the question, we have <span class="math inline">\(H_0: \mu = 101.75, H_a: \mu &gt; 101.75\)</span>.</p>
-<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## data</span></span>
 <span><span class="va">news.samp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">140</span>, <span class="fl">125</span>, <span class="fl">150</span>, <span class="fl">87</span>, <span class="fl">170</span>, <span class="fl">195</span>, <span class="fl">94</span>, <span class="fl">127</span>, <span class="fl">53</span><span class="op">)</span></span>
 <span></span>
@@ -299,17 +299,17 @@
 <span><span class="va">efs</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">news.samp</span><span class="op">)</span> <span class="op">-</span> <span class="fl">101.75</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">news.samp</span><span class="op">)</span></span>
 <span><span class="va">efs</span></span></code></pre></div>
 <pre><code>## [1] 0.5715588</code></pre>
-<div class="sourceCode" id="cb531"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning: package 'pwr' was built under R version 4.5.3</code></pre>
-<div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## power from pwr package</span></span>
 <span><span class="va">pow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, n <span class="op">=</span> <span class="fl">9</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
 <span>                  type <span class="op">=</span> <span class="st">"one.sample"</span>, </span>
 <span>                  alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span>
 <span><span class="va">pow</span></span></code></pre></div>
 <pre><code>## [1] 0.3927739</code></pre>
-<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb531"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
 <span><span class="co">## need to round up to whole number</span></span>
 <span><span class="va">min.n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
@@ -323,13 +323,13 @@
 <ol start="2" style="list-style-type: decimal">
 <li>A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small?</li>
 </ol>
-<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
 <span><span class="va">pow2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, n <span class="op">=</span> <span class="fl">307</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
 <span>                   type <span class="op">=</span> <span class="st">"paired"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span>
 <span><span class="va">pow2</span></span></code></pre></div>
 <pre><code>## [1] 0.937399</code></pre>
-<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
 <span><span class="va">min.n2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
 <span>                     power <span class="op">=</span> <span class="fl">0.8</span>, type <span class="op">=</span> <span class="st">"paired"</span>, </span>
@@ -341,14 +341,14 @@
 <ol start="3" style="list-style-type: decimal">
 <li>A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist’s test when the effect size is small?</li>
 </ol>
-<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
 <span><span class="va">pow3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, n <span class="op">=</span> <span class="fl">150</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
 <span>                   type <span class="op">=</span> <span class="st">"two.sample"</span>, </span>
 <span>                   alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span>
 <span><span class="va">pow3</span></span></code></pre></div>
 <pre><code>## [1] 0.4078021</code></pre>
-<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
 <span><span class="va">min.n3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
 <span>                             power <span class="op">=</span> <span class="fl">0.8</span>, type <span class="op">=</span> <span class="st">"two.sample"</span>, </span>
@@ -361,7 +361,7 @@
 <ol start="4" style="list-style-type: decimal">
 <li>The biologist conducting the experiment to identify differences in sepal widths between iris species has planted the irises, but 5 of the Versicolor plants have died as have 9 of the virginica plants. What is the power of the biologist’s updated test when the effect size is small?</li>
 </ol>
-<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
 <span><span class="va">pow4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t2n.test.html">pwr.t2n.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, n1 <span class="op">=</span> <span class="fl">145</span>, n2 <span class="op">=</span> <span class="fl">141</span>, </span>
 <span>                     sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
@@ -372,7 +372,7 @@
 <ol start="5" style="list-style-type: decimal">
 <li>The biologist decides that it is possible to plant additional virginica irises for the study. How many more should the biologist plant for 50% power?</li>
 </ol>
-<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.5</span></span>
 <span><span class="va">min.n5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t2n.test.html">pwr.t2n.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.2</span>, n1 <span class="op">=</span> <span class="fl">145</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.5</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">n2</span><span class="op">)</span></span>
 <span><span class="va">min.n5</span> <span class="op">-</span> <span class="fl">141</span></span></code></pre></div>

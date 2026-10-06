@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  6 OCT 2026 11:01
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  6 OCT 2026 12:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,9 +874,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 [16]
 
 [17]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1]  1.45729899 -0.41496012 -0.02680262  0.96137771  0.18
-000318  3.81033022[] 
+Overfull \hbox (38.25pt too wide) in paragraph at lines 678--678
+[]\TU/lmtt/m/n/10 ##  [1] -0.9229409 -5.4742894 -2.6466356  3.5559022 -1.185327
+9  3.3125803[] 
  []
 
 
@@ -3096,7 +3096,7 @@ Overfull \hbox (41.75235pt too wide) has occurred while \output is active
  []
 
 [191]
-Overfull \hbox (206.25pt too wide) in paragraph at lines 7792--7792
+Overfull \hbox (206.25pt too wide) in paragraph at lines 7771--7771
 []\TU/lmtt/m/n/10 ## alternative hypothesis: true difference in means between g
 roup female and group male is not equal to 0[] 
  []
@@ -3133,7 +3133,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [197]
-Overfull \vbox (0.30298pt too high) detected at line 8025
+Overfull \vbox (0.30298pt too high) detected at line 8004
  []
 
 

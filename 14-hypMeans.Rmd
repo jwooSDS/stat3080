@@ -346,7 +346,7 @@ The `anorexia` dataset in the `MASS` package provides data on patient weights be
 
 From the question, we have $H_0: \mu_d = 0, H_a: \mu_d \neq 0$.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(MASS)
 
 paired.Data <- MASS::anorexia
@@ -386,7 +386,7 @@ The test statistic is
 (\#eq:9-teststat2Means)
 \end{equation}
 
-where $\bar{X}, \bar{Y}$ denote the sample averages in each sample, $s_X, s_Y$ denote the standard deviation in each sample, $n_X, n_Y$ denote the sample sizes in in each sample, and $\mu_X - \mu_Y$ denotes the mean difference under the null hypothesis. The test statistic follows a $t$ distribution. The degrees of freedom is approximated using the [Welch–Satterthwaite equation](https://en.wikipedia.org/wiki/Welch%27s_t-test#Calculations).
+where $\bar{x}, \bar{y}$ denote the sample averages in each sample, $s_X, s_Y$ denote the standard deviation in each sample, $n_X, n_Y$ denote the sample sizes in in each sample, and $\mu_X - \mu_Y$ denotes the mean difference under the null hypothesis. The test statistic follows a $t$ distribution. The degrees of freedom is approximated using the [Welch–Satterthwaite equation](https://en.wikipedia.org/wiki/Welch%27s_t-test#Calculations).
 
 In some older references, it is suggested to approximate the degrees of freedom using $min(n_X, n_Y) - 1$. The hypothesis test using this approximation is considered to be more **conservative** than the approximation based on the Welch–Satterthwaite equation. A hypothesis test that is conservative is a test when the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section \@ref(prac).
 

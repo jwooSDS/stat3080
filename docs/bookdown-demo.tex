@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.45729899 -0.41496012 -0.02680262  0.96137771  0.18000318  3.81033022
-##  [7]  0.92853937  3.47636064 -0.94060637 -2.63445492
+##  [1] -0.9229409 -5.4742894 -2.6466356  3.5559022 -1.1853279  3.3125803
+##  [7] -4.0776415  2.6647287 -3.3536229  7.2253135
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -7651,28 +7651,7 @@ From the question, we have \(H_0: \mu_d = 0, H_a: \mu_d \neq 0\).
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(MASS)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## 
-## Attaching package: 'MASS'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:ISLR2':
-## 
-##     Boston
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:dplyr':
-## 
-##     select
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{paired.Data }\OtherTok{\textless{}{-}}\NormalTok{ MASS}\SpecialCharTok{::}\NormalTok{anorexia}
 
 \DocumentationTok{\#\#only control group}
@@ -7748,7 +7727,7 @@ The test statistic is
 \label{eq:9-teststat2Means}
 \end{equation}
 
-where \(\bar{X}, \bar{Y}\) denote the sample averages in each sample, \(s_X, s_Y\) denote the standard deviation in each sample, \(n_X, n_Y\) denote the sample sizes in in each sample, and \(\mu_X - \mu_Y\) denotes the mean difference under the null hypothesis. The test statistic follows a \(t\) distribution. The degrees of freedom is approximated using the \href{https://en.wikipedia.org/wiki/Welch\%27s_t-test\#Calculations}{Welch--Satterthwaite equation}.
+where \(\bar{x}, \bar{y}\) denote the sample averages in each sample, \(s_X, s_Y\) denote the standard deviation in each sample, \(n_X, n_Y\) denote the sample sizes in in each sample, and \(\mu_X - \mu_Y\) denotes the mean difference under the null hypothesis. The test statistic follows a \(t\) distribution. The degrees of freedom is approximated using the \href{https://en.wikipedia.org/wiki/Welch\%27s_t-test\#Calculations}{Welch--Satterthwaite equation}.
 
 In some older references, it is suggested to approximate the degrees of freedom using \(min(n_X, n_Y) - 1\). The hypothesis test using this approximation is considered to be more \textbf{conservative} than the approximation based on the Welch--Satterthwaite equation. A hypothesis test that is conservative is a test when the Type I error rate (probability of wrongly rejecting the null) is below the significance level, and is less powerful. We will cover these concepts in the next section, Section \ref{prac}.
 
@@ -8048,9 +8027,9 @@ Ideally, we would like the power of our hypothesis test to be large. So what are
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    The difference between the value of the estimator and the value of the parameter under the null hypothesis.
+    The difference between the true value of the parameter and the value of the parameter under the null hypothesis.
   \item
-    A ``standardized'' difference between the value of the estimator and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is \(\frac{\bar{x}_n - \mu_0}{s}\). For a 2-sample t-test, this is \(\frac{(\bar{x} - \bar{y}) - (\mu_x - \mu_y)}{\sqrt{s_x^2 + s_y^2}}\). General guidelines for interpretating the effect size when defined this way:
+    A ``standardized'' difference between the true value of the parameter and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is \(\frac{\mu_x - \mu_0}{s}\). For a 2-sample t-test, this is \(\frac{(\mu_x - \mu_y) - (\text{diff in null})}{\sqrt{s_x^2 + s_y^2}}\). General guidelines for interpretating the effect size when defined this way:
 
     \begin{itemize}
     \tightlist
@@ -8064,7 +8043,7 @@ Ideally, we would like the power of our hypothesis test to be large. So what are
   \end{enumerate}
 \end{itemize}
 
-In either definition, larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.
+In either definition, larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean is likely to deviate more from the null value if the null hypothesis is true.
 
 \begin{itemize}
 \item
@@ -8089,7 +8068,7 @@ We will use a couple of functions from the \texttt{pwr} package to compute power
 \begin{itemize}
 \tightlist
 \item
-  What is the effect size?
+  What is the effect size based on the sample?
 \item
   What is the power of their planned test to identify a significant difference when the true cost per textbook is moderately higher?
 \item

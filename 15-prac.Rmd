@@ -107,10 +107,9 @@ alpha <- 0.05
 ## function that simulates data from N(1,1),
 ## then constructs test for mean, and assesses if test
 ## correctly rejects H0
-mean_type1 <- function(n, alpha){
+mean_power <- function(n, alpha){
   
-  X <- rnorm(n) ##draw n data points from standard normal
-  
+  X <- rnorm(n, mean = 1, sd = 1) ##draw n data points N(1,1)
   ##calculate elements needed for CI of mean
   xbar <- mean(X) ##sample mean
   SE <- sd(X)/sqrt(n) ##SE of sample mean
@@ -128,9 +127,9 @@ mean_type1 <- function(n, alpha){
 ## find the proportion of samples that wrongly reject H0
 reps <- 10000
 
-rep_mean_type1 <- function(n, alpha){
+rep_mean_power <- function(n, alpha){
   
-  result <- replicate(reps, mean_type1(n, alpha))
+  result <- replicate(reps, mean_power(n, alpha))
   return(mean(result))
 }
 
@@ -138,7 +137,7 @@ rep_mean_type1 <- function(n, alpha){
 ## which is 0.05 in this simulation
 
 set.seed(31)
-rep_mean_type1(10, alpha)
+rep_mean_power(10, alpha)
 ```
 
 The estimated power of this test is 0.8003. So if the data come from a $N(1,1)$, the power of testing $H_0: \mu = 0, H_a: \mu \neq 0$ using a sample of size 10 and significance level of 0.05 is 0.8003.

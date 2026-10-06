@@ -342,36 +342,31 @@ In order to conduct a paired t-test, the optional `t.test()` argument `paired` s
 
 ### Worked Example {#egpairedt}
 
-A weight study was conducted on twins in Australia. Is there evidence that identical twins over the age of 50 have significantly different weights? 
+The `anorexia` dataset in the `MASS` package provides data on patient weights before and after receiving different forms of therapy for anorexia. We will look at the control group for this example, and we want to see if there is a change in weights before and after the study period.
 
 From the question, we have $H_0: \mu_d = 0, H_a: \mu_d \neq 0$.
 
 ```{r}
-library(OpenMx) ##data twinData from this package
+library(MASS)
 
-## using which is another to extract the rows that pertain to multiple conditions, we want identical twins with ages over 50.
-a <- which((twinData$zygosity == "MZFF" | twinData$zygosity == "MZMM" ) & twinData$age > 50)
+paired.Data <- MASS::anorexia
 
-## weights of twin 1
-wt1 <- twinData$wt1[a]
+##only control group
+control <- paired.Data[paired.Data$Treat == "Cont",]
 
-## corresponding weights of twin 2
-wt2 <- twinData$wt2[a]
-
-## Conduct the hypothesis test
-pair_result <- t.test(wt1, wt2, mu=0, alternative="two.sided", paired=TRUE)
+pair_result <- t.test(control$Prewt, control$Postwt, mu=0, alternative="two.sided", paired=TRUE)
 
 pair_result
 ```
 - The test statistic is $t = $ `r pair_result$statistic`.
-- The p-value is `r pair_result$p.value`. So we fail to reject the null hypothesis. The data do not provide evidence that the weights of identical twins over 50 years old are significantly different
+- The p-value is `r pair_result$p.value`. So we fail to reject the null hypothesis. The data do not provide evidence that the weights of the patients in the control group change before and after the study period.
 - The 95% confidence interval is `r pair_result$conf.int`. Notice how this interval contains the value under the null hypothesis, 0. The conclusion is consistent with the hypothesis test. 
 
-We could have also used the $t.test()4 function a little differently. We could have found the differences in weights between each pair of twins, and then performed a 1-sample t-test on these differences. 
+We could have also used the `t.test()` function a little differently. We could have found the differences in weights between each pair of readings for each patient, and then performed a 1-sample t-test on these differences. 
 
 ```{r}
-## do a 1 sample t test
-diffs <- wt1 - wt2
+## do as a 1 sample t test on pairs of differences
+diffs <- control$Prewt - control$Postwt
 
 other_result <- t.test(diffs, mu= 0, alternative = "two.sided", paired = FALSE)
 

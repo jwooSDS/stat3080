@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-10-06}
+\date{2026-10-07}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  3.972075  6.924835  2.551797 -1.157572 -4.608856  6.419535  7.976241
-##  [8]  2.759634 -3.713237 -1.837904
+##  [1] -0.6417055  6.1955809  0.2042058 -0.1265213  2.4077626 -0.3250673
+##  [7] -4.3179653  0.7307419 -2.5035937  4.2439155
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -5850,7 +5850,7 @@ Consider this simple scenario. We want to find the distribution associated with 
 
 \subsection{Population Vs. Sample}\label{population-vs.-sample}
 
-The above scenario illustrates a few concepts and terms that are fundamental in estimation. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample.
+The above scenario illustrates a few concepts and terms that are fundamental in statistical inference. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample.
 
 The \textbf{population} (sometimes called the population of interest) is the entire set of individuals, or objects, or events that a study is interested in. In the scenario described above, the population would be (all) American adults.
 
@@ -5870,7 +5870,7 @@ An \textbf{estimator} or a \textbf{statistic} is a numerical summary associated 
 
 An \textbf{estimated value}, or \textbf{estimate}, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mm Hg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mm Hg.
 
-So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:
+So a parameter is associated with a population, while an estimator is associated with a sample. Some other differences between parameters and estimators:
 
 \begin{itemize}
 \tightlist
@@ -5882,7 +5882,7 @@ So a parameter is a number that is associated with a population, while an estima
 
 \subsection{Sampling Distributions}\label{sampling-distributions}
 
-Now imagine that we keep obtaining representative samples of 750 American adults. We calculate the average systolic blood pressure from each sample. They are all different? We can then create a histogram or density plot (since the averages are numeric) to visualize the distribution of the sample means. Are they all close to each other? Or they spread out? Is the distribution bell-shaped or skewed?
+Now imagine that we keep obtaining representative samples of 750 American adults. We calculate the average systolic blood pressure from each sample. They are all likely to be differnt. We can then create a histogram or density plot (since the averages are numeric) to visualize the distribution of the sample means. Are they all close to each other? Or they spread out? Is the distribution bell-shaped or skewed?
 
 The distribution associated with a statistic (from the same sample size) is called its \textbf{sampling distribution}. A sampling distribution is the probability distribution of a given statistic (like a mean or proportion) calculated from multiple random samples of the same size taken from a larger population. Some statistics have known sampling distributions (under certain conditions):
 
@@ -6230,7 +6230,7 @@ In this example, we do the following:
 \FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(results\_Unif[,}\DecValTok{2}\NormalTok{]), }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
 \DocumentationTok{\#\#n = 25}
 \FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(results\_Unif[,}\DecValTok{3}\NormalTok{]), }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
-\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"n=1"}\NormalTok{, }\StringTok{"n=5"}\NormalTok{, }\StringTok{"n=25"}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{), }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{cex=}\FloatTok{0.7}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"n=2"}\NormalTok{, }\StringTok{"n=5"}\NormalTok{, }\StringTok{"n=25"}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{), }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{cex=}\FloatTok{0.7}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6279,7 +6279,7 @@ In this example, we do the following:
 \FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(results\_E[,}\DecValTok{1}\NormalTok{]), }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, max\_y1), }\AttributeTok{main=}\StringTok{"Density Plot of Sample Mean with n Varied"}\NormalTok{)}
 \FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(results\_E[,}\DecValTok{2}\NormalTok{]), }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
 \FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(results\_E[,}\DecValTok{3}\NormalTok{]), }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
-\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"n=1"}\NormalTok{, }\StringTok{"n=5"}\NormalTok{, }\StringTok{"n=25"}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{), }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{cex=}\FloatTok{0.7}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"n=2"}\NormalTok{, }\StringTok{"n=5"}\NormalTok{, }\StringTok{"n=25"}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{,}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{), }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{cex=}\FloatTok{0.7}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

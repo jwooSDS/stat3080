@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  6 OCT 2026 14:03
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  7 OCT 2026 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,9 +874,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 [16]
 
 [17]
-Overfull \hbox (59.25pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1]  3.972075  6.924835  2.551797 -1.157572 -4.608856  6.
-419535  7.976241[] 
+Overfull \hbox (38.25pt too wide) in paragraph at lines 678--678
+[]\TU/lmtt/m/n/10 ##  [1] -0.6417055  6.1955809  0.2042058 -0.1265213  2.407762
+6 -0.3250673[] 
  []
 
 
@@ -2817,9 +2817,6 @@ Chapter 11.
 
 
 [135]
-Underfull \vbox (badness 4378) has occurred while \output is active []
-
-
 
 
 Overfull \hbox (67.06343pt too wide) has occurred while \output is active
@@ -2856,9 +2853,6 @@ CENTRAL LIMIT THEOREM
 File: bookdown-demo_files/figure-latex/dist-samp-mean-1.pdf Graphic file (type 
 pdf)
 <use bookdown-demo_files/figure-latex/dist-samp-mean-1.pdf>
-
-Underfull \vbox (badness 1052) has occurred while \output is active []
-
 
 
 

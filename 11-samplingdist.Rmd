@@ -6,7 +6,7 @@ Consider this simple scenario. We want to find the distribution associated with 
 
 ### Population Vs. Sample
 
-The above scenario illustrates a few concepts and terms that are fundamental in estimation. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample. 
+The above scenario illustrates a few concepts and terms that are fundamental in statistical inference. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample. 
 
 The **population** (sometimes called the population of interest) is the entire set of individuals, or objects, or events that a study is interested in. In the scenario described above, the population would be (all) American adults. 
 
@@ -26,14 +26,14 @@ An **estimator** or a **statistic** is a numerical summary associated with sampl
 
 An **estimated value**, or **estimate**, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mm Hg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mm Hg. 
 
-So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:
+So a parameter is associated with a population, while an estimator is associated with a sample. Some other differences between parameters and estimators:
 
 - The value of parameters are unknown, while we can actually calculate numerical values of estimators.
 - The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 American adults. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is **variance associated with estimators due to random sampling**. 
 
 ### Sampling Distributions
 
-Now imagine that we keep obtaining representative samples of 750 American adults. We calculate the average systolic blood pressure from each sample. They are all different? We can then create a histogram or density plot (since the averages are numeric) to visualize the distribution of the sample means. Are they all close to each other? Or they spread out? Is the distribution bell-shaped or skewed?
+Now imagine that we keep obtaining representative samples of 750 American adults. We calculate the average systolic blood pressure from each sample. They are all likely to be differnt. We can then create a histogram or density plot (since the averages are numeric) to visualize the distribution of the sample means. Are they all close to each other? Or they spread out? Is the distribution bell-shaped or skewed?
 
 The distribution associated with a statistic (from the same sample size) is called its **sampling distribution**. A sampling distribution is the probability distribution of a given statistic (like a mean or proportion) calculated from multiple random samples of the same size taken from a larger population. Some statistics have known sampling distributions (under certain conditions):
 
@@ -265,7 +265,7 @@ plot(density(results_Unif[,1]), ylim=c(0, max_y1), main="Density Plot of Sample 
 lines(density(results_Unif[,2]), col="blue")
 ##n = 25
 lines(density(results_Unif[,3]), col="red")
-legend("topright", legend = c("n=1", "n=5", "n=25"), col = c("black","blue", "red"), lty = 1, cex=0.7)
+legend("topright", legend = c("n=2", "n=5", "n=25"), col = c("black","blue", "red"), lty = 1, cex=0.7)
 ```
 
 From Figure \@ref(fig:dist-U), we can see that when $n=1$, the distribution of the sample means is not normal. This is expected since this is just the distribution of the standard uniform. However, notice that when $n=5$, the distribution already looks approximately normal. We did not need as large a sample size as 25 for the CLT to kick in. 
@@ -298,7 +298,7 @@ max_y1 <- max(density(results_E[,1])$y, density(results_E[,2])$y, density(result
 plot(density(results_E[,1]), ylim=c(0, max_y1), main="Density Plot of Sample Mean with n Varied")
 lines(density(results_E[,2]), col="blue")
 lines(density(results_E[,3]), col="red")
-legend("topright", legend = c("n=1", "n=5", "n=25"), col = c("black","blue", "red"), lty = 1, cex=0.7)
+legend("topright", legend = c("n=2", "n=5", "n=25"), col = c("black","blue", "red"), lty = 1, cex=0.7)
 ```
 
 From Figure \@ref(fig:dist-E), we can see that when $n=5$, the distribution of the sample means when the data is exponential (skewed) is not normal. This was unlike the distribution of the sample means when the data were uniform. Although at $n=25$, the distribution is approximately normal.  

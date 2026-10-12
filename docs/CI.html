@@ -7,7 +7,7 @@
 <title>Chapter 12 Confidence Intervals | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="12.1 Introduction In Section 11, we learned about sampling distributions of statistics. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 12 Confidence Intervals | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="12.1 Introduction In Section 11, we learned about sampling distributions of statistics. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="12.1 Introduction In Section 11, we learned about sampling distributions of statistics. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -111,7 +112,7 @@
 <span class="header-section-number">12.2.1</span> Randomness of Estimators<a class="anchor" aria-label="anchor" href="#randomness-of-estimators"><i class="fas fa-link"></i></a>
 </h3>
 <p>Suppose we are trying to estimate the mean systolic blood pressure of all American adults, by using the sample mean of 750 randomly selected American adults. The sample mean is an estimator for the population mean. We want to be able to report the value of the estimator, as well as our uncertainty about the estimator. A way to measure the uncertainty of an estimator is through the variance or standard error of the estimator. Larger values indicate a higher degree of uncertainty, as an estimator with larger variance means that the value of the estimator is likely to be different among random samples.</p>
-<p>We will start with the confidence interval for a mean, since its sampling distribution is known (see Section <a href="clt.html#distsampmean">11.3</a>). We will use this setting to explain concepts associated with confidence intervals. We will then generalizing these concepts to other estimators with known distributions.</p>
+<p>We will start with the confidence interval for a mean, since its sampling distribution is known (see Section <a href="clt.html#distsampmean">11.3</a>). We will use this setting to explain concepts associated with confidence intervals. We will then generalize these concepts to other estimators with known distributions.</p>
 </div>
 <div id="randomness-of-confidence-intervals" class="section level3" number="12.2.2">
 <h3>
@@ -125,7 +126,7 @@ I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
 <p>Some terminology associated with intervals of the form in equation <a href="CI.html#eq:8-CIbasic">(12.1)</a>:</p>
 <ul>
 <li>
-<p><span class="math inline">\(\epsilon\)</span> is often called the <strong>margin of error</strong>. (Yes that margin of error that you often see reported in election polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value.</p>
+<p><span class="math inline">\(\epsilon\)</span> is often called the <strong>margin of error</strong>. (Yes that margin of error that you often see reported in election polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value. The margin of error can be interpreted as the maximum difference between a sample statistic and the true, unknown value in the population (the parameter) due to random sampling variability.</p>
 <ul>
 <li>Remember that the uncertainty being measured is the uncertainty due to random sampling, not due to other sources of uncertainty such as not getting a representative sample, people lying, etc. As mentioned in earlier modules, other methods are used to handle such issues and belong to the field of survey sampling, which is very interesting and an active area of research. We will not get into these issues in this class.</li>
 </ul>
@@ -223,7 +224,7 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= 2 \Phi(z^*) - 1 = 1 - \alpha \\
 \tag{12.7}
 \end{equation}\]</span></p>
 <p>So <span class="math inline">\(z^*\)</span> is found by inverting the CDF of a standard normal evaluated at <span class="math inline">\(1 - \frac{\alpha}{2}\)</span>. This quantity can easily be found using R. For example, for 95% confidence, <span class="math inline">\(\alpha = 0.05\)</span>, we type:</p>
-<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1.959964</code></pre>
@@ -269,7 +270,7 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span></span>
 <span><span class="co">## function that simulates data from standard normal,</span></span>
@@ -324,7 +325,7 @@ T =  \frac{\bar{X}_n - \mu}{\frac{s}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{SE(\bar
 \tag{12.10}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(SE(\bar{X}_n)\)</span> is now <span class="math inline">\(\frac{s}{\sqrt{n}}\)</span>. It turns out that <span class="math inline">\(T\)</span> follows another well-known distribution, called the <strong><span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom</strong>. The PDF of a <span class="math inline">\(t\)</span> distribution is pretty long and is not needed for this course (you can look it up on your own), but we take a look at the plot of its PDF and compare it with the plot of the PDF of a standard normal, in Figure <a href="CI.html#fig:8-t">12.3</a> below.</p>
-<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##plot PDF from -5 to 5</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span></span>
@@ -353,7 +354,7 @@ Figure 12.3: Plot of PDF for Z and t Distributions
 </ul>
 <p>How does the fact that we are working with a <span class="math inline">\(t\)</span> distribution instead of a standard normal affect how we calculate a confidence interval for the mean? How does equation <a href="CI.html#eq:8-CImean">(12.9)</a> change? We replace <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(s^2\)</span> and <span class="math inline">\(z^*\)</span> with <span class="math inline">\(t^*\)</span>. The critical value is now denoted by <span class="math inline">\(t^*\)</span> to emphasize that it is based on the <span class="math inline">\(t\)</span> distribution.</p>
 <p>As an example to find the critical value of a <span class="math inline">\(t\)</span> distribution with 10 degrees of freedom and with 95% confidence:</p>
-<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">10</span><span class="op">)</span> <span class="co">##supply percentile first, then value of df</span></span></code></pre></div>
 <pre><code>## [1] 2.228139</code></pre>

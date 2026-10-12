@@ -18,7 +18,7 @@ We will learn about the bootstrap, which is used when the distribution of a stat
 
 Suppose we are trying to estimate the mean systolic blood pressure of all American adults, by using the sample mean of 750 randomly selected American adults. The sample mean is an estimator for the population mean. We want to be able to report the value of the estimator, as well as our uncertainty about the estimator. A way to measure the uncertainty of an estimator is through the variance or standard error of the estimator. Larger values indicate a higher degree of uncertainty, as an estimator with larger variance means that the value of the estimator is likely to be different among random samples. 
 
-We will start with the confidence interval for a mean, since its sampling distribution is known (see Section \@ref(distsampmean)). We will use this setting to explain concepts associated with confidence intervals. We will then generalizing these concepts to other estimators with known distributions. 
+We will start with the confidence interval for a mean, since its sampling distribution is known (see Section \@ref(distsampmean)). We will use this setting to explain concepts associated with confidence intervals. We will then generalize these concepts to other estimators with known distributions. 
 
 ### Randomness of Confidence Intervals
 
@@ -31,7 +31,7 @@ I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
 
 Some terminology associated with intervals of the form in equation \@ref(eq:8-CIbasic):
 
-- $\epsilon$ is often called the **margin of error**. (Yes that margin of error that you often see reported in election polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value. 
+- $\epsilon$ is often called the **margin of error**. (Yes that margin of error that you often see reported in election polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value. The margin of error can be interpreted as the maximum difference between a sample statistic  and the true, unknown value in the population (the parameter) due to random sampling variability.
 
   - Remember that the uncertainty being measured is the uncertainty due to random sampling, not due to other sources of uncertainty such as not getting a representative sample, people lying, etc. As mentioned in earlier modules, other methods are used to handle such issues and belong to the field of survey sampling, which is very interesting and an active area of research. We will not get into these issues in this class.
 

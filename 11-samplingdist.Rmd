@@ -317,7 +317,7 @@ It turns out the CLT can also be applied to the sampling distribution of the sam
 
 When the data are independent, and if the sample size is large enough, the sampling distribution of the sample proportions is approximately $\hat{p} \sim N\left(p, \frac{p(1-p)}{n}\right)$.
 
-Most books will write that the sample size is large enough if $np \geq 10$ and $n(10-p) \geq 10$. Some books will say 5 instead of 10. The approximation to the normal distribution gets better as $np$ and $n(1-p)$ get larger.
+Most books will write that the sample size is large enough if $np \geq 10$ and $n(1-p) \geq 10$. Some books will say 5 instead of 10. The approximation to the normal distribution gets better as $np$ and $n(1-p)$ get larger.
 
 **Thought question:** Is there a contextual meaning behind the values of $np$ and $n(1-p)$?
 
@@ -352,7 +352,7 @@ Suppose we want to investigate the difference in the average systolic blood pres
 
 The population parameter is $\mu_X - \mu_Y$ and the statistic is $\bar{X} - \bar{Y}$, where $X$ and $Y$ denote the systolic blood pressures of female and male American adults respectively. 
 
-Under certain conditions, the sampling distribution of $\bar{X} - \bar{Y}$ is (approximately) $N(\bar{X} - \bar{Y}, \frac{\sigma^2_X}{n_X} + \frac{\sigma^2_Y}{n_Y})$, where $n_X$ and $n_Y$ denote the sample sizes of female and male American adults. 
+Under certain conditions, the sampling distribution of $\bar{X} - \bar{Y}$ is (approximately) $N(\mu_X - \mu_Y, \frac{\sigma^2_X}{n_X} + \frac{\sigma^2_Y}{n_Y})$, where $n_X$ and $n_Y$ denote the sample sizes of female and male American adults. 
 
 **Thought Question 1:** How would you use equations \@ref(eq:11-expectations) and \@ref(eq:11-variances) and theorem \@ref(thm:sum-norms) to explain this sampling distribution?
 
@@ -364,7 +364,7 @@ Suppose we want to investigate the difference in the proportion of female and ma
 
 The population parameter is $p_X - p_Y$ and the statistic is $\hat{p}_X - \hat{p}_Y$.
 
-Under certain conditions, the sampling distribution of $\hat{p}_X - \hat{p}_Y$ is (approximately) $N(\hat{p}_X - \hat{p}_Y, \frac{p_X(1-p_X)}{n_X} + \frac{p_Y(1-p_Y)}{n_Y})$, where $n_X$ and $n_Y$ denote the sample sizes of female and male voters. 
+Under certain conditions, the sampling distribution of $\hat{p}_X - \hat{p}_Y$ is (approximately) $N(p_X - p_Y, \frac{p_X(1-p_X)}{n_X} + \frac{p_Y(1-p_Y)}{n_Y})$, where $n_X$ and $n_Y$ denote the sample sizes of female and male voters. 
 
 **Thought Question 1:** How would you use equations \@ref(eq:11-expectations) and \@ref(eq:11-variances) and theorem \@ref(thm:sum-norms) to explain this sampling distribution?
 

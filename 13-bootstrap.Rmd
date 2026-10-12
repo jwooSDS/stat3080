@@ -145,7 +145,7 @@ We report the following:
 
 ## Parametric Vs Non-Parametric Methods
 
-The confidence intervals from Section \@ref(CIs) are based on the known sampling distributions of estimators, and have a closed form formula to calculate them. These confidence intervals are typically based on some conditions in order to be valid. 
+The confidence intervals from Section \@ref(CI) are based on the known sampling distributions of estimators, and have a closed form formula to calculate them. These confidence intervals are typically based on some conditions in order to be valid. 
 
 Such methods are sometimes called **parametric methods**, as the distributions they are based on fits a known probability distribution which can be specified by an equation via its PDF, $f_X$.
 

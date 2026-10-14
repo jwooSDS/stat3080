@@ -2,27 +2,27 @@
 
 ## Introduction
 
-In Section \@ref(clt), we learned about sampling distributions of statistics. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults to estimate the mean systolic blood pressure of all American adults. We also established that statistics such as the sample mean have randomness in them. If we were to obtain another random sample of 750 American adults, the sample mean blood pressure from this other sample is likely to be different from the original random sample. So is there uncertainty in our sample mean due to random sampling. 
+In Section \@ref(clt), we learned about sampling distributions of statistics. We established that statistics such as the sample mean have randomness in them. If we were to obtain different random samples of 750 American adults, the sample mean blood pressure from the samples are likely to be different from each other. So is there variablity in our sample mean due to random sampling. 
 
-You might notice in Section \@ref(clt) that we know the sampling distribution of some common statistics, or we can derive the sampling distribution using simulations. In these instances, the value of the corresponding parameters were known. This is unrealistic in real life; the purpose of what we do is to use data from our sample to infer the characteristics in the population!
+You might notice in Section \@ref(clt) that we know the sampling distribution of some common statistics (under certain conditions), or we can derive the sampling distribution using simulations. In these instances, the value of the corresponding parameters were known. This is unrealistic in real life; the purpose of what we do is to use data from our sample to infer the characteristics in the population!
 
-This section will be more realistic: the values of the population parameters are unknown. In this section, we will introduce confidence intervals. Confidence intervals build on the ideas from Section \@ref(clt): that statistics are random and we can quantify their uncertainty. The purpose of a confidence interval is to provide a range of plausible values for an unknown population parameter, based on a sample. A confidence interval not only provides the estimated value of the parameter, but also a measure of uncertainty associated with the estimation.
+This section will be more realistic: the values of the population parameters are unknown. In this section, we will introduce confidence intervals. Confidence intervals build on the ideas from Section \@ref(clt): that statistics are random and we can quantify their uncertainty (variance). The purpose of a confidence interval is to provide a range of plausible values for an unknown population parameter, based on a sample. A confidence interval not only provides the estimated value of the parameter, but also a measure of uncertainty associated with the estimation.
 
-We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding statistics, the sample mean and sample proportion, are known as long as certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other statistics that have known distributions will be constructed similarly. 
+We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding statistics, the sample mean and sample proportion, are **known** as long as certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other statistics that have known distributions will be constructed similarly. 
 
-We will learn about the bootstrap, which is used when the distribution of a statistic is unknown, in Section \@ref(boot). 
+We will learn about the bootstrap, which is used to construct confidence intervals when the distribution of a statistic is **unknown**, in Section \@ref(boot). 
 
 ## Confidence Interval for the Mean {#CImean}
 
 ### Randomness of Estimators
 
-Suppose we are trying to estimate the mean systolic blood pressure of all American adults, by using the sample mean of 750 randomly selected American adults. The sample mean is an estimator for the population mean. We want to be able to report the value of the estimator, as well as our uncertainty about the estimator. A way to measure the uncertainty of an estimator is through the variance or standard error of the estimator. Larger values indicate a higher degree of uncertainty, as an estimator with larger variance means that the value of the estimator is likely to be different among random samples. 
+Suppose we are trying to estimate the mean systolic blood pressure of all American adults, by using the sample mean of 750 randomly selected American adults. The sample mean is an estimator for the population mean. We want to be able to report the value of the estimator, as well as our uncertainty about the estimator. A way to measure the uncertainty of an estimator is through the **variance or standard error of the estimator**. Larger values indicate a higher degree of uncertainty, as an estimator with larger variance means that the value of the estimator is likely to be different among random samples. 
 
 We will start with the confidence interval for a mean, since its sampling distribution is known (see Section \@ref(distsampmean)). We will use this setting to explain concepts associated with confidence intervals. We will then generalize these concepts to other estimators with known distributions. 
 
 ### Randomness of Confidence Intervals
 
-The **confidence interval** is a probability applied to the estimator $\bar{X}_n$. Instead of focusing on the estimated value of the sample mean and its variance, we construct a confidence interval for the mean that takes the form:
+The **confidence interval** is a probability applied to an estimator such as $\bar{X}_n$. Instead of focusing on the estimated value of the sample mean and its variance, we construct a confidence interval for the mean that takes the form:
 
 \begin{equation} 
 I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
@@ -31,7 +31,7 @@ I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
 
 Some terminology associated with intervals of the form in equation \@ref(eq:8-CIbasic):
 
-- $\epsilon$ is often called the **margin of error**. (Yes that margin of error that you often see reported in election polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value. The margin of error can be interpreted as the maximum difference between a sample statistic  and the true, unknown value in the population (the parameter) due to random sampling variability.
+- $\epsilon$ is often called the **margin of error**. (Yes that margin of error that you often see reported in election polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value. The margin of error can be interpreted as the maximum difference between a sample estimator  and the true, unknown value in the population (the parameter) due to random sampling variability.
 
   - Remember that the uncertainty being measured is the uncertainty due to random sampling, not due to other sources of uncertainty such as not getting a representative sample, people lying, etc. As mentioned in earlier modules, other methods are used to handle such issues and belong to the field of survey sampling, which is very interesting and an active area of research. We will not get into these issues in this class.
 
@@ -188,7 +188,7 @@ Again, the formula in equation \@ref(eq:8-CImean) is only valid if either of the
 
 #### Coverage Probability {#CP}
 
-Figure \@ref(fig:8-CI) illustrates the concept of **coverage probability**. 20 random samples were drawn, and corresponding 50% confidence intervals were constructed, and we find that 10 out of 20 of these intervals contained the true value of the parameter. The coverage probability is 50%, since 10 out of 20 intervals contained the true value value of the parameter. This matches the confidence level of 50%. The **coverage probability should match the confidence level**, if not, the distribution that we used for the sampling distribution of the estimator is probably incorrect. 
+Figure \@ref(fig:8-CI) also illustrates the concept of **coverage probability**. 20 random samples were drawn, and corresponding 50% confidence intervals were constructed, and we find that 10 out of 20 of these intervals contained the true value of the parameter. The coverage probability is 50%, since 10 out of 20 intervals contained the true value value of the parameter. This matches the confidence level of 50%. The **coverage probability should match the confidence level**, if not, the distribution that we used for the sampling distribution of the estimator is probably incorrect. 
 
 So in general, for confidence intervals constructed at $(1-\alpha) \times 100\%$ confidence, the coverage probability of the confidence intervals should be $(1-\alpha) \times 100\%$. 
 

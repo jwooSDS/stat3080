@@ -37,9 +37,9 @@ When using Monte Carlo simulations to estimate the sampling distribution of esti
 
 3. For each dataset, calculate the value of the estimator $\hat{\Theta}$. Since we have $K$ datasets, we will have $K$ values for the estimators, denoted by $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$.
 
-4. We estimate the true mean of $\hat{\Theta}$ by taking the sample mean of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$.
+4. We estimate the value of $\Theta$ by taking the sample mean of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$.
 
-5. We estimate the true variance of $\hat{\Theta}$ by taking the sample variance of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$. Square-rooting this value gives an estimate for the standard error of $\hat{\Theta}$.
+5. We estimate the variance of $\hat{\Theta}$ by taking the sample variance of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$. Square-rooting this value gives an estimate for the standard error of $\hat{\Theta}$.
 
 6. We create a density plot of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$ to estimate the sampling distribution of $\hat{\Theta}$.
 
@@ -67,9 +67,11 @@ Comparing this algorithm with Monte Carlo simulations, the main differences are:
 
 - The $K$ datasets are produced slightly differently. For the bootstrap, they are synthesized by sampling with replacement $n$ data points from the original dataset of size $n$. With Monte Carlo simulations, we draw $n$ data points from its assumed distribution. 
 
-The math that proves the bootstrap works is beyond the level of this class, although it is freely available online. 
-
 The bootstrap tends to work better as the number of bootstrap datasets ,$K$, increases and as the sample size, $n$, increases.
+
+#### Why Resample with Same sample Size as Original Dataset?
+
+The variance of any sample statistic (generally) depends on the sample size. To approximate the variance of a statistic or estimator $\hat{\Theta}$, we need each bootstrapped dataset to be of the sample sample size as the original dataset.
 
 ### Confidence Intervals using the Bootstrap
 
@@ -83,8 +85,6 @@ The **basic** (or reverse percentile ) bootstrap $(1-\alpha) \times 100\%$ confi
 where $\delta^* = (\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - \hat{\theta}$, which is the difference between the estimator in the $K$ bootstrap samples and the value of the estimator in the original dataset, so $\hat{\delta}_{\beta}^*$ is the $\beta \times 100$th percentile of $\delta^*$.
 
 You may notice that the confidence interval in equation \@ref(eq:8-CIboot) does not fit the general framework given in equation \@ref(eq:8-CIbasic2). This is because the sampling distribution of the estimator may not be symmetric.
-
-The math that derives this confidence interval is beyond the level of this class, although it is freely available online.
 
 The bootstrap confidence interval tends to work better as $K$ increases and as $n$ increases.
 

@@ -273,6 +273,7 @@ introduction-3
 bootstrap
 estimating-sampling-distributions-using-many-random-samples
 the-bootstrap-algorithm
+why-resample-with-same-sample-size-as-original-dataset
 confidence-intervals-using-the-bootstrap
 worked-example-2
 parametric-vs-non-parametric-methods

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  14 OCT 2026 13:28
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  15 OCT 2026 10:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -906,9 +906,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 317.
 
 [12] [13] [14] [15] [16] [17]
-Overfull \hbox (59.25pt too wide) in paragraph at lines 699--699
-[]\TU/lmtt/m/n/10 ##  [1] -6.142001 -2.228556  3.134551  8.689792  1.124526  2.
-455470 -3.580885[] 
+Overfull \hbox (38.25pt too wide) in paragraph at lines 699--699
+[]\TU/lmtt/m/n/10 ##  [1]  2.3077913  1.4060060  0.3294605  2.3102493 -5.236996
+8 -1.3138589[] 
  []
 
 [18] [19] [20] [21] [22]
@@ -2678,10 +2678,7 @@ File: bookdown-demo_files/figure-latex/8-crit-1.pdf Graphic file (type pdf)
 [154]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[155] [156]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[157]
+[155] [156] [157]
 Underfull \hbox (badness 2980) in paragraph at lines 6840--6841
 []\TU/lmr/m/n/10 The solution to this is fairly intuitive, we use the sample va
 riance

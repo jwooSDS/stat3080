@@ -188,7 +188,7 @@ Again, the formula in equation \@ref(eq:8-CImean) is only valid if either of the
 
 #### Coverage Probability {#CP}
 
-Figure \@ref(fig:8-CI) also illustrates the concept of **coverage probability**. 20 random samples were drawn, and corresponding 50% confidence intervals were constructed, and we find that 10 out of 20 of these intervals contained the true value of the parameter. The coverage probability is 50%, since 10 out of 20 intervals contained the true value value of the parameter. This matches the confidence level of 50%. The **coverage probability should match the confidence level**, if not, the distribution that we used for the sampling distribution of the estimator is probably incorrect. 
+Figure \@ref(fig:8-CI) also illustrates the concept of **coverage probability**. 20 random samples were drawn, and corresponding 50% confidence intervals were constructed, and we find that 10 out of 20 of these intervals contained the true value of the parameter. The coverage probability is 50%, since 10 out of 20 intervals contained the true value value of the parameter. This matches the confidence level of 50%. The **coverage probability should match the confidence level**, if not, the distribution that we used for the sampling distribution of the estimator or statistic is probably incorrect. This is usually a by-product of not meeting conditions to construct the interval.
 
 So in general, for confidence intervals constructed at $(1-\alpha) \times 100\%$ confidence, the coverage probability of the confidence intervals should be $(1-\alpha) \times 100\%$. 
 

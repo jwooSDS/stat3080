@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-10-14}
+\date{2026-10-15}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -6.142001 -2.228556  3.134551  8.689792  1.124526  2.455470 -3.580885
-##  [8]  2.240812 -2.869037 -2.214634
+##  [1]  2.3077913  1.4060060  0.3294605  2.3102493 -5.2369968 -1.3138589
+##  [7]  4.2013183  1.0401417 -0.9253088  4.2478671
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -6757,7 +6757,7 @@ Again, the formula in equation \eqref{eq:8-CImean} is only valid if either of th
 \hypertarget{CP}{%
 \subsubsection{Coverage Probability}\label{CP}}
 
-Figure \ref{fig:8-CI} also illustrates the concept of \textbf{coverage probability}. 20 random samples were drawn, and corresponding 50\% confidence intervals were constructed, and we find that 10 out of 20 of these intervals contained the true value of the parameter. The coverage probability is 50\%, since 10 out of 20 intervals contained the true value value of the parameter. This matches the confidence level of 50\%. The \textbf{coverage probability should match the confidence level}, if not, the distribution that we used for the sampling distribution of the estimator is probably incorrect.
+Figure \ref{fig:8-CI} also illustrates the concept of \textbf{coverage probability}. 20 random samples were drawn, and corresponding 50\% confidence intervals were constructed, and we find that 10 out of 20 of these intervals contained the true value of the parameter. The coverage probability is 50\%, since 10 out of 20 intervals contained the true value value of the parameter. This matches the confidence level of 50\%. The \textbf{coverage probability should match the confidence level}, if not, the distribution that we used for the sampling distribution of the estimator or statistic is probably incorrect. This is usually a by-product of not meeting conditions to construct the interval.
 
 So in general, for confidence intervals constructed at \((1-\alpha) \times 100\%\) confidence, the coverage probability of the confidence intervals should be \((1-\alpha) \times 100\%\).
 

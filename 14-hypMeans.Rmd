@@ -62,7 +62,7 @@ A number of textbooks take the view that the null and alternative hypotheses are
 
 1. The calculations performed to assess the evidence our data provides are done assuming the null hypothesis is true. You will realize in the later subsections that one can only perform these calculations if the null hypothesis says the parameter is equal to some specific value.
 
-2. I have seen many people get confused with the null and alternative hypotheses if they insist the null and alternative must be opposite with a one-sided alternative. Indeed, if you look at Practice Exercise 9.3 and 9.4 in our book, the author has gotten these confused in the proposed solutions. 
+2. I have seen many people get confused with the null and alternative hypotheses if they insist the null and alternative must be opposite with a one-sided alternative. I have seen authors in a few widely used textbook actually get these confused in their proposed solutions. 
 
 ### Test Statistic
 
@@ -108,7 +108,7 @@ $$
         &= -2.357023.
 \end{split}
 $$
-This $t$ statistic is valid since our sample size is 50, which is usually large enough for the approximation to the $t$ distribution to be valid.
+This $t$ statistic is valid since our sample size is 50, which is usually large enough for the approximation to the $t$ distribution to be valid. We should also look at the distribution of the data to check it is not extremely skewed.
 
 Remember that the test statistic is a measure of how far our sample data are from their expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e. our data provide more evidence against the null hypothesis. 
 
@@ -118,7 +118,7 @@ The $t$ statistic also has this nice definition: it is the distance between our 
 
 We have established that larger values of the test statistic (in magnitude) imply more evidence against the null hypothesis. For the $t$ statistic for the mean, the factors that affect its magnitude are:
 
-- The difference between the sample mean $\bar{x}$ of our data and the value of the population mean if the null is true $\mu_0$. This difference is called the **effect size**. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true. 
+- The difference between the sample mean $\bar{x}$ of our data and the value of the population mean if the null is true $\mu_0$. Larger differences lead to larger test statistics, in magnitude. This should make sense since a larger difference implies the sample mean deviates more from the expected mean if the null hypothesis is true. 
 
 - The sample size $n$. Larger sample sizes lead to larger magnitudes for the $t$ statistic, since $\frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}}$ can be written as $\sqrt{n}\frac{\bar{x}_n - \mu_0}{s}$. This implies that even if the effect size stays the same, larger sample sizes provide more evidence against the null. 
 
@@ -128,11 +128,11 @@ After calculating the value of the test statistic, we need to assess if our data
 
 - Using the p-value, we **reject the null hypothesis if our p-value is less than the significance level**  (i.e. our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis)
 
-The **significance level** of the test, denoted by $\alpha$, is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in a later subsection. So if we conduct a hypothesis test with significance level $\alpha = 0.05$, we are saying that we are willing to have a 5% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.
+The **significance level** of the test, denoted by $\alpha$, is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in Section \@ref(prac). So if we conduct a hypothesis test with significance level $\alpha = 0.05$, we are saying that we are willing to have a 5% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.
 
 - Using the critical value, we **reject the null hypothesis if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis** (i.e. our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis).
 
-Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level. Both of these approaches will always lead to the same conclusion, so you only need to use one of them. 
+Both of these approaches are based on the sampling distribution of the statistic, and on the value of the significance level. Both of these approaches will always lead to the same conclusion, so you only need to use one of them. 
 
 #### P-Value 
 

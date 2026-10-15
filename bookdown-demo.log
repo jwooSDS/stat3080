@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  15 OCT 2026 14:01
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  15 OCT 2026 14:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,9 +874,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 [16]
 
 [17]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1] -1.25762755  0.05143739 -3.73099705  4.34061276 -2.03
-140477  0.22153977[] 
+Overfull \hbox (59.25pt too wide) in paragraph at lines 678--678
+[]\TU/lmtt/m/n/10 ##  [1]  2.653520  6.380158  2.674506  1.556148 -1.191361  4.
+773500  5.272536[] 
  []
 
 
@@ -3020,6 +3020,9 @@ Underfull \vbox (badness 1565) has occurred while \output is active []
 [178]
 
 [179]
+Underfull \vbox (badness 2359) has occurred while \output is active []
+
+
 
 [180]
 
@@ -3040,17 +3043,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 7354--7356
 File: bookdown-demo_files/figure-latex/9-pvalgreater-1.pdf Graphic file (type p
 df)
 <use bookdown-demo_files/figure-latex/9-pvalgreater-1.pdf>
-File: bookdown-demo_files/figure-latex/9-pvalless-1.pdf Graphic file (type pdf)
-
-<use bookdown-demo_files/figure-latex/9-pvalless-1.pdf>
 
 
 [181]
+File: bookdown-demo_files/figure-latex/9-pvalless-1.pdf Graphic file (type pdf)
 
-[182]
+<use bookdown-demo_files/figure-latex/9-pvalless-1.pdf>
 File: bookdown-demo_files/figure-latex/9-pvaleg-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/9-pvaleg-1.pdf>
 
+Underfull \vbox (badness 3168) has occurred while \output is active []
+
+
+
+[182]
 
 [183]
 File: images/09-crit_2sided.jpeg Graphic file (type bmp)
@@ -3060,11 +3066,12 @@ File: images/09-crit_2sided.jpeg Graphic file (type bmp)
 [184]
 File: images/09-crit_greater.jpeg Graphic file (type bmp)
 <images/09-crit_greater.jpeg>
-File: images/09-crit_less.jpeg Graphic file (type bmp)
-<images/09-crit_less.jpeg>
 
 
 [185]
+File: images/09-crit_less.jpeg Graphic file (type bmp)
+<images/09-crit_less.jpeg>
+
 
 [186]
 
@@ -3073,6 +3080,9 @@ File: images/09-crit_less.jpeg Graphic file (type bmp)
 [188]
 
 [189]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [190]
 

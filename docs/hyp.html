@@ -153,7 +153,7 @@
 <p>A number of textbooks take the view that the null and alternative hypotheses are complements, so if we write <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, then we must write <span class="math inline">\(H_0: \mu \geq \mu_0\)</span>. This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to <span class="math inline">\(\mu_0\)</span>. There are a couple of reasons why I say the null hypothesis is a statement involving an equality, rather than an inequality:</p>
 <ol style="list-style-type: decimal">
 <li><p>The calculations performed to assess the evidence our data provides are done assuming the null hypothesis is true. You will realize in the later subsections that one can only perform these calculations if the null hypothesis says the parameter is equal to some specific value.</p></li>
-<li><p>I have seen many people get confused with the null and alternative hypotheses if they insist the null and alternative must be opposite with a one-sided alternative. Indeed, if you look at Practice Exercise 9.3 and 9.4 in our book, the author has gotten these confused in the proposed solutions.</p></li>
+<li><p>I have seen many people get confused with the null and alternative hypotheses if they insist the null and alternative must be opposite with a one-sided alternative. I have seen authors in a few widely used textbook actually get these confused in their proposed solutions.</p></li>
 </ol>
 </div>
 </div>
@@ -190,7 +190,7 @@
         &amp;= -2.357023.
 \end{split}
 \]</span>
-This <span class="math inline">\(t\)</span> statistic is valid since our sample size is 50, which is usually large enough for the approximation to the <span class="math inline">\(t\)</span> distribution to be valid.</p>
+This <span class="math inline">\(t\)</span> statistic is valid since our sample size is 50, which is usually large enough for the approximation to the <span class="math inline">\(t\)</span> distribution to be valid. We should also look at the distribution of the data to check it is not extremely skewed.</p>
 <p>Remember that the test statistic is a measure of how far our sample data are from their expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e. our data provide more evidence against the null hypothesis.</p>
 <p>The <span class="math inline">\(t\)</span> statistic also has this nice definition: it is the distance between our sample estimator and the value of the parameter if the null hypothesis is true, in terms of number of standard errors. So for our Freshman 15 example, the sample mean is 2.357 standard errors smaller than the hypothesized value of 15.</p>
 <div id="factors" class="section level4" number="14.2.2.1">
@@ -199,7 +199,7 @@ This <span class="math inline">\(t\)</span> statistic is valid since our sample 
 </h4>
 <p>We have established that larger values of the test statistic (in magnitude) imply more evidence against the null hypothesis. For the <span class="math inline">\(t\)</span> statistic for the mean, the factors that affect its magnitude are:</p>
 <ul>
-<li><p>The difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true <span class="math inline">\(\mu_0\)</span>. This difference is called the <strong>effect size</strong>. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.</p></li>
+<li><p>The difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true <span class="math inline">\(\mu_0\)</span>. Larger differences lead to larger test statistics, in magnitude. This should make sense since a larger difference implies the sample mean deviates more from the expected mean if the null hypothesis is true.</p></li>
 <li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the <span class="math inline">\(t\)</span> statistic, since <span class="math inline">\(\frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}}\)</span> can be written as <span class="math inline">\(\sqrt{n}\frac{\bar{x}_n - \mu_0}{s}\)</span>. This implies that even if the effect size stays the same, larger sample sizes provide more evidence against the null.</p></li>
 </ul>
 </div>
@@ -212,11 +212,11 @@ This <span class="math inline">\(t\)</span> statistic is valid since our sample 
 <ul>
 <li>Using the p-value, we <strong>reject the null hypothesis if our p-value is less than the significance level</strong> (i.e. our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis)</li>
 </ul>
-<p>The <strong>significance level</strong> of the test, denoted by <span class="math inline">\(\alpha\)</span>, is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in a later subsection. So if we conduct a hypothesis test with significance level <span class="math inline">\(\alpha = 0.05\)</span>, we are saying that we are willing to have a 5% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.</p>
+<p>The <strong>significance level</strong> of the test, denoted by <span class="math inline">\(\alpha\)</span>, is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in Section <a href="prac.html#prac">15</a>. So if we conduct a hypothesis test with significance level <span class="math inline">\(\alpha = 0.05\)</span>, we are saying that we are willing to have a 5% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.</p>
 <ul>
 <li>Using the critical value, we <strong>reject the null hypothesis if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis</strong> (i.e. our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis).</li>
 </ul>
-<p>Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level. Both of these approaches will always lead to the same conclusion, so you only need to use one of them.</p>
+<p>Both of these approaches are based on the sampling distribution of the statistic, and on the value of the significance level. Both of these approaches will always lead to the same conclusion, so you only need to use one of them.</p>
 <div id="p-value" class="section level4" number="14.2.3.1">
 <h4>
 <span class="header-section-number">14.2.3.1</span> P-Value<a class="anchor" aria-label="anchor" href="#p-value"><i class="fas fa-link"></i></a>

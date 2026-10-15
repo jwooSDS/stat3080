@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  2.3077913  1.4060060  0.3294605  2.3102493 -5.2369968 -1.3138589
-##  [7]  4.2013183  1.0401417 -0.9253088  4.2478671
+##  [1]  0.9286397 -1.2022344  1.9727145 -2.8727213  6.7066808  1.5544307
+##  [7] -0.9310952  7.0063098  0.7505008  0.9708035
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -6533,9 +6533,9 @@ So far, we have talked about the sampling distributions of
   the difference in two independent sample proportions (Section \ref{two-props})
 \end{itemize}
 
-For these statistics, we know their distributions, or approximate distributions, under certain conditions. We can peform probability calculations associated with these statistics without using Monte Carlo simulations.
+For these statistics, we know their distributions, or approximate distributions, under certain conditions. We can perform probability calculations associated with these statistics without using Monte Carlo simulations.
 
-However, you may encounter a situation where you need to estimate the sampling distribution of a statistic which has no known mathematical. We saw an example in Section \ref{samp-dist-skewed}, where we needed the sampling distribution of the sample mean when the data are i.i.d. exponential with rate parameter 1, and when \(n=5\). The CLT does not apply in this situation so the sampling distribution of the sample mean should not be approximated by a normal distribution. However, we can still estimate probabilities using a Monte Carlo simulation as shown in Section \ref{samp-dist-skewed}.
+However, you may encounter a situation where you need to estimate the sampling distribution of a statistic which has no known distribution. We saw an example in Section \ref{samp-dist-skewed}, where we needed the sampling distribution of the sample mean when the data are i.i.d. exponential with rate parameter 1, and when \(n=5\). The CLT does not apply in this situation so the sampling distribution of the sample mean should not be approximated by a normal distribution. However, we can still estimate probabilities using a Monte Carlo simulation as shown in Section \ref{samp-dist-skewed}.
 
 \hypertarget{CI}{%
 \chapter{Confidence Intervals}\label{CI}}
@@ -6543,7 +6543,7 @@ However, you may encounter a situation where you need to estimate the sampling d
 \hypertarget{introduction-2}{%
 \section{Introduction}\label{introduction-2}}
 
-In Section \ref{clt}, we learned about sampling distributions of statistics. We established that statistics such as the sample mean have randomness in them. If we were to obtain different random samples of 750 American adults, the sample mean blood pressure from the samples are likely to be different from each other. So is there variablity in our sample mean due to random sampling.
+In Section \ref{clt}, we learned about sampling distributions of statistics. We established that statistics such as the sample mean have randomness in them. If we were to obtain different random samples of 750 American adults, the sample mean blood pressure from the samples are likely to be different from each other. So is there variability in our sample mean due to random sampling.
 
 You might notice in Section \ref{clt} that we know the sampling distribution of some common statistics (under certain conditions), or we can derive the sampling distribution using simulations. In these instances, the value of the corresponding parameters were known. This is unrealistic in real life; the purpose of what we do is to use data from our sample to infer the characteristics in the population!
 

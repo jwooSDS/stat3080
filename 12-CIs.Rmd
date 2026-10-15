@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In Section \@ref(clt), we learned about sampling distributions of statistics. We established that statistics such as the sample mean have randomness in them. If we were to obtain different random samples of 750 American adults, the sample mean blood pressure from the samples are likely to be different from each other. So is there variablity in our sample mean due to random sampling. 
+In Section \@ref(clt), we learned about sampling distributions of statistics. We established that statistics such as the sample mean have randomness in them. If we were to obtain different random samples of 750 American adults, the sample mean blood pressure from the samples are likely to be different from each other. So is there variability in our sample mean due to random sampling. 
 
 You might notice in Section \@ref(clt) that we know the sampling distribution of some common statistics (under certain conditions), or we can derive the sampling distribution using simulations. In these instances, the value of the corresponding parameters were known. This is unrealistic in real life; the purpose of what we do is to use data from our sample to infer the characteristics in the population!
 

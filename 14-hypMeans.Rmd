@@ -214,7 +214,7 @@ pt(-2.357023, 49) ##enter t stat, then df
 
 #### Critical Value
 
-Informally, the critical value is the value of the test statistic that is considered "enough" to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level. 
+Informally, the **critical value** is the value of the test statistic that is considered "enough" to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level. 
 
 We use the PDF of a $t$ distribution to visualize what a critical value is. We want to find the "cut off" value, denoted by $t_{n-1}^*$, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level $\alpha$. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \@ref(fig:9-critneq), \@ref(fig:9-critgreater), and \@ref(fig:9-critless) below, we have examples on the relevant areas under the PDF if $\alpha=0.05$ and $n=50$:
 
@@ -318,7 +318,7 @@ text.test$p.value ##p-value
 text.test$estimate ##value of estimator (sample mean here)
 ```
 
-- The test statistic is $t = $ `r text.test$statistic`.
+- The test statistic is t =  `r text.test$statistic`.
 - The p-value is `r text.test$p.value`.
 
 So we reject the null hypothesis. Our data support the student newspaper' claim that the claimed average by the bookstore is too low.
@@ -358,7 +358,7 @@ pair_result <- t.test(control$Prewt, control$Postwt, mu=0, alternative="two.side
 
 pair_result
 ```
-- The test statistic is $t = $ `r pair_result$statistic`.
+- The test statistic is t =  `r pair_result$statistic`.
 - The p-value is `r pair_result$p.value`. So we fail to reject the null hypothesis. The data do not provide evidence that the weights of the patients in the control group change before and after the study period.
 - The 95% confidence interval is `r pair_result$conf.int`. Notice how this interval contains the value under the null hypothesis, 0. The conclusion is consistent with the hypothesis test. 
 

@@ -321,11 +321,13 @@ text.test$estimate ##value of estimator (sample mean here)
 - The test statistic is t =  `r text.test$statistic`.
 - The p-value is `r text.test$p.value`.
 
-So we reject the null hypothesis. Our data support the student newspaper' claim that the claimed average by the bookstore is too low.
+So we fail to reject the null hypothesis. Our data do not support the student newspaper' claim that the claimed average by the bookstore is too low. 
+
+Note: Our p-value is only slightly above the significance level of 0.05. It is recommended that you supply the p-value, and not just the conclusion, so readers can make their own decision if the result rejects the null based on a different significancel level. We will discuss the meaning behind the choice of significance level later in Section \@ref(prac).
 
 ## Hypothesis Test for Paired Means
 
-The hypothesis test for paired means (also called the paired t-test or the hypothesis test for two dependent means) is a special case of the hypothesis test for the mean where instead of testing the mean of one population, the difference of two means is tested by using the differences in pairs of data points that are dependent. As this is a special case of the one-sample t-test, the same assumptions are required: the differences of the paired values are normally distributed, or if the number of paired values is large enough.
+The hypothesis test for paired means (also called the paired t-test or the hypothesis test for two dependent means) is a special case of the hypothesis test for the mean where instead of testing the mean of one population, we are assessing the differences in pairs of data points that are dependent. As this is a special case of the one-sample t-test, the same assumptions are required: the differences of the paired values are normally distributed, or if the number of paired values is large enough.
 
 The test statistic is
 
@@ -360,7 +362,7 @@ pair_result
 ```
 - The test statistic is t =  `r pair_result$statistic`.
 - The p-value is `r pair_result$p.value`. So we fail to reject the null hypothesis. The data do not provide evidence that the weights of the patients in the control group change before and after the study period.
-- The 95% confidence interval is `r pair_result$conf.int`. Notice how this interval contains the value under the null hypothesis, 0. The conclusion is consistent with the hypothesis test. 
+- The 95% confidence interval is (`r pair_result$conf.int`). Notice how this interval contains the value under the null hypothesis, 0. The conclusion is consistent with the hypothesis test. 
 
 We could have also used the `t.test()` function a little differently. We could have found the differences in weights between each pair of readings for each patient, and then performed a 1-sample t-test on these differences. 
 
@@ -412,9 +414,9 @@ result_2samp <- t.test(body_mass_g ~ sex, data = Data,
 
 result_2samp
 ```
-- The test statistic is $t = $ `r result_2samp$statistic`.
+- The test statistic is t =  `r result_2samp$statistic`.
 - The p-value is virtually 0. So we reject the null hypothesis. The data provide evidence that the average weights of female and male Gentoo penguins are significantly different
-- The 95% confidence interval is `r result_2samp$conf.int`. Notice how this interval does not contain the value under the null hypothesis, 0. In fact, since the entire interval is below 0, we can also say that the male Gentoo penguins are heavier, on average, than their female counterparts. The conclusion is consistent with the hypothesis test. 
+- The 95% confidence interval is (`r result_2samp$conf.int`). Notice how this interval does not contain the value under the null hypothesis, 0. In fact, since the entire interval is below 0, we can also say that the male Gentoo penguins are heavier, on average, than their female counterparts. The conclusion is consistent with the hypothesis test. 
 
 
 

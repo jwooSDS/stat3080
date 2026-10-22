@@ -76,6 +76,7 @@ fig:9-critless
 eq:9-teststatPaired
 eq:9-teststat2Means
 tab:practical
+fig:16-boottest
 Rbasics
 overview-of-r
 rstudio-interface
@@ -305,3 +306,9 @@ power
 factors-affecting-power
 worked-examples
 statistical-vs-practical-significance
+randomtest
+introduction-6
+bootstrap-in-hypothesis-testing
+boottest1
+randomization-test
+worked-example-3

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 16 The Bootstrap in Hypothesis Testing and Randomization Test | STAT 3080: From Data to Knowledge</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="16.1 Introduction The hypothesis tests for the means in Section 14 are based on certain conditions being met, so that test statistics can be calculated based on known sampling distributions. What...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 16 The Bootstrap in Hypothesis Testing and Randomization Test | STAT 3080: From Data to Knowledge">
+<meta property="og:type" content="book">
+<meta property="og:description" content="16.1 Introduction The hypothesis tests for the means in Section 14 are based on certain conditions being met, so that test statistics can be calculated based on known sampling distributions. What...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 16 The Bootstrap in Hypothesis Testing and Randomization Test | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="16.1 Introduction The hypothesis tests for the means in Section 14 are based on certain conditions being met, so that test statistics can be calculated based on known sampling distributions. What...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 3080: From Data to Knowledge</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
+<li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
+<li><a class="" href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></li>
+<li><a class="" href="func.html"><span class="header-section-number">4</span> Functions</a></li>
+<li><a class="" href="control.html"><span class="header-section-number">5</span> Control Flow</a></li>
+<li><a class="" href="sims.html"><span class="header-section-number">6</span> Simulations</a></li>
+<li><a class="" href="applyfam.html"><span class="header-section-number">7</span> Apply Family</a></li>
+<li><a class="" href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
+<li><a class="" href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></li>
+<li><a class="" href="EDA.html"><span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data</a></li>
+<li><a class="" href="clt.html"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem</a></li>
+<li><a class="" href="CI.html"><span class="header-section-number">12</span> Confidence Intervals</a></li>
+<li><a class="" href="boot.html"><span class="header-section-number">13</span> The Bootstrap</a></li>
+<li><a class="" href="hyp.html"><span class="header-section-number">14</span> Hypothesis Testing for Means</a></li>
+<li><a class="" href="prac.html"><span class="header-section-number">15</span> Type I and II Errors, Significance Level, Power</a></li>
+<li><a class="active" href="randomtest.html"><span class="header-section-number">16</span> The Bootstrap in Hypothesis Testing and Randomization Test</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="randomtest" class="section level1" number="16">
+<h1>
+<span class="header-section-number">16</span> The Bootstrap in Hypothesis Testing and Randomization Test<a class="anchor" aria-label="anchor" href="#randomtest"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction-6" class="section level2" number="16.1">
+<h2>
+<span class="header-section-number">16.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>The hypothesis tests for the means in Section <a href="hyp.html#hyp">14</a> are based on certain conditions being met, so that test statistics can be calculated based on known sampling distributions. What happens if these conditions are not met? Using the test statistics from Section <a href="hyp.html#hyp">14</a> will be unreliable (generally). Similar to confidence intervals, we can use ideas associated with the bootstrap to conduct a hypothesis test when the sampling distribution of a test statistic is unknown.</p>
+<p>We will also learn about the randomization test, which uses the bootstrap when testing the difference between two independent populations.</p>
+</div>
+<div id="bootstrap-in-hypothesis-testing" class="section level2" number="16.2">
+<h2>
+<span class="header-section-number">16.2</span> Bootstrap in Hypothesis Testing<a class="anchor" aria-label="anchor" href="#bootstrap-in-hypothesis-testing"><i class="fas fa-link"></i></a>
+</h2>
+<p>The steps are:</p>
+<ol style="list-style-type: decimal">
+<li>Write the null and alternative hypotheses.</li>
+<li>Compute <span class="math inline">\(\hat{\theta}\)</span>, the value of the test statistic in the original sample.</li>
+<li>Synthesize <span class="math inline">\(K\)</span> bootstrap samples.</li>
+<li>For each bootstrap sample, calculate the value of the estimator <span class="math inline">\(\hat{\Theta}\)</span>. Since we have <span class="math inline">\(K\)</span> bootstrapped datasets, we will have <span class="math inline">\(K\)</span> values for the estimators, denoted by <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>.</li>
+<li>We estimate the expected value of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample mean of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>. This value is denoted by <span class="math inline">\(M_b(\hat{\Theta})\)</span>.</li>
+<li>Build the sampling distribution of the statistic assuming the null hypothesis is true. This is done by <span class="math inline">\((\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta}) + \mu_0\)</span>. This computes the bootstrap test statistic from each bootstrap sample.</li>
+<li>Find the p-value, which is the proportion of bootstrap test statistics that are as extreme, or more extreme, than <span class="math inline">\(\hat{\theta}\)</span>. Note: for a two sided test, find the proportion of the bootstrap test statistics with absolute value equal to or greater than the absolute value of <span class="math inline">\(\hat{\theta}\)</span>, as well as the proportion of the bootstrap test statistics with absolute value equal to or less than the absolute value of <span class="math inline">\(\hat{\theta}\)</span>. Then multiply the smaller proportion by 2.</li>
+</ol>
+<div id="boottest1" class="section level3" number="16.2.1">
+<h3>
+<span class="header-section-number">16.2.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#boottest1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Scenario: Suppose that for budget purposes we are only able to draw a sample of 7 from the unknown population distribution. We wish to test if the mean of the unknown population is greater than 3. In this case, bootstrapping can be used to estimate the sampling distribution of the test statistic under the null hypothesis. We note that the sample size is likely to be too small to use the Central Limit Theorem.</p>
+<p>The hypotheses are <span class="math inline">\(H_0: \mu = 3, H_a: \mu &gt; 3\)</span>.</p>
+<div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">samp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.77</span>, <span class="fl">10.48</span>, <span class="fl">4.30</span>, <span class="fl">0.96</span>, <span class="fl">2.67</span>, <span class="fl">2.76</span>, <span class="fl">2.02</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## step 2</span></span>
+<span><span class="va">samp_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">samp_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## step 3</span></span>
+<span><span class="va">Reps</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span>
+<span><span class="va">boot_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">Reps</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">samp_data</span>, replace<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## step 4</span></span>
+<span><span class="va">boot_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">boot_samples</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## steps 5, 6</span></span>
+<span><span class="va">mu0</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span><span class="va">boot_means_null</span> <span class="op">&lt;-</span> <span class="va">boot_means</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">boot_means</span><span class="op">)</span> <span class="op">+</span> <span class="va">mu0</span></span>
+<span></span>
+<span><span class="co">## step 7</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">boot_means_null</span> <span class="op">&gt;=</span> <span class="va">samp_mean</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.2873</code></pre>
+<p>So the p-value is 0.2876, so we fail to reject the null hypothesis. The data do not support the claim that the average is greater than 3.</p>
+<p>Figure <a href="randomtest.html#fig:16-boottest">16.1</a> below visualizes the sampling distirubtion of <span class="math inline">\(\bar{X}\)</span> assuming that the mean is truly 3. A blue line is overlaid to show the sample mean in the original data. The p-value is found by finding the proportion of bootstrap test statistics that are to the right of the blue line.</p>
+<div class="sourceCode" id="cb542"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">boot_means_null</span><span class="op">)</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Sampling Distribution of x-bar when H0 is True"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Bootstrap x-bar"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="va">samp_mean</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:16-boottest"></span>
+<img src="bookdown-demo_files/figure-html/16-boottest-1.png" alt="Sampling Distribution of Sample Mean when Null is True" width="672"><p class="caption">
+Figure 16.1: Sampling Distribution of Sample Mean when Null is True
+</p>
+</div>
+</div>
+</div>
+<div id="randomization-test" class="section level2" number="16.3">
+<h2>
+<span class="header-section-number">16.3</span> Randomization Test<a class="anchor" aria-label="anchor" href="#randomization-test"><i class="fas fa-link"></i></a>
+</h2>
+<p>For a hypothesis test that compares a parameter between two independent populations, the <strong>randomization test</strong> is preferred. It uses the bootstrap with some tweaks. The steps are:</p>
+<ol style="list-style-type: decimal">
+<li>Write the null and alternative hypotheses.</li>
+<li>Compute the value of the statistic (usually difference in means or difference in proportions) in the original sample.</li>
+<li>Combine the two samples into one sample.</li>
+<li>Reassign the observations in the combined sample into two pseudo groups with the same sample size as the original two samples.</li>
+<li>Compute the value of the statistic based on the two pseudo groups.</li>
+<li>Repeat steps 4 and 5 a large number of times. This would build the sampling distribution.</li>
+<li>Find the p-value, which is the proportion of pseudo groups with statistics that are as extreme, or more extreme, than the value of the statistic in the original samples. Note: for a two sided test, find the proportion of the pseudo group statistics with absolute value equal to or greater than the absolute value of the statistic in the original samples.</li>
+</ol>
+<div id="worked-example-3" class="section level3" number="16.3.1">
+<h3>
+<span class="header-section-number">16.3.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>This is a continuation of the worked example in Section <a href="randomtest.html#boottest1">16.2.1</a>.</p>
+<p>Suppose that we would like to use the sample of 7 observations from the unknown population and a second sample of 8 observations from another unknown population to test if the means of the two unknown populations are the same. We use the randomization test here.</p>
+<p>The hypotheses are <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0, H_a: \mu_1 - \mu_2 \neq 0\)</span>.</p>
+<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Draw the second sample and calculate its sample mean</span></span>
+<span><span class="va">samp_data2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4.68</span>, <span class="fl">4.83</span>, <span class="fl">4.29</span>, <span class="fl">1.42</span>, <span class="fl">7.81</span>, <span class="fl">5.20</span>, <span class="fl">3.97</span>, <span class="fl">1.59</span><span class="op">)</span></span>
+<span><span class="va">samp_mean2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">samp_data2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Step 2</span></span>
+<span><span class="va">samp_diff</span> <span class="op">&lt;-</span> <span class="va">samp_mean</span> <span class="op">-</span> <span class="va">samp_mean2</span></span>
+<span></span>
+<span><span class="co">## write rand.test() which combines steps 3, 4, 5</span></span>
+<span><span class="va">rand.test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">rand_comb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">samp_data</span>, <span class="va">samp_data2</span><span class="op">)</span> <span class="op">)</span></span>
+<span>  <span class="va">bmean1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">rand_comb</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">bmean2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">rand_comb</span><span class="op">[</span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp_data</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp_data2</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">bmean1</span> <span class="op">-</span> <span class="va">bmean2</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## step 6</span></span>
+<span><span class="va">boot_diffs_null</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">Reps</span>, <span class="fu">rand.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp_data</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## step 7</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">boot_diffs_null</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">samp_diff</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<pre><code>## [1] 0.6548</code></pre>
+<p>So the p-value is large, so we fail to reject the null hypothesis. The data do not support the claim that there is a difference in the means in the 2 populations.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="prac.html"><span class="header-section-number">15</span> Type I and II Errors, Significance Level, Power</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#randomtest"><span class="header-section-number">16</span> The Bootstrap in Hypothesis Testing and Randomization Test</a></li>
+<li><a class="nav-link" href="#introduction-6"><span class="header-section-number">16.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#bootstrap-in-hypothesis-testing"><span class="header-section-number">16.2</span> Bootstrap in Hypothesis Testing</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#boottest1"><span class="header-section-number">16.2.1</span> Worked Example</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#randomization-test"><span class="header-section-number">16.3</span> Randomization Test</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#worked-example-3"><span class="header-section-number">16.3.1</span> Worked Example</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-22.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

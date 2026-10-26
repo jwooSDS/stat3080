@@ -12,7 +12,9 @@ We go back to the university bookstore worked example in Section \@ref(eg1sample
 
 - The type I error in this study is concluding that students pay more than \$101.75, on average, when the average amount paid is \$101.75.
 
-- The type II error in this study is concluding that there is not enough evidence that students pay more than \$101.75, on average, when the average amount paid greater \$101.75.
+- The type II error in this study is concluding that there is not enough evidence that students pay more than \$101.75, on average, when the average amount paid is greater \$101.75.
+
+From Section \@ref(eg1samplet), we failed to reject the null hypothesis, so we could have made a type II error. 
 
 Next, we discuss how we can measure or control the probability of making these errors. 
 
@@ -80,11 +82,11 @@ The estimated probability of making a type I error is 0.0531, which matches the 
 
 **Thought question**: Feel free to play around with the code and adjust the value of the significance level, change the alternative hypothesis to a 1-sided test, or any other factor. The estimated probability of making a type I error should always match the significance level. 
 
-If the type I error of a hypothesis test does not match its significance level, the test is considered unreliable.
+If the estimated probability of making a type I error of a hypothesis test does not match its significance level, the test is considered unreliable. This is how reliability of hypothesis tests are assessed when conditions to carry out these tests are not met.
 
 ## Power and Type II Error {#power}
 
-The **power** of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. power of a test is 1 minus the probability of making a type II error. 
+The **power** of a test is its probability of being able to correctly reject the null hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. power of a test is 1 minus the probability of making a type II error. 
 
 Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test. 
 
@@ -142,7 +144,7 @@ rep_mean_power(10, alpha)
 
 The estimated power of this test is 0.8003. So if the data come from a $N(1,1)$, the power of testing $H_0: \mu = 0, H_a: \mu \neq 0$ using a sample of size 10 and significance level of 0.05 is 0.8003.
 
-Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of $n$ and $\alpha$. 
+Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another distribution. The power is also specific to the values of $n$ and $\alpha$. 
 
 **Power analysis** or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).
 
@@ -150,9 +152,9 @@ Note: we must specify a specific value for the parameter that makes the alternat
 
 ### Factors Affecting Power
 
-Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \@ref(factors), these are:
+Ideally, we would like the power of our hypothesis test to be high. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \@ref(factors), these are:
 
-- The effect size. There are a couple of definitions of effect size:
+- The **effect size**. There are a couple of definitions of effect size:
 
     1. The difference between the true value of the parameter and the value of the parameter under the null hypothesis.
     2. A "standardized" difference between the true value of the parameter and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is $\frac{\mu_x - \mu_0}{s}$. For a 2-sample t-test, this is $\frac{(\mu_x - \mu_y) - (\text{diff in null})}{\sqrt{s_x^2 + s_y^2}}$. General guidelines for interpretating the effect size when defined this way:
@@ -210,7 +212,7 @@ The power with moderate effect size is `r pow`.
 
 The minimum sample size for moderate effect size with at least 0.80 power is `r min.n`.
 
-2. A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small?    
+2. A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small? What is the minimum sample size to attain a power of at least 0.80 with small effect size?    
 
 ```{r}
 
@@ -231,7 +233,7 @@ The power with small effect size is `r pow2`.
 
 The minimum sample size for small effect size with at least 0.80 power is `r min.n2`.
 
-3. A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist's test when the effect size is small?  
+3. A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist's test when the effect size is small? What is the minimum sample size to attain a power of at least 0.80 with small effect size?
 
 ```{r}
 ## Calculate the power
@@ -289,14 +291,14 @@ Table: (\#tab:practical) Sample Size on P-Values and CIs
 | :------- | :------- | :------- | 
 | 25 | 0.617 | (97.080, 104.920)|
 | 350 | 0.061 | (99.952, 102.408) | 
-| 400 | 0.455 | (100.020, 101.980) | 
+| 400 | 0.045 | (100.020, 101.980) | 
 | 2,500 | $5.7 \times 10^{-7}$ | (100.608, 101.392) | 
 
 Most would probably agree that the effect size in this example is small, yet for a sample size of 400 or more, we will reject the null hypothesis. When the sample size is huge, the p-value is extremely small, which we may interpret as having strong evidence against the null hypothesis, so we have "statistical significance". On the other hand, the small effect size tells us that the practical significance may be of little consequence. 
 
 A couple of recommendations when reporting results from a hypothesis test:
 
-- If possible, report the corresponding confidence interval, so the reader can see what is the range of plausible values for the parameter and make their own decision. However, not every hypothesis test has an associated confidence interval; we will see one such class of hypothesis tests in the next subsection.
+- If possible, report the corresponding confidence interval, so the reader can see what is the range of plausible values for the parameter and make their own decision. However, not every hypothesis test has an associated confidence interval.
 
 - Researchers need to establish the minimum effect size for a result to be considered practically significant. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the this value should not be adjusted in order to be able to conclude that the null hypothesis is rejected. 
 

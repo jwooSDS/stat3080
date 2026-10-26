@@ -107,8 +107,9 @@
 <p>We go back to the university bookstore worked example in Section <a href="hyp.html#eg1samplet">14.2.5</a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 101.75, H_a: \mu &gt; 101.75\)</span>.</p>
 <ul>
 <li><p>The type I error in this study is concluding that students pay more than $101.75, on average, when the average amount paid is $101.75.</p></li>
-<li><p>The type II error in this study is concluding that there is not enough evidence that students pay more than $101.75, on average, when the average amount paid greater $101.75.</p></li>
+<li><p>The type II error in this study is concluding that there is not enough evidence that students pay more than $101.75, on average, when the average amount paid is greater $101.75.</p></li>
 </ul>
+<p>From Section <a href="hyp.html#eg1samplet">14.2.5</a>, we failed to reject the null hypothesis, so we could have made a type II error.</p>
 <p>Next, we discuss how we can measure or control the probability of making these errors.</p>
 </div>
 <div id="significance-level-and-type-i-error" class="section level2" number="15.3">
@@ -181,13 +182,13 @@
 <pre><code>## [1] 0.0531</code></pre>
 <p>The estimated probability of making a type I error is 0.0531, which matches the significance level which was set to be 0.05.</p>
 <p><strong>Thought question</strong>: Feel free to play around with the code and adjust the value of the significance level, change the alternative hypothesis to a 1-sided test, or any other factor. The estimated probability of making a type I error should always match the significance level.</p>
-<p>If the type I error of a hypothesis test does not match its significance level, the test is considered unreliable.</p>
+<p>If the estimated probability of making a type I error of a hypothesis test does not match its significance level, the test is considered unreliable. This is how reliability of hypothesis tests are assessed when conditions to carry out these tests are not met.</p>
 </div>
 <div id="power" class="section level2" number="15.4">
 <h2>
 <span class="header-section-number">15.4</span> Power and Type II Error<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
 </h2>
-<p>The <strong>power</strong> of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. power of a test is 1 minus the probability of making a type II error.</p>
+<p>The <strong>power</strong> of a test is its probability of being able to correctly reject the null hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. power of a test is 1 minus the probability of making a type II error.</p>
 <p>Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test.</p>
 <p>Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from <span class="math inline">\(N(1,1)\)</span> (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span>. The code below does the following:</p>
 <ul>
@@ -247,17 +248,17 @@
 <span><span class="fu">rep_mean_power</span><span class="op">(</span><span class="fl">10</span>, <span class="va">alpha</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.8003</code></pre>
 <p>The estimated power of this test is 0.8003. So if the data come from a <span class="math inline">\(N(1,1)\)</span>, the power of testing <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span> using a sample of size 10 and significance level of 0.05 is 0.8003.</p>
-<p>Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of <span class="math inline">\(n\)</span> and <span class="math inline">\(\alpha\)</span>.</p>
+<p>Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another distribution. The power is also specific to the values of <span class="math inline">\(n\)</span> and <span class="math inline">\(\alpha\)</span>.</p>
 <p><strong>Power analysis</strong> or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).</p>
 <p><strong>Thought question</strong>: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?</p>
 <div id="factors-affecting-power" class="section level3" number="15.4.1">
 <h3>
 <span class="header-section-number">15.4.1</span> Factors Affecting Power<a class="anchor" aria-label="anchor" href="#factors-affecting-power"><i class="fas fa-link"></i></a>
 </h3>
-<p>Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section <a href="hyp.html#factors">14.2.2.1</a>, these are:</p>
+<p>Ideally, we would like the power of our hypothesis test to be high. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section <a href="hyp.html#factors">14.2.2.1</a>, these are:</p>
 <ul>
 <li>
-<p>The effect size. There are a couple of definitions of effect size:</p>
+<p>The <strong>effect size</strong>. There are a couple of definitions of effect size:</p>
 <ol style="list-style-type: decimal">
 <li>The difference between the true value of the parameter and the value of the parameter under the null hypothesis.</li>
 <li>A “standardized” difference between the true value of the parameter and the value of the parameter under the null hypothesis. For a 1-sample t-test, this is <span class="math inline">\(\frac{\mu_x - \mu_0}{s}\)</span>. For a 2-sample t-test, this is <span class="math inline">\(\frac{(\mu_x - \mu_y) - (\text{diff in null})}{\sqrt{s_x^2 + s_y^2}}\)</span>. General guidelines for interpretating the effect size when defined this way:
@@ -320,7 +321,7 @@
 <p>The power with moderate effect size is 0.3927739.</p>
 <p>The minimum sample size for moderate effect size with at least 0.80 power is 27.</p>
 <ol start="2" style="list-style-type: decimal">
-<li>A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small?</li>
+<li>A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small? What is the minimum sample size to attain a power of at least 0.80 with small effect size?</li>
 </ol>
 <div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
@@ -338,7 +339,7 @@
 <p>The power with small effect size is 0.937399.</p>
 <p>The minimum sample size for small effect size with at least 0.80 power is 199.</p>
 <ol start="3" style="list-style-type: decimal">
-<li>A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist’s test when the effect size is small?</li>
+<li>A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist’s test when the effect size is small? What is the minimum sample size to attain a power of at least 0.80 with small effect size?</li>
 </ol>
 <div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
@@ -407,7 +408,7 @@
 </tr>
 <tr class="odd">
 <td align="left">400</td>
-<td align="left">0.455</td>
+<td align="left">0.045</td>
 <td align="left">(100.020, 101.980)</td>
 </tr>
 <tr class="even">
@@ -420,7 +421,7 @@
 <p>Most would probably agree that the effect size in this example is small, yet for a sample size of 400 or more, we will reject the null hypothesis. When the sample size is huge, the p-value is extremely small, which we may interpret as having strong evidence against the null hypothesis, so we have “statistical significance”. On the other hand, the small effect size tells us that the practical significance may be of little consequence.</p>
 <p>A couple of recommendations when reporting results from a hypothesis test:</p>
 <ul>
-<li><p>If possible, report the corresponding confidence interval, so the reader can see what is the range of plausible values for the parameter and make their own decision. However, not every hypothesis test has an associated confidence interval; we will see one such class of hypothesis tests in the next subsection.</p></li>
+<li><p>If possible, report the corresponding confidence interval, so the reader can see what is the range of plausible values for the parameter and make their own decision. However, not every hypothesis test has an associated confidence interval.</p></li>
 <li><p>Researchers need to establish the minimum effect size for a result to be considered practically significant. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the this value should not be adjusted in order to be able to conclude that the null hypothesis is rejected.</p></li>
 </ul>
 <p>To remind ourselves, we use hypothesis tests to test for “statistical significance”. What we are testing is whether the deviation of our sample estimate from its value if the null hypothesis is true can be attributed to random sampling alone or not. If we reject the null hypothesis, the deviation is unlikely to be attributed to random sampling alone.</p>
@@ -461,7 +462,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-22.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

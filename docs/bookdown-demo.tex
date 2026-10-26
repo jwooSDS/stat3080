@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-10-22}
+\date{2026-10-26}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.6046586  2.2109061 -4.5344276  0.6098203 -2.3013008 -3.1838266
-##  [7] -1.5385264  5.1207796  0.9886802  2.6421689
+##  [1] -2.439614 -3.006897  2.352212 -2.244048 -2.823796 -1.509248 -1.405995
+##  [8]  7.203505  3.870623 -1.995526
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -8040,8 +8040,10 @@ We go back to the university bookstore worked example in Section \ref{eg1samplet
 \item
   The type I error in this study is concluding that students pay more than \$101.75, on average, when the average amount paid is \$101.75.
 \item
-  The type II error in this study is concluding that there is not enough evidence that students pay more than \$101.75, on average, when the average amount paid greater \$101.75.
+  The type II error in this study is concluding that there is not enough evidence that students pay more than \$101.75, on average, when the average amount paid is greater \$101.75.
 \end{itemize}
+
+From Section \ref{eg1samplet}, we failed to reject the null hypothesis, so we could have made a type II error.
 
 Next, we discuss how we can measure or control the probability of making these errors.
 
@@ -8141,12 +8143,12 @@ The estimated probability of making a type I error is 0.0531, which matches the 
 
 \textbf{Thought question}: Feel free to play around with the code and adjust the value of the significance level, change the alternative hypothesis to a 1-sided test, or any other factor. The estimated probability of making a type I error should always match the significance level.
 
-If the type I error of a hypothesis test does not match its significance level, the test is considered unreliable.
+If the estimated probability of making a type I error of a hypothesis test does not match its significance level, the test is considered unreliable. This is how reliability of hypothesis tests are assessed when conditions to carry out these tests are not met.
 
 \hypertarget{power}{%
 \section{Power and Type II Error}\label{power}}
 
-The \textbf{power} of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e.~power of a test is 1 minus the probability of making a type II error.
+The \textbf{power} of a test is its probability of being able to correctly reject the null hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e.~power of a test is 1 minus the probability of making a type II error.
 
 Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test.
 
@@ -8230,7 +8232,7 @@ Suppose we want to estimate the power of the hypothesis test for the mean if the
 
 The estimated power of this test is 0.8003. So if the data come from a \(N(1,1)\), the power of testing \(H_0: \mu = 0, H_a: \mu \neq 0\) using a sample of size 10 and significance level of 0.05 is 0.8003.
 
-Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of \(n\) and \(\alpha\).
+Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another distribution. The power is also specific to the values of \(n\) and \(\alpha\).
 
 \textbf{Power analysis} or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).
 
@@ -8239,11 +8241,11 @@ Note: we must specify a specific value for the parameter that makes the alternat
 \hypertarget{factors-affecting-power}{%
 \subsection{Factors Affecting Power}\label{factors-affecting-power}}
 
-Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \ref{factors}, these are:
+Ideally, we would like the power of our hypothesis test to be high. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \ref{factors}, these are:
 
 \begin{itemize}
 \item
-  The effect size. There are a couple of definitions of effect size:
+  The \textbf{effect size}. There are a couple of definitions of effect size:
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -8357,7 +8359,7 @@ The minimum sample size for moderate effect size with at least 0.80 power is 27.
 \setcounter{enumi}{1}
 \tightlist
 \item
-  A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small?
+  A weight study was conducted on 307 sets of twins in Australia over the age of 50 to determine if there is evidence that identical twins have significantly different weights. What is the power if the effect size is small? What is the minimum sample size to attain a power of at least 0.80 with small effect size?
 \end{enumerate}
 
 \begin{Shaded}
@@ -8396,7 +8398,7 @@ The minimum sample size for small effect size with at least 0.80 power is 199.
 \setcounter{enumi}{2}
 \tightlist
 \item
-  A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist's test when the effect size is small?
+  A biologist is interested in whether different species of iris have different sepal widths. He is particularly interested in whether the Versicolor and Virginica species are significantly different. With random samples of 150 flowers from each species, what is the power of the biologist's test when the effect size is small? What is the minimum sample size to attain a power of at least 0.80 with small effect size?
 \end{enumerate}
 
 \begin{Shaded}
@@ -8502,7 +8504,7 @@ Consider this hypothetical example. We have \(H_0: \mu = 100, H_a: \mu \neq 100\
 \endlastfoot
 25 & 0.617 & (97.080, 104.920) \\
 350 & 0.061 & (99.952, 102.408) \\
-400 & 0.455 & (100.020, 101.980) \\
+400 & 0.045 & (100.020, 101.980) \\
 2,500 & \(5.7 \times 10^{-7}\) & (100.608, 101.392) \\
 \end{longtable}
 
@@ -8512,7 +8514,7 @@ A couple of recommendations when reporting results from a hypothesis test:
 
 \begin{itemize}
 \item
-  If possible, report the corresponding confidence interval, so the reader can see what is the range of plausible values for the parameter and make their own decision. However, not every hypothesis test has an associated confidence interval; we will see one such class of hypothesis tests in the next subsection.
+  If possible, report the corresponding confidence interval, so the reader can see what is the range of plausible values for the parameter and make their own decision. However, not every hypothesis test has an associated confidence interval.
 \item
   Researchers need to establish the minimum effect size for a result to be considered practically significant. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the this value should not be adjusted in order to be able to conclude that the null hypothesis is rejected.
 \end{itemize}

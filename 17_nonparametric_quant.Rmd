@@ -1,0 +1,8 @@
+# Non-Parametric Tests for Quantitative Data {#nonparamquant}
+
+## Introduction
+
+In general, non-parametric, quantitative hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section \@ref(hyp) which require knowledge of the sampling distribution of the relevant test statistic.
+
+Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from continuous distributions and test the median of the distribution or the difference of two medians. 
+

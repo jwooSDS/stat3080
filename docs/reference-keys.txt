@@ -312,3 +312,5 @@ bootstrap-in-hypothesis-testing
 boottest1
 randomization-test
 worked-example-3
+nonparamquant
+introduction-7

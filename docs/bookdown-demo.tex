@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.06078751  1.69580657 -2.61844374  0.49855747  3.26369743  0.87869816
-##  [7]  2.02153241 -0.14348455 -0.09611077  1.91068096
+##  [1]  6.7217468  2.6251910  0.2682830 -1.3108301  1.0170444 -2.0921034
+##  [7]  0.2469359  3.8701783  0.2587613 -3.0895164
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -8756,27 +8756,9 @@ Consider the sample data below drawn from a cell phone record that represent the
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(ggplot2)}
-
 \DocumentationTok{\#\# Sampled data}
 \NormalTok{calls1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{)}
 
-\DocumentationTok{\#\# Histogram of sampled data}
-\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(calls1), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{calls1)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+} 
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Length of Calls"}\NormalTok{,}
-    \AttributeTok{x =} \StringTok{"Minutes"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown-demo_files/figure-latex/eg1-1.pdf}
-\caption{\label{fig:eg1}Histogram of Call Lengths from First Sample}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \DocumentationTok{\#\# Determine test statistic}
 \NormalTok{v }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(calls1 }\SpecialCharTok{\textgreater{}} \DecValTok{5}\NormalTok{)}
 \NormalTok{v}
@@ -8837,22 +8819,6 @@ Consider the sample data drawn from another user's cell phone record. Is there e
 \begin{Highlighting}[]
 \NormalTok{calls2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{,}\DecValTok{35}\NormalTok{,}\DecValTok{31}\NormalTok{,}\DecValTok{41}\NormalTok{,}\DecValTok{36}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{21}\NormalTok{,}\DecValTok{37}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{42}\NormalTok{,}\DecValTok{32}\NormalTok{,}\DecValTok{33}\NormalTok{,}\DecValTok{28}\NormalTok{,}\DecValTok{41}\NormalTok{,}\DecValTok{44}\NormalTok{)}
 
-\DocumentationTok{\#\# Histogram of sampled data}
-\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(calls2), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{calls2)) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+} 
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Length of Calls (2nd Sample)"}\NormalTok{,}
-    \AttributeTok{x =} \StringTok{"Minutes"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown-demo_files/figure-latex/eg2-1.pdf}
-\caption{\label{fig:eg2}Histogram of Call Lengths from Second Sample}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{v2 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(calls2 }\SpecialCharTok{\textgreater{}} \DecValTok{30}\NormalTok{)}
 \NormalTok{v2}
 \end{Highlighting}
@@ -9283,7 +9249,7 @@ A grocery store's manager decides to compare the register personnel to determine
 
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{))}
 \FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(rpA), }\AttributeTok{main =} \StringTok{"Employee A"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Speed"}\NormalTok{)}
-\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(rpA), }\AttributeTok{main =} \StringTok{"Employee A"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Speed"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(rpB), }\AttributeTok{main =} \StringTok{"Employee B"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Speed"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

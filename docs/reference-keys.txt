@@ -77,8 +77,6 @@ eq:9-teststatPaired
 eq:9-teststat2Means
 tab:practical
 fig:16-boottest
-fig:eg1
-fig:eg2
 fig:eg3
 fig:eg4
 fig:eg5

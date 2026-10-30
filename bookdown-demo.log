@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  30 OCT 2026 15:16
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  30 OCT 2026 15:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -906,9 +906,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 317.
 
 [12] [13] [14] [15] [16] [17]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 699--699
-[]\TU/lmtt/m/n/10 ##  [1]  1.06078751  1.69580657 -2.61844374  0.49855747  3.26
-369743  0.87869816[] 
+Overfull \hbox (38.25pt too wide) in paragraph at lines 699--699
+[]\TU/lmtt/m/n/10 ##  [1]  6.7217468  2.6251910  0.2682830 -1.3108301  1.017044
+4 -2.0921034[] 
  []
 
 [18] [19] [20] [21] [22]
@@ -2842,33 +2842,39 @@ TATIVE DATA
  []
 
 [208]
-File: bookdown-demo_files/figure-latex/eg1-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/eg1-1.pdf>
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 8812--8812
+Overfull \hbox (12.0pt too wide) in paragraph at lines 8794--8794
 []\TU/lmtt/m/n/10 ## number of successes = 3, number of trials = 15, p-value = 
 0.01758[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 8812--8812
+Overfull \hbox (27.75pt too wide) in paragraph at lines 8794--8794
 []\TU/lmtt/m/n/10 ## alternative hypothesis: true probability of success is les
 s than 0.5[] 
  []
 
 [209]
-File: bookdown-demo_files/figure-latex/eg2-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/eg2-1.pdf>
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 8887--8887
+Overfull \hbox (12.0pt too wide) in paragraph at lines 8853--8853
 []\TU/lmtt/m/n/10 ## number of successes = 10, number of trials = 15, p-value =
  0.1509[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 8887--8887
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8853--8853
 []\TU/lmtt/m/n/10 ## alternative hypothesis: true probability of success is gre
 ater than 0.5[] 
+ []
+
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 8916--8916
+[]\TU/lmtt/m/n/10 ## number of successes = 11, number of trials = 15, p-value =
+ 0.1185[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8916--8916
+[]\TU/lmtt/m/n/10 ## alternative hypothesis: true probability of success is not
+ equal to 0.5[] 
  []
 
 
@@ -2877,21 +2883,9 @@ Overfull \hbox (7.4156pt too wide) has occurred while \output is active
 TATIVE DATA
  []
 
-[210]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[211]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 8950--8950
-[]\TU/lmtt/m/n/10 ## number of successes = 11, number of trials = 15, p-value =
- 0.1185[] 
- []
-
-
-Overfull \hbox (43.5pt too wide) in paragraph at lines 8950--8950
-[]\TU/lmtt/m/n/10 ## alternative hypothesis: true probability of success is not
- equal to 0.5[] 
- []
-
+[210] [211]
+File: bookdown-demo_files/figure-latex/eg3-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/eg3-1.pdf>
 
 Overfull \hbox (7.4156pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 212 \TU/lmr/m/sl/10 CHAPTER 17.  NON-PARAMETRIC TESTS FOR QUANTI
@@ -2899,8 +2893,17 @@ TATIVE DATA
  []
 
 [212] [213]
-File: bookdown-demo_files/figure-latex/eg3-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/eg3-1.pdf>
+Overfull \hbox (6.75pt too wide) in paragraph at lines 9062--9062
+[]\TU/lmtt/m/n/10 ## number of successes = 6, number of trials = 10, p-value = 
+0.7539[] 
+ []
+
+
+Overfull \hbox (43.5pt too wide) in paragraph at lines 9062--9062
+[]\TU/lmtt/m/n/10 ## alternative hypothesis: true probability of success is not
+ equal to 0.5[] 
+ []
+
 
 Overfull \hbox (7.4156pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 214 \TU/lmr/m/sl/10 CHAPTER 17.  NON-PARAMETRIC TESTS FOR QUANTI
@@ -2908,20 +2911,20 @@ TATIVE DATA
  []
 
 [214]
-Overfull \hbox (6.75pt too wide) in paragraph at lines 9096--9096
-[]\TU/lmtt/m/n/10 ## number of successes = 6, number of trials = 10, p-value = 
-0.7539[] 
+File: bookdown-demo_files/figure-latex/eg4-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/eg4-1.pdf>
+[215]
+Overfull \hbox (1.5pt too wide) in paragraph at lines 9155--9155
+[]\TU/lmtt/m/n/10 ## number of successes = 3, number of trials = 12, p-value = 
+0.146[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 9096--9096
+Overfull \hbox (43.5pt too wide) in paragraph at lines 9155--9155
 []\TU/lmtt/m/n/10 ## alternative hypothesis: true probability of success is not
  equal to 0.5[] 
  []
 
-[215]
-File: bookdown-demo_files/figure-latex/eg4-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/eg4-1.pdf>
 
 Overfull \hbox (7.4156pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 216 \TU/lmr/m/sl/10 CHAPTER 17.  NON-PARAMETRIC TESTS FOR QUANTI
@@ -2929,33 +2932,19 @@ TATIVE DATA
  []
 
 [216]
-Overfull \hbox (1.5pt too wide) in paragraph at lines 9189--9189
-[]\TU/lmtt/m/n/10 ## number of successes = 3, number of trials = 12, p-value = 
-0.146[] 
- []
-
-
-Overfull \hbox (43.5pt too wide) in paragraph at lines 9189--9189
-[]\TU/lmtt/m/n/10 ## alternative hypothesis: true probability of success is not
- equal to 0.5[] 
+Overfull \vbox (0.4813pt too high) detected at line 9254
  []
 
 [217]
+File: bookdown-demo_files/figure-latex/eg5-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/eg5-1.pdf>
+(bookdown-demo.bbl
 Overfull \hbox (7.4156pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 218 \TU/lmr/m/sl/10 CHAPTER 17.  NON-PARAMETRIC TESTS FOR QUANTI
 TATIVE DATA
  []
 
-[218]
-File: bookdown-demo_files/figure-latex/eg5-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/eg5-1.pdf>
-[219] (bookdown-demo.bbl
-Overfull \hbox (7.4156pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 220 \TU/lmr/m/sl/10 CHAPTER 17.  NON-PARAMETRIC TESTS FOR QUANTI
-TATIVE DATA
- []
-
-[220]) [221
+[218]) [219
 
 ] (bookdown-demo.aux)
 
@@ -2963,12 +2952,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20498 strings out of 411472
- 384031 string characters out of 5818265
+ 20480 strings out of 411472
+ 383305 string characters out of 5818265
  1873012 words of memory out of 5000000
- 40405 multiletter control sequences out of 15000+600000
+ 40389 multiletter control sequences out of 15000+600000
  518810 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,17n,121p,1012b,544s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (221 pages).
+Output written on bookdown-demo.pdf (219 pages).

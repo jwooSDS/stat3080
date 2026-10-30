@@ -6,3 +6,301 @@ In general, non-parametric, quantitative hypothesis tests do not require knowled
 
 Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from continuous distributions and test the median of the distribution or the difference of two medians. 
 
+The specific non-parametric tests we will be learning about are:
+
+- Sign test (analogous to 1-sample t test).
+- Wilcoxon sign-rank test (analogous to 1-sample t test).
+- Wilcoxon rank-sum test (analogous to 2-sample t test).
+
+## Sign Test
+
+The sign test enables users to draw conclusions regarding the **median** of a **continuous** distribution. Like the parametric tests, the null hypothesis will be assumed true throughout the test. 
+
+### Hypotheses
+
+For this test, the null hypothesis is that the population median (M) is equal to the null value (m). The alternative hypothesis can be either two-sided, greater than, or less than. The three possible sets of hypotheses are:  
+
+- $H_0: M = m,  H_a: M > m$.
+- $H_0: M = m,  H_a: M < m$.
+- $H_0: M = m,  H_a: M \neq m$.
+
+### Test Statistic
+
+Since the median is the center of the data, the number of data points above and below the true value of the median should be (roughly) equal. Since the null hypothesis is assumed to be true, the null value is assumed to be the center of the data. 
+
+We compare each value in the data with the assumed value of the median in the null hypothesis. The test statistic is the number of data points greater than the null value. We denote the value of the test statistic with $v$.
+
+### Distribution of Test Statistic
+
+If the null hypothesis is true, we would expect half the data points to be greater than the null value. The number of data points greater than the null value can be denoted by $X$, and $X$ follows a binomial distribution with the sample size as the number of trials and 0.5 as the probability of success. 
+
+### P-Value
+
+The p-value is found by determining the probability of obtaining a test statistic at least as extreme as the one found in the same direction as the test. 
+
+- For a greater than alternative hypothesis, this is $P(X \geq v)$.
+- For a less than alternative hypothesis, this is $P(X \leq v)$.
+- For a two-sided alternative, we double the smaller of $P(X \geq v)$ and $P(X \leq v)$. 
+
+The p-value can be found by using the `pbinom()` function or by using the `binom.test()` function. 
+
+### Worked Example 1
+
+Consider the sample data below drawn from a cell phone record that represent the number of minutes spent per call. Is there evidence that the median call length is less than 5 minutes?
+
+$H_0: M = 5, H_a: M < 5$.
+
+```{r message = FALSE, warning = FALSE, eg1, fig.cap="Histogram of Call Lengths from First Sample"}
+library(ggplot2)
+
+## Sampled data
+calls1 <- c(2,1,3,3,3,3,1,3,16,2,2,12,20,3,1)
+
+## Histogram of sampled data
+ggplot(data.frame(calls1), aes(x=calls1)) + 
+  geom_histogram(binwidth = 5, color = "black", fill = "white") + 
+  labs(title = "Length of Calls",
+    x = "Minutes", y = "Count")
+
+## Determine test statistic
+v <- sum(calls1 > 5)
+v
+
+## Determine sample size
+n <- length(calls1)
+
+## Determine p-value
+binom.test(v, n, alternative="less")
+
+## Compare p-value with
+pbinom(v, n, 0.5)
+```
+
+The value of the test statistic is 3, in other words, there are 3 calls longer than 5 minutes in our sample of 15 calls.
+
+So we reject the null hypothesis as the p-value is 0.018, which is less than 0.05. Our data provides evidence that the median call length is less than 5 minutes.
+
+### Worked Example 2    
+
+Consider the sample data drawn from another user's cell  phone record. Is there evidence that the median call length is more than 30 minutes?
+
+$H_0: M = 30, H_a: M > 30$.
+
+```{r eg2, fig.cap="Histogram of Call Lengths from Second Sample"}
+calls2 <- c(22,35,31,41,36,1,21,37,1,42,32,33,28,41,44)
+
+## Histogram of sampled data
+ggplot(data.frame(calls2), aes(x=calls2)) + 
+  geom_histogram(binwidth = 5, color = "black", fill = "white") + 
+  labs(title = "Length of Calls (2nd Sample)",
+    x = "Minutes", y = "Count")
+
+v2 <- sum(calls2 > 30)
+v2
+
+## Determine sample size
+n2 <- length(calls2)
+
+## Determine p-value
+binom.test(v2, n2, alternative="greater")
+
+## Compare p-value with
+1 - pbinom(v2 - 1, n2, 0.5)
+## or
+pbinom(v2 - 1, n2, 0.5, lower.tail = FALSE)
+```
+
+The value of the test statistic is 10. So there are 10 calls longer than 30 minutes. 
+
+We fail to reject the null hypothesis as our p-value is 0.15, which is greater than 0.05. The sample does not provide evidence that the median length of call is greater than 30 minutes.
+
+### Worked Example 3
+
+Consider the sample data drawn from the second user's cell phone record. Is there evidence that the median call length is different from 25 minutes?
+
+```{r}
+v3 <- sum(calls2 > 25)
+v3
+
+## Determine p-value
+binom.test(v3, n2, alternative="two.sided")
+
+## Compare with
+2*(1 - pbinom(v3 - 1, 15, 0.5))
+```
+
+We fail to reject the null hypothesis since the p-value is 0.19, which is greater than 0.05. Our sample does not support the claim that the median length of calls is different from 25 minutes.
+
+### Final Comments 
+
+Notice the only assumption for the sign test is that the data should be continuous. The classical 1-sample t-test has more assumptions (data are i.i.d. normal or sample size is large enough).
+
+So the sign test can be used in a wider variety of settings. However, when the assumptions for the 1-sample t-test are met, the 1-sample t-test is more powerful. 
+
+## Wilcoxon Sign-Rank Test
+
+### Test Statistic
+
+The Wilcoxon sign-rank test is another way to test the median of a continuous distribution and uses the same hypotheses as the sign test. It has one additional assumption that the distribution be symmetric. 
+
+The Wilcoxon sign-rank test works in a similar way to the sign test. Instead of each value being compared directly to the null value:
+
+1. First, the null value is subtracted from each sampled value, which will yield a positive difference if the sampled value is above the assumed median and a negative difference if the sampled value is below the assumed median. 
+
+2. Next, the absolute values of the differences are ranked and any tied values receive a rank that is the average of the would-be ranks of all the tied values. 
+
+3. Finally, the ranks of the positive differences are summed to find the value of the test statistic, denoted by $w$.  
+
+### P-Value
+
+The p-value is found in one of two ways: exactly or approximately. 
+
+#### Exact P-Value
+
+Consider all possible combinations of positive and negative differences in step 2, and calculate the value of the test statistic for each combination. 
+
+The p-value is the proportion of combination of test statistics that are at least as large as the calculated test statistic in step 3. 
+
+The exact method is used when the sample size is small.
+
+#### Approximate P-Value
+
+The approximate method is used when the sample size is large, since the number of combinations needed for the exact method grows exponentially with sample size $(2^n)$ and can get computationally expensive. Other scenarios where the approximate method should be used is when tied ranks exist, or if a data point has a value exactly equal to the null value.
+
+The approximate method uses a normal approximation for the distribution of the test statistic. When the approximation method is used, users have the option to include a continuity correction to adjust the integer-based test statistics to the continuous normal scale. It is recommended to use the continuity correction, unless the sample size is really large. The continuity correction is usually a bit more conservative.    
+
+#### Using R
+
+The function `wilcox.test()` will conduct the Wilcoxon Sign-Rank test. The required arguments are the sampled data, the null value of the median (via the argument `mu`), and the alternative hypothesis. Users can also specify whether to generate the exact p-value and whether to ignore the continuity correction.
+
+### Worked Example
+
+We have data from 10 adults and their daily caloric intake. We want to assess if the median daily caloric intake is different from 2000 kcal.
+
+$H_0: M = 2000, H_a: M \neq 2000$.
+
+```{r eg3, fig.cap="Density Plot of Caloric Intake"}
+caloric_intake <- c(1950, 2020, 2100, 1985, 2040, 1990, 2070, 2030, 1955, 2080)
+
+## check is data looks symmetric.
+## Symmetry needed for Wilcoxon Rank Sign Test
+## Otherwise use Sign Test
+plot(density(caloric_intake), main ="Caloric Intake", xlab = "kcal")
+## OK. Somewhat symmetric
+
+## sample size 10
+## no tied tanks. Function will display a message if they exist
+## no value equal to null. Function will display a message if they exist
+wilcox.test(caloric_intake, mu = 2000, alternative = "two.sided")
+```
+
+We note from the density plot that the data is symmetric, so we can use the Wilcoxon Sign-Rank test. The p-value is 0.2754 which is greater than 0.05, so we fail to reject the null hypothesis. The sample does not provide evidence that the median daily caloric intake of adults is different from 2000 kcal.
+
+We could have used the sign test here. However, note that the p-value is larger than from the Wilcoxon Sign-Rank test. It turns our that if the conditions for the Wilcoxon Sign-Rank test are met (data are symmetric), the Wilcoxon Sign-Rank test is more powerful than the sign test. This is because it incorporates more information when calculating the test statistic as it also includes the magnitude and not just sign. 
+
+```{r}
+v4 <- sum(caloric_intake > 2000)
+v4
+
+## Determine p-value
+binom.test(v4, 10, alternative = "two.sided")
+
+## Compare with
+2*(1 - pbinom(v4 - 1, 10, 0.5))
+```
+### Tests for one Quantitative Variable
+
+The classical 1-sample t test, sign test, and Wilcoxon rank-sign test are used to test the center of a quantitative variable. 
+
+- If data is normal, use the 1-sample t test (most assumptions).
+- If data is not normal but symmetric, use the Wilcoxon rank-sign test (less assumptions).
+- If data is not symmetric, use the sign test (least assumptions).
+
+Could we use the sign test in under all scenarios? We could, but if the conditions for the other tests exist, the sign test has the least power. 
+
+## Paired Tests
+
+Recall from Section \@ref(pairedt) that the paired t test can be viewed as a 1-sample t test applied to pairs of differences. A similar idea can be applied to the sign test and Wilcoxon Sign-Rank test!
+
+### Worked Example
+
+A study is conducted to test whether people's ability to report words accurately is affected by the ear in which the words are heard. Each participant in the study heard a series of words randomly delivered to either their right or left ear and report the word if they could. The number of words correctly reported from each ear was recorded for each participant. Is there evidence that words are reported more accurately from one ear over the other?
+
+We have $H_0: M_{diff} = 0, H_a: M_{diff} \neq 0$.
+
+The results from the sign test is shown below. The p-value is 0.146 which is greater than 0.05 so we fail to reject the null hypothesis. The data do not provide evidence that words are reported more accurately from one ear over the other.
+
+```{r eg4, fig.cap="Density Plot of Paired Differences"}
+## Correct word counts
+left <- c(25, 29, 10, 31, 27, 24, 27, 29, 30, 32, 20, 25)
+right <- c(32, 30, 7, 36, 20, 32, 26, 33, 32, 32, 30, 32)
+
+## paired differences
+paired_diff <- left - right
+
+plot(density(paired_diff), main ="Differences in Left and Right Ear", xlab = "Paired Differences")
+
+v5 <- sum(paired_diff > 0)
+v5
+
+## Determine p-value
+binom.test(v5, length(paired_diff), alternative="two.sided")
+
+## Compare with
+2*(pbinom(v5, length(paired_diff), 0.5))
+```
+
+We note from the density plot in Fig \@ref(fig:eg4) that the distribution of the paired differences is somewhat symmetric, so we could also use the Wilcoxon sign-rank test.
+
+The results from the Wilcoxon sign-rank test is shown below. The p-value is 0.09 which is greater than 0.05 so we fail to reject the null hypothesis. The data do not provide evidence that words are reported more accurately from one ear over the other.
+
+Note that if we tried to use the exact p-value we would have received an error message, as one of the paired differences is 0, which is equal to the value in the null hypothesis. We applied the continuity correction which is the default.
+
+```{r}
+wilcox.test(left, right, alternative="two.sided", paired=TRUE, exact = FALSE)
+
+## OR
+
+wilcox.test(paired_diff, alternative="two.sided", exact = FALSE)
+```
+## Wilcoxon Rank-Sum Test
+
+The Wilcoxon rank-sum test compares the medians of two continuous populations that are assumed to have the same shape and are independent. The three possible sets of hypotheses are: 
+
+- $H_0: M_1 = M_2,  H_a: M_1 > M_2$.
+- $H_0: M_1 = M_2,  H_a: M_1 < M_2$.
+- $H_0: M_1 = M_2,  H_a: M_1 \neq M_2$.
+
+The main idea of how the test statistic is calculated is as follows:
+
+1. Combine data from both samples, and rank all the data from smallest to largest. If two or more values are identical, assign them the average of the ranks they occupy
+
+2. Separate the data back into their original groups.
+
+3. Sum up the ranks from each group. If the null hypothesis is true (and the sample sizes are equal), then the sums of the ranks in both groups should be roughly equal.
+
+An adjustment is made to account for unequal sample sizes. 
+
+As with the Wilcoxon sign-rank test, the p-value is determined using either the exact method or the approximate method.  
+
+### Worked Example
+
+A grocery store's manager decides to compare the register personnel to determine if there is a difference in the speed with which they checkout customers. Is there evidence that there is a difference in checkout times of the two selected employees?  
+
+$H_0: M_1 = M_2,  H_a: M_1 \neq M_2$.
+
+```{r eg5, fig.cap="Checkout Speeds of Employees"}
+## Register data
+rpA <- c(5.8, 1, 1.1, 2.1, 2.5, 1.1, 1, 1.2, 3.2, 2.7)
+rpB <- c(1.5, 2.7, 6.6, 4.6, 1.1, 1.2, 5.7, 3.2, 1.2, 1.3)
+
+par(mfrow=c(2,1))
+plot(density(rpA), main = "Employee A", xlab="Speed")
+plot(density(rpA), main = "Employee A", xlab="Speed")
+
+## Conduct the test
+wilcox.test(rpA, rpB, alternative = "two.sided", exact = FALSE)
+```
+
+From Figure \@ref(fig:eg5), the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.                                                          
+

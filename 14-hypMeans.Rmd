@@ -325,7 +325,7 @@ So we fail to reject the null hypothesis. Our data do not support the student ne
 
 Note: Our p-value is only slightly above the significance level of 0.05. It is recommended that you supply the p-value, and not just the conclusion, so readers can make their own decision if the result rejects the null based on a different significancel level. We will discuss the meaning behind the choice of significance level later in Section \@ref(prac).
 
-## Hypothesis Test for Paired Means
+## Hypothesis Test for Paired Means {#pairedt}
 
 The hypothesis test for paired means (also called the paired t-test or the hypothesis test for two dependent means) is a special case of the hypothesis test for the mean where instead of testing the mean of one population, we are assessing the differences in pairs of data points that are dependent. As this is a special case of the one-sample t-test, the same assumptions are required: the differences of the paired values are normally distributed, or if the number of paired values is large enough.
 

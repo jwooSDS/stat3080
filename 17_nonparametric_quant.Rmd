@@ -125,6 +125,8 @@ Notice the only assumption for the sign test is that the data should be continuo
 
 So the sign test can be used in a wider variety of settings. However, when the assumptions for the 1-sample t-test are met, the 1-sample t-test is more powerful. 
 
+The sign test is also conservative. 
+
 ## Wilcoxon Sign-Rank Test
 
 ### Test Statistic
@@ -133,7 +135,7 @@ The Wilcoxon sign-rank test is another way to test the median of a continuous di
 
 The Wilcoxon sign-rank test works in a similar way to the sign test. Instead of each value being compared directly to the null value:
 
-1. First, the null value is subtracted from each sampled value, which will yield a positive difference if the sampled value is above the assumed median and a negative difference if the sampled value is below the assumed median. 
+1. First, the null value is subtracted from each sampled value, which will yield a positive difference if the sampled value is above the assumed median and a negative difference if the sampled value is below the assumed median. Any observation with a difference of 0 is discarded.
 
 2. Next, the absolute values of the differences are ranked and any tied values receive a rank that is the average of the would-be ranks of all the tied values. 
 
@@ -291,4 +293,6 @@ wilcox.test(rpA, rpB, alternative = "two.sided", exact = FALSE)
 ```
 
 From Figure \@ref(fig:eg5), the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.                                                          
+## Comparison with the Bootstrap
 
+The tests we have learned today do not have sample size requirements. This is unlike the bootstrap which work better as sample size gets larger.

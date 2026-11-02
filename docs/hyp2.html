@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 18 Hypothesis Testing for Categorical Data | STAT 3080: From Data to Knowledge</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="18.1 Introduction Thus far, we have introduce hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections 14 and 16). In this section, we will...">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta property="og:title" content="Chapter 18 Hypothesis Testing for Categorical Data | STAT 3080: From Data to Knowledge">
+<meta property="og:type" content="book">
+<meta property="og:description" content="18.1 Introduction Thus far, we have introduce hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections 14 and 16). In this section, we will...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 18 Hypothesis Testing for Categorical Data | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="18.1 Introduction Thus far, we have introduce hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections 14 and 16). In this section, we will...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">STAT 3080: From Data to Knowledge</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="Rbasics.html"><span class="header-section-number">1</span> R Basics</a></li>
+<li><a class="" href="rmd.html"><span class="header-section-number">2</span> R Markdown</a></li>
+<li><a class="" href="subset.html"><span class="header-section-number">3</span> Working with Data Structures</a></li>
+<li><a class="" href="func.html"><span class="header-section-number">4</span> Functions</a></li>
+<li><a class="" href="control.html"><span class="header-section-number">5</span> Control Flow</a></li>
+<li><a class="" href="sims.html"><span class="header-section-number">6</span> Simulations</a></li>
+<li><a class="" href="applyfam.html"><span class="header-section-number">7</span> Apply Family</a></li>
+<li><a class="" href="ggplot.html"><span class="header-section-number">8</span> Data Visualizations (ggplot2)</a></li>
+<li><a class="" href="dplyr.html"><span class="header-section-number">9</span> Data Wrangling (dplyr)</a></li>
+<li><a class="" href="EDA.html"><span class="header-section-number">10</span> Exploratory Data Analysis and Tidying Data</a></li>
+<li><a class="" href="clt.html"><span class="header-section-number">11</span> Sampling Distributions and the Central Limit Theorem</a></li>
+<li><a class="" href="CI.html"><span class="header-section-number">12</span> Confidence Intervals</a></li>
+<li><a class="" href="boot.html"><span class="header-section-number">13</span> The Bootstrap</a></li>
+<li><a class="" href="hyp.html"><span class="header-section-number">14</span> Hypothesis Testing for Means</a></li>
+<li><a class="" href="prac.html"><span class="header-section-number">15</span> Type I and II Errors, Significance Level, Power</a></li>
+<li><a class="" href="randomtest.html"><span class="header-section-number">16</span> The Bootstrap in Hypothesis Testing and Randomization Test</a></li>
+<li><a class="" href="nonparamquant.html"><span class="header-section-number">17</span> Non-Parametric Tests for Quantitative Data</a></li>
+<li><a class="active" href="hyp2.html"><span class="header-section-number">18</span> Hypothesis Testing for Categorical Data</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="hyp2" class="section level1" number="18">
+<h1>
+<span class="header-section-number">18</span> Hypothesis Testing for Categorical Data<a class="anchor" aria-label="anchor" href="#hyp2"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction-8" class="section level2" number="18.1">
+<h2>
+<span class="header-section-number">18.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-8"><i class="fas fa-link"></i></a>
+</h2>
+<p>Thus far, we have introduce hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections <a href="hyp.html#hyp">14</a> and <a href="randomtest.html#randomtest">16</a>). In this section, we will introduce parametric hypothesis testing associated with categorical data. The specific tests are</p>
+<ol style="list-style-type: decimal">
+<li>Goodness-of-fit (GOF) test (test for one categorical variable).</li>
+<li>Chi-squared test for two-way table (test for two categorical variables).</li>
+<li>One-sample z-test (test for one proportion).</li>
+<li>Two-sample z-test (test for difference in two independent proportions).</li>
+</ol>
+<p>First, a quick note about terminology: The distinct “values” or options a categorical variable can take are called <strong>levels</strong>. Some other common terms that are used interchangeably with levels are factors, categories, or classes. For example, the levels associated with the categorical variable eye color could be blue, green, black, brown, and so on.</p>
+</div>
+<div id="goodness-of-fit-test-for-a-categorical-variable" class="section level2" number="18.2">
+<h2>
+<span class="header-section-number">18.2</span> Goodness-of-Fit Test for A Categorical Variable<a class="anchor" aria-label="anchor" href="#goodness-of-fit-test-for-a-categorical-variable"><i class="fas fa-link"></i></a>
+</h2>
+<p>We introduce the goodness-of-fit (GOF) test to test the distribution of proportions across one categorical variable. Suppose the categorical variable has <span class="math inline">\(k\)</span> levels.</p>
+<div id="hypotheses-1" class="section level3" number="18.2.1">
+<h3>
+<span class="header-section-number">18.2.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The null hypothesis states that the population proportions (<span class="math inline">\(p_1, p_2, \cdots, p_k\)</span>) of each level of the categorical variable is equal to some claimed probability distribution (<span class="math inline">\(\pi_1, \pi_2, \cdots, \pi_k\)</span>). In notation, <span class="math inline">\(H_0: p_1 = \pi_1, p_2 = \pi_2, \cdots, p_k = \pi_k\)</span>. The alternative hypothesis is that at least one of the population proportions is not equal to its claimed probability, i.e. <span class="math inline">\(H_a:\)</span> at least one <span class="math inline">\(p_i \neq \pi_i\)</span>.</p>
+</div>
+<div id="test-statistic-3" class="section level3" number="18.2.2">
+<h3>
+<span class="header-section-number">18.2.2</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>The test statistic associated with the GOF test is a chi-squared test statistic</p>
+<p><span class="math display" id="eq:18-GOFts">\[\begin{equation}
+X^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}
+\tag{18.1}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(O_i\)</span> denotes the observed count in level <span class="math inline">\(i\)</span> and <span class="math inline">\(E_i\)</span> denotes the expected counts in level <span class="math inline">\(i\)</span> if the null hypothesis is true. The expected count for each level is just the multiplication of the sample size with its corresponding claimed probability in the null hypothesis.</p>
+<p>As with any test statistic, this test statistic measures how far our observed data deviates from the null hypothesis, so larger values provide more evidence against the null hypothesis.</p>
+</div>
+<div id="p-value-and-critical-value" class="section level3" number="18.2.3">
+<h3>
+<span class="header-section-number">18.2.3</span> P-Value and Critical Value<a class="anchor" aria-label="anchor" href="#p-value-and-critical-value"><i class="fas fa-link"></i></a>
+</h3>
+<p>If the sample size is large enough, the test statistic <span class="math inline">\(X^2\)</span> can be approximated with <span class="math inline">\(\chi^2_{k-1}\)</span>, a chi-squared distribution with <span class="math inline">\(k-1\)</span> degrees of freedom. The approximation to the <span class="math inline">\(\chi^2_{k-1}\)</span> distribution works better as the sample size increases. There are various rules of thumb that exist in the literature to assess when the approximation works well: we will use the rule that says that all the expected counts must be at least 5.</p>
+<p>Therefore, the p-value and critical value are both based on the <span class="math inline">\(\chi^2_{k-1}\)</span> distribution. Recall the definition of the p-value from Section <a href="hyp.html#pval">14.2.3.1</a>: it is the probability of observing the value of our test statistic, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true.</p>
+<p>Therefore, the p-value for this test is <span class="math inline">\(P(X^2 &gt; \chi^2_{k-1})\)</span>, which can be found by using <code>1 - \pchisq("value of test statistic", k-1)</code>.</p>
+<p>The critical value can therefore be found by using <code>qchisq("1 - alpha", k-1)</code>.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="nonparamquant.html"><span class="header-section-number">17</span> Non-Parametric Tests for Quantitative Data</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hyp2"><span class="header-section-number">18</span> Hypothesis Testing for Categorical Data</a></li>
+<li><a class="nav-link" href="#introduction-8"><span class="header-section-number">18.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#goodness-of-fit-test-for-a-categorical-variable"><span class="header-section-number">18.2</span> Goodness-of-Fit Test for A Categorical Variable</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypotheses-1"><span class="header-section-number">18.2.1</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#test-statistic-3"><span class="header-section-number">18.2.2</span> Test Statistic</a></li>
+<li><a class="nav-link" href="#p-value-and-critical-value"><span class="header-section-number">18.2.3</span> P-Value and Critical Value</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

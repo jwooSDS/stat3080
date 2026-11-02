@@ -80,6 +80,7 @@ fig:16-boottest
 fig:eg3
 fig:eg4
 fig:eg5
+eq:18-GOFts
 Rbasics
 overview-of-r
 rstudio-interface
@@ -290,7 +291,7 @@ some-comments-about-the-null-hypothesis-with-a-one-sided-alternative
 test-statistic
 factors
 decision
-p-value
+pval
 critical-value-1
 writing-conclusions
 eg1samplet
@@ -321,14 +322,14 @@ sign-test
 hypotheses
 test-statistic-1
 distribution-of-test-statistic
-p-value-1
+p-value
 worked-example-1-1
 worked-example-2-1
 worked-example-3-1
 final-comments
 wilcoxon-sign-rank-test
 test-statistic-2
-p-value-2
+p-value-1
 exact-p-value
 approximate-p-value
 using-r
@@ -338,3 +339,9 @@ paired-tests
 worked-example-5
 wilcoxon-rank-sum-test
 worked-example-6
+hyp2
+introduction-8
+goodness-of-fit-test-for-a-categorical-variable
+hypotheses-1
+test-statistic-3
+p-value-and-critical-value

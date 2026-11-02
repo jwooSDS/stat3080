@@ -134,7 +134,7 @@ The **significance level** of the test, denoted by $\alpha$, is the probability 
 
 Both of these approaches are based on the sampling distribution of the statistic, and on the value of the significance level. Both of these approaches will always lead to the same conclusion, so you only need to use one of them. 
 
-#### P-Value 
+#### P-Value {#pval}
 
 The **p-value** is the probability of observing the value of our test statistic, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true. 
 

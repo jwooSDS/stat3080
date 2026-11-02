@@ -7,7 +7,7 @@
 <title>Chapter 17 Non-Parametric Tests for Quantitative Data | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="17.1 Introduction In general, non-parametric, quantitative hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 17 Non-Parametric Tests for Quantitative Data | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="17.1 Introduction In general, non-parametric, quantitative hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="17.1 Introduction In general, non-parametric, quantitative hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -82,6 +83,7 @@
 <li><a class="" href="prac.html"><span class="header-section-number">15</span> Type I and II Errors, Significance Level, Power</a></li>
 <li><a class="" href="randomtest.html"><span class="header-section-number">16</span> The Bootstrap in Hypothesis Testing and Randomization Test</a></li>
 <li><a class="active" href="nonparamquant.html"><span class="header-section-number">17</span> Non-Parametric Tests for Quantitative Data</a></li>
+<li><a class="" href="hyp2.html"><span class="header-section-number">18</span> Hypothesis Testing for Categorical Data</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -119,11 +121,11 @@
 <p>For this test, the null hypothesis is that the population median (M) is equal to the null value (m). The alternative hypothesis can be either two-sided, greater than, or less than. The three possible sets of hypotheses are:</p>
 <ul>
 <li>
-<span class="math inline">\(H_0: M = m, H_a: M &gt; m\)</span>.</li>
+<span class="math inline">\(H_0: M = m,  H_a: M &gt; m\)</span>.</li>
 <li>
-<span class="math inline">\(H_0: M = m, H_a: M &lt; m\)</span>.</li>
+<span class="math inline">\(H_0: M = m,  H_a: M &lt; m\)</span>.</li>
 <li>
-<span class="math inline">\(H_0: M = m, H_a: M \neq m\)</span>.</li>
+<span class="math inline">\(H_0: M = m,  H_a: M \neq m\)</span>.</li>
 </ul>
 </div>
 <div id="test-statistic-1" class="section level3" number="17.2.2">
@@ -139,9 +141,9 @@
 </h3>
 <p>If the null hypothesis is true, we would expect half the data points to be greater than the null value. The number of data points greater than the null value can be denoted by <span class="math inline">\(X\)</span>, and <span class="math inline">\(X\)</span> follows a binomial distribution with the sample size as the number of trials and 0.5 as the probability of success.</p>
 </div>
-<div id="p-value-1" class="section level3" number="17.2.4">
+<div id="p-value" class="section level3" number="17.2.4">
 <h3>
-<span class="header-section-number">17.2.4</span> P-Value<a class="anchor" aria-label="anchor" href="#p-value-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.2.4</span> P-Value<a class="anchor" aria-label="anchor" href="#p-value"><i class="fas fa-link"></i></a>
 </h3>
 <p>The p-value is found by determining the probability of obtaining a test statistic at least as extreme as the one found in the same direction as the test.</p>
 <ul>
@@ -157,7 +159,7 @@
 </h3>
 <p>Consider the sample data below drawn from a cell phone record that represent the number of minutes spent per call. Is there evidence that the median call length is less than 5 minutes?</p>
 <p><span class="math inline">\(H_0: M = 5, H_a: M &lt; 5\)</span>.</p>
-<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Sampled data</span></span>
 <span><span class="va">calls1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">16</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">12</span>,<span class="fl">20</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span></span>
 <span></span>
@@ -165,7 +167,7 @@
 <span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">calls1</span> <span class="op">&gt;</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">v</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb552"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine sample size</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">calls1</span><span class="op">)</span></span>
 <span></span>
@@ -182,7 +184,7 @@
 ## sample estimates:
 ## probability of success 
 ##                    0.2</code></pre>
-<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Compare p-value with</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">v</span>, <span class="va">n</span>, <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.01757813</code></pre>
@@ -195,13 +197,13 @@
 </h3>
 <p>Consider the sample data drawn from another user’s cell phone record. Is there evidence that the median call length is more than 30 minutes?</p>
 <p><span class="math inline">\(H_0: M = 30, H_a: M &gt; 30\)</span>.</p>
-<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">calls2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22</span>,<span class="fl">35</span>,<span class="fl">31</span>,<span class="fl">41</span>,<span class="fl">36</span>,<span class="fl">1</span>,<span class="fl">21</span>,<span class="fl">37</span>,<span class="fl">1</span>,<span class="fl">42</span>,<span class="fl">32</span>,<span class="fl">33</span>,<span class="fl">28</span>,<span class="fl">41</span>,<span class="fl">44</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">calls2</span> <span class="op">&gt;</span> <span class="fl">30</span><span class="op">)</span></span>
 <span><span class="va">v2</span></span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine sample size</span></span>
 <span><span class="va">n2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">calls2</span><span class="op">)</span></span>
 <span></span>
@@ -218,11 +220,11 @@
 ## sample estimates:
 ## probability of success 
 ##              0.6666667</code></pre>
-<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Compare p-value with</span></span>
 <span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">v2</span> <span class="op">-</span> <span class="fl">1</span>, <span class="va">n2</span>, <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.1508789</code></pre>
-<div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## or</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">v2</span> <span class="op">-</span> <span class="fl">1</span>, <span class="va">n2</span>, <span class="fl">0.5</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.1508789</code></pre>
@@ -234,11 +236,11 @@
 <span class="header-section-number">17.2.7</span> Worked Example 3<a class="anchor" aria-label="anchor" href="#worked-example-3-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Consider the sample data drawn from the second user’s cell phone record. Is there evidence that the median call length is different from 25 minutes?</p>
-<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">calls2</span> <span class="op">&gt;</span> <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="va">v3</span></span></code></pre></div>
 <pre><code>## [1] 11</code></pre>
-<div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine p-value</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">v3</span>, <span class="va">n2</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -252,7 +254,7 @@
 ## sample estimates:
 ## probability of success 
 ##              0.7333333</code></pre>
-<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Compare with</span></span>
 <span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">v3</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">15</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.1184692</code></pre>
@@ -264,6 +266,7 @@
 </h3>
 <p>Notice the only assumption for the sign test is that the data should be continuous. The classical 1-sample t-test has more assumptions (data are i.i.d. normal or sample size is large enough).</p>
 <p>So the sign test can be used in a wider variety of settings. However, when the assumptions for the 1-sample t-test are met, the 1-sample t-test is more powerful.</p>
+<p>The sign test is also conservative.</p>
 </div>
 </div>
 <div id="wilcoxon-sign-rank-test" class="section level2" number="17.3">
@@ -277,14 +280,14 @@
 <p>The Wilcoxon sign-rank test is another way to test the median of a continuous distribution and uses the same hypotheses as the sign test. It has one additional assumption that the distribution be symmetric.</p>
 <p>The Wilcoxon sign-rank test works in a similar way to the sign test. Instead of each value being compared directly to the null value:</p>
 <ol style="list-style-type: decimal">
-<li><p>First, the null value is subtracted from each sampled value, which will yield a positive difference if the sampled value is above the assumed median and a negative difference if the sampled value is below the assumed median.</p></li>
+<li><p>First, the null value is subtracted from each sampled value, which will yield a positive difference if the sampled value is above the assumed median and a negative difference if the sampled value is below the assumed median. Any observation with a difference of 0 is discarded.</p></li>
 <li><p>Next, the absolute values of the differences are ranked and any tied values receive a rank that is the average of the would-be ranks of all the tied values.</p></li>
 <li><p>Finally, the ranks of the positive differences are summed to find the value of the test statistic, denoted by <span class="math inline">\(w\)</span>.</p></li>
 </ol>
 </div>
-<div id="p-value-2" class="section level3" number="17.3.2">
+<div id="p-value-1" class="section level3" number="17.3.2">
 <h3>
-<span class="header-section-number">17.3.2</span> P-Value<a class="anchor" aria-label="anchor" href="#p-value-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.3.2</span> P-Value<a class="anchor" aria-label="anchor" href="#p-value-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>The p-value is found in one of two ways: exactly or approximately.</p>
 <div id="exact-p-value" class="section level4" number="17.3.2.1">
@@ -315,7 +318,7 @@
 </h3>
 <p>We have data from 10 adults and their daily caloric intake. We want to assess if the median daily caloric intake is different from 2000 kcal.</p>
 <p><span class="math inline">\(H_0: M = 2000, H_a: M \neq 2000\)</span>.</p>
-<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">caloric_intake</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1950</span>, <span class="fl">2020</span>, <span class="fl">2100</span>, <span class="fl">1985</span>, <span class="fl">2040</span>, <span class="fl">1990</span>, <span class="fl">2070</span>, <span class="fl">2030</span>, <span class="fl">1955</span>, <span class="fl">2080</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## check is data looks symmetric.</span></span>
@@ -328,7 +331,7 @@
 Figure 17.1: Density Plot of Caloric Intake
 </p>
 </div>
-<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb571"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## OK. Somewhat symmetric</span></span>
 <span></span>
 <span><span class="co">## sample size 10</span></span>
@@ -343,11 +346,11 @@ Figure 17.1: Density Plot of Caloric Intake
 ## alternative hypothesis: true location is not equal to 2000</code></pre>
 <p>We note from the density plot that the data is symmetric, so we can use the Wilcoxon Sign-Rank test. The p-value is 0.2754 which is greater than 0.05, so we fail to reject the null hypothesis. The sample does not provide evidence that the median daily caloric intake of adults is different from 2000 kcal.</p>
 <p>We could have used the sign test here. However, note that the p-value is larger than from the Wilcoxon Sign-Rank test. It turns our that if the conditions for the Wilcoxon Sign-Rank test are met (data are symmetric), the Wilcoxon Sign-Rank test is more powerful than the sign test. This is because it incorporates more information when calculating the test statistic as it also includes the magnitude and not just sign.</p>
-<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb573"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">caloric_intake</span> <span class="op">&gt;</span> <span class="fl">2000</span><span class="op">)</span></span>
 <span><span class="va">v4</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine p-value</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">v4</span>, <span class="fl">10</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -361,7 +364,7 @@ Figure 17.1: Density Plot of Caloric Intake
 ## sample estimates:
 ## probability of success 
 ##                    0.6</code></pre>
-<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Compare with</span></span>
 <span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">v4</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.7539063</code></pre>
@@ -391,7 +394,7 @@ Figure 17.1: Density Plot of Caloric Intake
 <p>A study is conducted to test whether people’s ability to report words accurately is affected by the ear in which the words are heard. Each participant in the study heard a series of words randomly delivered to either their right or left ear and report the word if they could. The number of words correctly reported from each ear was recorded for each participant. Is there evidence that words are reported more accurately from one ear over the other?</p>
 <p>We have <span class="math inline">\(H_0: M_{diff} = 0, H_a: M_{diff} \neq 0\)</span>.</p>
 <p>The results from the sign test is shown below. The p-value is 0.146 which is greater than 0.05 so we fail to reject the null hypothesis. The data do not provide evidence that words are reported more accurately from one ear over the other.</p>
-<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Correct word counts</span></span>
 <span><span class="va">left</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">29</span>, <span class="fl">10</span>, <span class="fl">31</span>, <span class="fl">27</span>, <span class="fl">24</span>, <span class="fl">27</span>, <span class="fl">29</span>, <span class="fl">30</span>, <span class="fl">32</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="va">right</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">30</span>, <span class="fl">7</span>, <span class="fl">36</span>, <span class="fl">20</span>, <span class="fl">32</span>, <span class="fl">26</span>, <span class="fl">33</span>, <span class="fl">32</span>, <span class="fl">32</span>, <span class="fl">30</span>, <span class="fl">32</span><span class="op">)</span></span>
@@ -406,11 +409,11 @@ Figure 17.1: Density Plot of Caloric Intake
 Figure 17.2: Density Plot of Paired Differences
 </p>
 </div>
-<div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">paired_diff</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">v5</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine p-value</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">v5</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">paired_diff</span><span class="op">)</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -424,14 +427,14 @@ Figure 17.2: Density Plot of Paired Differences
 ## sample estimates:
 ## probability of success 
 ##                   0.25</code></pre>
-<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Compare with</span></span>
 <span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">v5</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">paired_diff</span><span class="op">)</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.1459961</code></pre>
 <p>We note from the density plot in Fig <a href="nonparamquant.html#fig:eg4">17.2</a> that the distribution of the paired differences is somewhat symmetric, so we could also use the Wilcoxon sign-rank test.</p>
 <p>The results from the Wilcoxon sign-rank test is shown below. The p-value is 0.09 which is greater than 0.05 so we fail to reject the null hypothesis. The data do not provide evidence that words are reported more accurately from one ear over the other.</p>
 <p>Note that if we tried to use the exact p-value we would have received an error message, as one of the paired differences is 0, which is equal to the value in the null hypothesis. We applied the continuity correction which is the default.</p>
-<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">left</span>, <span class="va">right</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span>, paired<span class="op">=</span><span class="cn">TRUE</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank test with continuity correction
@@ -439,7 +442,7 @@ Figure 17.2: Density Plot of Paired Differences
 ## data:  left and right
 ## V = 13.5, p-value = 0.09036
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
-<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## OR</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">paired_diff</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -458,11 +461,11 @@ Figure 17.2: Density Plot of Paired Differences
 <p>The Wilcoxon rank-sum test compares the medians of two continuous populations that are assumed to have the same shape and are independent. The three possible sets of hypotheses are:</p>
 <ul>
 <li>
-<span class="math inline">\(H_0: M_1 = M_2, H_a: M_1 &gt; M_2\)</span>.</li>
+<span class="math inline">\(H_0: M_1 = M_2,  H_a: M_1 &gt; M_2\)</span>.</li>
 <li>
-<span class="math inline">\(H_0: M_1 = M_2, H_a: M_1 &lt; M_2\)</span>.</li>
+<span class="math inline">\(H_0: M_1 = M_2,  H_a: M_1 &lt; M_2\)</span>.</li>
 <li>
-<span class="math inline">\(H_0: M_1 = M_2, H_a: M_1 \neq M_2\)</span>.</li>
+<span class="math inline">\(H_0: M_1 = M_2,  H_a: M_1 \neq M_2\)</span>.</li>
 </ul>
 <p>The main idea of how the test statistic is calculated is as follows:</p>
 <ol style="list-style-type: decimal">
@@ -477,8 +480,8 @@ Figure 17.2: Density Plot of Paired Differences
 <span class="header-section-number">17.5.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-6"><i class="fas fa-link"></i></a>
 </h3>
 <p>A grocery store’s manager decides to compare the register personnel to determine if there is a difference in the speed with which they checkout customers. Is there evidence that there is a difference in checkout times of the two selected employees?</p>
-<p><span class="math inline">\(H_0: M_1 = M_2, H_a: M_1 \neq M_2\)</span>.</p>
-<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
+<p><span class="math inline">\(H_0: M_1 = M_2,  H_a: M_1 \neq M_2\)</span>.</p>
+<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Register data</span></span>
 <span><span class="va">rpA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.8</span>, <span class="fl">1</span>, <span class="fl">1.1</span>, <span class="fl">2.1</span>, <span class="fl">2.5</span>, <span class="fl">1.1</span>, <span class="fl">1</span>, <span class="fl">1.2</span>, <span class="fl">3.2</span>, <span class="fl">2.7</span><span class="op">)</span></span>
 <span><span class="va">rpB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">2.7</span>, <span class="fl">6.6</span>, <span class="fl">4.6</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">5.7</span>, <span class="fl">3.2</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span><span class="op">)</span></span>
@@ -492,7 +495,7 @@ Figure 17.2: Density Plot of Paired Differences
 Figure 17.3: Checkout Speeds of Employees
 </p>
 </div>
-<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Conduct the test</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">rpA</span>, <span class="va">rpB</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -501,14 +504,16 @@ Figure 17.3: Checkout Speeds of Employees
 ## data:  rpA and rpB
 ## W = 34, p-value = 0.2394
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
-<p>From Figure <a href="nonparamquant.html#fig:eg5">17.3</a>, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.</p>
+<p>From Figure <a href="nonparamquant.html#fig:eg5">17.3</a>, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.<br>
+## Comparison with the Bootstrap</p>
+<p>The tests we have learned today do not have sample size requirements. This is unlike the bootstrap which work better as sample size gets larger.</p>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="randomtest.html"><span class="header-section-number">16</span> The Bootstrap in Hypothesis Testing and Randomization Test</a></div>
-<div class="next"><a href="references.html">References</a></div>
+<div class="next"><a href="hyp2.html"><span class="header-section-number">18</span> Hypothesis Testing for Categorical Data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -519,7 +524,7 @@ Figure 17.3: Checkout Speeds of Employees
 <li><a class="nav-link" href="#hypotheses"><span class="header-section-number">17.2.1</span> Hypotheses</a></li>
 <li><a class="nav-link" href="#test-statistic-1"><span class="header-section-number">17.2.2</span> Test Statistic</a></li>
 <li><a class="nav-link" href="#distribution-of-test-statistic"><span class="header-section-number">17.2.3</span> Distribution of Test Statistic</a></li>
-<li><a class="nav-link" href="#p-value-1"><span class="header-section-number">17.2.4</span> P-Value</a></li>
+<li><a class="nav-link" href="#p-value"><span class="header-section-number">17.2.4</span> P-Value</a></li>
 <li><a class="nav-link" href="#worked-example-1-1"><span class="header-section-number">17.2.5</span> Worked Example 1</a></li>
 <li><a class="nav-link" href="#worked-example-2-1"><span class="header-section-number">17.2.6</span> Worked Example 2</a></li>
 <li><a class="nav-link" href="#worked-example-3-1"><span class="header-section-number">17.2.7</span> Worked Example 3</a></li>
@@ -529,7 +534,7 @@ Figure 17.3: Checkout Speeds of Employees
 <li>
 <a class="nav-link" href="#wilcoxon-sign-rank-test"><span class="header-section-number">17.3</span> Wilcoxon Sign-Rank Test</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#test-statistic-2"><span class="header-section-number">17.3.1</span> Test Statistic</a></li>
-<li><a class="nav-link" href="#p-value-2"><span class="header-section-number">17.3.2</span> P-Value</a></li>
+<li><a class="nav-link" href="#p-value-1"><span class="header-section-number">17.3.2</span> P-Value</a></li>
 <li><a class="nav-link" href="#worked-example-4"><span class="header-section-number">17.3.3</span> Worked Example</a></li>
 <li><a class="nav-link" href="#tests-for-one-quantitative-variable"><span class="header-section-number">17.3.4</span> Tests for one Quantitative Variable</a></li>
 </ul>
@@ -556,7 +561,7 @@ Figure 17.3: Checkout Speeds of Employees
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-10-30.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

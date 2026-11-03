@@ -6,17 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 18 Hypothesis Testing for Categorical Data | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="18.1 Introduction Thus far, we have introduce hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections 14 and 16). In this section, we will...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="description" content="18.1 Introduction Thus far, we have introduced hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections 14 and 16). In this section, we will...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 18 Hypothesis Testing for Categorical Data | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="18.1 Introduction Thus far, we have introduce hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections 14 and 16). In this section, we will...">
+<meta property="og:description" content="18.1 Introduction Thus far, we have introduced hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections 14 and 16). In this section, we will...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 18 Hypothesis Testing for Categorical Data | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="18.1 Introduction Thus far, we have introduce hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections 14 and 16). In this section, we will...">
+<meta name="twitter:description" content="18.1 Introduction Thus far, we have introduced hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections 14 and 16). In this section, we will...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,7 +26,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -84,6 +83,7 @@
 <li><a class="" href="randomtest.html"><span class="header-section-number">16</span> The Bootstrap in Hypothesis Testing and Randomization Test</a></li>
 <li><a class="" href="nonparamquant.html"><span class="header-section-number">17</span> Non-Parametric Tests for Quantitative Data</a></li>
 <li><a class="active" href="hyp2.html"><span class="header-section-number">18</span> Hypothesis Testing for Categorical Data</a></li>
+<li><a class="" href="nonparamcat.html"><span class="header-section-number">19</span> Non-Parametric Tests for Categorical Data</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -100,7 +100,7 @@
 <h2>
 <span class="header-section-number">18.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-8"><i class="fas fa-link"></i></a>
 </h2>
-<p>Thus far, we have introduce hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections <a href="hyp.html#hyp">14</a> and <a href="randomtest.html#randomtest">16</a>). In this section, we will introduce parametric hypothesis testing associated with categorical data. The specific tests are</p>
+<p>Thus far, we have introduced hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections <a href="hyp.html#hyp">14</a> and <a href="randomtest.html#randomtest">16</a>). In this section, we will introduce parametric hypothesis testing associated with categorical data. The specific tests are:</p>
 <ol style="list-style-type: decimal">
 <li>Goodness-of-fit (GOF) test (test for one categorical variable).</li>
 <li>Chi-squared test for two-way table (test for two categorical variables).</li>
@@ -129,24 +129,452 @@
 X^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}
 \tag{18.1}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(O_i\)</span> denotes the observed count in level <span class="math inline">\(i\)</span> and <span class="math inline">\(E_i\)</span> denotes the expected counts in level <span class="math inline">\(i\)</span> if the null hypothesis is true. The expected count for each level is just the multiplication of the sample size with its corresponding claimed probability in the null hypothesis.</p>
-<p>As with any test statistic, this test statistic measures how far our observed data deviates from the null hypothesis, so larger values provide more evidence against the null hypothesis.</p>
+<p>where <span class="math inline">\(O_i\)</span> denotes the observed count in level <span class="math inline">\(i\)</span> and <span class="math inline">\(E_i\)</span> denotes the expected counts in level <span class="math inline">\(i\)</span> if the null hypothesis is true. The expected count for each level is just the multiplication of the sample size with its corresponding claimed probability in the null hypothesis.
+As with any test statistic, this test statistic measures how far our observed data deviates from the null hypothesis, so larger values provide more evidence against the null hypothesis.</p>
 </div>
 <div id="p-value-and-critical-value" class="section level3" number="18.2.3">
 <h3>
 <span class="header-section-number">18.2.3</span> P-Value and Critical Value<a class="anchor" aria-label="anchor" href="#p-value-and-critical-value"><i class="fas fa-link"></i></a>
 </h3>
-<p>If the sample size is large enough, the test statistic <span class="math inline">\(X^2\)</span> can be approximated with <span class="math inline">\(\chi^2_{k-1}\)</span>, a chi-squared distribution with <span class="math inline">\(k-1\)</span> degrees of freedom. The approximation to the <span class="math inline">\(\chi^2_{k-1}\)</span> distribution works better as the sample size increases. There are various rules of thumb that exist in the literature to assess when the approximation works well: we will use the rule that says that all the expected counts must be at least 5.</p>
+<p>If the sample size is large enough, the test statistic <span class="math inline">\(X^2\)</span> can be approximated with <span class="math inline">\(\chi^2_{k-1}\)</span>, a chi-squared distribution with <span class="math inline">\(k-1\)</span> degrees of freedom. The approximation to the <span class="math inline">\(\chi^2_{k-1}\)</span> distribution works better as the sample size increases. There are various rules of thumb that exist in the literature to assess when the approximation works well: we will use the rule that says that the expected counts for all levels must be at least 5.</p>
 <p>Therefore, the p-value and critical value are both based on the <span class="math inline">\(\chi^2_{k-1}\)</span> distribution. Recall the definition of the p-value from Section <a href="hyp.html#pval">14.2.3.1</a>: it is the probability of observing the value of our test statistic, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true.</p>
 <p>Therefore, the p-value for this test is <span class="math inline">\(P(X^2 &gt; \chi^2_{k-1})\)</span>, which can be found by using <code>1 - \pchisq("value of test statistic", k-1)</code>.</p>
 <p>The critical value can therefore be found by using <code>qchisq("1 - alpha", k-1)</code>.</p>
-
+<div id="degrees-of-freedom" class="section level4" number="18.2.3.1">
+<h4>
+<span class="header-section-number">18.2.3.1</span> Degrees of Freedom<a class="anchor" aria-label="anchor" href="#degrees-of-freedom"><i class="fas fa-link"></i></a>
+</h4>
+<p>As written in Section <a href="CI.html#df">12.2.4.3</a>, the degrees of freedom is the number of independent pieces of information that can take on any numerical value when estimating a parameter. Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied.</p>
+<p>In the context of a GOF test for a categorical variable, the pieces of information we have come as the observed counts, one for each level, so there are <span class="math inline">\(k\)</span> of them. However, the sum of these counts must equal the sample size, i.e. <span class="math inline">\(\sum_{i=1}^k O_i = n\)</span>. If we know the observed counts for <span class="math inline">\(k-1\)</span> of these levels, the observed count for the last level is fixed. Therefore, the degrees of freedom is <span class="math inline">\(k-1\)</span>.</p>
+</div>
+</div>
+<div id="worked-example-7" class="section level3" number="18.2.4">
+<h3>
+<span class="header-section-number">18.2.4</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-7"><i class="fas fa-link"></i></a>
+</h3>
+<p>It is thought that when given a standard treatment, 50% of individuals with hypertension will show a marked decrease in blood pressure, 25% of individuals with hypertension will show a moderate decrease in blood pressure, 10% of individuals with hypertension will show a slight decrease in blood pressure, and 15% of individuals with hypertension will show no change in blood pressure. A random sample of 200 individuals with hypertension is selected and each is given a new treatment. The observed counts are 111, 65, 11, and 13, respectively. Is there evidence that individuals react differently to this treatment than to the standard treatment?</p>
+<p>We can tabulate the information regarding the proportion of results from the standard treatment in Table <a href="hyp2.html#tab:egGOF">18.1</a> below.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:egGOF">Table 18.1: </span> Proportion of Results from Standard Treatment</caption>
+<thead><tr class="header">
+<th align="center">Marked Decrease</th>
+<th align="center">Moderate Decrease</th>
+<th align="center">Slight Decrease</th>
+<th align="center">No Change</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">0.50</td>
+<td align="center">0.25</td>
+<td align="center">0.10</td>
+<td align="center">0.15</td>
+</tr></tbody>
+</table></div>
+<p>Therefore, the hypotheses are:</p>
+<ul>
+<li><span class="math inline">\(H_0, p_1 = 0.50, p_2 = 0.25, p_3 = 0.10, p_4 = 0.15\)</span></li>
+<li>
+<span class="math inline">\(H_a:\)</span> at least one of the <span class="math inline">\(p_i\)</span>s in <span class="math inline">\(H_0\)</span> is incorrect.</li>
+</ul>
+<p>Based on a random sample of 200, the expected counts are</p>
+<ul>
+<li>
+<span class="math inline">\(E_1 = 200 \times 0.50 = 100\)</span>.</li>
+<li>
+<span class="math inline">\(E_2 = 200 \times 0.25 = 50\)</span>.</li>
+<li>
+<span class="math inline">\(E_3 = 200 \times 0.10 = 20\)</span>.</li>
+<li>
+<span class="math inline">\(E_4 = 200 \times 0.15 = 30\)</span>.</li>
+</ul>
+<p>All the expected counts are above 5 so we can continue with the GOF test.</p>
+<p>The observed counts are: <span class="math inline">\(O_1 = 108, O_2 = 63, O_3 = 9, O_4 = 11\)</span>. Note that these counts can be displayed as a table, since tables are often used to summarize categorical variables.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:egGOF2">Table 18.2: </span> Observed Counts from New Treatment</caption>
+<thead><tr class="header">
+<th align="center">Marked Decrease</th>
+<th align="center">Moderate Decrease</th>
+<th align="center">Slight Decrease</th>
+<th align="center">No Change</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">108</td>
+<td align="center">63</td>
+<td align="center">9</td>
+<td align="center">11</td>
+</tr></tbody>
+</table></div>
+<p>Therefore, the <span class="math inline">\(X^2\)</span> test statistic is</p>
+<p><span class="math display">\[
+\begin{split}
+X^2 &amp;= \frac{(111 - 100)^2}{100} + \frac{(65 - 50)^2}{50} + \frac{(11- 20)^2}{20} + \frac{(13- 30)^2}{30} \\
+        &amp;= 19.39333.
+\end{split}
+\]</span></p>
+<p>The p-value is</p>
+<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="fl">19.39333</span>, df <span class="op">=</span> <span class="fl">4</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.0002266897</code></pre>
+<p>And the critical value is</p>
+<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">qchisq</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.05</span>, df <span class="op">=</span> <span class="fl">4</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 7.814728</code></pre>
+<p>Since the p-value is virtually 0 and is smaller than 0.05, (or since the test statistic is 19.39333 which is greater than the critical value of 7.814728), we reject the null hypothesis. Our sample of 200 provides evidence that individuals react differently to the new treatment than to the standard treatment.</p>
+<p>To use R, we can use the <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code> function. We supply the vector of observed counts, as well as a vector of the probabilities assumed in the null hypothesis. To stay consistent with equation <a href="hyp2.html#eq:18-GOFts">(18.1)</a>, we do not apply the continuity correction.</p>
+<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">111</span>, <span class="fl">65</span>, <span class="fl">11</span>, <span class="fl">13</span><span class="op">)</span> <span class="co">## observed counts</span></span>
+<span><span class="va">null.probs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.1</span>, <span class="fl">0.15</span><span class="op">)</span> <span class="co">##probabilities in null</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">obs</span>, p <span class="op">=</span> <span class="va">null.probs</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  obs
+## X-squared = 19.393, df = 3, p-value = 0.0002267</code></pre>
+</div>
+</div>
+<div id="chi-squared-test-for-two-way-table" class="section level2" number="18.3">
+<h2>
+<span class="header-section-number">18.3</span> Chi-Squared Test for Two-Way Table<a class="anchor" aria-label="anchor" href="#chi-squared-test-for-two-way-table"><i class="fas fa-link"></i></a>
+</h2>
+<p>A two-way table is the most common summary associated with two categorical variables. The chi-squared test for a two-way table is used to assess whether two categorical variables are associated or not.</p>
+<p>The chi-squared test for two-way tables determines whether the distribution of proportions of one categorical variable is the same over different levels of the other categorical variable. If so, the categorical variables have no association.</p>
+<div id="hypotheses-2" class="section level3" number="18.3.1">
+<h3>
+<span class="header-section-number">18.3.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Thus, the null hypothesis for this test is that there is no association between the two categorical variables. The alternative hypothesis is that the two categorical variables have some sort of relationship.</p>
+</div>
+<div id="test-statistic-4" class="section level3" number="18.3.2">
+<h3>
+<span class="header-section-number">18.3.2</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic-4"><i class="fas fa-link"></i></a>
+</h3>
+<p>The test statistic has the same formula as the test statistic for the GOF test, per equation <a href="hyp2.html#eq:18-GOFts">(18.1)</a>.</p>
+<p>The main difference is how the expected counts are calculated. These counts are based on the two-way table and the totals in the corresponding row and column of the table.</p>
+<p><span class="math display" id="eq:18-expcounts">\[\begin{equation}
+E_i = \frac{\text{row total for level }i \times \text{ column total for level }i}{n}
+\tag{18.2}
+\end{equation}\]</span></p>
+<p><strong>Thought Question:</strong> Can you derive formula <a href="hyp2.html#eq:18-expcounts">(18.2)</a> using basic probability rules?</p>
+</div>
+<div id="p-value-and-critical-value-1" class="section level3" number="18.3.3">
+<h3>
+<span class="header-section-number">18.3.3</span> P-Value and Critical Value<a class="anchor" aria-label="anchor" href="#p-value-and-critical-value-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>If the sample size is large enough, the test statistic <span class="math inline">\(X^2\)</span> can be approximated with <span class="math inline">\(\chi^2_{(r-1) \times (c-1)}\)</span>, a chi-squared distribution with <span class="math inline">\((r-1) \times (c-1)\)</span> degrees of freedom, where <span class="math inline">\(r\)</span> and <span class="math inline">\(c\)</span> denote the number of rows and columns in the two-way table.</p>
+<p>The approximation to the <span class="math inline">\(\chi^2_{(r-1) \times (c-1)}\)</span> distribution works better as the sample size increases. There are various rules of thumb that exist in the literature to assess when the approximation works well: we will use the rule that says that no more than 20% of the expected counts can be less than 5 and none are less than 1.</p>
+<div id="degrees-of-freedom-1" class="section level4" number="18.3.3.1">
+<h4>
+<span class="header-section-number">18.3.3.1</span> Degrees of Freedom<a class="anchor" aria-label="anchor" href="#degrees-of-freedom-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Why is the degrees of freedom for this test <span class="math inline">\((r-1) \times (c-1)\)</span>? Imagine two categorical variables, one with <span class="math inline">\(r\)</span> levels and the other with <span class="math inline">\(c\)</span> levels. Their counts are summarized in a <span class="math inline">\(r \times c\)</span> two-way table (two-way table with <span class="math inline">\(r\)</span> rows and <span class="math inline">\(c\)</span> columns).</p>
+<p>For our given data of sample size <span class="math inline">\(n\)</span>, with row and column totals given. Once you know the values of <span class="math inline">\((r-1) \times (c-1)\)</span> cells, the rest of the table is filled.</p>
+</div>
+</div>
+<div id="worked-example-8" class="section level3" number="18.3.4">
+<h3>
+<span class="header-section-number">18.3.4</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-8"><i class="fas fa-link"></i></a>
+</h3>
+<p>Consider the following data from 400 individuals, and we have information regarding their gender and educational level. The data are represented in the two-way table, Table <a href="hyp2.html#tab:eg2way">18.3</a> below.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:eg2way">Table 18.3: </span> Two-Way Table for Worked Example</caption>
+<thead><tr class="header">
+<th align="center"></th>
+<th align="center">HS</th>
+<th align="center">BA</th>
+<th align="center">MA</th>
+<th align="center">PhD</th>
+<th align="center">Total</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Female</td>
+<td align="center">63</td>
+<td align="center">54</td>
+<td align="center">46</td>
+<td align="center">41</td>
+<td align="center">204</td>
+</tr>
+<tr class="even">
+<td align="center">Male</td>
+<td align="center">42</td>
+<td align="center">44</td>
+<td align="center">53</td>
+<td align="center">57</td>
+<td align="center">196</td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center">105</td>
+<td align="center">98</td>
+<td align="center">99</td>
+<td align="center">98</td>
+<td align="center">400</td>
+</tr>
+</tbody>
+</table></div>
+<p>The null hypothesis is that gender and educational level have no association. The alternative hypothesis is that gender and educational level have some association.</p>
+<p>Next, we need to find the expected counts for each cell in the two-way table. As an example, to find the expected count for females with BA, we use equation <a href="hyp2.html#eq:18-expcounts">(18.2)</a> to get <span class="math inline">\(\frac{204 \times 105}{400} = 53.55\)</span>. This means that if there is no association between gender and educational level, we should expect to see 53.55 females with BA in our sample of 400.</p>
+<p>For brevity, I won’t show the calculations for the other expected counts, but you can verify some of these on your own. The table of expected counts is shown in Table <a href="hyp2.html#tab:eg2wayexp">18.4</a> below.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:eg2wayexp">Table 18.4: </span> Two-Way Table for Expected Counts</caption>
+<thead><tr class="header">
+<th align="center"></th>
+<th align="center">HS</th>
+<th align="center">BA</th>
+<th align="center">MA</th>
+<th align="center">PhD</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Female</td>
+<td align="center">53.55</td>
+<td align="center">49.98</td>
+<td align="center">50.49</td>
+<td align="center">49.98</td>
+</tr>
+<tr class="even">
+<td align="center">Male</td>
+<td align="center">51.45</td>
+<td align="center">48.02</td>
+<td align="center">48.51</td>
+<td align="center">48.02</td>
+</tr>
+</tbody>
+</table></div>
+<p>We note that all expected counts are above 5 so we can continue with the test.</p>
+<p>Therefore, the <span class="math inline">\(X^2\)</span> test statistic, using equation <a href="hyp2.html#eq:18-GOFts">(18.1)</a> is</p>
+<p><span class="math display">\[
+\begin{split}
+X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots + \frac{(57 - 48.02)^2}{48.02} \\
+        &amp;= 8.170871.
+\end{split}
+\]</span></p>
+<p>So the p-value is</p>
+<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="fl">8.170871</span>, df <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.04260921</code></pre>
+<p>which is below 0.05, so we reject the null hypothesis. The data provides evidence that there is an association between gender and educational level.</p>
+<p>We can use the <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code> function, where we supply a two-dimensional matrix that contains the same information as the two-way table of observed counts. To stay consistent with equation <a href="hyp2.html#eq:18-GOFts">(18.1)</a>, we do not apply the continuity correction.</p>
+<div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">63</span>,<span class="fl">42</span>,<span class="fl">54</span>,<span class="fl">44</span>,<span class="fl">46</span>,<span class="fl">53</span>,<span class="fl">41</span>,<span class="fl">57</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Female"</span>,<span class="st">"Male"</span><span class="op">)</span>, </span>
+<span>                    Education <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"HS"</span>,<span class="st">"BA"</span>,<span class="st">"MA"</span>,<span class="st">"PhD"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">Data</span></span></code></pre></div>
+<pre><code>##         Education
+## Gender   HS BA MA PhD
+##   Female 63 54 46  41
+##   Male   42 44 53  57</code></pre>
+<div class="sourceCode" id="cb598"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">Data</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Pearson's Chi-squared test
+## 
+## data:  Data
+## X-squared = 8.1709, df = 3, p-value = 0.04261</code></pre>
+</div>
+</div>
+<div id="test-for-one-proportion" class="section level2" number="18.4">
+<h2>
+<span class="header-section-number">18.4</span> Test for One Proportion<a class="anchor" aria-label="anchor" href="#test-for-one-proportion"><i class="fas fa-link"></i></a>
+</h2>
+<p>The test for one proportion, or 1-sample z-test, is used to assess the proportion, denoted by <span class="math inline">\(p\)</span>, of a binary variable in one population. The general framework of this test is fairly similar to the 1-sample t-test, the test for one mean.</p>
+<div id="hypotheses-3" class="section level3" number="18.4.1">
+<h3>
+<span class="header-section-number">18.4.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Depending on the research question, the null and alternative hypotheses are:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0: p = p_0, H_a: p &gt; p_0\)</span>.</li>
+<li>
+<span class="math inline">\(H_0: p = p_0, H_a: p &lt; p_0\)</span>.</li>
+<li>
+<span class="math inline">\(H_0: p = p_0, H_a: p \neq p_0\)</span>.</li>
+</ul>
+<p><span class="math inline">\(p_0\)</span> denotes the assumed value of the proportion under the null hypothesis.</p>
+</div>
+<div id="test-statistic-5" class="section level3" number="18.4.2">
+<h3>
+<span class="header-section-number">18.4.2</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic-5"><i class="fas fa-link"></i></a>
+</h3>
+<p>The test statistic is a <span class="math inline">\(Z\)</span> statistic:</p>
+<p><span class="math display" id="eq:teststatProp">\[\begin{equation}
+\hat{Z} =  \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1- p_0)}{n}}}.
+\tag{18.3}
+\end{equation}\]</span></p>
+</div>
+<div id="p-value-and-critical-value-2" class="section level3" number="18.4.3">
+<h3>
+<span class="header-section-number">18.4.3</span> P-Value and Critical Value<a class="anchor" aria-label="anchor" href="#p-value-and-critical-value-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>If the sample size is large enough, the test statistic <span class="math inline">\(\hat{Z}\)</span> is approximately standard normal, so p-values and critical values are based on the standard normal.</p>
+<p>Most books will write that the sample size is large enough if <span class="math inline">\(n \hat{p} \geq 10\)</span> and <span class="math inline">\(n(1-\hat{p}) \geq 10\)</span>. Some books will say 5 instead of 10. The approximation to the normal distribution gets better as <span class="math inline">\(n\hat{p}\)</span> and <span class="math inline">\(n(1-\hat{p})\)</span> get larger.</p>
+<p><strong>Thought question:</strong> Is there a contextual meaning behind the values of <span class="math inline">\(n\hat{p}\)</span> and <span class="math inline">\(n(1-\hat{p})\)</span>?</p>
+</div>
+<div id="worked-example-9" class="section level3" number="18.4.4">
+<h3>
+<span class="header-section-number">18.4.4</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-9"><i class="fas fa-link"></i></a>
+</h3>
+<p>A student hears that 10% of the U.S. population is left-handed and wants to determine if his school has the same proportion as the general population. To investigate, he randomly samples 200 of his fellow students and finds 16 of them to be left-handed. Is there evidence that the student population proportion differs from the general population proportion?</p>
+<p>We have <span class="math inline">\(H_0: p = 0.1, H_a: p \neq 0.1\)</span>.</p>
+<p>We have 16 left-handers and 184 right-handers in the sample. These values are both greater than 10 so we can proceed.</p>
+<p>We can use the <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> function. We need to supply the number of yes responses, the sample size, the proportion in the null hypothesis, and the alternative hypothesis. To stay consistent with equation <a href="hyp2.html#eq:teststatProp">(18.3)</a>, we do not apply the continuity correction.</p>
+<div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Conduct the test</span></span>
+<span><span class="va">z.prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">200</span>, p<span class="op">=</span><span class="fl">0.1</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">z.prop</span></span></code></pre></div>
+<pre><code>## 
+##  1-sample proportions test without continuity correction
+## 
+## data:  16 out of 200, null probability 0.1
+## X-squared = 0.88889, df = 1, p-value = 0.3458
+## alternative hypothesis: true p is not equal to 0.1
+## 95 percent confidence interval:
+##  0.04984059 0.12598949
+## sample estimates:
+##    p 
+## 0.08</code></pre>
+<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Verify test statistic</span></span>
+<span><span class="va">phat</span> <span class="op">&lt;-</span> <span class="fl">16</span><span class="op">/</span><span class="fl">200</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">phat</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">*</span><span class="fl">0.9</span><span class="op">/</span><span class="fl">200</span><span class="op">)</span></span>
+<span><span class="va">z</span></span></code></pre></div>
+<pre><code>## [1] -0.942809</code></pre>
+<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Verify p-value</span></span>
+<span><span class="va">p.value</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">p.value</span></span></code></pre></div>
+<pre><code>## [1] 0.3457786</code></pre>
+<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Compare test statistic and p-value to output</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">z.prop</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## X-squared 
+##  0.942809</code></pre>
+<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">z.prop</span><span class="op">$</span><span class="va">p.value</span></span></code></pre></div>
+<pre><code>## [1] 0.3457786</code></pre>
+<p>The p-value is 0.3458 which is greater than 0.05. The data do not provide evidence that student population proportion of left-handers differs from the general population.</p>
+<p>Note: the <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> function uses the <span class="math inline">\(X^2\)</span> test statistic per equation <a href="hyp2.html#eq:18-GOFts">(18.1)</a>, and works the problem as a GOF test for one categorical variable. It turns out that for a one-sample z-test, the <span class="math inline">\(X^2\)</span> test statistic is the squared of the <span class="math inline">\(Z\)</span> test statistic.</p>
+<p>Another note: While the test statistic and p-value can be determined from the output of the <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> function, the confidence interval reported is calculated in a different way and is different from the standard one-sample z-confidence interval for proportions given in equation <a href="CI.html#eq:8-CIprop">(12.12)</a>.</p>
+</div>
+</div>
+<div id="test-for-difference-in-two-independent-proportions" class="section level2" number="18.5">
+<h2>
+<span class="header-section-number">18.5</span> Test for Difference in Two Independent Proportions<a class="anchor" aria-label="anchor" href="#test-for-difference-in-two-independent-proportions"><i class="fas fa-link"></i></a>
+</h2>
+<p>The two-sample z-test tests the difference of the proportions of a binary variable across two independent populations.</p>
+<div id="hypotheses-4" class="section level3" number="18.5.1">
+<h3>
+<span class="header-section-number">18.5.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-4"><i class="fas fa-link"></i></a>
+</h3>
+<p>Depending on the research question, the null and alternative hypotheses are:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0: p_X - p_Y = 0, H_a: p_X - p_Y &gt; 0\)</span>.</li>
+<li>
+<span class="math inline">\(H_0: p_X - p_Y = 0, H_a: p_X - p_Y &lt; 0\)</span>.</li>
+<li>
+<span class="math inline">\(H_0: p_X - p_Y = 0, H_a: p_X - p_Y \neq 0\)</span>.</li>
+</ul>
+<p><span class="math inline">\(p_X\)</span> and <span class="math inline">\(P_Y\)</span> denotes the assumed values of the two proportions under the null hypothesis.</p>
+</div>
+<div id="test-statistic-6" class="section level3" number="18.5.2">
+<h3>
+<span class="header-section-number">18.5.2</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic-6"><i class="fas fa-link"></i></a>
+</h3>
+<p>The test statistic is a <span class="math inline">\(Z\)</span> statistic:</p>
+<p><span class="math display" id="eq:teststat2Prop">\[\begin{equation}
+\hat{Z} =  \frac{\hat{p}_X - \hat{p}_Y}{\sqrt{\hat{p}(1 - \hat{p}(\frac{1}{n_X} + \frac{1}{n_Y}))}},
+\tag{18.4}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\hat{p}\)</span> denotes the proportion when both samples are viewed as one sample.</p>
+</div>
+<div id="p-value-and-critical-value-3" class="section level3" number="18.5.3">
+<h3>
+<span class="header-section-number">18.5.3</span> P-Value and Critical Value<a class="anchor" aria-label="anchor" href="#p-value-and-critical-value-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>If the sample sizes are large enough, the test statistic <span class="math inline">\(\hat{Z}\)</span> is approximately standard normal, so p-values and critical values are based on the standard normal. The approximation works better as <span class="math inline">\(n_X \hat{P}_X, n_X (1-\hat{P}_X), n_Y \hat{P}_Y, n_Y (1-\hat{P}_Y)\)</span> get larger. We will use at least 10 to be considered large enough.</p>
+</div>
+<div id="worked-example-10" class="section level3" number="18.5.4">
+<h3>
+<span class="header-section-number">18.5.4</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-10"><i class="fas fa-link"></i></a>
+</h3>
+<p>The sample poverty rate in 2001 was found to be 11.7% using a sample of 50,000 individuals. The sample poverty rate in 2002 was found to be 12.1% using a sample of 60,000 individuals. Is there significant evidence that the U.S. poverty rate changed from 2001 to 2002?</p>
+<p>We have <span class="math inline">\(H_0: p_X - p_Y = 0, H_a: p_X - p_Y \neq 0\)</span>.</p>
+<p>The sample sizes are clearly enough: there are more than 10 people in the sample who are poor and not poor in both samples.</p>
+<div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Conduct the test</span></span>
+<span><span class="va">phat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.117</span>, <span class="fl">0.121</span><span class="op">)</span> <span class="co">##sample props in each samples</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50000</span>, <span class="fl">60000</span><span class="op">)</span> <span class="co">##sample sizes in each samples</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">phat</span><span class="op">*</span><span class="va">n</span> <span class="co">##number of people who are poor in each sample</span></span>
+<span></span>
+<span><span class="va">z2.prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span>, correct<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">z2.prop</span></span></code></pre></div>
+<pre><code>## 
+##  2-sample test for equality of proportions without continuity correction
+## 
+## data:  x out of n
+## X-squared = 4.1567, df = 1, p-value = 0.04147
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  -0.0078401642 -0.0001598358
+## sample estimates:
+## prop 1 prop 2 
+##  0.117  0.121</code></pre>
+<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Verify test statistic</span></span>
+<span><span class="va">comb.phat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">phat</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">comb.phat</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">comb.phat</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">z</span></span></code></pre></div>
+<pre><code>## [1] 2.038807</code></pre>
+<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Verify p-value</span></span>
+<span><span class="va">p.value</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="va">p.value</span></span></code></pre></div>
+<pre><code>## [1] 0.04146928</code></pre>
+<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Compare test statistic and p-value to output</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">z2.prop</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## X-squared 
+##  2.038807</code></pre>
+<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">z2.prop</span><span class="op">$</span><span class="va">p.value</span></span></code></pre></div>
+<pre><code>## [1] 0.04146928</code></pre>
+<p>The p-value is 0.04147 which is less than 0.05. The data do provides evidence that the U.S. poverty rate changed from 2001 to 2002?</p>
+<p>Note: the <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> function uses the <span class="math inline">\(X^2\)</span> test statistic per equation <a href="hyp2.html#eq:18-GOFts">(18.1)</a>, and works the problem as a GOF test for a two-way table. It turns out that for a 2-sample z-test, the <span class="math inline">\(X^2\)</span> test statistic is the squared of the <span class="math inline">\(Z\)</span> test statistic.</p>
+<p>Another note: While the test statistic and p-value can be determined from the output of the <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> function, the confidence interval reported is calculated in a different way and is different from the standard 2-sample z-confidence interval for proportions given in equation <a href="#8-CI2props"><strong>??</strong></a>.</p>
+</div>
+</div>
+<div id="a-couple-of-comments" class="section level2" number="18.6">
+<h2>
+<span class="header-section-number">18.6</span> A Couple of Comments<a class="anchor" aria-label="anchor" href="#a-couple-of-comments"><i class="fas fa-link"></i></a>
+</h2>
+<div id="continuity-correction" class="section level3" number="18.6.1">
+<h3>
+<span class="header-section-number">18.6.1</span> Continuity Correction<a class="anchor" aria-label="anchor" href="#continuity-correction"><i class="fas fa-link"></i></a>
+</h3>
+<p>You may have noticed that in the functions <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code> and <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> that we set the argument <code>correct</code> to be <code>FALSE</code>. This means we do not want to apply the continuity correction, which results in test statistics that match the formulas given in this section.</p>
+<p>The reason why the continuity correction may be applied is due to the fact that we are using a continuous distribution (chi-squared or standard normal) to approximate the distribution of test statistics based on categorical and not continuous data. This mismatch can artificially inflate the test statistic and lower the p-value, making it more likely to have a false positive (Type I error) with small sample sizes.</p>
+<p>The larger the sample size, the impact of the continuity correction becomes more negligible.</p>
+</div>
+<div id="small-sample-sizes" class="section level3" number="18.6.2">
+<h3>
+<span class="header-section-number">18.6.2</span> Small Sample Sizes<a class="anchor" aria-label="anchor" href="#small-sample-sizes"><i class="fas fa-link"></i></a>
+</h3>
+<p>You may realize that the tests in this section do not work with small sample sizes. A couple of workarounds:</p>
+<ol style="list-style-type: decimal">
+<li><p>Combine some of the levels involving small sample sizes so conditions are met. Make sure that doing so still enables you to answer the question you posed.</p></li>
+<li><p>Consider non-parametric methods, such as Fisher’s exact test, which we see in Section <a href="nonparamcat.html#nonparamcat">19</a>.</p></li>
+</ol>
 </div>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="nonparamquant.html"><span class="header-section-number">17</span> Non-Parametric Tests for Quantitative Data</a></div>
-<div class="next"><a href="references.html">References</a></div>
+<div class="next"><a href="nonparamcat.html"><span class="header-section-number">19</span> Non-Parametric Tests for Categorical Data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -157,6 +585,37 @@ X^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}
 <li><a class="nav-link" href="#hypotheses-1"><span class="header-section-number">18.2.1</span> Hypotheses</a></li>
 <li><a class="nav-link" href="#test-statistic-3"><span class="header-section-number">18.2.2</span> Test Statistic</a></li>
 <li><a class="nav-link" href="#p-value-and-critical-value"><span class="header-section-number">18.2.3</span> P-Value and Critical Value</a></li>
+<li><a class="nav-link" href="#worked-example-7"><span class="header-section-number">18.2.4</span> Worked Example</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#chi-squared-test-for-two-way-table"><span class="header-section-number">18.3</span> Chi-Squared Test for Two-Way Table</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypotheses-2"><span class="header-section-number">18.3.1</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#test-statistic-4"><span class="header-section-number">18.3.2</span> Test Statistic</a></li>
+<li><a class="nav-link" href="#p-value-and-critical-value-1"><span class="header-section-number">18.3.3</span> P-Value and Critical Value</a></li>
+<li><a class="nav-link" href="#worked-example-8"><span class="header-section-number">18.3.4</span> Worked Example</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#test-for-one-proportion"><span class="header-section-number">18.4</span> Test for One Proportion</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypotheses-3"><span class="header-section-number">18.4.1</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#test-statistic-5"><span class="header-section-number">18.4.2</span> Test Statistic</a></li>
+<li><a class="nav-link" href="#p-value-and-critical-value-2"><span class="header-section-number">18.4.3</span> P-Value and Critical Value</a></li>
+<li><a class="nav-link" href="#worked-example-9"><span class="header-section-number">18.4.4</span> Worked Example</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#test-for-difference-in-two-independent-proportions"><span class="header-section-number">18.5</span> Test for Difference in Two Independent Proportions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypotheses-4"><span class="header-section-number">18.5.1</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#test-statistic-6"><span class="header-section-number">18.5.2</span> Test Statistic</a></li>
+<li><a class="nav-link" href="#p-value-and-critical-value-3"><span class="header-section-number">18.5.3</span> P-Value and Critical Value</a></li>
+<li><a class="nav-link" href="#worked-example-10"><span class="header-section-number">18.5.4</span> Worked Example</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#a-couple-of-comments"><span class="header-section-number">18.6</span> A Couple of Comments</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#continuity-correction"><span class="header-section-number">18.6.1</span> Continuity Correction</a></li>
+<li><a class="nav-link" href="#small-sample-sizes"><span class="header-section-number">18.6.2</span> Small Sample Sizes</a></li>
 </ul>
 </li>
 </ul>
@@ -175,7 +634,7 @@ X^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-02.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

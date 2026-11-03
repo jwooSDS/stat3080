@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Thus far, we have introduce hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections \@ref(hyp) and \@ref(randomtest)). In this section, we will introduce parametric hypothesis testing associated with categorical data. The specific tests are
+Thus far, we have introduced hypothesis testing (parametric and non-parametric) when the variable of interest is quantitative (see Sections \@ref(hyp) and \@ref(randomtest)). In this section, we will introduce parametric hypothesis testing associated with categorical data. The specific tests are:
 
 1. Goodness-of-fit (GOF) test (test for one categorical variable).
 2. Chi-squared test for two-way table (test for two categorical variables).
@@ -29,12 +29,11 @@ X^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}
 \end{equation}
 
 where $O_i$ denotes the observed count in level $i$ and $E_i$ denotes the expected counts in level $i$ if the null hypothesis is true. The expected count for each level is just the multiplication of the sample size with its corresponding claimed probability in the null hypothesis. 
-
 As with any test statistic, this test statistic measures how far our observed data deviates from the null hypothesis, so larger values provide more evidence against the null hypothesis. 
 
 ### P-Value and Critical Value
 
-If the sample size is large enough, the test statistic $X^2$ can be approximated with $\chi^2_{k-1}$, a chi-squared distribution with $k-1$ degrees of freedom. The approximation to the $\chi^2_{k-1}$ distribution works better as the sample size increases. There are various rules of thumb that exist in the literature to assess when the approximation works well: we will use the rule that says that all the expected counts must be at least 5. 
+If the sample size is large enough, the test statistic $X^2$ can be approximated with $\chi^2_{k-1}$, a chi-squared distribution with $k-1$ degrees of freedom. The approximation to the $\chi^2_{k-1}$ distribution works better as the sample size increases. There are various rules of thumb that exist in the literature to assess when the approximation works well: we will use the rule that says that the expected counts for all levels must be at least 5. 
 
 Therefore, the p-value and critical value are both based on the $\chi^2_{k-1}$ distribution. Recall the definition of the p-value from Section \@ref(pval): it is the probability of observing the value of our test statistic, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true. 
 
@@ -42,3 +41,312 @@ Therefore, the p-value for this test is $P(X^2 > \chi^2_{k-1})$, which can be fo
 
 The critical value can therefore be found by using `qchisq("1 - alpha", k-1)`. 
 
+#### Degrees of Freedom
+
+As written in Section \@ref(df), the degrees of freedom is the number of independent pieces of information that can take on any numerical value when estimating a parameter. Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. 
+
+In the context of a GOF test for a categorical variable, the pieces of information we have come as the observed counts, one for each level, so there are $k$ of them. However, the sum of these counts must equal the sample size, i.e. $\sum_{i=1}^k O_i = n$. If we know the observed counts for $k-1$ of these levels, the observed count for the last level is fixed. Therefore, the degrees of freedom is $k-1$. 
+
+### Worked Example
+
+It is thought that when given a standard treatment, 50% of individuals with hypertension will show a marked decrease in blood pressure, 25% of individuals with hypertension will show a moderate decrease in blood pressure, 10% of individuals with hypertension will show a slight decrease in blood pressure, and 15% of individuals with hypertension will show no change in blood pressure. A random sample of 200 individuals with hypertension is selected and each is given a new treatment. The observed counts are 111, 65, 11, and 13, respectively. Is there evidence that individuals react differently to this treatment than to the standard treatment?   
+
+We can tabulate the information regarding the proportion of results from the standard treatment in Table \@ref(tab:egGOF) below.
+
+Table: (\#tab:egGOF) Proportion of Results from Standard Treatment
+
+| Marked Decrease | Moderate Decrease  | Slight Decrease | No Change | 
+|:----------:|:-------------:|:------:|:------:|
+| 0.50 |  0.25 | 0.10  |  0.15 |
+
+Therefore, the hypotheses are:
+
+- $H_0, p_1 = 0.50, p_2 = 0.25, p_3 = 0.10, p_4 = 0.15$
+- $H_a:$ at least one of the $p_i$s in $H_0$ is incorrect. 
+
+Based on a random sample of 200, the expected counts are
+
+- $E_1 = 200 \times 0.50 = 100$.
+- $E_2 = 200 \times 0.25 = 50$.
+- $E_3 = 200 \times 0.10 = 20$.
+- $E_4 = 200 \times 0.15 = 30$.
+
+All the expected counts are above 5 so we can continue with the GOF test.
+
+The observed counts are: $O_1 = 108, O_2 = 63, O_3 = 9, O_4 = 11$. Note that these counts can be displayed as a table, since tables are often used to summarize categorical variables.
+
+Table: (\#tab:egGOF2) Observed Counts from New Treatment
+
+| Marked Decrease | Moderate Decrease  | Slight Decrease | No Change | 
+|:----------:|:-------------:|:------:|:------:|
+| 108 |  63 | 9  |  11 |
+
+Therefore, the $X^2$ test statistic is
+
+$$
+\begin{split}
+X^2 &= \frac{(111 - 100)^2}{100} + \frac{(65 - 50)^2}{50} + \frac{(11- 20)^2}{20} + \frac{(13- 30)^2}{30} \\
+        &= 19.39333.
+\end{split}
+$$
+
+The p-value is 
+
+```{r}
+1 - pchisq(19.39333, df = 4 - 1)
+```
+
+And the critical value is
+
+```{r}
+qchisq(1 - 0.05, df = 4 - 1)
+```
+
+Since the p-value is virtually 0 and is smaller than 0.05, (or since the test statistic is 19.39333 which is greater than the critical value of 7.814728), we reject the null hypothesis. Our sample of 200 provides evidence that individuals react differently to the new treatment than to the standard treatment. 
+
+To use R, we can use the `chisq.test()` function. We supply the vector of observed counts, as well as a vector of the probabilities assumed in the null hypothesis. To stay consistent with equation \@ref(eq:18-GOFts), we do not apply the continuity correction.
+
+```{r}
+obs <- c(111, 65, 11, 13) ## observed counts
+null.probs <- c(0.5, 0.25, 0.1, 0.15) ##probabilities in null
+chisq.test(obs, p = null.probs, correct = FALSE)
+```
+
+## Chi-Squared Test for Two-Way Table
+
+A two-way table is the most common summary associated with two categorical variables. The chi-squared test for a two-way table is used to assess whether two categorical variables are associated or not. 
+
+The chi-squared test for two-way tables determines whether the distribution of proportions of one categorical variable is the same over different levels of the other categorical variable. If so, the categorical variables have no association. 
+
+### Hypotheses
+
+Thus, the null hypothesis for this test is that there is no association between the two categorical variables. The alternative hypothesis is that the two categorical variables have some sort of relationship. 
+
+### Test Statistic
+
+The test statistic has the same formula as the test statistic for the GOF test, per equation \@ref(eq:18-GOFts). 
+
+The main difference is how the expected counts are calculated. These counts are based on the two-way table and the totals in the corresponding row and column of the table.
+
+\begin{equation} 
+E_i = \frac{\text{row total for level }i \times \text{ column total for level }i}{n}
+(\#eq:18-expcounts)
+\end{equation}
+
+**Thought Question:** Can you derive formula \@ref(eq:18-expcounts) using basic probability rules?
+
+### P-Value and Critical Value
+
+If the sample size is large enough, the test statistic $X^2$ can be approximated with $\chi^2_{(r-1) \times (c-1)}$, a chi-squared distribution with $(r-1) \times (c-1)$ degrees of freedom, where $r$ and $c$ denote the number of rows and columns in the two-way table.
+
+The approximation to the $\chi^2_{(r-1) \times (c-1)}$ distribution works better as the sample size increases. There are various rules of thumb that exist in the literature to assess when the approximation works well: we will use the rule that says that no more than 20% of the expected counts can be less than 5 and none are less than 1.
+
+#### Degrees of Freedom
+
+Why is the degrees of freedom for this test $(r-1) \times (c-1)$? Imagine two categorical variables, one with $r$ levels and the other with $c$ levels. Their counts are summarized in a $r \times c$ two-way table (two-way table with $r$ rows and $c$ columns). 
+
+For our given data of sample size $n$, with row and column totals given. Once you know the values of $(r-1) \times (c-1)$ cells, the rest of the table is filled. 
+
+### Worked Example
+
+Consider the following data from 400 individuals, and we have information regarding their gender and educational level. The data are represented in the two-way table, Table \@ref(tab:eg2way) below.
+
+Table: (\#tab:eg2way) Two-Way Table for Worked Example
+
+|  | HS  | BA | MA |  PhD |  Total | 
+|:---:|:-----:|:----:|:----:|:----:| :----:|
+| Female |  63 | 54  |46 | 41 | 204 |
+| Male |  42  | 44 | 53 | 57 | 196 |
+| Total | 105 | 98 |99 | 98 | 400 |
+
+The null hypothesis is that gender and educational level have no association. The alternative hypothesis is that gender and educational level have some association. 
+
+Next, we need to find the expected counts for each cell in the two-way table. As an example, to find the expected count for females with BA, we use equation \@ref(eq:18-expcounts) to get $\frac{204 \times 105}{400} = 53.55$. This means that if there is no association between gender and educational level, we should expect to see 53.55 females with BA in our sample of 400. 
+
+For brevity, I won't show the calculations for the other expected counts, but you can verify some of these on your own. The table of expected counts is shown in Table \@ref(tab:eg2wayexp) below.
+
+Table: (\#tab:eg2wayexp) Two-Way Table for Expected Counts
+
+|  | HS  | BA | MA |  PhD | 
+|:---:|:-----:|:----:|:----:|:----:| 
+| Female |  53.55 | 49.98  |50.49 | 49.98 | 
+| Male |  51.45  | 48.02 | 48.51 | 48.02 | 
+
+We note that all expected counts are above 5 so we can continue with the test.
+
+Therefore, the $X^2$ test statistic, using equation \@ref(eq:18-GOFts) is
+
+$$
+\begin{split}
+X^2 &= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots + \frac{(57 - 48.02)^2}{48.02} \\
+        &= 8.170871.
+\end{split}
+$$
+
+So the p-value is 
+
+```{r}
+1 - pchisq(8.170871, df = 3)
+```
+
+which is below 0.05, so we reject the null hypothesis. The data provides evidence that there is an association between gender and educational level. 
+
+We can use the `chisq.test()` function, where we supply a two-dimensional matrix that contains the same information as the two-way table of observed counts. To stay consistent with equation \@ref(eq:18-GOFts), we do not apply the continuity correction.
+
+```{r}
+Data <- matrix(c(63,42,54,44,46,53,41,57), nrow = 2, ncol = 4)
+dimnames(Data) <- list(Gender = c("Female","Male"), 
+                    Education = c("HS","BA","MA","PhD"))
+Data
+
+chisq.test(Data, correct = FALSE)
+```
+
+## Test for One Proportion
+
+The test for one proportion, or 1-sample z-test, is used to assess the proportion, denoted by $p$, of a binary variable in one population. The general framework of this test is fairly similar to the 1-sample t-test, the test for one mean.
+
+### Hypotheses
+
+Depending on the research question, the null and alternative hypotheses are:
+
+- $H_0: p = p_0,  H_a: p > p_0$.
+- $H_0: p = p_0,  H_a: p < p_0$.
+- $H_0: p = p_0,  H_a: p \neq p_0$.
+
+$p_0$ denotes the assumed value of the proportion under the null hypothesis. 
+
+### Test Statistic
+
+The test statistic is a $Z$ statistic:
+
+\begin{equation} 
+\hat{Z} =  \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1- p_0)}{n}}}.
+(\#eq:teststatProp)
+\end{equation}
+
+### P-Value and Critical Value
+
+If the sample size is large enough, the test statistic $\hat{Z}$ is approximately standard normal, so p-values and critical values are based on the standard normal. 
+
+Most books will write that the sample size is large enough if $n \hat{p} \geq 10$ and $n(1-\hat{p}) \geq 10$. Some books will say 5 instead of 10. The approximation to the normal distribution gets better as $n\hat{p}$ and $n(1-\hat{p})$ get larger.
+
+**Thought question:** Is there a contextual meaning behind the values of $n\hat{p}$ and $n(1-\hat{p})$?
+
+### Worked Example
+
+A student hears that 10% of the U.S. population is left-handed and wants to determine if his school has the same proportion as the general population. To investigate, he randomly  samples 200 of his fellow students and finds 16 of them to be left-handed. Is there evidence that the student population proportion differs from the general population proportion?
+
+We have $H_0: p = 0.1, H_a: p \neq 0.1$. 
+
+We have 16 left-handers and 184 right-handers in the sample. These values are both greater than 10 so we can proceed. 
+
+We can use the `prop.test()` function. We need to supply the number of yes responses, the sample size, the proportion in the null hypothesis, and the alternative hypothesis. To stay consistent with equation \@ref(eq:teststatProp), we do not apply the continuity correction.
+
+```{r}
+## Conduct the test
+z.prop <- prop.test(16, 200, p=0.1, alternative="two.sided", correct = FALSE)
+z.prop
+
+## Verify test statistic
+phat <- 16/200
+z <- (phat-0.1)/sqrt(0.1*0.9/200)
+z
+
+## Verify p-value
+p.value <- 2*(1-pnorm(abs(z)))
+p.value
+
+## Compare test statistic and p-value to output
+sqrt(z.prop$statistic)
+z.prop$p.value
+```
+
+The p-value is 0.3458 which is greater than 0.05. The data do not provide evidence that student population proportion of left-handers differs from the general population. 
+
+Note: the `prop.test()` function uses the $X^2$ test statistic per equation \@ref(eq:18-GOFts), and works the problem as a GOF test for one categorical variable. It turns out that for a one-sample z-test, the $X^2$ test statistic is the squared of the $Z$ test statistic. 
+
+Another note: While the test statistic and p-value can be determined from the  output of the `prop.test()` function, the confidence interval reported is calculated in a different way and is different from the standard one-sample z-confidence interval for proportions given in equation \@ref(eq:8-CIprop).   
+
+## Test for Difference in Two Independent Proportions
+
+The two-sample z-test tests the difference of the proportions of a binary variable across two independent populations.
+
+### Hypotheses
+
+Depending on the research question, the null and alternative hypotheses are:
+
+- $H_0: p_X - p_Y = 0,  H_a: p_X - p_Y > 0$.
+- $H_0: p_X - p_Y = 0,  H_a: p_X - p_Y < 0$.
+- $H_0: p_X - p_Y = 0,  H_a: p_X - p_Y \neq 0$.
+
+$p_X$ and $P_Y$ denotes the assumed values of the two proportions under the null hypothesis. 
+
+### Test Statistic
+
+The test statistic is a $Z$ statistic:
+
+\begin{equation} 
+\hat{Z} =  \frac{\hat{p}_X - \hat{p}_Y}{\sqrt{\hat{p}(1 - \hat{p}(\frac{1}{n_X} + \frac{1}{n_Y}))}},
+(\#eq:teststat2Prop)
+\end{equation}
+
+where $\hat{p}$ denotes the proportion when both samples are viewed as one sample. 
+
+### P-Value and Critical Value
+
+If the sample sizes are large enough, the test statistic $\hat{Z}$ is approximately standard normal, so p-values and critical values are based on the standard normal. The approximation works better as $n_X \hat{P}_X, n_X (1-\hat{P}_X), n_Y \hat{P}_Y, n_Y (1-\hat{P}_Y)$ get larger. We will use at least 10 to be considered large enough. 
+
+### Worked Example
+
+The sample poverty rate in 2001 was found to be 11.7% using a sample of 50,000 individuals. The sample poverty rate in 2002 was found to be 12.1% using a sample of 60,000 individuals. Is there significant evidence that the U.S. poverty rate changed from 2001 to 2002?  
+
+We have $H_0: p_X - p_Y = 0, H_a: p_X - p_Y \neq 0$.
+
+The sample sizes are clearly enough: there are more than 10 people in the sample who are poor and not poor in both samples. 
+
+```{r}
+## Conduct the test
+phat <- c(0.117, 0.121) ##sample props in each samples
+n <- c(50000, 60000) ##sample sizes in each samples
+x <- phat*n ##number of people who are poor in each sample
+
+z2.prop <- prop.test(x, n, alternative="two.sided", correct=FALSE)
+z2.prop
+
+## Verify test statistic
+comb.phat <- sum(x)/sum(n)
+z <- diff(phat)/sqrt(comb.phat*(1-comb.phat)*(1/n[1]+1/n[2]))
+z
+
+## Verify p-value
+p.value <- 2*(1-pnorm(abs(z))) 
+p.value
+
+## Compare test statistic and p-value to output
+sqrt(z2.prop$statistic)
+z2.prop$p.value
+```
+The p-value is 0.04147 which is less than 0.05. The data do provides evidence that the  U.S. poverty rate changed from 2001 to 2002?  
+
+Note: the `prop.test()` function uses the $X^2$ test statistic per equation \@ref(eq:18-GOFts), and works the problem as a GOF test for a two-way table. It turns out that for a 2-sample z-test, the $X^2$ test statistic is the squared of the $Z$ test statistic. 
+
+Another note: While the test statistic and p-value can be determined from the  output of the `prop.test()` function, the confidence interval reported is calculated in a different way and is different from the standard 2-sample z-confidence interval for proportions given in equation \@ref(8-CI2props). 
+
+## A Couple of Comments
+
+### Continuity Correction
+
+You may have noticed that in the functions `chisq.test()` and `prop.test()` that we set the argument `correct` to be `FALSE`. This means we do not want to apply the continuity correction, which results in test statistics that match the formulas given in this section. 
+
+The reason why the continuity correction may be applied is due to the fact that we are using a continuous distribution (chi-squared or standard normal) to approximate the distribution of test statistics based on categorical and not continuous data. This mismatch can artificially inflate the test statistic and lower the p-value, making it more likely to have a false positive (Type I error) with small sample sizes.
+
+The larger the sample size, the impact of the continuity correction becomes more negligible. 
+
+### Small Sample Sizes
+
+You may realize that the tests in this section do not work with small sample sizes. A couple of workarounds:
+
+1. Combine some of the levels involving small sample sizes so conditions are met. Make sure that doing so still enables you to answer the question you posed.
+
+2. Consider non-parametric methods, such as Fisher's exact test, which we see in Section \@ref(nonparamcat).

@@ -1,0 +1,7 @@
+# Non-Parametric Tests for Categorical Data {#nonparamcat}
+
+## Introduction
+
+blah
+
+

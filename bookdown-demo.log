@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  3 NOV 2026 16:08
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  5 NOV 2026 10:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -906,9 +906,15 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 (Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 317.
 
 [12] [13] [14] [15] [16] [17]
-Overfull \hbox (59.25pt too wide) in paragraph at lines 699--699
-[]\TU/lmtt/m/n/10 ##  [1]  1.494897  1.908684  2.140204  2.174079 -4.029187 -1.
-864784  5.296763[] 
+Overfull \hbox (33.0pt too wide) in paragraph at lines 699--699
+[]\TU/lmtt/m/n/10 ##  [1] -4.254317050  0.006794499 -0.833377795 -0.742985970  
+0.685164830[] 
+ []
+
+
+Overfull \hbox (33.0pt too wide) in paragraph at lines 699--699
+[]\TU/lmtt/m/n/10 ##  [6]  2.707283257 -1.656138944 -0.148729634  2.562443776  
+2.441812496[] 
  []
 
 [18] [19] [20] [21] [22]
@@ -2971,35 +2977,64 @@ Overfull \hbox (48.75pt too wide) in paragraph at lines 9807--9807
 ity correction[] 
  []
 
-[228]
-
-LaTeX Warning: Reference `8-CI2props' on page 229 undefined on input line 9860.
-
-
-[229] [230]
+[228] [229] [230]
 Chapter 19.
-(bookdown-demo.bbl [231
+[231
 
 ]
-Overfull \hbox (3.59561pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 232 \TU/lmr/m/sl/10 CHAPTER 19.  NON-PARAMETRIC TESTS FOR CATEGO
-RICAL DATA
+Overfull \hbox (69.43341pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 232 \TU/lmr/m/sl/10 CHAPTER 19.  POWER AND NON-PARAMETRIC TESTS 
+FOR CATEGORICAL DATA
  []
 
-[232
+[232] [233]
+Overfull \hbox (69.43341pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 234 \TU/lmr/m/sl/10 CHAPTER 19.  POWER AND NON-PARAMETRIC TESTS 
+FOR CATEGORICAL DATA
+ []
 
-]) [233] (bookdown-demo.aux)
+[234] [235]
+Overfull \hbox (69.43341pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 236 \TU/lmr/m/sl/10 CHAPTER 19.  POWER AND NON-PARAMETRIC TESTS 
+FOR CATEGORICAL DATA
+ []
+
+[236] [237]
+Overfull \hbox (27.75pt too wide) in paragraph at lines 10348--10348
+[]\TU/lmtt/m/n/10 ##  Fisher[]s Exact Test for Count Data with simulated p-valu
+e (based on[] 
+ []
+
+
+Overfull \hbox (27.75pt too wide) in paragraph at lines 10364--10364
+[]\TU/lmtt/m/n/10 ##  Fisher[]s Exact Test for Count Data with simulated p-valu
+e (based on[] 
+ []
+
+
+Overfull \hbox (69.43341pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 238 \TU/lmr/m/sl/10 CHAPTER 19.  POWER AND NON-PARAMETRIC TESTS 
+FOR CATEGORICAL DATA
+ []
+
+[238]
+Chapter 20.
+(bookdown-demo.bbl [239
+
+] [240
+
+]) [241] (bookdown-demo.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20531 strings out of 411472
- 384149 string characters out of 5818265
+ 20556 strings out of 411472
+ 384510 string characters out of 5818265
  1873012 words of memory out of 5000000
- 40440 multiletter control sequences out of 15000+600000
+ 40465 multiletter control sequences out of 15000+600000
  518810 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,17n,121p,1012b,544s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (233 pages).
+Output written on bookdown-demo.pdf (241 pages).

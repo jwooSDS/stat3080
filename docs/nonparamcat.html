@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 19 Non-Parametric Tests for Categorical Data | STAT 3080: From Data to Knowledge</title>
+<title>Chapter 19 Power and Non-Parametric Tests for Categorical Data | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="19.1 Introduction blah">
+<meta name="description" content="19.1 Introduction Recall from Section 15 that the power of a hypothesis test is the probability that the null hypothesis will be rejected when the alternative hypothesis is true and that the...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 19 Non-Parametric Tests for Categorical Data | STAT 3080: From Data to Knowledge">
+<meta property="og:title" content="Chapter 19 Power and Non-Parametric Tests for Categorical Data | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="19.1 Introduction blah">
+<meta property="og:description" content="19.1 Introduction Recall from Section 15 that the power of a hypothesis test is the probability that the null hypothesis will be rejected when the alternative hypothesis is true and that the...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 19 Non-Parametric Tests for Categorical Data | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="19.1 Introduction blah">
+<meta name="twitter:title" content="Chapter 19 Power and Non-Parametric Tests for Categorical Data | STAT 3080: From Data to Knowledge">
+<meta name="twitter:description" content="19.1 Introduction Recall from Section 15 that the power of a hypothesis test is the probability that the null hypothesis will be rejected when the alternative hypothesis is true and that the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -83,7 +83,8 @@
 <li><a class="" href="randomtest.html"><span class="header-section-number">16</span> The Bootstrap in Hypothesis Testing and Randomization Test</a></li>
 <li><a class="" href="nonparamquant.html"><span class="header-section-number">17</span> Non-Parametric Tests for Quantitative Data</a></li>
 <li><a class="" href="hyp2.html"><span class="header-section-number">18</span> Hypothesis Testing for Categorical Data</a></li>
-<li><a class="active" href="nonparamcat.html"><span class="header-section-number">19</span> Non-Parametric Tests for Categorical Data</a></li>
+<li><a class="active" href="nonparamcat.html"><span class="header-section-number">19</span> Power and Non-Parametric Tests for Categorical Data</a></li>
+<li><a class="" href="est.html"><span class="header-section-number">20</span> Estimation</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -94,24 +95,373 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nonparamcat" class="section level1" number="19">
 <h1>
-<span class="header-section-number">19</span> Non-Parametric Tests for Categorical Data<a class="anchor" aria-label="anchor" href="#nonparamcat"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19</span> Power and Non-Parametric Tests for Categorical Data<a class="anchor" aria-label="anchor" href="#nonparamcat"><i class="fas fa-link"></i></a>
 </h1>
 <div id="introduction-9" class="section level2" number="19.1">
 <h2>
 <span class="header-section-number">19.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-9"><i class="fas fa-link"></i></a>
 </h2>
-<p>blah</p>
+<p>Recall from Section <a href="prac.html#prac">15</a> that the power of a hypothesis test is the probability that the null hypothesis will be rejected when the alternative hypothesis is true and that the sample size, significance level, and effect size are used together to determine its value. There are power functions corresponding to the various types of parametric, categorical tests.</p>
+<p>We will use worked examples to see how to use functions (from the <code>pwr</code> package) in R to assess the power of parametric tests for categorical data.</p>
+<p>In Section <a href="nonparamcat.html#exact">19.3</a>, we will lean about Fisher’s exact test, which is a non-parametric test for testing if the categorical variables in a two-way table are associated or not, and can be used when conditions for parametric versions covered in Section <a href="hyp2.html#hyp2">18</a> are not met.</p>
+</div>
+<div id="worked-examples-1" class="section level2" number="19.2">
+<h2>
+<span class="header-section-number">19.2</span> Worked Examples<a class="anchor" aria-label="anchor" href="#worked-examples-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span> <span class="co">##load package for various power functions</span></span></code></pre></div>
+<div id="gof-test-for-categorical-data" class="section level3" number="19.2.1">
+<h3>
+<span class="header-section-number">19.2.1</span> GOF Test for Categorical Data<a class="anchor" aria-label="anchor" href="#gof-test-for-categorical-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>It is thought that when given a standard treatment, 50% of individuals with hypertension will show a marked decrease in blood pressure, 25% of individuals with hypertension will show a moderate decrease in blood pressure, 10% of individuals with hypertension will show a slight decrease in blood pressure, and 15% of individuals with hypertension will show no change in blood pressure. A random sample of 200 individuals with hypertension will be selected and each will be given a new treatment to test if there is evidence that individuals react differently to this treatment than to the standard treatment. What is the power if there is a small effect size between the treatments? What is the minimum sample size to detect a small effect size between the treatments with at least 0.8 power?</p>
+<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.chisq.test.html">pwr.chisq.test</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.2</span>, N <span class="op">=</span> <span class="fl">200</span>, df <span class="op">=</span> <span class="fl">3</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##      Chi squared power calculation 
+## 
+##               w = 0.2
+##               N = 200
+##              df = 3
+##       sig.level = 0.05
+##           power = 0.6541111
+## 
+## NOTE: N is the number of observations</code></pre>
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## w for effect size.</span></span>
+<span><span class="co">## N for sample size</span></span>
+<span><span class="co">## df is 3 since we have 4 levels</span></span></code></pre></div>
+<p>The power is about 0.654 for a small effect size.</p>
+<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.chisq.test.html">pwr.chisq.test</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.2</span>, df <span class="op">=</span> <span class="fl">3</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">$</span><span class="va">N</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 273</code></pre>
+<p>We need a sample of at least 273 to achieve 0.8 power with small effect size.</p>
+</div>
+<div id="chi-squared-test-for-two-way-table-1" class="section level3" number="19.2.2">
+<h3>
+<span class="header-section-number">19.2.2</span> Chi-Squared Test for Two-Way Table<a class="anchor" aria-label="anchor" href="#chi-squared-test-for-two-way-table-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>A sample of 400 individuals is to be randomly drawn to determine whether there is a significant association between gender and education level. The individuals will be classified into two genders and four education levels. What is the power for this test when there is a small association?</p>
+<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.chisq.test.html">pwr.chisq.test</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.2</span>, N <span class="op">=</span> <span class="fl">400</span>, df <span class="op">=</span> <span class="fl">3</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span></code></pre></div>
+<pre><code>## [1] 0.9340886</code></pre>
+<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## df is (2-1) times (4-1) = 3</span></span></code></pre></div>
+<p>The power is about 0.934 to detect a small association between gender and education level.</p>
+<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.chisq.test.html">pwr.chisq.test</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.2</span>, df <span class="op">=</span> <span class="fl">3</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">$</span><span class="va">N</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 273</code></pre>
+<p>We need at 273 observations to achive 0.8 power to detect a small association between gender and education level.</p>
+</div>
+<div id="one-sample-z-test" class="section level3" number="19.2.3">
+<h3>
+<span class="header-section-number">19.2.3</span> One-Sample Z-Test<a class="anchor" aria-label="anchor" href="#one-sample-z-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>A student hears that 10% of the U.S. population is left-handed and wants to determine if his school has a lower proportion than the general population. To investigate, he plans to randomly sample 200 of his fellow students. What is the power of the student’s test when the true proportion is slightly lower? What is the minimum</p>
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.p.test.html">pwr.p.test</a></span><span class="op">(</span>h <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span>, n <span class="op">=</span> <span class="fl">200</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, alternative <span class="op">=</span> <span class="st">"less"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span></code></pre></div>
+<pre><code>## [1] 0.881709</code></pre>
+<p>The power to detect a small difference is about 0.882.</p>
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.p.test.html">pwr.p.test</a></span><span class="op">(</span>h<span class="op">=</span><span class="op">-</span><span class="fl">0.2</span>, sig.level<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span>, alternative<span class="op">=</span><span class="st">"less"</span><span class="op">)</span><span class="op">$</span><span class="va">n</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 155</code></pre>
+<p>He needs a sample size of at least 155 to detect a small difference with at least 0.8 power.</p>
+</div>
+<div id="two-sample-z-test" class="section level3" number="19.2.4">
+<h3>
+<span class="header-section-number">19.2.4</span> Two-Sample Z-Test<a class="anchor" aria-label="anchor" href="#two-sample-z-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The sample poverty rate in 2001 is to be measured using a sample of 500 individuals. The sample poverty rate in 2002 is to be measured using a sample of 600 individuals. What is the power of the test for whether there is significant evidence that the U.S. poverty rate changed from 2001 to 2002 when the effect size is small? If the sample size from 2001 remains 500, what does the sample size for 2002 need to be to yield a power of 80%?</p>
+<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.2p2n.test.html">pwr.2p2n.test</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0.2</span>, n1 <span class="op">=</span> <span class="fl">500</span>, n2 <span class="op">=</span> <span class="fl">600</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span></code></pre></div>
+<pre><code>## [1] 0.9103523</code></pre>
+<p>The power to detect a small effect size is 0.910.</p>
+<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.2p2n.test.html">pwr.2p2n.test</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0.2</span>, n1 <span class="op">=</span> <span class="fl">500</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">n2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 323</code></pre>
+<p>The minimum sample size in 2002 to achieve power of at least 0.8 is 323.</p>
+</div>
+</div>
+<div id="exact" class="section level2" number="19.3">
+<h2>
+<span class="header-section-number">19.3</span> Fisher’s Exact Test<a class="anchor" aria-label="anchor" href="#exact"><i class="fas fa-link"></i></a>
+</h2>
+<p>The Fisher’s exact test tests whether there is association between independent categorical variables that can be summarized in a two-way table with fixed marginal totals. Before we go any further, we need to learn about the <strong>hypergeometric</strong> distribution, since Fisher’s exact test is based on this distribution.</p>
+<div id="the-hypergeometric-distribution" class="section level3" number="19.3.1">
+<h3>
+<span class="header-section-number">19.3.1</span> The Hypergeometric Distribution<a class="anchor" aria-label="anchor" href="#the-hypergeometric-distribution"><i class="fas fa-link"></i></a>
+</h3>
+<p>This is a classical example used to demonstrate the hypergeometric distribution. I have adjusted the notation to better match the arguments used in R and so it is different from the classical notation:</p>
+<ul>
+<li>Imagine an urn with <span class="math inline">\(m\)</span> white balls and <span class="math inline">\(n\)</span> black balls.</li>
+<li>Sample <span class="math inline">\(k\)</span> balls from the urn without replacement.</li>
+<li>Let <span class="math inline">\(X\)</span> be the number of white balls in the sample.</li>
+<li>
+<span class="math inline">\(X\)</span> follows a hypergeometric distribution with parameters <span class="math inline">\(m, n, k\)</span>, i.e. <span class="math inline">\(X \sim H(m, n, k)\)</span>.</li>
+</ul>
+<p>This information is represented in the following two-way table:</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:hyper">Table 19.1: </span> Two-Way Table for Hypergeometric Distribution</caption>
+<thead><tr class="header">
+<th align="center"></th>
+<th align="center">White</th>
+<th align="center">Black</th>
+<th align="center">Total</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Sampled</td>
+<td align="center"><span class="math inline">\(X\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(k\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Not sampled</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(N - k\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center"><span class="math inline">\(m\)</span></td>
+<td align="center"><span class="math inline">\(n\)</span></td>
+<td align="center"><span class="math inline">\(N = m+n\)</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>With <span class="math inline">\(X \sim H(m, n, k)\)</span>: <span class="math inline">\(X\)</span> is the random variable that denotes the number of white balls in a sample of size <span class="math inline">\(k\)</span>, drawn without replacement from an urn with <span class="math inline">\(m\)</span> white balls and <span class="math inline">\(n\)</span> black balls. The PMF of <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display" id="eq:19-hyp">\[\begin{equation}
+P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
+\tag{19.1}
+\end{equation}\]</span></p>
+<p>To find the probability from equation <a href="nonparamcat.html#eq:19-hyp">(19.1)</a>, we can use <code>dhyper(x, m, n, k)</code>. For example, if we have this table</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:hyper2">Table 19.2: </span> Two-Way Table for Hypergeometric Distribution</caption>
+<thead><tr class="header">
+<th align="center"></th>
+<th align="center">White</th>
+<th align="center">Black</th>
+<th align="center">Total</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Sampled</td>
+<td align="center">9</td>
+<td align="center">1</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center">Not sampled</td>
+<td align="center">6</td>
+<td align="center">4</td>
+<td align="center">10</td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center">15</td>
+<td align="center">5</td>
+<td align="center">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>The probability of having 9 white balls from 10 drawn without replacement from an urn with 15 white balls and 5 black balls is</p>
+<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.1354489</code></pre>
+<p>Now we are ready to talk more about Fisher’s exact test.</p>
+</div>
+<div id="hypotheses-5" class="section level3" number="19.3.2">
+<h3>
+<span class="header-section-number">19.3.2</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses-5"><i class="fas fa-link"></i></a>
+</h3>
+<p>The null and alternative hypotheses are the same as the chi-squared test for two-way tables:</p>
+<ul>
+<li>The null hypothesis states that there is no association between the two variables.</li>
+<li>The alternative hypothesis states that there is some association between the two variables.</li>
+</ul>
+</div>
+<div id="test-statistic-and-p-value" class="section level3" number="19.3.3">
+<h3>
+<span class="header-section-number">19.3.3</span> Test Statistic and P-value<a class="anchor" aria-label="anchor" href="#test-statistic-and-p-value"><i class="fas fa-link"></i></a>
+</h3>
+<p>There is not a calculated test statistic. Instead, the probability of observing values that indicate a more extreme association that what is shown in the given two-way table is calculated as the p-value.</p>
+<p>So we assume the null hypothesis is true (no association), then constrain the row and column totals in the two way table (keep them fixed).</p>
+<p>We then consider all possible two-way tables that satisfy the row and column totals, and calculate the relevant probability for each possible table.</p>
+<p>The p-value of Fisher’s exact test is the sum of the probabilities for all tables having a probability equal to or smaller than that observed.</p>
+<p>For example, we observe the following data presented in table <a href="nonparamcat.html#tab:hyper2">19.2</a>.</p>
+<p>Given the row and column totals, the only possible values for <span class="math inline">\(X\)</span> are 5, 6, 7, 8, 9, 10. The corresponding probabilities are</p>
+<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.01625387</code></pre>
+<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.1354489</code></pre>
+<div class="sourceCode" id="cb645"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.3482972</code></pre>
+<div class="sourceCode" id="cb647"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.3482972</code></pre>
+<div class="sourceCode" id="cb649"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.1354489</code></pre>
+<div class="sourceCode" id="cb651"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.01625387</code></pre>
+<p>so the p-value is</p>
+<div class="sourceCode" id="cb653"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span>    <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.3034056</code></pre>
+<p>Next, we go over a worked example.</p>
+</div>
+<div id="worked-example-11" class="section level3" number="19.3.4">
+<h3>
+<span class="header-section-number">19.3.4</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-11"><i class="fas fa-link"></i></a>
+</h3>
+<p>A research team made up of advocates for social justice and psychologists designed an experiment where two companies were sent a batch of 12 resumes for evaluation. Each resume was returned either with an invitation for an interview or not. Two versions of all 12 resumes were created: one with a non-European sounding name and one with a European-American sounding name. The version sent to each company was randomized. Is there evidence of ethnic bias?</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:egexact">Table 19.3: </span> Two-Way Table for Worked Example</caption>
+<thead><tr class="header">
+<th align="center"></th>
+<th align="center">Invitation</th>
+<th align="center">None</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Non-Euro</td>
+<td align="center">2</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center">Euro</td>
+<td align="center">8</td>
+<td align="center">4</td>
+</tr>
+</tbody>
+</table></div>
+<p>The null hypothesis is that there is no association between the sound of the last name and whether the resume resulted in an invitation or not. The alternative hypothesis is that there is an association between the sound of the last name and whether the resume resulted in an invitation or not.</p>
+<p>To find the p-value in R, we need to create a matrix that represents the information in Table <a href="nonparamcat.html#tab:egexact">19.3</a>, and then apply the <code><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test()</a></code> function to the matrix.</p>
+<div class="sourceCode" id="cb655"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exp.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">10</span>,<span class="fl">8</span>,<span class="fl">4</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">2</span>, </span>
+<span>                  byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">exp.res</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Fisher's Exact Test for Count Data
+## 
+## data:  exp.res
+## p-value = 0.03607
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.008101526 0.896925044
+## sample estimates:
+## odds ratio 
+##  0.1121872</code></pre>
+<p>The p-value is 0.036, so we reject the null hypothesis. The data provide evidence of some association between the sound of the last name and whether the resume resulted in an invitation or not.</p>
+<p>We could have listed all possible two-way tables with the same row and column totals as Table <a href="nonparamcat.html#tab:egexact">19.3</a> and find each of their corresponding probabilities based on the hypergeometric distribution, but there are 11 such tables.</p>
+</div>
+<div id="larger-tables" class="section level3" number="19.3.5">
+<h3>
+<span class="header-section-number">19.3.5</span> Larger Tables<a class="anchor" aria-label="anchor" href="#larger-tables"><i class="fas fa-link"></i></a>
+</h3>
+<p>With a two-way table, the number of possibilities with the same row and column totals can get large easily. For larger tables (more than 2 rows or 2 columns), the number of possibilities is large.</p>
+<p>With large tables, Monte Carlo simulation can be used to generate the p-value using the default 2,000 replicates by specifying <code>TRUE</code> for the <code>simulate.p.value</code> argument. The number of replicates used can be set with the <code>B</code> argument.</p>
+<p>Consider this example: The research team instead asks both companies for whether the candidate would definitely receive an invitation for an interview, might receive an invitation for an interview, or definitely would not receive an invitation for an interview.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:eglarge">Table 19.4: </span> Two-Way Table for Larger Table</caption>
+<thead><tr class="header">
+<th align="center"></th>
+<th align="center">Invitation</th>
+<th align="center">Possible</th>
+<th align="center">None</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Non-Euro</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">7</td>
+</tr>
+<tr class="even">
+<td align="center">Euro</td>
+<td align="center">8</td>
+<td align="center">1</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table></div>
+<div class="sourceCode" id="cb657"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exp2.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, </span>
+<span>                   nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>, </span>
+<span>                   byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">exp2.res</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Fisher's Exact Test for Count Data
+## 
+## data:  exp2.res
+## p-value = 0.05993
+## alternative hypothesis: two.sided</code></pre>
+<div class="sourceCode" id="cb659"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">exp2.res</span>, simulate.p.value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Fisher's Exact Test for Count Data with simulated p-value (based on
+##  2000 replicates)
+## 
+## data:  exp2.res
+## p-value = 0.05047
+## alternative hypothesis: two.sided</code></pre>
+<div class="sourceCode" id="cb661"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">exp2.res</span>, simulate.p.value <span class="op">=</span> <span class="cn">TRUE</span>, B <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Fisher's Exact Test for Count Data with simulated p-value (based on
+##  10000 replicates)
+## 
+## data:  exp2.res
+## p-value = 0.06059
+## alternative hypothesis: two.sided</code></pre>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="hyp2.html"><span class="header-section-number">18</span> Hypothesis Testing for Categorical Data</a></div>
-<div class="next"><a href="references.html">References</a></div>
+<div class="next"><a href="est.html"><span class="header-section-number">20</span> Estimation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#nonparamcat"><span class="header-section-number">19</span> Non-Parametric Tests for Categorical Data</a></li>
+<li><a class="nav-link" href="#nonparamcat"><span class="header-section-number">19</span> Power and Non-Parametric Tests for Categorical Data</a></li>
 <li><a class="nav-link" href="#introduction-9"><span class="header-section-number">19.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#worked-examples-1"><span class="header-section-number">19.2</span> Worked Examples</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#gof-test-for-categorical-data"><span class="header-section-number">19.2.1</span> GOF Test for Categorical Data</a></li>
+<li><a class="nav-link" href="#chi-squared-test-for-two-way-table-1"><span class="header-section-number">19.2.2</span> Chi-Squared Test for Two-Way Table</a></li>
+<li><a class="nav-link" href="#one-sample-z-test"><span class="header-section-number">19.2.3</span> One-Sample Z-Test</a></li>
+<li><a class="nav-link" href="#two-sample-z-test"><span class="header-section-number">19.2.4</span> Two-Sample Z-Test</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#exact"><span class="header-section-number">19.3</span> Fisher’s Exact Test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-hypergeometric-distribution"><span class="header-section-number">19.3.1</span> The Hypergeometric Distribution</a></li>
+<li><a class="nav-link" href="#hypotheses-5"><span class="header-section-number">19.3.2</span> Hypotheses</a></li>
+<li><a class="nav-link" href="#test-statistic-and-p-value"><span class="header-section-number">19.3.3</span> Test Statistic and P-value</a></li>
+<li><a class="nav-link" href="#worked-example-11"><span class="header-section-number">19.3.4</span> Worked Example</a></li>
+<li><a class="nav-link" href="#larger-tables"><span class="header-section-number">19.3.5</span> Larger Tables</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -128,7 +478,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-03.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

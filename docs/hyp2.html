@@ -83,7 +83,8 @@
 <li><a class="" href="randomtest.html"><span class="header-section-number">16</span> The Bootstrap in Hypothesis Testing and Randomization Test</a></li>
 <li><a class="" href="nonparamquant.html"><span class="header-section-number">17</span> Non-Parametric Tests for Quantitative Data</a></li>
 <li><a class="active" href="hyp2.html"><span class="header-section-number">18</span> Hypothesis Testing for Categorical Data</a></li>
-<li><a class="" href="nonparamcat.html"><span class="header-section-number">19</span> Non-Parametric Tests for Categorical Data</a></li>
+<li><a class="" href="nonparamcat.html"><span class="header-section-number">19</span> Power and Non-Parametric Tests for Categorical Data</a></li>
+<li><a class="" href="est.html"><span class="header-section-number">20</span> Estimation</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -545,7 +546,7 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 <pre><code>## [1] 0.04146928</code></pre>
 <p>The p-value is 0.04147 which is less than 0.05. The data do provides evidence that the U.S. poverty rate changed from 2001 to 2002?</p>
 <p>Note: the <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> function uses the <span class="math inline">\(X^2\)</span> test statistic per equation <a href="hyp2.html#eq:18-GOFts">(18.1)</a>, and works the problem as a GOF test for a two-way table. It turns out that for a 2-sample z-test, the <span class="math inline">\(X^2\)</span> test statistic is the squared of the <span class="math inline">\(Z\)</span> test statistic.</p>
-<p>Another note: While the test statistic and p-value can be determined from the output of the <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> function, the confidence interval reported is calculated in a different way and is different from the standard 2-sample z-confidence interval for proportions given in equation <a href="#8-CI2props"><strong>??</strong></a>.</p>
+<p>Another note: While the test statistic and p-value can be determined from the output of the <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> function, the confidence interval reported is calculated in a different way and is different from the standard 2-sample z-confidence interval for proportions given in equation <a href="CI.html#eq:8-CI2props">(12.14)</a>.</p>
 </div>
 </div>
 <div id="a-couple-of-comments" class="section level2" number="18.6">
@@ -574,7 +575,7 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="nonparamquant.html"><span class="header-section-number">17</span> Non-Parametric Tests for Quantitative Data</a></div>
-<div class="next"><a href="nonparamcat.html"><span class="header-section-number">19</span> Non-Parametric Tests for Categorical Data</a></div>
+<div class="next"><a href="nonparamcat.html"><span class="header-section-number">19</span> Power and Non-Parametric Tests for Categorical Data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -634,7 +635,7 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-03.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

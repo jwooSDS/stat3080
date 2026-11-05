@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-11-03}
+\date{2026-11-05}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.494897  1.908684  2.140204  2.174079 -4.029187 -1.864784  5.296763
-##  [8] -0.540407  1.147775  2.700830
+##  [1] -4.254317050  0.006794499 -0.833377795 -0.742985970  0.685164830
+##  [6]  2.707283257 -1.656138944 -0.148729634  2.562443776  2.441812496
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -9857,7 +9857,7 @@ The p-value is 0.04147 which is less than 0.05. The data do provides evidence th
 
 Note: the \texttt{prop.test()} function uses the \(X^2\) test statistic per equation \eqref{eq:18-GOFts}, and works the problem as a GOF test for a two-way table. It turns out that for a 2-sample z-test, the \(X^2\) test statistic is the squared of the \(Z\) test statistic.
 
-Another note: While the test statistic and p-value can be determined from the output of the \texttt{prop.test()} function, the confidence interval reported is calculated in a different way and is different from the standard 2-sample z-confidence interval for proportions given in equation \ref{8-CI2props}.
+Another note: While the test statistic and p-value can be determined from the output of the \texttt{prop.test()} function, the confidence interval reported is calculated in a different way and is different from the standard 2-sample z-confidence interval for proportions given in equation \eqref{eq:8-CI2props}.
 
 \hypertarget{a-couple-of-comments}{%
 \section{A Couple of Comments}\label{a-couple-of-comments}}
@@ -9885,10 +9885,489 @@ You may realize that the tests in this section do not work with small sample siz
 \end{enumerate}
 
 \hypertarget{nonparamcat}{%
-\chapter{Non-Parametric Tests for Categorical Data}\label{nonparamcat}}
+\chapter{Power and Non-Parametric Tests for Categorical Data}\label{nonparamcat}}
 
 \hypertarget{introduction-9}{%
 \section{Introduction}\label{introduction-9}}
+
+Recall from Section \ref{prac} that the power of a hypothesis test is the probability that the null hypothesis will be rejected when the alternative hypothesis is true and that the sample size, significance level, and effect size are used together to determine its value. There are power functions corresponding to the various types of parametric, categorical tests.
+
+We will use worked examples to see how to use functions (from the \texttt{pwr} package) in R to assess the power of parametric tests for categorical data.
+
+In Section \ref{exact}, we will lean about Fisher's exact test, which is a non-parametric test for testing if the categorical variables in a two-way table are associated or not, and can be used when conditions for parametric versions covered in Section \ref{hyp2} are not met.
+
+\hypertarget{worked-examples-1}{%
+\section{Worked Examples}\label{worked-examples-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(pwr) }\DocumentationTok{\#\#load package for various power functions}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gof-test-for-categorical-data}{%
+\subsection{GOF Test for Categorical Data}\label{gof-test-for-categorical-data}}
+
+It is thought that when given a standard treatment, 50\% of individuals with hypertension will show a marked decrease in blood pressure, 25\% of individuals with hypertension will show a moderate decrease in blood pressure, 10\% of individuals with hypertension will show a slight decrease in blood pressure, and 15\% of individuals with hypertension will show no change in blood pressure. A random sample of 200 individuals with hypertension will be selected and each will be given a new treatment to test if there is evidence that individuals react differently to this treatment than to the standard treatment. What is the power if there is a small effect size between the treatments? What is the minimum sample size to detect a small effect size between the treatments with at least 0.8 power?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Calculate the power}
+\FunctionTok{pwr.chisq.test}\NormalTok{(}\AttributeTok{w =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{N =} \DecValTok{200}\NormalTok{, }\AttributeTok{df =} \DecValTok{3}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Chi squared power calculation 
+## 
+##               w = 0.2
+##               N = 200
+##              df = 3
+##       sig.level = 0.05
+##           power = 0.6541111
+## 
+## NOTE: N is the number of observations
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# w for effect size.}
+\DocumentationTok{\#\# N for sample size}
+\DocumentationTok{\#\# df is 3 since we have 4 levels}
+\end{Highlighting}
+\end{Shaded}
+
+The power is about 0.654 for a small effect size.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Determine the sample size required for power of 0.8}
+\FunctionTok{ceiling}\NormalTok{(}\FunctionTok{pwr.chisq.test}\NormalTok{(}\AttributeTok{w =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{df =} \DecValTok{3}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{power =} \FloatTok{0.8}\NormalTok{)}\SpecialCharTok{$}\NormalTok{N)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 273
+\end{verbatim}
+
+We need a sample of at least 273 to achieve 0.8 power with small effect size.
+
+\hypertarget{chi-squared-test-for-two-way-table-1}{%
+\subsection{Chi-Squared Test for Two-Way Table}\label{chi-squared-test-for-two-way-table-1}}
+
+A sample of 400 individuals is to be randomly drawn to determine whether there is a significant association between gender and education level. The individuals will be classified into two genders and four education levels. What is the power for this test when there is a small association?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Calculate the power}
+\FunctionTok{pwr.chisq.test}\NormalTok{(}\AttributeTok{w =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{N =} \DecValTok{400}\NormalTok{, }\AttributeTok{df =} \DecValTok{3}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{)}\SpecialCharTok{$}\NormalTok{power}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9340886
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# df is (2{-}1) times (4{-}1) = 3}
+\end{Highlighting}
+\end{Shaded}
+
+The power is about 0.934 to detect a small association between gender and education level.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ceiling}\NormalTok{(}\FunctionTok{pwr.chisq.test}\NormalTok{(}\AttributeTok{w =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{df =} \DecValTok{3}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{power =} \FloatTok{0.8}\NormalTok{)}\SpecialCharTok{$}\NormalTok{N)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 273
+\end{verbatim}
+
+We need at 273 observations to achive 0.8 power to detect a small association between gender and education level.
+
+\hypertarget{one-sample-z-test}{%
+\subsection{One-Sample Z-Test}\label{one-sample-z-test}}
+
+A student hears that 10\% of the U.S. population is left-handed and wants to determine if his school has a lower proportion than the general population. To investigate, he plans to randomly sample 200 of his fellow students. What is the power of the student's test when the true proportion is slightly lower? What is the minimum
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Calculate the power}
+\FunctionTok{pwr.p.test}\NormalTok{(}\AttributeTok{h =} \SpecialCharTok{{-}}\FloatTok{0.2}\NormalTok{, }\AttributeTok{n =} \DecValTok{200}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"less"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{power}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.881709
+\end{verbatim}
+
+The power to detect a small difference is about 0.882.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Determine the sample size required for power of 0.8}
+\FunctionTok{ceiling}\NormalTok{(}\FunctionTok{pwr.p.test}\NormalTok{(}\AttributeTok{h=}\SpecialCharTok{{-}}\FloatTok{0.2}\NormalTok{, }\AttributeTok{sig.level=}\FloatTok{0.05}\NormalTok{, }\AttributeTok{power=}\FloatTok{0.8}\NormalTok{, }\AttributeTok{alternative=}\StringTok{"less"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 155
+\end{verbatim}
+
+He needs a sample size of at least 155 to detect a small difference with at least 0.8 power.
+
+\hypertarget{two-sample-z-test}{%
+\subsection{Two-Sample Z-Test}\label{two-sample-z-test}}
+
+The sample poverty rate in 2001 is to be measured using a sample of 500 individuals. The sample poverty rate in 2002 is to be measured using a sample of 600 individuals. What is the power of the test for whether there is significant evidence that the U.S. poverty rate changed from 2001 to 2002 when the effect size is small? If the sample size from 2001 remains 500, what does the sample size for 2002 need to be to yield a power of 80\%?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Calculate the power}
+\FunctionTok{pwr.2p2n.test}\NormalTok{(}\AttributeTok{h =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{n1 =} \DecValTok{500}\NormalTok{, }\AttributeTok{n2 =} \DecValTok{600}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{power}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9103523
+\end{verbatim}
+
+The power to detect a small effect size is 0.910.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Determine the sample size required for power of 0.8}
+\FunctionTok{ceiling}\NormalTok{(}\FunctionTok{pwr.2p2n.test}\NormalTok{(}\AttributeTok{h =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{n1 =} \DecValTok{500}\NormalTok{, }\AttributeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\AttributeTok{power =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}\SpecialCharTok{$}\NormalTok{n2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 323
+\end{verbatim}
+
+The minimum sample size in 2002 to achieve power of at least 0.8 is 323.
+
+\hypertarget{exact}{%
+\section{Fisher's Exact Test}\label{exact}}
+
+The Fisher's exact test tests whether there is association between independent categorical variables that can be summarized in a two-way table with fixed marginal totals. Before we go any further, we need to learn about the \textbf{hypergeometric} distribution, since Fisher's exact test is based on this distribution.
+
+\hypertarget{the-hypergeometric-distribution}{%
+\subsection{The Hypergeometric Distribution}\label{the-hypergeometric-distribution}}
+
+This is a classical example used to demonstrate the hypergeometric distribution. I have adjusted the notation to better match the arguments used in R and so it is different from the classical notation:
+
+\begin{itemize}
+\tightlist
+\item
+  Imagine an urn with \(m\) white balls and \(n\) black balls.
+\item
+  Sample \(k\) balls from the urn without replacement.
+\item
+  Let \(X\) be the number of white balls in the sample.
+\item
+  \(X\) follows a hypergeometric distribution with parameters \(m, n, k\), i.e.~\(X \sim H(m, n, k)\).
+\end{itemize}
+
+This information is represented in the following two-way table:
+
+\begin{longtable}[]{@{}cccc@{}}
+\caption{\label{tab:hyper} Two-Way Table for Hypergeometric Distribution}\tabularnewline
+\toprule\noalign{}
+& White & Black & Total \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+& White & Black & Total \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Sampled & \(X\) & & \(k\) \\
+Not sampled & & & \(N - k\) \\
+Total & \(m\) & \(n\) & \(N = m+n\) \\
+\end{longtable}
+
+With \(X \sim H(m, n, k)\): \(X\) is the random variable that denotes the number of white balls in a sample of size \(k\), drawn without replacement from an urn with \(m\) white balls and \(n\) black balls. The PMF of \(X\) is
+
+\begin{equation} 
+P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
+\label{eq:19-hyp}
+\end{equation}
+
+To find the probability from equation \eqref{eq:19-hyp}, we can use \texttt{dhyper(x,\ m,\ n,\ k)}. For example, if we have this table
+
+\begin{longtable}[]{@{}cccc@{}}
+\caption{\label{tab:hyper2} Two-Way Table for Hypergeometric Distribution}\tabularnewline
+\toprule\noalign{}
+& White & Black & Total \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+& White & Black & Total \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Sampled & 9 & 1 & 10 \\
+Not sampled & 6 & 4 & 10 \\
+Total & 15 & 5 & 20 \\
+\end{longtable}
+
+The probability of having 9 white balls from 10 drawn without replacement from an urn with 15 white balls and 5 black balls is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dhyper}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1354489
+\end{verbatim}
+
+Now we are ready to talk more about Fisher's exact test.
+
+\hypertarget{hypotheses-5}{%
+\subsection{Hypotheses}\label{hypotheses-5}}
+
+The null and alternative hypotheses are the same as the chi-squared test for two-way tables:
+
+\begin{itemize}
+\tightlist
+\item
+  The null hypothesis states that there is no association between the two variables.
+\item
+  The alternative hypothesis states that there is some association between the two variables.
+\end{itemize}
+
+\hypertarget{test-statistic-and-p-value}{%
+\subsection{Test Statistic and P-value}\label{test-statistic-and-p-value}}
+
+There is not a calculated test statistic. Instead, the probability of observing values that indicate a more extreme association that what is shown in the given two-way table is calculated as the p-value.
+
+So we assume the null hypothesis is true (no association), then constrain the row and column totals in the two way table (keep them fixed).
+
+We then consider all possible two-way tables that satisfy the row and column totals, and calculate the relevant probability for each possible table.
+
+The p-value of Fisher's exact test is the sum of the probabilities for all tables having a probability equal to or smaller than that observed.
+
+For example, we observe the following data presented in table \ref{tab:hyper2}.
+
+Given the row and column totals, the only possible values for \(X\) are 5, 6, 7, 8, 9, 10. The corresponding probabilities are
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dhyper}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01625387
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dhyper}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1354489
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dhyper}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3482972
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dhyper}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3482972
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dhyper}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1354489
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dhyper}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01625387
+\end{verbatim}
+
+so the p-value is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{dhyper}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{dhyper}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+    \SpecialCharTok{+} \FunctionTok{dhyper}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{dhyper}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3034056
+\end{verbatim}
+
+Next, we go over a worked example.
+
+\hypertarget{worked-example-11}{%
+\subsection{Worked Example}\label{worked-example-11}}
+
+A research team made up of advocates for social justice and psychologists designed an experiment where two companies were sent a batch of 12 resumes for evaluation. Each resume was returned either with an invitation for an interview or not. Two versions of all 12 resumes were created: one with a non-European sounding name and one with a European-American sounding name. The version sent to each company was randomized. Is there evidence of ethnic bias?
+
+\begin{longtable}[]{@{}ccc@{}}
+\caption{\label{tab:egexact} Two-Way Table for Worked Example}\tabularnewline
+\toprule\noalign{}
+& Invitation & None \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+& Invitation & None \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Non-Euro & 2 & 10 \\
+Euro & 8 & 4 \\
+\end{longtable}
+
+The null hypothesis is that there is no association between the sound of the last name and whether the resume resulted in an invitation or not. The alternative hypothesis is that there is an association between the sound of the last name and whether the resume resulted in an invitation or not.
+
+To find the p-value in R, we need to create a matrix that represents the information in Table \ref{tab:egexact}, and then apply the \texttt{fisher.test()} function to the matrix.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exp.res }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{4}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }
+                  \AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+
+\FunctionTok{fisher.test}\NormalTok{(exp.res)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Fisher's Exact Test for Count Data
+## 
+## data:  exp.res
+## p-value = 0.03607
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.008101526 0.896925044
+## sample estimates:
+## odds ratio 
+##  0.1121872
+\end{verbatim}
+
+The p-value is 0.036, so we reject the null hypothesis. The data provide evidence of some association between the sound of the last name and whether the resume resulted in an invitation or not.
+
+We could have listed all possible two-way tables with the same row and column totals as Table \ref{tab:egexact} and find each of their corresponding probabilities based on the hypergeometric distribution, but there are 11 such tables.
+
+\hypertarget{larger-tables}{%
+\subsection{Larger Tables}\label{larger-tables}}
+
+With a two-way table, the number of possibilities with the same row and column totals can get large easily. For larger tables (more than 2 rows or 2 columns), the number of possibilities is large.
+
+With large tables, Monte Carlo simulation can be used to generate the p-value using the default 2,000 replicates by specifying \texttt{TRUE} for the \texttt{simulate.p.value} argument. The number of replicates used can be set with the \texttt{B} argument.
+
+Consider this example: The research team instead asks both companies for whether the candidate would definitely receive an invitation for an interview, might receive an invitation for an interview, or definitely would not receive an invitation for an interview.
+
+\begin{longtable}[]{@{}cccc@{}}
+\caption{\label{tab:eglarge} Two-Way Table for Larger Table}\tabularnewline
+\toprule\noalign{}
+& Invitation & Possible & None \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+& Invitation & Possible & None \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Non-Euro & 2 & 3 & 7 \\
+Euro & 8 & 1 & 3 \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{exp2.res }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{), }
+                   \AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{, }
+                   \AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+
+\FunctionTok{fisher.test}\NormalTok{(exp2.res)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Fisher's Exact Test for Count Data
+## 
+## data:  exp2.res
+## p-value = 0.05993
+## alternative hypothesis: two.sided
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fisher.test}\NormalTok{(exp2.res, }\AttributeTok{simulate.p.value =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Fisher's Exact Test for Count Data with simulated p-value (based on
+##  2000 replicates)
+## 
+## data:  exp2.res
+## p-value = 0.05047
+## alternative hypothesis: two.sided
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fisher.test}\NormalTok{(exp2.res, }\AttributeTok{simulate.p.value =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{B =} \DecValTok{10000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Fisher's Exact Test for Count Data with simulated p-value (based on
+##  10000 replicates)
+## 
+## data:  exp2.res
+## p-value = 0.06059
+## alternative hypothesis: two.sided
+\end{verbatim}
+
+\hypertarget{est}{%
+\chapter{Estimation}\label{est}}
+
+\hypertarget{introduction-10}{%
+\section{Introduction}\label{introduction-10}}
 
 blah
 

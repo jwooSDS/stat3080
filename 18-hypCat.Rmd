@@ -331,7 +331,7 @@ The p-value is 0.04147 which is less than 0.05. The data do provides evidence th
 
 Note: the `prop.test()` function uses the $X^2$ test statistic per equation \@ref(eq:18-GOFts), and works the problem as a GOF test for a two-way table. It turns out that for a 2-sample z-test, the $X^2$ test statistic is the squared of the $Z$ test statistic. 
 
-Another note: While the test statistic and p-value can be determined from the  output of the `prop.test()` function, the confidence interval reported is calculated in a different way and is different from the standard 2-sample z-confidence interval for proportions given in equation \@ref(8-CI2props). 
+Another note: While the test statistic and p-value can be determined from the  output of the `prop.test()` function, the confidence interval reported is calculated in a different way and is different from the standard 2-sample z-confidence interval for proportions given in equation \@ref(eq:8-CI2props). 
 
 ## A Couple of Comments
 

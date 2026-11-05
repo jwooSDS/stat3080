@@ -93,6 +93,8 @@ eq:19-hyp
 tab:hyper2
 tab:egexact
 tab:eglarge
+eq:7-bias
+fig:20-bias
 Rbasics
 overview-of-r
 rstudio-interface
@@ -393,3 +395,8 @@ worked-example-11
 larger-tables
 est
 introduction-10
+estprops
+estimators-vs-estimates
+bias
+standard-error-and-variance
+consistency

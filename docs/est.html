@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 20 Estimation | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="20.1 Introduction blah">
+<meta name="description" content="20.1 Introduction In Section 11, you were introduced to some of the key concepts associated with statistical inference: that we use data from a representative sample to estimate features of...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 20 Estimation | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="20.1 Introduction blah">
+<meta property="og:description" content="20.1 Introduction In Section 11, you were introduced to some of the key concepts associated with statistical inference: that we use data from a representative sample to estimate features of...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 20 Estimation | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="20.1 Introduction blah">
+<meta name="twitter:description" content="20.1 Introduction In Section 11, you were introduced to some of the key concepts associated with statistical inference: that we use data from a representative sample to estimate features of...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -101,8 +101,144 @@
 <h2>
 <span class="header-section-number">20.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-10"><i class="fas fa-link"></i></a>
 </h2>
-<p>blah</p>
-
+<p>In Section <a href="clt.html#clt">11</a>, you were introduced to some of the key concepts associated with statistical inference: that we use data from a representative sample to estimate features of interest in a population. The features of the population are typically called parameters, for example, the population mean, the population median, and so on. Since we do not have access to data for the population, we use an estimator based on our sample to estimate the value of the parameter.</p>
+<p>Some estimators may seem obvious, such as using the sample mean to estimate the population mean. But some are not, for example, why do we use this formula for the sample variance, <span class="math inline">\(s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}\)</span> when estimating the population variance? You’ve probably asked why is <span class="math inline">\(n-1\)</span> in the denominator.</p>
+<p>Whenever we propose an estimator for a parameter, we want to assess how “good” the estimator is. We will cover a few measures that are used to assess an estimator: bias, variance, and mean-squared error.</p>
+</div>
+<div id="estprops" class="section level2" number="20.2">
+<h2>
+<span class="header-section-number">20.2</span> Properties of Estimators<a class="anchor" aria-label="anchor" href="#estprops"><i class="fas fa-link"></i></a>
+</h2>
+<p>How do we assess if our estimators are “good” or not? We define a few concepts that are used in this assessment.</p>
+<div id="estimators-vs-estimates" class="section level3" number="20.2.1">
+<h3>
+<span class="header-section-number">20.2.1</span> Estimators VS Estimates<a class="anchor" aria-label="anchor" href="#estimators-vs-estimates"><i class="fas fa-link"></i></a>
+</h3>
+<p>We wrote about estimators and estimates earlier in Section <a href="clt.html#clt">11</a>, but as a quick reminder on what these are:</p>
+<ul>
+<li><p>An <strong>estimator</strong> is a numerical summary associated with samples.</p></li>
+<li><p>An <strong>estimated value</strong>, or <strong>estimate</strong>, is the actual value of the estimator based on a sample.</p></li>
+</ul>
+<p>We define some notation:</p>
+<ul>
+<li><p>Let <span class="math inline">\(\theta\)</span> denote the population parameter we wish to estimate.</p></li>
+<li><p>Let <span class="math inline">\(\hat{\theta}\)</span> denote the estimator for <span class="math inline">\(\theta\)</span>.</p></li>
+</ul>
+<p>We will use a simple example to illustrate these ideas in the rest of this section. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. We can define two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\theta}_1 = \bar{X} = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\theta}_2 = X_1 + 2\)</span>. The first estimator takes the average value of the <span class="math inline">\(n\)</span> data points. The second estimator uses the first data point and adds 2 to it.</p>
+<p>We can see that we are free to define estimators in various ways. The question now is how do we evaluate whether an estimator is “good” or not. There are a few metrics to evaluate estimators.</p>
+</div>
+<div id="bias" class="section level3" number="20.2.2">
+<h3>
+<span class="header-section-number">20.2.2</span> Bias<a class="anchor" aria-label="anchor" href="#bias"><i class="fas fa-link"></i></a>
+</h3>
+<p>One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is <strong>unbiased</strong> if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator <span class="math inline">\(\hat{\theta}\)</span> is unbiased if <span class="math inline">\(E(\hat{\theta}) = \theta\)</span>. From this definition of an unbiased estimator, we have the definition of the <strong>bias</strong> of an estimator:</p>
+<p><span class="math display" id="eq:7-bias">\[\begin{equation}
+Bias(\hat{\theta}) = E(\hat{\theta}) - \theta.
+\tag{20.1}
+\end{equation}\]</span></p>
+<p>So, while the value of an estimator could vary from sample to sample, the estimator is unbiased if it is equal to the true parameter, on average in the long-run.</p>
+<p>We go back to the example from the previous subsection. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. We can define two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\theta}_1 = \bar{X} = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\theta}_2 = X_1 + 2\)</span>. Assess whether <span class="math inline">\(\hat{\theta}_1\)</span> and <span class="math inline">\(\hat{\theta}_2\)</span> are unbiased or not.</p>
+<ul>
+<li>
+<p>The mathematical way of answering this question is to evaluate the expected value of both estimators using equation <a href="clt.html#eq:11-expectations">(11.1)</a>:</p>
+<ul>
+<li><p><span class="math inline">\(E(\hat{\theta}_1) = \frac{1}{n}E(\sum_{i=1}^n X_i) = \frac{1}{n}\sum_{i=1}^n E(X_i) = \frac{1}{n}(\mu + \cdots + \mu) = \mu\)</span>, so it is unbiased.</p></li>
+<li><p><span class="math inline">\(E(\hat{\theta}_2) = E(X_1 + 2) = E(X_1) + 2 = \mu +2\)</span> which is not equal to <span class="math inline">\(\mu\)</span>, so it is biased.</p></li>
+</ul>
+</li>
+<li>
+<p>We can also use Monte Carlo simulations to show these results. The simulation should do the following:</p>
+<ul>
+<li>The code simulates <span class="math inline">\(X_1, \cdots, X_{n}\)</span> i.i.d. from a known distribution, and with <span class="math inline">\(n\)</span> fixed. In the code below, I used a standard normal, with <span class="math inline">\(n=100\)</span>.<br>
+</li>
+<li>Generate a large number of replicates (I used 10 thousand replicates) of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>.</li>
+<li>For each replicate of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>, calculate <span class="math inline">\(\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\theta}_2 = X_1 + 2\)</span>.</li>
+<li>We then find the average of <span class="math inline">\(\hat{\theta}_1\)</span> and <span class="math inline">\(\hat{\theta}_2\)</span> across the replicates.</li>
+</ul>
+</li>
+</ul>
+<p>If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0.</p>
+<div class="sourceCode" id="cb663"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Function that simulates n obs from Z, then finds theta1 and theta2</span></span>
+<span><span class="va">estimators</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">Xs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span>  <span class="va">est1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Xs</span><span class="op">)</span> <span class="co">## theta1</span></span>
+<span>  <span class="va">est2</span> <span class="op">&lt;-</span> <span class="va">Xs</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fl">2</span> <span class="co">## theta2</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">est1</span>, <span class="va">est2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## use 10,000 reps with n = 100</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fu">estimators</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Find the long-run average of both estimators</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">result</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span> <span class="co">## this is also bias since true mean of Z is 0</span></span></code></pre></div>
+<pre><code>## [1] 0.0002085981 1.9997755252</code></pre>
+<div class="sourceCode" id="cb665"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##create density plots to show distribution for est1 and est 2, and overlay line to show true value of mu</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot for theta1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="fl">0</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot for theta2"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="fl">0</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:20-bias"></span>
+<img src="bookdown-demo_files/figure-html/20-bias-1.png" alt="Dist of theta1 (left) and theta2 (right)" width="672"><p class="caption">
+Figure 20.1: Dist of theta1 (left) and theta2 (right)
+</p>
+</div>
+<p>Figure <a href="est.html#fig:20-bias">20.1</a> displays the distribution of the 10 thousand <span class="math inline">\(\hat{\theta}_1\)</span>s and <span class="math inline">\(\hat{\theta}_2\)</span>s. Visually, an estimator is unbiased if its “middle” is equal to the value of the parameter, which is 0. We can see this is clearly not the case for <span class="math inline">\(\hat{\theta}_2\)</span> so it is biased.</p>
+<p>The results from the MC simulation matches with the math. We had shown that <span class="math inline">\(\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}\)</span> is an unbiased estimator for <span class="math inline">\(\mu\)</span>, whereas <span class="math inline">\(\hat{\theta}_2 = X_1 + 2\)</span> is a biased estimator.</p>
+<p>So, based on bias, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.</p>
+<p>The bias deals with the centrality of the estimator, i.e. is the estimator equal to the true parameter, on average. As we have seen in previous modules, we are not only concerned with measures of centrality, but also with measures of uncertainty. For example, how likely is it to observe a random sample where its estimated value is far from the true parameter?</p>
+</div>
+<div id="standard-error-and-variance" class="section level3" number="20.2.3">
+<h3>
+<span class="header-section-number">20.2.3</span> Standard Error and Variance<a class="anchor" aria-label="anchor" href="#standard-error-and-variance"><i class="fas fa-link"></i></a>
+</h3>
+<p>It turns out that the concept of variance can also be applied to estimators, as they can be viewed as random variables, and not just to individual data points. Estimators with smaller variances have a smaller degree of uncertainty: the value of the estimators do not change as much from random sample to random sample.</p>
+<p>We can go back to the example from the previous subsection. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. We defined two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\theta}_2 = X_1 + 2\)</span>. Derive the variance of both estimators.</p>
+<p>The mathematical way of answering this question is to evaluate the variance of both estimators using equation <a href="clt.html#eq:11-variances">(11.2)</a>:</p>
+<ul>
+<li><p><span class="math inline">\(Var(\hat{\theta}_1) = \frac{1}{n^2}Var(\sum_{i=1}^n X_i) = \frac{1}{n^2} \sum_{i=1}^n Var(X_i) = \frac{1}{n^2} (\sigma^2 + \cdots + \sigma^2) = \frac{\sigma^2}{n}\)</span>.</p></li>
+<li><p><span class="math inline">\(Var(\hat{\theta}_2) = Var(X_1 + 2) = Var(X_1) = \sigma^2\)</span>.</p></li>
+</ul>
+<p>There is also another term used when evaluating the variance of an estimator: this is the <strong>standard error</strong> of an estimator. This is essentially the standard deviation of the estimator, i.e. <span class="math inline">\(SE(\hat{\theta}) = \sqrt{Var(\hat{\theta})}\)</span>. Going back to our example: <span class="math inline">\(SE(\hat{\theta}_1) = \frac{\sigma}{\sqrt{n}}\)</span> and <span class="math inline">\(SE(\hat{\theta}_2) = \sigma\)</span>.</p>
+<p>Note: The term standard error is only applied to estimators. It is not used when finding the standard deviation of data points.</p>
+<p>We can also use our Monte Carlo simulation from the previous subsection to estimate these values:</p>
+<div class="sourceCode" id="cb666"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span> <span class="co">##should be close to 1/100, since n=100</span></span></code></pre></div>
+<pre><code>## [1] 0.01016771</code></pre>
+<div class="sourceCode" id="cb668"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span> <span class="co">##should be close to 1</span></span></code></pre></div>
+<pre><code>## [1] 0.9967087</code></pre>
+<div class="sourceCode" id="cb670"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span> <span class="co">##should be close to 1/10</span></span></code></pre></div>
+<pre><code>## [1] 0.100835</code></pre>
+<div class="sourceCode" id="cb672"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span> <span class="co">##should be close to 1</span></span></code></pre></div>
+<pre><code>## [1] 0.998353</code></pre>
+<p>These results are reflected in Figure <a href="est.html#fig:20-bias">20.1</a>. Notice the scale of the x-axis for the plot of <span class="math inline">\(\hat{\theta}_2\)</span> (on the right) is much larger, so <span class="math inline">\(\hat{\theta}_2\)</span> has larger variability than <span class="math inline">\(\hat{\theta}_1\)</span>, i.e. we are more uncertain about the value of <span class="math inline">\(\hat{\theta}_2\)</span>, since they deviate more from each other.</p>
+<p>It should be clear by now that estimators with smaller standard errors (or variances) are desired. So, based on standard error, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.</p>
+</div>
+<div id="consistency" class="section level3" number="20.2.4">
+<h3>
+<span class="header-section-number">20.2.4</span> Consistency<a class="anchor" aria-label="anchor" href="#consistency"><i class="fas fa-link"></i></a>
+</h3>
+<p>An associated concept with bias, variance, and standard errors of estimators is consistency. The definition of consistency in estimators is fairly technical, so we will give a broad overview of its concept.</p>
+<p>The behavior of an estimator <span class="math inline">\(\hat{\theta}\)</span> may change as the number of data points <span class="math inline">\(n\)</span> changes.</p>
+<p>An estimator is <strong>consistent</strong> if <span class="math inline">\(\hat{\theta}\)</span> gets closer to and approaches the true value of <span class="math inline">\(\theta\)</span> as <span class="math inline">\(n\)</span> gets larger and approaches infinity. This means as the sample size <span class="math inline">\(n\)</span> gets larger, the estimator tends to get closer to the true value of the parameter.</p>
+<p>To check if an estimator <span class="math inline">\(\hat{\theta}\)</span> is consistent, we have to check two things:</p>
+<ol style="list-style-type: decimal">
+<li>Its bias shrinks to 0 as <span class="math inline">\(n\)</span> approaches infinity, and</li>
+<li>Its variance shrinks to 0 as <span class="math inline">\(n\)</span> approaches infinity.</li>
+</ol>
+<p>We go back to the example from the previous subsection. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. We defined two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\theta}_2 = X_1 + 2\)</span>. Assess whether these estimators are consistent or not.</p>
+<p>For <span class="math inline">\(\hat{\theta}_1\)</span>, we had earlier shown that</p>
+<ul>
+<li>
+<span class="math inline">\(E(\hat{\theta}_1) = \mu\)</span>, so its bias is <span class="math inline">\(E(\hat{\theta}_1) - \mu = 0\)</span>. Its bias is 0 regardless of sample size <span class="math inline">\(n\)</span>.</li>
+</ul>
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -113,6 +249,14 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#est"><span class="header-section-number">20</span> Estimation</a></li>
 <li><a class="nav-link" href="#introduction-10"><span class="header-section-number">20.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#estprops"><span class="header-section-number">20.2</span> Properties of Estimators</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#estimators-vs-estimates"><span class="header-section-number">20.2.1</span> Estimators VS Estimates</a></li>
+<li><a class="nav-link" href="#bias"><span class="header-section-number">20.2.2</span> Bias</a></li>
+<li><a class="nav-link" href="#standard-error-and-variance"><span class="header-section-number">20.2.3</span> Standard Error and Variance</a></li>
+<li><a class="nav-link" href="#consistency"><span class="header-section-number">20.2.4</span> Consistency</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">

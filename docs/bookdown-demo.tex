@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -4.254317050  0.006794499 -0.833377795 -0.742985970  0.685164830
-##  [6]  2.707283257 -1.656138944 -0.148729634  2.562443776  2.441812496
+##  [1] -2.6771834  9.3873978 -3.8752963  0.2333943 -4.7455142  4.2087832
+##  [7] -2.1506328  4.8354497  6.9171876 -0.6245111
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -8544,7 +8544,7 @@ The steps are:
 \item
   Write the null and alternative hypotheses.
 \item
-  Compute \(\hat{\theta}\), the value of the test statistic in the original sample.
+  Compute \(\hat{\theta}\), the value of the estimator which is also becomes the the test statistic in the original sample.
 \item
   Synthesize \(K\) bootstrap samples.
 \item
@@ -8560,13 +8560,20 @@ The steps are:
 \hypertarget{boottest1}{%
 \subsection{Worked Example}\label{boottest1}}
 
-Scenario: Suppose that for budget purposes we are only able to draw a sample of 7 from the unknown population distribution. We wish to test if the mean of the unknown population is greater than 3. In this case, bootstrapping can be used to estimate the sampling distribution of the test statistic under the null hypothesis. We note that the sample size is likely to be too small to use the Central Limit Theorem.
+Scenario: Suppose that for budget purposes we are only able to draw a sample of 7 from the unknown population distribution. We wish to test if the mean of the unknown population is greater than 3. In this case, bootstrapping can be used to estimate the sampling distribution of the test statistic under the null hypothesis.
+
+We note that the sample size is likely to be too small to use the Central Limit Theorem. A density plot of the data (not shown) shows its not normal nor is it symmetric, so the sample means cannot be approximated by a normal distribution and we cannot use the 1-sample t-test.
 
 The hypotheses are \(H_0: \mu = 3, H_a: \mu > 3\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{samp\_data }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{1.77}\NormalTok{, }\FloatTok{10.48}\NormalTok{, }\FloatTok{4.30}\NormalTok{, }\FloatTok{0.96}\NormalTok{, }\FloatTok{2.67}\NormalTok{, }\FloatTok{2.76}\NormalTok{, }\FloatTok{2.02}\NormalTok{)}
+
+\DocumentationTok{\#\# should also check the density plot of the data}
+\DocumentationTok{\#\# I am not showing it here but its not normal, nor}
+\DocumentationTok{\#\# is it symmetric. So sample means cannot be approximated}
+\DocumentationTok{\#\# by normal}
 
 \DocumentationTok{\#\# step 2}
 \NormalTok{samp\_mean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(samp\_data)}
@@ -8594,7 +8601,7 @@ The hypotheses are \(H_0: \mu = 3, H_a: \mu > 3\).
 
 So the p-value is 0.2876, so we fail to reject the null hypothesis. The data do not support the claim that the average is greater than 3.
 
-Figure \ref{fig:16-boottest} below visualizes the sampling distirubtion of \(\bar{X}\) assuming that the mean is truly 3. A blue line is overlaid to show the sample mean in the original data. The p-value is found by finding the proportion of bootstrap test statistics that are to the right of the blue line.
+Figure \ref{fig:16-boottest} below visualizes the sampling distribution of \(\bar{X}\) assuming that the mean is truly 3. A blue line is overlaid to show the sample mean in the original data. The p-value is found by finding the proportion of bootstrap test statistics that are to the right of the blue line.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10369,7 +10376,226 @@ Euro & 8 & 1 & 3 \\
 \hypertarget{introduction-10}{%
 \section{Introduction}\label{introduction-10}}
 
-blah
+In Section \ref{clt}, you were introduced to some of the key concepts associated with statistical inference: that we use data from a representative sample to estimate features of interest in a population. The features of the population are typically called parameters, for example, the population mean, the population median, and so on. Since we do not have access to data for the population, we use an estimator based on our sample to estimate the value of the parameter.
+
+Some estimators may seem obvious, such as using the sample mean to estimate the population mean. But some are not, for example, why do we use this formula for the sample variance, \(s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}\) when estimating the population variance? You've probably asked why is \(n-1\) in the denominator.
+
+Whenever we propose an estimator for a parameter, we want to assess how ``good'' the estimator is. We will cover a few measures that are used to assess an estimator: bias, variance, and mean-squared error.
+
+\hypertarget{estprops}{%
+\section{Properties of Estimators}\label{estprops}}
+
+How do we assess if our estimators are ``good'' or not? We define a few concepts that are used in this assessment.
+
+\hypertarget{estimators-vs-estimates}{%
+\subsection{Estimators VS Estimates}\label{estimators-vs-estimates}}
+
+We wrote about estimators and estimates earlier in Section \ref{clt}, but as a quick reminder on what these are:
+
+\begin{itemize}
+\item
+  An \textbf{estimator} is a numerical summary associated with samples.
+\item
+  An \textbf{estimated value}, or \textbf{estimate}, is the actual value of the estimator based on a sample.
+\end{itemize}
+
+We define some notation:
+
+\begin{itemize}
+\item
+  Let \(\theta\) denote the population parameter we wish to estimate.
+\item
+  Let \(\hat{\theta}\) denote the estimator for \(\theta\).
+\end{itemize}
+
+We will use a simple example to illustrate these ideas in the rest of this section. Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. We can define two estimators of \(\mu\) as \(\hat{\theta}_1 = \bar{X} = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\theta}_2 = X_1 + 2\). The first estimator takes the average value of the \(n\) data points. The second estimator uses the first data point and adds 2 to it.
+
+We can see that we are free to define estimators in various ways. The question now is how do we evaluate whether an estimator is ``good'' or not. There are a few metrics to evaluate estimators.
+
+\hypertarget{bias}{%
+\subsection{Bias}\label{bias}}
+
+One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is \textbf{unbiased} if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator \(\hat{\theta}\) is unbiased if \(E(\hat{\theta}) = \theta\). From this definition of an unbiased estimator, we have the definition of the \textbf{bias} of an estimator:
+
+\begin{equation} 
+Bias(\hat{\theta}) = E(\hat{\theta}) - \theta.
+\label{eq:7-bias}
+\end{equation}
+
+So, while the value of an estimator could vary from sample to sample, the estimator is unbiased if it is equal to the true parameter, on average in the long-run.
+
+We go back to the example from the previous subsection. Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. We can define two estimators of \(\mu\) as \(\hat{\theta}_1 = \bar{X} = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\theta}_2 = X_1 + 2\). Assess whether \(\hat{\theta}_1\) and \(\hat{\theta}_2\) are unbiased or not.
+
+\begin{itemize}
+\item
+  The mathematical way of answering this question is to evaluate the expected value of both estimators using equation \eqref{eq:11-expectations}:
+
+  \begin{itemize}
+  \item
+    \(E(\hat{\theta}_1) = \frac{1}{n}E(\sum_{i=1}^n X_i) = \frac{1}{n}\sum_{i=1}^n E(X_i) = \frac{1}{n}(\mu + \cdots + \mu) = \mu\), so it is unbiased.
+  \item
+    \(E(\hat{\theta}_2) = E(X_1 + 2) = E(X_1) + 2 = \mu +2\) which is not equal to \(\mu\), so it is biased.
+  \end{itemize}
+\item
+  We can also use Monte Carlo simulations to show these results. The simulation should do the following:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The code simulates \(X_1, \cdots, X_{n}\) i.i.d. from a known distribution, and with \(n\) fixed. In the code below, I used a standard normal, with \(n=100\).\\
+  \item
+    Generate a large number of replicates (I used 10 thousand replicates) of \(X_1, \cdots, X_{n}\).
+  \item
+    For each replicate of \(X_1, \cdots, X_{n}\), calculate \(\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\theta}_2 = X_1 + 2\).
+  \item
+    We then find the average of \(\hat{\theta}_1\) and \(\hat{\theta}_2\) across the replicates.
+  \end{itemize}
+\end{itemize}
+
+If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Function that simulates n obs from Z, then finds theta1 and theta2}
+\NormalTok{estimators }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n)\{}
+\NormalTok{  Xs }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(n)}
+\NormalTok{  est1 }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(Xs) }\DocumentationTok{\#\# theta1}
+\NormalTok{  est2 }\OtherTok{\textless{}{-}}\NormalTok{ Xs[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+} \DecValTok{2} \DocumentationTok{\#\# theta2}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{c}\NormalTok{(est1, est2))}
+\NormalTok{\}}
+
+\DocumentationTok{\#\# use 10,000 reps with n = 100}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{replicate}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\FunctionTok{estimators}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+
+\DocumentationTok{\#\# Find the long{-}run average of both estimators}
+\FunctionTok{apply}\NormalTok{(result, }\DecValTok{1}\NormalTok{, mean) }\DocumentationTok{\#\# this is also bias since true mean of Z is 0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0002085981 1.9997755252
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#create density plots to show distribution for est1 and est 2, and overlay line to show true value of mu}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(result[}\DecValTok{1}\NormalTok{,]), }\AttributeTok{main=}\StringTok{"Density Plot for theta1"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\DecValTok{0}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(result[}\DecValTok{2}\NormalTok{,]), }\AttributeTok{main=}\StringTok{"Density Plot for theta2"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\DecValTok{0}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/20-bias-1.pdf}
+\caption{\label{fig:20-bias}Dist of theta1 (left) and theta2 (right)}
+\end{figure}
+
+Figure \ref{fig:20-bias} displays the distribution of the 10 thousand \(\hat{\theta}_1\)s and \(\hat{\theta}_2\)s. Visually, an estimator is unbiased if its ``middle'' is equal to the value of the parameter, which is 0. We can see this is clearly not the case for \(\hat{\theta}_2\) so it is biased.
+
+The results from the MC simulation matches with the math. We had shown that \(\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}\) is an unbiased estimator for \(\mu\), whereas \(\hat{\theta}_2 = X_1 + 2\) is a biased estimator.
+
+So, based on bias, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.
+
+The bias deals with the centrality of the estimator, i.e.~is the estimator equal to the true parameter, on average. As we have seen in previous modules, we are not only concerned with measures of centrality, but also with measures of uncertainty. For example, how likely is it to observe a random sample where its estimated value is far from the true parameter?
+
+\hypertarget{standard-error-and-variance}{%
+\subsection{Standard Error and Variance}\label{standard-error-and-variance}}
+
+It turns out that the concept of variance can also be applied to estimators, as they can be viewed as random variables, and not just to individual data points. Estimators with smaller variances have a smaller degree of uncertainty: the value of the estimators do not change as much from random sample to random sample.
+
+We can go back to the example from the previous subsection. Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. We defined two estimators of \(\mu\) as \(\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\theta}_2 = X_1 + 2\). Derive the variance of both estimators.
+
+The mathematical way of answering this question is to evaluate the variance of both estimators using equation \eqref{eq:11-variances}:
+
+\begin{itemize}
+\item
+  \(Var(\hat{\theta}_1) = \frac{1}{n^2}Var(\sum_{i=1}^n X_i) = \frac{1}{n^2} \sum_{i=1}^n Var(X_i) = \frac{1}{n^2} (\sigma^2 + \cdots + \sigma^2) = \frac{\sigma^2}{n}\).
+\item
+  \(Var(\hat{\theta}_2) = Var(X_1 + 2) = Var(X_1) = \sigma^2\).
+\end{itemize}
+
+There is also another term used when evaluating the variance of an estimator: this is the \textbf{standard error} of an estimator. This is essentially the standard deviation of the estimator, i.e.~\(SE(\hat{\theta}) = \sqrt{Var(\hat{\theta})}\). Going back to our example: \(SE(\hat{\theta}_1) = \frac{\sigma}{\sqrt{n}}\) and \(SE(\hat{\theta}_2) = \sigma\).
+
+Note: The term standard error is only applied to estimators. It is not used when finding the standard deviation of data points.
+
+We can also use our Monte Carlo simulation from the previous subsection to estimate these values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{var}\NormalTok{(result[}\DecValTok{1}\NormalTok{,]) }\DocumentationTok{\#\#should be close to 1/100, since n=100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01016771
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{var}\NormalTok{(result[}\DecValTok{2}\NormalTok{,]) }\DocumentationTok{\#\#should be close to 1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9967087
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sd}\NormalTok{(result[}\DecValTok{1}\NormalTok{,]) }\DocumentationTok{\#\#should be close to 1/10}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.100835
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sd}\NormalTok{(result[}\DecValTok{2}\NormalTok{,]) }\DocumentationTok{\#\#should be close to 1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.998353
+\end{verbatim}
+
+These results are reflected in Figure \ref{fig:20-bias}. Notice the scale of the x-axis for the plot of \(\hat{\theta}_2\) (on the right) is much larger, so \(\hat{\theta}_2\) has larger variability than \(\hat{\theta}_1\), i.e.~we are more uncertain about the value of \(\hat{\theta}_2\), since they deviate more from each other.
+
+It should be clear by now that estimators with smaller standard errors (or variances) are desired. So, based on standard error, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.
+
+\hypertarget{consistency}{%
+\subsection{Consistency}\label{consistency}}
+
+An associated concept with bias, variance, and standard errors of estimators is consistency. The definition of consistency in estimators is fairly technical, so we will give a broad overview of its concept.
+
+The behavior of an estimator \(\hat{\theta}\) may change as the number of data points \(n\) changes.
+
+An estimator is \textbf{consistent} if \(\hat{\theta}\) gets closer to and approaches the true value of \(\theta\) as \(n\) gets larger and approaches infinity. This means as the sample size \(n\) gets larger, the estimator tends to get closer to the true value of the parameter.
+
+To check if an estimator \(\hat{\theta}\) is consistent, we have to check two things:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Its bias shrinks to 0 as \(n\) approaches infinity, and
+\item
+  Its variance shrinks to 0 as \(n\) approaches infinity.
+\end{enumerate}
+
+We go back to the example from the previous subsection. Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. We defined two estimators of \(\mu\) as \(\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\theta}_2 = X_1 + 2\). Assess whether these estimators are consistent or not.
+
+For \(\hat{\theta}_1\), we had earlier shown that
+
+\begin{itemize}
+\tightlist
+\item
+  \(E(\hat{\theta}_1) = \mu\), so its bias is \(E(\hat{\theta}_1) - \mu = 0\). Its bias is 0 regardless of sample size \(n\).
+\end{itemize}
 
   \bibliography{book.bib,packages.bib}
 

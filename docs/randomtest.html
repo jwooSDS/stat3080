@@ -111,7 +111,7 @@
 <p>The steps are:</p>
 <ol style="list-style-type: decimal">
 <li>Write the null and alternative hypotheses.</li>
-<li>Compute <span class="math inline">\(\hat{\theta}\)</span>, the value of the test statistic in the original sample.</li>
+<li>Compute <span class="math inline">\(\hat{\theta}\)</span>, the value of the estimator which is also becomes the the test statistic in the original sample.</li>
 <li>Synthesize <span class="math inline">\(K\)</span> bootstrap samples.</li>
 <li>For each bootstrap sample, calculate the value of the estimator <span class="math inline">\(\hat{\Theta}\)</span>. Since we have <span class="math inline">\(K\)</span> bootstrapped datasets, we will have <span class="math inline">\(K\)</span> values for the estimators, denoted by <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>.</li>
 <li>We estimate the expected value of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample mean of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>. This value is denoted by <span class="math inline">\(M_b(\hat{\Theta})\)</span>.</li>
@@ -122,10 +122,16 @@
 <h3>
 <span class="header-section-number">16.2.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#boottest1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Scenario: Suppose that for budget purposes we are only able to draw a sample of 7 from the unknown population distribution. We wish to test if the mean of the unknown population is greater than 3. In this case, bootstrapping can be used to estimate the sampling distribution of the test statistic under the null hypothesis. We note that the sample size is likely to be too small to use the Central Limit Theorem.</p>
+<p>Scenario: Suppose that for budget purposes we are only able to draw a sample of 7 from the unknown population distribution. We wish to test if the mean of the unknown population is greater than 3. In this case, bootstrapping can be used to estimate the sampling distribution of the test statistic under the null hypothesis.</p>
+<p>We note that the sample size is likely to be too small to use the Central Limit Theorem. A density plot of the data (not shown) shows its not normal nor is it symmetric, so the sample means cannot be approximated by a normal distribution and we cannot use the 1-sample t-test.</p>
 <p>The hypotheses are <span class="math inline">\(H_0: \mu = 3, H_a: \mu &gt; 3\)</span>.</p>
 <div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">samp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.77</span>, <span class="fl">10.48</span>, <span class="fl">4.30</span>, <span class="fl">0.96</span>, <span class="fl">2.67</span>, <span class="fl">2.76</span>, <span class="fl">2.02</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## should also check the density plot of the data</span></span>
+<span><span class="co">## I am not showing it here but its not normal, nor</span></span>
+<span><span class="co">## is it symmetric. So sample means cannot be approximated</span></span>
+<span><span class="co">## by normal</span></span>
 <span></span>
 <span><span class="co">## step 2</span></span>
 <span><span class="va">samp_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">samp_data</span><span class="op">)</span></span>
@@ -146,7 +152,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">boot_means_null</span> <span class="op">&gt;=</span> <span class="va">samp_mean</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2873</code></pre>
 <p>So the p-value is 0.2876, so we fail to reject the null hypothesis. The data do not support the claim that the average is greater than 3.</p>
-<p>Figure <a href="randomtest.html#fig:16-boottest">16.1</a> below visualizes the sampling distirubtion of <span class="math inline">\(\bar{X}\)</span> assuming that the mean is truly 3. A blue line is overlaid to show the sample mean in the original data. The p-value is found by finding the proportion of bootstrap test statistics that are to the right of the blue line.</p>
+<p>Figure <a href="randomtest.html#fig:16-boottest">16.1</a> below visualizes the sampling distribution of <span class="math inline">\(\bar{X}\)</span> assuming that the mean is truly 3. A blue line is overlaid to show the sample mean in the original data. The p-value is found by finding the proportion of bootstrap test statistics that are to the right of the blue line.</p>
 <div class="sourceCode" id="cb542"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">boot_means_null</span><span class="op">)</span>,</span>
 <span>     main <span class="op">=</span> <span class="st">"Sampling Distribution of x-bar when H0 is True"</span>,</span>

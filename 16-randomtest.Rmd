@@ -11,7 +11,7 @@ We will also learn about the randomization test, which uses the bootstrap when t
 The steps are:
 
 1. Write the null and alternative hypotheses.
-2. Compute $\hat{\theta}$, the value of the test statistic in the original sample.
+2. Compute $\hat{\theta}$, the value of the estimator which is also becomes the the test statistic in the original sample.
 3. Synthesize $K$ bootstrap samples.
 4. For each bootstrap sample, calculate the value of the estimator $\hat{\Theta}$. Since we have $K$ bootstrapped datasets, we will have $K$ values for the estimators, denoted by $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$.
 5. We estimate the expected value of $\hat{\Theta}$ by taking the sample mean of $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$. This value is denoted by $M_b(\hat{\Theta})$.
@@ -20,12 +20,19 @@ The steps are:
 
 ### Worked Example {#boottest1}
 
-Scenario:  Suppose that for budget purposes we are only able to draw a sample of 7 from the unknown population distribution.  We wish to test if the mean of the unknown population is greater than 3. In this case, bootstrapping can be used to estimate the sampling distribution of the test statistic under the null hypothesis. We note that the sample size is likely to be too small to use the Central Limit Theorem.
+Scenario:  Suppose that for budget purposes we are only able to draw a sample of 7 from the unknown population distribution.  We wish to test if the mean of the unknown population is greater than 3. In this case, bootstrapping can be used to estimate the sampling distribution of the test statistic under the null hypothesis. 
+
+We note that the sample size is likely to be too small to use the Central Limit Theorem. A density plot of the data (not shown) shows its not normal nor is it symmetric, so the sample means cannot be approximated by a normal distribution and we cannot use the 1-sample t-test.
 
 The hypotheses are $H_0: \mu = 3, H_a: \mu > 3$.
 
 ```{r}
 samp_data <- c(1.77, 10.48, 4.30, 0.96, 2.67, 2.76, 2.02)
+
+## should also check the density plot of the data
+## I am not showing it here but its not normal, nor
+## is it symmetric. So sample means cannot be approximated
+## by normal
 
 ## step 2
 samp_mean <- mean(samp_data)
@@ -48,7 +55,7 @@ mean(boot_means_null >= samp_mean)
 
 So the p-value is 0.2876, so we fail to reject the null hypothesis. The data do not support the claim that the average is greater than 3.
 
-Figure \@ref(fig:16-boottest) below visualizes the sampling distirubtion of $\bar{X}$ assuming that the mean is truly 3. A blue line is overlaid to show the sample mean in the original data. The p-value is found by finding the proportion of bootstrap test statistics that are to the right of the blue line.
+Figure \@ref(fig:16-boottest) below visualizes the sampling distribution of $\bar{X}$ assuming that the mean is truly 3. A blue line is overlaid to show the sample mean in the original data. The p-value is found by finding the proportion of bootstrap test statistics that are to the right of the blue line.
 
 ```{r 16-boottest, fig.cap="Sampling Distribution of Sample Mean when Null is True"}
 plot(density(boot_means_null),

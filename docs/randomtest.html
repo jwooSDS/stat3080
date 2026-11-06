@@ -7,7 +7,7 @@
 <title>Chapter 16 The Bootstrap in Hypothesis Testing and Randomization Test | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="16.1 Introduction The hypothesis tests for the means in Section 14 are based on certain conditions being met, so that test statistics can be calculated based on known sampling distributions. What...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 16 The Bootstrap in Hypothesis Testing and Randomization Test | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="16.1 Introduction The hypothesis tests for the means in Section 14 are based on certain conditions being met, so that test statistics can be calculated based on known sampling distributions. What...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="16.1 Introduction The hypothesis tests for the means in Section 14 are based on certain conditions being met, so that test statistics can be calculated based on known sampling distributions. What...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -125,7 +126,7 @@
 <p>Scenario: Suppose that for budget purposes we are only able to draw a sample of 7 from the unknown population distribution. We wish to test if the mean of the unknown population is greater than 3. In this case, bootstrapping can be used to estimate the sampling distribution of the test statistic under the null hypothesis.</p>
 <p>We note that the sample size is likely to be too small to use the Central Limit Theorem. A density plot of the data (not shown) shows its not normal nor is it symmetric, so the sample means cannot be approximated by a normal distribution and we cannot use the 1-sample t-test.</p>
 <p>The hypotheses are <span class="math inline">\(H_0: \mu = 3, H_a: \mu &gt; 3\)</span>.</p>
-<div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">samp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.77</span>, <span class="fl">10.48</span>, <span class="fl">4.30</span>, <span class="fl">0.96</span>, <span class="fl">2.67</span>, <span class="fl">2.76</span>, <span class="fl">2.02</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## should also check the density plot of the data</span></span>
@@ -153,7 +154,7 @@
 <pre><code>## [1] 0.2873</code></pre>
 <p>So the p-value is 0.2876, so we fail to reject the null hypothesis. The data do not support the claim that the average is greater than 3.</p>
 <p>Figure <a href="randomtest.html#fig:16-boottest">16.1</a> below visualizes the sampling distribution of <span class="math inline">\(\bar{X}\)</span> assuming that the mean is truly 3. A blue line is overlaid to show the sample mean in the original data. The p-value is found by finding the proportion of bootstrap test statistics that are to the right of the blue line.</p>
-<div class="sourceCode" id="cb542"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">boot_means_null</span><span class="op">)</span>,</span>
 <span>     main <span class="op">=</span> <span class="st">"Sampling Distribution of x-bar when H0 is True"</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Bootstrap x-bar"</span><span class="op">)</span></span>
@@ -187,7 +188,7 @@ Figure 16.1: Sampling Distribution of Sample Mean when Null is True
 <p>This is a continuation of the worked example in Section <a href="randomtest.html#boottest1">16.2.1</a>.</p>
 <p>Suppose that we would like to use the sample of 7 observations from the unknown population and a second sample of 8 observations from another unknown population to test if the means of the two unknown populations are the same. We use the randomization test here.</p>
 <p>The hypotheses are <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0, H_a: \mu_1 - \mu_2 \neq 0\)</span>.</p>
-<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb548"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Draw the second sample and calculate its sample mean</span></span>
 <span><span class="va">samp_data2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4.68</span>, <span class="fl">4.83</span>, <span class="fl">4.29</span>, <span class="fl">1.42</span>, <span class="fl">7.81</span>, <span class="fl">5.20</span>, <span class="fl">3.97</span>, <span class="fl">1.59</span><span class="op">)</span></span>
 <span><span class="va">samp_mean2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">samp_data2</span><span class="op">)</span></span>
@@ -196,7 +197,7 @@ Figure 16.1: Sampling Distribution of Sample Mean when Null is True
 <span><span class="va">samp_diff</span> <span class="op">&lt;-</span> <span class="va">samp_mean</span> <span class="op">-</span> <span class="va">samp_mean2</span></span>
 <span></span>
 <span><span class="co">## write rand.test() which combines steps 3, 4, 5</span></span>
-<span><span class="va">rand.test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="va">rand.test</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span> <span class="co">##x should be the length of the first sample</span></span>
 <span>  <span class="va">rand_comb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">samp_data</span>, <span class="va">samp_data2</span><span class="op">)</span> <span class="op">)</span></span>
 <span>  <span class="va">bmean1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">rand_comb</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="va">bmean2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">rand_comb</span><span class="op">[</span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp_data</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp_data2</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
@@ -207,12 +208,20 @@ Figure 16.1: Sampling Distribution of Sample Mean when Null is True
 <span><span class="va">boot_diffs_null</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">Reps</span>, <span class="fu">rand.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp_data</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## step 7</span></span>
-<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">boot_diffs_null</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">samp_diff</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <pre><code>## [1] 0.6548</code></pre>
 <p>So the p-value is large, so we fail to reject the null hypothesis. The data do not support the claim that there is a difference in the means in the 2 populations.</p>
-
 </div>
+</div>
+<div id="a-few-comments" class="section level2" number="16.4">
+<h2>
+<span class="header-section-number">16.4</span> A Few Comments<a class="anchor" aria-label="anchor" href="#a-few-comments"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Just like with confidence intervals, the bootstrap for hypothesis testing works better for large sample sizes.</li>
+<li>While the randomization test does not require large sample sizes, any test involving small sample sizes have low power.</li>
+<li>While these tests can be viewed as non-parametric tests, they are usually viewed as <strong>resampling methods</strong>, since we create samples by (re)sampling from the original data. While non-parametric tests generally have lower power than their parametric counterparts (when conditions are met), resampling methods generally have similar power to parametric methods, while not requiring conditions. The “drawback” with resampling methods is that they are computationally expensive, and have a “random” component so the final numerical value can change unless <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> is used.</li>
+</ul>
 </div>
 </div>
   <div class="chapter-nav">
@@ -229,6 +238,7 @@ Figure 16.1: Sampling Distribution of Sample Mean when Null is True
 <li>
 <a class="nav-link" href="#randomization-test"><span class="header-section-number">16.3</span> Randomization Test</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#worked-example-3"><span class="header-section-number">16.3.1</span> Worked Example</a></li></ul>
 </li>
+<li><a class="nav-link" href="#a-few-comments"><span class="header-section-number">16.4</span> A Few Comments</a></li>
 </ul>
 
       <div class="book-extra">
@@ -245,7 +255,7 @@ Figure 16.1: Sampling Distribution of Sample Mean when Null is True
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-05.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

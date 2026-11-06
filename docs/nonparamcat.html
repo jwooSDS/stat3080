@@ -7,7 +7,7 @@
 <title>Chapter 19 Power and Non-Parametric Tests for Categorical Data | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="19.1 Introduction Recall from Section 15 that the power of a hypothesis test is the probability that the null hypothesis will be rejected when the alternative hypothesis is true and that the...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 19 Power and Non-Parametric Tests for Categorical Data | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
 <meta property="og:description" content="19.1 Introduction Recall from Section 15 that the power of a hypothesis test is the probability that the null hypothesis will be rejected when the alternative hypothesis is true and that the...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="19.1 Introduction Recall from Section 15 that the power of a hypothesis test is the probability that the null hypothesis will be rejected when the alternative hypothesis is true and that the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -109,14 +110,14 @@
 <h2>
 <span class="header-section-number">19.2</span> Worked Examples<a class="anchor" aria-label="anchor" href="#worked-examples-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span> <span class="co">##load package for various power functions</span></span></code></pre></div>
 <div id="gof-test-for-categorical-data" class="section level3" number="19.2.1">
 <h3>
 <span class="header-section-number">19.2.1</span> GOF Test for Categorical Data<a class="anchor" aria-label="anchor" href="#gof-test-for-categorical-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>It is thought that when given a standard treatment, 50% of individuals with hypertension will show a marked decrease in blood pressure, 25% of individuals with hypertension will show a moderate decrease in blood pressure, 10% of individuals with hypertension will show a slight decrease in blood pressure, and 15% of individuals with hypertension will show no change in blood pressure. A random sample of 200 individuals with hypertension will be selected and each will be given a new treatment to test if there is evidence that individuals react differently to this treatment than to the standard treatment. What is the power if there is a small effect size between the treatments? What is the minimum sample size to detect a small effect size between the treatments with at least 0.8 power?</p>
-<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.chisq.test.html">pwr.chisq.test</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.2</span>, N <span class="op">=</span> <span class="fl">200</span>, df <span class="op">=</span> <span class="fl">3</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -129,12 +130,12 @@
 ##           power = 0.6541111
 ## 
 ## NOTE: N is the number of observations</code></pre>
-<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## w for effect size.</span></span>
 <span><span class="co">## N for sample size</span></span>
 <span><span class="co">## df is 3 since we have 4 levels</span></span></code></pre></div>
 <p>The power is about 0.654 for a small effect size.</p>
-<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.chisq.test.html">pwr.chisq.test</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.2</span>, df <span class="op">=</span> <span class="fl">3</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">$</span><span class="va">N</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 273</code></pre>
@@ -145,14 +146,14 @@
 <span class="header-section-number">19.2.2</span> Chi-Squared Test for Two-Way Table<a class="anchor" aria-label="anchor" href="#chi-squared-test-for-two-way-table-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>A sample of 400 individuals is to be randomly drawn to determine whether there is a significant association between gender and education level. The individuals will be classified into two genders and four education levels. What is the power for this test when there is a small association?</p>
-<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.chisq.test.html">pwr.chisq.test</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.2</span>, N <span class="op">=</span> <span class="fl">400</span>, df <span class="op">=</span> <span class="fl">3</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span></code></pre></div>
 <pre><code>## [1] 0.9340886</code></pre>
-<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## df is (2-1) times (4-1) = 3</span></span></code></pre></div>
 <p>The power is about 0.934 to detect a small association between gender and education level.</p>
-<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.chisq.test.html">pwr.chisq.test</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.2</span>, df <span class="op">=</span> <span class="fl">3</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">$</span><span class="va">N</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 273</code></pre>
 <p>We need at 273 observations to achive 0.8 power to detect a small association between gender and education level.</p>
@@ -162,12 +163,12 @@
 <span class="header-section-number">19.2.3</span> One-Sample Z-Test<a class="anchor" aria-label="anchor" href="#one-sample-z-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>A student hears that 10% of the U.S. population is left-handed and wants to determine if his school has a lower proportion than the general population. To investigate, he plans to randomly sample 200 of his fellow students. What is the power of the student’s test when the true proportion is slightly lower? What is the minimum</p>
-<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.p.test.html">pwr.p.test</a></span><span class="op">(</span>h <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span>, n <span class="op">=</span> <span class="fl">200</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, alternative <span class="op">=</span> <span class="st">"less"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span></code></pre></div>
 <pre><code>## [1] 0.881709</code></pre>
 <p>The power to detect a small difference is about 0.882.</p>
-<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.p.test.html">pwr.p.test</a></span><span class="op">(</span>h<span class="op">=</span><span class="op">-</span><span class="fl">0.2</span>, sig.level<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span>, alternative<span class="op">=</span><span class="st">"less"</span><span class="op">)</span><span class="op">$</span><span class="va">n</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 155</code></pre>
@@ -178,12 +179,12 @@
 <span class="header-section-number">19.2.4</span> Two-Sample Z-Test<a class="anchor" aria-label="anchor" href="#two-sample-z-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>The sample poverty rate in 2001 is to be measured using a sample of 500 individuals. The sample poverty rate in 2002 is to be measured using a sample of 600 individuals. What is the power of the test for whether there is significant evidence that the U.S. poverty rate changed from 2001 to 2002 when the effect size is small? If the sample size from 2001 remains 500, what does the sample size for 2002 need to be to yield a power of 80%?</p>
-<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Calculate the power</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.2p2n.test.html">pwr.2p2n.test</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0.2</span>, n1 <span class="op">=</span> <span class="fl">500</span>, n2 <span class="op">=</span> <span class="fl">600</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">power</span></span></code></pre></div>
 <pre><code>## [1] 0.9103523</code></pre>
 <p>The power to detect a small effect size is 0.910.</p>
-<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb642"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine the sample size required for power of 0.8</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.2p2n.test.html">pwr.2p2n.test</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0.2</span>, n1 <span class="op">=</span> <span class="fl">500</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span><span class="op">$</span><span class="va">n2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 323</code></pre>
@@ -275,7 +276,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 </tbody>
 </table></div>
 <p>The probability of having 9 white balls from 10 drawn without replacement from an urn with 15 white balls and 5 black balls is</p>
-<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb644"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.1354489</code></pre>
 <p>Now we are ready to talk more about Fisher’s exact test.</p>
@@ -300,26 +301,26 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 <p>The p-value of Fisher’s exact test is the sum of the probabilities for all tables having a probability equal to or smaller than that observed.</p>
 <p>For example, we observe the following data presented in table <a href="nonparamcat.html#tab:hyper2">19.2</a>.</p>
 <p>Given the row and column totals, the only possible values for <span class="math inline">\(X\)</span> are 5, 6, 7, 8, 9, 10. The corresponding probabilities are</p>
-<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb646"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.01625387</code></pre>
-<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb648"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.1354489</code></pre>
-<div class="sourceCode" id="cb645"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb650"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.3482972</code></pre>
-<div class="sourceCode" id="cb647"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb652"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.3482972</code></pre>
-<div class="sourceCode" id="cb649"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb654"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.1354489</code></pre>
-<div class="sourceCode" id="cb651"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb656"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.01625387</code></pre>
 <p>so the p-value is</p>
-<div class="sourceCode" id="cb653"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb658"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span>    <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.3034056</code></pre>
@@ -353,7 +354,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 </table></div>
 <p>The null hypothesis is that there is no association between the sound of the last name and whether the resume resulted in an invitation or not. The alternative hypothesis is that there is an association between the sound of the last name and whether the resume resulted in an invitation or not.</p>
 <p>To find the p-value in R, we need to create a matrix that represents the information in Table <a href="nonparamcat.html#tab:egexact">19.3</a>, and then apply the <code><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test()</a></code> function to the matrix.</p>
-<div class="sourceCode" id="cb655"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb660"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">exp.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">10</span>,<span class="fl">8</span>,<span class="fl">4</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">2</span>, </span>
 <span>                  byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -403,7 +404,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 </tr>
 </tbody>
 </table></div>
-<div class="sourceCode" id="cb657"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb662"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">exp2.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, </span>
 <span>                   nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>, </span>
 <span>                   byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -415,7 +416,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 ## data:  exp2.res
 ## p-value = 0.05993
 ## alternative hypothesis: two.sided</code></pre>
-<div class="sourceCode" id="cb659"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb664"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">exp2.res</span>, simulate.p.value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Fisher's Exact Test for Count Data with simulated p-value (based on
@@ -424,7 +425,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 ## data:  exp2.res
 ## p-value = 0.05047
 ## alternative hypothesis: two.sided</code></pre>
-<div class="sourceCode" id="cb661"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb666"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="va">exp2.res</span>, simulate.p.value <span class="op">=</span> <span class="cn">TRUE</span>, B <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Fisher's Exact Test for Count Data with simulated p-value (based on
@@ -478,7 +479,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-05.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

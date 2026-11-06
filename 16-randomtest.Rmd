@@ -94,7 +94,7 @@ samp_mean2 <- mean(samp_data2)
 samp_diff <- samp_mean - samp_mean2
 
 ## write rand.test() which combines steps 3, 4, 5
-rand.test <- function(x){
+rand.test <- function(x){ ##x should be the length of the first sample
   rand_comb <- sample( c(samp_data, samp_data2) )
   bmean1 <- mean(rand_comb[1:x])
   bmean2 <- mean(rand_comb[(x+1):(length(samp_data)+length(samp_data2))])
@@ -105,7 +105,13 @@ rand.test <- function(x){
 boot_diffs_null <- replicate(Reps, rand.test(length(samp_data)))
 
 ## step 7
-
 mean(abs(boot_diffs_null) >= abs(samp_diff)) 
 ```
+
 So the p-value is large, so we fail to reject the null hypothesis. The data do not support the claim that there is a difference in the means in the 2 populations.
+
+## A Few Comments
+
+- Just like with confidence intervals, the bootstrap for hypothesis testing works better for large sample sizes. 
+- While the randomization test does not require large sample sizes, any test involving small sample sizes have low power.
+- While these tests can be viewed as non-parametric tests, they are usually viewed as **resampling methods**, since we create samples by (re)sampling from the original data. While non-parametric tests generally have lower power than their parametric counterparts (when conditions are met), resampling methods generally have similar power to parametric methods, while not requiring conditions. The "drawback" with resampling methods is that they are computationally expensive, and have a "random" component so the final numerical value can change unless `set.seed()` is used. 

@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 17 Non-Parametric Tests for Quantitative Data | STAT 3080: From Data to Knowledge</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="17.1 Introduction In general, non-parametric, quantitative hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis...">
+<meta name="description" content="17.1 Introduction In general, non-parametric hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section...">
 <meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 17 Non-Parametric Tests for Quantitative Data | STAT 3080: From Data to Knowledge">
 <meta property="og:type" content="book">
-<meta property="og:description" content="17.1 Introduction In general, non-parametric, quantitative hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis...">
+<meta property="og:description" content="17.1 Introduction In general, non-parametric hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 17 Non-Parametric Tests for Quantitative Data | STAT 3080: From Data to Knowledge">
-<meta name="twitter:description" content="17.1 Introduction In general, non-parametric, quantitative hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis...">
+<meta name="twitter:description" content="17.1 Introduction In general, non-parametric hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -102,7 +102,7 @@
 <h2>
 <span class="header-section-number">17.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-7"><i class="fas fa-link"></i></a>
 </h2>
-<p>In general, non-parametric, quantitative hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section <a href="hyp.html#hyp">14</a> which require knowledge of the sampling distribution of the relevant test statistic.</p>
+<p>In general, non-parametric hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section <a href="hyp.html#hyp">14</a> which require knowledge of the sampling distribution of the relevant test statistic.</p>
 <p>Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from continuous distributions and test the median of the distribution or the difference of two medians.</p>
 <p>The specific non-parametric tests we will be learning about are:</p>
 <ul>
@@ -115,7 +115,7 @@
 <h2>
 <span class="header-section-number">17.2</span> Sign Test<a class="anchor" aria-label="anchor" href="#sign-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>The sign test enables users to draw conclusions regarding the <strong>median</strong> of a <strong>continuous</strong> distribution. Like the parametric tests, the null hypothesis will be assumed true throughout the test.</p>
+<p>The sign test enables users to draw conclusions regarding the <strong>median</strong> of a <strong>continuous</strong> distribution. Like parametric tests, the null hypothesis will be assumed true throughout the test.</p>
 <div id="hypotheses" class="section level3" number="17.2.1">
 <h3>
 <span class="header-section-number">17.2.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses"><i class="fas fa-link"></i></a>
@@ -134,7 +134,7 @@
 <h3>
 <span class="header-section-number">17.2.2</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Since the median is the center of the data, the number of data points above and below the true value of the median should be (roughly) equal. Since the null hypothesis is assumed to be true, the null value is assumed to be the center of the data.</p>
+<p>Since the median is the center of the data, the number of data points above and below the true value of the median should be equal. Since the null hypothesis is assumed to be true, the null value is assumed to be the center of the data.</p>
 <p>We compare each value in the data with the assumed value of the median in the null hypothesis. The test statistic is the number of data points greater than the null value. We denote the value of the test statistic with <span class="math inline">\(v\)</span>.</p>
 </div>
 <div id="distribution-of-test-statistic" class="section level3" number="17.2.3">
@@ -174,6 +174,7 @@
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">calls1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Determine p-value</span></span>
+<span><span class="co">## supply value of test statistic, sample size, and direction of alternative</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">v</span>, <span class="va">n</span>, alternative<span class="op">=</span><span class="st">"less"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Exact binomial test
@@ -268,7 +269,7 @@
 </h3>
 <p>Notice the only assumption for the sign test is that the data should be continuous. The classical 1-sample t-test has more assumptions (data are i.i.d. normal or sample size is large enough).</p>
 <p>So the sign test can be used in a wider variety of settings. However, when the assumptions for the 1-sample t-test are met, the 1-sample t-test is more powerful.</p>
-<p>The sign test is also conservative.</p>
+<p>The sign test is also more conservative.</p>
 </div>
 </div>
 <div id="wilcoxon-sign-rank-test" class="section level2" number="17.3">
@@ -377,18 +378,18 @@ Figure 17.1: Density Plot of Caloric Intake
 </h3>
 <p>The classical 1-sample t test, sign test, and Wilcoxon rank-sign test are used to test the center of a quantitative variable.</p>
 <ul>
-<li>If data is normal, use the 1-sample t test (most assumptions).</li>
+<li>If data is normal or if the sample size is large enough and data is not heavily skewed, use the 1-sample t test (most assumptions).</li>
 <li>If data is not normal but symmetric, use the Wilcoxon rank-sign test (less assumptions).</li>
 <li>If data is not symmetric, use the sign test (least assumptions).</li>
 </ul>
-<p>Could we use the sign test in under all scenarios? We could, but if the conditions for the other tests exist, the sign test has the least power.</p>
+<p>Could we use the sign test under all scenarios? We could, but if the conditions for the other tests exist, the sign test has the least power.</p>
 </div>
 </div>
 <div id="paired-tests" class="section level2" number="17.4">
 <h2>
 <span class="header-section-number">17.4</span> Paired Tests<a class="anchor" aria-label="anchor" href="#paired-tests"><i class="fas fa-link"></i></a>
 </h2>
-<p>Recall from Section <a href="hyp.html#pairedt">14.3</a> that the paired t test can be viewed as a 1-sample t test applied to pairs of differences. A similar idea can be applied to the sign test and Wilcoxon Sign-Rank test!</p>
+<p>Recall from Section <a href="hyp.html#pairedt">14.3</a> that the paired t test can be viewed as a 1-sample t test applied to pairs of differences. A similar idea can be applied to the sign test and Wilcoxon sign-rank test!</p>
 <div id="worked-example-5" class="section level3" number="17.4.1">
 <h3>
 <span class="header-section-number">17.4.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-5"><i class="fas fa-link"></i></a>
@@ -454,6 +455,7 @@ Figure 17.2: Density Plot of Paired Differences
 ## data:  paired_diff
 ## V = 13.5, p-value = 0.09036
 ## alternative hypothesis: true location is not equal to 0</code></pre>
+<p>Also notice that the p-value from the sign test is higher. This is expected as the sign test has less power and is more conservative.</p>
 </div>
 </div>
 <div id="wilcoxon-rank-sum-test" class="section level2" number="17.5">
@@ -506,11 +508,16 @@ Figure 17.3: Checkout Speeds of Employees
 ## data:  rpA and rpB
 ## W = 34, p-value = 0.2394
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
-<p>From Figure <a href="nonparamquant.html#fig:eg5">17.3</a>, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.<br>
-## Comparison with the Bootstrap</p>
-<p>The tests we have learned today do not have sample size requirements. This is unlike the bootstrap which work better as sample size gets larger.</p>
-
+<p>From Figure <a href="nonparamquant.html#fig:eg5">17.3</a>, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.</p>
 </div>
+</div>
+<div id="comparison-with-the-bootstrap" class="section level2" number="17.6">
+<h2>
+<span class="header-section-number">17.6</span> Comparison with the Bootstrap<a class="anchor" aria-label="anchor" href="#comparison-with-the-bootstrap"><i class="fas fa-link"></i></a>
+</h2>
+<p>The tests we have learned today do not have sample size requirements. This is unlike the bootstrap which work better as sample size gets larger.</p>
+<p>These tests are also considered the more traditional non-parametric methods, and are not considered resampling methods.</p>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -547,6 +554,7 @@ Figure 17.3: Checkout Speeds of Employees
 <li>
 <a class="nav-link" href="#wilcoxon-rank-sum-test"><span class="header-section-number">17.5</span> Wilcoxon Rank-Sum Test</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#worked-example-6"><span class="header-section-number">17.5.1</span> Worked Example</a></li></ul>
 </li>
+<li><a class="nav-link" href="#comparison-with-the-bootstrap"><span class="header-section-number">17.6</span> Comparison with the Bootstrap</a></li>
 </ul>
 
       <div class="book-extra">

@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.10671487  2.02318258 -0.07178718  1.61726863 -1.10920340 -1.94465138
-##  [7]  3.01586407 -1.97155132  3.02464425 -6.70946127
+##  [1]  0.6161648  7.8306104  2.9657943  0.1355315  0.5171381 -2.4299854
+##  [7]  2.0354659  3.5519079  4.0357260  1.8056645
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -8482,7 +8482,7 @@ So the p-value is large, so we fail to reject the null hypothesis. The data do n
 
 \section{Introduction}\label{introduction-7}
 
-In general, non-parametric, quantitative hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section \ref{hyp} which require knowledge of the sampling distribution of the relevant test statistic.
+In general, non-parametric hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section \ref{hyp} which require knowledge of the sampling distribution of the relevant test statistic.
 
 Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from continuous distributions and test the median of the distribution or the difference of two medians.
 
@@ -8500,7 +8500,7 @@ The specific non-parametric tests we will be learning about are:
 
 \section{Sign Test}\label{sign-test}
 
-The sign test enables users to draw conclusions regarding the \textbf{median} of a \textbf{continuous} distribution. Like the parametric tests, the null hypothesis will be assumed true throughout the test.
+The sign test enables users to draw conclusions regarding the \textbf{median} of a \textbf{continuous} distribution. Like parametric tests, the null hypothesis will be assumed true throughout the test.
 
 \subsection{Hypotheses}\label{hypotheses}
 
@@ -8518,7 +8518,7 @@ For this test, the null hypothesis is that the population median (M) is equal to
 
 \subsection{Test Statistic}\label{test-statistic-1}
 
-Since the median is the center of the data, the number of data points above and below the true value of the median should be (roughly) equal. Since the null hypothesis is assumed to be true, the null value is assumed to be the center of the data.
+Since the median is the center of the data, the number of data points above and below the true value of the median should be equal. Since the null hypothesis is assumed to be true, the null value is assumed to be the center of the data.
 
 We compare each value in the data with the assumed value of the median in the null hypothesis. The test statistic is the number of data points greater than the null value. We denote the value of the test statistic with \(v\).
 
@@ -8569,6 +8569,7 @@ Consider the sample data below drawn from a cell phone record that represent the
 \NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(calls1)}
 
 \DocumentationTok{\#\# Determine p{-}value}
+\DocumentationTok{\#\# supply value of test statistic, sample size, and direction of alternative}
 \FunctionTok{binom.test}\NormalTok{(v, n, }\AttributeTok{alternative=}\StringTok{"less"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -8726,7 +8727,7 @@ Notice the only assumption for the sign test is that the data should be continuo
 
 So the sign test can be used in a wider variety of settings. However, when the assumptions for the 1-sample t-test are met, the 1-sample t-test is more powerful.
 
-The sign test is also conservative.
+The sign test is also more conservative.
 
 \section{Wilcoxon Sign-Rank Test}\label{wilcoxon-sign-rank-test}
 
@@ -8865,18 +8866,18 @@ The classical 1-sample t test, sign test, and Wilcoxon rank-sign test are used t
 \begin{itemize}
 \tightlist
 \item
-  If data is normal, use the 1-sample t test (most assumptions).
+  If data is normal or if the sample size is large enough and data is not heavily skewed, use the 1-sample t test (most assumptions).
 \item
   If data is not normal but symmetric, use the Wilcoxon rank-sign test (less assumptions).
 \item
   If data is not symmetric, use the sign test (least assumptions).
 \end{itemize}
 
-Could we use the sign test in under all scenarios? We could, but if the conditions for the other tests exist, the sign test has the least power.
+Could we use the sign test under all scenarios? We could, but if the conditions for the other tests exist, the sign test has the least power.
 
 \section{Paired Tests}\label{paired-tests}
 
-Recall from Section \ref{pairedt} that the paired t test can be viewed as a 1-sample t test applied to pairs of differences. A similar idea can be applied to the sign test and Wilcoxon Sign-Rank test!
+Recall from Section \ref{pairedt} that the paired t test can be viewed as a 1-sample t test applied to pairs of differences. A similar idea can be applied to the sign test and Wilcoxon sign-rank test!
 
 \subsection{Worked Example}\label{worked-example-5}
 
@@ -8986,6 +8987,8 @@ Note that if we tried to use the exact p-value we would have received an error m
 ## alternative hypothesis: true location is not equal to 0
 \end{verbatim}
 
+Also notice that the p-value from the sign test is higher. This is expected as the sign test has less power and is more conservative.
+
 \section{Wilcoxon Rank-Sum Test}\label{wilcoxon-rank-sum-test}
 
 The Wilcoxon rank-sum test compares the medians of two continuous populations that are assumed to have the same shape and are independent. The three possible sets of hypotheses are:
@@ -9056,10 +9059,13 @@ A grocery store's manager decides to compare the register personnel to determine
 ## alternative hypothesis: true location shift is not equal to 0
 \end{verbatim}
 
-From Figure \ref{fig:eg5}, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.\\
-\#\# Comparison with the Bootstrap
+From Figure \ref{fig:eg5}, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.
+
+\section{Comparison with the Bootstrap}\label{comparison-with-the-bootstrap}
 
 The tests we have learned today do not have sample size requirements. This is unlike the bootstrap which work better as sample size gets larger.
+
+These tests are also considered the more traditional non-parametric methods, and are not considered resampling methods.
 
 \chapter{Hypothesis Testing for Categorical Data}\label{hyp2}
 

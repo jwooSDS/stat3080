@@ -354,6 +354,7 @@ paired-tests
 worked-example-5
 wilcoxon-rank-sum-test
 worked-example-6
+comparison-with-the-bootstrap
 hyp2
 introduction-8
 goodness-of-fit-test-for-a-categorical-variable

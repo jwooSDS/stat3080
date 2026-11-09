@@ -13,10 +13,12 @@ The steps are:
 1. Write the null and alternative hypotheses.
 2. Compute $\hat{\theta}$, the value of the estimator which is also becomes the the test statistic in the original sample.
 3. Synthesize $K$ bootstrap samples.
-4. For each bootstrap sample, calculate the value of the estimator $\hat{\Theta}$. Since we have $K$ bootstrapped datasets, we will have $K$ values for the estimators, denoted by $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$.
-5. We estimate the expected value of $\hat{\Theta}$ by taking the sample mean of $\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}$. This value is denoted by $M_b(\hat{\Theta})$.
-6. Build the sampling distribution of the statistic assuming the null hypothesis is true. This is done by $(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta}) + \mu_0$. This computes the bootstrap test statistic from each bootstrap sample. 
+4. For each bootstrap sample, calculate the value of the estimator $\hat{\Theta}$. Since we have $K$ bootstrapped datasets, we will have $K$ values for the estimators, denoted by $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$.
+5. We estimate the expected value of $\hat{\Theta}$ by taking the sample mean of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$. This value is denoted by $M_b(\hat{\Theta})$.
+6. Build the sampling distribution of the statistic **assuming the null hypothesis is true**. This is done by $(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta}) + \mu_0$. This computes the bootstrap test statistic from each bootstrap sample. 
 7. Find the p-value, which is the proportion of bootstrap test statistics that are as extreme, or more extreme, than $\hat{\theta}$. Note: for a two sided test, find the proportion of the bootstrap test statistics with absolute value equal to or greater than the absolute value of $\hat{\theta}$, as well as the proportion of the bootstrap test statistics with absolute value equal to or less than the absolute value of $\hat{\theta}$. Then multiply the smaller proportion by 2. 
+
+The first 5 steps are about the same as with the bootstrap. The main difference is the sampling distribution is now built assuming the null hypothesis is true. 
 
 ### Worked Example {#boottest1}
 
@@ -49,6 +51,8 @@ boot_means <- apply(boot_samples, 2, mean)
 mu0 <- 3
 boot_means_null <- boot_means - mean(boot_means) + mu0
 
+## Thought question: what is the value of mean(boot_means - mean(boot_means))?
+
 ## step 7
 mean(boot_means_null >= samp_mean)
 ```
@@ -63,7 +67,6 @@ plot(density(boot_means_null),
      xlab = "Bootstrap x-bar")
 abline(v = samp_mean, col = "blue")
 ```
-
 
 ## Randomization Test
 
@@ -114,4 +117,4 @@ So the p-value is large, so we fail to reject the null hypothesis. The data do n
 
 - Just like with confidence intervals, the bootstrap for hypothesis testing works better for large sample sizes. 
 - While the randomization test does not require large sample sizes, any test involving small sample sizes have low power.
-- While these tests can be viewed as non-parametric tests, they are usually viewed as **resampling methods**, since we create samples by (re)sampling from the original data. While non-parametric tests generally have lower power than their parametric counterparts (when conditions are met), resampling methods generally have similar power to parametric methods, while not requiring conditions. The "drawback" with resampling methods is that they are computationally expensive, and have a "random" component so the final numerical value can change unless `set.seed()` is used. 
+- While these tests can be viewed as non-parametric tests, they are usually viewed as **resampling methods**, since we create samples by (re)sampling from the original data. While non-parametric tests generally have lower power than their parametric counterparts (when conditions are met), resampling methods generally have similar power to parametric methods, while not requiring conditions. The "drawbacks" with resampling methods are that they are computationally expensive, and have a "random" component so the final numerical value can change unless `set.seed()` is used. 

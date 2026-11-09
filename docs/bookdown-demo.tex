@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-11-06}
+\date{2026-11-09}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.6161648  7.8306104  2.9657943  0.1355315  0.5171381 -2.4299854
-##  [7]  2.0354659  3.5519079  4.0357260  1.8056645
+##  [1] -0.2257777 -1.6032593 -3.0638074 -8.1454853  2.5569451 -3.5273170
+##  [7]  2.7168698  6.3299034  0.7387498 -1.0963116
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -8335,14 +8335,16 @@ The steps are:
 \item
   Synthesize \(K\) bootstrap samples.
 \item
-  For each bootstrap sample, calculate the value of the estimator \(\hat{\Theta}\). Since we have \(K\) bootstrapped datasets, we will have \(K\) values for the estimators, denoted by \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\).
+  For each bootstrap sample, calculate the value of the estimator \(\hat{\Theta}\). Since we have \(K\) bootstrapped datasets, we will have \(K\) values for the estimators, denoted by \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\).
 \item
-  We estimate the expected value of \(\hat{\Theta}\) by taking the sample mean of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\). This value is denoted by \(M_b(\hat{\Theta})\).
+  We estimate the expected value of \(\hat{\Theta}\) by taking the sample mean of \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\). This value is denoted by \(M_b(\hat{\Theta})\).
 \item
-  Build the sampling distribution of the statistic assuming the null hypothesis is true. This is done by \((\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta}) + \mu_0\). This computes the bootstrap test statistic from each bootstrap sample.
+  Build the sampling distribution of the statistic \textbf{assuming the null hypothesis is true}. This is done by \((\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta}) + \mu_0\). This computes the bootstrap test statistic from each bootstrap sample.
 \item
   Find the p-value, which is the proportion of bootstrap test statistics that are as extreme, or more extreme, than \(\hat{\theta}\). Note: for a two sided test, find the proportion of the bootstrap test statistics with absolute value equal to or greater than the absolute value of \(\hat{\theta}\), as well as the proportion of the bootstrap test statistics with absolute value equal to or less than the absolute value of \(\hat{\theta}\). Then multiply the smaller proportion by 2.
 \end{enumerate}
+
+The first 5 steps are about the same as with the bootstrap. The main difference is the sampling distribution is now built assuming the null hypothesis is true.
 
 \subsection{Worked Example}\label{boottest1}
 
@@ -8375,6 +8377,8 @@ The hypotheses are \(H_0: \mu = 3, H_a: \mu > 3\).
 \DocumentationTok{\#\# steps 5, 6}
 \NormalTok{mu0 }\OtherTok{\textless{}{-}} \DecValTok{3}
 \NormalTok{boot\_means\_null }\OtherTok{\textless{}{-}}\NormalTok{ boot\_means }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(boot\_means) }\SpecialCharTok{+}\NormalTok{ mu0}
+
+\DocumentationTok{\#\# Thought question: what is the value of mean(boot\_means {-} mean(boot\_means))?}
 
 \DocumentationTok{\#\# step 7}
 \FunctionTok{mean}\NormalTok{(boot\_means\_null }\SpecialCharTok{\textgreater{}=}\NormalTok{ samp\_mean)}
@@ -8475,7 +8479,7 @@ So the p-value is large, so we fail to reject the null hypothesis. The data do n
 \item
   While the randomization test does not require large sample sizes, any test involving small sample sizes have low power.
 \item
-  While these tests can be viewed as non-parametric tests, they are usually viewed as \textbf{resampling methods}, since we create samples by (re)sampling from the original data. While non-parametric tests generally have lower power than their parametric counterparts (when conditions are met), resampling methods generally have similar power to parametric methods, while not requiring conditions. The ``drawback'' with resampling methods is that they are computationally expensive, and have a ``random'' component so the final numerical value can change unless \texttt{set.seed()} is used.
+  While these tests can be viewed as non-parametric tests, they are usually viewed as \textbf{resampling methods}, since we create samples by (re)sampling from the original data. While non-parametric tests generally have lower power than their parametric counterparts (when conditions are met), resampling methods generally have similar power to parametric methods, while not requiring conditions. The ``drawbacks'' with resampling methods are that they are computationally expensive, and have a ``random'' component so the final numerical value can change unless \texttt{set.seed()} is used.
 \end{itemize}
 
 \chapter{Non-Parametric Tests for Quantitative Data}\label{nonparamquant}

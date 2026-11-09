@@ -114,11 +114,12 @@
 <li>Write the null and alternative hypotheses.</li>
 <li>Compute <span class="math inline">\(\hat{\theta}\)</span>, the value of the estimator which is also becomes the the test statistic in the original sample.</li>
 <li>Synthesize <span class="math inline">\(K\)</span> bootstrap samples.</li>
-<li>For each bootstrap sample, calculate the value of the estimator <span class="math inline">\(\hat{\Theta}\)</span>. Since we have <span class="math inline">\(K\)</span> bootstrapped datasets, we will have <span class="math inline">\(K\)</span> values for the estimators, denoted by <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>.</li>
-<li>We estimate the expected value of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample mean of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>. This value is denoted by <span class="math inline">\(M_b(\hat{\Theta})\)</span>.</li>
-<li>Build the sampling distribution of the statistic assuming the null hypothesis is true. This is done by <span class="math inline">\((\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}) - M_b(\hat{\Theta}) + \mu_0\)</span>. This computes the bootstrap test statistic from each bootstrap sample.</li>
+<li>For each bootstrap sample, calculate the value of the estimator <span class="math inline">\(\hat{\Theta}\)</span>. Since we have <span class="math inline">\(K\)</span> bootstrapped datasets, we will have <span class="math inline">\(K\)</span> values for the estimators, denoted by <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>.</li>
+<li>We estimate the expected value of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample mean of <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>. This value is denoted by <span class="math inline">\(M_b(\hat{\Theta})\)</span>.</li>
+<li>Build the sampling distribution of the statistic <strong>assuming the null hypothesis is true</strong>. This is done by <span class="math inline">\((\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta}) + \mu_0\)</span>. This computes the bootstrap test statistic from each bootstrap sample.</li>
 <li>Find the p-value, which is the proportion of bootstrap test statistics that are as extreme, or more extreme, than <span class="math inline">\(\hat{\theta}\)</span>. Note: for a two sided test, find the proportion of the bootstrap test statistics with absolute value equal to or greater than the absolute value of <span class="math inline">\(\hat{\theta}\)</span>, as well as the proportion of the bootstrap test statistics with absolute value equal to or less than the absolute value of <span class="math inline">\(\hat{\theta}\)</span>. Then multiply the smaller proportion by 2.</li>
 </ol>
+<p>The first 5 steps are about the same as with the bootstrap. The main difference is the sampling distribution is now built assuming the null hypothesis is true.</p>
 <div id="boottest1" class="section level3" number="16.2.1">
 <h3>
 <span class="header-section-number">16.2.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#boottest1"><i class="fas fa-link"></i></a>
@@ -148,6 +149,8 @@
 <span><span class="co">## steps 5, 6</span></span>
 <span><span class="va">mu0</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="va">boot_means_null</span> <span class="op">&lt;-</span> <span class="va">boot_means</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">boot_means</span><span class="op">)</span> <span class="op">+</span> <span class="va">mu0</span></span>
+<span></span>
+<span><span class="co">## Thought question: what is the value of mean(boot_means - mean(boot_means))?</span></span>
 <span></span>
 <span><span class="co">## step 7</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">boot_means_null</span> <span class="op">&gt;=</span> <span class="va">samp_mean</span><span class="op">)</span></span></code></pre></div>
@@ -220,7 +223,7 @@ Figure 16.1: Sampling Distribution of Sample Mean when Null is True
 <ul>
 <li>Just like with confidence intervals, the bootstrap for hypothesis testing works better for large sample sizes.</li>
 <li>While the randomization test does not require large sample sizes, any test involving small sample sizes have low power.</li>
-<li>While these tests can be viewed as non-parametric tests, they are usually viewed as <strong>resampling methods</strong>, since we create samples by (re)sampling from the original data. While non-parametric tests generally have lower power than their parametric counterparts (when conditions are met), resampling methods generally have similar power to parametric methods, while not requiring conditions. The “drawback” with resampling methods is that they are computationally expensive, and have a “random” component so the final numerical value can change unless <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> is used.</li>
+<li>While these tests can be viewed as non-parametric tests, they are usually viewed as <strong>resampling methods</strong>, since we create samples by (re)sampling from the original data. While non-parametric tests generally have lower power than their parametric counterparts (when conditions are met), resampling methods generally have similar power to parametric methods, while not requiring conditions. The “drawbacks” with resampling methods are that they are computationally expensive, and have a “random” component so the final numerical value can change unless <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> is used.</li>
 </ul>
 </div>
 </div>
@@ -255,7 +258,7 @@ Figure 16.1: Sampling Distribution of Sample Mean when Null is True
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-06.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

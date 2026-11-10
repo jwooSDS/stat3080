@@ -116,7 +116,8 @@
 <li>Synthesize <span class="math inline">\(K\)</span> bootstrap samples.</li>
 <li>For each bootstrap sample, calculate the value of the estimator <span class="math inline">\(\hat{\Theta}\)</span>. Since we have <span class="math inline">\(K\)</span> bootstrapped datasets, we will have <span class="math inline">\(K\)</span> values for the estimators, denoted by <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>.</li>
 <li>We estimate the expected value of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample mean of <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>. This value is denoted by <span class="math inline">\(M_b(\hat{\Theta})\)</span>.</li>
-<li>Build the sampling distribution of the statistic <strong>assuming the null hypothesis is true</strong>. This is done by <span class="math inline">\((\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta}) + \mu_0\)</span>. This computes the bootstrap test statistic from each bootstrap sample.</li>
+<li>Build the sampling distribution of the statistic <strong>assuming the null hypothesis is true</strong>. This is done by <span class="math inline">\((\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta}) + \mu_0\)</span>. This computes the bootstrap test statistic from each bootstrap sample.
+<strong>Thought question:</strong> What is the expected value of <span class="math inline">\((\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta})\)</span>?</li>
 <li>Find the p-value, which is the proportion of bootstrap test statistics that are as extreme, or more extreme, than <span class="math inline">\(\hat{\theta}\)</span>. Note: for a two sided test, find the proportion of the bootstrap test statistics with absolute value equal to or greater than the absolute value of <span class="math inline">\(\hat{\theta}\)</span>, as well as the proportion of the bootstrap test statistics with absolute value equal to or less than the absolute value of <span class="math inline">\(\hat{\theta}\)</span>. Then multiply the smaller proportion by 2.</li>
 </ol>
 <p>The first 5 steps are about the same as with the bootstrap. The main difference is the sampling distribution is now built assuming the null hypothesis is true.</p>
@@ -258,7 +259,7 @@ Figure 16.1: Sampling Distribution of Sample Mean when Null is True
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-09.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

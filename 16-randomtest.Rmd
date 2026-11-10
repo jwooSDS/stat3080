@@ -16,6 +16,7 @@ The steps are:
 4. For each bootstrap sample, calculate the value of the estimator $\hat{\Theta}$. Since we have $K$ bootstrapped datasets, we will have $K$ values for the estimators, denoted by $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$.
 5. We estimate the expected value of $\hat{\Theta}$ by taking the sample mean of $\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}$. This value is denoted by $M_b(\hat{\Theta})$.
 6. Build the sampling distribution of the statistic **assuming the null hypothesis is true**. This is done by $(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta}) + \mu_0$. This computes the bootstrap test statistic from each bootstrap sample. 
+**Thought question:** What is the expected value of $(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta})$?
 7. Find the p-value, which is the proportion of bootstrap test statistics that are as extreme, or more extreme, than $\hat{\theta}$. Note: for a two sided test, find the proportion of the bootstrap test statistics with absolute value equal to or greater than the absolute value of $\hat{\theta}$, as well as the proportion of the bootstrap test statistics with absolute value equal to or less than the absolute value of $\hat{\theta}$. Then multiply the smaller proportion by 2. 
 
 The first 5 steps are about the same as with the bootstrap. The main difference is the sampling distribution is now built assuming the null hypothesis is true. 

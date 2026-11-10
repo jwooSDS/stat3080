@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-11-09}
+\date{2026-11-10}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.2257777 -1.6032593 -3.0638074 -8.1454853  2.5569451 -3.5273170
-##  [7]  2.7168698  6.3299034  0.7387498 -1.0963116
+##  [1]  0.356787 -4.036777 -1.383004  4.519867  1.378955  3.700459  1.863603
+##  [8] -3.696270  3.596757 -2.048173
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -8340,6 +8340,7 @@ The steps are:
   We estimate the expected value of \(\hat{\Theta}\) by taking the sample mean of \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\). This value is denoted by \(M_b(\hat{\Theta})\).
 \item
   Build the sampling distribution of the statistic \textbf{assuming the null hypothesis is true}. This is done by \((\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta}) + \mu_0\). This computes the bootstrap test statistic from each bootstrap sample.
+  \textbf{Thought question:} What is the expected value of \((\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}) - M_b(\hat{\Theta})\)?
 \item
   Find the p-value, which is the proportion of bootstrap test statistics that are as extreme, or more extreme, than \(\hat{\theta}\). Note: for a two sided test, find the proportion of the bootstrap test statistics with absolute value equal to or greater than the absolute value of \(\hat{\theta}\), as well as the proportion of the bootstrap test statistics with absolute value equal to or less than the absolute value of \(\hat{\theta}\). Then multiply the smaller proportion by 2.
 \end{enumerate}

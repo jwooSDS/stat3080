@@ -103,7 +103,7 @@
 <span class="header-section-number">16.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>The hypothesis tests for the means in Section <a href="hyp.html#hyp">14</a> are based on certain conditions being met, so that test statistics can be calculated based on known sampling distributions. What happens if these conditions are not met? Using the test statistics from Section <a href="hyp.html#hyp">14</a> will be unreliable (generally). Similar to confidence intervals, we can use ideas associated with the bootstrap to conduct a hypothesis test when the sampling distribution of a test statistic is unknown.</p>
-<p>We will also learn about the randomization test, which uses the bootstrap when testing the difference between two independent populations.</p>
+<p>We will also learn about the randomization test, which uses resampling when testing the difference between two independent populations. In fact, the bootstrap also uses resampling.</p>
 </div>
 <div id="bootstrap-in-hypothesis-testing" class="section level2" number="16.2">
 <h2>
@@ -175,7 +175,7 @@ Figure 16.1: Sampling Distribution of Sample Mean when Null is True
 <h2>
 <span class="header-section-number">16.3</span> Randomization Test<a class="anchor" aria-label="anchor" href="#randomization-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>For a hypothesis test that compares a parameter between two independent populations, the <strong>randomization test</strong> is preferred. It uses the bootstrap with some tweaks. The steps are:</p>
+<p>For a hypothesis test that compares a parameter between two independent populations, the <strong>randomization test</strong> is preferred. It uses resampling. The steps are:</p>
 <ol style="list-style-type: decimal">
 <li>Write the null and alternative hypotheses.</li>
 <li>Compute the value of the statistic (usually difference in means or difference in proportions) in the original sample.</li>

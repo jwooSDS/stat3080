@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  0.356787 -4.036777 -1.383004  4.519867  1.378955  3.700459  1.863603
-##  [8] -3.696270  3.596757 -2.048173
+##  [1]  1.3728903 -3.5397985 -0.9090065 -2.4847193 -2.2724082 -2.2473903
+##  [7] -1.1710076  3.7182268  1.7750896  1.3880855
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -8319,7 +8319,7 @@ To summarize, hypothesis testing is used to assess ``statistical significance'',
 
 The hypothesis tests for the means in Section \ref{hyp} are based on certain conditions being met, so that test statistics can be calculated based on known sampling distributions. What happens if these conditions are not met? Using the test statistics from Section \ref{hyp} will be unreliable (generally). Similar to confidence intervals, we can use ideas associated with the bootstrap to conduct a hypothesis test when the sampling distribution of a test statistic is unknown.
 
-We will also learn about the randomization test, which uses the bootstrap when testing the difference between two independent populations.
+We will also learn about the randomization test, which uses resampling when testing the difference between two independent populations. In fact, the bootstrap also uses resampling.
 
 \section{Bootstrap in Hypothesis Testing}\label{bootstrap-in-hypothesis-testing}
 
@@ -8411,7 +8411,7 @@ Figure \ref{fig:16-boottest} below visualizes the sampling distribution of \(\ba
 
 \section{Randomization Test}\label{randomization-test}
 
-For a hypothesis test that compares a parameter between two independent populations, the \textbf{randomization test} is preferred. It uses the bootstrap with some tweaks. The steps are:
+For a hypothesis test that compares a parameter between two independent populations, the \textbf{randomization test} is preferred. It uses resampling. The steps are:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}

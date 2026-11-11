@@ -159,7 +159,7 @@ Bias(\hat{\theta}) = E(\hat{\theta}) - \theta.
 </li>
 </ul>
 <p>If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0.</p>
-<div class="sourceCode" id="cb668"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb670"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Function that simulates n obs from Z, then finds theta1 and theta2</span></span>
 <span><span class="va">estimators</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">Xs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
@@ -174,7 +174,7 @@ Bias(\hat{\theta}) = E(\hat{\theta}) - \theta.
 <span><span class="co">## Find the long-run average of both estimators</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">result</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span> <span class="co">## this is also bias since true mean of Z is 0</span></span></code></pre></div>
 <pre><code>## [1] 0.0002085981 1.9997755252</code></pre>
-<div class="sourceCode" id="cb670"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb672"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create density plots to show distribution for est1 and est 2, and overlay line to show true value of mu</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot for theta1"</span><span class="op">)</span></span>
@@ -206,16 +206,16 @@ Figure 20.1: Dist of theta1 (left) and theta2 (right)
 <p>There is also another term used when evaluating the variance of an estimator: this is the <strong>standard error</strong> of an estimator. This is essentially the standard deviation of the estimator, i.e. <span class="math inline">\(SE(\hat{\theta}) = \sqrt{Var(\hat{\theta})}\)</span>. Going back to our example: <span class="math inline">\(SE(\hat{\theta}_1) = \frac{\sigma}{\sqrt{n}}\)</span> and <span class="math inline">\(SE(\hat{\theta}_2) = \sigma\)</span>.</p>
 <p>Note: The term standard error is only applied to estimators. It is not used when finding the standard deviation of data points.</p>
 <p>We can also use our Monte Carlo simulation from the previous subsection to estimate these values:</p>
-<div class="sourceCode" id="cb671"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb673"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span> <span class="co">##should be close to 1/100, since n=100</span></span></code></pre></div>
 <pre><code>## [1] 0.01016771</code></pre>
-<div class="sourceCode" id="cb673"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb675"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span> <span class="co">##should be close to 1</span></span></code></pre></div>
 <pre><code>## [1] 0.9967087</code></pre>
-<div class="sourceCode" id="cb675"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb677"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span> <span class="co">##should be close to 1/10</span></span></code></pre></div>
 <pre><code>## [1] 0.100835</code></pre>
-<div class="sourceCode" id="cb677"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb679"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">result</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span> <span class="co">##should be close to 1</span></span></code></pre></div>
 <pre><code>## [1] 0.998353</code></pre>
 <p>These results are reflected in Figure <a href="est.html#fig:20-bias">20.1</a>. Notice the scale of the x-axis for the plot of <span class="math inline">\(\hat{\theta}_2\)</span> (on the right) is much larger, so <span class="math inline">\(\hat{\theta}_2\)</span> has larger variability than <span class="math inline">\(\hat{\theta}_1\)</span>, i.e. we are more uncertain about the value of <span class="math inline">\(\hat{\theta}_2\)</span>, since they deviate more from each other.</p>
@@ -274,7 +274,7 @@ Figure 20.1: Dist of theta1 (left) and theta2 (right)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-10.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

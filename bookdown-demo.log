@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  10 NOV 2026 13:19
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  11 NOV 2026 14:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -875,8 +875,8 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 
 [17]
 Overfull \hbox (38.25pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1]  1.3728903 -3.5397985 -0.9090065 -2.4847193 -2.272408
-2 -2.2473903[] 
+[]\TU/lmtt/m/n/10 ##  [1]  2.8295829  1.1503685 -1.0246335 -0.2706676  1.066296
+5  0.6212261[] 
  []
 
 
@@ -3211,6 +3211,9 @@ TING AND RANDOMIZATION TEST
 ]
 Chapter 17.
 
+Underfull \vbox (badness 1668) has occurred while \output is active []
+
+
 
 [211]
 
@@ -3302,16 +3305,13 @@ TATIVE DATA
  []
 
 [218]
-File: bookdown-demo_files/figure-latex/eg4-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/eg4-1.pdf>
-
-Overfull \hbox (1.5pt too wide) in paragraph at lines 8944--8944
+Overfull \hbox (1.5pt too wide) in paragraph at lines 8933--8933
 []\TU/lmtt/m/n/10 ## number of successes = 3, number of trials = 12, p-value = 
 0.146[] 
  []
 
 
-Overfull \hbox (43.5pt too wide) in paragraph at lines 8944--8944
+Overfull \hbox (43.5pt too wide) in paragraph at lines 8933--8933
 []\TU/lmtt/m/n/10 ## alternative hypothesis: true probability of success is not
  equal to 0.5[] 
  []
@@ -3319,6 +3319,9 @@ Overfull \hbox (43.5pt too wide) in paragraph at lines 8944--8944
 
 
 [219]
+File: bookdown-demo_files/figure-latex/eg4-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/eg4-1.pdf>
+
 
 
 Overfull \hbox (7.4156pt too wide) has occurred while \output is active
@@ -3331,9 +3334,6 @@ TATIVE DATA
 [221]
 File: bookdown-demo_files/figure-latex/eg5-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/eg5-1.pdf>
-
-Underfull \vbox (badness 1342) has occurred while \output is active []
-
 
 
 
@@ -3357,13 +3357,13 @@ TATIVE DATA
 ]
 Chapter 18.
 
-Underfull \hbox (badness 1789) in paragraph at lines 9079--9080
+Underfull \hbox (badness 1789) in paragraph at lines 9102--9103
 \TU/lmr/m/n/10 Thus far, we have introduced hypothesis testing (parametric and 
 non-
  []
 
 
-Underfull \hbox (badness 1264) in paragraph at lines 9096--9096
+Underfull \hbox (badness 1264) in paragraph at lines 9119--9119
 []\TU/lmr/bx/n/14.4 Goodness-of-Fit Test for A Categorical
  []
 
@@ -3392,7 +3392,7 @@ mr/m/n/10 233
  []
 
 [233]
-Overfull \hbox (48.75pt too wide) in paragraph at lines 9573--9573
+Overfull \hbox (48.75pt too wide) in paragraph at lines 9596--9596
 []\TU/lmtt/m/n/10 ##  2-sample test for equality of proportions without continu
 ity correction[] 
  []
@@ -3438,13 +3438,13 @@ FOR CATEGORICAL DATA
  []
 
 [242] [243]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 10098--10098
+Overfull \hbox (27.75pt too wide) in paragraph at lines 10121--10121
 []\TU/lmtt/m/n/10 ##  Fisher[]s Exact Test for Count Data with simulated p-valu
 e (based on[] 
  []
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 10114--10114
+Overfull \hbox (27.75pt too wide) in paragraph at lines 10137--10137
 []\TU/lmtt/m/n/10 ##  Fisher[]s Exact Test for Count Data with simulated p-valu
 e (based on[] 
  []
@@ -3464,7 +3464,7 @@ Chapter 20.
 [245
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 10183--10185
+Underfull \hbox (badness 10000) in paragraph at lines 10206--10208
 
  []
 

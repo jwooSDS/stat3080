@@ -4,7 +4,7 @@
 
 In general, non-parametric hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section \@ref(hyp) which require knowledge of the sampling distribution of the relevant test statistic.
 
-Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from continuous distributions and test the median of the distribution or the difference of two medians. 
+Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from **continuous** distributions and test the **median** of the distribution or the **difference of two medians** from two independent populations. 
 
 The specific non-parametric tests we will be learning about are:
 
@@ -14,7 +14,7 @@ The specific non-parametric tests we will be learning about are:
 
 ## Sign Test
 
-The sign test enables users to draw conclusions regarding the **median** of a **continuous** distribution. Like parametric tests, the null hypothesis will be assumed true throughout the test. 
+The sign test enables users to draw conclusions regarding the median of a continuous distribution. Like parametric tests, the null hypothesis will be assumed true throughout the test. 
 
 ### Hypotheses
 
@@ -122,7 +122,7 @@ We fail to reject the null hypothesis since the p-value is 0.19, which is greate
 
 ### Final Comments 
 
-Notice the only assumption for the sign test is that the data should be continuous. The classical 1-sample t-test has more assumptions (data are i.i.d. normal or sample size is large enough).
+Notice the only assumption for the sign test is that the data should be continuous. The classical 1-sample t-test has more assumptions (data are i.i.d. normal or sample size is large enough with data not being extremely skewed).
 
 So the sign test can be used in a wider variety of settings. However, when the assumptions for the 1-sample t-test are met, the 1-sample t-test is more powerful. 
 
@@ -132,13 +132,13 @@ The sign test is also more conservative.
 
 ### Test Statistic
 
-The Wilcoxon sign-rank test is another way to test the median of a continuous distribution and uses the same hypotheses as the sign test. It has one additional assumption that the distribution be symmetric. 
+The Wilcoxon sign-rank test is another way to test the median of a continuous distribution and uses the same hypotheses as the sign test. It has one additional assumption that the distribution be **symmetric**. 
 
 The Wilcoxon sign-rank test works in a similar way to the sign test. Instead of each value being compared directly to the null value:
 
 1. First, the null value is subtracted from each sampled value, which will yield a positive difference if the sampled value is above the assumed median and a negative difference if the sampled value is below the assumed median. Any observation with a difference of 0 is discarded.
 
-2. Next, the absolute values of the differences are ranked and any tied values receive a rank that is the average of the would-be ranks of all the tied values. 
+2. Next, the absolute values of the differences are ranked (from smallest to largest) and any tied values receive a rank that is the average of the would-be ranks of all the tied values. 
 
 3. Finally, the ranks of the positive differences are summed to find the value of the test statistic, denoted by $w$.  
 
@@ -152,7 +152,7 @@ Consider all possible combinations of positive and negative differences in step 
 
 The p-value is the proportion of combination of test statistics that are at least as large as the calculated test statistic in step 3. 
 
-The exact method is used when the sample size is small.
+The exact method is recommended when the sample size is small.
 
 #### Approximate P-Value
 
@@ -162,7 +162,7 @@ The approximate method uses a normal approximation for the distribution of the t
 
 #### Using R
 
-The function `wilcox.test()` will conduct the Wilcoxon Sign-Rank test. The required arguments are the sampled data, the null value of the median (via the argument `mu`), and the alternative hypothesis. Users can also specify whether to generate the exact p-value and whether to ignore the continuity correction.
+The function `wilcox.test()` will conduct the Wilcoxon Sign-Rank test. The required arguments are the sampled data, the null value of the median (via the argument `mu`), and the alternative hypothesis. Users can also specify whether to generate the exact p-value or use the approximate p-value and whether to ignore the continuity correction.
 
 ### Worked Example
 
@@ -173,21 +173,21 @@ $H_0: M = 2000, H_a: M \neq 2000$.
 ```{r eg3, fig.cap="Density Plot of Caloric Intake"}
 caloric_intake <- c(1950, 2020, 2100, 1985, 2040, 1990, 2070, 2030, 1955, 2080)
 
-## check is data looks symmetric.
+## check if data looks symmetric.
 ## Symmetry needed for Wilcoxon Rank Sign Test
 ## Otherwise use Sign Test
 plot(density(caloric_intake), main ="Caloric Intake", xlab = "kcal")
 ## OK. Somewhat symmetric
 
 ## sample size 10
-## no tied tanks. Function will display a message if they exist
+## no tied ranks. Function will display a message if they exist
 ## no value equal to null. Function will display a message if they exist
 wilcox.test(caloric_intake, mu = 2000, alternative = "two.sided")
 ```
 
 We note from the density plot that the data is symmetric, so we can use the Wilcoxon Sign-Rank test. The p-value is 0.2754 which is greater than 0.05, so we fail to reject the null hypothesis. The sample does not provide evidence that the median daily caloric intake of adults is different from 2000 kcal.
 
-We could have used the sign test here. However, note that the p-value is larger than from the Wilcoxon Sign-Rank test. It turns our that if the conditions for the Wilcoxon Sign-Rank test are met (data are symmetric), the Wilcoxon Sign-Rank test is more powerful than the sign test. This is because it incorporates more information when calculating the test statistic as it also includes the magnitude and not just sign. 
+We could have used the sign test here. However, note that the p-value is larger than from the Wilcoxon Sign-Rank test. It turns our that if the conditions for the Wilcoxon Sign-Rank test are met (data are symmetric), the Wilcoxon Sign-Rank test is more powerful than the sign test. (More powerful tests generally have smaller p-values as long as conditions for the tests are met.) This is because it incorporates more information when calculating the test statistic as it also includes the magnitude and not just sign. 
 
 ```{r}
 v4 <- sum(caloric_intake > 2000)
@@ -199,7 +199,8 @@ binom.test(v4, 10, alternative = "two.sided")
 ## Compare with
 2*(1 - pbinom(v4 - 1, 10, 0.5))
 ```
-### Tests for one Quantitative Variable
+
+### Tests for One Quantitative Variable
 
 The classical 1-sample t test, sign test, and Wilcoxon rank-sign test are used to test the center of a quantitative variable. 
 
@@ -207,7 +208,7 @@ The classical 1-sample t test, sign test, and Wilcoxon rank-sign test are used t
 - If data is not normal but symmetric, use the Wilcoxon rank-sign test (less assumptions).
 - If data is not symmetric, use the sign test (least assumptions).
 
-Could we use the sign test under all scenarios? We could, but if the conditions for the other tests exist, the sign test has the least power. 
+Could we use the sign test under all scenarios? We could, but if the conditions for the other tests are met, the sign test has the least power. 
 
 ## Paired Tests
 
@@ -221,7 +222,7 @@ We have $H_0: M_{diff} = 0, H_a: M_{diff} \neq 0$.
 
 The results from the sign test is shown below. The p-value is 0.146 which is greater than 0.05 so we fail to reject the null hypothesis. The data do not provide evidence that words are reported more accurately from one ear over the other.
 
-```{r eg4, fig.cap="Density Plot of Paired Differences"}
+```{r}
 ## Correct word counts
 left <- c(25, 29, 10, 31, 27, 24, 27, 29, 30, 32, 20, 25)
 right <- c(32, 30, 7, 36, 20, 32, 26, 33, 32, 32, 30, 32)
@@ -229,8 +230,7 @@ right <- c(32, 30, 7, 36, 20, 32, 26, 33, 32, 32, 30, 32)
 ## paired differences
 paired_diff <- left - right
 
-plot(density(paired_diff), main ="Differences in Left and Right Ear", xlab = "Paired Differences")
-
+## test stat from sign test
 v5 <- sum(paired_diff > 0)
 v5
 
@@ -242,6 +242,10 @@ binom.test(v5, length(paired_diff), alternative="two.sided")
 ```
 
 We note from the density plot in Fig \@ref(fig:eg4) that the distribution of the paired differences is somewhat symmetric, so we could also use the Wilcoxon sign-rank test.
+
+```{r eg4, fig.cap="Density Plot of Paired Differences"}
+plot(density(paired_diff), main ="Differences in Left and Right Ear", xlab = "Paired Differences")
+```
 
 The results from the Wilcoxon sign-rank test is shown below. The p-value is 0.09 which is greater than 0.05 so we fail to reject the null hypothesis. The data do not provide evidence that words are reported more accurately from one ear over the other.
 
@@ -255,7 +259,12 @@ wilcox.test(left, right, alternative="two.sided", paired=TRUE, exact = FALSE)
 wilcox.test(paired_diff, alternative="two.sided", exact = FALSE)
 ```
 
-Also notice that the p-value from the sign test is higher. This is expected as the sign test has less power and is more conservative. 
+We could have also carried out the parametric paired t-test. Notice the p-value is a bit smaller than the Wilcoxon Sign-Rank test. When conditions for the paired t-test are met, it is more powerful. 
+
+```{r}
+t.test(paired_diff)
+```
+
 
 ## Wilcoxon Rank-Sum Test
 
@@ -273,13 +282,15 @@ The main idea of how the test statistic is calculated is as follows:
 
 3. Sum up the ranks from each group. If the null hypothesis is true (and the sample sizes are equal), then the sums of the ranks in both groups should be roughly equal.
 
+4. A test statistic is calculated based on the sum of the ranks from each group. The literature is not unanimous abou the formula for this test statistic (usually Mann-Whitney test statistic) so we will not go into the details here. 
+
 An adjustment is made to account for unequal sample sizes. 
 
 As with the Wilcoxon sign-rank test, the p-value is determined using either the exact method or the approximate method.  
 
 ### Worked Example
 
-A grocery store's manager decides to compare the register personnel to determine if there is a difference in the speed with which they checkout customers. Is there evidence that there is a difference in checkout times of the two selected employees?  
+A grocery store's manager decides to compare the register personnel to determine if there is a difference in the speed with which they checkout customers. Is there evidence that there is a difference in the median checkout times of the two selected employees?  
 
 $H_0: M_1 = M_2,  H_a: M_1 \neq M_2$.
 
@@ -296,7 +307,7 @@ plot(density(rpB), main = "Employee B", xlab="Speed")
 wilcox.test(rpA, rpB, alternative = "two.sided", exact = FALSE)
 ```
 
-From Figure \@ref(fig:eg5), the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.
+From Figure \@ref(fig:eg5), the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the median checkout speeds of the employees are different.
 
 ## Comparison with the Bootstrap
 

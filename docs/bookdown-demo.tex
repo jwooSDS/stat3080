@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-11-10}
+\date{2026-11-11}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.3728903 -3.5397985 -0.9090065 -2.4847193 -2.2724082 -2.2473903
-##  [7] -1.1710076  3.7182268  1.7750896  1.3880855
+##  [1]  2.8295829  1.1503685 -1.0246335 -0.2706676  1.0662965  0.6212261
+##  [7] -0.3391750  3.5452674  2.5460884 -0.1582148
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -8489,7 +8489,7 @@ So the p-value is large, so we fail to reject the null hypothesis. The data do n
 
 In general, non-parametric hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section \ref{hyp} which require knowledge of the sampling distribution of the relevant test statistic.
 
-Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from continuous distributions and test the median of the distribution or the difference of two medians.
+Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from \textbf{continuous} distributions and test the \textbf{median} of the distribution or the \textbf{difference of two medians} from two independent populations.
 
 The specific non-parametric tests we will be learning about are:
 
@@ -8505,7 +8505,7 @@ The specific non-parametric tests we will be learning about are:
 
 \section{Sign Test}\label{sign-test}
 
-The sign test enables users to draw conclusions regarding the \textbf{median} of a \textbf{continuous} distribution. Like parametric tests, the null hypothesis will be assumed true throughout the test.
+The sign test enables users to draw conclusions regarding the median of a continuous distribution. Like parametric tests, the null hypothesis will be assumed true throughout the test.
 
 \subsection{Hypotheses}\label{hypotheses}
 
@@ -8728,7 +8728,7 @@ We fail to reject the null hypothesis since the p-value is 0.19, which is greate
 
 \subsection{Final Comments}\label{final-comments}
 
-Notice the only assumption for the sign test is that the data should be continuous. The classical 1-sample t-test has more assumptions (data are i.i.d. normal or sample size is large enough).
+Notice the only assumption for the sign test is that the data should be continuous. The classical 1-sample t-test has more assumptions (data are i.i.d. normal or sample size is large enough with data not being extremely skewed).
 
 So the sign test can be used in a wider variety of settings. However, when the assumptions for the 1-sample t-test are met, the 1-sample t-test is more powerful.
 
@@ -8738,7 +8738,7 @@ The sign test is also more conservative.
 
 \subsection{Test Statistic}\label{test-statistic-2}
 
-The Wilcoxon sign-rank test is another way to test the median of a continuous distribution and uses the same hypotheses as the sign test. It has one additional assumption that the distribution be symmetric.
+The Wilcoxon sign-rank test is another way to test the median of a continuous distribution and uses the same hypotheses as the sign test. It has one additional assumption that the distribution be \textbf{symmetric}.
 
 The Wilcoxon sign-rank test works in a similar way to the sign test. Instead of each value being compared directly to the null value:
 
@@ -8747,7 +8747,7 @@ The Wilcoxon sign-rank test works in a similar way to the sign test. Instead of 
 \item
   First, the null value is subtracted from each sampled value, which will yield a positive difference if the sampled value is above the assumed median and a negative difference if the sampled value is below the assumed median. Any observation with a difference of 0 is discarded.
 \item
-  Next, the absolute values of the differences are ranked and any tied values receive a rank that is the average of the would-be ranks of all the tied values.
+  Next, the absolute values of the differences are ranked (from smallest to largest) and any tied values receive a rank that is the average of the would-be ranks of all the tied values.
 \item
   Finally, the ranks of the positive differences are summed to find the value of the test statistic, denoted by \(w\).
 \end{enumerate}
@@ -8762,7 +8762,7 @@ Consider all possible combinations of positive and negative differences in step 
 
 The p-value is the proportion of combination of test statistics that are at least as large as the calculated test statistic in step 3.
 
-The exact method is used when the sample size is small.
+The exact method is recommended when the sample size is small.
 
 \subsubsection{Approximate P-Value}\label{approximate-p-value}
 
@@ -8772,7 +8772,7 @@ The approximate method uses a normal approximation for the distribution of the t
 
 \subsubsection{Using R}\label{using-r}
 
-The function \texttt{wilcox.test()} will conduct the Wilcoxon Sign-Rank test. The required arguments are the sampled data, the null value of the median (via the argument \texttt{mu}), and the alternative hypothesis. Users can also specify whether to generate the exact p-value and whether to ignore the continuity correction.
+The function \texttt{wilcox.test()} will conduct the Wilcoxon Sign-Rank test. The required arguments are the sampled data, the null value of the median (via the argument \texttt{mu}), and the alternative hypothesis. Users can also specify whether to generate the exact p-value or use the approximate p-value and whether to ignore the continuity correction.
 
 \subsection{Worked Example}\label{worked-example-4}
 
@@ -8784,7 +8784,7 @@ We have data from 10 adults and their daily caloric intake. We want to assess if
 \begin{Highlighting}[]
 \NormalTok{caloric\_intake }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1950}\NormalTok{, }\DecValTok{2020}\NormalTok{, }\DecValTok{2100}\NormalTok{, }\DecValTok{1985}\NormalTok{, }\DecValTok{2040}\NormalTok{, }\DecValTok{1990}\NormalTok{, }\DecValTok{2070}\NormalTok{, }\DecValTok{2030}\NormalTok{, }\DecValTok{1955}\NormalTok{, }\DecValTok{2080}\NormalTok{)}
 
-\DocumentationTok{\#\# check is data looks symmetric.}
+\DocumentationTok{\#\# check if data looks symmetric.}
 \DocumentationTok{\#\# Symmetry needed for Wilcoxon Rank Sign Test}
 \DocumentationTok{\#\# Otherwise use Sign Test}
 \FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(caloric\_intake), }\AttributeTok{main =}\StringTok{"Caloric Intake"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"kcal"}\NormalTok{)}
@@ -8802,7 +8802,7 @@ We have data from 10 adults and their daily caloric intake. We want to assess if
 \DocumentationTok{\#\# OK. Somewhat symmetric}
 
 \DocumentationTok{\#\# sample size 10}
-\DocumentationTok{\#\# no tied tanks. Function will display a message if they exist}
+\DocumentationTok{\#\# no tied ranks. Function will display a message if they exist}
 \DocumentationTok{\#\# no value equal to null. Function will display a message if they exist}
 \FunctionTok{wilcox.test}\NormalTok{(caloric\_intake, }\AttributeTok{mu =} \DecValTok{2000}\NormalTok{, }\AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{)}
 \end{Highlighting}
@@ -8819,7 +8819,7 @@ We have data from 10 adults and their daily caloric intake. We want to assess if
 
 We note from the density plot that the data is symmetric, so we can use the Wilcoxon Sign-Rank test. The p-value is 0.2754 which is greater than 0.05, so we fail to reject the null hypothesis. The sample does not provide evidence that the median daily caloric intake of adults is different from 2000 kcal.
 
-We could have used the sign test here. However, note that the p-value is larger than from the Wilcoxon Sign-Rank test. It turns our that if the conditions for the Wilcoxon Sign-Rank test are met (data are symmetric), the Wilcoxon Sign-Rank test is more powerful than the sign test. This is because it incorporates more information when calculating the test statistic as it also includes the magnitude and not just sign.
+We could have used the sign test here. However, note that the p-value is larger than from the Wilcoxon Sign-Rank test. It turns our that if the conditions for the Wilcoxon Sign-Rank test are met (data are symmetric), the Wilcoxon Sign-Rank test is more powerful than the sign test. (More powerful tests generally have smaller p-values as long as conditions for the tests are met.) This is because it incorporates more information when calculating the test statistic as it also includes the magnitude and not just sign.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8864,7 +8864,7 @@ We could have used the sign test here. However, note that the p-value is larger 
 ## [1] 0.7539063
 \end{verbatim}
 
-\subsection{Tests for one Quantitative Variable}\label{tests-for-one-quantitative-variable}
+\subsection{Tests for One Quantitative Variable}\label{tests-for-one-quantitative-variable}
 
 The classical 1-sample t test, sign test, and Wilcoxon rank-sign test are used to test the center of a quantitative variable.
 
@@ -8878,7 +8878,7 @@ The classical 1-sample t test, sign test, and Wilcoxon rank-sign test are used t
   If data is not symmetric, use the sign test (least assumptions).
 \end{itemize}
 
-Could we use the sign test under all scenarios? We could, but if the conditions for the other tests exist, the sign test has the least power.
+Could we use the sign test under all scenarios? We could, but if the conditions for the other tests are met, the sign test has the least power.
 
 \section{Paired Tests}\label{paired-tests}
 
@@ -8901,18 +8901,7 @@ The results from the sign test is shown below. The p-value is 0.146 which is gre
 \DocumentationTok{\#\# paired differences}
 \NormalTok{paired\_diff }\OtherTok{\textless{}{-}}\NormalTok{ left }\SpecialCharTok{{-}}\NormalTok{ right}
 
-\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(paired\_diff), }\AttributeTok{main =}\StringTok{"Differences in Left and Right Ear"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Paired Differences"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown-demo_files/figure-latex/eg4-1.pdf}
-\caption{\label{fig:eg4}Density Plot of Paired Differences}
-\end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
+\DocumentationTok{\#\# test stat from sign test}
 \NormalTok{v5 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(paired\_diff }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)}
 \NormalTok{v5}
 \end{Highlighting}
@@ -8956,6 +8945,18 @@ The results from the sign test is shown below. The p-value is 0.146 which is gre
 
 We note from the density plot in Fig \ref{fig:eg4} that the distribution of the paired differences is somewhat symmetric, so we could also use the Wilcoxon sign-rank test.
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(paired\_diff), }\AttributeTok{main =}\StringTok{"Differences in Left and Right Ear"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Paired Differences"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/eg4-1.pdf}
+\caption{\label{fig:eg4}Density Plot of Paired Differences}
+\end{figure}
+
 The results from the Wilcoxon sign-rank test is shown below. The p-value is 0.09 which is greater than 0.05 so we fail to reject the null hypothesis. The data do not provide evidence that words are reported more accurately from one ear over the other.
 
 Note that if we tried to use the exact p-value we would have received an error message, as one of the paired differences is 0, which is equal to the value in the null hypothesis. We applied the continuity correction which is the default.
@@ -8992,7 +8993,27 @@ Note that if we tried to use the exact p-value we would have received an error m
 ## alternative hypothesis: true location is not equal to 0
 \end{verbatim}
 
-Also notice that the p-value from the sign test is higher. This is expected as the sign test has less power and is more conservative.
+We could have also carried out the parametric paired t-test. Notice the p-value is a bit smaller than the Wilcoxon Sign-Rank test. When conditions for the paired t-test are met, it is more powerful.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(paired\_diff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  One Sample t-test
+## 
+## data:  paired_diff
+## t = -1.9009, df = 11, p-value = 0.08382
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -5.9340604  0.4340604
+## sample estimates:
+## mean of x 
+##     -2.75
+\end{verbatim}
 
 \section{Wilcoxon Rank-Sum Test}\label{wilcoxon-rank-sum-test}
 
@@ -9018,6 +9039,8 @@ The main idea of how the test statistic is calculated is as follows:
   Separate the data back into their original groups.
 \item
   Sum up the ranks from each group. If the null hypothesis is true (and the sample sizes are equal), then the sums of the ranks in both groups should be roughly equal.
+\item
+  A test statistic is calculated based on the sum of the ranks from each group. The literature is not unanimous abou the formula for this test statistic (usually Mann-Whitney test statistic) so we will not go into the details here.
 \end{enumerate}
 
 An adjustment is made to account for unequal sample sizes.
@@ -9026,7 +9049,7 @@ As with the Wilcoxon sign-rank test, the p-value is determined using either the 
 
 \subsection{Worked Example}\label{worked-example-6}
 
-A grocery store's manager decides to compare the register personnel to determine if there is a difference in the speed with which they checkout customers. Is there evidence that there is a difference in checkout times of the two selected employees?
+A grocery store's manager decides to compare the register personnel to determine if there is a difference in the speed with which they checkout customers. Is there evidence that there is a difference in the median checkout times of the two selected employees?
 
 \(H_0: M_1 = M_2,  H_a: M_1 \neq M_2\).
 
@@ -9064,7 +9087,7 @@ A grocery store's manager decides to compare the register personnel to determine
 ## alternative hypothesis: true location shift is not equal to 0
 \end{verbatim}
 
-From Figure \ref{fig:eg5}, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.
+From Figure \ref{fig:eg5}, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the median checkout speeds of the employees are different.
 
 \section{Comparison with the Bootstrap}\label{comparison-with-the-bootstrap}
 

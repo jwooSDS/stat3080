@@ -103,7 +103,7 @@
 <span class="header-section-number">17.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-7"><i class="fas fa-link"></i></a>
 </h2>
 <p>In general, non-parametric hypothesis tests do not require knowledge of the sampling distribution of the relevant test statistic. These are unlike the hypothesis tests in Section <a href="hyp.html#hyp">14</a> which require knowledge of the sampling distribution of the relevant test statistic.</p>
-<p>Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from continuous distributions and test the median of the distribution or the difference of two medians.</p>
+<p>Instead, each sampled data point is given a sign and/or a rank and these are used to make determinations. All of these particular hypothesis tests assume that the data are sampled from <strong>continuous</strong> distributions and test the <strong>median</strong> of the distribution or the <strong>difference of two medians</strong> from two independent populations.</p>
 <p>The specific non-parametric tests we will be learning about are:</p>
 <ul>
 <li>Sign test (analogous to 1-sample t test).</li>
@@ -115,7 +115,7 @@
 <h2>
 <span class="header-section-number">17.2</span> Sign Test<a class="anchor" aria-label="anchor" href="#sign-test"><i class="fas fa-link"></i></a>
 </h2>
-<p>The sign test enables users to draw conclusions regarding the <strong>median</strong> of a <strong>continuous</strong> distribution. Like parametric tests, the null hypothesis will be assumed true throughout the test.</p>
+<p>The sign test enables users to draw conclusions regarding the median of a continuous distribution. Like parametric tests, the null hypothesis will be assumed true throughout the test.</p>
 <div id="hypotheses" class="section level3" number="17.2.1">
 <h3>
 <span class="header-section-number">17.2.1</span> Hypotheses<a class="anchor" aria-label="anchor" href="#hypotheses"><i class="fas fa-link"></i></a>
@@ -267,7 +267,7 @@
 <h3>
 <span class="header-section-number">17.2.8</span> Final Comments<a class="anchor" aria-label="anchor" href="#final-comments"><i class="fas fa-link"></i></a>
 </h3>
-<p>Notice the only assumption for the sign test is that the data should be continuous. The classical 1-sample t-test has more assumptions (data are i.i.d. normal or sample size is large enough).</p>
+<p>Notice the only assumption for the sign test is that the data should be continuous. The classical 1-sample t-test has more assumptions (data are i.i.d. normal or sample size is large enough with data not being extremely skewed).</p>
 <p>So the sign test can be used in a wider variety of settings. However, when the assumptions for the 1-sample t-test are met, the 1-sample t-test is more powerful.</p>
 <p>The sign test is also more conservative.</p>
 </div>
@@ -280,11 +280,11 @@
 <h3>
 <span class="header-section-number">17.3.1</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic-2"><i class="fas fa-link"></i></a>
 </h3>
-<p>The Wilcoxon sign-rank test is another way to test the median of a continuous distribution and uses the same hypotheses as the sign test. It has one additional assumption that the distribution be symmetric.</p>
+<p>The Wilcoxon sign-rank test is another way to test the median of a continuous distribution and uses the same hypotheses as the sign test. It has one additional assumption that the distribution be <strong>symmetric</strong>.</p>
 <p>The Wilcoxon sign-rank test works in a similar way to the sign test. Instead of each value being compared directly to the null value:</p>
 <ol style="list-style-type: decimal">
 <li><p>First, the null value is subtracted from each sampled value, which will yield a positive difference if the sampled value is above the assumed median and a negative difference if the sampled value is below the assumed median. Any observation with a difference of 0 is discarded.</p></li>
-<li><p>Next, the absolute values of the differences are ranked and any tied values receive a rank that is the average of the would-be ranks of all the tied values.</p></li>
+<li><p>Next, the absolute values of the differences are ranked (from smallest to largest) and any tied values receive a rank that is the average of the would-be ranks of all the tied values.</p></li>
 <li><p>Finally, the ranks of the positive differences are summed to find the value of the test statistic, denoted by <span class="math inline">\(w\)</span>.</p></li>
 </ol>
 </div>
@@ -299,7 +299,7 @@
 </h4>
 <p>Consider all possible combinations of positive and negative differences in step 2, and calculate the value of the test statistic for each combination.</p>
 <p>The p-value is the proportion of combination of test statistics that are at least as large as the calculated test statistic in step 3.</p>
-<p>The exact method is used when the sample size is small.</p>
+<p>The exact method is recommended when the sample size is small.</p>
 </div>
 <div id="approximate-p-value" class="section level4" number="17.3.2.2">
 <h4>
@@ -312,7 +312,7 @@
 <h4>
 <span class="header-section-number">17.3.2.3</span> Using R<a class="anchor" aria-label="anchor" href="#using-r"><i class="fas fa-link"></i></a>
 </h4>
-<p>The function <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code> will conduct the Wilcoxon Sign-Rank test. The required arguments are the sampled data, the null value of the median (via the argument <code>mu</code>), and the alternative hypothesis. Users can also specify whether to generate the exact p-value and whether to ignore the continuity correction.</p>
+<p>The function <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code> will conduct the Wilcoxon Sign-Rank test. The required arguments are the sampled data, the null value of the median (via the argument <code>mu</code>), and the alternative hypothesis. Users can also specify whether to generate the exact p-value or use the approximate p-value and whether to ignore the continuity correction.</p>
 </div>
 </div>
 <div id="worked-example-4" class="section level3" number="17.3.3">
@@ -324,7 +324,7 @@
 <div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">caloric_intake</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1950</span>, <span class="fl">2020</span>, <span class="fl">2100</span>, <span class="fl">1985</span>, <span class="fl">2040</span>, <span class="fl">1990</span>, <span class="fl">2070</span>, <span class="fl">2030</span>, <span class="fl">1955</span>, <span class="fl">2080</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## check is data looks symmetric.</span></span>
+<span><span class="co">## check if data looks symmetric.</span></span>
 <span><span class="co">## Symmetry needed for Wilcoxon Rank Sign Test</span></span>
 <span><span class="co">## Otherwise use Sign Test</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">caloric_intake</span><span class="op">)</span>, main <span class="op">=</span><span class="st">"Caloric Intake"</span>, xlab <span class="op">=</span> <span class="st">"kcal"</span><span class="op">)</span></span></code></pre></div>
@@ -338,7 +338,7 @@ Figure 17.1: Density Plot of Caloric Intake
 <code class="sourceCode R"><span><span class="co">## OK. Somewhat symmetric</span></span>
 <span></span>
 <span><span class="co">## sample size 10</span></span>
-<span><span class="co">## no tied tanks. Function will display a message if they exist</span></span>
+<span><span class="co">## no tied ranks. Function will display a message if they exist</span></span>
 <span><span class="co">## no value equal to null. Function will display a message if they exist</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">caloric_intake</span>, mu <span class="op">=</span> <span class="fl">2000</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -348,7 +348,7 @@ Figure 17.1: Density Plot of Caloric Intake
 ## V = 39, p-value = 0.2754
 ## alternative hypothesis: true location is not equal to 2000</code></pre>
 <p>We note from the density plot that the data is symmetric, so we can use the Wilcoxon Sign-Rank test. The p-value is 0.2754 which is greater than 0.05, so we fail to reject the null hypothesis. The sample does not provide evidence that the median daily caloric intake of adults is different from 2000 kcal.</p>
-<p>We could have used the sign test here. However, note that the p-value is larger than from the Wilcoxon Sign-Rank test. It turns our that if the conditions for the Wilcoxon Sign-Rank test are met (data are symmetric), the Wilcoxon Sign-Rank test is more powerful than the sign test. This is because it incorporates more information when calculating the test statistic as it also includes the magnitude and not just sign.</p>
+<p>We could have used the sign test here. However, note that the p-value is larger than from the Wilcoxon Sign-Rank test. It turns our that if the conditions for the Wilcoxon Sign-Rank test are met (data are symmetric), the Wilcoxon Sign-Rank test is more powerful than the sign test. (More powerful tests generally have smaller p-values as long as conditions for the tests are met.) This is because it incorporates more information when calculating the test statistic as it also includes the magnitude and not just sign.</p>
 <div class="sourceCode" id="cb573"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">caloric_intake</span> <span class="op">&gt;</span> <span class="fl">2000</span><span class="op">)</span></span>
 <span><span class="va">v4</span></span></code></pre></div>
@@ -374,7 +374,7 @@ Figure 17.1: Density Plot of Caloric Intake
 </div>
 <div id="tests-for-one-quantitative-variable" class="section level3" number="17.3.4">
 <h3>
-<span class="header-section-number">17.3.4</span> Tests for one Quantitative Variable<a class="anchor" aria-label="anchor" href="#tests-for-one-quantitative-variable"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.3.4</span> Tests for One Quantitative Variable<a class="anchor" aria-label="anchor" href="#tests-for-one-quantitative-variable"><i class="fas fa-link"></i></a>
 </h3>
 <p>The classical 1-sample t test, sign test, and Wilcoxon rank-sign test are used to test the center of a quantitative variable.</p>
 <ul>
@@ -382,7 +382,7 @@ Figure 17.1: Density Plot of Caloric Intake
 <li>If data is not normal but symmetric, use the Wilcoxon rank-sign test (less assumptions).</li>
 <li>If data is not symmetric, use the sign test (least assumptions).</li>
 </ul>
-<p>Could we use the sign test under all scenarios? We could, but if the conditions for the other tests exist, the sign test has the least power.</p>
+<p>Could we use the sign test under all scenarios? We could, but if the conditions for the other tests are met, the sign test has the least power.</p>
 </div>
 </div>
 <div id="paired-tests" class="section level2" number="17.4">
@@ -405,18 +405,11 @@ Figure 17.1: Density Plot of Caloric Intake
 <span><span class="co">## paired differences</span></span>
 <span><span class="va">paired_diff</span> <span class="op">&lt;-</span> <span class="va">left</span> <span class="op">-</span> <span class="va">right</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">paired_diff</span><span class="op">)</span>, main <span class="op">=</span><span class="st">"Differences in Left and Right Ear"</span>, xlab <span class="op">=</span> <span class="st">"Paired Differences"</span><span class="op">)</span></span></code></pre></div>
-<div class="figure">
-<span style="display:block;" id="fig:eg4"></span>
-<img src="bookdown-demo_files/figure-html/eg4-1.png" alt="Density Plot of Paired Differences" width="672"><p class="caption">
-Figure 17.2: Density Plot of Paired Differences
-</p>
-</div>
-<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">paired_diff</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co">## test stat from sign test</span></span>
+<span><span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">paired_diff</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">v5</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Determine p-value</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">v5</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">paired_diff</span><span class="op">)</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -430,11 +423,19 @@ Figure 17.2: Density Plot of Paired Differences
 ## sample estimates:
 ## probability of success 
 ##                   0.25</code></pre>
-<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Compare with</span></span>
 <span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="va">v5</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">paired_diff</span><span class="op">)</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.1459961</code></pre>
 <p>We note from the density plot in Fig <a href="nonparamquant.html#fig:eg4">17.2</a> that the distribution of the paired differences is somewhat symmetric, so we could also use the Wilcoxon sign-rank test.</p>
+<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">paired_diff</span><span class="op">)</span>, main <span class="op">=</span><span class="st">"Differences in Left and Right Ear"</span>, xlab <span class="op">=</span> <span class="st">"Paired Differences"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:eg4"></span>
+<img src="bookdown-demo_files/figure-html/eg4-1.png" alt="Density Plot of Paired Differences" width="672"><p class="caption">
+Figure 17.2: Density Plot of Paired Differences
+</p>
+</div>
 <p>The results from the Wilcoxon sign-rank test is shown below. The p-value is 0.09 which is greater than 0.05 so we fail to reject the null hypothesis. The data do not provide evidence that words are reported more accurately from one ear over the other.</p>
 <p>Note that if we tried to use the exact p-value we would have received an error message, as one of the paired differences is 0, which is equal to the value in the null hypothesis. We applied the continuity correction which is the default.</p>
 <div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
@@ -455,7 +456,20 @@ Figure 17.2: Density Plot of Paired Differences
 ## data:  paired_diff
 ## V = 13.5, p-value = 0.09036
 ## alternative hypothesis: true location is not equal to 0</code></pre>
-<p>Also notice that the p-value from the sign test is higher. This is expected as the sign test has less power and is more conservative.</p>
+<p>We could have also carried out the parametric paired t-test. Notice the p-value is a bit smaller than the Wilcoxon Sign-Rank test. When conditions for the paired t-test are met, it is more powerful.</p>
+<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">paired_diff</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  paired_diff
+## t = -1.9009, df = 11, p-value = 0.08382
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -5.9340604  0.4340604
+## sample estimates:
+## mean of x 
+##     -2.75</code></pre>
 </div>
 </div>
 <div id="wilcoxon-rank-sum-test" class="section level2" number="17.5">
@@ -476,6 +490,7 @@ Figure 17.2: Density Plot of Paired Differences
 <li><p>Combine data from both samples, and rank all the data from smallest to largest. If two or more values are identical, assign them the average of the ranks they occupy</p></li>
 <li><p>Separate the data back into their original groups.</p></li>
 <li><p>Sum up the ranks from each group. If the null hypothesis is true (and the sample sizes are equal), then the sums of the ranks in both groups should be roughly equal.</p></li>
+<li><p>A test statistic is calculated based on the sum of the ranks from each group. The literature is not unanimous abou the formula for this test statistic (usually Mann-Whitney test statistic) so we will not go into the details here.</p></li>
 </ol>
 <p>An adjustment is made to account for unequal sample sizes.</p>
 <p>As with the Wilcoxon sign-rank test, the p-value is determined using either the exact method or the approximate method.</p>
@@ -483,9 +498,9 @@ Figure 17.2: Density Plot of Paired Differences
 <h3>
 <span class="header-section-number">17.5.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-6"><i class="fas fa-link"></i></a>
 </h3>
-<p>A grocery store’s manager decides to compare the register personnel to determine if there is a difference in the speed with which they checkout customers. Is there evidence that there is a difference in checkout times of the two selected employees?</p>
+<p>A grocery store’s manager decides to compare the register personnel to determine if there is a difference in the speed with which they checkout customers. Is there evidence that there is a difference in the median checkout times of the two selected employees?</p>
 <p><span class="math inline">\(H_0: M_1 = M_2,  H_a: M_1 \neq M_2\)</span>.</p>
-<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Register data</span></span>
 <span><span class="va">rpA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5.8</span>, <span class="fl">1</span>, <span class="fl">1.1</span>, <span class="fl">2.1</span>, <span class="fl">2.5</span>, <span class="fl">1.1</span>, <span class="fl">1</span>, <span class="fl">1.2</span>, <span class="fl">3.2</span>, <span class="fl">2.7</span><span class="op">)</span></span>
 <span><span class="va">rpB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">2.7</span>, <span class="fl">6.6</span>, <span class="fl">4.6</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">5.7</span>, <span class="fl">3.2</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span><span class="op">)</span></span>
@@ -499,7 +514,7 @@ Figure 17.2: Density Plot of Paired Differences
 Figure 17.3: Checkout Speeds of Employees
 </p>
 </div>
-<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Conduct the test</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">rpA</span>, <span class="va">rpB</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -508,7 +523,7 @@ Figure 17.3: Checkout Speeds of Employees
 ## data:  rpA and rpB
 ## W = 34, p-value = 0.2394
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
-<p>From Figure <a href="nonparamquant.html#fig:eg5">17.3</a>, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the checkout speeds of the employees are different.</p>
+<p>From Figure <a href="nonparamquant.html#fig:eg5">17.3</a>, the distributions are similar, so we can use the Wilcoxon rank-sum test. The p-value is 0.239, so we cannot reject the null hypothesis. The data do not provide evidence that the median checkout speeds of the employees are different.</p>
 </div>
 </div>
 <div id="comparison-with-the-bootstrap" class="section level2" number="17.6">
@@ -545,7 +560,7 @@ Figure 17.3: Checkout Speeds of Employees
 <li><a class="nav-link" href="#test-statistic-2"><span class="header-section-number">17.3.1</span> Test Statistic</a></li>
 <li><a class="nav-link" href="#p-value-1"><span class="header-section-number">17.3.2</span> P-Value</a></li>
 <li><a class="nav-link" href="#worked-example-4"><span class="header-section-number">17.3.3</span> Worked Example</a></li>
-<li><a class="nav-link" href="#tests-for-one-quantitative-variable"><span class="header-section-number">17.3.4</span> Tests for one Quantitative Variable</a></li>
+<li><a class="nav-link" href="#tests-for-one-quantitative-variable"><span class="header-section-number">17.3.4</span> Tests for One Quantitative Variable</a></li>
 </ul>
 </li>
 <li>
@@ -571,7 +586,7 @@ Figure 17.3: Checkout Speeds of Employees
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-10.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

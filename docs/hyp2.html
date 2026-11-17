@@ -558,8 +558,9 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 <span class="header-section-number">18.6.1</span> Continuity Correction<a class="anchor" aria-label="anchor" href="#continuity-correction"><i class="fas fa-link"></i></a>
 </h3>
 <p>You may have noticed that in the functions <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code> and <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> that we set the argument <code>correct</code> to be <code>FALSE</code>. This means we do not want to apply the <strong>continuity correction</strong>, which results in test statistics that match the formulas given in this section.</p>
-<p>The reason why the continuity correction may be applied is due to the fact that we are using a continuous distribution (chi-squared or standard normal) to approximate the distribution of test statistics based on categorical and not continuous data. This mismatch can artificially inflate the test statistic and lower the p-value, making it more likely to have a false positive (Type I error) with small sample sizes.</p>
+<p>The reason why the continuity correction may be applied is due to the fact that we are using a continuous distribution (chi-squared or standard normal) to approximate the distribution of test statistics based on discrete (counts or proportions which are associated with categorical data) and not continuous data. This mismatch can artificially inflate the test statistic and lower the p-value, making it more likely to have a false positive (Type I error) with small sample sizes.</p>
 <p>The larger the sample size, the impact of the continuity correction becomes more negligible.</p>
+<p>For a deeper discussion into continuity correction, please read <span class="citation">Goldstein-Greenwood (<a href="references.html#ref-continue">2023</a>)</span>.</p>
 </div>
 <div id="small-sample-sizes" class="section level3" number="18.6.2">
 <h3>
@@ -635,7 +636,7 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-16.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

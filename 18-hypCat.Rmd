@@ -339,9 +339,11 @@ Another note: While the test statistic and p-value can be determined from the  o
 
 You may have noticed that in the functions `chisq.test()` and `prop.test()` that we set the argument `correct` to be `FALSE`. This means we do not want to apply the **continuity correction**, which results in test statistics that match the formulas given in this section. 
 
-The reason why the continuity correction may be applied is due to the fact that we are using a continuous distribution (chi-squared or standard normal) to approximate the distribution of test statistics based on categorical and not continuous data. This mismatch can artificially inflate the test statistic and lower the p-value, making it more likely to have a false positive (Type I error) with small sample sizes.
+The reason why the continuity correction may be applied is due to the fact that we are using a continuous distribution (chi-squared or standard normal) to approximate the distribution of test statistics based on discrete (counts or proportions which are associated with categorical data) and not continuous data. This mismatch can artificially inflate the test statistic and lower the p-value, making it more likely to have a false positive (Type I error) with small sample sizes.
 
 The larger the sample size, the impact of the continuity correction becomes more negligible. 
+
+For a deeper discussion into continuity correction, please read @continue. 
 
 ### Small Sample Sizes
 

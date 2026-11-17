@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-11-16}
+\date{2026-11-17}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  6.7635753  1.2152108 -6.5761493 -6.7487607 -0.2520038  6.2767369
-##  [7] -1.8810281 -2.8480839 -1.2823019 -2.3748023
+##  [1]  4.0087597  6.2047637  3.3965805  1.3217507  5.2416514 -0.3061044
+##  [7]  5.2038052 -2.6712872 -0.3988366  4.6816779
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -9921,9 +9921,11 @@ Another note: While the test statistic and p-value can be determined from the ou
 
 You may have noticed that in the functions \texttt{chisq.test()} and \texttt{prop.test()} that we set the argument \texttt{correct} to be \texttt{FALSE}. This means we do not want to apply the \textbf{continuity correction}, which results in test statistics that match the formulas given in this section.
 
-The reason why the continuity correction may be applied is due to the fact that we are using a continuous distribution (chi-squared or standard normal) to approximate the distribution of test statistics based on categorical and not continuous data. This mismatch can artificially inflate the test statistic and lower the p-value, making it more likely to have a false positive (Type I error) with small sample sizes.
+The reason why the continuity correction may be applied is due to the fact that we are using a continuous distribution (chi-squared or standard normal) to approximate the distribution of test statistics based on discrete (counts or proportions which are associated with categorical data) and not continuous data. This mismatch can artificially inflate the test statistic and lower the p-value, making it more likely to have a false positive (Type I error) with small sample sizes.
 
 The larger the sample size, the impact of the continuity correction becomes more negligible.
+
+For a deeper discussion into continuity correction, please read \citet{continue}.
 
 \hypertarget{small-sample-sizes}{%
 \subsection{Small Sample Sizes}\label{small-sample-sizes}}

@@ -130,8 +130,10 @@
 X^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i}
 \tag{18.1}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(O_i\)</span> denotes the <strong>observed count</strong> in level <span class="math inline">\(i\)</span> and <span class="math inline">\(E_i\)</span> denotes the <strong>expected counts</strong> in level <span class="math inline">\(i\)</span> if the null hypothesis is true. The expected count for each level is just the multiplication of the sample size with its corresponding claimed probability in the null hypothesis.
-As with any test statistic, this test statistic measures how far our observed data deviates from the null hypothesis, so larger values provide more evidence against the null hypothesis.</p>
+<p>where <span class="math inline">\(O_i\)</span> denotes the <strong>observed count</strong> in level <span class="math inline">\(i\)</span> and <span class="math inline">\(E_i\)</span> denotes the <strong>expected counts</strong> in level <span class="math inline">\(i\)</span> if the null hypothesis is true.</p>
+<p>The expected count is the expected (average) number of observations we should have in our sample of size <span class="math inline">\(n\)</span> for each level if the null hypothesis is true.</p>
+<p>For a GOF test, the expected count for each level is just the multiplication of the sample size with its corresponding claimed probability in the null hypothesis.</p>
+<p>As with any test statistic, this test statistic measures how far our observed data deviates from the null hypothesis, so larger values provide more evidence against the null hypothesis.</p>
 </div>
 <div id="p-value-and-critical-value" class="section level3" number="18.2.3">
 <h3>
@@ -256,6 +258,7 @@ X^2 &amp;= \frac{(111 - 100)^2}{100} + \frac{(65 - 50)^2}{50} + \frac{(11- 20)^2
 E_i = \frac{\text{row total for level }i \times \text{ column total for level }i}{n}
 \tag{18.2}
 \end{equation}\]</span></p>
+<p>The expected count is the expected (average) number of observations we should have in our sample of size <span class="math inline">\(n\)</span> for each column and row of the two-way table if there is no association between the variables (i.e. null hypothesis is true).</p>
 <p><strong>Thought Question:</strong> Can you derive formula <a href="hyp2.html#eq:18-expcounts">(18.2)</a> using basic probability rules?</p>
 </div>
 <div id="p-value-and-critical-value-1" class="section level3" number="18.3.3">
@@ -369,12 +372,21 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 ##   Female 63 54 46  41
 ##   Male   42 44 53  57</code></pre>
 <div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">Data</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">result2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">Data</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">result2</span></span></code></pre></div>
 <pre><code>## 
 ##  Pearson's Chi-squared test
 ## 
 ## data:  Data
 ## X-squared = 8.1709, df = 3, p-value = 0.04261</code></pre>
+<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## extract expected counts</span></span>
+<span><span class="va">result2</span><span class="op">$</span><span class="va">expected</span></span></code></pre></div>
+<pre><code>##         Education
+## Gender      HS    BA    MA   PhD
+##   Female 53.55 49.98 50.49 49.98
+##   Male   51.45 48.02 48.51 48.02</code></pre>
 </div>
 </div>
 <div id="test-for-one-proportion" class="section level2" number="18.4">
@@ -423,7 +435,7 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 <p>We have <span class="math inline">\(H_0: p = 0.1, H_a: p \neq 0.1\)</span>.</p>
 <p>We have 16 left-handers and 184 right-handers in the sample. These values are both greater than 10 so we can proceed.</p>
 <p>We can use the <code><a href="https://rdrr.io/r/stats/prop.test.html">prop.test()</a></code> function. We need to supply the number of yes responses, the sample size, the proportion in the null hypothesis, and the alternative hypothesis. To stay consistent with equation <a href="hyp2.html#eq:teststatProp">(18.3)</a>, we do not apply the continuity correction.</p>
-<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Conduct the test</span></span>
 <span><span class="va">z.prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">200</span>, p<span class="op">=</span><span class="fl">0.1</span>, alternative<span class="op">=</span><span class="st">"two.sided"</span>, correct <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">z.prop</span></span></code></pre></div>
@@ -438,23 +450,23 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 ## sample estimates:
 ##    p 
 ## 0.08</code></pre>
-<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Verify test statistic</span></span>
 <span><span class="va">phat</span> <span class="op">&lt;-</span> <span class="fl">16</span><span class="op">/</span><span class="fl">200</span></span>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">phat</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">*</span><span class="fl">0.9</span><span class="op">/</span><span class="fl">200</span><span class="op">)</span></span>
 <span><span class="va">z</span></span></code></pre></div>
 <pre><code>## [1] -0.942809</code></pre>
-<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Verify p-value</span></span>
 <span><span class="va">p.value</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">p.value</span></span></code></pre></div>
 <pre><code>## [1] 0.3457786</code></pre>
-<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Compare test statistic and p-value to output</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">z.prop</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## X-squared 
 ##  0.942809</code></pre>
-<div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">z.prop</span><span class="op">$</span><span class="va">p.value</span></span></code></pre></div>
 <pre><code>## [1] 0.3457786</code></pre>
 <p>The p-value is 0.3458 which is greater than 0.05. The data do not provide evidence that student population proportion of left-handers differs from the general population.</p>
@@ -506,7 +518,7 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 <p>The sample poverty rate in 2001 was found to be 11.7% using a sample of 50,000 individuals. The sample poverty rate in 2002 was found to be 12.1% using a sample of 60,000 individuals. Is there significant evidence that the U.S. poverty rate changed from 2001 to 2002?</p>
 <p>We have <span class="math inline">\(H_0: p_X - p_Y = 0, H_a: p_X - p_Y \neq 0\)</span>.</p>
 <p>The sample sizes are clearly enough: there are more than 10 people in the sample who are poor and not poor in both samples.</p>
-<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Conduct the test</span></span>
 <span><span class="va">phat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.117</span>, <span class="fl">0.121</span><span class="op">)</span> <span class="co">##sample props in each samples</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50000</span>, <span class="fl">60000</span><span class="op">)</span> <span class="co">##sample sizes in each samples</span></span>
@@ -525,23 +537,23 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 ## sample estimates:
 ## prop 1 prop 2 
 ##  0.117  0.121</code></pre>
-<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Verify test statistic</span></span>
 <span><span class="va">comb.phat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">phat</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">comb.phat</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">comb.phat</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fl">1</span><span class="op">/</span><span class="va">n</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">z</span></span></code></pre></div>
 <pre><code>## [1] 2.038807</code></pre>
-<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Verify p-value</span></span>
 <span><span class="va">p.value</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="va">p.value</span></span></code></pre></div>
 <pre><code>## [1] 0.04146928</code></pre>
-<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Compare test statistic and p-value to output</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">z2.prop</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## X-squared 
 ##  2.038807</code></pre>
-<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">z2.prop</span><span class="op">$</span><span class="va">p.value</span></span></code></pre></div>
 <pre><code>## [1] 0.04146928</code></pre>
 <p>The p-value is 0.04147 which is less than 0.05. The data do provides evidence that the U.S. poverty rate changed from 2001 to 2002?</p>

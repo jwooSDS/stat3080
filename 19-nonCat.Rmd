@@ -131,6 +131,28 @@ The probability of having 9 white balls from 10 drawn without replacement from a
 ```{r}
 dhyper(9, 15, 5, 10)
 ```
+
+#### Applications with Hypergeometric Distribution
+
+The hypergeometric distribution is used widely in any application involving sampling without replacement. Some common applications involving hypergeometric distribution:
+
+- Finding the probability that a sample of $k$ manufactured parts contains $x$ defective items out of a finite batch of $N = m+n$, where $m$ denotes the number of defective items and $n$ denotes the number of non defective items.
+
+- Estimating animal or plant population characteristics using capture-recapture methods without replacement.
+
+#### Hypergeometric vs Binomial Distribution
+
+You may have used the binomial distribution in applications regarding obtaining a random sample from a population. The binomial requires the following:
+
+1. Each trial is either a success or failure. 
+2. Number of trials is fixed.
+3. Each trial is independent.
+4. Probability of success stays the same for each trial.
+
+In obtaining a random sample from a population, we typically do it by sampling without replacement. If so, then the probability of success does not technically stay the same for each trial. For example, if we have 100 people in the population and 10 have a certain genetic trait. The probability that the second person has the trait depends on whether the first person has the trait ($\frac{9}{99}$) or not ($\frac{10}{99}$).
+
+So why is the binomial distribution used? (e.g. see Section \@ref(distsampprop)) It turns out the binomial and hypergeometric distributions are approximately the same when the size of the population is much larger relative to the sample size (most of the literature says sample size is not more than 5% of population size). And working with the binomial distribution is much simpler. 
+
 Now we are ready to talk more about Fisher's exact test.
 
 ### Hypotheses
@@ -142,7 +164,7 @@ The null and alternative hypotheses are the same as the chi-squared test for two
 
 ### Test Statistic and P-value
 
-There is not a calculated test statistic. Instead, the probability of observing values that indicate a more extreme association that what is shown in the given two-way table is calculated as the p-value. 
+There is no calculated test statistic. Instead, the probability of observing values that indicate a more extreme association that what is shown in the given two-way table is calculated as the p-value. 
 
 So we assume the null hypothesis is true (no association), then constrain the row and column totals in the two way table (keep them fixed).
 
@@ -222,4 +244,4 @@ fisher.test(exp2.res, simulate.p.value = TRUE)
 fisher.test(exp2.res, simulate.p.value = TRUE, B = 10000)
 ```
 
-
+If you find the computation of the p-value to take too long without using simulation, you may consider using simulation. The more replicates the better. 

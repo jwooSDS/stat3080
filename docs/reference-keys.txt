@@ -391,6 +391,8 @@ one-sample-z-test
 two-sample-z-test
 exact
 the-hypergeometric-distribution
+applications-with-hypergeometric-distribution
+hypergeometric-vs-binomial-distribution
 hypotheses-5
 test-statistic-and-p-value
 worked-example-11

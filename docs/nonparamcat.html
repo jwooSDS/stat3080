@@ -155,7 +155,7 @@
 <div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.chisq.test.html">pwr.chisq.test</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.2</span>, df <span class="op">=</span> <span class="fl">3</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span><span class="op">$</span><span class="va">N</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 273</code></pre>
-<p>We need at 273 observations to achive 0.8 power to detect a small association between gender and education level.</p>
+<p>We need at 273 observations to achieve 0.8 power to detect a small association between gender and education level.</p>
 </div>
 <div id="one-sample-z-test" class="section level3" number="19.2.3">
 <h3>
@@ -342,7 +342,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 <div class="sourceCode" id="cb655"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.01625387</code></pre>
-<p>In our table, we observed 9 white balls. So the scenarios that are considered equal to or more extreme than observing 9 white balls are when we observe 9, or 10, or 5, or 6, white balls. So we find these probabilities and add them up (since they are mutually exlusive). The p-value is</p>
+<p>In our table, we observed 9 white balls. So the scenarios that are considered equal to or more extreme than observing 9 white balls are when we observe 9, or 10, or 5, or 6, white balls. So we find these probabilities and add them up (since they are mutually exclusive). The p-value is</p>
 <div class="sourceCode" id="cb657"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span>    <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Hypergeometric.html">dhyper</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>

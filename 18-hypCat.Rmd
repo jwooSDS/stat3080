@@ -168,7 +168,7 @@ Table: (\#tab:eg2way) Two-Way Table for Worked Example
 
 The null hypothesis is that gender and educational level have no association. The alternative hypothesis is that gender and educational level have some association. 
 
-Next, we need to find the expected counts for each cell in the two-way table. As an example, to find the expected count for females with BA, we use equation \@ref(eq:18-expcounts) to get $\frac{204 \times 105}{400} = 53.55$. This means that if there is no association between gender and educational level, we should expect to see 53.55 females with BA in our sample of 400. 
+Next, we need to find the expected counts for each cell in the two-way table. As an example, to find the expected count for females with HS, we use equation \@ref(eq:18-expcounts) to get $\frac{204 \times 105}{400} = 53.55$. This means that if there is no association between gender and educational level, we should expect to see 53.55 females with HS in our sample of 400. 
 
 For brevity, I won't show the calculations for the other expected counts, but you can verify some of these on your own. The table of expected counts is shown in Table \@ref(tab:eg2wayexp) below.
 
@@ -299,7 +299,7 @@ $p_X$ and $P_Y$ denotes the assumed values of the two proportions under the null
 The test statistic is a $Z$ statistic:
 
 \begin{equation} 
-\hat{Z} =  \frac{\hat{p}_X - \hat{p}_Y}{\sqrt{\hat{p}(1 - \hat{p}(\frac{1}{n_X} + \frac{1}{n_Y}))}},
+\hat{Z} =  \frac{\hat{p}_X - \hat{p}_Y}{\sqrt{\hat{p}(1 - \hat{p})(\frac{1}{n_X} + \frac{1}{n_Y})}},
 (\#eq:teststat2Prop)
 \end{equation}
 
@@ -307,7 +307,7 @@ where $\hat{p}$ denotes the proportion when both samples are viewed as one sampl
 
 ### P-Value and Critical Value
 
-If the sample sizes are large enough, the test statistic $\hat{Z}$ is approximately standard normal, so p-values and critical values are based on the standard normal. The approximation works better as $n_X \hat{P}_X, n_X (1-\hat{P}_X), n_Y \hat{P}_Y, n_Y (1-\hat{P}_Y)$ get larger. We will use at least 10 to be considered large enough. 
+If the sample sizes are large enough, the test statistic $\hat{Z}$ is approximately standard normal, so p-values and critical values are based on the standard normal. The approximation works better as $n_X \hat{p}_X, n_X (1-\hat{p}_X), n_Y \hat{p}_Y, n_Y (1-\hat{p}_Y)$ get larger. We will use at least 10 to be considered large enough. 
 
 ### Worked Example
 

@@ -319,7 +319,7 @@ E_i = \frac{\text{row total for level }i \times \text{ column total for level }i
 </tbody>
 </table></div>
 <p>The null hypothesis is that gender and educational level have no association. The alternative hypothesis is that gender and educational level have some association.</p>
-<p>Next, we need to find the expected counts for each cell in the two-way table. As an example, to find the expected count for females with BA, we use equation <a href="hyp2.html#eq:18-expcounts">(18.2)</a> to get <span class="math inline">\(\frac{204 \times 105}{400} = 53.55\)</span>. This means that if there is no association between gender and educational level, we should expect to see 53.55 females with BA in our sample of 400.</p>
+<p>Next, we need to find the expected counts for each cell in the two-way table. As an example, to find the expected count for females with HS, we use equation <a href="hyp2.html#eq:18-expcounts">(18.2)</a> to get <span class="math inline">\(\frac{204 \times 105}{400} = 53.55\)</span>. This means that if there is no association between gender and educational level, we should expect to see 53.55 females with HS in our sample of 400.</p>
 <p>For brevity, I won’t show the calculations for the other expected counts, but you can verify some of these on your own. The table of expected counts is shown in Table <a href="hyp2.html#tab:eg2wayexp">18.4</a> below.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
@@ -500,7 +500,7 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 </h3>
 <p>The test statistic is a <span class="math inline">\(Z\)</span> statistic:</p>
 <p><span class="math display" id="eq:teststat2Prop">\[\begin{equation}
-\hat{Z} =  \frac{\hat{p}_X - \hat{p}_Y}{\sqrt{\hat{p}(1 - \hat{p}(\frac{1}{n_X} + \frac{1}{n_Y}))}},
+\hat{Z} =  \frac{\hat{p}_X - \hat{p}_Y}{\sqrt{\hat{p}(1 - \hat{p})(\frac{1}{n_X} + \frac{1}{n_Y})}},
 \tag{18.4}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(\hat{p}\)</span> denotes the proportion when both samples are viewed as one sample.</p>
@@ -509,7 +509,7 @@ X^2 &amp;= \frac{(63 - 53.55)^2}{53.55} + \frac{(54 - 49.98)^2}{49.98} + \cdots 
 <h3>
 <span class="header-section-number">18.5.3</span> P-Value and Critical Value<a class="anchor" aria-label="anchor" href="#p-value-and-critical-value-3"><i class="fas fa-link"></i></a>
 </h3>
-<p>If the sample sizes are large enough, the test statistic <span class="math inline">\(\hat{Z}\)</span> is approximately standard normal, so p-values and critical values are based on the standard normal. The approximation works better as <span class="math inline">\(n_X \hat{P}_X, n_X (1-\hat{P}_X), n_Y \hat{P}_Y, n_Y (1-\hat{P}_Y)\)</span> get larger. We will use at least 10 to be considered large enough.</p>
+<p>If the sample sizes are large enough, the test statistic <span class="math inline">\(\hat{Z}\)</span> is approximately standard normal, so p-values and critical values are based on the standard normal. The approximation works better as <span class="math inline">\(n_X \hat{p}_X, n_X (1-\hat{p}_X), n_Y \hat{p}_Y, n_Y (1-\hat{p}_Y)\)</span> get larger. We will use at least 10 to be considered large enough.</p>
 </div>
 <div id="worked-example-10" class="section level3" number="18.5.4">
 <h3>

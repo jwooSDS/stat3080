@@ -50,7 +50,7 @@ The power is about 0.934 to detect a small association between gender and educat
 ceiling(pwr.chisq.test(w = 0.2, df = 3, sig.level = 0.05, power = 0.8)$N)
 ```
 
-We need at 273 observations to achive 0.8 power to detect a small association between gender and education level.
+We need at 273 observations to achieve 0.8 power to detect a small association between gender and education level.
 
 ### One-Sample Z-Test
 
@@ -185,7 +185,7 @@ dhyper(9, 15, 5, 10)
 dhyper(10, 15, 5, 10)
 ```
 
-In our table, we observed 9 white balls. So the scenarios that are considered equal to or more extreme than observing 9 white balls are when we observe 9, or 10, or 5, or 6, white balls. So we find these probabilities and add them up (since they are mutually exlusive). The p-value is
+In our table, we observed 9 white balls. So the scenarios that are considered equal to or more extreme than observing 9 white balls are when we observe 9, or 10, or 5, or 6, white balls. So we find these probabilities and add them up (since they are mutually exclusive). The p-value is
 
 ```{r}
 sum(dhyper(5, 15, 5, 10) + dhyper(6, 15, 5, 10)

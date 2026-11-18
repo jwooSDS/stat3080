@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -1.045127  2.809160  1.787944 -5.107803 -2.003602 -1.355285  2.765772
-##  [8] -5.660927  3.371372  1.546036
+##  [1]  6.0307315 -2.2094501  0.4850952 -2.2738895 -1.2143918 -4.4786421
+##  [7]  1.5329923  0.5891491  5.2737384  3.9025898
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -9589,7 +9589,7 @@ Total & 105 & 98 & 99 & 98 & 400 \\
 
 The null hypothesis is that gender and educational level have no association. The alternative hypothesis is that gender and educational level have some association.
 
-Next, we need to find the expected counts for each cell in the two-way table. As an example, to find the expected count for females with BA, we use equation \eqref{eq:18-expcounts} to get \(\frac{204 \times 105}{400} = 53.55\). This means that if there is no association between gender and educational level, we should expect to see 53.55 females with BA in our sample of 400.
+Next, we need to find the expected counts for each cell in the two-way table. As an example, to find the expected count for females with HS, we use equation \eqref{eq:18-expcounts} to get \(\frac{204 \times 105}{400} = 53.55\). This means that if there is no association between gender and educational level, we should expect to see 53.55 females with HS in our sample of 400.
 
 For brevity, I won't show the calculations for the other expected counts, but you can verify some of these on your own. The table of expected counts is shown in Table \ref{tab:eg2wayexp} below.
 
@@ -9837,7 +9837,7 @@ Depending on the research question, the null and alternative hypotheses are:
 The test statistic is a \(Z\) statistic:
 
 \begin{equation} 
-\hat{Z} =  \frac{\hat{p}_X - \hat{p}_Y}{\sqrt{\hat{p}(1 - \hat{p}(\frac{1}{n_X} + \frac{1}{n_Y}))}},
+\hat{Z} =  \frac{\hat{p}_X - \hat{p}_Y}{\sqrt{\hat{p}(1 - \hat{p})(\frac{1}{n_X} + \frac{1}{n_Y})}},
 \label{eq:teststat2Prop}
 \end{equation}
 
@@ -9846,7 +9846,7 @@ where \(\hat{p}\) denotes the proportion when both samples are viewed as one sam
 \hypertarget{p-value-and-critical-value-3}{%
 \subsection{P-Value and Critical Value}\label{p-value-and-critical-value-3}}
 
-If the sample sizes are large enough, the test statistic \(\hat{Z}\) is approximately standard normal, so p-values and critical values are based on the standard normal. The approximation works better as \(n_X \hat{P}_X, n_X (1-\hat{P}_X), n_Y \hat{P}_Y, n_Y (1-\hat{P}_Y)\) get larger. We will use at least 10 to be considered large enough.
+If the sample sizes are large enough, the test statistic \(\hat{Z}\) is approximately standard normal, so p-values and critical values are based on the standard normal. The approximation works better as \(n_X \hat{p}_X, n_X (1-\hat{p}_X), n_Y \hat{p}_Y, n_Y (1-\hat{p}_Y)\) get larger. We will use at least 10 to be considered large enough.
 
 \hypertarget{worked-example-10}{%
 \subsection{Worked Example}\label{worked-example-10}}
@@ -10066,7 +10066,7 @@ The power is about 0.934 to detect a small association between gender and educat
 ## [1] 273
 \end{verbatim}
 
-We need at 273 observations to achive 0.8 power to detect a small association between gender and education level.
+We need at 273 observations to achieve 0.8 power to detect a small association between gender and education level.
 
 \hypertarget{one-sample-z-test}{%
 \subsection{One-Sample Z-Test}\label{one-sample-z-test}}
@@ -10333,7 +10333,7 @@ Given the row and column totals, the only possible values for \(X\) are 5, 6, 7,
 ## [1] 0.01625387
 \end{verbatim}
 
-In our table, we observed 9 white balls. So the scenarios that are considered equal to or more extreme than observing 9 white balls are when we observe 9, or 10, or 5, or 6, white balls. So we find these probabilities and add them up (since they are mutually exlusive). The p-value is
+In our table, we observed 9 white balls. So the scenarios that are considered equal to or more extreme than observing 9 white balls are when we observe 9, or 10, or 5, or 6, white balls. So we find these probabilities and add them up (since they are mutually exclusive). The p-value is
 
 \begin{Shaded}
 \begin{Highlighting}[]

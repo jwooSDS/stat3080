@@ -397,6 +397,7 @@ hypotheses-5
 test-statistic-and-p-value
 worked-example-11
 larger-tables
+fishers-exact-test-vs-chi-squared-test
 a-few-comments-1
 est
 introduction-10

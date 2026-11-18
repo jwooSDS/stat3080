@@ -456,9 +456,20 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 ## alternative hypothesis: two.sided</code></pre>
 <p>If you find the computation of the p-value to take too long without using simulation, you may consider using the Monte Carlo simulation. The more replicates the better. Notice the result with using more replicates is closer to the result using the exact p-value.</p>
 </div>
-<div id="a-few-comments-1" class="section level3" number="19.3.6">
+<div id="fishers-exact-test-vs-chi-squared-test" class="section level3" number="19.3.6">
 <h3>
-<span class="header-section-number">19.3.6</span> A Few Comments<a class="anchor" aria-label="anchor" href="#a-few-comments-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.6</span> Fisher’s Exact Test Vs Chi-Squared Test<a class="anchor" aria-label="anchor" href="#fishers-exact-test-vs-chi-squared-test"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Fisher’s exact test is conservative. Type I error rates are lower than the significance level. Exact p-values can only take specific values, so Fisher’s test often operates at an actual error rate lower than the significance level.</li>
+<li>The chi-squared test for two-way table is liberal for smaller sample sizes, when no continuity correction is applied. Type I error rates are higher than the significance level. When continuity correction is applied, it behaves more similarly to Fisher’s exact test.</li>
+<li>Fisher’s exact test is generally less powerful than chi-squared test (with no continuity correction) with smaller sample sizes.</li>
+</ul>
+<p>Assuming conditions are met for a chi-squared test, your decision on which test to use may come down to whether you’d rather control Type I error rate (reduce it, so favor Fisher’s exact test), or control Type II error rate (reduce it, so favor chi-squared test with no continuity correction). For larger sample sizes, this distinction is less pronounced.</p>
+</div>
+<div id="a-few-comments-1" class="section level3" number="19.3.7">
+<h3>
+<span class="header-section-number">19.3.7</span> A Few Comments<a class="anchor" aria-label="anchor" href="#a-few-comments-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>In Section <a href="nonparamquant.html#nonparamquant">17</a>, it was mentioned that non-parametric methods do not require knowledge of the sampling distribution of the test statistic, whereas parametric methods require such knowledge.</p>
 <p>For the sampling distribution of the test statistic to be applicable in parametric methods, certain assumptions or conditions need to be met. When these are met, there is a known formula associated with the PDF of the sampling distribution.</p>
@@ -492,7 +503,8 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 <li><a class="nav-link" href="#test-statistic-and-p-value"><span class="header-section-number">19.3.3</span> Test Statistic and P-value</a></li>
 <li><a class="nav-link" href="#worked-example-11"><span class="header-section-number">19.3.4</span> Worked Example</a></li>
 <li><a class="nav-link" href="#larger-tables"><span class="header-section-number">19.3.5</span> Larger Tables</a></li>
-<li><a class="nav-link" href="#a-few-comments-1"><span class="header-section-number">19.3.6</span> A Few Comments</a></li>
+<li><a class="nav-link" href="#fishers-exact-test-vs-chi-squared-test"><span class="header-section-number">19.3.6</span> Fisher’s Exact Test Vs Chi-Squared Test</a></li>
+<li><a class="nav-link" href="#a-few-comments-1"><span class="header-section-number">19.3.7</span> A Few Comments</a></li>
 </ul>
 </li>
 </ul>

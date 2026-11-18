@@ -243,6 +243,14 @@ fisher.test(exp2.res, simulate.p.value = TRUE, B = 10000)
 
 If you find the computation of the p-value to take too long without using simulation, you may consider using the Monte Carlo simulation. The more replicates the better. Notice the result with using more replicates is closer to the result using the exact p-value.
 
+### Fisher's Exact Test Vs Chi-Squared Test
+
+- Fisher's exact test is conservative. Type I error rates are lower than the significance level. Exact p-values can only take specific values, so Fisher’s test often operates at an actual error rate lower than the significance level.
+- The chi-squared test for two-way table is liberal for smaller sample sizes, when no continuity correction is applied. Type I error rates are higher than the significance level. When continuity correction is applied, it behaves more similarly to Fisher's exact test.
+- Fisher's exact test is generally less powerful than chi-squared test (with no continuity correction) with smaller sample sizes.
+
+Assuming conditions are met for a chi-squared test, your decision on which test to use may come down to whether you'd rather control Type I error rate (reduce it, so favor Fisher's exact test), or control Type II error rate (reduce it, so favor chi-squared test with no continuity correction). For larger sample sizes, this distinction is less pronounced. 
+
 ### A Few Comments
 
 In Section \@ref(nonparamquant), it was mentioned that non-parametric methods do not require knowledge of the sampling distribution of the test statistic, whereas parametric methods require such knowledge. 

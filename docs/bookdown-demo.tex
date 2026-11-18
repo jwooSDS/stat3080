@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  6.0307315 -2.2094501  0.4850952 -2.2738895 -1.2143918 -4.4786421
-##  [7]  1.5329923  0.5891491  5.2737384  3.9025898
+##  [1]  4.23083980 -0.15632130  1.95443454  4.68554496 -5.72463209  0.09600628
+##  [7]  3.81874174  7.53822510 -2.39016637 -0.23584593
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -10474,6 +10474,21 @@ Euro & 8 & 1 & 3 \\
 \end{verbatim}
 
 If you find the computation of the p-value to take too long without using simulation, you may consider using the Monte Carlo simulation. The more replicates the better. Notice the result with using more replicates is closer to the result using the exact p-value.
+
+\hypertarget{fishers-exact-test-vs-chi-squared-test}{%
+\subsection{Fisher's Exact Test Vs Chi-Squared Test}\label{fishers-exact-test-vs-chi-squared-test}}
+
+\begin{itemize}
+\tightlist
+\item
+  Fisher's exact test is conservative. Type I error rates are lower than the significance level. Exact p-values can only take specific values, so Fisher's test often operates at an actual error rate lower than the significance level.
+\item
+  The chi-squared test for two-way table is liberal for smaller sample sizes, when no continuity correction is applied. Type I error rates are higher than the significance level. When continuity correction is applied, it behaves more similarly to Fisher's exact test.
+\item
+  Fisher's exact test is generally less powerful than chi-squared test (with no continuity correction) with smaller sample sizes.
+\end{itemize}
+
+Assuming conditions are met for a chi-squared test, your decision on which test to use may come down to whether you'd rather control Type I error rate (reduce it, so favor Fisher's exact test), or control Type II error rate (reduce it, so favor chi-squared test with no continuity correction). For larger sample sizes, this distinction is less pronounced.
 
 \hypertarget{a-few-comments-1}{%
 \subsection{A Few Comments}\label{a-few-comments-1}}

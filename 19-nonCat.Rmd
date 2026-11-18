@@ -88,7 +88,7 @@ The minimum sample size in 2002 to achieve power of at least 0.8 is 323.
 
 ## Fisher's Exact Test {#exact}
 
-The Fisher's exact test tests whether there is association between independent categorical variables that can be summarized in a two-way table with fixed marginal totals. Before we go any further, we need to learn about the **hypergeometric** distribution, since Fisher's exact test is based on this distribution. 
+The Fisher's exact test tests whether there is association between categorical variables that can be summarized in a two-way table with fixed marginal totals. Before we go any further, we need to learn about the **hypergeometric** distribution, since Fisher's exact test is based on this distribution. 
 
 ### The Hypergeometric Distribution
 
@@ -142,7 +142,7 @@ The hypergeometric distribution is used widely in any application involving samp
 
 #### Hypergeometric vs Binomial Distribution
 
-You may have used the binomial distribution in applications regarding obtaining a random sample from a population. The binomial requires the following:
+You may have used the binomial distribution in applications regarding obtaining a random sample from a population. The binomial distribution requires the following:
 
 1. Each trial is either a success or failure. 
 2. Number of trials is fixed.
@@ -151,7 +151,7 @@ You may have used the binomial distribution in applications regarding obtaining 
 
 In obtaining a random sample from a population, we typically do it by sampling without replacement. If so, then the probability of success does not technically stay the same for each trial. For example, if we have 100 people in the population and 10 have a certain genetic trait. The probability that the second person has the trait depends on whether the first person has the trait ($\frac{9}{99}$) or not ($\frac{10}{99}$).
 
-So why is the binomial distribution used? (e.g. see Section \@ref(distsampprop)) It turns out the binomial and hypergeometric distributions are approximately the same when the size of the population is much larger relative to the sample size (most of the literature says sample size is not more than 5% of population size). And working with the binomial distribution is much simpler. 
+So why is the binomial distribution used (e.g. see Section \@ref(distsampprop))? It turns out the binomial and hypergeometric distributions are approximately the same when the size of the population is much larger relative to the sample size (most of the literature says sample size is not more than 5% of population size). Also, working with the binomial distribution is much simpler. 
 
 Now we are ready to talk more about Fisher's exact test.
 
@@ -185,7 +185,7 @@ dhyper(9, 15, 5, 10)
 dhyper(10, 15, 5, 10)
 ```
 
-so the p-value is
+In our table, we observed 9 white balls. So the scenarios that are considered equal to or more extreme than observing 9 white balls are when we observe 9, or 10, or 5, or 6, white balls. So we find these probabilities and add them up (since they are mutually exlusive). The p-value is
 
 ```{r}
 sum(dhyper(5, 15, 5, 10) + dhyper(6, 15, 5, 10)
@@ -209,15 +209,14 @@ The null hypothesis is that there is no association between the sound of the las
 To find the p-value in R, we need to create a matrix that represents the information in Table \@ref(tab:egexact), and then apply the `fisher.test()` function to the matrix. 
 
 ```{r}
-exp.res <- matrix(c(2,10,8,4), nrow = 2, ncol = 2, 
-                  byrow = TRUE)
+exp.res <- matrix(c(2,8,10,4), nrow = 2, ncol = 2)
 
 fisher.test(exp.res)
 ```
 
-The p-value is 0.036, so we reject the null hypothesis. The data provide evidence of some association between the sound of the last name and whether the resume resulted in an invitation or not.
+The p-value is 0.036, so we reject the null hypothesis. The data provide evidence of some association between the sound of the last name and whether the resume resulted in an invitation or not. Similar to the chi-squared test for two-way tables, Fisher's exact test does not tell us the direction of the association. We have to go back to Table \@ref(tab:egexact), and we notice that resumes with a non-European sounding name have a smaller chance of receiving an invitation.
 
-We could have listed all possible two-way tables with the same row and column totals as Table \@ref(tab:egexact) and find each of their corresponding probabilities based on the hypergeometric distribution, but there are 11 such tables.
+We could have listed all possible two-way tables with the same row and column totals as Table \@ref(tab:egexact) and find each of their corresponding probabilities based on the hypergeometric distribution, but there are 11 such tables for this example. 
 
 ### Larger Tables
 
@@ -235,13 +234,24 @@ Table: (\#tab:eglarge) Two-Way Table for Larger Table
 | Euro | 8   | 1 | 3 |
 
 ```{r}
-exp2.res <- matrix(c(2,3,7,8,1,3), 
-                   nrow = 2, ncol = 3, 
-                   byrow = TRUE)
+exp2.res <- matrix(c(2,8,3,1,7,3), nrow = 2, ncol = 3)
 
 fisher.test(exp2.res)
 fisher.test(exp2.res, simulate.p.value = TRUE)
 fisher.test(exp2.res, simulate.p.value = TRUE, B = 10000)
 ```
 
-If you find the computation of the p-value to take too long without using simulation, you may consider using simulation. The more replicates the better. 
+If you find the computation of the p-value to take too long without using simulation, you may consider using the Monte Carlo simulation. The more replicates the better. Notice the result with using more replicates is closer to the result using the exact p-value.
+
+### A Few Comments
+
+In Section \@ref(nonparamquant), it was mentioned that non-parametric methods do not require knowledge of the sampling distribution of the test statistic, whereas parametric methods require such knowledge. 
+
+For the sampling distribution of the test statistic to be applicable in parametric methods, certain assumptions or conditions need to be met. When these are met, there is a known formula associated with the PDF of the sampling distribution. 
+
+Fisher's exact test is generally considered a non-parametric method since it does not require any condition or assumption to be met. It is applicable in any scenario with sampling without replacement, which is done in all studies. 
+
+Also, instead of calculating a test statistic which is approximated by a known distribution, we directly calculate exact probabilities using the hypergeometric distribution. 
+
+A small technical debate exists where some will consider Fisher's exact test to be parametric, since it is associated with a known PMF, in equation \@ref(eq:19-hyp). This is a minority opinion and the vast majority of practitioners consider Fisher's exact test to be non-parametric due to the lack of any assumptions about the data. 
+

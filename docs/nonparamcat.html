@@ -282,7 +282,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 <h4>
 <span class="header-section-number">19.3.1.1</span> Applications with Hypergeometric Distribution<a class="anchor" aria-label="anchor" href="#applications-with-hypergeometric-distribution"><i class="fas fa-link"></i></a>
 </h4>
-<p>The hypergeometric distribution is used widely in any application involving sampling without replacement. Some common applications involving hypergeometric distribution:</p>
+<p>The hypergeometric distribution models the probability of getting a specific number of successes in a fixed-size sample drawn without replacement from a finite population. Some common applications involving hypergeometric distribution:</p>
 <ul>
 <li><p>Finding the probability that a sample of <span class="math inline">\(k\)</span> manufactured parts contains <span class="math inline">\(x\)</span> defective items out of a finite batch of <span class="math inline">\(N = m+n\)</span>, where <span class="math inline">\(m\)</span> denotes the number of defective items and <span class="math inline">\(n\)</span> denotes the number of non defective items.</p></li>
 <li><p>Estimating animal or plant population characteristics using capture-recapture methods without replacement.</p></li>
@@ -299,7 +299,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 <li>Each trial is independent.</li>
 <li>Probability of success stays the same for each trial.</li>
 </ol>
-<p>In obtaining a random sample from a population, we typically do it by sampling without replacement. If so, then the probability of success does not technically stay the same for each trial. For example, if we have 100 people in the population and 10 have a certain genetic trait. The probability that the second person has the trait depends on whether the first person has the trait (<span class="math inline">\(\frac{9}{99}\)</span>) or not (<span class="math inline">\(\frac{10}{99}\)</span>).</p>
+<p>In obtaining a random sample from a population, we typically do it by sampling without replacement. If so, then the probability of success does not technically stay the same for each trial. Because items are not put back, each draw changes the composition of the remaining population, making successive trials dependent. For example, if we have 100 people in the population and 10 have a certain genetic trait. The probability that the second person has the trait depends on whether the first person has the trait (<span class="math inline">\(\frac{9}{99}\)</span>) or not (<span class="math inline">\(\frac{10}{99}\)</span>).</p>
 <p>So why is the binomial distribution used (e.g. see Section <a href="clt.html#distsampprop">11.5</a>)? It turns out the binomial and hypergeometric distributions are approximately the same when the size of the population is much larger relative to the sample size (most of the literature says sample size is not more than 5% of population size). Also, working with the binomial distribution is much simpler.</p>
 <p>Now we are ready to talk more about Fisher’s exact test.</p>
 </div>
@@ -523,7 +523,7 @@ P(X=x) = \frac{\binom{m}{x} \binom{n}{k-x}}{\binom{m + n}{k}}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-18.</p>
+    <p>"<strong>STAT 3080: From Data to Knowledge</strong>" was written by Jeffrey Woo. It was last built on 2026-11-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

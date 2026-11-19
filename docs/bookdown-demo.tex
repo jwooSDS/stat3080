@@ -127,7 +127,7 @@
 
 \title{STAT 3080: From Data to Knowledge}
 \author{Jeffrey Woo}
-\date{2026-11-18}
+\date{2026-11-19}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -694,8 +694,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]  4.23083980 -0.15632130  1.95443454  4.68554496 -5.72463209  0.09600628
-##  [7]  3.81874174  7.53822510 -2.39016637 -0.23584593
+##  [1]  5.2053993  6.0676459 -2.4627734  1.5822739 -3.6405954 -0.7522863
+##  [7]  0.9146372  0.9348314 -0.9707410 -2.5676470
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -10212,7 +10212,7 @@ The probability of having 9 white balls from 10 drawn without replacement from a
 \hypertarget{applications-with-hypergeometric-distribution}{%
 \subsubsection{Applications with Hypergeometric Distribution}\label{applications-with-hypergeometric-distribution}}
 
-The hypergeometric distribution is used widely in any application involving sampling without replacement. Some common applications involving hypergeometric distribution:
+The hypergeometric distribution models the probability of getting a specific number of successes in a fixed-size sample drawn without replacement from a finite population. Some common applications involving hypergeometric distribution:
 
 \begin{itemize}
 \item
@@ -10239,7 +10239,7 @@ You may have used the binomial distribution in applications regarding obtaining 
   Probability of success stays the same for each trial.
 \end{enumerate}
 
-In obtaining a random sample from a population, we typically do it by sampling without replacement. If so, then the probability of success does not technically stay the same for each trial. For example, if we have 100 people in the population and 10 have a certain genetic trait. The probability that the second person has the trait depends on whether the first person has the trait (\(\frac{9}{99}\)) or not (\(\frac{10}{99}\)).
+In obtaining a random sample from a population, we typically do it by sampling without replacement. If so, then the probability of success does not technically stay the same for each trial. Because items are not put back, each draw changes the composition of the remaining population, making successive trials dependent. For example, if we have 100 people in the population and 10 have a certain genetic trait. The probability that the second person has the trait depends on whether the first person has the trait (\(\frac{9}{99}\)) or not (\(\frac{10}{99}\)).
 
 So why is the binomial distribution used (e.g.~see Section \ref{distsampprop})? It turns out the binomial and hypergeometric distributions are approximately the same when the size of the population is much larger relative to the sample size (most of the literature says sample size is not more than 5\% of population size). Also, working with the binomial distribution is much simpler.
 

@@ -134,7 +134,7 @@ dhyper(9, 15, 5, 10)
 
 #### Applications with Hypergeometric Distribution
 
-The hypergeometric distribution is used widely in any application involving sampling without replacement. Some common applications involving hypergeometric distribution:
+The hypergeometric distribution models the probability of getting a specific number of successes in a fixed-size sample drawn without replacement from a finite population. Some common applications involving hypergeometric distribution:
 
 - Finding the probability that a sample of $k$ manufactured parts contains $x$ defective items out of a finite batch of $N = m+n$, where $m$ denotes the number of defective items and $n$ denotes the number of non defective items.
 
@@ -149,7 +149,7 @@ You may have used the binomial distribution in applications regarding obtaining 
 3. Each trial is independent.
 4. Probability of success stays the same for each trial.
 
-In obtaining a random sample from a population, we typically do it by sampling without replacement. If so, then the probability of success does not technically stay the same for each trial. For example, if we have 100 people in the population and 10 have a certain genetic trait. The probability that the second person has the trait depends on whether the first person has the trait ($\frac{9}{99}$) or not ($\frac{10}{99}$).
+In obtaining a random sample from a population, we typically do it by sampling without replacement. If so, then the probability of success does not technically stay the same for each trial. Because items are not put back, each draw changes the composition of the remaining population, making successive trials dependent. For example, if we have 100 people in the population and 10 have a certain genetic trait. The probability that the second person has the trait depends on whether the first person has the trait ($\frac{9}{99}$) or not ($\frac{10}{99}$).
 
 So why is the binomial distribution used (e.g. see Section \@ref(distsampprop))? It turns out the binomial and hypergeometric distributions are approximately the same when the size of the population is much larger relative to the sample size (most of the literature says sample size is not more than 5% of population size). Also, working with the binomial distribution is much simpler. 
 

@@ -1,4 +1,4 @@
-# Estimation {#est}
+# Assessing Estimators {#est}
 
 ## Introduction
 
@@ -30,7 +30,7 @@ We will use a simple example to illustrate these ideas in the rest of this secti
 
 We can see that we are free to define estimators in various ways. The question now is how do we evaluate whether an estimator is "good" or not. There are a few metrics to evaluate estimators. 
 
-### Bias
+### Bias {#biasest}
 
 One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is **unbiased** if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator $\hat{\theta}$ is unbiased if $E(\hat{\theta}) = \theta$. From this definition of an unbiased estimator, we have the definition of the **bias** of an estimator:
 
@@ -88,7 +88,7 @@ The results from the MC simulation matches with the math. We had shown that $\ha
 
 So, based on bias, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it. 
 
-The bias deals with the centrality of the estimator, i.e. is the estimator equal to the true parameter, on average. As we have seen in previous modules, we are not only concerned with measures of centrality, but also with measures of uncertainty. For example, how likely is it to observe a random sample where its estimated value is far from the true parameter?
+The bias deals with the centrality of the estimator, i.e. is the estimator equal to the true parameter, on average. However, we are not only concerned with measures of centrality, but also with measures of uncertainty. For example, how likely is it to observe a random sample where its estimated value is far from the true parameter?
 
 ### Standard Error and Variance
 
@@ -123,20 +123,103 @@ It should be clear by now that estimators with smaller standard errors (or varia
 
 An associated concept with bias, variance, and standard errors of estimators is consistency. The definition of consistency in estimators is fairly technical, so we will give a broad overview of its concept.
 
-The behavior of an estimator $\hat{\theta}$ may change as the number of data points $n$ changes. 
+The behavior of an estimator $\hat{\theta}$ may change as the number of data points $n$ changes. An estimator is **consistent** if $\hat{\theta}$ gets closer to and approaches the true value of $\theta$ as $n$ gets larger and approaches infinity. This means as the sample size $n$ gets larger, the estimator tends to get closer to the true value of the parameter.
 
-An estimator is **consistent** if $\hat{\theta}$ gets closer to and approaches the true value of $\theta$ as $n$ gets larger and approaches infinity. This means as the sample size $n$ gets larger, the estimator tends to get closer to the true value of the parameter.
+To check if an estimator $\hat{\theta}$ is consistent, we have to check two criteria:
 
-To check if an estimator $\hat{\theta}$ is consistent, we have to check two things:
-
-1. Its bias shrinks to 0 as $n$ approaches infinity, and
+1. Its bias shrinks to 0 as $n$ approaches infinity. An estimator whose bias shrinks to 0 as $n$ approaches infinity is also called **asymptotically unbiased**, and
 2. Its variance shrinks to 0 as $n$ approaches infinity.
 
 We go back to the example from the previous subsection. Consider $X_1, \cdots, X_n$ i.i.d. Normal with unknown mean $\mu$ and variance $\sigma^2$ that is known. We defined two estimators of $\mu$ as $\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\theta}_2 = X_1 + 2$. Assess whether these estimators are consistent or not. 
 
 For $\hat{\theta}_1$, we had earlier shown that
 
-- $E(\hat{\theta}_1) = \mu$, so its bias is $E(\hat{\theta}_1) - \mu = 0$. Its bias is 0 regardless of sample size $n$.
+- $E(\hat{\theta}_1) = \mu$, so its bias is $E(\hat{\theta}_1) - \mu = 0$. Its bias is 0 regardless of sample size $n$. So the first criteria is checked.
 
+- $Var(\hat{\theta}_1) = \frac{\sigma^2}{n}$, so its variance shrinks to 0 as $n$ gets larger and approaches infinity. So the second criteria is checked.
 
+So $\hat{\theta}_1 = \frac{\sum_{i=1}^n X_i}{n}$ is a consistent estimator of $\mu$.
 
+For $\hat{\theta}_2$, we had earlier shown that
+
+- $E(\hat{\theta}_2) = \mu + 2$, so its bias is $E(\hat{\theta}_2) - \mu = 2$. Its bias is 2 regardless of sample size $n$, so it doesn't shrink to 0. So the first criteria fails; this estimator is not consistent. It is not necessary to check the second criteria, but we'll check it as an example.
+
+- $Var(\hat{\theta}_2) = \sigma^2$, so its variance shrinks is constant regardless of sample size, so it doesn't shrink to 0 as $n$ gets larger. So the second criteria fails too. 
+
+To create a Monte Carlo simulation to assess whether an estimator is consistent or not, we can tweak the Monte Carlo simulation from Section \@ref(biasest). We need to vary the value of the sample size $n$, and show that the estimator is asymptotically unbiased and its variance shrinks to 0 as $n$ gets larger.
+
+```{r consistent, fig.cap="Dist of Theta1 (left) and Theta2 (right) as n is Varied"}
+## write a function that allows us to replicate the earlier function called estimators
+## estimators generates the values of est1 and est 2 based on rnorm(n)
+
+repEstimators <- function(K, n){
+  result <- replicate(K, estimators(n))
+  return(list(est1 = result[1,], est2 = result[2,])) 
+}
+
+## vary n = 10, 100, 1000 and store results
+store <- sapply(c(10, 100, 1000), repEstimators, K = 10000)
+
+## est 1 with n = 10, 100, 1000
+est1.10 <- store[[1]]
+est1.100 <- store[[3]]
+est1.1000 <- store[[5]]
+
+## est 2 with n = 10, 100, 1000
+est2.10 <- store[[2]]
+est2.100 <- store[[4]]
+est2.1000 <- store[[6]]
+
+## create visualization
+
+par(mfrow=c(1,2))
+
+## find max value of density plots for est1 so plots all show up complete
+max_est1 <- max(density(est1.10)$y, density(est1.100)$y, density(est1.1000)$y) 
+
+plot(density(est1.10), ylim=c(0, max_est1), main="Density Plot of Est1 with n Varied")
+lines(density(est1.100), col="blue")
+lines(density(est1.1000), col="red")
+abline(v = 0)
+legend("topright", legend = c("n=10", "n=100", "n=1000"), col = c("black","blue", "red"), lty = 1, cex=0.7)
+
+## find max value of density plots for est2 so plots all show up complete
+max_est2 <- max(density(est2.10)$y, density(est2.100)$y, density(est2.1000)$y) 
+
+plot(density(est2.10), ylim=c(0, max_est2), main="Density Plot of Est1 with n Varied")
+lines(density(est2.100), col="blue")
+lines(density(est2.1000), col="red")
+abline(v = 0)
+legend("topright", legend = c("n=10", "n=100", "n=1000"), col = c("black","blue", "red"), lty = 1, cex=0.7)
+```
+
+Figure \@ref(fig:consistent) displays the distribution of the 10 thousand $\hat{\theta}_1$s and $\hat{\theta}$s when $n=10, 100, 1000$. Visually, an estimator is consistent if
+
+- the center of the density plot gets closer to the true value as $n$ gets larger, and
+- its density plot becomes narrower as $n$ gets larger. 
+
+Using the left plot in Figure \@ref(fig:consistent) for $\hat{\theta}_1$, we see that for all values of $n$, the center of the density plot is virtually equal to the true value (true value overlaid as a black vertical line). We also see that the spread of the density plot becomes smaller as $n$ gets larger. So $\hat{\theta}_1$ is consistent.
+
+Using the left plot in Figure \@ref(fig:consistent) for $\hat{\theta}_1$, we see that for all values of $n$, the center of the density plot is not equal to the true value (true value overlaid as a black vertical line). We also see that the spread of the density plot  does not become smaller as $n$ gets larger. So $\hat{\theta}_2$ is not consistent.
+
+### Mean-Squared Error (MSE)
+
+A popular measure that combines both bias and variance is the **mean-squared error (MSE)** of an estimator:
+
+\begin{equation} 
+MSE(\hat{\theta}) = E\left[(\hat{\theta} - \theta)^2 \right].
+(\#eq:MSE)
+\end{equation}
+
+The MSE of an estimator can be interpreted as the average squared difference between an estimator and the value of its parameter. It turns out that the MSE of an estimator is related to the bias of an estimator and the variance of an estimator:
+
+\begin{equation} 
+MSE(\hat{\theta}) = Var(\hat{\theta}) + Bias(\hat{\theta})^2.
+(\#eq:MSEdecomp)
+\end{equation}
+
+In other words, the MSE of an estimator is equal to the variance of an estimator plus the squared bias of an estimator. Equation \@ref(eq:MSEdecomp) is often called the bias-variance decomposition of the MSE. If an estimator is unbiased, equation Equation \@ref(eq:MSEdecomp) tells us that the MSE of an estimator is equal to its variance. 
+
+What the MSE of an estimator suggests is that we need to consider both the bias and variance of an estimator. People often think that an unbiased estimator is the "best". However, an unbiased estimator could have high variance. Such an estimator could have high MSE. In such a setting, it may be worth considering another estimator that may be biased, but have much smaller variance, resulting in a lower MSE. 
+
+An example of where this can happen is in linear regression. Classical methods with linear regression yield unbiased estimators, but under specific scenarios, these estimators could have high variances. Another model, called the ridge regression model, considers biased estimators which may have smaller variances, which can result in lower MSEs in these specific scenarios.

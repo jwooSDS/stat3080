@@ -95,6 +95,9 @@ tab:egexact
 tab:eglarge
 eq:7-bias
 fig:20-bias
+fig:consistent
+eq:MSE
+eq:MSEdecomp
 Rbasics
 overview-of-r
 rstudio-interface
@@ -403,6 +406,7 @@ est
 introduction-10
 estprops
 estimators-vs-estimates
-bias
+biasest
 standard-error-and-variance
 consistency
+mean-squared-error-mse

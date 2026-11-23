@@ -140,7 +140,7 @@ For $\hat{\theta}_2$, we had earlier shown that
 
 - $E(\hat{\theta}_2) = \mu + 2$, so its bias is $E(\hat{\theta}_2) - \mu = 2$. Its bias is 2 regardless of sample size $n$, so it doesn't shrink to 0. So the first criteria fails; this estimator is not consistent. It is not necessary to check the second criteria, but we'll check it as an example.
 
-- $Var(\hat{\theta}_2) = \sigma^2$, so its variance shrinks is constant regardless of sample size, so it doesn't shrink to 0 as $n$ gets larger. So the second criteria fails too. 
+- $Var(\hat{\theta}_2) = \sigma^2$, so its variance is constant regardless of sample size, so it doesn't shrink to 0 as $n$ gets larger. So the second criteria fails too. 
 
 To create a Monte Carlo simulation to assess whether an estimator is consistent or not, we can tweak the Monte Carlo simulation from Section \@ref(biasest). We need to vary the value of the sample size $n$, and show that the estimator is asymptotically unbiased and its variance shrinks to 0 as $n$ gets larger.
 
@@ -203,7 +203,7 @@ Figure \@ref(fig:consistent) displays the distribution of the 10 thousand $\hat{
 
 Using the left plot in Figure \@ref(fig:consistent) for $\hat{\theta}_1$, we see that for all values of $n$, the center of the density plot is virtually equal to the true value (true value overlaid as a black vertical line). We also see that the spread of the density plot becomes smaller as $n$ gets larger. So $\hat{\theta}_1$ is consistent.
 
-Using the left plot in Figure \@ref(fig:consistent) for $\hat{\theta}_1$, we see that for all values of $n$, the center of the density plot is not equal to the true value (true value overlaid as a black vertical line). We also see that the spread of the density plot  does not become smaller as $n$ gets larger. So $\hat{\theta}_2$ is not consistent.
+Using the right plot in Figure \@ref(fig:consistent) for $\hat{\theta}_2$, we see that for all values of $n$, the center of the density plot is not equal to the true value (true value overlaid as a black vertical line). We also see that the spread of the density plot  does not become smaller as $n$ gets larger. So $\hat{\theta}_2$ is not consistent.
 
 ## Mean-Squared Error (MSE)
 

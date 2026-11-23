@@ -148,43 +148,50 @@ To create a Monte Carlo simulation to assess whether an estimator is consistent 
 ## write a function that allows us to replicate the earlier function called estimators
 ## estimators generates the values of est1 and est 2 based on rnorm(n)
 
-repEstimators <- function(K, n){
-  result <- replicate(K, estimators(n))
-  return(list(est1 = result[1,], est2 = result[2,])) 
+rep_estimators <- function(K, n){
+  res <- replicate(K, estimators(n))
+  return(res)
 }
 
-## vary n = 10, 100, 1000 and store results
-store <- sapply(c(10, 100, 1000), repEstimators, K = 10000)
+## vary n = 10, 100, 1000
 
-## est 1 with n = 10, 100, 1000
-est1.10 <- store[[1]]
-est1.100 <- store[[3]]
-est1.1000 <- store[[5]]
+results <- sapply(c(10, 100, 1000), rep_estimators, K = 10000)
 
-## est 2 with n = 10, 100, 1000
-est2.10 <- store[[2]]
-est2.100 <- store[[4]]
-est2.1000 <- store[[6]]
+## odd numbered rows give results from est 1
+## even numbered rows give results from est 2
+odds <- seq(1, 20000 - 1, by = 2)
+evens <- seq(2, 20000, by = 2)
 
-## create visualization
+estimator1 <- results[odds, ]
+estimator2 <- results[evens, ]
+
+## long-run average of est 1 as n varied. Should be close to 0 for all if unbiased
+apply(estimator1, 2, mean)
+## sd of est 1 as n varied. Should get smaller if consistent
+apply(estimator1, 2, sd)
+
+## long-run average of est 2 as n varied. Not close to 0 for all, so biased
+apply(estimator2, 2, mean)
+## sd of est 2 as n varied. Does not get smaller as n increases, so not consistent
+apply(estimator2, 2, sd)
 
 par(mfrow=c(1,2))
 
-## find max value of density plots for est1 so plots all show up complete
-max_est1 <- max(density(est1.10)$y, density(est1.100)$y, density(est1.1000)$y) 
+##find max value of density plots for est 1 so plots all show up complete
+max_y1 <- max(density(estimator1[,1])$y, density(estimator1[,2])$y, density(estimator1[,3])$y)
 
-plot(density(est1.10), ylim=c(0, max_est1), main="Density Plot of Est1 with n Varied")
-lines(density(est1.100), col="blue")
-lines(density(est1.1000), col="red")
+plot(density(estimator1[,1]), ylim=c(0, max_y1), main="Density Plot of theta1 with n Varied")
+lines(density(estimator1[,2]), col="blue")
+lines(density(estimator1[,3]), col="red")
 abline(v = 0)
 legend("topright", legend = c("n=10", "n=100", "n=1000"), col = c("black","blue", "red"), lty = 1, cex=0.7)
 
-## find max value of density plots for est2 so plots all show up complete
-max_est2 <- max(density(est2.10)$y, density(est2.100)$y, density(est2.1000)$y) 
+##find max value of density plots for est 2 so plots all show up complete
+max_y2 <- max(density(estimator2[,1])$y, density(estimator2[,2])$y, density(estimator2[,3])$y)
 
-plot(density(est2.10), ylim=c(0, max_est2), main="Density Plot of Est1 with n Varied")
-lines(density(est2.100), col="blue")
-lines(density(est2.1000), col="red")
+plot(density(estimator2[,1]), ylim=c(0, max_y2), main="Density Plot of theta2 with n Varied")
+lines(density(estimator2[,2]), col="blue")
+lines(density(estimator2[,3]), col="red")
 abline(v = 0)
 legend("topright", legend = c("n=10", "n=100", "n=1000"), col = c("black","blue", "red"), lty = 1, cex=0.7)
 ```

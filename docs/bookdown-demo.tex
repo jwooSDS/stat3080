@@ -673,8 +673,8 @@ Suppose \(X \sim N(1,9)\), i.e.~a normal distribution with mean 1 and variance 9
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -3.6687088 -4.8864772 -4.8786816  0.7881594  2.7358261  1.8220606
-##  [7] -0.9760619  4.1670575 -0.1520775  2.2984558
+##  [1]  0.25054247  0.81139877  1.12986516  2.62365145 -0.03353072  3.72735640
+##  [7]  5.72227641  0.63642890  1.96773102 -4.64745474
 \end{verbatim}
 
 Note: you are likely to get a vector of 10 numbers that are different than the ones shown.
@@ -10254,7 +10254,7 @@ We can see that we are free to define estimators in various ways. The question n
 
 \section{Bias}\label{biasest}
 
-One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is \textbf{unbiased} if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator \(\hat{\theta}\) is unbiased if \(E(\hat{\theta}) = \theta\). From this definition of an unbiased estimator, we have the definition of the \textbf{bias} of an estimator:
+One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is \textbf{unbiased} if the long run average of an estimator is equal to the true value of the parameter. A biased estimator systematically over- or under- estimates the true value of the parameter. Mathematically, an estimator \(\hat{\theta}\) is unbiased if \(E(\hat{\theta}) = \theta\). From this definition of an unbiased estimator, we have the definition of the \textbf{bias} of an estimator:
 
 \begin{equation} 
 Bias(\hat{\theta}) = E(\hat{\theta}) - \theta.

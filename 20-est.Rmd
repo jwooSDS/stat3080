@@ -28,7 +28,7 @@ We can see that we are free to define estimators in various ways. The question n
 
 ## Bias {#biasest}
 
-One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is **unbiased** if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator $\hat{\theta}$ is unbiased if $E(\hat{\theta}) = \theta$. From this definition of an unbiased estimator, we have the definition of the **bias** of an estimator:
+One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is **unbiased** if the long run average of an estimator is equal to the true value of the parameter. A biased estimator systematically over- or under- estimates the true value of the parameter. Mathematically, an estimator $\hat{\theta}$ is unbiased if $E(\hat{\theta}) = \theta$. From this definition of an unbiased estimator, we have the definition of the **bias** of an estimator:
 
 \begin{equation} 
 Bias(\hat{\theta}) = E(\hat{\theta}) - \theta.

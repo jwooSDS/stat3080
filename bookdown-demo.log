@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  23 NOV 2026 13:36
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  23 NOV 2026 13:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,9 +874,9 @@ LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
 [16]
 
 [17]
-Overfull \hbox (69.75pt too wide) in paragraph at lines 678--678
-[]\TU/lmtt/m/n/10 ##  [1]  0.08094267  3.71592078 -0.15429487 -0.09528672 -0.51
-224960  2.53617341[] 
+Overfull \hbox (38.25pt too wide) in paragraph at lines 678--678
+[]\TU/lmtt/m/n/10 ##  [1]  1.8702740  2.0717588 -2.1550716  5.3194908  2.173896
+4  0.5500087[] 
  []
 
 
@@ -3479,7 +3479,7 @@ Chapter 20.
 [247
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 10288--10290
+Underfull \hbox (badness 10000) in paragraph at lines 10284--10286
 
  []
 
@@ -3495,7 +3495,7 @@ File: bookdown-demo_files/figure-latex/20-bias-1.pdf Graphic file (type pdf)
 [250]
 
 [251]
-Overfull \vbox (0.33112pt too high) detected at line 10498
+Overfull \vbox (0.33112pt too high) detected at line 10494
  []
 
 
@@ -3504,9 +3504,6 @@ Overfull \vbox (0.33112pt too high) detected at line 10498
 File: bookdown-demo_files/figure-latex/consistent-1.pdf Graphic file (type pdf)
 
 <use bookdown-demo_files/figure-latex/consistent-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 
 
 [253]
@@ -3529,10 +3526,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20498 strings out of 409029
- 381307 string characters out of 5763847
- 1951612 words of memory out of 5000000
- 42862 multiletter control sequences out of 15000+600000
+ 20500 strings out of 409029
+ 381318 string characters out of 5763847
+ 1950612 words of memory out of 5000000
+ 42864 multiletter control sequences out of 15000+600000
  564592 words of font info for 98 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,17n,123p,1012b,553s stack positions out of 10000i,1000n,20000p,200000b,200000s

@@ -404,7 +404,6 @@ fishers-exact-test-vs-chi-squared-test
 a-few-comments-1
 est
 introduction-10
-estprops
 estimators-vs-estimates
 biasest
 standard-error-and-variance

@@ -6,11 +6,7 @@ In Section \@ref(clt), you were introduced to some of the key concepts associate
 
 Some estimators may seem obvious, such as using the sample mean to estimate the population mean. But some are not, for example, why do we use this formula for the sample variance, $s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}$ when estimating the population variance? You've probably asked why is $n-1$ in the denominator.
 
- Whenever we propose an estimator for a parameter, we want to assess how “good” the estimator is. We will cover a few measures that are used to assess an estimator: bias, variance, and mean-squared error.
- 
-## Properties of Estimators {#estprops}
-
-How do we assess if our estimators are "good" or not? We define a few concepts that are used in this assessment. 
+Whenever we propose an estimator for a parameter, we want to assess how “good” the estimator is. We will cover a few measures that are used to assess an estimator: bias, variance, and mean-squared error. We define a few concepts that are used in this assessment. 
 
 ### Estimators VS Estimates
 
@@ -30,7 +26,7 @@ We will use a simple example to illustrate these ideas in the rest of this secti
 
 We can see that we are free to define estimators in various ways. The question now is how do we evaluate whether an estimator is "good" or not. There are a few metrics to evaluate estimators. 
 
-### Bias {#biasest}
+## Bias {#biasest}
 
 One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is **unbiased** if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator $\hat{\theta}$ is unbiased if $E(\hat{\theta}) = \theta$. From this definition of an unbiased estimator, we have the definition of the **bias** of an estimator:
 
@@ -90,7 +86,7 @@ So, based on bias, the sample mean is a better estimator for the population mean
 
 The bias deals with the centrality of the estimator, i.e. is the estimator equal to the true parameter, on average. However, we are not only concerned with measures of centrality, but also with measures of uncertainty. For example, how likely is it to observe a random sample where its estimated value is far from the true parameter?
 
-### Standard Error and Variance
+## Standard Error and Variance
 
 It turns out that the concept of variance can also be applied to estimators, as they can be viewed as random variables, and not just to individual data points. Estimators with smaller variances have a smaller degree of uncertainty: the value of the estimators do not change as much from random sample to random sample. 
 
@@ -119,7 +115,7 @@ These results are reflected in Figure \@ref(fig:20-bias). Notice the scale of th
 
 It should be clear by now that estimators with smaller standard errors (or variances) are desired. So, based on standard error, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it. 
 
-### Consistency
+## Consistency
 
 An associated concept with bias, variance, and standard errors of estimators is consistency. The definition of consistency in estimators is fairly technical, so we will give a broad overview of its concept.
 
@@ -202,7 +198,7 @@ Using the left plot in Figure \@ref(fig:consistent) for $\hat{\theta}_1$, we see
 
 Using the left plot in Figure \@ref(fig:consistent) for $\hat{\theta}_1$, we see that for all values of $n$, the center of the density plot is not equal to the true value (true value overlaid as a black vertical line). We also see that the spread of the density plot  does not become smaller as $n$ gets larger. So $\hat{\theta}_2$ is not consistent.
 
-### Mean-Squared Error (MSE)
+## Mean-Squared Error (MSE)
 
 A popular measure that combines both bias and variance is the **mean-squared error (MSE)** of an estimator:
 
